@@ -1,0 +1,17 @@
+.toplevel_page_black-widgets img {
+    max-height: 20px;
+    z-index: 999;
+    opacity: 1;
+}
+
+body.toplevel_page_black-widgets {
+    /* background: #fd746c; */
+    /* background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%); */
+    background-image: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
+}
+
+.bw-wrap p {
+     font-size: 19px;
+     color: #000;
+     font-weight: 500;
+ }

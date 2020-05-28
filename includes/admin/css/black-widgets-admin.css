@@ -1,0 +1,83 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+ 
+ .toplevel_page_black-widgets img {
+     max-height: 20px !important;
+     z-index: 999 !important;
+     opacity: 1 !important;
+     max-width: 50px;
+ }
+ 
+ body.toplevel_page_black-widgets {
+     background: #A0AEB9;
+     position: relative;
+ }
+ 
+ body.toplevel_page_black-widgets .bw-box-backend {
+     font-family: source-serif-pro,serif !important;
+     font-weight: 400;
+     font-style: normal;
+     max-width: 980px;
+     margin: 50px auto;
+     padding: 50px 40px;
+     border-radius: 24px;
+ }
+ 
+ .bw-box-backend h4.bw-backend-heading, .bw-box-backend h2.bw-backend-heading {
+     color: #fff;
+ }
+ 
+ .bw-box-backend h2.bw-backend-heading {
+     font-size: 42px;
+     line-height: 54px;
+     letter-spacing: -1.5px;
+     margin-bottom: 85px;
+     margin-top: 0;
+ }
+ 
+ .bw-box-backend h2.bw-backend-heading:first-child {
+     font-weight: 800;
+     margin-bottom: 20px;
+ }
+ 
+ .bw-box-backend h4.bw-backend-heading {
+     font-size: 21px;
+     margin: 50px 0;
+ }
+ 
+ .bw-box-backend h4.bw-backend-heading strong {
+     font-weight: 900;
+ }
+ 
+ .bw-box-backend a {
+     color: #0719a3;
+     transition: all 0.3s ease;
+ }
+ 
+ .bw-box-backend a:hover {
+     color: #fff !important;
+ }
+
+ .bw-box-backend a:focus {
+    border: 0;
+    box-shadow: unset;
+ }
+ 
+ #elementor-panel-category-bw .elementor-element {
+     background: #000;
+     background: linear-gradient(-45deg, #000 0%, #222 50%, #000 100%);
+     color: #fff;
+     transition: all .02s ease !important;
+ }
+ 
+ #elementor-panel-category-bw .elementor-element .icon, #elementor-panel-category-bw .elementor-element .title {
+     color: #fff;
+     transition: all .3s ease !important;
+ }
+ 
+ #elementor-panel-category-bw .elementor-element:hover .icon, #elementor-panel-category-bw .elementor-element:hover .title {
+     color: #fcb92c;
+ }
+ 
