@@ -33,7 +33,7 @@ This is Black Widgets for Elementor plugin. 14 Elementor Widgets.
 
 == Changelog ==
 
-= 1.0.1 — 28 May 2020 =
+= 1.0.2 — 30 May 2020 =
 - Added: Namespace to plugin
 - Changed: BW Classes to BLACK_WIDGETS
 - Changed: bw text domain to blackwidgets
