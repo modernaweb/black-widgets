@@ -55,7 +55,7 @@ class Black_Widgets_Admin {
 		/** Admin Content */
 		function black_widgets_options() {
 
-			require_once( __DIR__ . '/control-panel.php');
+			require_once( __DIR__ . '/black-widgets-control-panel.php');
 
 		}
 

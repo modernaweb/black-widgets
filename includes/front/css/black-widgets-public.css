@@ -730,7 +730,7 @@
 .bw-flipbox .bw-flip-card .bw-front,
 .bw-flipbox .bw-flip-card .bw-back {background: #000; display: flex;background-position: center;background-repeat: no-repeat;background-size: cover;text-align: center;justify-content: center;align-items: center;position: absolute;height: 100%;width: 100%;-webkit-backface-visibility: hidden;backface-visibility: hidden;transform-style: preserve-3d;transition: ease-in-out 600ms; padding: 40px;}
 .bw-flipbox .bw-flip-card .bw-front {overflow: hidden;color: #fff;}
-.bw-flipbox .bw-flip-card .bw-front:before {position: absolute;display: block;content: '';top: 0;left: 0;right: 0;bottom: 0;background: linear-gradient(135deg, #222, #333);opacity: .25;z-index: -1;}
+.bw-flipbox .bw-flip-card .bw-front:before {position: absolute;display: block;content: '';top: 0;left: 0;right: 0;bottom: 0;background: #222;opacity: .25;z-index: -1;}
 .bw-flipbox .bw-flip-card .bw-front,
 .bw-flipbox .bw-flip-card .bw-back,
 .bw-flipbox .bw-flip-card .bw-front:before {border-radius: 12px;}

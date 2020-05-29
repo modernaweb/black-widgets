@@ -1,4 +1,12 @@
 <?php
+
+namespace Black_Widgets\admin;
+
+// Exit if accessed directly
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 echo '<div class="bw-box-backend">';
     echo '<h2 class="bw-backend-heading"> G\'day,</h2><h2 class="bw-backend-heading">We are glad work on Black Widgets to create FREE and Professional add-on for an awesome Elementor Plugin.</h2>';
     echo '<h4 class="bw-backend-heading"> We\'ll glad if you share your feedback with us: <a href="mailto:modernawebdesign@gmail.com">modernawebdesign@gmail.com</a></h4>';

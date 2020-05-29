@@ -65,19 +65,19 @@
     box-shadow: unset;
  }
  
- #elementor-panel-category-bw .elementor-element {
+ #elementor-panel-category-black_widgets .elementor-element {
      background: #000;
      background: linear-gradient(-45deg, #000 0%, #222 50%, #000 100%);
      color: #fff;
      transition: all .02s ease !important;
  }
  
- #elementor-panel-category-bw .elementor-element .icon, #elementor-panel-category-bw .elementor-element .title {
+ #elementor-panel-category-black_widgets .elementor-element .icon, #elementor-panel-category-black_widgets .elementor-element .title {
      color: #fff;
      transition: all .3s ease !important;
  }
  
- #elementor-panel-category-bw .elementor-element:hover .icon, #elementor-panel-category-bw .elementor-element:hover .title {
+ #elementor-panel-category-black_widgets .elementor-element:hover .icon, #elementor-panel-category-black_widgets .elementor-element:hover .title {
      color: #fcb92c;
  }
  

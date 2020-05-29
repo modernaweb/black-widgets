@@ -1,10 +1,15 @@
 <?php
 namespace Elementor;
-namespace BW_Modernaweb\Includes\Widgets;
+namespace BLACK_WIDGETS_Modernaweb\Includes\Widgets;
+namespace Black_Widgets;
+
+// If this file is called directly, abort.
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 use Elementor\Plugin;
-
 use Elementor\Widget_Base;
-
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Scheme_Typography;
@@ -22,7 +27,7 @@ use Elementor\Group_Control_Css_Filter;
  *
  * @since 1.0.0
  */
-class BW_Flip_Ix extends \Elementor\Widget_Base {
+class BLACK_WIDGETS_Flip_Ix extends \Elementor\Widget_Base {
 
 	/**
 	 * Get widget name.
@@ -49,7 +54,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Black Flip Box', 'bw' );
+		return __( 'Black Flip Box', 'blackwidgets' );
 	}
 
 	/**
@@ -77,7 +82,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 	 * @return array Widget categories.
 	 */
 	public function get_categories() {
-		return [ 'bw' ];
+		return [ 'black_widgets' ];
 	}
 
 	/**
@@ -95,7 +100,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => __( 'Content', 'bw' ),
+				'label' => __( 'Content', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -104,14 +109,14 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_type',
 			[
-				'label' => __( 'Select Type', 'bw' ),
+				'label' => __( 'Select Type', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'fbtt',
 				'options' => [
-					'fbtt' 			=> __( 'Flip Bottom To Top', 'bw' ),
-					'fttb' 			=> __( 'Flip Top To Bottom', 'bw' ),
-					'fltr' 			=> __( 'Flip Left To Right', 'bw' ),
-					'frtl' 			=> __( 'Flip Right To Left', 'bw' ),
+					'fbtt' 			=> __( 'Flip Bottom To Top', 'blackwidgets' ),
+					'fttb' 			=> __( 'Flip Top To Bottom', 'blackwidgets' ),
+					'fltr' 			=> __( 'Flip Left To Right', 'blackwidgets' ),
+					'frtl' 			=> __( 'Flip Right To Left', 'blackwidgets' ),
 				],
 			]
 		);
@@ -120,10 +125,10 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_3d',
 			[
-				'label' 		=> __( '3D Depth', 'bw' ),
+				'label' 		=> __( '3D Depth', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-				'label_on' 		=> __( 'Enable', 'bw' ),
-				'label_off' 	=> __( 'Disable', 'bw' ),
+				'label_on' 		=> __( 'Enable', 'blackwidgets' ),
+				'label_off' 	=> __( 'Disable', 'blackwidgets' ),
 				'return_value' 	=> 'ddd',
 				'default' 		=> 'off',
 			]
@@ -140,14 +145,14 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'face_tab_content',
 			[
-				'label' => __( 'Face', 'bw' ),
+				'label' => __( 'Face', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'widget_face_icon',
 			[
-				'label' => __( 'Icon', 'bw' ),
+				'label' => __( 'Icon', 'blackwidgets' ),
 				'type' => Controls_Manager::ICONS,
 			]
 		);
@@ -156,28 +161,28 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_face_title',
 			[
-				'label' => __( 'Title', 'bw' ),
+				'label' => __( 'Title', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Flipbox', 'bw' ),
-				'placeholder' => __( 'Type your title here', 'bw' ),
+				'default' => __( 'Flipbox', 'blackwidgets' ),
+				'placeholder' => __( 'Type your title here', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'widget_face_description',
 			[
-				'label' => __( 'Description (limit character 159)', 'bw' ),
+				'label' => __( 'Description (limit character 159)', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXTAREA,
 				'rows' => 5,
-				'default' => __( 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.', 'bw' ),
-				'placeholder' => __( 'Type your description here', 'bw' ),
+				'default' => __( 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.', 'blackwidgets' ),
+				'placeholder' => __( 'Type your description here', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'face_bg',
 			[
-				'label' => __( 'Face Background Options', 'bw' ),
+				'label' => __( 'Face Background Options', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -188,7 +193,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'flipbox_face_bg',
-				'label' => __( 'Face Background', 'bw' ),
+				'label' => __( 'Face Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front',
 			]
@@ -197,7 +202,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_control(
 			'flipbox_face_bg_opacity',
 			[
-				'label' => __( 'Opacity', 'bw' ),
+				'label' => __( 'Opacity', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -217,7 +222,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			\Elementor\Group_Control_Css_Filter::get_type(),
 			[
 				'name'     => 'flipbox_face_bg_filters',
-				'label' => __( 'Overlay CSS Filters', 'bw' ),
+				'label' => __( 'Overlay CSS Filters', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front',
 			]
 		);
@@ -236,7 +241,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'flipbox_face_overlay',
-				'label' => __( 'Background', 'bw' ),
+				'label' => __( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front:before',
 			]
@@ -245,7 +250,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_control(
 			'flipbox_face_overlay_opacity',
 			[
-				'label' => __( 'Opacity', 'bw' ),
+				'label' => __( 'Opacity', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -265,7 +270,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			\Elementor\Group_Control_Css_Filter::get_type(),
 			[
 				'name'     => 'flipbox_face_overlay_filters',
-				'label' => __( 'Overlay CSS Filters', 'bw' ),
+				'label' => __( 'Overlay CSS Filters', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front:before',
 			]
 		);
@@ -274,14 +279,14 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'back_tab_content',
 			[
-				'label' => __( 'Back', 'bw' ),
+				'label' => __( 'Back', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'widget_back_icon',
 			[
-				'label' => __( 'Icon', 'bw' ),
+				'label' => __( 'Icon', 'blackwidgets' ),
 				'type' => Controls_Manager::ICONS,
 			]
 		);
@@ -290,28 +295,28 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_back_title',
 			[
-				'label' => __( 'Title', 'bw' ),
+				'label' => __( 'Title', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Know More', 'bw' ),
-				'placeholder' => __( 'Type your title here', 'bw' ),
+				'default' => __( 'Know More', 'blackwidgets' ),
+				'placeholder' => __( 'Type your title here', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'widget_back_description',
 			[
-				'label' => __( 'Description (limit character 300)', 'bw' ),
+				'label' => __( 'Description (limit character 300)', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXTAREA,
 				'rows' => 5,
-				'default' => __( 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.', 'bw' ),
-				'placeholder' => __( 'Type your description here', 'bw' ),
+				'default' => __( 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.', 'blackwidgets' ),
+				'placeholder' => __( 'Type your description here', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'back_bg',
 			[
-				'label' => __( 'Back Background Options', 'bw' ),
+				'label' => __( 'Back Background Options', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -322,7 +327,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'flipbox_back_bg',
-				'label' => __( 'Back Background', 'bw' ),
+				'label' => __( 'Back Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back',
 			]
@@ -332,7 +337,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			\Elementor\Group_Control_Css_Filter::get_type(),
 			[
 				'name'     => 'flipbox_back_bg_filters',
-				'label' => __( 'Overlay CSS Filters', 'bw' ),
+				'label' => __( 'Overlay CSS Filters', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back',
 			]
 		);
@@ -340,19 +345,19 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_control(
 			'btn_txt',
 			[
-				'label' => __( 'Button Text', 'bw' ),
+				'label' => __( 'Button Text', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Click Here', 'bw' ),
-				'placeholder' => __( 'Type your title here', 'bw' ),
+				'default' => __( 'Click Here', 'blackwidgets' ),
+				'placeholder' => __( 'Type your title here', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'btn_link',
 			[
-				'label' => __( 'Link', 'bw' ),
+				'label' => __( 'Link', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::URL,
-				'placeholder' => __( 'https://your-link.com', 'bw' ),
+				'placeholder' => __( 'https://your-link.com', 'blackwidgets' ),
 				'show_external' => true,
 				'show_nofollow' => false,
 				'default' => [
@@ -373,7 +378,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section',
 			[
-				'label' => __( 'Box Style', 'bw' ),
+				'label' => __( 'Box Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -382,7 +387,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
-				'label' => __( 'Margin', 'bw' ),
+				'label' => __( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -395,7 +400,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
-				'label' => __( 'Padding', 'bw' ),
+				'label' => __( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -409,7 +414,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_box_background',
-				'label' => __( 'Background', 'bw' ),
+				'label' => __( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', ],
 				'selector' => '{{WRAPPER}} .bw-flipbox',
 			]
@@ -419,19 +424,19 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_alignment',
 			[
-				'label'     => __( 'Text Alignment', 'bw' ),
+				'label'     => __( 'Text Alignment', 'blackwidgets' ),
 				'type'      => \Elementor\Controls_Manager::CHOOSE,
 				'options'   => [
 					'left'   => [
-						'title' => __( 'Left', 'bw' ),
+						'title' => __( 'Left', 'blackwidgets' ),
 						'icon'  => 'fa fa-align-left',
 					],
 					'center' => [
-						'title' => __( 'Center', 'bw' ),
+						'title' => __( 'Center', 'blackwidgets' ),
 						'icon'  => 'fa fa-align-center',
 					],
 					'right'  => [
-						'title' => __( 'Right', 'bw' ),
+						'title' => __( 'Right', 'blackwidgets' ),
 						'icon'  => 'fa fa-align-right',
 					],
 				],
@@ -444,7 +449,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_box_border',
-				'label' => __( 'Border', 'bw' ),
+				'label' => __( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-flipbox',
 			]
 		);
@@ -453,11 +458,11 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_box_border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'bw' ),
+				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-flipbox' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-flipbox, {{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front, {{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back, {{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front:before' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -467,7 +472,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_box_box_shadow',
-				'label' => __( 'Box Shadow', 'bw' ),
+				'label' => __( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-flipbox',
 			]
 		);
@@ -480,7 +485,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section_icon_typo',
 			[
-				'label' => __( 'Front Icon Settings', 'bw' ),
+				'label' => __( 'Front Icon Settings', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -489,7 +494,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_icon_color',
 			[
-				'label' => __( 'Color', 'bw' ),
+				'label' => __( 'Color', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => \Elementor\Scheme_Color::get_type(),
@@ -506,7 +511,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'icon_front_bg',
-				'label' => __( 'Back Background', 'bw' ),
+				'label' => __( 'Back Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box i',
 			]
@@ -515,7 +520,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_icon',
 			[
-				'label' => __( 'Size', 'bw' ),
+				'label' => __( 'Size', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range' => [
@@ -547,7 +552,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_icon_margin',
 			[
-				'label' => __( 'Margin', 'bw' ),
+				'label' => __( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -560,7 +565,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_icon_padding',
 			[
-				'label' => __( 'Padding', 'bw' ),
+				'label' => __( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -581,7 +586,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'style_main_icon_border',
-				'label' => __( 'Border', 'bw' ),
+				'label' => __( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box i',
 			]
 		);
@@ -590,7 +595,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_icon_border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'bw' ),
+				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -604,7 +609,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'style_main_icon_box_shadow',
-				'label' => __( 'Box Shadow', 'bw' ),
+				'label' => __( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box i',
 			]
 		);
@@ -617,7 +622,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section_main_typo',
 			[
-				'label' => __( 'Front Title Typography', 'bw' ),
+				'label' => __( 'Front Title Typography', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -626,7 +631,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_title_color',
 			[
-				'label' => __( 'Color', 'bw' ),
+				'label' => __( 'Color', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => \Elementor\Scheme_Color::get_type(),
@@ -643,7 +648,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'style_main_title_typography1',
-				'label' => __( 'Typography', 'bw' ),
+				'label' => __( 'Typography', 'blackwidgets' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box h4',
 			]
@@ -654,7 +659,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'style_main_title_text_shadow',
-				'label' => __( 'Text Shadow', 'bw' ),
+				'label' => __( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box h4',
 			]
 		);
@@ -671,7 +676,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'style_main_title_background',
-				'label' => __( 'Background', 'bw' ),
+				'label' => __( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box h4',
 			]
@@ -688,7 +693,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_title_margin',
 			[
-				'label' => __( 'Margin', 'bw' ),
+				'label' => __( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -701,7 +706,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_title_padding',
 			[
-				'label' => __( 'Padding', 'bw' ),
+				'label' => __( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -722,7 +727,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'style_main_title_border',
-				'label' => __( 'Border', 'bw' ),
+				'label' => __( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box h4',
 			]
 		);
@@ -731,7 +736,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_title_border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'bw' ),
+				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -745,7 +750,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'style_main_title_box_shadow',
-				'label' => __( 'Box Shadow', 'bw' ),
+				'label' => __( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box h4',
 			]
 		);
@@ -758,7 +763,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section_paragraph_typo',
 			[
-				'label' => __( 'Front Paragraph Typography', 'bw' ),
+				'label' => __( 'Front Paragraph Typography', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -767,7 +772,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_paragraph_color',
 			[
-				'label' => __( 'Color', 'bw' ),
+				'label' => __( 'Color', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => \Elementor\Scheme_Color::get_type(),
@@ -784,7 +789,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'style_main_paragraph_typography1',
-				'label' => __( 'Typography', 'bw' ),
+				'label' => __( 'Typography', 'blackwidgets' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box p',
 			]
@@ -795,7 +800,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'style_main_paragraph_text_shadow',
-				'label' => __( 'Text Shadow', 'bw' ),
+				'label' => __( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box p',
 			]
 		);
@@ -812,7 +817,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'style_main_paragraph_background',
-				'label' => __( 'Background', 'bw' ),
+				'label' => __( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box p',
 			]
@@ -829,7 +834,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_paragraph_margin',
 			[
-				'label' => __( 'Margin', 'bw' ),
+				'label' => __( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -842,7 +847,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_paragraph_padding',
 			[
-				'label' => __( 'Padding', 'bw' ),
+				'label' => __( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -863,7 +868,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'style_main_paragraph_border',
-				'label' => __( 'Border', 'bw' ),
+				'label' => __( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box p',
 			]
 		);
@@ -872,7 +877,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_paragraph_border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'bw' ),
+				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -886,7 +891,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'style_main_paragraph_box_shadow',
-				'label' => __( 'Box Shadow', 'bw' ),
+				'label' => __( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box p',
 			]
 		);
@@ -899,7 +904,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section_back_icon_typo',
 			[
-				'label' => __( 'Back Icon Settings', 'bw' ),
+				'label' => __( 'Back Icon Settings', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -908,7 +913,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_back_icon_color',
 			[
-				'label' => __( 'Color', 'bw' ),
+				'label' => __( 'Color', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => \Elementor\Scheme_Color::get_type(),
@@ -925,7 +930,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'icon_back_bg',
-				'label' => __( 'Back Background', 'bw' ),
+				'label' => __( 'Back Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description i',
 			]
@@ -934,7 +939,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_back_icon',
 			[
-				'label' => __( 'Size', 'bw' ),
+				'label' => __( 'Size', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range' => [
@@ -966,7 +971,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_back_icon_margin',
 			[
-				'label' => __( 'Margin', 'bw' ),
+				'label' => __( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -979,7 +984,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_back_icon_padding',
 			[
-				'label' => __( 'Padding', 'bw' ),
+				'label' => __( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -1000,7 +1005,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'style_main_back_icon_border',
-				'label' => __( 'Border', 'bw' ),
+				'label' => __( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description i',
 			]
 		);
@@ -1009,7 +1014,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_back_icon_border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'bw' ),
+				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -1023,7 +1028,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'style_main_back_icon_box_shadow',
-				'label' => __( 'Box Shadow', 'bw' ),
+				'label' => __( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description i',
 			]
 		);
@@ -1036,7 +1041,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section_back_main_typo',
 			[
-				'label' => __( 'Back Title Typography', 'bw' ),
+				'label' => __( 'Back Title Typography', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -1045,7 +1050,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_back_title_color',
 			[
-				'label' => __( 'Color', 'bw' ),
+				'label' => __( 'Color', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => \Elementor\Scheme_Color::get_type(),
@@ -1062,7 +1067,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'style_main_back_title_typography1',
-				'label' => __( 'Typography', 'bw' ),
+				'label' => __( 'Typography', 'blackwidgets' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description h4',
 			]
@@ -1073,7 +1078,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'style_main_back_title_text_shadow',
-				'label' => __( 'Text Shadow', 'bw' ),
+				'label' => __( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description h4',
 			]
 		);
@@ -1090,7 +1095,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'style_main_back_title_background',
-				'label' => __( 'Background', 'bw' ),
+				'label' => __( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description h4',
 			]
@@ -1107,7 +1112,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_back_title_margin',
 			[
-				'label' => __( 'Margin', 'bw' ),
+				'label' => __( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -1120,7 +1125,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_back_title_padding',
 			[
-				'label' => __( 'Padding', 'bw' ),
+				'label' => __( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -1141,7 +1146,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'style_main_back_title_border',
-				'label' => __( 'Border', 'bw' ),
+				'label' => __( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description h4',
 			]
 		);
@@ -1150,7 +1155,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_back_title_border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'bw' ),
+				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -1164,7 +1169,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'style_main_back_title_box_shadow',
-				'label' => __( 'Box Shadow', 'bw' ),
+				'label' => __( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description h4',
 			]
 		);
@@ -1177,7 +1182,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section_back_paragraph_typo',
 			[
-				'label' => __( 'Back Paragraph Typography', 'bw' ),
+				'label' => __( 'Back Paragraph Typography', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -1186,7 +1191,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_back_paragraph_color',
 			[
-				'label' => __( 'Color', 'bw' ),
+				'label' => __( 'Color', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => \Elementor\Scheme_Color::get_type(),
@@ -1203,7 +1208,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'style_main_back_paragraph_typography1',
-				'label' => __( 'Typography', 'bw' ),
+				'label' => __( 'Typography', 'blackwidgets' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description p',
 			]
@@ -1214,7 +1219,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'style_main_back_paragraph_text_shadow',
-				'label' => __( 'Text Shadow', 'bw' ),
+				'label' => __( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description p',
 			]
 		);
@@ -1231,7 +1236,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'style_main_back_paragraph_background',
-				'label' => __( 'Background', 'bw' ),
+				'label' => __( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description p',
 			]
@@ -1248,7 +1253,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_back_paragraph_margin',
 			[
-				'label' => __( 'Margin', 'bw' ),
+				'label' => __( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -1261,7 +1266,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_back_paragraph_padding',
 			[
-				'label' => __( 'Padding', 'bw' ),
+				'label' => __( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -1282,7 +1287,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'style_main_back_paragraph_border',
-				'label' => __( 'Border', 'bw' ),
+				'label' => __( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description p',
 			]
 		);
@@ -1291,7 +1296,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_back_paragraph_border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'bw' ),
+				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -1305,7 +1310,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'style_main_back_paragraph_box_shadow',
-				'label' => __( 'Box Shadow', 'bw' ),
+				'label' => __( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description p',
 			]
 		);
@@ -1318,7 +1323,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section_back_button_typo',
 			[
-				'label' => __( 'Button Typography', 'bw' ),
+				'label' => __( 'Button Typography', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -1327,7 +1332,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_back_button_color',
 			[
-				'label' => __( 'Color', 'bw' ),
+				'label' => __( 'Color', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => \Elementor\Scheme_Color::get_type(),
@@ -1344,7 +1349,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'style_main_back_button_typography1',
-				'label' => __( 'Typography', 'bw' ),
+				'label' => __( 'Typography', 'blackwidgets' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description .bw-button',
 			]
@@ -1355,7 +1360,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'style_main_back_button_text_shadow',
-				'label' => __( 'Text Shadow', 'bw' ),
+				'label' => __( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description .bw-button',
 			]
 		);
@@ -1372,7 +1377,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'style_main_back_button_background',
-				'label' => __( 'Background', 'bw' ),
+				'label' => __( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description .bw-button',
 			]
@@ -1389,7 +1394,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_back_button_margin',
 			[
-				'label' => __( 'Margin', 'bw' ),
+				'label' => __( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -1402,7 +1407,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_back_button_padding',
 			[
-				'label' => __( 'Padding', 'bw' ),
+				'label' => __( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -1423,7 +1428,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'style_main_back_button_border',
-				'label' => __( 'Border', 'bw' ),
+				'label' => __( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description .bw-button',
 			]
 		);
@@ -1432,7 +1437,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_back_button_border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'bw' ),
+				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -1446,7 +1451,7 @@ class BW_Flip_Ix extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'style_main_back_button_box_shadow',
-				'label' => __( 'Box Shadow', 'bw' ),
+				'label' => __( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description .bw-button',
 			]
 		);

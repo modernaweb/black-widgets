@@ -1,10 +1,15 @@
 <?php
 namespace Elementor;
-namespace BW_Modernaweb\Includes\Widgets;
+namespace BLACK_WIDGETS_Modernaweb\Includes\Widgets;
+namespace Black_Widgets;
+
+// If this file is called directly, abort.
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 use Elementor\Plugin;
-
 use Elementor\Widget_Base;
-
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Scheme_Typography;
@@ -21,7 +26,7 @@ use Elementor\Group_Control_Text_Shadow;
  *
  * @since 1.0.0
  */
-class BW_Alert extends \Elementor\Widget_Base {
+class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 
 	/**
 	 * Get widget name.
@@ -48,7 +53,7 @@ class BW_Alert extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Black Alert', 'bw' );
+		return __( 'Black Alert', 'blackwidgets' );
 	}
 
 	/**
@@ -76,7 +81,7 @@ class BW_Alert extends \Elementor\Widget_Base {
 	 * @return array Widget categories.
 	 */
 	public function get_categories() {
-		return [ 'bw' ];
+		return [ 'black_widgets' ];
 	}
 
 	/**
@@ -94,7 +99,7 @@ class BW_Alert extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => __( 'Content', 'bw' ),
+				'label' => __( 'Content', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -103,16 +108,16 @@ class BW_Alert extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_type',
 			[
-				'label' => __( 'Select Type', 'bw' ),
+				'label' => __( 'Select Type', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'normal',
 				'options' => [
-					'normal' 	=> __( 'Normal', 'bw' ),
-					'success' 	=> __( 'Success', 'bw' ),
-					'warning' 	=> __( 'Warning', 'bw' ),
-					'error' 	=> __( 'Error', 'bw' ),
+					'normal' 	=> __( 'Normal', 'blackwidgets' ),
+					'success' 	=> __( 'Success', 'blackwidgets' ),
+					'warning' 	=> __( 'Warning', 'blackwidgets' ),
+					'error' 	=> __( 'Error', 'blackwidgets' ),
 				],
-				'description' => __( 'We create some skin before, you can use these or no! make a new custom type.', 'bw' ),
+				'description' => __( 'We create some skin before, you can use these or no! make a new custom type.', 'blackwidgets' ),
 			]
 		);
 
@@ -120,10 +125,10 @@ class BW_Alert extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_text',
 			[
-				'label' => __( 'Alert Text', 'bw' ),
+				'label' => __( 'Alert Text', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __( 'Type Message Here', 'bw' ),
-                'description' => __( 'HTML Available =)', 'bw' ),
+                'default' => __( 'Type Message Here', 'blackwidgets' ),
+                'description' => __( 'HTML Available =)', 'blackwidgets' ),
 			]
 		);
 
@@ -131,10 +136,10 @@ class BW_Alert extends \Elementor\Widget_Base {
 		$this->add_control(
 			'enable_icon_widget',
 			[
-				'label' 		=> __( 'Enable Icon', 'bw' ),
+				'label' 		=> __( 'Enable Icon', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-				'label_on' 		=> __( 'Enable', 'bw' ),
-				'label_off' 	=> __( 'Disable', 'bw' ),
+				'label_on' 		=> __( 'Enable', 'blackwidgets' ),
+				'label_off' 	=> __( 'Disable', 'blackwidgets' ),
 				'return_value' 	=> 'on',
 				'default' 		=> 'off',
 			]
@@ -143,7 +148,7 @@ class BW_Alert extends \Elementor\Widget_Base {
 		$this->add_control(
 			'icon_widget',
 			[
-				'label' => __( 'Icon', 'bw' ),
+				'label' => __( 'Icon', 'blackwidgets' ),
                 'type' => Controls_Manager::ICONS,
 				'condition'  => [
 					'enable_icon_widget' => [
@@ -161,7 +166,7 @@ class BW_Alert extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section',
 			[
-				'label' => __( 'Box Style', 'bw' ),
+				'label' => __( 'Box Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -171,7 +176,7 @@ class BW_Alert extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_box_background',
-				'label' => __( 'Background', 'bw' ),
+				'label' => __( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-alert-box',
 			]
@@ -182,7 +187,7 @@ class BW_Alert extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_box_border',
-				'label' => __( 'Border', 'bw' ),
+				'label' => __( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-alert-box',
 			]
 		);
@@ -192,7 +197,7 @@ class BW_Alert extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_box_box_shadow',
-				'label' => __( 'Box Shadow', 'bw' ),
+				'label' => __( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-alert-box',
 			]
 		);
@@ -200,7 +205,7 @@ class BW_Alert extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_box_border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'bw' ),
+				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -213,7 +218,7 @@ class BW_Alert extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
-				'label' => __( 'Margin', 'bw' ),
+				'label' => __( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -226,7 +231,7 @@ class BW_Alert extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
-				'label' => __( 'Padding', 'bw' ),
+				'label' => __( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -243,7 +248,7 @@ class BW_Alert extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'typo_section',
 			[
-				'label' => __( 'Typography Style', 'bw' ),
+				'label' => __( 'Typography Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
         );
@@ -252,7 +257,7 @@ class BW_Alert extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_alert_color',
 			[
-				'label' => __( 'Color', 'bw' ),
+				'label' => __( 'Color', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => \Elementor\Scheme_Color::get_type(),
@@ -269,7 +274,7 @@ class BW_Alert extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'style_alert_typography1',
-				'label' => __( 'Typography', 'bw' ),
+				'label' => __( 'Typography', 'blackwidgets' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-alert-box',
 			]
@@ -280,7 +285,7 @@ class BW_Alert extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'style_alert_text_shadow',
-				'label' => __( 'Text Shadow', 'bw' ),
+				'label' => __( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-alert-box',
 			]
         );
@@ -295,7 +300,7 @@ class BW_Alert extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_icon_alert_size',
 			[
-				'label' => __( 'Icon Size', 'bw' ),
+				'label' => __( 'Icon Size', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -315,7 +320,7 @@ class BW_Alert extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_icon_alert_color',
 			[
-				'label' => __( 'Icon Color', 'bw' ),
+				'label' => __( 'Icon Color', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => \Elementor\Scheme_Color::get_type(),
@@ -332,7 +337,7 @@ class BW_Alert extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'style_Icon_alert_text_shadow',
-				'label' => __( 'Text Shadow', 'bw' ),
+				'label' => __( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-alert-box i',
 			]
         );

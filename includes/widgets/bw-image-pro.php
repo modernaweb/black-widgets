@@ -1,10 +1,15 @@
 <?php
 namespace Elementor;
-namespace BW_Modernaweb\Includes\Widgets;
+namespace BLACK_WIDGETS_Modernaweb\Includes\Widgets;
+namespace Black_Widgets;
+
+// If this file is called directly, abort.
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 use Elementor\Plugin;
-
 use Elementor\Widget_Base;
-
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Scheme_Typography;
@@ -23,7 +28,7 @@ use Elementor\Group_Control_Css_Filter;
  *
  * @since 1.0.0
  */
-class BW_Image extends \Elementor\Widget_Base {
+class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 
 	/**
 	 * Get widget name.
@@ -50,7 +55,7 @@ class BW_Image extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Black Image', 'bw' );
+		return __( 'Black Image', 'blackwidgets' );
 	}
 
 	/**
@@ -78,7 +83,7 @@ class BW_Image extends \Elementor\Widget_Base {
 	 * @return array Widget categories.
 	 */
 	public function get_categories() {
-		return [ 'bw' ];
+		return [ 'black_widgets' ];
 	}
 
 	/**
@@ -96,7 +101,7 @@ class BW_Image extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => __( 'Content', 'bw' ),
+				'label' => __( 'Content', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -104,7 +109,7 @@ class BW_Image extends \Elementor\Widget_Base {
 		$this->add_control(
 			'image',
 			[
-				'label' => __( 'Choose Image', 'bw' ),
+				'label' => __( 'Choose Image', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::MEDIA,
 				'default' => [
 					'url' => \Elementor\Utils::get_placeholder_image_src(),
@@ -116,19 +121,19 @@ class BW_Image extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_alignment',
 			[
-				'label'     => __( 'Text Alignment', 'bw' ),
+				'label'     => __( 'Text Alignment', 'blackwidgets' ),
 				'type'      => \Elementor\Controls_Manager::CHOOSE,
 				'options'   => [
 					'left'   => [
-						'title' => __( 'Left', 'bw' ),
+						'title' => __( 'Left', 'blackwidgets' ),
 						'icon'  => 'fa fa-align-left',
 					],
 					'center' => [
-						'title' => __( 'Center', 'bw' ),
+						'title' => __( 'Center', 'blackwidgets' ),
 						'icon'  => 'fa fa-align-center',
 					],
 					'right'  => [
-						'title' => __( 'Right', 'bw' ),
+						'title' => __( 'Right', 'blackwidgets' ),
 						'icon'  => 'fa fa-align-right',
 					],
 				],
@@ -151,12 +156,12 @@ class BW_Image extends \Elementor\Widget_Base {
 		$this->add_control(
 			'image_link',
 			[
-				'label' => __( 'Add link for Image?', 'bw' ),
+				'label' => __( 'Add link for Image?', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'no',
 				'options' => [
-					'no' => __( 'No', 'bw' ),
-					'yes' => __( 'Yes', 'bw' ),
+					'no' => __( 'No', 'blackwidgets' ),
+					'yes' => __( 'Yes', 'blackwidgets' ),
                 ],
 			]
 		);
@@ -164,9 +169,9 @@ class BW_Image extends \Elementor\Widget_Base {
 		$this->add_control(
 			'image_link_url',
 			[
-				'label' => __( 'Link', 'bw' ),
+				'label' => __( 'Link', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::URL,
-				'placeholder' => __( 'https://your-link.com', 'bw' ),
+				'placeholder' => __( 'https://your-link.com', 'blackwidgets' ),
 				'show_external' => true,
 				'default' => [
 					'url' => '',
@@ -185,111 +190,111 @@ class BW_Image extends \Elementor\Widget_Base {
 		// $this->add_control(
 		// 	'image_movement',
 		// 	[
-		// 		'label' 		=> __( 'Image Movement Animate', 'bw' ),
+		// 		'label' 		=> __( 'Image Movement Animate', 'blackwidgets' ),
 		// 		'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-		// 		'label_on' 		=> __( 'Enable', 'bw' ),
-		// 		'label_off' 	=> __( 'Disable', 'bw' ),
+		// 		'label_on' 		=> __( 'Enable', 'blackwidgets' ),
+		// 		'label_off' 	=> __( 'Disable', 'blackwidgets' ),
 		// 		'return_value' 	=> 'on',
 		// 		'default' 		=> 'off',
 		// 	]
 		// );
 
-		// Start From
-		$this->add_control(
-			'trigger_hook',
-			[
-				'label' 		=> __( 'Start Point', 'bw' ),
-				'type' 			=> \Elementor\Controls_Manager::TEXT,
-				'placeholder'   => '0.1',
-				'default'       => '0.1',
-				'condition' 	=> [ 
-					'image_movement' 	=> [
-						'on',
-					],
-				],
-			]
-		);
+		// // Start From
+		// $this->add_control(
+		// 	'trigger_hook',
+		// 	[
+		// 		'label' 		=> __( 'Start Point', 'blackwidgets' ),
+		// 		'type' 			=> \Elementor\Controls_Manager::TEXT,
+		// 		'placeholder'   => '0.1',
+		// 		'default'       => '0.1',
+		// 		'condition' 	=> [ 
+		// 			'image_movement' 	=> [
+		// 				'on',
+		// 			],
+		// 		],
+		// 	]
+		// );
 
-		// Length
-		$this->add_control(
-			'duration',
-			[
-				'label' 		=> __( 'Length Movement', 'bw' ),
-				'type' 			=> \Elementor\Controls_Manager::TEXT,
-				'placeholder'   => '100%',
-				'default'       => '100%',
-				'condition' 	=> [ 
-					'image_movement' 	=> [
-						'on',
-					],
-				],
-			]
-		);
+		// // Length
+		// $this->add_control(
+		// 	'duration',
+		// 	[
+		// 		'label' 		=> __( 'Length Movement', 'blackwidgets' ),
+		// 		'type' 			=> \Elementor\Controls_Manager::TEXT,
+		// 		'placeholder'   => '100%',
+		// 		'default'       => '100%',
+		// 		'condition' 	=> [ 
+		// 			'image_movement' 	=> [
+		// 				'on',
+		// 			],
+		// 		],
+		// 	]
+		// );
 
-		// Vertical Movement
-		$this->add_control(
-			'vertical_movement',
-			[
-				'label' 		=> __( 'Vertical Movement', 'bw' ),
-				'type' 			=> \Elementor\Controls_Manager::TEXT,
-				'condition' 	=> [ 
-					'image_movement' 	=> [
-						'on',
-					],
-				],
-			]
-		);
+		// // Vertical Movement
+		// $this->add_control(
+		// 	'vertical_movement',
+		// 	[
+		// 		'label' 		=> __( 'Vertical Movement', 'blackwidgets' ),
+		// 		'type' 			=> \Elementor\Controls_Manager::TEXT,
+		// 		'condition' 	=> [ 
+		// 			'image_movement' 	=> [
+		// 				'on',
+		// 			],
+		// 		],
+		// 	]
+		// );
 
-		// Horizontal Movement
-		$this->add_control(
-			'horizontal_movement',
-			[
-				'label' 		=> __( 'Horizontal Movement', 'bw' ),
-				'type' 			=> \Elementor\Controls_Manager::TEXT,
-				'condition' 	=> [ 
-					'image_movement' 	=> [
-						'on',
-					],
-				],
-			]
-		);
+		// // Horizontal Movement
+		// $this->add_control(
+		// 	'horizontal_movement',
+		// 	[
+		// 		'label' 		=> __( 'Horizontal Movement', 'blackwidgets' ),
+		// 		'type' 			=> \Elementor\Controls_Manager::TEXT,
+		// 		'condition' 	=> [ 
+		// 			'image_movement' 	=> [
+		// 				'on',
+		// 			],
+		// 		],
+		// 	]
+		// );
 
-		// Opacity at End
-		$this->add_control(
-			'opacity',
-			[
-				'label' 		=> __( 'Opacity at End', 'bw' ),
-				'type' 			=> \Elementor\Controls_Manager::TEXT,
-				'condition' 	=> [ 
-					'image_movement' 	=> [
-						'on',
-					],
-				],
-			]
-		);
+		// // Opacity at End
+		// $this->add_control(
+		// 	'opacity',
+		// 	[
+		// 		'label' 		=> __( 'Opacity at End', 'blackwidgets' ),
+		// 		'type' 			=> \Elementor\Controls_Manager::TEXT,
+		// 		'condition' 	=> [ 
+		// 			'image_movement' 	=> [
+		// 				'on',
+		// 			],
+		// 		],
+		// 	]
+		// );
 
-		// Rotation at End
-		$this->add_control(
-			'rotation',
-			[
-				'label' 		=> __( 'Rotation at End', 'bw' ),
-				'type' 			=> \Elementor\Controls_Manager::TEXT,
-				'condition' 	=> [ 
-					'image_movement' 	=> [
-						'on',
-					],
-				],
-			]
-		);
+		// // Rotation at End
+		// $this->add_control(
+		// 	'rotation',
+		// 	[
+		// 		'label' 		=> __( 'Rotation at End', 'blackwidgets' ),
+		// 		'type' 			=> \Elementor\Controls_Manager::TEXT,
+		// 		'condition' 	=> [ 
+		// 			'image_movement' 	=> [
+		// 				'on',
+		// 			],
+		// 		],
+		// 	]
+		// );
 
 		// Enable Image Movement Animate
 		$this->add_control(
 			'image_parllax',
 			[
-				'label' 		=> __( 'Extra Image Parallax', 'bw' ),
+				'label' 		=> __( 'Extra Image Parallax', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-				'label_on' 		=> __( 'Enable', 'bw' ),
-				'label_off' 	=> __( 'Disable', 'bw' ),
+				'label_on' 		=> __( 'Enable', 'blackwidgets' ),
+				'label_off' 	=> __( 'Disable', 'blackwidgets' ),
 				'return_value' 	=> 'bw-parallax',
 				'default' 		=> 'off',
 			]
@@ -304,7 +309,7 @@ class BW_Image extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section',
 			[
-				'label' => __( 'Image Box Style', 'bw' ),
+				'label' => __( 'Image Box Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -314,7 +319,7 @@ class BW_Image extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_1_normal',
 			[
-				'label' => __( 'Normal', 'bw' ),
+				'label' => __( 'Normal', 'blackwidgets' ),
 			]
 		);
 
@@ -323,7 +328,7 @@ class BW_Image extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_box_background',
-				'label' => __( 'Background', 'bw' ),
+				'label' => __( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-image img',
 			]
@@ -340,7 +345,7 @@ class BW_Image extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
-				'label' => __( 'Margin', 'bw' ),
+				'label' => __( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -353,7 +358,7 @@ class BW_Image extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
-				'label' => __( 'Padding', 'bw' ),
+				'label' => __( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -374,7 +379,7 @@ class BW_Image extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_box_border',
-				'label' => __( 'Border', 'bw' ),
+				'label' => __( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-image img',
 			]
 		);
@@ -384,7 +389,7 @@ class BW_Image extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_box_box_shadow',
-				'label' => __( 'Box Shadow', 'bw' ),
+				'label' => __( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-image img',
 			]
 		);
@@ -392,7 +397,7 @@ class BW_Image extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_box_border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'bw' ),
+				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -414,7 +419,7 @@ class BW_Image extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_1_hover',
 			[
-				'label' => __( 'Hover', 'bw' ),
+				'label' => __( 'Hover', 'blackwidgets' ),
 			]
 		);
 
@@ -423,7 +428,7 @@ class BW_Image extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_hover_box_background',
-				'label' => __( 'Background', 'bw' ),
+				'label' => __( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', ],
 				'selector' => '{{WRAPPER}} .bw-image img:hover',
 			]
@@ -440,7 +445,7 @@ class BW_Image extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_hover_box_margin',
 			[
-				'label' => __( 'Margin', 'bw' ),
+				'label' => __( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -453,7 +458,7 @@ class BW_Image extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_hover_box_padding',
 			[
-				'label' => __( 'Padding', 'bw' ),
+				'label' => __( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -474,7 +479,7 @@ class BW_Image extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_hover_box_border',
-				'label' => __( 'Border', 'bw' ),
+				'label' => __( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-image img:hover',
 			]
 		);
@@ -484,7 +489,7 @@ class BW_Image extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_hover_box_box_shadow',
-				'label' => __( 'Box Shadow', 'bw' ),
+				'label' => __( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-image img:hover',
 			]
 		);
@@ -492,7 +497,7 @@ class BW_Image extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_hover_box_border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'bw' ),
+				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -550,11 +555,13 @@ class BW_Image extends \Elementor\Widget_Base {
 		$trigger_hook	        = !empty($settings['trigger_hook']) 			?  $settings['trigger_hook'] 						: '';
 		$horizontal_movement	= !empty($settings['horizontal_movement']) 		? 'x: "' . $settings['horizontal_movement'] . '",' 	: '';
 		$vertical_movement		= !empty($settings['vertical_movement']) 		? 'y: "' . $settings['vertical_movement'] . '",' 	: '';
-		$opacity				= is_numeric( $settings['opacity'] ) 			? 'opacity: "' . $settings['opacity'] . '",' 		: '';
+		$opacity				= !empty( $settings['opacity'] ) 			? 'opacity: "' . $settings['opacity'] . '",' 		: '';
 		$rotation				= !empty($settings['rotation']) 				? 'rotation: "' . $settings['rotation'] . '",' 		: '';
 		$parallax				= isset($settings['image_parllax'])				? $settings['image_parllax']						: '';
 		$data_id                = 'bw_' . uniqid();
 		$script_id              = '#' . $data_id;
+
+		$image_movement = ''; //$settings['image_movement']
 
         // Render
         echo '<div class="bw-image" style="text-align: ' . $alignment . ';">';
@@ -571,7 +578,7 @@ class BW_Image extends \Elementor\Widget_Base {
 
 		echo '</div>';
 
-		if ( $settings['image_movement'] == 'on') {
+		if ( $image_movement == 'on') {
 			echo '<script>
 				( function( $ ) {
 					$( document ).ready( function() {

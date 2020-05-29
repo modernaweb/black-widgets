@@ -1,10 +1,11 @@
 <?php
 
 namespace Elementor;
-namespace BW_Modernaweb\Includes\Widgets;
+namespace BLACK_WIDGETS_Modernaweb\Includes\Widgets;
+namespace Black_Widgets;
 use Elementor\Plugin;
 
-final class BW_Modernaweb_Plugin {
+final class BLACK_WIDGETS_Modernaweb_Plugin {
 
 	/**
 	 * Plugin Version
@@ -41,7 +42,7 @@ final class BW_Modernaweb_Plugin {
 	 * @access private
 	 * @static
 	 *
-	 * @var BW_Modernaweb_Plugin The single instance of the class.
+	 * @var BLACK_WIDGETS_Modernaweb_Plugin The single instance of the class.
 	 */
 	private static $_instance = null;
 
@@ -55,7 +56,7 @@ final class BW_Modernaweb_Plugin {
 	 * @access public
 	 * @static
 	 *
-	 * @return BW_Modernaweb_Plugin An instance of the class.
+	 * @return BLACK_WIDGETS_Modernaweb_Plugin An instance of the class.
 	 */
 	public static function instance() {
 
@@ -77,23 +78,22 @@ final class BW_Modernaweb_Plugin {
 
 		add_action( 'init', [ $this, 'i18n' ] );
 		add_action( 'plugins_loaded', [ $this, 'init' ] );
-		add_action( 'admin_menu', [ $this, 'bw_reg_menu' ] );
+		add_action( 'admin_menu', [ $this, 'black_widgets_reg_menu' ] );
 
 		add_filter('upload_mimes', [ $this, 'add_file_types_to_uploads' ]);
-
 
 	}
 
 	/**
 	 * Add dashboard menu
 	 *
-	 * Fired by `bw_reg_menu` action hook.
+	 * Fired by `black_widgets_reg_menu` action hook.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @access public
 	 */
-	public function bw_reg_menu() {
+	public function black_widgets_reg_menu() {
 
 		$page_title = 'Black Widgets';
 		$menu_title = 'Black Widgets';
@@ -286,7 +286,7 @@ final class BW_Modernaweb_Plugin {
 		// Include Widget files
         require_once( __DIR__ . '/widgets/bw-title.php'   				);
         require_once( __DIR__ . '/widgets/bw-button.php'  				);
-        require_once( __DIR__ . '/widgets/bw-image.php'					);
+        require_once( __DIR__ . '/widgets/bw-image-pro.php'					);
         require_once( __DIR__ . '/widgets/bw-flipix.php'				);
         require_once( __DIR__ . '/widgets/bw-title-animate.php'     	);
         require_once( __DIR__ . '/widgets/bw-magic-link.php'    		);
@@ -300,29 +300,29 @@ final class BW_Modernaweb_Plugin {
         require_once( __DIR__ . '/widgets/bw-call-to-action.php'		);
 
         // Register widget
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BW_Title() 				);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BW_Button() 				);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BW_Image() 				);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BW_Flip_Ix() 				);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BW_Title_Animate() 		);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BW_Magic_Link() 			);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BW_Dropcap() 				);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BW_Fade() 				);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BW_Alert() 				);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BW_Icon() 				);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BW_List()					);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BW_Social_Links()			);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BW_Icon_Box()				);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BW_Call_To_Action()		);
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Title() 				);
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Button() 				);
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Image_Pro()				);
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Flip_Ix() 				);
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Title_Animate() 		);
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Magic_Link() 			);
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Dropcap() 				);
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Fade() 					);
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Alert() 				);
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Icon() 					);
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_List()					);
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Social_Links()			);
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Icon_Box()				);
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Call_To_Action()		);
 
 	}
 
 	function add_elementor_widget_categories( $elements_manager ) {
 
 		$elements_manager->add_category(
-			'bw',
+			'black_widgets',
 			[
-				'title' => __( 'Black Widgets', 'bw' ),
+				'title' => __( 'Black Widgets', 'blackwidgets' ),
 				'icon' => 'fa fa-plug',
 			]
 		);
@@ -331,4 +331,4 @@ final class BW_Modernaweb_Plugin {
 
 }
 
-BW_Modernaweb_Plugin::instance();
+BLACK_WIDGETS_Modernaweb_Plugin::instance();

@@ -1,27 +1,22 @@
 <?php
 /**
- * Plugins primary file, in charge of including all other dependencies.
- *
- * @package Black Widgets
- *
- * @wordpress-plugin
- * Plugin Name: 		Black Widgets
- * Plugin URI: 			http://modernaweb.net/black-widgets
- * Description: 		The black building widgets for Elementor
- * Author: 				Modernaweb
- * Version: 			1.0.1
- * Author URI: 			http://modernaweb.net/
- * Text Domain: 		bw
- * Domain Path:       /languages
+ * Plugin Name: Black Widgets
+ * Plugin URI: http://modernaweb.net/black-widgets
+ * Description: The black building widgets for Elementor. 
+ * Author: Modernaweb
+ * Version: 1.0.2
+ * Author URI: http://modernaweb.net/
+ * Text Domain: blackwidgets
+ * Domain Path: /languages
  * lack Widgets is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  */
 
-// If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-	die;
+// Exit if accessed directly
+if (!defined('ABSPATH')) {
+    exit;
 }
 
 /**
@@ -29,14 +24,28 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'BLACK_WIDGETS_VERSION', '1.0.1' );
+define( 'BLACK_WIDGETS_PLUGIN_BASENAME', plugin_basename(__FILE__));
+define( 'BLACK_WIDGETS_PLUGIN_PATH', trailingslashit(plugin_dir_path(__FILE__)));
+define( 'BLACK_WIDGETS_PLUGIN_URL', trailingslashit(plugins_url('/', __FILE__)));
+define( 'BLACK_WIDGETS_VERSION', '1.0.2' );
+define( 'BLACK_WIDGETS_ASSET_PATH', wp_upload_dir()['basedir'] . '/black-widgets');
+define( 'BLACK_WIDGETS_ASSET_URL', wp_upload_dir()['baseurl'] . '/black-widgets');
+
+
+/**
+ * Including autoloader.
+ *
+ * @since 1.0.1
+ */
+require_once BLACK_WIDGETS_PLUGIN_PATH . 'autoload.php';
+
 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-black-widgets-activator.php
  */
 function activate_black_widgets() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-black-widgets-activator.php';
+	require_once BLACK_WIDGETS_PLUGIN_PATH . 'includes/class-black-widgets-activator.php';
 	Black_Widgets_Activator::activate();
 }
 
@@ -45,7 +54,7 @@ function activate_black_widgets() {
  * This action is documented in includes/class-black-widgets-deactivator.php
  */
 function deactivate_black_widgets() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-black-widgets-deactivator.php';
+	require_once BLACK_WIDGETS_PLUGIN_PATH . 'includes/class-black-widgets-deactivator.php';
 	Black_Widgets_Deactivator::deactivate();
 }
 
@@ -77,16 +86,16 @@ function run_black_widgets() {
 run_black_widgets();
 
 /** Redirect after activate plugin */
-register_activation_hook(__FILE__, 'bw_activate');
-add_action('admin_init', 'bw_redirect');
+register_activation_hook(__FILE__, 'black_widgets_activate');
+add_action('admin_init', 'black_widgets_redirect');
 
-function bw_activate() {
+function black_widgets_activate() {
 
 	add_option('my_plugin_do_activation_redirect', true);
 
 }
 
-function bw_redirect() {
+function black_widgets_redirect() {
 
     if (get_option('my_plugin_do_activation_redirect', false)) {
 
