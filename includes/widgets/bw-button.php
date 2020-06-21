@@ -209,7 +209,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Button Text', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Let\'s started', 'blackwidgets' ),
+				'default' => __( 'Lets started', 'blackwidgets' ),
 				'placeholder' => __( 'Type your title here', 'blackwidgets' ),
 			]
 		);

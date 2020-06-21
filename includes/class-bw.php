@@ -78,39 +78,8 @@ final class BLACK_WIDGETS_Modernaweb_Plugin {
 
 		add_action( 'init', [ $this, 'i18n' ] );
 		add_action( 'plugins_loaded', [ $this, 'init' ] );
-		add_action( 'admin_menu', [ $this, 'black_widgets_reg_menu' ] );
-
+		// add_action( 'admin_menu', [ $this, 'black_widgets_reg_menu' ] );
 		add_filter('upload_mimes', [ $this, 'add_file_types_to_uploads' ]);
-
-	}
-
-	/**
-	 * Add dashboard menu
-	 *
-	 * Fired by `black_widgets_reg_menu` action hook.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @access public
-	 */
-	public function black_widgets_reg_menu() {
-
-		$page_title = 'Black Widgets';
-		$menu_title = 'Black Widgets';
-		$capability = 'manage_options';
-		$menu_slug  = 'black-widgets';
-		$function   = 'black_widgets_options';
-		$icon_url   = plugin_dir_url(__FILE__ ) . '../includes/admin/img/bw.svg';
-		$position   = 9;
-		add_menu_page(
-			$page_title,
-			$menu_title,
-			$capability,
-			$menu_slug,
-			$function,
-			$icon_url,
-			$position
-		);
 
 	}
 
@@ -187,14 +156,29 @@ final class BLACK_WIDGETS_Modernaweb_Plugin {
 		add_action( 'elementor/elements/categories_registered', [ $this, 'add_elementor_widget_categories' ] );
 
         add_action( 'elementor/editor/after_enqueue_styles', function() {
-            wp_register_style( 'style', plugins_url( '/admin/css/black-widgets-admin.css', __FILE__ ), array(), '1', 'all' );
+
+			// Load options
+			if ( get_option('plugin_options') ): $options = get_option('plugin_options'); else: $options = ''; endif;
+			$bw_dark_style  = isset($options['bw_dark_style']) ? $options['bw_dark_style'] : '';
+			// var_dump( $options['bw_dark_style'] );
+			if ( $bw_dark_style == 'on' ) {
+				wp_register_style( 'style', plugins_url( '/admin/css/black-widgets-elementor.css', __FILE__ ), array(), '1', 'all' );
+			} else {
+				wp_register_style( 'style', plugins_url( '/admin/css/black-widgets-admin.css', __FILE__ ), array(), '1', 'all' );
+			}
+
 			wp_enqueue_style( 'style' );
+
 		});
 
 		add_action('elementor/editor/before_enqueue_scripts', function() {
 			wp_enqueue_script('bw-jquery-plugins', plugin_dir_url( __FILE__ ) . 'front/js/bw-jquery-plugins.js', array(), '1.0.0', 'true' );
 			wp_enqueue_script('bw-public', plugin_dir_url( __FILE__ ) . 'front/js/bw-public.js', array(), '1.0.0', 'true' );
 		});
+
+		// add_action( 'elementor/element/before_section_start', [ $this, 'bw_style_before_section_start' ] , 10, 3 );
+		// add_action( 'elementor/frontend/section/before_render', [ $this, 'bw_css_pattern' ] );
+		// add_action( 'elementor/frontend/section/after_render', [ $this, 'bw_css_js' ] );
 
 	}
 
@@ -286,7 +270,7 @@ final class BLACK_WIDGETS_Modernaweb_Plugin {
 		// Include Widget files
         require_once( __DIR__ . '/widgets/bw-title.php'   				);
         require_once( __DIR__ . '/widgets/bw-button.php'  				);
-        require_once( __DIR__ . '/widgets/bw-image-pro.php'					);
+        require_once( __DIR__ . '/widgets/bw-image-pro.php'				);
         require_once( __DIR__ . '/widgets/bw-flipix.php'				);
         require_once( __DIR__ . '/widgets/bw-title-animate.php'     	);
         require_once( __DIR__ . '/widgets/bw-magic-link.php'    		);
@@ -298,6 +282,7 @@ final class BLACK_WIDGETS_Modernaweb_Plugin {
         require_once( __DIR__ . '/widgets/bw-social-links.php'			);
         require_once( __DIR__ . '/widgets/bw-icon-box.php'				);
         require_once( __DIR__ . '/widgets/bw-call-to-action.php'		);
+        require_once( __DIR__ . '/widgets/bw-blockquote.php'			);
 
         // Register widget
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Title() 				);
@@ -314,6 +299,7 @@ final class BLACK_WIDGETS_Modernaweb_Plugin {
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Social_Links()			);
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Icon_Box()				);
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Call_To_Action()		);
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Block_Quote()			);
 
 	}
 
@@ -328,6 +314,79 @@ final class BLACK_WIDGETS_Modernaweb_Plugin {
 		);
 	
 	}
+	
+	public function bw_style_before_section_start ( $element, $section_id, $args ) {
+		// @var \Elementor\Element_Base $element | https://code.elementor.com/php-hooks/
+		if ( 'section' === $element->get_name() && 'section_background' === $section_id ) {
+	 
+			$element->start_controls_section(
+				'bw_custom_section_settings',
+				[
+					'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+					'label' => __( 'BW Custom Section Settings', 'blackwidgets' ),
+				]
+			);
+
+			$element->add_control(
+				'bw_custom_section_enable_css_pattern',
+				[
+					'label' 		=> __( 'CSS Pattern For Background', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::SWITCHER,
+					'label_on' 		=> __( 'Yes', 'blackwidgets' ),
+					'label_off' 	=> __( 'No !', 'blackwidgets' ),
+					'return_value' 	=> 'css_enable',
+					'default' 		=> 'off',
+				]
+			);
+
+			$element->add_control(
+				'bw_custom_section_css_pattern',
+				[
+					'label' => __( 'CSS Pattern', 'blackwidgets' ),
+					'type' => \Elementor\Controls_Manager::SELECT,
+					'default' => 'bw-pattern-1',
+					'options' => [
+						'bw-pattern-1' 	=> __( 'Type 1', 'blackwidgets' ),
+						'bw-pattern-2' 	=> __( 'Type 2', 'blackwidgets' ),
+						'bw-pattern-3' 	=> __( 'Type 3', 'blackwidgets' ),
+						'bw-pattern-4' 	=> __( 'Type 4', 'blackwidgets' ),
+						'bw-pattern-5' 	=> __( 'Type 5', 'blackwidgets' ),
+						'bw-pattern-6' 	=> __( 'Type 6', 'blackwidgets' ),
+						'bw-pattern-7' 	=> __( 'Type 7', 'blackwidgets' ),
+					],
+					'condition'  => [
+						'bw_custom_section_enable_css_pattern' => [
+							'css_enable',
+						],
+					],
+				]
+			);
+
+			$element->end_controls_section();
+		}
+	 }
+
+	 public function bw_css_pattern ( $element ) {
+		
+		$settings = $element->get_settings();
+		if (isset($settings['bw_custom_section_enable_css_pattern']) && $settings['bw_custom_section_enable_css_pattern'] == 'css_enable' ){
+			$element->add_render_attribute( '_wrapper', 'id', $settings['bw_custom_section_css_pattern'] );
+		}
+
+	 }
+
+	 function bw_css_js() {
+
+		?>
+			<script>
+				jQuery(document).ready(function($) {
+					jQuery("head link[rel='stylesheet']").last().before("<style>#bw-pattern-1{background: #ccc;}</style>");
+				});
+			</script>
+
+		<?php
+
+	 }
 
 }
 

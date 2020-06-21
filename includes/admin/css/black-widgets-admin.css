@@ -25,6 +25,11 @@
      border-radius: 24px;
  }
  
+ body.toplevel_page_black-widgets ul#adminmenu a.wp-has-current-submenu:after,
+ body.toplevel_page_black-widgets ul#adminmenu>li.current>a.current:after {
+    border-right-color: #A0AEB9;
+}
+
  .bw-box-backend h4.bw-backend-heading, .bw-box-backend h2.bw-backend-heading {
      color: #fff;
  }
@@ -33,7 +38,7 @@
      font-size: 42px;
      line-height: 54px;
      letter-spacing: -1.5px;
-     margin-bottom: 85px;
+     margin-bottom: 55px;
      margin-top: 0;
  }
  
@@ -64,6 +69,16 @@
     border: 0;
     box-shadow: unset;
  }
+
+ body.toplevel_page_black-widgets .bw-box-backend .bw-banner {
+    max-width: 100%;
+    width: 100%;
+    max-height: unset !important;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 24px 80px -40px rgba(0, 0, 0, 0.4);
+    margin: 24px 0;
+}
  
  #elementor-panel-category-black_widgets .elementor-element {
      background: #000;

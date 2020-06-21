@@ -96,7 +96,6 @@ class Black_Widgets_Public {
 
 		wp_enqueue_script('bw-jquery-plugins', plugin_dir_url( __FILE__ ) . 'js/bw-jquery-plugins.js', array(), '1.0.0', 'true' );
 		wp_enqueue_script('bw-public', plugin_dir_url( __FILE__ ) . 'js/bw-public.js', array(), '1.0.0', 'true' );
-		
 
 
 	}
