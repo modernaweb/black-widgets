@@ -65,27 +65,27 @@ Wordpress 4.9+
 
 ### 1. Black Widgets Screenshot 1
 
-[missing image]
+![Black Widgets Screenshot 1](https://ps.w.org/black-widgets/assets/screenshot-1.png)
 
 ### 2. Black Widgets Screenshot 2
 
-[missing image]
+![Black Widgets Screenshot 2](https://ps.w.org/black-widgets/assets/screenshot-2.png)
 
 ### 3. Black Widgets Screenshot 3
 
-[missing image]
+![Black Widgets Screenshot 3](https://ps.w.org/black-widgets/assets/screenshot-3.png)
 
 ### 4. Black Widgets Screenshot 4
 
-[missing image]
+![Black Widgets Screenshot 4](https://ps.w.org/black-widgets/assets/screenshot-4.png)
 
 ### 5. Black Widgets Screenshot 5
 
-[missing image]
+![Black Widgets Screenshot 5](https://ps.w.org/black-widgets/assets/screenshot-5.png)
 
 ### 6. Black Widgets Screenshot 6
 
-[missing image]
+![Black Widgets Screenshot 6](https://ps.w.org/black-widgets/assets/screenshot-6.png)
 
 
 
