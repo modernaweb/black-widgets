@@ -1,13 +1,14 @@
-=== Black Widgets For Elementor ===
-Contributors: skalanter, modernaweb
-Donate link: http://modernaweb.net/
-Tags: page builder, editor, elementor widgets, elementor addon
-Stable tag: 1.1.0
-Tested up to: 5.5.1
-Requires at least: 5.4
-Requires PHP: 5.6
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+# Black Widgets For Elementor
+
+**Contributors:** skalanter, modernaweb \
+**Donate link:** http://modernaweb.net/ \
+**Tags:** page builder, editor, elementor widgets, elementor addon \
+**Stable tag:** 1.1.0 \
+**Tested up to:** 5.5.1 \
+**Requires at least:** 5.4 \
+**Requires PHP:** 5.6 \
+**License:** GPLv2 or later \
+**License URI:** https://www.gnu.org/licenses/gpl-2.0.html
 
 Free add-on for Elementor, You can add ability more customization with visual effects. ✌
 
@@ -62,24 +63,43 @@ Wordpress 4.9+
 
 ## Screenshots
 
-1. Black Widgets Screenshot 1
-2. Black Widgets Screenshot 2
-3. Black Widgets Screenshot 3
-4. Black Widgets Screenshot 4
-5. Black Widgets Screenshot 5
-6. Black Widgets Screenshot 6
+### 1. Black Widgets Screenshot 1
+
+![Black Widgets Screenshot 1](https://ps.w.org/black-widgets/assets/screenshot-1.png)
+
+### 2. Black Widgets Screenshot 2
+
+![Black Widgets Screenshot 2](https://ps.w.org/black-widgets/assets/screenshot-2.png)
+
+### 3. Black Widgets Screenshot 3
+
+![Black Widgets Screenshot 3](https://ps.w.org/black-widgets/assets/screenshot-3.png)
+
+### 4. Black Widgets Screenshot 4
+
+![Black Widgets Screenshot 4](https://ps.w.org/black-widgets/assets/screenshot-4.png)
+
+### 5. Black Widgets Screenshot 5
+
+![Black Widgets Screenshot 5](https://ps.w.org/black-widgets/assets/screenshot-5.png)
+
+### 6. Black Widgets Screenshot 6
+
+![Black Widgets Screenshot 6](https://ps.w.org/black-widgets/assets/screenshot-6.png)
+
 
 
 ## Changelog
 
-= What is next? =
+### What is next?
+
 - Add some new widgets
 - CSS variables
 - Main Animate
 - More compatibility
 
+### 1.1.0 — 2020-09-10
 
-= 1.1.0 — 2020-09-10 =
 - Compatibility: WordPress v5.5.0
 - Compatibility: Elementor v3.0.0
 - Compatibility: Safari, Chrome, Firefox Browsers
@@ -93,22 +113,26 @@ Wordpress 4.9+
 - Fixed: Responsive issue on BW Call To Action widget
 - Fixed: Some minor issue
 
-= 1.0.5 — 2020-06-21 =
+### 1.0.5 — 2020-06-21
+
 - Added: Settings page
 - Added: Elementor environment dark mode
 - Added: New widget: Blockquote
 - Fixed: Some minor issue
 
-= 1.0.2 — 2020-05-30 =
+### 1.0.2 — 2020-05-30
+
 - Added: Namespace to plugin
 - Changed: BW Classes to BLACK_WIDGETS
 - Changed: bw text domain to blackwidgets
 - Fixed: Some minor issue
 
-= 1.0.1 — 2020-05-28 =
+### 1.0.1 — 2020-05-28
+
 - Fixed: Some minor issue
 
-= 1.0.0 — 2020-05-23 =
+### 1.0.0 — 2020-05-23
+
 - Initial release.
 
 

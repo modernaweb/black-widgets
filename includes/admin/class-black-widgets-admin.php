@@ -179,7 +179,7 @@ class Black_Widgets_Admin {
 
 		add_settings_field( // For add a new setting field : head over to 17 June 2020 1:30PM >> Settings Part IV << 3c64f36
 			'bw_dark_style_chb1',
-			'Black Elementor environment',
+			'Black Elementor Environment',
 			array( $this, 'bw_setting_chb1_fn' ),
 			'black_widgets_settings_general_settings',
 			'black_widgets_settings_example_setting'
@@ -206,9 +206,6 @@ class Black_Widgets_Admin {
 		require_once( __DIR__ . '/black-widgets-settings.php');
 
 	}
-
-
-
 
 
 

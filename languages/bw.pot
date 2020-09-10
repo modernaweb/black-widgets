@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Black Widgets\n"
-"POT-Creation-Date: 2020-06-20 23:21+0430\n"
+"POT-Creation-Date: 2020-09-10 23:05+0430\n"
 "PO-Revision-Date: 2020-05-23 23:07+0430\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -221,13 +221,17 @@ msgstr ""
 msgid "Enable Icon"
 msgstr ""
 
-#: includes/widgets/bw-alert.php:141 includes/widgets/bw-flipix.php:130
-#: includes/widgets/bw-image-pro.php:296
+#: includes/widgets/bw-alert.php:141 includes/widgets/bw-fade.php:439
+#: includes/widgets/bw-fade.php:872 includes/widgets/bw-flipix.php:130
+#: includes/widgets/bw-image-pro.php:296 includes/widgets/bw-image-pro.php:549
+#: includes/widgets/bw-image-pro.php:972
 msgid "Enable"
 msgstr ""
 
-#: includes/widgets/bw-alert.php:142 includes/widgets/bw-flipix.php:131
-#: includes/widgets/bw-image-pro.php:297
+#: includes/widgets/bw-alert.php:142 includes/widgets/bw-fade.php:440
+#: includes/widgets/bw-fade.php:873 includes/widgets/bw-flipix.php:131
+#: includes/widgets/bw-image-pro.php:297 includes/widgets/bw-image-pro.php:550
+#: includes/widgets/bw-image-pro.php:973
 msgid "Disable"
 msgstr ""
 
@@ -301,7 +305,7 @@ msgstr ""
 #: includes/widgets/bw-call-to-action.php:870
 #: includes/widgets/bw-dropcap.php:196 includes/widgets/bw-dropcap.php:287
 #: includes/widgets/bw-dropcap.php:430 includes/widgets/bw-dropcap.php:571
-#: includes/widgets/bw-fade.php:265 includes/widgets/bw-fade.php:327
+#: includes/widgets/bw-fade.php:265 includes/widgets/bw-fade.php:344
 #: includes/widgets/bw-flipix.php:452 includes/widgets/bw-flipix.php:589
 #: includes/widgets/bw-flipix.php:730 includes/widgets/bw-flipix.php:871
 #: includes/widgets/bw-flipix.php:1008 includes/widgets/bw-flipix.php:1149
@@ -340,7 +344,7 @@ msgstr ""
 #: includes/widgets/bw-call-to-action.php:893
 #: includes/widgets/bw-dropcap.php:206 includes/widgets/bw-dropcap.php:297
 #: includes/widgets/bw-dropcap.php:453 includes/widgets/bw-dropcap.php:594
-#: includes/widgets/bw-fade.php:275 includes/widgets/bw-flipix.php:475
+#: includes/widgets/bw-fade.php:292 includes/widgets/bw-flipix.php:475
 #: includes/widgets/bw-flipix.php:612 includes/widgets/bw-flipix.php:753
 #: includes/widgets/bw-flipix.php:894 includes/widgets/bw-flipix.php:1031
 #: includes/widgets/bw-flipix.php:1172 includes/widgets/bw-flipix.php:1313
@@ -379,18 +383,19 @@ msgstr ""
 #: includes/widgets/bw-call-to-action.php:879
 #: includes/widgets/bw-dropcap.php:214 includes/widgets/bw-dropcap.php:305
 #: includes/widgets/bw-dropcap.php:439 includes/widgets/bw-dropcap.php:580
-#: includes/widgets/bw-flipix.php:461 includes/widgets/bw-flipix.php:598
-#: includes/widgets/bw-flipix.php:739 includes/widgets/bw-flipix.php:880
-#: includes/widgets/bw-flipix.php:1017 includes/widgets/bw-flipix.php:1158
-#: includes/widgets/bw-flipix.php:1299 includes/widgets/bw-flipix.php:1440
-#: includes/widgets/bw-icon-box.php:521 includes/widgets/bw-icon-box.php:612
-#: includes/widgets/bw-icon-box.php:796 includes/widgets/bw-icon-box.php:987
-#: includes/widgets/bw-icon-box.php:1178 includes/widgets/bw-icon-box.php:1369
-#: includes/widgets/bw-icon-box.php:1569 includes/widgets/bw-icon-box.php:1742
-#: includes/widgets/bw-icon.php:207 includes/widgets/bw-image-pro.php:400
-#: includes/widgets/bw-image-pro.php:500 includes/widgets/bw-list.php:201
-#: includes/widgets/bw-list.php:299 includes/widgets/bw-list.php:416
-#: includes/widgets/bw-list.php:525 includes/widgets/bw-magic-link.php:253
+#: includes/widgets/bw-fade.php:273 includes/widgets/bw-flipix.php:461
+#: includes/widgets/bw-flipix.php:598 includes/widgets/bw-flipix.php:739
+#: includes/widgets/bw-flipix.php:880 includes/widgets/bw-flipix.php:1017
+#: includes/widgets/bw-flipix.php:1158 includes/widgets/bw-flipix.php:1299
+#: includes/widgets/bw-flipix.php:1440 includes/widgets/bw-icon-box.php:521
+#: includes/widgets/bw-icon-box.php:612 includes/widgets/bw-icon-box.php:796
+#: includes/widgets/bw-icon-box.php:987 includes/widgets/bw-icon-box.php:1178
+#: includes/widgets/bw-icon-box.php:1369 includes/widgets/bw-icon-box.php:1569
+#: includes/widgets/bw-icon-box.php:1742 includes/widgets/bw-icon.php:207
+#: includes/widgets/bw-image-pro.php:400 includes/widgets/bw-image-pro.php:500
+#: includes/widgets/bw-list.php:201 includes/widgets/bw-list.php:299
+#: includes/widgets/bw-list.php:416 includes/widgets/bw-list.php:525
+#: includes/widgets/bw-magic-link.php:253
 #: includes/widgets/bw-magic-link.php:344
 #: includes/widgets/bw-magic-link.php:478
 #: includes/widgets/bw-magic-link.php:619
@@ -1035,7 +1040,8 @@ msgstr ""
 msgid "Line 2"
 msgstr ""
 
-#: includes/widgets/bw-fade.php:121
+#: includes/widgets/bw-fade.php:121 includes/widgets/bw-fade.php:834
+#: includes/widgets/bw-image-pro.php:939
 msgid ""
 "It just work with scroll down and does not work on first section. it works "
 "once"
@@ -1049,28 +1055,313 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: includes/widgets/bw-fade.php:288
+#: includes/widgets/bw-fade.php:305
 msgid "Image & line  Style"
 msgstr ""
 
-#: includes/widgets/bw-fade.php:296
+#: includes/widgets/bw-fade.php:313
 msgid "Start line width"
 msgstr ""
 
-#: includes/widgets/bw-fade.php:340
+#: includes/widgets/bw-fade.php:357
 msgid "Image Width"
 msgstr ""
 
-#: includes/widgets/bw-fade.php:371
+#: includes/widgets/bw-fade.php:388
 msgid "Image Cover X"
 msgstr ""
 
-#: includes/widgets/bw-fade.php:379
+#: includes/widgets/bw-fade.php:396
 msgid "After change style, scroll down to see changes"
 msgstr ""
 
-#: includes/widgets/bw-fade.php:386
+#: includes/widgets/bw-fade.php:403
 msgid "Image Hover Animation"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:423 includes/widgets/bw-image-pro.php:538
+msgid "2D & 3D Normal Transfrom Style"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:437 includes/widgets/bw-fade.php:870
+#: includes/widgets/bw-image-pro.php:547 includes/widgets/bw-image-pro.php:970
+msgid "Transfrom Style"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:457 includes/widgets/bw-fade.php:890
+#: includes/widgets/bw-image-pro.php:567 includes/widgets/bw-image-pro.php:990
+msgid "Move"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:466 includes/widgets/bw-fade.php:899
+#: includes/widgets/bw-image-pro.php:576 includes/widgets/bw-image-pro.php:999
+msgid "Move on → X"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:480 includes/widgets/bw-fade.php:913
+#: includes/widgets/bw-image-pro.php:590 includes/widgets/bw-image-pro.php:1013
+msgid "movement on the diagram X - do not leave empty!"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:487 includes/widgets/bw-fade.php:920
+#: includes/widgets/bw-image-pro.php:597 includes/widgets/bw-image-pro.php:1020
+msgid "Move on ↑ Y"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:501 includes/widgets/bw-fade.php:934
+#: includes/widgets/bw-image-pro.php:611 includes/widgets/bw-image-pro.php:1034
+msgid "movement on the diagram Y - do not leave empty!"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:508 includes/widgets/bw-fade.php:941
+#: includes/widgets/bw-image-pro.php:618 includes/widgets/bw-image-pro.php:1041
+msgid "Move on ↙ Z"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:522 includes/widgets/bw-fade.php:955
+#: includes/widgets/bw-image-pro.php:632 includes/widgets/bw-image-pro.php:1055
+msgid "movement on the diagram Z - do not leave empty!"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:532 includes/widgets/bw-fade.php:965
+#: includes/widgets/bw-image-pro.php:642 includes/widgets/bw-image-pro.php:1065
+msgid "Scale"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:541 includes/widgets/bw-fade.php:974
+#: includes/widgets/bw-image-pro.php:651 includes/widgets/bw-image-pro.php:1074
+msgid "Scale on → X"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:555 includes/widgets/bw-fade.php:988
+#: includes/widgets/bw-image-pro.php:665 includes/widgets/bw-image-pro.php:1088
+msgid "set 1.1 to scale on left and right - do not set 0"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:562 includes/widgets/bw-fade.php:995
+#: includes/widgets/bw-image-pro.php:672 includes/widgets/bw-image-pro.php:1095
+msgid "Scale on ↑ Y"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:576 includes/widgets/bw-fade.php:1009
+#: includes/widgets/bw-image-pro.php:686 includes/widgets/bw-image-pro.php:1109
+msgid "set 1.1 to scale on top and bottom - do not set 0"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:583 includes/widgets/bw-fade.php:1016
+#: includes/widgets/bw-image-pro.php:693 includes/widgets/bw-image-pro.php:1116
+msgid "Scale on ↙ Z"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:597 includes/widgets/bw-fade.php:618
+#: includes/widgets/bw-fade.php:639 includes/widgets/bw-fade.php:1030
+#: includes/widgets/bw-fade.php:1051 includes/widgets/bw-fade.php:1072
+#: includes/widgets/bw-image-pro.php:707 includes/widgets/bw-image-pro.php:728
+#: includes/widgets/bw-image-pro.php:749 includes/widgets/bw-image-pro.php:1130
+#: includes/widgets/bw-image-pro.php:1151
+#: includes/widgets/bw-image-pro.php:1172
+msgid "If you want to use scale Z or 3D Scale, you should set perspective size"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:604 includes/widgets/bw-fade.php:1037
+#: includes/widgets/bw-image-pro.php:714 includes/widgets/bw-image-pro.php:1137
+msgid "Self Perspective ◊"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:625 includes/widgets/bw-fade.php:1058
+#: includes/widgets/bw-image-pro.php:735 includes/widgets/bw-image-pro.php:1158
+msgid "Children Perspective ◊"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:649 includes/widgets/bw-fade.php:1082
+#: includes/widgets/bw-image-pro.php:759 includes/widgets/bw-image-pro.php:1182
+msgid "Rotate"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:658 includes/widgets/bw-fade.php:1091
+#: includes/widgets/bw-image-pro.php:768 includes/widgets/bw-image-pro.php:1191
+msgid "Rotate on → X"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:678 includes/widgets/bw-fade.php:1111
+#: includes/widgets/bw-image-pro.php:788 includes/widgets/bw-image-pro.php:1211
+msgid "Rotate on ↑ Y"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:698 includes/widgets/bw-fade.php:1131
+#: includes/widgets/bw-image-pro.php:808 includes/widgets/bw-image-pro.php:1231
+msgid "Rotate on ↙ Z"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:721 includes/widgets/bw-fade.php:1154
+#: includes/widgets/bw-image-pro.php:831 includes/widgets/bw-image-pro.php:1254
+msgid "Skew"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:730 includes/widgets/bw-fade.php:1163
+#: includes/widgets/bw-image-pro.php:840 includes/widgets/bw-image-pro.php:1263
+msgid "Skew on → X ▱"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:750 includes/widgets/bw-fade.php:1183
+#: includes/widgets/bw-image-pro.php:860 includes/widgets/bw-image-pro.php:1283
+msgid "Skew on ↑ Y ▱"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:781 includes/widgets/bw-image-pro.php:891
+msgid "Cursor & Hover Animate"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:795 includes/widgets/bw-image-pro.php:900
+msgid "Select Cursor Style"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:799 includes/widgets/bw-image-pro.php:904
+msgid "auto"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:800 includes/widgets/bw-image-pro.php:905
+msgid "default"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:801 includes/widgets/bw-image-pro.php:906
+msgid "none"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:802 includes/widgets/bw-image-pro.php:907
+msgid "pointer"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:803 includes/widgets/bw-image-pro.php:908
+msgid "not-Allowed"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:804 includes/widgets/bw-image-pro.php:909
+msgid "wait"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:805 includes/widgets/bw-image-pro.php:910
+msgid "progress"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:806 includes/widgets/bw-image-pro.php:911
+msgid "help"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:807 includes/widgets/bw-image-pro.php:912
+msgid "context-menu"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:808 includes/widgets/bw-image-pro.php:913
+msgid "cell"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:809 includes/widgets/bw-image-pro.php:914
+msgid "crosshair"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:810 includes/widgets/bw-image-pro.php:915
+msgid "text"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:811 includes/widgets/bw-image-pro.php:916
+msgid "wetical-text"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:812 includes/widgets/bw-image-pro.php:917
+msgid "grab"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:813 includes/widgets/bw-image-pro.php:918
+msgid "grabbing"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:814 includes/widgets/bw-image-pro.php:919
+msgid "alias"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:815 includes/widgets/bw-image-pro.php:920
+msgid "copy"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:816 includes/widgets/bw-image-pro.php:921
+msgid "move"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:817 includes/widgets/bw-image-pro.php:922
+msgid "zoom-in"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:818 includes/widgets/bw-image-pro.php:923
+msgid "zoom-out"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:819 includes/widgets/bw-image-pro.php:924
+msgid "col-resize"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:820 includes/widgets/bw-image-pro.php:925
+msgid "row-resize"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:821 includes/widgets/bw-image-pro.php:926
+msgid "nesw-resize"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:822 includes/widgets/bw-image-pro.php:927
+msgid "newse-resize"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:823 includes/widgets/bw-image-pro.php:928
+msgid "ew-resize"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:824 includes/widgets/bw-image-pro.php:929
+msgid "ns-resize"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:825 includes/widgets/bw-image-pro.php:930
+msgid "n-resize"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:826 includes/widgets/bw-image-pro.php:931
+msgid "w-resize"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:827 includes/widgets/bw-image-pro.php:932
+msgid "s-resize"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:828 includes/widgets/bw-image-pro.php:933
+msgid "e-resize"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:829 includes/widgets/bw-image-pro.php:934
+msgid "nw-resize"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:830 includes/widgets/bw-image-pro.php:935
+msgid "ne-resize"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:831 includes/widgets/bw-image-pro.php:936
+msgid "sw-resize"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:832 includes/widgets/bw-image-pro.php:937
+msgid "se-resize"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:841 includes/widgets/bw-image-pro.php:946
+msgid "Type Custom Animate"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:843 includes/widgets/bw-image-pro.php:948
+msgid "all 0.23s ease"
+msgstr ""
+
+#: includes/widgets/bw-fade.php:856 includes/widgets/bw-image-pro.php:961
+msgid "2D & 3D Hover Transfrom Style"
 msgstr ""
 
 #: includes/widgets/bw-flipix.php:57

@@ -5,10 +5,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-echo '<div class="wrap">';
+echo '<div id="bw-wrap">';
 	settings_errors();
 	echo '<div class="icon32" id="icon-options-general"></div>';
-	echo '<h2>Black Widgets</h2>';
+	echo '<h1>Black Widgets Settings</h1>';
 	echo '<hr />';
 	
 	echo '<form action="options.php" method="post">';
@@ -20,7 +20,7 @@ echo '<div class="wrap">';
 		do_settings_sections('black_widgets_settings_general_settings');
 		?>
 		<p class="submit">
-			<input name="Submit" type="submit" class="button-primary" value="<?php _e('Save Changes' ,'blackwidgets'); ?>" />
+			<input name="Submit" type="submit" class="bw-backend-btn button-primary" value="<?php _e('Save Changes' ,'blackwidgets'); ?>" />
 		</p>
 		<?php
 	echo '</form>';

@@ -383,7 +383,6 @@ final class BLACK_WIDGETS_Modernaweb_Plugin {
 					jQuery("head link[rel='stylesheet']").last().before("<style>#bw-pattern-1{background: #ccc;}</style>");
 				});
 			</script>
-
 		<?php
 
 	 }

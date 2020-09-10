@@ -380,7 +380,7 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 			[
 				'name' => 'widget_box_border',
 				'label' => __( 'Border', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .bw-image img',
+				'selector' => '{{WRAPPER}} .bw-image img, {{WRAPPER}} .bw-image .simpleParallax',
 			]
 		);
 
@@ -390,7 +390,7 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 			[
 				'name' => 'widget_box_box_shadow',
 				'label' => __( 'Box Shadow', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .bw-image img',
+				'selector' => '{{WRAPPER}} .bw-image img, {{WRAPPER}} .bw-image .simpleParallax',
 			]
 		);
 
@@ -401,7 +401,7 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-image img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-image img, {{WRAPPER}} .bw-image .simpleParallax' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -480,7 +480,7 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 			[
 				'name' => 'widget_hover_box_border',
 				'label' => __( 'Border', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .bw-image img:hover',
+				'selector' => '{{WRAPPER}} .bw-image img:hover, {{WRAPPER}} .bw-image .simpleParallax:hover',
 			]
 		);
 
@@ -490,7 +490,7 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 			[
 				'name' => 'widget_hover_box_box_shadow',
 				'label' => __( 'Box Shadow', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .bw-image img:hover',
+				'selector' => '{{WRAPPER}} .bw-image img:hover, {{WRAPPER}} .bw-image .simpleParallax:hover',
 			]
 		);
 
@@ -501,7 +501,7 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-image img:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-image img:hover, {{WRAPPER}} .bw-image .simpleParallax:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -530,6 +530,781 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 		$this->end_controls_section();
 		// End
 
+		// Start
+		// Style section
+		$this->start_controls_section(
+			'transform_section',
+			[
+				'label' => __( '2D & 3D Normal Transfrom Style', 'blackwidgets' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		// Enable Image Movement Animate
+		$this->add_control(
+			'transform_normal_option',
+			[
+				'label' 		=> __( 'Transfrom Style', 'blackwidgets' ),
+				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
+				'label_on' 		=> __( 'Enable', 'blackwidgets' ),
+				'label_off' 	=> __( 'Disable', 'blackwidgets' ),
+				'return_value' 	=> 'normal_transform',
+				'default' 		=> 'off',
+			]
+		);
+
+		// Style Subtitle Tabs
+		$this->start_controls_tabs('transform_tabs', [
+			'condition' 	=> [
+				'transform_normal_option' 	=> [
+					'normal_transform',
+				],
+			],
+		]);
+		$this->start_controls_tab(
+			'transform_tab_move',
+			[
+				'label' => __( 'Move', 'blackwidgets' ),
+			]
+		);
+
+		// Start normal tab content
+
+		$this->add_responsive_control(
+			'move_normal_x',
+			[
+				'label' => __( 'Move on → X', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => -100,
+						'max' => 100,
+						'step' => 2,
+					],
+				],
+				'default'  => [
+					'unit' => 'px',
+					'size' => 0,
+				],
+				'description' => __( 'movement on the diagram X - do not leave empty!', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_responsive_control(
+			'move_normal_y',
+			[
+				'label' => __( 'Move on ↑ Y', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => -100,
+						'max' => 100,
+						'step' => 2,
+					],
+				],
+				'default'  => [
+					'unit' => 'px',
+					'size' => 0,
+				],
+				'description' => __( 'movement on the diagram Y - do not leave empty!', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_responsive_control(
+			'move_normal_z',
+			[
+				'label' => __( 'Move on ↙ Z', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => -100,
+						'max' => 100,
+						'step' => 2,
+					],
+				],
+				'default'  => [
+					'unit' => 'px',
+					'size' => 0,
+				],
+				'description' => __( 'movement on the diagram Z - do not leave empty!', 'blackwidgets' ),
+			]
+		);
+
+		// end normal tab content
+
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'transform_tab_scale',
+			[
+				'label' => __( 'Scale', 'blackwidgets' ),
+			]
+		);
+
+		// Start hover tab content
+
+		$this->add_responsive_control(
+			'scale_normal_x',
+			[
+				'label' => __( 'Scale on → X', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'deg' ],
+				'range' => [
+					'px' => [
+						'min' => -100,
+						'max' => 100,
+						'step' => 1,
+					],
+				],
+				'default'  => [
+					'unit' => 'deg',
+					'size' => 1,
+				],
+				'description' => __( 'set 1.1 to scale on left and right - do not set 0', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_responsive_control(
+			'scale_normal_y',
+			[
+				'label' => __( 'Scale on ↑ Y', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'deg' ],
+				'range' => [
+					'px' => [
+						'min' => -100,
+						'max' => 100,
+						'step' => 1,
+					],
+				],
+				'default'  => [
+					'unit' => 'deg',
+					'size' => 1,
+				],
+				'description' => __( 'set 1.1 to scale on top and bottom - do not set 0', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_responsive_control(
+			'scale_normal_z',
+			[
+				'label' => __( 'Scale on ↙ Z', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'deg' ],
+				'range' => [
+					'px' => [
+						'min' => -100,
+						'max' => 100,
+						'step' => 1,
+					],
+				],
+				'default'  => [
+					'unit' => 'deg',
+					'size' => 1,
+				],
+				'description' => __( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_responsive_control(
+			'perspective',
+			[
+				'label' => __( 'Self Perspective ◊', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'ps' ],
+				'range' => [
+					'px' => [
+						'min' => -3000,
+						'max' => 3000,
+						'step' => 50,
+					],
+				],
+				'default'  => [
+					'unit' => 'px',
+					'size' => 0,
+				],
+				'description' => __( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_responsive_control(
+			'perspective_child',
+			[
+				'label' => __( 'Children Perspective ◊', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'ps' ],
+				'range' => [
+					'px' => [
+						'min' => -3000,
+						'max' => 3000,
+						'step' => 50,
+					],
+				],
+				'default'  => [
+					'unit' => 'px',
+					'size' => 0,
+				],
+				'description' => __( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
+			]
+		);
+
+		// end hover tab content
+
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'transform_tab_rotate',
+			[
+				'label' => __( 'Rotate', 'blackwidgets' ),
+			]
+		);
+
+		// Start hover tab content
+
+		$this->add_responsive_control(
+			'rotate_normal_x',
+			[
+				'label' => __( 'Rotate on → X', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'deg' ],
+				'range' => [
+					'px' => [
+						'min' => -100,
+						'max' => 100,
+						'step' => 5,
+					],
+				],
+				'default'  => [
+					'unit' => 'deg',
+					'size' => 0,
+				]
+			]
+		);
+
+		$this->add_responsive_control(
+			'rotate_normal_y',
+			[
+				'label' => __( 'Rotate on ↑ Y', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'deg' ],
+				'range' => [
+					'px' => [
+						'min' => -100,
+						'max' => 100,
+						'step' => 5,
+					],
+				],
+				'default'  => [
+					'unit' => 'deg',
+					'size' => 0,
+				]
+			]
+		);
+
+		$this->add_responsive_control(
+			'rotate_normal_z',
+			[
+				'label' => __( 'Rotate on ↙ Z', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'deg' ],
+				'range' => [
+					'px' => [
+						'min' => -100,
+						'max' => 100,
+						'step' => 5,
+					],
+				],
+				'default'  => [
+					'unit' => 'deg',
+					'size' => 0,
+				]
+			]
+		);
+
+		// end hover tab content
+
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'transform_tab_skew',
+			[
+				'label' => __( 'Skew', 'blackwidgets' ),
+			]
+		);
+
+		// Start hover tab content
+
+		$this->add_responsive_control(
+			'skew_normal_x',
+			[
+				'label' => __( 'Skew on → X ▱', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'deg' ],
+				'range' => [
+					'px' => [
+						'min' => -100,
+						'max' => 100,
+						'step' => 5,
+					],
+				],
+				'default'  => [
+					'unit' => 'deg',
+					'size' => 0,
+				]
+			]
+		);
+
+		$this->add_responsive_control(
+			'skew_normal_y',
+			[
+				'label' => __( 'Skew on ↑ Y ▱', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'deg' ],
+				'range' => [
+					'px' => [
+						'min' => -100,
+						'max' => 100,
+						'step' => 5,
+					],
+				],
+				'default'  => [
+					'unit' => 'deg',
+					'size' => 0,
+				]
+			]
+		);
+
+		// end hover tab content
+
+		$this->end_controls_tab();
+		$this->end_controls_tabs(); // End Tabs
+
+		$this->end_controls_section();
+		// End
+
+
+		// Start
+		// Style section
+		$this->start_controls_section(
+			'image_pro_cursor_animate',
+			[
+				'label' => __( 'Cursor & Hover Animate', 'blackwidgets' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		// Select type of the title
+		$this->add_control(
+			'widget_cursor',
+			[
+				'label' => __( 'Select Cursor Style', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'default',
+				'options' => [
+					'auto' 			=> __( 'auto', 'blackwidgets' ),
+					'default' 		=> __( 'default', 'blackwidgets' ),
+					'none' 			=> __( 'none', 'blackwidgets' ),
+					'pointer' 		=> __( 'pointer', 'blackwidgets' ),
+					'not-Allowed' 	=> __( 'not-Allowed', 'blackwidgets' ),
+					'wait' 			=> __( 'wait', 'blackwidgets' ),
+					'progress' 		=> __( 'progress', 'blackwidgets' ),
+					'help' 			=> __( 'help', 'blackwidgets' ),
+					'context-menu' 	=> __( 'context-menu', 'blackwidgets' ),
+					'cell' 			=> __( 'cell', 'blackwidgets' ),
+					'crosshair' 	=> __( 'crosshair', 'blackwidgets' ),
+					'text' 			=> __( 'text', 'blackwidgets' ),
+					'wetical-text' 	=> __( 'wetical-text', 'blackwidgets' ),
+					'grab' 			=> __( 'grab', 'blackwidgets' ),
+					'grabbing' 		=> __( 'grabbing', 'blackwidgets' ),
+					'alias' 		=> __( 'alias', 'blackwidgets' ),
+					'copy' 			=> __( 'copy', 'blackwidgets' ),
+					'move' 			=> __( 'move', 'blackwidgets' ),
+					'zoom-in'		=> __( 'zoom-in', 'blackwidgets' ),
+					'zoom-out' 		=> __( 'zoom-out', 'blackwidgets' ),
+					'col-resize' 	=> __( 'col-resize', 'blackwidgets' ),
+					'row-resize' 	=> __( 'row-resize', 'blackwidgets' ),
+					'nesw-resize' 	=> __( 'nesw-resize', 'blackwidgets' ),
+					'newse-resize' 	=> __( 'newse-resize', 'blackwidgets' ),
+					'ew-resize' 	=> __( 'ew-resize', 'blackwidgets' ),
+					'ns-resize' 	=> __( 'ns-resize', 'blackwidgets' ),
+					'n-resize' 		=> __( 'n-resize', 'blackwidgets' ),
+					'w-resize' 		=> __( 'w-resize', 'blackwidgets' ),
+					's-resize' 		=> __( 's-resize', 'blackwidgets' ),
+					'e-resize' 		=> __( 'e-resize', 'blackwidgets' ),
+					'nw-resize' 	=> __( 'nw-resize', 'blackwidgets' ),
+					'ne-resize' 	=> __( 'ne-resize', 'blackwidgets' ),
+					'sw-resize' 	=> __( 'sw-resize', 'blackwidgets' ),
+					'se-resize'		=> __( 'se-resize', 'blackwidgets' ),
+				],
+				'description' => __( 'It just work with scroll down and does not work on first section. it works once', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'image_pro_anime',
+			[
+				'label' => __( 'Type Custom Animate', 'plugin-domain' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( 'all 0.23s ease', 'plugin-domain' ),
+			]
+		);
+
+		$this->end_controls_section();
+		// End
+
+
+		// Start
+		// Style section
+		$this->start_controls_section(
+			'transform_section_hover',
+			[
+				'label' => __( '2D & 3D Hover Transfrom Style', 'blackwidgets' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		// Enable Image Movement Animate
+		$this->add_control(
+			'transform_hover_option',
+			[
+				'label' 		=> __( 'Transfrom Style', 'blackwidgets' ),
+				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
+				'label_on' 		=> __( 'Enable', 'blackwidgets' ),
+				'label_off' 	=> __( 'Disable', 'blackwidgets' ),
+				'return_value' 	=> 'hover_transform',
+				'default' 		=> 'off',
+			]
+		);
+
+		// Style Subtitle Tabs
+		$this->start_controls_tabs('transform_hover_tabs', [
+			'condition' 	=> [
+				'transform_hover_option' 	=> [
+					'hover_transform',
+				],
+			],
+		]);
+		$this->start_controls_tab(
+			'transform_tab_move_hover',
+			[
+				'label' => __( 'Move', 'blackwidgets' ),
+			]
+		);
+
+		// Start normal tab content
+
+		$this->add_responsive_control(
+			'move_hover_x',
+			[
+				'label' => __( 'Move on → X', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => -100,
+						'max' => 100,
+						'step' => 2,
+					],
+				],
+				'default'  => [
+					'unit' => 'px',
+					'size' => 0,
+				],
+				'description' => __( 'movement on the diagram X - do not leave empty!', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_responsive_control(
+			'move_hover_y',
+			[
+				'label' => __( 'Move on ↑ Y', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => -100,
+						'max' => 100,
+						'step' => 2,
+					],
+				],
+				'default'  => [
+					'unit' => 'px',
+					'size' => 0,
+				],
+				'description' => __( 'movement on the diagram Y - do not leave empty!', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_responsive_control(
+			'move_hover_z',
+			[
+				'label' => __( 'Move on ↙ Z', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => -100,
+						'max' => 100,
+						'step' => 2,
+					],
+				],
+				'default'  => [
+					'unit' => 'px',
+					'size' => 0,
+				],
+				'description' => __( 'movement on the diagram Z - do not leave empty!', 'blackwidgets' ),
+			]
+		);
+
+		// end normal tab content
+
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'transform_tab_scale_hover',
+			[
+				'label' => __( 'Scale', 'blackwidgets' ),
+			]
+		);
+
+		// Start hover tab content
+
+		$this->add_responsive_control(
+			'scale_hover_x',
+			[
+				'label' => __( 'Scale on → X', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'deg' ],
+				'range' => [
+					'px' => [
+						'min' => -100,
+						'max' => 100,
+						'step' => 1,
+					],
+				],
+				'default'  => [
+					'unit' => 'deg',
+					'size' => 1,
+				],
+				'description' => __( 'set 1.1 to scale on left and right - do not set 0', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_responsive_control(
+			'scale_hover_y',
+			[
+				'label' => __( 'Scale on ↑ Y', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'deg' ],
+				'range' => [
+					'px' => [
+						'min' => -100,
+						'max' => 100,
+						'step' => 1,
+					],
+				],
+				'default'  => [
+					'unit' => 'deg',
+					'size' => 1,
+				],
+				'description' => __( 'set 1.1 to scale on top and bottom - do not set 0', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_responsive_control(
+			'scale_hover_z',
+			[
+				'label' => __( 'Scale on ↙ Z', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'deg' ],
+				'range' => [
+					'px' => [
+						'min' => -100,
+						'max' => 100,
+						'step' => 1,
+					],
+				],
+				'default'  => [
+					'unit' => 'deg',
+					'size' => 1,
+				],
+				'description' => __( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_responsive_control(
+			'perspective_hover',
+			[
+				'label' => __( 'Self Perspective ◊', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'ps' ],
+				'range' => [
+					'px' => [
+						'min' => -3000,
+						'max' => 3000,
+						'step' => 50,
+					],
+				],
+				'default'  => [
+					'unit' => 'px',
+					'size' => 0,
+				],
+				'description' => __( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_responsive_control(
+			'perspective_child_hover',
+			[
+				'label' => __( 'Children Perspective ◊', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'ps' ],
+				'range' => [
+					'px' => [
+						'min' => -3000,
+						'max' => 3000,
+						'step' => 50,
+					],
+				],
+				'default'  => [
+					'unit' => 'px',
+					'size' => 0,
+				],
+				'description' => __( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
+			]
+		);
+
+		// end hover tab content
+
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'transform_tab_rotate_hover',
+			[
+				'label' => __( 'Rotate', 'blackwidgets' ),
+			]
+		);
+
+		// Start hover tab content
+
+		$this->add_responsive_control(
+			'rotate_hover_x',
+			[
+				'label' => __( 'Rotate on → X', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'deg' ],
+				'range' => [
+					'px' => [
+						'min' => -100,
+						'max' => 100,
+						'step' => 5,
+					],
+				],
+				'default'  => [
+					'unit' => 'deg',
+					'size' => 0,
+				]
+			]
+		);
+
+		$this->add_responsive_control(
+			'rotate_hover_y',
+			[
+				'label' => __( 'Rotate on ↑ Y', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'deg' ],
+				'range' => [
+					'px' => [
+						'min' => -100,
+						'max' => 100,
+						'step' => 5,
+					],
+				],
+				'default'  => [
+					'unit' => 'deg',
+					'size' => 0,
+				]
+			]
+		);
+
+		$this->add_responsive_control(
+			'rotate_hover_z',
+			[
+				'label' => __( 'Rotate on ↙ Z', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'deg' ],
+				'range' => [
+					'px' => [
+						'min' => -100,
+						'max' => 100,
+						'step' => 5,
+					],
+				],
+				'default'  => [
+					'unit' => 'deg',
+					'size' => 0,
+				]
+			]
+		);
+
+		// end hover tab content
+
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'transform_tab_skew_hover',
+			[
+				'label' => __( 'Skew', 'blackwidgets' ),
+			]
+		);
+
+		// Start hover tab content
+
+		$this->add_responsive_control(
+			'skew_hover_x',
+			[
+				'label' => __( 'Skew on → X ▱', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'deg' ],
+				'range' => [
+					'px' => [
+						'min' => -100,
+						'max' => 100,
+						'step' => 5,
+					],
+				],
+				'default'  => [
+					'unit' => 'deg',
+					'size' => 0,
+				]
+			]
+		);
+
+		$this->add_responsive_control(
+			'skew_hover_y',
+			[
+				'label' => __( 'Skew on ↑ Y ▱', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'deg' ],
+				'range' => [
+					'px' => [
+						'min' => -100,
+						'max' => 100,
+						'step' => 5,
+					],
+				],
+				'default'  => [
+					'unit' => 'deg',
+					'size' => 0,
+				]
+			]
+		);
+
+		// end hover tab content
+
+		$this->end_controls_tab();
+		$this->end_controls_tabs(); // End Tabs
+
+		$this->end_controls_section();
+		// End
+
 	}
 
 	/**
@@ -543,7 +1318,6 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 	protected function render() {
 
 		$settings   	= $this->get_settings_for_display();
-
 		// Variables
         $type 	           		= isset($settings['widget_type']) 				? $settings['widget_type'] 							: 'type';
         $alignment 	       		= isset($settings['widget_alignment']) 			? $settings['widget_alignment'] 					: '';
@@ -555,22 +1329,109 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 		$trigger_hook	        = !empty($settings['trigger_hook']) 			?  $settings['trigger_hook'] 						: '';
 		$horizontal_movement	= !empty($settings['horizontal_movement']) 		? 'x: "' . $settings['horizontal_movement'] . '",' 	: '';
 		$vertical_movement		= !empty($settings['vertical_movement']) 		? 'y: "' . $settings['vertical_movement'] . '",' 	: '';
-		$opacity				= !empty( $settings['opacity'] ) 			? 'opacity: "' . $settings['opacity'] . '",' 		: '';
+		$opacity				= !empty( $settings['opacity'] ) 				? 'opacity: "' . $settings['opacity'] . '",' 		: '';
 		$rotation				= !empty($settings['rotation']) 				? 'rotation: "' . $settings['rotation'] . '",' 		: '';
 		$parallax				= isset($settings['image_parllax'])				? $settings['image_parllax']						: '';
+		// Transform Option
+		$normal_transform		= isset($settings['transform_normal_option'])	? $settings['transform_normal_option']				: '';
+		$hover_transform		= isset($settings['transform_hover_option'])	? $settings['transform_hover_option']				: '';
+		//Transform Styles
+		$move_normal_x			= isset($settings['move_normal_x'])				? $settings['move_normal_x']						: '0px';
+		$move_normal_y			= isset($settings['move_normal_y'])				? $settings['move_normal_y']						: '0px';
+		$move_normal_z			= isset($settings['move_normal_z'])				? $settings['move_normal_z']						: '0px';
+		$scale_normal_x			= isset($settings['scale_normal_x'])			? $settings['scale_normal_x']						: '1';
+		$scale_normal_y			= isset($settings['scale_normal_y'])			? $settings['scale_normal_y']						: '1';
+		$scale_normal_z			= isset($settings['scale_normal_z'])			? $settings['scale_normal_z']						: '1';
+		$rotate_normal_x		= isset($settings['rotate_normal_x'])			? $settings['rotate_normal_x']						: '0deg';
+		$rotate_normal_y		= isset($settings['rotate_normal_y'])			? $settings['rotate_normal_y']						: '0deg';
+		$rotate_normal_z		= isset($settings['rotate_normal_z'])			? $settings['rotate_normal_z']						: '0deg';
+		$skew_normal_x			= isset($settings['skew_normal_x'])				? $settings['skew_normal_x']						: '0deg';
+		$skew_normal_y			= isset($settings['skew_normal_y'])				? $settings['skew_normal_y']						: '0deg';
+		$perspective			= isset($settings['perspective'])				? $settings['perspective']							: '0px';
+		$perspective_child		= isset($settings['perspective_child'])			? $settings['perspective_child']					: '0px';
+		// Cursor and Animate
+		$cursor					= isset($settings['widget_cursor'])				? $settings['widget_cursor']						: 'auto';
+		$animate				= isset($settings['image_pro_anime'])			? $settings['image_pro_anime']						: 'all 0.3s ease';
+		//Transform Styles	
+		$move_hover_x			= isset($settings['move_hover_x'])				? $settings['move_hover_x']							: '0px';
+		$move_hover_y			= isset($settings['move_hover_y'])				? $settings['move_hover_y']							: '0px';
+		$move_hover_z			= isset($settings['move_hover_z'])				? $settings['move_hover_z']							: '0px';
+		$scale_hover_x			= isset($settings['scale_hover_x'])				? $settings['scale_hover_x']						: '1';
+		$scale_hover_y			= isset($settings['scale_hover_y'])				? $settings['scale_hover_y']						: '1';
+		$scale_hover_z			= isset($settings['scale_hover_z'])				? $settings['scale_hover_z']						: '1';
+		$rotate_hover_x			= isset($settings['rotate_hover_x'])			? $settings['rotate_hover_x']						: '0deg';
+		$rotate_hover_y			= isset($settings['rotate_hover_y'])			? $settings['rotate_hover_y']						: '0deg';
+		$rotate_hover_z			= isset($settings['rotate_hover_z'])			? $settings['rotate_hover_z']						: '0deg';
+		$skew_hover_x			= isset($settings['skew_hover_x'])				? $settings['skew_hover_x']							: '0deg';
+		$skew_hover_y			= isset($settings['skew_hover_y'])				? $settings['skew_hover_y']							: '0deg';
+		$perspective_hover		= isset($settings['perspective_hover'])			? $settings['perspective_hover']					: '0px';
+		$perspective_child_hover= isset($settings['perspective_child_hover'])	? $settings['perspective_child_hover']				: '0px';
+		//ID Settings
 		$data_id                = 'bw_' . uniqid();
 		$script_id              = '#' . $data_id;
-
-		$image_movement = ''; //$settings['image_movement']
+		$image_movement 		= ''; //$settings['image_movement']
+		//Transform Normal Styles 
+		// Normal Move 
+		$translatex 			= isset( $move_normal_x["size"] ) ? $move_normal_x["size"] . $move_normal_x["unit"] : '';
+		$translatey 			= isset( $move_normal_y["size"] ) ? $move_normal_y["size"] . $move_normal_y["unit"] : '';
+		$translatez 			= isset( $move_normal_z["size"] ) ? $move_normal_z["size"] . $move_normal_z["unit"] : '';
+		$translate3d 			= 'translate3d(' . $translatex . ', ' . $translatey . ', ' . $translatez . ')';
+		// Normal Scale 
+		$scalex 				= isset( $scale_normal_x["size"] ) ? $scale_normal_x["size"] : '';
+		$scaley 				= isset( $scale_normal_y["size"] ) ? $scale_normal_y["size"] : '';
+		$scalez 				= isset( $scale_normal_z["size"] ) ? $scale_normal_z["size"] : '';
+		$scale3dx 				= isset( $scale_normal_z["size"] ) ? '-webkit-transform-style: preserve-3d; transform-style: preserve-3d;' : '';
+		$scale3d 				= 'scale3d(' . $scalex . ', ' . $scaley . ', ' . $scalez . ')';
+		// Normal Rotate
+		$rotatex 				= isset( $rotate_normal_x["size"] ) ? 'rotateX(' . $rotate_normal_x["size"] . $rotate_normal_x["unit"] . ')' : '';
+		$rotatey 				= isset( $rotate_normal_y["size"] ) ? 'rotateY(' . $rotate_normal_y["size"] . $rotate_normal_y["unit"] . ')' : '';
+		$rotatez 				= isset( $rotate_normal_z["size"] ) ? 'rotateZ(' . $rotate_normal_z["size"] . $rotate_normal_z["unit"] . ')' : '';
+		// Normal Skew
+		$skewx 					= isset( $skew_normal_x["size"] ) ? $skew_normal_x["size"] . $skew_normal_x["unit"] : '';
+		$skewy 					= isset( $skew_normal_y["size"] ) ? $skew_normal_y["size"] . $skew_normal_y["unit"] : '';
+		$skew 					= 'skew(' . $skewx . ', ' . $skewy . ')';
+		// Normal Self perspective
+		$perspective 			=  isset( $perspective["size"] ) ? 'perspective:' . $perspective["size"] . $perspective["unit"] . '; -webkit-perspective:' . $perspective["size"] . $perspective["unit"] . ';': '';
+		// Normal Child perspective
+		$perspective_child 		=  isset( $perspective_child["size"] ) ? 'perspective(' . $perspective_child["size"] . $perspective_child["unit"] . ')': '';
+		//Transform Hover Styles 
+		//Hover Move
+		$translatex_hover		= isset( $move_hover_x["size"] ) ? $move_hover_x["size"] . $move_hover_x["unit"] : '';
+		$translatey_hover		= isset( $move_hover_y["size"] ) ? $move_hover_y["size"] . $move_hover_y["unit"] : '';
+		$translatez_hover		= isset( $move_hover_z["size"] ) ? $move_hover_z["size"] . $move_hover_z["unit"] : '';
+		$translate3d_hover		= 'translate3d(' . $translatex_hover . ', ' . $translatey_hover . ', ' . $translatez_hover . ')';
+		// Hover Scale
+		$scalex_hover 			= isset( $scale_hover_x["size"] ) ? $scale_hover_x["size"] : '';
+		$scaley_hover 			= isset( $scale_hover_y["size"] ) ? $scale_hover_y["size"] : '';
+		$scalez_hover 			= isset( $scale_hover_z["size"] ) ? $scale_hover_z["size"] : '';
+		$scale3dx_hover 		= isset( $scale_hover_z["size"] ) ?'-webkit-transform-style: preserve-3d; transform-style: preserve-3d;' : '';
+		$scale3d_hover 			= 'scale3d(' . $scalex_hover . ', ' . $scaley_hover . ', ' . $scalez_hover . ')';
+		// Hover Rotate
+		$rotatex_hover 			= isset( $rotate_hover_x["size"] ) ? 'rotateX(' . $rotate_hover_x["size"] . $rotate_hover_x["unit"] . ')' : '';
+		$rotatey_hover 			= isset( $rotate_hover_y["size"] ) ? 'rotateY(' . $rotate_hover_y["size"] . $rotate_hover_y["unit"] . ')' : '';
+		$rotatez_hover 			= isset( $rotate_hover_z["size"] ) ? 'rotateZ(' . $rotate_hover_z["size"] . $rotate_hover_z["unit"] . ')' : '';
+		// Hover Skew
+		$skewx_hover 			= isset( $skew_hover_x["size"] ) ? $skew_hover_x["size"] . $skew_hover_x["unit"] : '';
+		$skewy_hover 			= isset( $skew_hover_y["size"] ) ? $skew_hover_y["size"] . $skew_hover_y["unit"] : '';
+		$skew_hover 			= 'skew(' . $skewx_hover . ', ' . $skewy_hover . ')';
+		// Hover Self perspective
+		$perspective_hover 		= isset( $perspective_hover["size"] ) ? 'perspective:' . $perspective_hover["size"] . $perspective_hover["unit"] . '; -webkit-perspective:' . $perspective_hover["size"] . $perspective_hover["unit"] . ';' : '';
+		// Hover Child perspective
+		$perspective_child_hover= isset( $perspective_child_hover["size"] ) ? 'perspective(' . $perspective_child_hover["size"] . $perspective_child_hover["unit"] . ')' : '';
+		// Create a Custom CSS for Normal and Hover Styles
+		$normal_transform_style = ($normal_transform == 'normal_transform') ? "#$data_id { -webkit-transition: $animate; -o-transition: $animate; transition: $animate; $perspective transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; -webkit-transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; $scale3dx }" : '';
+		$hover_transform_style 	= ($hover_transform == 'hover_transform') ? "#$data_id:hover { $perspective_hover transform: $perspective_child_hover $skew_hover $rotatex_hover $rotatey_hover $rotatez_hover $scale3d_hover $translate3d_hover; -webkit-transform: $perspective_child_hover $skew_hover $rotatex_hover $rotatey_hover $rotatez_hover $scale3d_hover $translate3d_hover; $scale3dx_hover }" : '';
+		//Return all of the styles
+		echo "<style> $normal_transform_style $hover_transform_style</style>";
 
         // Render
         echo '<div class="bw-image" style="text-align: ' . $alignment . ';">';
 
-            echo '<div class="bw-img-' . $type . ' ' . $settings['hover_animation'] . '" id="'. $data_id .'">';
+            echo '<div class="bw-img-' . $type . ' ' . $settings['hover_animation'] . ' bw-cursor-' . $cursor .'" id="'. $data_id .'">';
 
             if ( $image_link == 'yes') { echo '<a href="' . $settings['bw_image_link']['url'] . '"' . $target . $nofollow . ' class="bw-image-link">'; }
 
-				echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail', $settings ) . '" class=" ' . $parallax . ' bw-img-tag">';
+				echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail', $settings ) . '" class=" ' . $parallax . ' bw-img-tag bw-cursor-' . $cursor .'">';
 
             if ( $image_link == 'yes'){ echo '</a>'; }
 
