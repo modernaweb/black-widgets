@@ -268,38 +268,42 @@ final class BLACK_WIDGETS_Modernaweb_Plugin {
 	public function init_widgets() {
 
 		// Include Widget files
-        require_once( __DIR__ . '/widgets/bw-title.php'   				);
-        require_once( __DIR__ . '/widgets/bw-button.php'  				);
-        require_once( __DIR__ . '/widgets/bw-image-pro.php'				);
-        require_once( __DIR__ . '/widgets/bw-flipix.php'				);
-        require_once( __DIR__ . '/widgets/bw-title-animate.php'     	);
-        require_once( __DIR__ . '/widgets/bw-magic-link.php'    		);
-        require_once( __DIR__ . '/widgets/bw-dropcap.php'    			);
-        require_once( __DIR__ . '/widgets/bw-fade.php'    				);
-        require_once( __DIR__ . '/widgets/bw-alert.php'					);
-        require_once( __DIR__ . '/widgets/bw-icon.php'					);
-        require_once( __DIR__ . '/widgets/bw-list.php'					);
-        require_once( __DIR__ . '/widgets/bw-social-links.php'			);
-        require_once( __DIR__ . '/widgets/bw-icon-box.php'				);
-        require_once( __DIR__ . '/widgets/bw-call-to-action.php'		);
-        require_once( __DIR__ . '/widgets/bw-blockquote.php'			);
+        require_once( __DIR__ . '/widgets/bw-title.php' );
+        require_once( __DIR__ . '/widgets/bw-button.php' );
+        require_once( __DIR__ . '/widgets/bw-image-pro.php' );
+        require_once( __DIR__ . '/widgets/bw-flipix.php' );
+        require_once( __DIR__ . '/widgets/bw-title-animate.php' );
+        require_once( __DIR__ . '/widgets/bw-magic-link.php' );
+        require_once( __DIR__ . '/widgets/bw-dropcap.php' );
+        require_once( __DIR__ . '/widgets/bw-fade.php' );
+        require_once( __DIR__ . '/widgets/bw-alert.php' );
+        require_once( __DIR__ . '/widgets/bw-icon.php' );
+        require_once( __DIR__ . '/widgets/bw-list.php' );
+        require_once( __DIR__ . '/widgets/bw-social-links.php' );
+        require_once( __DIR__ . '/widgets/bw-icon-box.php' );
+        require_once( __DIR__ . '/widgets/bw-call-to-action.php' );
+		require_once( __DIR__ . '/widgets/bw-blockquote.php' );
+		require_once( __DIR__ . '/widgets/bw-typography.php' );
+		// require_once( __DIR__ . '/widgets/bw-loop.php' );
 
         // Register widget
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Title() 				);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Button() 				);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Image_Pro()				);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Flip_Ix() 				);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Title_Animate() 		);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Magic_Link() 			);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Dropcap() 				);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Fade() 					);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Alert() 				);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Icon() 					);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_List()					);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Social_Links()			);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Icon_Box()				);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Call_To_Action()		);
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Block_Quote()			);
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Title() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Button() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Image_Pro() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Flip_Ix() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Title_Animate() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Magic_Link() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Dropcap() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Fade() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Alert() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Icon() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_List() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Social_Links() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Icon_Box() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Call_To_Action() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Block_Quote() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Typography() );
+		// \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Loop() );
 
 	}
 

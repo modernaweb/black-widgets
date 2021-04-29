@@ -12,7 +12,8 @@ use Elementor\Plugin;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
-use Elementor\Scheme_Typography;
+use Elementor\Core\Schemes\Color;
+use Elementor\Core\Schemes\Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
@@ -371,10 +372,10 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 			'style_main_back_link_color',
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-magic-link a' => 'color: {{VALUE}}',
@@ -388,7 +389,7 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_main_back_link_typography1',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-magic-link a',
 			]
 		);
@@ -512,10 +513,10 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 			'style_main_back_link_hover_color',
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-magic-link a:hover' => 'color: {{VALUE}}',
@@ -529,7 +530,7 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_main_back_link_hover_typography1',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-magic-link a:hover',
 			]
 		);
@@ -830,10 +831,10 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 			'svg_heart_color',
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-magic-link .bw-magic-heart span svg' => 'fill: {{VALUE}}',
@@ -845,15 +846,16 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 				],
 			]
 		);
+
 		// Color
 		$this->add_control(
 			'svg_wheel_color',
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-magic-link .bw-magic-wheel svg g line, {{WRAPPER}} .bw-magic-link .bw-magic-wheel svg g polyline, {{WRAPPER}} .bw-magic-link .bw-magic-wheel svg g circle' => 'stroke: {{VALUE}} !important',
@@ -865,7 +867,6 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 				],
 			]
 		);
-
 
 		$this->add_control(
 			'magic_link_bg_opacity',
@@ -885,7 +886,6 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 				],
 			]
 		);
-
 
 		$this->end_controls_section();
 		// End
@@ -919,7 +919,7 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 				echo '<div class="bw-magic-link"><a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-magic-' . $type . '">' . $text . '</a></div>';
 			break;
 			case 'arrow':
-				echo '<div class="bw-magic-link"><a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-magic-' . $type . '">' . $text . '<span>⟶</span></a></div>';
+				echo '<div class="bw-magic-link"><a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-magic-' . $type . '">' . $text . '<span>  <i aria-hidden="true" class="fas fa-arrow-right"></i> </span></a></div>';
 			break;
 			case 'wheel':
 				echo '<div class="bw-magic-link"><a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-magic-' . $type . '"><svg><g><line x2="227.62" y1="31.28" y2="31.28"></line><polyline points="222.62 25.78 228.12 31.28 222.62 36.78"></polyline><circle cx="224.67" cy="30.94" r="30.5" transform="rotate(180 224.67 30.94) scale(1, -1) translate(0, -61)"></circle></g></svg><span>' . $text . '</span></a></div>';

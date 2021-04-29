@@ -12,7 +12,8 @@ use Elementor\Plugin;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
-use Elementor\Scheme_Typography;
+use Elementor\Core\Schemes\Color;
+use Elementor\Core\Schemes\Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
@@ -53,7 +54,7 @@ class BLACK_WIDGETS_Dropcap extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Black Dropcap', 'blackwidgets' );
+		return __( 'Black Drop Cap', 'blackwidgets' );
 	}
 
 	/**
@@ -332,10 +333,10 @@ class BLACK_WIDGETS_Dropcap extends \Elementor\Widget_Base {
 			'style_main_back_first_letter_paragraph_color',
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-dropcap-wrap .bw-dropcap::first-letter' => 'color: {{VALUE}}',
@@ -349,7 +350,7 @@ class BLACK_WIDGETS_Dropcap extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_main_back_first_letter_paragraph_typography1',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-dropcap-wrap .bw-dropcap::first-letter',
 			]
 		);
@@ -473,10 +474,10 @@ class BLACK_WIDGETS_Dropcap extends \Elementor\Widget_Base {
 			'style_main_back_paragraph_color',
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-dropcap-wrap .bw-dropcap' => 'color: {{VALUE}}',
@@ -490,7 +491,7 @@ class BLACK_WIDGETS_Dropcap extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_main_back_paragraph_typography1',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-dropcap-wrap .bw-dropcap',
 			]
 		);

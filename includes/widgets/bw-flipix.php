@@ -12,7 +12,8 @@ use Elementor\Plugin;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
-use Elementor\Scheme_Typography;
+use Elementor\Core\Schemes\Color;
+use Elementor\Core\Schemes\Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
@@ -495,10 +496,10 @@ class BLACK_WIDGETS_Flip_Ix extends \Elementor\Widget_Base {
 			'style_main_icon_color',
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box i' => 'color: {{VALUE}}',
@@ -632,10 +633,10 @@ class BLACK_WIDGETS_Flip_Ix extends \Elementor\Widget_Base {
 			'style_main_title_color',
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box h4' => 'color: {{VALUE}}',
@@ -649,7 +650,7 @@ class BLACK_WIDGETS_Flip_Ix extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_main_title_typography1',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box h4',
 			]
 		);
@@ -773,10 +774,10 @@ class BLACK_WIDGETS_Flip_Ix extends \Elementor\Widget_Base {
 			'style_main_paragraph_color',
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box p' => 'color: {{VALUE}}',
@@ -790,7 +791,7 @@ class BLACK_WIDGETS_Flip_Ix extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_main_paragraph_typography1',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box p',
 			]
 		);
@@ -914,10 +915,10 @@ class BLACK_WIDGETS_Flip_Ix extends \Elementor\Widget_Base {
 			'style_main_back_icon_color',
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description i' => 'color: {{VALUE}}',
@@ -1051,10 +1052,10 @@ class BLACK_WIDGETS_Flip_Ix extends \Elementor\Widget_Base {
 			'style_main_back_title_color',
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description h4' => 'color: {{VALUE}}',
@@ -1068,7 +1069,7 @@ class BLACK_WIDGETS_Flip_Ix extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_main_back_title_typography1',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description h4',
 			]
 		);
@@ -1192,10 +1193,10 @@ class BLACK_WIDGETS_Flip_Ix extends \Elementor\Widget_Base {
 			'style_main_back_paragraph_color',
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description p' => 'color: {{VALUE}}',
@@ -1209,7 +1210,7 @@ class BLACK_WIDGETS_Flip_Ix extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_main_back_paragraph_typography1',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description p',
 			]
 		);
@@ -1333,10 +1334,10 @@ class BLACK_WIDGETS_Flip_Ix extends \Elementor\Widget_Base {
 			'style_main_back_button_color',
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description .bw-button' => 'color: {{VALUE}}',
@@ -1350,7 +1351,7 @@ class BLACK_WIDGETS_Flip_Ix extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_main_back_button_typography1',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description .bw-button',
 			]
 		);

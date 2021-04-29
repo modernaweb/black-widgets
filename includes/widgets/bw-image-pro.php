@@ -12,7 +12,8 @@ use Elementor\Plugin;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
-use Elementor\Scheme_Typography;
+use Elementor\Core\Schemes\Color;
+use Elementor\Core\Schemes\Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
@@ -1317,110 +1318,112 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 	 */
 	protected function render() {
 
-		$settings   	= $this->get_settings_for_display();
+		$settings   				= $this->get_settings_for_display();
 		// Variables
-        $type 	           		= isset($settings['widget_type']) 				? $settings['widget_type'] 							: 'type';
-        $alignment 	       		= isset($settings['widget_alignment']) 			? $settings['widget_alignment'] 					: '';
-        $image_URL 	       		= isset( $settings['image']['url']) 			?  $settings['image']['url'] 						: '';
-        $image_link 	   		= isset($settings['image_link']) 				? $settings['image_link'] 							: '';
-		$target            		= $settings['image_link_url']['is_external'] 	? 'target="_blank"' 								: '';
-        $nofollow          		= $settings['image_link_url']['nofollow'] 		? ' rel="nofollow"' 								: '';
-		$duration	            = !empty($settings['duration']) 				?  $settings['duration'] 							: '';
-		$trigger_hook	        = !empty($settings['trigger_hook']) 			?  $settings['trigger_hook'] 						: '';
-		$horizontal_movement	= !empty($settings['horizontal_movement']) 		? 'x: "' . $settings['horizontal_movement'] . '",' 	: '';
-		$vertical_movement		= !empty($settings['vertical_movement']) 		? 'y: "' . $settings['vertical_movement'] . '",' 	: '';
-		$opacity				= !empty( $settings['opacity'] ) 				? 'opacity: "' . $settings['opacity'] . '",' 		: '';
-		$rotation				= !empty($settings['rotation']) 				? 'rotation: "' . $settings['rotation'] . '",' 		: '';
-		$parallax				= isset($settings['image_parllax'])				? $settings['image_parllax']						: '';
+        $type 	           			= isset($settings['widget_type']) 						? $settings['widget_type'] 							: 'type';
+        $alignment 	       			= isset($settings['widget_alignment']) 					? $settings['widget_alignment'] 					: '';
+        $image_URL 	       			= isset( $settings['image']['url']) 					? $settings['image']['url'] 						: '';
+		$image_link 	   			= isset($settings['image_link']) 						? $settings['image_link'] 							: '';
+		// $img_url 	   				= isset($settings['image_link_url'])					? $settings['image_link_url']						: '';
+		$target            			= isset($settings['image_link_url']['is_external']) 	? 'target="_blank"' 								: '';
+        $nofollow          			= isset($settings['image_link_url']['nofollow']) 		? ' rel="nofollow"' 								: '';
+		$duration	            	= !empty($settings['duration']) 						?  $settings['duration'] 							: '';
+		$trigger_hook	        	= !empty($settings['trigger_hook']) 					?  $settings['trigger_hook'] 						: '';
+		$horizontal_movement		= !empty($settings['horizontal_movement']) 				? 'x: "' . $settings['horizontal_movement'] . '",' 	: '';
+		$vertical_movement			= !empty($settings['vertical_movement']) 				? 'y: "' . $settings['vertical_movement'] . '",' 	: '';
+		$opacity					= !empty( $settings['opacity'] ) 						? 'opacity: "' . $settings['opacity'] . '",' 		: '';
+		$rotation					= !empty($settings['rotation']) 						? 'rotation: "' . $settings['rotation'] . '",' 		: '';
+		$parallax					= isset($settings['image_parllax'])						? $settings['image_parllax']						: '';
+		// $imagelink					= isset($settings['bw_image_link']['url'])				? $settings['bw_image_link']['url']						: '';
 		// Transform Option
-		$normal_transform		= isset($settings['transform_normal_option'])	? $settings['transform_normal_option']				: '';
-		$hover_transform		= isset($settings['transform_hover_option'])	? $settings['transform_hover_option']				: '';
+		$normal_transform			= isset($settings['transform_normal_option'])			? $settings['transform_normal_option']				: '';
+		$hover_transform			= isset($settings['transform_hover_option'])			? $settings['transform_hover_option']				: '';
 		//Transform Styles
-		$move_normal_x			= isset($settings['move_normal_x'])				? $settings['move_normal_x']						: '0px';
-		$move_normal_y			= isset($settings['move_normal_y'])				? $settings['move_normal_y']						: '0px';
-		$move_normal_z			= isset($settings['move_normal_z'])				? $settings['move_normal_z']						: '0px';
-		$scale_normal_x			= isset($settings['scale_normal_x'])			? $settings['scale_normal_x']						: '1';
-		$scale_normal_y			= isset($settings['scale_normal_y'])			? $settings['scale_normal_y']						: '1';
-		$scale_normal_z			= isset($settings['scale_normal_z'])			? $settings['scale_normal_z']						: '1';
-		$rotate_normal_x		= isset($settings['rotate_normal_x'])			? $settings['rotate_normal_x']						: '0deg';
-		$rotate_normal_y		= isset($settings['rotate_normal_y'])			? $settings['rotate_normal_y']						: '0deg';
-		$rotate_normal_z		= isset($settings['rotate_normal_z'])			? $settings['rotate_normal_z']						: '0deg';
-		$skew_normal_x			= isset($settings['skew_normal_x'])				? $settings['skew_normal_x']						: '0deg';
-		$skew_normal_y			= isset($settings['skew_normal_y'])				? $settings['skew_normal_y']						: '0deg';
-		$perspective			= isset($settings['perspective'])				? $settings['perspective']							: '0px';
-		$perspective_child		= isset($settings['perspective_child'])			? $settings['perspective_child']					: '0px';
+		$move_normal_x				= isset($settings['move_normal_x'])						? $settings['move_normal_x']						: '0px';
+		$move_normal_y				= isset($settings['move_normal_y'])						? $settings['move_normal_y']						: '0px';
+		$move_normal_z				= isset($settings['move_normal_z'])						? $settings['move_normal_z']						: '0px';
+		$scale_normal_x				= isset($settings['scale_normal_x'])					? $settings['scale_normal_x']						: '1';
+		$scale_normal_y				= isset($settings['scale_normal_y'])					? $settings['scale_normal_y']						: '1';
+		$scale_normal_z				= isset($settings['scale_normal_z'])					? $settings['scale_normal_z']						: '1';
+		$rotate_normal_x			= isset($settings['rotate_normal_x'])					? $settings['rotate_normal_x']						: '0deg';
+		$rotate_normal_y			= isset($settings['rotate_normal_y'])					? $settings['rotate_normal_y']						: '0deg';
+		$rotate_normal_z			= isset($settings['rotate_normal_z'])					? $settings['rotate_normal_z']						: '0deg';
+		$skew_normal_x				= isset($settings['skew_normal_x'])						? $settings['skew_normal_x']						: '0deg';
+		$skew_normal_y				= isset($settings['skew_normal_y'])						? $settings['skew_normal_y']						: '0deg';
+		$perspective				= isset($settings['perspective'])						? $settings['perspective']							: '0px';
+		$perspective_child			= isset($settings['perspective_child'])					? $settings['perspective_child']					: '0px';
 		// Cursor and Animate
-		$cursor					= isset($settings['widget_cursor'])				? $settings['widget_cursor']						: 'auto';
-		$animate				= isset($settings['image_pro_anime'])			? $settings['image_pro_anime']						: 'all 0.3s ease';
+		$cursor						= isset($settings['widget_cursor'])						? $settings['widget_cursor']						: 'auto';
+		$animate					= isset($settings['image_pro_anime'])					? $settings['image_pro_anime']						: 'all 0.3s ease';
 		//Transform Styles	
-		$move_hover_x			= isset($settings['move_hover_x'])				? $settings['move_hover_x']							: '0px';
-		$move_hover_y			= isset($settings['move_hover_y'])				? $settings['move_hover_y']							: '0px';
-		$move_hover_z			= isset($settings['move_hover_z'])				? $settings['move_hover_z']							: '0px';
-		$scale_hover_x			= isset($settings['scale_hover_x'])				? $settings['scale_hover_x']						: '1';
-		$scale_hover_y			= isset($settings['scale_hover_y'])				? $settings['scale_hover_y']						: '1';
-		$scale_hover_z			= isset($settings['scale_hover_z'])				? $settings['scale_hover_z']						: '1';
-		$rotate_hover_x			= isset($settings['rotate_hover_x'])			? $settings['rotate_hover_x']						: '0deg';
-		$rotate_hover_y			= isset($settings['rotate_hover_y'])			? $settings['rotate_hover_y']						: '0deg';
-		$rotate_hover_z			= isset($settings['rotate_hover_z'])			? $settings['rotate_hover_z']						: '0deg';
-		$skew_hover_x			= isset($settings['skew_hover_x'])				? $settings['skew_hover_x']							: '0deg';
-		$skew_hover_y			= isset($settings['skew_hover_y'])				? $settings['skew_hover_y']							: '0deg';
-		$perspective_hover		= isset($settings['perspective_hover'])			? $settings['perspective_hover']					: '0px';
-		$perspective_child_hover= isset($settings['perspective_child_hover'])	? $settings['perspective_child_hover']				: '0px';
+		$move_hover_x				= isset($settings['move_hover_x'])						? $settings['move_hover_x']							: '0px';
+		$move_hover_y				= isset($settings['move_hover_y'])						? $settings['move_hover_y']							: '0px';
+		$move_hover_z				= isset($settings['move_hover_z'])						? $settings['move_hover_z']							: '0px';
+		$scale_hover_x				= isset($settings['scale_hover_x'])						? $settings['scale_hover_x']						: '1';
+		$scale_hover_y				= isset($settings['scale_hover_y'])						? $settings['scale_hover_y']						: '1';
+		$scale_hover_z				= isset($settings['scale_hover_z'])						? $settings['scale_hover_z']						: '1';
+		$rotate_hover_x				= isset($settings['rotate_hover_x'])					? $settings['rotate_hover_x']						: '0deg';
+		$rotate_hover_y				= isset($settings['rotate_hover_y'])					? $settings['rotate_hover_y']						: '0deg';
+		$rotate_hover_z				= isset($settings['rotate_hover_z'])					? $settings['rotate_hover_z']						: '0deg';
+		$skew_hover_x				= isset($settings['skew_hover_x'])						? $settings['skew_hover_x']							: '0deg';
+		$skew_hover_y				= isset($settings['skew_hover_y'])						? $settings['skew_hover_y']							: '0deg';
+		$perspective_hover			= isset($settings['perspective_hover'])					? $settings['perspective_hover']					: '0px';
+		$perspective_child_hover	= isset($settings['perspective_child_hover'])			? $settings['perspective_child_hover']				: '0px';
 		//ID Settings
-		$data_id                = 'bw_' . uniqid();
-		$script_id              = '#' . $data_id;
-		$image_movement 		= ''; //$settings['image_movement']
+		$data_id                	= 'bw_' . uniqid();
+		$script_id              	= '#' . $data_id;
+		$image_movement 			= ''; //$settings['image_movement']
 		//Transform Normal Styles 
 		// Normal Move 
-		$translatex 			= isset( $move_normal_x["size"] ) ? $move_normal_x["size"] . $move_normal_x["unit"] : '';
-		$translatey 			= isset( $move_normal_y["size"] ) ? $move_normal_y["size"] . $move_normal_y["unit"] : '';
-		$translatez 			= isset( $move_normal_z["size"] ) ? $move_normal_z["size"] . $move_normal_z["unit"] : '';
-		$translate3d 			= 'translate3d(' . $translatex . ', ' . $translatey . ', ' . $translatez . ')';
+		$translatex 				= isset( $move_normal_x["size"] ) 						? $move_normal_x["size"] . $move_normal_x["unit"] : '';
+		$translatey 				= isset( $move_normal_y["size"] ) 						? $move_normal_y["size"] . $move_normal_y["unit"] : '';
+		$translatez 				= isset( $move_normal_z["size"] ) 						? $move_normal_z["size"] . $move_normal_z["unit"] : '';
+		$translate3d 				= 'translate3d(' . $translatex . ', ' . $translatey . ', ' . $translatez . ')';
 		// Normal Scale 
-		$scalex 				= isset( $scale_normal_x["size"] ) ? $scale_normal_x["size"] : '';
-		$scaley 				= isset( $scale_normal_y["size"] ) ? $scale_normal_y["size"] : '';
-		$scalez 				= isset( $scale_normal_z["size"] ) ? $scale_normal_z["size"] : '';
-		$scale3dx 				= isset( $scale_normal_z["size"] ) ? '-webkit-transform-style: preserve-3d; transform-style: preserve-3d;' : '';
-		$scale3d 				= 'scale3d(' . $scalex . ', ' . $scaley . ', ' . $scalez . ')';
+		$scalex 					= isset( $scale_normal_x["size"] ) 						? $scale_normal_x["size"] : '';
+		$scaley 					= isset( $scale_normal_y["size"] ) 						? $scale_normal_y["size"] : '';
+		$scalez 					= isset( $scale_normal_z["size"] ) 						? $scale_normal_z["size"] : '';
+		$scale3dx 					= isset( $scale_normal_z["size"] ) 						? '-webkit-transform-style: preserve-3d; transform-style: preserve-3d;' : '';
+		$scale3d 					= 'scale3d(' . $scalex . ', ' . $scaley . ', ' . $scalez . ')';
 		// Normal Rotate
-		$rotatex 				= isset( $rotate_normal_x["size"] ) ? 'rotateX(' . $rotate_normal_x["size"] . $rotate_normal_x["unit"] . ')' : '';
-		$rotatey 				= isset( $rotate_normal_y["size"] ) ? 'rotateY(' . $rotate_normal_y["size"] . $rotate_normal_y["unit"] . ')' : '';
-		$rotatez 				= isset( $rotate_normal_z["size"] ) ? 'rotateZ(' . $rotate_normal_z["size"] . $rotate_normal_z["unit"] . ')' : '';
+		$rotatex 					= isset( $rotate_normal_x["size"] ) 					? 'rotateX(' . $rotate_normal_x["size"] . $rotate_normal_x["unit"] . ')' : '';
+		$rotatey 					= isset( $rotate_normal_y["size"] ) 					? 'rotateY(' . $rotate_normal_y["size"] . $rotate_normal_y["unit"] . ')' : '';
+		$rotatez 					= isset( $rotate_normal_z["size"] ) 					? 'rotateZ(' . $rotate_normal_z["size"] . $rotate_normal_z["unit"] . ')' : '';
 		// Normal Skew
-		$skewx 					= isset( $skew_normal_x["size"] ) ? $skew_normal_x["size"] . $skew_normal_x["unit"] : '';
-		$skewy 					= isset( $skew_normal_y["size"] ) ? $skew_normal_y["size"] . $skew_normal_y["unit"] : '';
-		$skew 					= 'skew(' . $skewx . ', ' . $skewy . ')';
+		$skewx 						= isset( $skew_normal_x["size"] ) 						? $skew_normal_x["size"] . $skew_normal_x["unit"] : '';
+		$skewy 						= isset( $skew_normal_y["size"] ) 						? $skew_normal_y["size"] . $skew_normal_y["unit"] : '';
+		$skew 						= 'skew(' . $skewx . ', ' . $skewy . ')';
 		// Normal Self perspective
-		$perspective 			=  isset( $perspective["size"] ) ? 'perspective:' . $perspective["size"] . $perspective["unit"] . '; -webkit-perspective:' . $perspective["size"] . $perspective["unit"] . ';': '';
+		$perspective 				= isset( $perspective["size"] ) 						? 'perspective:' . $perspective["size"] . $perspective["unit"] . '; -webkit-perspective:' . $perspective["size"] . $perspective["unit"] . ';': '';
 		// Normal Child perspective
-		$perspective_child 		=  isset( $perspective_child["size"] ) ? 'perspective(' . $perspective_child["size"] . $perspective_child["unit"] . ')': '';
+		$perspective_child 			= isset( $perspective_child["size"] ) 					? 'perspective(' . $perspective_child["size"] . $perspective_child["unit"] . ')': '';
 		//Transform Hover Styles 
 		//Hover Move
-		$translatex_hover		= isset( $move_hover_x["size"] ) ? $move_hover_x["size"] . $move_hover_x["unit"] : '';
-		$translatey_hover		= isset( $move_hover_y["size"] ) ? $move_hover_y["size"] . $move_hover_y["unit"] : '';
-		$translatez_hover		= isset( $move_hover_z["size"] ) ? $move_hover_z["size"] . $move_hover_z["unit"] : '';
-		$translate3d_hover		= 'translate3d(' . $translatex_hover . ', ' . $translatey_hover . ', ' . $translatez_hover . ')';
+		$translatex_hover			= isset( $move_hover_x["size"] ) 						? $move_hover_x["size"] . $move_hover_x["unit"] : '';
+		$translatey_hover			= isset( $move_hover_y["size"] ) 						? $move_hover_y["size"] . $move_hover_y["unit"] : '';
+		$translatez_hover			= isset( $move_hover_z["size"] ) 						? $move_hover_z["size"] . $move_hover_z["unit"] : '';
+		$translate3d_hover			= 'translate3d(' . $translatex_hover . ', ' . $translatey_hover . ', ' . $translatez_hover . ')';
 		// Hover Scale
-		$scalex_hover 			= isset( $scale_hover_x["size"] ) ? $scale_hover_x["size"] : '';
-		$scaley_hover 			= isset( $scale_hover_y["size"] ) ? $scale_hover_y["size"] : '';
-		$scalez_hover 			= isset( $scale_hover_z["size"] ) ? $scale_hover_z["size"] : '';
-		$scale3dx_hover 		= isset( $scale_hover_z["size"] ) ?'-webkit-transform-style: preserve-3d; transform-style: preserve-3d;' : '';
-		$scale3d_hover 			= 'scale3d(' . $scalex_hover . ', ' . $scaley_hover . ', ' . $scalez_hover . ')';
+		$scalex_hover 				= isset( $scale_hover_x["size"] ) 						? $scale_hover_x["size"] : '';
+		$scaley_hover 				= isset( $scale_hover_y["size"] ) 						? $scale_hover_y["size"] : '';
+		$scalez_hover 				= isset( $scale_hover_z["size"] ) 						? $scale_hover_z["size"] : '';
+		$scale3dx_hover 			= isset( $scale_hover_z["size"] ) 						?'-webkit-transform-style: preserve-3d; transform-style: preserve-3d;' : '';
+		$scale3d_hover 				= 'scale3d(' . $scalex_hover . ', ' . $scaley_hover . ', ' . $scalez_hover . ')';
 		// Hover Rotate
-		$rotatex_hover 			= isset( $rotate_hover_x["size"] ) ? 'rotateX(' . $rotate_hover_x["size"] . $rotate_hover_x["unit"] . ')' : '';
-		$rotatey_hover 			= isset( $rotate_hover_y["size"] ) ? 'rotateY(' . $rotate_hover_y["size"] . $rotate_hover_y["unit"] . ')' : '';
-		$rotatez_hover 			= isset( $rotate_hover_z["size"] ) ? 'rotateZ(' . $rotate_hover_z["size"] . $rotate_hover_z["unit"] . ')' : '';
+		$rotatex_hover 				= isset( $rotate_hover_x["size"] ) 						? 'rotateX(' . $rotate_hover_x["size"] . $rotate_hover_x["unit"] . ')' : '';
+		$rotatey_hover 				= isset( $rotate_hover_y["size"] ) 						? 'rotateY(' . $rotate_hover_y["size"] . $rotate_hover_y["unit"] . ')' : '';
+		$rotatez_hover 				= isset( $rotate_hover_z["size"] ) 						? 'rotateZ(' . $rotate_hover_z["size"] . $rotate_hover_z["unit"] . ')' : '';
 		// Hover Skew
-		$skewx_hover 			= isset( $skew_hover_x["size"] ) ? $skew_hover_x["size"] . $skew_hover_x["unit"] : '';
-		$skewy_hover 			= isset( $skew_hover_y["size"] ) ? $skew_hover_y["size"] . $skew_hover_y["unit"] : '';
-		$skew_hover 			= 'skew(' . $skewx_hover . ', ' . $skewy_hover . ')';
+		$skewx_hover 				= isset( $skew_hover_x["size"] ) 						? $skew_hover_x["size"] . $skew_hover_x["unit"] : '';
+		$skewy_hover 				= isset( $skew_hover_y["size"] ) 						? $skew_hover_y["size"] . $skew_hover_y["unit"] : '';
+		$skew_hover 				= 'skew(' . $skewx_hover . ', ' . $skewy_hover . ')';
 		// Hover Self perspective
-		$perspective_hover 		= isset( $perspective_hover["size"] ) ? 'perspective:' . $perspective_hover["size"] . $perspective_hover["unit"] . '; -webkit-perspective:' . $perspective_hover["size"] . $perspective_hover["unit"] . ';' : '';
+		$perspective_hover 			= isset( $perspective_hover["size"] ) 					? 'perspective:' . $perspective_hover["size"] . $perspective_hover["unit"] . '; -webkit-perspective:' . $perspective_hover["size"] . $perspective_hover["unit"] . ';' : '';
 		// Hover Child perspective
-		$perspective_child_hover= isset( $perspective_child_hover["size"] ) ? 'perspective(' . $perspective_child_hover["size"] . $perspective_child_hover["unit"] . ')' : '';
+		$perspective_child_hover	= isset( $perspective_child_hover["size"] ) 			? 'perspective(' . $perspective_child_hover["size"] . $perspective_child_hover["unit"] . ')' : '';
 		// Create a Custom CSS for Normal and Hover Styles
-		$normal_transform_style = ($normal_transform == 'normal_transform') ? "#$data_id { -webkit-transition: $animate; -o-transition: $animate; transition: $animate; $perspective transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; -webkit-transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; $scale3dx }" : '';
-		$hover_transform_style 	= ($hover_transform == 'hover_transform') ? "#$data_id:hover { $perspective_hover transform: $perspective_child_hover $skew_hover $rotatex_hover $rotatey_hover $rotatez_hover $scale3d_hover $translate3d_hover; -webkit-transform: $perspective_child_hover $skew_hover $rotatex_hover $rotatey_hover $rotatez_hover $scale3d_hover $translate3d_hover; $scale3dx_hover }" : '';
+		$normal_transform_style 	= ($normal_transform == 'normal_transform')				? "#$data_id { -webkit-transition: $animate; -o-transition: $animate; transition: $animate; $perspective transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; -webkit-transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; $scale3dx }" : '';
+		$hover_transform_style 		= ($hover_transform == 'hover_transform')				? "#$data_id:hover { $perspective_hover transform: $perspective_child_hover $skew_hover $rotatex_hover $rotatey_hover $rotatez_hover $scale3d_hover $translate3d_hover; -webkit-transform: $perspective_child_hover $skew_hover $rotatex_hover $rotatey_hover $rotatez_hover $scale3d_hover $translate3d_hover; $scale3dx_hover }" : '';
 		//Return all of the styles
 		echo "<style> $normal_transform_style $hover_transform_style</style>";
 
@@ -1429,11 +1432,11 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 
             echo '<div class="bw-img-' . $type . ' ' . $settings['hover_animation'] . ' bw-cursor-' . $cursor .'" id="'. $data_id .'">';
 
-            if ( $image_link == 'yes') { echo '<a href="' . $settings['bw_image_link']['url'] . '"' . $target . $nofollow . ' class="bw-image-link">'; }
+            if ( isset($image_link) && $image_link == 'yes') { echo '<a href="' . $settings['image_link_url']['url'] . '"' . $target . $nofollow . ' class="bw-image-link">'; }
 
 				echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail', $settings ) . '" class=" ' . $parallax . ' bw-img-tag bw-cursor-' . $cursor .'">';
 
-            if ( $image_link == 'yes'){ echo '</a>'; }
+            if ( isset($image_link) && $image_link == 'yes'){ echo '</a>'; }
 
             echo '</div>';
 

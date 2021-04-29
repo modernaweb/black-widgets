@@ -3,83 +3,80 @@
  * included in this file.
  */
  
- .toplevel_page_black-widgets img {
-     max-height: 20px !important;
-     z-index: 999 !important;
-     opacity: 1 !important;
-     max-width: 50px;
+.toplevel_page_black-widgets img {
+    max-height: 20px !important;
+    z-index: 999 !important;
+    opacity: 1 !important;
+    max-width: 50px;
  }
  
- body.toplevel_page_black-widgets {
-     background: #A0AEB9;
-     position: relative;
- }
- 
- body.toplevel_page_black-widgets .bw-box-backend {
-     font-family: source-serif-pro,serif !important;
-     font-weight: 400;
-     font-style: normal;
-     max-width: 980px;
-     margin: 50px auto;
-     padding: 50px 40px;
-     border-radius: 24px;
- }
- 
- body.toplevel_page_black-widgets ul#adminmenu a.wp-has-current-submenu:after,
- body.toplevel_page_black-widgets ul#adminmenu>li.current>a.current:after {
-    border-right-color: #A0AEB9;
+body.toplevel_page_black-widgets .bw-box-backend {
+    max-width: 800px;
 }
 
- .bw-box-backend h4.bw-backend-heading, .bw-box-backend h2.bw-backend-heading {
-     color: #fff;
- }
- 
- .bw-box-backend h2.bw-backend-heading {
-     font-size: 42px;
-     line-height: 54px;
-     letter-spacing: -1.5px;
-     margin-bottom: 55px;
-     margin-top: 0;
- }
- 
- .bw-box-backend h2.bw-backend-heading:first-child {
-     font-weight: 800;
-     margin-bottom: 20px;
- }
- 
- .bw-box-backend h4.bw-backend-heading {
-     font-size: 21px;
-     margin: 50px 0;
- }
- 
- .bw-box-backend h4.bw-backend-heading strong {
-     font-weight: 900;
- }
- 
- .bw-box-backend a {
-     color: #0719a3;
-     transition: all 0.3s ease;
- }
- 
- .bw-box-backend a:hover {
-     color: #fff !important;
- }
+body.toplevel_page_black-widgets .bw-box-backend .card {
+    max-width: 70%;
+    border-radius: 8px;
+    border: 1px solid #a0aeb947;
+    padding: 28px;
+}
 
- .bw-box-backend a:focus {
-    border: 0;
-    box-shadow: unset;
- }
+body.toplevel_page_black-widgets .bw-box-backend .card h2 {
+    margin: 0 0 28px 0;
+}
 
- body.toplevel_page_black-widgets .bw-box-backend .bw-banner {
-    max-width: 100%;
-    width: 100%;
+body.toplevel_page_black-widgets .bw-box-backend .card p {
+    color: #3c4146;
+    margin: 0 0 28px 0!important;
+}
+
+body.toplevel_page_black-widgets .bw-box-backend .card .bw-banner {
     max-height: unset !important;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0 24px 80px -40px rgba(0, 0, 0, 0.4);
-    margin: 24px 0;
+    max-width: 100% !important;
+    border-radius: 4px;
+    margin: 28px 0 0 0;
 }
- 
+
+body.toplevel_page_black-widgets .bw-box-backend .bw-backend-heading strong, body.toplevel_page_black-widgets .bw-box-backend .bw-backend-heading a {
+    font-size: 11px;
+    font-weight: bold;
+    color: #696969;
+    margin: 0 7px;
+    text-decoration: none;
+}
+
+body.toplevel_page_black-widgets .bw-box-backend .bw-backend-heading a:hover {
+    color: #0719a3;
+}
+
+body.toplevel_page_black-widgets .bw-box-backend .card .bw-btn-box {
+    display: flex;
+    margin: 0 0 0 0 !important;
+}
+
+body.toplevel_page_black-widgets .bw-box-backend .bw-btn {
+    padding: 7px 24px 9px;
+    background: #444;
+    color: #fff;
+    border-radius: 2px;
+    line-height: 1.4;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.27s ease;
+    display: block;
+}
+
+body.toplevel_page_black-widgets .bw-box-backend .bw-btn.bw-uq {
+    background: #0719a3;
+    margin-right: 10px;
+}
+
+body.toplevel_page_black-widgets .bw-box-backend .bw-btn:hover {
+    background: #000;
+}
+
+
  #elementor-panel-category-black_widgets .elementor-element {
      background: #000;
      background: linear-gradient(-45deg, #000 0%, #222 50%, #000 100%);
@@ -219,7 +216,7 @@
     transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
     background-color: #0719a3 !important;
     /* background-image: linear-gradient(90deg, #0719a3 0%, #283bcb 50%, #4656cf 100%) !important; */
-    box-shadow: 0 4px 45px -7px #0719a3 !important;
+    box-shadow: 0 14px 45px -14px #0719a3 !important;
     color: #fff;
     text-transform: uppercase;
     font-weight: 700;
@@ -233,5 +230,5 @@
     outline-offset: 15px;
     background-color: #000 !important;
     /* background-image: linear-gradient(90deg, #000 0%, #222 50%, #333 100%) !important; */
-    box-shadow: 0 4px 45px -7px #000 !important;
+    box-shadow: 0 14px 45px -14px #000 !important;
 }

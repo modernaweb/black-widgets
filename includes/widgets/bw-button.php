@@ -12,7 +12,8 @@ use Elementor\Plugin;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
-use Elementor\Scheme_Typography;
+use Elementor\Core\Schemes\Color;
+use Elementor\Core\Schemes\Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
@@ -505,10 +506,10 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			'widget_btn_solid_color',
 			[
 				'label' => __( 'Button Text Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-button-box .bw-btn' => 'color: {{VALUE}}',
@@ -522,7 +523,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			[
 				'name' => 'btn_typography1',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-button-box .bw-btn',
 			]
 		);
@@ -541,10 +542,10 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			'widget_btn_hover_solid_color',
 			[
 				'label' => __( 'Button Text Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-button-box .bw-btn:hover' => 'color: {{VALUE}}',
@@ -558,7 +559,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			[
 				'name' => 'btn_hover_typography1',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-button-box .bw-btn:hover',
 			]
 		);

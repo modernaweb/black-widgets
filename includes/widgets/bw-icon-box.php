@@ -12,7 +12,8 @@ use Elementor\Plugin;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
-use Elementor\Scheme_Typography;
+use Elementor\Core\Schemes\Color;
+use Elementor\Core\Schemes\Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
@@ -356,10 +357,29 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 				'options' => [
 					'enable_icon' 			=> __( 'With ICON', 'blackwidgets' ),
 					'enable_image'			=> __( 'With IMAGE or SVG', 'blackwidgets' ),
+					'enable_code'			=> __( 'With SVG Code', 'blackwidgets' ),
 				],
 				'condition'  => [
 					'widget_icon_image_enable' => [
 						'icon_image_enable',
+					],
+				],
+			]
+		);
+
+		// Subtitle
+		$this->add_control(
+			'widget_code',
+			[
+				'label' => __( 'CODE', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( 'SVG CODE HERE', 'blackwidgets' ),
+				'condition'  => [
+					'widget_icon_image_enable' => [
+						'icon_image_enable',
+					],
+					'widget_icon_image_type' => [
+						'enable_code',
 					],
 				],
 			]
@@ -652,10 +672,10 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			'widget_icon_box_title_normal_color',
 			[
 				'label' => __( 'Normal Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox .bw-it-is-title' => 'color: {{VALUE}}',
@@ -676,10 +696,10 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			'widget_icon_box_title_hover_color',
 			[
 				'label' => __( 'Hover Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox:hover .bw-it-is-title' => 'color: {{VALUE}}',
@@ -703,7 +723,7 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			[
 				'name' => 'content_title_typographys',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-iconbox .bw-it-is-title',
 			]
 		);
@@ -843,10 +863,10 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			'widget_icon_box_subtitle_normal_color',
 			[
 				'label' => __( 'Normal Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox .bw-it-is-subtitle' => 'color: {{VALUE}}',
@@ -867,10 +887,10 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			'widget_icon_box_subtitle_hover_color',
 			[
 				'label' => __( 'Hover Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox:hover .bw-it-is-subtitle' => 'color: {{VALUE}}',
@@ -894,7 +914,7 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			[
 				'name' => 'content_subtitle_typographys',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-iconbox .bw-it-is-subtitle',
 			]
 		);
@@ -1034,10 +1054,10 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			'widget_icon_box_paragraph_normal_color',
 			[
 				'label' => __( 'Normal Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox .bw-it-is-paragraph' => 'color: {{VALUE}}',
@@ -1058,10 +1078,10 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			'widget_icon_box_paragraph_hover_color',
 			[
 				'label' => __( 'Hover Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox:hover .bw-it-is-paragraph' => 'color: {{VALUE}}',
@@ -1085,7 +1105,7 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			[
 				'name' => 'content_paragraph_typographys',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-iconbox .bw-it-is-paragraph',
 			]
 		);
@@ -1225,10 +1245,10 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			'widget_icon_box_link_normal_color',
 			[
 				'label' => __( 'Normal Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox .bw-btn' => 'color: {{VALUE}}',
@@ -1249,10 +1269,10 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			'widget_icon_box_link_hover_color',
 			[
 				'label' => __( 'Hover Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox .bw-btn:hover' => 'color: {{VALUE}}',
@@ -1276,7 +1296,7 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			[
 				'name' => 'content_link_typographys',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-iconbox .bw-btn',
 			]
 		);
@@ -1416,10 +1436,10 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			'widget_icon_box_icon_normal_color',
 			[
 				'label' => __( 'Normal Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon i' => 'color: {{VALUE}}',
@@ -1451,10 +1471,10 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			'widget_icon_box_icon_hover_color',
 			[
 				'label' => __( 'Hover Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon:hover i' => 'color: {{VALUE}}',
@@ -1791,6 +1811,7 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 		$enable_icon_image		= 'icon_image_enable' === $settings['widget_icon_image_enable']	? $settings['widget_icon_image_enable'] 		: '';
 		$icon_image				= isset( $settings['widget_icon_image_type'] )					? $settings['widget_icon_image_type']			: '';
 		$iconset				= isset($settings['widget_icon'])								? $settings['widget_icon']						: ''; // Icon
+		$svgcode				= isset($settings['widget_code'])								? $settings['widget_code']						: ''; // Icon
 		// Link
 		$enable_link			= 'link_enable' === $settings['widget_link_enable']				? $settings['widget_link_enable'] 				: '';
 		$link					= isset($settings['widget_link_url']['url'])					? $settings['widget_link_url']['url']			: ''; // Link URL
@@ -1814,7 +1835,7 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 					// Subtitle
 					if ( $enable_subtitle ) echo '<' . $subtitle_tag . ' class="bw-it-is-subtitle ' . $subtitle_align . '">' . $subtitle . '</' . $subtitle_tag . '>';
 					// Image
-					if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>'; else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif;
+					if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>'; elseif ( $svgcode == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div>'; else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif;
 					// Paragraph
 					if ( $enable_paragraph ) echo '<p class="bw-it-is-paragraph ' . $paragraph_align . '">' . $paragraph . '</p>';
 					// Link
@@ -1827,7 +1848,7 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 					echo '<div class="bw-iconbox bw-' . $position . '">';
 						echo '<div class="bw-image-wrap">';
 							// Image
-							if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>'; else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif;
+							if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>'; elseif ( $svgcode == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div>'; else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif;
 						echo '</div>';
 						echo '<div class="bw-content-wrap">';
 							// Title
@@ -1846,26 +1867,29 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			case 'position-6':
 				echo '<div class="bw-iconbox bw-' . $position . '">';
 					echo '<div class="bw-wrapper">';
-						// Image
-						if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>'; else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif;
-						echo '<div class="bw-icon-box-title">';
-							// Title
-							if ( $enable_title ) echo '<' . $title_tag . ' class="bw-it-is-title ' . $title_align . '">' . $title . '</' . $title_tag . '>';
-							// Subtitle
-							if ( $enable_subtitle ) echo '<' . $subtitle_tag . ' class="bw-it-is-subtitle ' . $subtitle_align . '">' . $subtitle . '</' . $subtitle_tag . '>';
-						echo '</div>';
+					// Image
+					if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>'; elseif ( $svgcode == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div>';else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif;
+						echo '<div class="bw-typography-wrapper">';
+							echo '<div class="bw-icon-box-title">';
+								// Title
+								if ( $enable_title ) echo '<' . $title_tag . ' class="bw-it-is-title ' . $title_align . '">' . $title . '</' . $title_tag . '>';
+								// Subtitle
+								if ( $enable_subtitle ) echo '<' . $subtitle_tag . ' class="bw-it-is-subtitle ' . $subtitle_align . '">' . $subtitle . '</' . $subtitle_tag . '>';
+							echo '</div>';
+							// Paragraph
+							if ( $enable_paragraph ) echo '<p class="bw-it-is-paragraph ' . $paragraph_align . '">' . $paragraph . '</p>';
+							// Link
+							if ( $enable_link ) echo '<a href="' . $link . '"' . $link_target . $link_nofollow . ' class="bw-btn ' . $link_align . '">' . $link_text . '</a>';
+						echo '</div>';	
 					echo '</div>';
-					// Paragraph
-					if ( $enable_paragraph ) echo '<p class="bw-it-is-paragraph ' . $paragraph_align . '">' . $paragraph . '</p>';
-					// Link
-					if ( $enable_link ) echo '<a href="' . $link . '"' . $link_target . $link_nofollow . ' class="bw-btn ' . $link_align . '">' . $link_text . '</a>';
 				echo '</div>';
 				break;
 
 			default:
 				echo '<div class="bw-iconbox bw-' . $position . '">';
 					// Image
-					if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>'; else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif;
+					echo '<div class="bw-iconbox-icon"><div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div></div>';
+					// elseif ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>';  else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>';
 					// Title
 					if ( $enable_title ) echo '<' . $title_tag . ' class="bw-it-is-title ' . $title_align . '">' . $title . '</' . $title_tag . '>';
 					// Subtitle

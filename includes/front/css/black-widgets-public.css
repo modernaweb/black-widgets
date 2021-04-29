@@ -3,9 +3,6 @@
  * included in this file.
  */
 
-
-
-
 /* cursor */
  .bw-cursor-auto {cursor: auto;}
  .bw-cursor-default {cursor: default;}
@@ -41,7 +38,6 @@
  .bw-cursor-ne-resize {cursor: ne-resize;}
  .bw-cursor-sw-resize {cursor: sw-resize;}
  .bw-cursor-se-resize {cursor: se-resize;}
-
 
 /**
  * Black Title
@@ -2299,6 +2295,8 @@
 
 .bw-title-animate.center {
     text-align: center;
+    width: fit-content;
+    margin: auto;
 }
 
 .bw-title-animate.right {
@@ -4293,98 +4291,6 @@
     }
 }
 
-/* Works Carousel */
-.bw-m-carousel .owl-stage-outer {
-    padding: 80px 0;
-    overflow: visible !important;
-}
-
-.bw-m-carousel .owl-item {
-    transform: scale(0.97);
-    transition: 1s all cubic-bezier(0.68, 0.1, 0.24, 0.84);
-    border-radius: 24px;
-    text-align: center;
-}
-
-.bw-m-carousel .owl-item .bw-m-carousel-item {
-    border-radius: 24px;
-    max-height: 540px;
-    min-height: 570px;
-    background-size: 140%, 100%, 120%;
-    background-repeat: no-repeat;
-    background-position: center center;
-    position: relative;
-    transition: 1s all cubic-bezier(0.68, 0.1, 0.24, 0.84);
-}
-
-.bw-m-carousel .owl-item:hover .bw-m-carousel-item {
-    transition: 1s all cubic-bezier(0.68, 0.1, 0.24, 0.84);
-    background-size: 180%, 120%, 120%;
-    transition-delay: .47s;
-}
-
-.bw-m-carousel .owl-item .bw-m-carousel-item .bw-m-c-content {
-    position: absolute;
-    display: block;
-    margin: 0 auto;
-    text-align: center;
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 3% 10%;
-}
-
-.bw-m-carousel .owl-item.blue {
-    transform: scale(0.87);
-}
-
-.bw-m-carousel .owl-item:hover {
-    transform: scale(1.1);
-}
-
-.bw-m-carousel .owl-item {
-    filter: grayscale(100%);
-}
-
-.bw-m-carousel .owl-item:hover {
-    filter: grayscale(0%);
-}
-
-#bw-work-carousel.bw-m-carousel .owl-item img {
-    width: 35%;
-    margin: 0 auto;
-    transition: 1s all cubic-bezier(0.68, 0.1, 0.24, 0.84);
-    position: relative;
-    overflow: visible;
-}
-
-#bw-work-carousel.bw-m-carousel .owl-item.blue img {
-    transition-delay: .73s;
-}
-
-#bw-work-carousel.bw-m-carousel .owl-item.blue:hover img {
-    width: 60%;
-}
-
-.bw-m-carousel .owl-item h4 {
-    font-size: 24px;
-    transition: 1s all cubic-bezier(0.68, 0.1, 0.24, 0.84);
-    margin-top: 28px;
-}
-
-.bw-m-carousel .owl-item.blue h4 {
-    margin-top: 35px;
-    transition-delay: .73s;
-}
-
-.bw-m-carousel .owl-item:hover h4 {
-    margin-top: 58px;
-}
-
-.bw-m-carousel .owl-item p {
-    font-size: 16px;
-    font-weight: 400;
-}
-
 /**
  * Black Blockquote
  */
@@ -4460,4 +4366,184 @@
         line-height: 24px;
     }
 }
+
+/**
+ * Black Typography
+ */
+.bw-typograpgy {
+    position: relative;
+    display: block;
+}
+
+.bw-typograpgy.left {
+    text-align: left;
+}
+
+.bw-typograpgy.center {
+    text-align: center;
+}
+
+.bw-typograpgy.right {
+    text-align: right;
+}
+
+/* Simple Style */
+.bw-typograpgy.bw-t-1 {
+    position: relative;
+    display: block;
+}
+
+.bw-typograpgy.bw-t-1 .bw-typograpgy-main-title {
+    display: block;
+}
+
+/* With Shape */
+.bw-typograpgy.bw-t-2 {
+    width: 100%;
+}
+
+/* .bw-typograpgy.bw-t-2.left.custom-style {
+    float: left;
+    width: fit-content;
+    min-height: 20px;
+    margin: 0;
+    display: block;
+}
+
+.bw-typograpgy.bw-t-2.right.custom-style {
+    float: left;
+    width: fit-content;
+    min-height: 20px;
+    margin: 0;
+    display: block;
+} */
+
+.bw-typograpgy.bw-t-2 .bw-typograpgy-with-title.style-x-1,
+.bw-typograpgy.bw-t-2 .bw-typograpgy-with-title.style-x-2,
+.bw-typograpgy.bw-t-2 .bw-typograpgy-with-title.style-x-3 {
+    width: fit-content;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bw-typograpgy.bw-t-2 .bw-typograpgy-with-title.style-x-4,
+.bw-typograpgy.bw-t-2 .bw-typograpgy-with-title.style-x-5,
+.bw-typograpgy.bw-t-2 .bw-typograpgy-with-title.style-x-6 {
+    width: fit-content;
+    margin: 0 auto;
+    display: block;
+}
+
+.bw-typograpgy.bw-t-2 .line-1,
+.bw-typograpgy.bw-t-2 .line-2 {
+    width: 46px;
+    height: 2px;
+    background: #000;
+    display: block;
+    margin: 7px auto;
+}
+
+.bw-typograpgy.bw-t-2 .bw-bw-t-2-text {
+    margin: 7px;
+}
+
+/* Custom Style */
+.bw-typograpgy.bw-t-2 .bw-typograpgy-with-title.custom-style {
+    width: fit-content;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.bw-typograpgy.bw-t-2 .bw-typograpgy-with-title.custom-style .top-bottom {
+    min-width: 100%;
+    width: 100% !important;
+    display: block !important;
+    max-width: 100%;
+}
+
+.bw-typograpgy.bw-t-2 .bw-typograpgy-with-title.custom-style .bw-bw-t-2-text {
+    margin: auto;
+}
+
+.bw-typograpgy .bw-left-top div,
+.bw-typograpgy .bw-right-bottom div,
+.bw-typograpgy .bw-left-top,
+.bw-typograpgy .bw-right-bottom {
+    line-height: 0;
+}
+
+.bw-typograpgy .bw-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Vertical Title */
+.bw-typograpgy-wrap .bw-wrapper-unset,
+.bw-typograpgy-wrap .bw-unset {
+    display: unset !important;
+}
+
+.bw-typograpgy-wrap .bw-wrapper-block,
+.bw-typograpgy-wrap .bw-block {
+    display: block !important;
+}
+
+.bw-typograpgy-wrap .bw-wrapper-unset .bw-typograpgy-repetitive.bw-typography-this-title,
+.bw-typograpgy-wrap .bw-wrapper-block .bw-typograpgy-repetitive.bw-typography-this-title {
+    display: unset !important;
+}
+
+.bw-typograpgy-wrap .bw-rotation-1 .bw-typography-this-title,
+.bw-typograpgy-wrap .bw-rotation-2 .bw-typography-this-title,
+.bw-typograpgy-wrap .bw-rotation-3 .bw-typography-this-title,
+.bw-typograpgy-wrap .bw-rotation-4 .bw-typography-this-title,
+.bw-typograpgy-wrap .bw-rotation-6 .bw-typography-this-title,
+.bw-typograpgy-wrap .bw-rotation-7 .bw-typography-this-title {
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    white-space: nowrap;
+}
+
+.bw-typograpgy-wrap .bw-rotation-1 .bw-typography-this-title {
+    transform: rotate( -180deg );
+}
+
+.bw-typograpgy-wrap .bw-rotation-2 .bw-typography-this-title {
+    transform: rotate( -90deg );
+}
+
+.bw-typograpgy-wrap .bw-rotation-3 .bw-typography-this-title {
+    transform: rotate( -45deg );
+}
+
+.bw-typograpgy-wrap .bw-rotation-4 .bw-typography-this-title {
+    transform: rotate( 0deg );
+}
+
+.bw-typograpgy-wrap .bw-rotation-5 .bw-typography-this-title {
+    transform: rotate( 45deg );
+}
+
+.bw-typograpgy-wrap .bw-rotation-6 .bw-typography-this-title {
+    transform: rotate( 90deg );
+}
+
+.bw-typograpgy-wrap .bw-rotation-7 .bw-typography-this-title {
+    transform: rotate( 180deg );
+}
+
+
+/**
+ * Black Loop
+ */
+
+
 

@@ -19,6 +19,8 @@ use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Color;
 use Elementor\Group_Control_Text_Shadow;
+use Elementor\Group_Control_Image_Size;
+use Elementor\Group_Control_Css_Filter;
 
 /**
  * Elementor title Widget.
@@ -27,7 +29,7 @@ use Elementor\Group_Control_Text_Shadow;
  *
  * @since 1.0.0
  */
-class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
+class BLACK_WIDGETS_Loop extends \Elementor\Widget_Base {
 
 	/**
 	 * Get widget name.
@@ -40,7 +42,7 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 	 * @return string Widget name.
 	 */
 	public function get_name() {
-		return 'b_alert';
+		return 'b_loop';
 	}
 
 	/**
@@ -54,7 +56,7 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Black Alert', 'blackwidgets' );
+		return __( 'Black Loop', 'blackwidgets' );
 	}
 
 	/**
@@ -68,7 +70,7 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'eicon-warning';
+		return 'eicon-circle-o';
 	}
 
 	/**
@@ -105,31 +107,30 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Select type of the title
+
+        // Message of the Alert
+		$this->add_control(
+			'post_type',
+			[
+				'label' => __( 'Alert Text', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __( 'post', 'blackwidgets' ),
+			]
+		);
+
 		$this->add_control(
 			'widget_type',
 			[
 				'label' => __( 'Select Type', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
-				'default' => 'normal',
+				'default' => 'style_1',
 				'options' => [
-					'normal' 	=> __( 'Normal', 'blackwidgets' ),
-					'success' 	=> __( 'Success', 'blackwidgets' ),
-					'warning' 	=> __( 'Warning', 'blackwidgets' ),
-					'error' 	=> __( 'Error', 'blackwidgets' ),
+					'style_1' 	=> __( 'Style 1', 'blackwidgets' ),
+					'style_2' 	=> __( 'Style 2', 'blackwidgets' ),
+					'style_3' 	=> __( 'Style 3', 'blackwidgets' ),
+					'style_4' 	=> __( 'Style 4', 'blackwidgets' ),
 				],
 				'description' => __( 'We create some skin before, you can use these or no! make a new custom type.', 'blackwidgets' ),
-			]
-		);
-
-        // Message of the Alert
-		$this->add_control(
-			'widget_text',
-			[
-				'label' => __( 'Alert Text', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __( 'Type Message Here', 'blackwidgets' ),
-                'description' => __( 'HTML Available =)', 'blackwidgets' ),
 			]
 		);
 
@@ -261,7 +262,7 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 				'label' => __( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type'  => Color::get_type(),
+					'type' => Color::get_type(),
 					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
@@ -324,7 +325,7 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 				'label' => __( 'Icon Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type'  => Color::get_type(),
+					'type' => Color::get_type(),
 					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
@@ -361,14 +362,61 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 
 		// Variables
         $type 	        = isset($settings['widget_type']) ? $settings['widget_type'] : '';
-        $message        = isset($settings['widget_text']) ? $settings['widget_text'] : '';
+        $post_type        = isset($settings['post_type']) ? $settings['post_type'] : 'post';
 
 		// Render
-        echo '<div class="bw-alert-box ' . $type . '">';
-            \Elementor\Icons_Manager::render_icon( $settings['icon_widget'], [ 'aria-hidden' => 'true' ] );
-            echo $message;
+        echo '<div class="bw-loop">'; // start bw-loop
 
-        echo '</div>';
+        $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; 
+
+        // The WordPress Query
+        $args = array(
+            'post_type'         => $post_type,
+            'posts_per_page'    => 3,
+            'paged'             => $paged,
+        );
+        global $the_query;
+        $the_query = new \WP_Query( $args );
+
+        if ( $the_query->have_posts() ) : 
+            while ( $the_query->have_posts() ) : $the_query->the_post(); 
+
+                // Article Content
+                echo '<div class="bw-loop-article-wrap">';
+                    echo '<a href="'. get_the_permalink().'"> '. get_the_title().'</a>';
+                echo '</div>';
+
+            endwhile;
+
+            echo '<div class="pagination">';
+            $pagination = paginate_links( [ // Pagination Options
+                'total'		    => $the_query->max_num_pages,
+                'current'	    => $paged,
+                'type'          => 'plain',
+                'prev_next'     => false,
+                'prev_text'     => sprintf( '<i></i> %1$s', __( 'Newer Posts', 'blackwidgets' ) ),
+                'next_text'     => sprintf( '%1$s <i></i>', __( 'Older Posts', 'blackwidgets' ) ),
+            ] );
+            echo str_replace('span', 'a', $pagination);
+            echo '</div>';
+
+            wp_reset_postdata();
+        else :
+            echo '<p>';
+                _e( 'Sorry, no posts matched your criteria.' );
+            echo '</p>';
+        endif;
+
+        echo '</div>'; // end bw-loop
+
+
+
+
+
+	   
+
+
+
 
 	}
 

@@ -129,7 +129,7 @@ class Black_Widgets_Admin {
 		$menu_slug  = 'black-widgets';
 		$function   = 'black_widgets_options';
 		$icon_url   = plugin_dir_url(__FILE__ ) . 'img/bw.svg';
-		$position   = 9;
+		$position   = 58;
 		add_menu_page(
 			$page_title,
 			$menu_title,
@@ -156,6 +156,15 @@ class Black_Widgets_Admin {
 			'black-widgets-settings',
 			array($this, 'black_widgets_settings')
 		);
+
+		// add_submenu_page(
+		// 	$menu_slug,
+		// 	__( 'Codedsgn', 'blackwidgets' ),
+		// 	__( 'Codedsgn', 'blackwidgets' ),
+		// 	$capability,
+		// 	'black-widgets-dsgn',
+		// 	array($this, 'black_widgets_dsgn')
+		// );
 
     }
 
@@ -206,6 +215,10 @@ class Black_Widgets_Admin {
 		require_once( __DIR__ . '/black-widgets-settings.php');
 
 	}
+	// Display the admin options page
+	// function black_widgets_dsgn() {
+	// 	require_once( __DIR__ . '/black-widgets-dsgn.php');
+	// }
 
 
 

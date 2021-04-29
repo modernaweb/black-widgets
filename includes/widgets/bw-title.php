@@ -12,7 +12,8 @@ use Elementor\Plugin;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
-use Elementor\Scheme_Typography;
+use Elementor\Core\Schemes\Color;
+use Elementor\Core\Schemes\Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
@@ -398,10 +399,10 @@ class BLACK_WIDGETS_Title extends \Elementor\Widget_Base {
 			'widget_title_solid_color',
 			[
 				'label' => __( 'Title Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-title-box .bw-title .bw-div' => 'color: {{VALUE}}',
@@ -415,7 +416,7 @@ class BLACK_WIDGETS_Title extends \Elementor\Widget_Base {
 			[
 				'name' => 'content_typography1',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-title-box .bw-title .bw-div',
 			]
 		);
@@ -426,7 +427,7 @@ class BLACK_WIDGETS_Title extends \Elementor\Widget_Base {
 			[
 				'name' => 'content_typography1_8_2',
 				'label' => __( 'First Letter Typography - type 8', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-title-box.bw-t-8 .bw-title div::first-letter',
 				'condition'  => [
 					'widget_type' => [
@@ -555,10 +556,10 @@ class BLACK_WIDGETS_Title extends \Elementor\Widget_Base {
 			'widget_subtitle_solid_color',
 			[
 				'label' => __( 'Subtitle Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-title-box .bw-subtitle .bw-div' => 'color: {{VALUE}}',
@@ -572,7 +573,7 @@ class BLACK_WIDGETS_Title extends \Elementor\Widget_Base {
 			[
 				'name' => 'content_typography2',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-title-box .bw-subtitle .bw-div',
 			]
 		);
@@ -583,7 +584,7 @@ class BLACK_WIDGETS_Title extends \Elementor\Widget_Base {
 			[
 				'name' => 'content_typography2_8_2',
 				'label' => __( 'First Letter Typography - type 8', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-title-box.bw-t-8 .bw-subtitle div::first-letter',
 				'condition'  => [
 					'widget_type' => [

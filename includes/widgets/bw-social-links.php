@@ -12,7 +12,8 @@ use Elementor\Plugin;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
-use Elementor\Scheme_Typography;
+use Elementor\Core\Schemes\Color;
+use Elementor\Core\Schemes\Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
@@ -429,10 +430,10 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			'style_main_social_name_color',
 			[
 				'label' => __( 'Social Name Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-social-links .bw-social .bw-social-name, {{WRAPPER}} .bw-social-links.bw-t6 .bw-social' => 'color: {{VALUE}}',
@@ -446,7 +447,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_main_social_name_typography',
 				'label' => __( 'Social Name Typography', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-social-links .bw-social .bw-social-name, {{WRAPPER}} .bw-social-links.bw-t6 .bw-social',
 			]
 		);
@@ -473,10 +474,10 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			'style_main_follow_text_color',
 			[
 				'label' => __( 'Follow Link Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-social-links .bw-social .bw-follow-text' => 'color: {{VALUE}}',
@@ -495,7 +496,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_main_follow_text_typography',
 				'label' => __( 'Follow Typography', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-social-links .bw-social .bw-follow-text',
 				'condition'  => [
 					'widget_type' => [
@@ -653,10 +654,10 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			'style_hover_main_social_name_color',
 			[
 				'label' => __( 'Social Name Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-social-links .bw-social:hover .bw-social-name, {{WRAPPER}} .bw-social-links.bw-t6 .bw-social:hover' => 'color: {{VALUE}}',
@@ -670,7 +671,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_hover_main_social_name_typography',
 				'label' => __( 'Social Name Typography', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-social-links .bw-social:hover .bw-social-name, {{WRAPPER}} .bw-social-links.bw-t6 .bw-social:hover',
 			]
 		);
@@ -697,10 +698,10 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			'style_hover_main_follow_text_color',
 			[
 				'label' => __( 'Follow link Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-social-links .bw-social:hover .bw-follow-text' => 'color: {{VALUE}}',
@@ -719,7 +720,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_hover_main_follow_text_typography',
 				'label' => __( 'Follow Typography', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-social-links .bw-social:hover .bw-follow-text',
 				'condition'  => [
 					'widget_type' => [
@@ -899,10 +900,10 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			'style_main_icon_color',
 			[
 				'label' => __( 'Icon Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-social-links .bw-social i' => 'color: {{VALUE}}',
@@ -947,10 +948,10 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			'style_hover_icon_color',
 			[
 				'label' => __( 'Icon Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-social-links .bw-social:hover i' => 'color: {{VALUE}}',
@@ -1005,7 +1006,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 
 		// Variables
         $type 	        = isset($settings['widget_type']) ? $settings['widget_type'] : '';
-        $follow 	        = isset($settings['widget_follow']) ? $settings['widget_follow'] : '';
+        $follow			= isset($settings['widget_follow']) ? $settings['widget_follow'] : '';
 
 		// Render
 		echo '<div class="bw-social-links ' . $type . '">';

@@ -12,7 +12,8 @@ use Elementor\Plugin;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
-use Elementor\Scheme_Typography;
+use Elementor\Core\Schemes\Color;
+use Elementor\Core\Schemes\Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
@@ -511,10 +512,10 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			'style_before_title_color',
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-title-animate .bw-before' => 'color: {{VALUE}}',
@@ -528,7 +529,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_before_title_typography1',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-before',
 			]
 		);
@@ -657,10 +658,10 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			'style_main_title_color',
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-title-animate .bw-animate-text' => 'color: {{VALUE}}',
@@ -674,7 +675,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_main_title_typography1',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-animate-text',
 			]
 		);
@@ -803,10 +804,10 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			'style_symbol_title_color',
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-title-animate .bw-symbol' => 'color: {{VALUE}}',
@@ -820,7 +821,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_symbol_title_typography1',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-symbol',
 			]
 		);
@@ -957,10 +958,10 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			'style_after_title_color',
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-title-animate .bw-after' => 'color: {{VALUE}}',
@@ -974,7 +975,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_after_title_typography1',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-after',
 			]
 		);
@@ -1105,10 +1106,10 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			'style_after_line_color',
 			[
 				'label' => __( 'Line Color', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-title-animate .bw-line' => 'background-color: {{VALUE}} !important',

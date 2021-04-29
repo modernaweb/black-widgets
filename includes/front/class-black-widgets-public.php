@@ -73,6 +73,7 @@ class Black_Widgets_Public {
 		 * class.
 		 */
 		wp_enqueue_style( $this->black_widgets, plugin_dir_url( __FILE__ ) . 'css/black-widgets-public.css', array(), $this->version);
+		// wp_enqueue_style( 'owl-carousel', plugin_dir_url( __FILE__ ) . 'css/black-widgets-min.css', array(), $this->version);
 	}
 
 	/**
