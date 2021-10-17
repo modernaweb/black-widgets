@@ -29,12 +29,12 @@ use Elementor\Group_Control_Css_Filter;
  *
  * @since 1.0.0
  */
-class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
+class BLACK_WIDGETS_Box extends \Elementor\Widget_Base {
 
 	/**
 	 * Get widget name.
 	 *
-	 * Retrieve line widget name.
+	 * Retrieve button widget name.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -42,13 +42,13 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 	 * @return string Widget name.
 	 */
 	public function get_name() {
-		return 'b_fade';
+		return 'b_box';
 	}
 
 	/**
 	 * Get widget title.
 	 *
-	 * Retrieve line widget title.
+	 * Retrieve button widget title.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -56,13 +56,13 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Black Fade', 'blackwidgets' );
+		return __( 'Black Box', 'blackwidgets' );
 	}
 
 	/**
 	 * Get widget icon.
 	 *
-	 * Retrieve line widget icon.
+	 * Retrieve button widget icon.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -70,13 +70,13 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'eicon-container';
+		return 'eicon-info-box';
 	}
 
 	/**
 	 * Get widget categories.
 	 *
-	 * Retrieve the list of categories the line widget belongs to.
+	 * Retrieve the list of categories the button widget belongs to.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -88,7 +88,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 	}
 
 	/**
-	 * Register line widget controls.
+	 * Register button widget controls.
 	 *
 	 * Adds different input fields to allow the user to change and customize the widget settings.
 	 *
@@ -113,13 +113,60 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Select Type', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
-				'default' => 'bw-t-2',
+				'default' => 'bw-style-1',
 				'options' => [
-					'bw-t-1' => __( 'Image', 'blackwidgets' ),
-					'bw-t-2' => __( 'Line 1', 'blackwidgets' ),
-					'bw-t-3' => __( 'Line 2', 'blackwidgets' ),
+					'bw-style-1' => __( 'Type 1', 'blackwidgets' ),
+					'bw-style-2' => __( 'Type 2', 'blackwidgets' ),
 				],
-				'description' => __( 'It just work with scroll down and does not work on first section. it works once', 'blackwidgets' ),
+				'description' => __( 'We created some skin before, you can use these or no! make a new custom type.', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'divider_0',
+			[
+				'type' => \Elementor\Controls_Manager::DIVIDER,
+			]
+		);
+
+		// Link?
+		$this->add_control(
+			'box_link',
+			[
+				'label' => __( 'Box Link', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'no',
+				'options' => [
+					'no' => __( 'No', 'blackwidgets' ),
+					'yes' => __( 'Yes', 'blackwidgets' ),
+                ],
+			]
+		);
+
+		$this->add_control(
+			'box_link_url',
+			[
+				'label' => __( 'Link', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::URL,
+				'placeholder' => __( 'https://your-link.com', 'blackwidgets' ),
+				'show_external' => true,
+				'default' => [
+					'url' => '#',
+					'is_external' => true,
+					'nofollow' => true,
+                ],
+				'condition'  => [
+					'box_link' => [
+						'yes',
+					],
+				],
+			]
+        );
+
+		$this->add_control(
+			'divider_1',
+			[
+				'type' => \Elementor\Controls_Manager::DIVIDER,
 			]
 		);
 
@@ -131,68 +178,137 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 				'default' => [
 					'url' => \Elementor\Utils::get_placeholder_image_src(),
 				],
-				'condition'  => [
-					'widget_type' => [
-						'bw-t-1',
-					],
-				],
 			]
         );
 
 		$this->add_group_control(
 			Group_Control_Image_Size::get_type(),
 			[
-				'name' => 'thumbnail', //
-				// Usage: `{name}_size` and `{name}_custom_dimension`, in this case `thumbnail_size` and `thumbnail_custom_dimension`.
+				'name' => 'thumbnail', // // Usage: `{name}_size` and `{name}_custom_dimension`, in this case `thumbnail_size` and `thumbnail_custom_dimension`.
 				'exclude' => [ 'custom' ],
 				'include' => [],
 				'default' => 'full',
-				'condition'  => [
-					'widget_type' => [
-						'bw-t-1',
-					],
-				],
 			]
         );
 
-		// Link?
 		$this->add_control(
-			'image_link',
+			'divider_2',
 			[
-				'label' => __( 'Add link for Image?', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::DIVIDER,
+			]
+		);
+
+		// Type title
+		$this->add_control(
+			'widget_title',
+			[
+				'label' => __( 'Title', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( 'Clean & Solid', 'blackwidgets' ),
+				'placeholder' => __( 'Type your title here', 'blackwidgets' ),
+				'description' => __( 'You can use all other HTML tags into the title field e.g. code, mark, abbr, blockquote and  ...', 'blackwidgets' ),
+			]
+		);
+
+		// Select tag
+		$this->add_control(
+			'widget_html_tag_title',
+			[
+				'label' => __( 'HTML Tag', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
-				'default' => 'no',
+				'default' => 'h4',
 				'options' => [
-					'no' => __( 'No', 'blackwidgets' ),
-					'yes' => __( 'Yes', 'blackwidgets' ),
+					'div' => __( 'div', 'blackwidgets' ),
+					'h1' => __( 'H1', 'blackwidgets' ),
+					'h2' => __( 'H2', 'blackwidgets' ),
+					'h3' => __( 'H3', 'blackwidgets' ),
+					'h4' => __( 'H4', 'blackwidgets' ),
+					'h5' => __( 'H5', 'blackwidgets' ),
+					'h6' => __( 'H6', 'blackwidgets' ),
+					'p' => __( 'p', 'blackwidgets' ),
+					'span' => __( 'span', 'blackwidgets' ),
 				],
-				'condition'  => [
-					'widget_type' => [
-						'bw-t-1',
-					],
-				],
+				'description' => __( 'Choose an HTML tag, it can help you to SEO and beautifully of the UI design with follow the structure of your website.', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
-			'image_link_url',
+			'divider_3',
 			[
-				'label' => __( 'Link', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::URL,
-				'placeholder' => __( 'https://your-link.com', 'blackwidgets' ),
-				'show_external' => true,
-				'default' => [
-					'url' => '',
-					'is_external' => true,
-					'nofollow' => true,
-                ],
+				'type' => \Elementor\Controls_Manager::DIVIDER,
+			]
+		);
+
+		// Type subtitle
+		$this->add_control(
+			'widget_subtitle',
+			[
+				'label' => __( 'Subtitle', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'placeholder' => __( 'Type your title here', 'blackwidgets' ),
+				'default' => __( 'Development, Design, and E-Commerce', 'blackwidgets' ),
+				'description' => __( 'You can use all other HTML tags into the title field e.g. code, mark, abbr, blockquote and  ...', 'blackwidgets' ),
+			]
+		);
+
+		// Select tag
+		$this->add_control(
+			'widget_html_tag_subtitle',
+			[
+				'label' => __( 'HTML Tag', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'p',
+				'options' => [
+					'div' => __( 'div', 'blackwidgets' ),
+					'h1' => __( 'H1', 'blackwidgets' ),
+					'h2' => __( 'H2', 'blackwidgets' ),
+					'h3' => __( 'H3', 'blackwidgets' ),
+					'h4' => __( 'H4', 'blackwidgets' ),
+					'h5' => __( 'H5', 'blackwidgets' ),
+					'h6' => __( 'H6', 'blackwidgets' ),
+					'p' => __( 'p', 'blackwidgets' ),
+					'span' => __( 'span', 'blackwidgets' ),
+				],
+				'description' => __( 'Choose an HTML tag, it can help you to SEO and beautifully of the UI design with follow the structure of your website.', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'divider_4',
+			[
+				'type' => \Elementor\Controls_Manager::DIVIDER,
+			]
+		);
+
+		// Alignment
+		$this->add_responsive_control(
+			'widget_alignment',
+			[
+				'label'     => __( 'Text Alignment', 'blackwidgets' ),
+				'type'      => \Elementor\Controls_Manager::CHOOSE,
+				'options'   => [
+					'left'   => [
+						'title' => __( 'Left', 'blackwidgets' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => __( 'Center', 'blackwidgets' ),
+						'icon'  => 'eicon-text-align-center',
+					],
+					'right'  => [
+						'title' => __( 'Right', 'blackwidgets' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+				],
+				'default'   => 'center',
+				'toggle'    => true,
 				'condition'  => [
-					'image_link' => [
-						'yes',
+					'widget_type' => [
+						'bw-style-1',
 					],
 				],
 			]
-        );
+		);
 
 		$this->end_controls_section();
 		// End
@@ -207,19 +323,28 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 			]
 		);
 
+		// Style Subtitle Tabs
+		$this->start_controls_tabs('black_widget_1_tab');
+		$this->start_controls_tab(
+			'tab_1_normal',
+			[
+				'label' => __( 'Normal', 'blackwidgets' ),
+			]
+		);
+
 		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_box_background',
 				'label' => __( 'Background', 'blackwidgets' ),
-				'types' => [ 'classic', 'gradient', 'video' ],
-				'selector' => '{{WRAPPER}} .bw-line, {{WRAPPER}} .bw-load-img',
+				'types' => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .bw-hover-box',
 			]
 		);
 
 		$this->add_control(
-			'hr4',
+			'hr1',
 			[
 				'type' => \Elementor\Controls_Manager::DIVIDER,
 			]
@@ -233,7 +358,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-line, {{WRAPPER}} .bw-load-img' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-hover-box' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -246,13 +371,13 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-line, {{WRAPPER}} .bw-load-img' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-hover-box' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
 
 		$this->add_control(
-			'hr5',
+			'hr2',
 			[
 				'type' => \Elementor\Controls_Manager::DIVIDER,
 			]
@@ -264,24 +389,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 			[
 				'name' => 'widget_box_border',
 				'label' => __( 'Border', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .bw-line, {{WRAPPER}} .bw-load-img',
-			]
-		);
-
-		$this->add_responsive_control(
-			'widget_box_border_radius_for_fade', //param_name
-			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
-				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', '%' ],
-				'selectors' => [
-					'{{WRAPPER}} .bw-load-img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-				'condition'  => [
-					'widget_type' => [
-						'bw-t-1',
-					],
-				],
+				'selector' => '{{WRAPPER}} .bw-hover-box',
 			]
 		);
 
@@ -291,93 +399,27 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 			[
 				'name' => 'widget_box_box_shadow',
 				'label' => __( 'Box Shadow', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .bw-line, {{WRAPPER}} .bw-load-img',
+				'selector' => '{{WRAPPER}} .bw-hover-box',
 			]
 		);
 
-		$this->end_controls_section();
-		// End
-
-		// Start
-		// Style section
-		$this->start_controls_section(
-			'line_style_section',
+		$this->add_responsive_control(
+			'widget_box_border_radius', 
 			[
-				'label' => __( 'Image & line  Style', 'blackwidgets' ),
-				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
-			]
-		);
-
-		$this->add_control(
-			'start_width',
-			[
-				'label' => __( 'Start line width', 'blackwidgets' ),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%' ],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 2000,
-						'step' => 10,
-					],
-					'%' => [
-						'min' => 0,
-						'max' => 100,
-						'step' => 5,
-					],
-				],
+				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-line' => 'width: {{SIZE}}{{UNIT}};',
-				],
-				'condition'  => [
-					'widget_type!' => [
-						'bw-t-1',
-					],
+					'{{WRAPPER}} .bw-hover-box' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
 
-		// Border
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'tab_1_hover',
 			[
-				'name' => 'line_border',
-				'label' => __( 'Border', 'blackwidgets' ),
-                'selector' => '{{WRAPPER}} .bw-line',
-				'condition'  => [
-					'widget_type' => [
-						'bw-t-3',
-					],
-				],
-			]
-		);
-
-		$this->add_control(
-			'img_width',
-			[
-				'label' => __( 'Image Width', 'blackwidgets' ),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%' ],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 2000,
-						'step' => 10,
-					],
-					'%' => [
-						'min' => 0,
-						'max' => 100,
-						'step' => 5,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .bw-load-img' => 'max-width: {{SIZE}}{{UNIT}};',
-				],
-				'condition'  => [
-					'widget_type' => [
-						'bw-t-1',
-					],
-				],
+				'label' => __( 'Hover', 'blackwidgets' ),
 			]
 		);
 
@@ -385,35 +427,89 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
-				'name' => 'img_background',
-				'label' => __( 'Image Cover X', 'blackwidgets' ),
-				'types' => [ 'classic', 'gradient', 'video' ],
-				'selector' => '{{WRAPPER}} .bw-load-img .bw-image-grow-cover ',
-				'condition'  => [
-					'widget_type' => [
-						'bw-t-1',
-					],
-				],
-				'description' => __( 'After change style, scroll down to see changes', 'blackwidgets' ),
+				'name' => 'widget_hover_box_background',
+				'label' => __( 'Background', 'blackwidgets' ),
+				'types' => [ 'classic', 'gradient', ],
+				'selector' => '{{WRAPPER}} .bw-hover-box:hover',
 			]
 		);
 
 		$this->add_control(
-			'hover_animation',
+			'hr3',
 			[
-				'label' => __( 'Image Hover Animation', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::HOVER_ANIMATION,
-				'prefix_class' => 'elementor-animation-',
-				'condition'  => [
-					'widget_type' => [
-						'bw-t-1',
-					],
+				'type' => \Elementor\Controls_Manager::DIVIDER,
+			]
+		);
+
+		// Margin
+		$this->add_responsive_control(
+			'widget_hover_box_margin',
+			[
+				'label' => __( 'Margin', 'blackwidgets' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-hover-box:hover' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
 
+		// Padding
+		$this->add_responsive_control(
+			'widget_hover_box_padding',
+			[
+				'label' => __( 'Padding', 'blackwidgets' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-hover-box:hover' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'hr4',
+			[
+				'type' => \Elementor\Controls_Manager::DIVIDER,
+			]
+		);
+
+		// Border
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' => 'widget_hover_box_border',
+				'label' => __( 'Border', 'blackwidgets' ),
+				'selector' => '{{WRAPPER}} .bw-hover-box:hover',
+			]
+		);
+
+		// Box shadow
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name' => 'widget_hover_box_box_shadow',
+				'label' => __( 'Box Shadow', 'blackwidgets' ),
+				'selector' => '{{WRAPPER}} .bw-hover-box:hover',
+			]
+		);
+
+		$this->add_responsive_control(
+			'widget_hover_box_border_radius',
+			[
+				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-hover-box:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+		$this->end_controls_tabs(); // End Tabs
+
 		$this->end_controls_section();
-        // End
 
 
 		// Start
@@ -423,11 +519,6 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 			[
 				'label' => __( '2D & 3D Normal Transfrom Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
-				'condition'  => [
-					'widget_type' => [
-						'bw-t-1',
-					],
-				],
 			]
 		);
 
@@ -781,11 +872,6 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Cursor & Hover Animate', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
-				'condition'  => [
-					'widget_type' => [
-						'bw-t-1',
-					],
-				],
 			]
 		);
 
@@ -856,11 +942,6 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 			[
 				'label' => __( '2D & 3D Hover Transfrom Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
-				'condition'  => [
-					'widget_type' => [
-						'bw-t-1',
-					],
-				],
 			]
 		);
 
@@ -1206,6 +1287,283 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->end_controls_section();
 		// End
 
+
+		// Start
+		// Style section
+		$this->start_controls_section(
+			'image_style_section',
+			[
+				'label' => __( 'Image Style', 'blackwidgets' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		// Style Subtitle Tabs
+		$this->start_controls_tabs('black_widget_2_tab');
+		$this->start_controls_tab(
+			'img_tab_1_normal',
+			[
+				'label' => __( 'Normal', 'blackwidgets' ),
+			]
+		);
+
+		// Background
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'image_style_background',
+				'label' => __( 'Background', 'blackwidgets' ),
+				'types' => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .bw-hover-box .bw-featured-image',
+			]
+		);
+
+		$this->add_control(
+			'hr5',
+			[
+				'type' => \Elementor\Controls_Manager::DIVIDER,
+			]
+		);
+
+		// Margin
+		$this->add_responsive_control(
+			'image_style_margin',
+			[
+				'label' => __( 'Margin', 'blackwidgets' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-hover-box .bw-featured-image' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Padding
+		$this->add_responsive_control(
+			'image_style_padding',
+			[
+				'label' => __( 'Padding', 'blackwidgets' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-hover-box .bw-featured-image' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'hr6',
+			[
+				'type' => \Elementor\Controls_Manager::DIVIDER,
+			]
+		);
+
+		// Border
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' => 'image_style_border',
+				'label' => __( 'Border', 'blackwidgets' ),
+				'selector' => '{{WRAPPER}} .bw-hover-box .bw-featured-image',
+			]
+		);
+
+		// Box shadow
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name' => 'image_style_box_shadow',
+				'label' => __( 'Box Shadow', 'blackwidgets' ),
+				'selector' => '{{WRAPPER}} .bw-hover-box .bw-featured-image',
+			]
+		);
+
+		$this->add_control(
+			'image_style_border_radius', //param_name
+			[
+				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-hover-box .bw-featured-image' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Css_Filter::get_type(),
+			[
+				'name' => 'image_css_filter',
+				'selector' => 
+					'{{WRAPPER}} .bw-hover-box .bw-featured-image'
+			]
+		);
+
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'img_tab_1_hover',
+			[
+				'label' => __( 'Hover', 'blackwidgets' ),
+			]
+		);
+
+		// Background
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'image_style_hover_box_background',
+				'label' => __( 'Background', 'blackwidgets' ),
+				'types' => [ 'classic', 'gradient', ],
+				'selector' => '{{WRAPPER}} .bw-hover-box .bw-featured-image:hover',
+			]
+		);
+
+		$this->add_control(
+			'hr7',
+			[
+				'type' => \Elementor\Controls_Manager::DIVIDER,
+			]
+		);
+
+		// Margin
+		$this->add_responsive_control(
+			'image_style_hover_box_margin',
+			[
+				'label' => __( 'Margin', 'blackwidgets' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-hover-box .bw-featured-image:hover' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Padding
+		$this->add_responsive_control(
+			'image_style_hover_box_padding',
+			[
+				'label' => __( 'Padding', 'blackwidgets' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-hover-box .bw-featured-image:hover' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'hr8',
+			[
+				'type' => \Elementor\Controls_Manager::DIVIDER,
+			]
+		);
+
+		// Border
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' => 'image_style_hover_box_border',
+				'label' => __( 'Border', 'blackwidgets' ),
+				'selector' => '{{WRAPPER}} .bw-hover-box .bw-featured-image:hover',
+			]
+		);
+
+		// Box shadow
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name' => 'image_style_hover_box_box_shadow',
+				'label' => __( 'Box Shadow', 'blackwidgets' ),
+				'selector' => '{{WRAPPER}} .bw-hover-box .bw-featured-image:hover',
+			]
+		);
+
+		$this->add_control(
+			'image_style_hover_box_border_radius', //param_name
+			[
+				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-hover-box .bw-featured-image:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Css_Filter::get_type(),
+			[
+				'name' => 'image_css_filter_hover',
+				'selector' => 
+					'{{WRAPPER}} .bw-hover-box .bw-featured-image:hover'
+			]
+		);
+
+		$this->add_control(
+			'hover_animation',
+			[
+				'label' => __( 'Hover Animation', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::HOVER_ANIMATION,
+				'prefix_class' => 'elementor-animation-',
+			]
+		);
+
+		$this->end_controls_tab();
+		$this->end_controls_tabs(); // End Tabs
+
+		$this->end_controls_section();
+		// End
+		// Start
+		// Style section
+		$this->start_controls_section(
+			'style2_link_section',
+			[
+				'label' => __( 'Overlay Style', 'blackwidgets' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+				'condition'  => [
+					'widget_type' => [
+						'bw-style-2',
+					],
+				],
+			]
+		);
+
+		// Background
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'overlay_bg_color',
+				'label' => __( 'Background', 'blackwidgets' ),
+				'types' => [ 'classic', 'gradient', ],
+				'selector' => '{{WRAPPER}} .bw-hover-box.bw-style-2 a:after',
+			]
+		);
+
+		// Background
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'overlay_bg_hover_color',
+				'label' => __( 'Background Hover', 'blackwidgets' ),
+				'types' => [ 'classic', 'gradient', ],
+				'selector' => '{{WRAPPER}} .bw-hover-box.bw-style-2 a:hover:after',
+			]
+		);
+
+		$this->end_controls_section();
+		// End
+
+
+
+
+
+
+
+
+
+
+
+
 	}
 
 	/**
@@ -1218,13 +1576,8 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 	 */
 	protected function render() {
 
-		$settings   				= $this->get_settings_for_display();
-		// Variables
-        $type 	        			= isset($settings['widget_type']) 						? $settings['widget_type'] 							: '';
-        $image_URL 	       			= isset( $settings['image']['url']) 					?  $settings['image']['url'] 						: '';
-        $image_link 	   			= isset($settings['image_link']) 						? $settings['image_link'] 							: '';
-		$target            			= isset($settings['image_link_url']['is_external']) 	? 'target="_blank"' 								: '';
-        $nofollow          			= isset($settings['image_link_url']['nofollow']) 		? ' rel="nofollow"' 								: '';
+		$settings   	= $this->get_settings_for_display();
+
 		// Transform Option
 		$normal_transform			= isset($settings['transform_normal_option'])			? $settings['transform_normal_option']				: '';
 		$hover_transform			= isset($settings['transform_hover_option'])			? $settings['transform_hover_option']				: '';
@@ -1315,22 +1668,59 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		//Return all of the styles
 		echo "<style> $normal_transform_style $hover_transform_style</style>";
 
+		// Variables
+		$type 			= isset($settings['widget_type']) 									? $settings['widget_type'] 												: '';
+		$alignment 		= isset($settings['widget_alignment']) 								? $settings['widget_alignment'] 										: '';
+		$title 			= isset($settings['widget_title']) 									? $settings['widget_title'] 											: '';
+		$subtitle 		= isset($settings['widget_subtitle']) 								? $settings['widget_subtitle'] 											: '';
+		$title_tag 		= isset($settings['widget_html_tag_title']) 						? $settings['widget_html_tag_title'] 									: '';
+		$subtitle_tag   = isset($settings['widget_html_tag_subtitle']) 						? $settings['widget_html_tag_subtitle'] 								: '';
+        $image_URL		= isset( $settings['image']['url']) 								? $settings['image']['url'] 											: '';
+		$box_link		= isset($settings['box_link']) 										? $settings['box_link'] 												: '';
+		// $img_url		= isset($settings['image_link_url'])								? $settings['image_link_url']											: '';
+		$target			= isset($settings['image_link_url']['is_external']) 				? 'target="_blank"' 													: '';
+        $nofollow		= isset($settings['image_link_url']['nofollow']) 					? ' rel="nofollow"' 													: '';
+
+
+
+		
 		// Render
-        switch ($type) {
-			case 'bw-t-1':
-				echo '<div class="bw-load-img bw-cursor-' . $cursor .'" id="'. $data_id .'">';
-					echo '<div class="bw-img ' . $settings['hover_animation'] . '">';
-						if ( $image_link == 'yes') { echo '<a href="' . $settings['image_link_url']['url'] . '"' . $target . $nofollow . ' class="bw-image-link">'; }
-						echo '<div class="bw-image-grow-cover"></div>';
-							echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail', $settings ) . '" class="">';
-						if ( $image_link == 'yes'){ echo '</a>'; }
+		if ( $type == 'bw-style-1' ) {
+			echo '<div class="bw-hover-box bw-cursor-' . $cursor .' ' . $type . '" id="'. $data_id .'">';
+				if ( isset($box_link) && $box_link == 'yes' ) { echo '<a href="' . $settings['box_link_url']['url'] . '"' . $target . $nofollow . ' class="bw-image-link">'; }
+					echo '<div class="bw-featured-image bw-hover-1">';
+							echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail', $settings ) . '" class="bw-img-tag bw-cursor-' . $cursor .' ' . $settings['hover_animation'] . '">';
 					echo '</div>';
-				echo '</div>';
-				break;
-			default:
-				echo '<div class="bw-line ' . $type . '"></div>';
-				break;
+					echo '<div class="bw-content-box bw-' . $alignment . '">';
+						echo '<' . $title_tag . ' class="bw-title">' . $title . '</' . $title_tag . '>';
+						echo '<' . $subtitle_tag . ' class="bw-description"> ' . $subtitle . '</' . $subtitle_tag . '>';
+					echo '</div>';
+				if ( isset($box_link) && $box_link == 'yes' ){ echo '</a>'; }
+			echo '</div>';
+		} else if ( $type == 'bw-style-2' ) {
+			echo '<div class="bw-hover-box bw-cursor-' . $cursor .' ' . $type . '" id="'. $data_id .'">';
+			// echo '<div class="mw-portfolio-img">';
+				// echo '<a href="https://modernaweb.net/dsgn/" target="_blank" class="mw-portfolio-link">';
+		if ( isset($box_link) && $box_link == 'yes') { echo '<a href="' . $settings['box_link_url']['url'] . '"' . $target . $nofollow . ' class="bw-hero">'; }
+				// echo '<img src="https://res.cloudinary.com/modernaweb/images/f_auto,q_auto/v1616775327/portfolio-desgn/portfolio-desgn.png" class="mw-portfolio-hero">';
+					echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail', $settings ) . '" class="bw-img-tag bw-cursor-' . $cursor .' ' . $settings['hover_animation'] . '">';
+					echo '<div class="bw-title-box">';
+						echo '<span class="bw-typography">';
+							echo '<' . $title_tag . ' class="bw-title">' . $title . '</' . $title_tag . '>';
+							echo '<' . $subtitle_tag . ' class="bw-description"> ' . $subtitle . '</' . $subtitle_tag . '>';
+						echo '</span>';
+					echo '</div>';
+		if ( isset($box_link) && $box_link == 'yes' ){ echo '</a>'; }
+				// echo '</a>';
+			echo '</div>';
+		} else if ( $type == 'bw-style-6' ) {
+
+		} else {
+			echo '';
 		}
+
+
+
 
 	}
 

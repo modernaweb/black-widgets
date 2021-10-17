@@ -1,5 +1,10 @@
 <?php
 
+// Exit if accessed directly
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Adding custom icon to icon control in Elementor
  */
@@ -376,9 +381,9 @@ function Black_Widgets_elementor_icons( $tabs = array() ) {
         'lock',
     );
 
-	$tabs['bw_elementor_icons'] = array(
-		'name'          => 'bw_elementor_icons',
-		'label'         => esc_html__( 'Elementor Icons', 'bw' ),
+	$tabs['black_widgets_elementor_icons'] = array(
+		'name'          => 'black_widgets_elementor_icons',
+		'label'         => esc_html__( 'Elementor Icons', 'blackwidgets' ),
 		'labelIcon'     => 'demo-icon eicon-elementor-square',
 		'prefix'        => 'eicon-',
 		'displayPrefix' => 'eicon',

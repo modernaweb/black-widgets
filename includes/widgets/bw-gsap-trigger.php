@@ -27,7 +27,7 @@ use Elementor\Group_Control_Text_Shadow;
  *
  * @since 1.0.0
  */
-class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
+class BLACK_WIDGETS_GSAP_Trigger extends \Elementor\Widget_Base {
 
 	/**
 	 * Get widget name.
@@ -40,7 +40,7 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 	 * @return string Widget name.
 	 */
 	public function get_name() {
-		return 'b_alert';
+		return 'b_gsap_trigger';
 	}
 
 	/**
@@ -54,7 +54,7 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Black Alert', 'blackwidgets' );
+		return __( 'Black Trigger', 'blackwidgets' );
 	}
 
 	/**
@@ -68,7 +68,7 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'eicon-warning';
+		return 'eicon-scroll';
 	}
 
 	/**
@@ -109,53 +109,139 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_type',
 			[
-				'label' => __( 'Select Type', 'blackwidgets' ),
+				'label' => __( 'Select Content', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
-				'default' => 'normal',
+				'default' => 'html',
 				'options' => [
-					'normal' 	=> __( 'Normal', 'blackwidgets' ),
-					'success' 	=> __( 'Success', 'blackwidgets' ),
-					'warning' 	=> __( 'Warning', 'blackwidgets' ),
-					'error' 	=> __( 'Error', 'blackwidgets' ),
+					'html' 				=> __( 'HTML', 'blackwidgets' ),
+					// 'text' 				=> __( 'Text', 'blackwidgets' ),
+					// 'shape'				=> __( 'Shape', 'blackwidgets' ),
+					// 'nested_div' 		=> __( 'Nested Div', 'blackwidgets' ),
+					// 'image_sequence' 	=> __( 'Image Sequence', 'blackwidgets' ),
+					// 'video_sequence' 	=> __( 'Video Sequence', 'blackwidgets' ),
 				],
 				'description' => __( 'We create some skin before, you can use these or no! make a new custom type.', 'blackwidgets' ),
 			]
 		);
 
+		$this->add_control(
+			'widget_html_content',
+			[
+				'label' => __( 'HTML Code', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXTAREA,
+				'rows' => 21,
+				'default' =>
+'
+<h3 class="bw-eg" style="font-size: 170px;">
+GROW YOUR
+</h3>
+<h3 class="bw-eg" style="font-size: 170px;">
+BUSINESS
+</h3>
+<h3 class="bw-eg" style="font-size: 170px;">
+ONLINE
+</h3>
+',
+				'description' => __( 'Put your HTML tags here, please check the example structure', 'blackwidgets' ),
+			]
+		);
+
         // Message of the Alert
 		$this->add_control(
-			'widget_text',
+			'widget_html_class',
 			[
-				'label' => __( 'Alert Text', 'blackwidgets' ),
+				'label' => __( 'Shared Class', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __( 'Type Message Here', 'blackwidgets' ),
-                'description' => __( 'HTML Available =)', 'blackwidgets' ),
+                'default' => __( 'bw-eg', 'blackwidgets' ),
+                'description' => __( 'use the shared class for each line, like the example', 'blackwidgets' ),
 			]
 		);
 
-		// Enable Icon
-		$this->add_control(
-			'enable_icon_widget',
+
+		$this->end_controls_section();
+		// End
+
+		// Start
+		// Content section
+		$this->start_controls_section(
+			'content_html_js',
 			[
-				'label' 		=> __( 'Enable Icon', 'blackwidgets' ),
-				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-				'label_on' 		=> __( 'Enable', 'blackwidgets' ),
-				'label_off' 	=> __( 'Disable', 'blackwidgets' ),
-				'return_value' 	=> 'on',
-				'default' 		=> 'off',
+				'label' => __( 'JS for HTML Content', 'blackwidgets' ),
+				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+
+		$this->add_control(
+			'widget_html_js_gsap_timeline_scroll_trigger',
+			[
+				'label' => __( 'JS: GSAP timeline > scrollTrigger', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXTAREA,
+				'rows' => 21,
+				'default' =>
+'
+trigger: ".bw-eg",
+start: "top bottom",
+end: "top",
+toggleActions: "restart none none reset",
+start: "top center",
+end: "bottom",
+// markers: true, // enable it to to show the markers
+',
+				'description' => __( 'Put your transform properties tags here for "from"', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
-			'icon_widget',
+			'widget_html_js_tl_from',
 			[
-				'label' => __( 'Icon', 'blackwidgets' ),
-                'type' => Controls_Manager::ICONS,
-				'condition'  => [
-					'enable_icon_widget' => [
-						'on',
-					],
-				],
+				'label' => __( 'JS: GSAP tl.from', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXTAREA,
+				'rows' => 21,
+				'default' => 
+'
+opacity: 1,
+rotation: 3,
+scaleX: 1,
+scaleY: 0,
+scaleZ: 0,
+skewX: "26",
+skewY: "-42",
+x: 0,
+y: 0,
+z: 0,
+x: "0",
+y: "25",
+autoAlpha:1,
+transformStyle: "preserve-3d",
+',
+				'description' => __( 'Put your transform properties tags here for "from"', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'widget_html_js_tl_to',
+			[
+				'label' => __( 'JS: GSAP tl.to', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXTAREA,
+				'rows' => 21,
+				'default' => 
+'
+opacity: 1,
+rotation: 0,
+scaleX: 1,
+scaleY: 1,
+scaleZ: 0,
+skewX: 0,
+skewY: 0,
+x: 0,
+y: 0,
+z: 0,
+x: "0",
+y: "0",
+transformStyle: "preserve-3d",
+',
+				'description' => __( 'Put your transform properties tags here for "to"', 'blackwidgets' ),
 			]
 		);
 
@@ -179,7 +265,7 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 				'name' => 'widget_box_background',
 				'label' => __( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .bw-alert-box',
+				'selector' => '{{WRAPPER}} .bw-gsap-code-box',
 			]
 		);
 
@@ -189,7 +275,7 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 			[
 				'name' => 'widget_box_border',
 				'label' => __( 'Border', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .bw-alert-box',
+				'selector' => '{{WRAPPER}} .bw-gsap-code-box',
 			]
 		);
 
@@ -199,7 +285,7 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 			[
 				'name' => 'widget_box_box_shadow',
 				'label' => __( 'Box Shadow', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .bw-alert-box',
+				'selector' => '{{WRAPPER}} .bw-gsap-code-box',
 			]
 		);
 
@@ -210,7 +296,7 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-alert-box' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-gsap-code-box' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -223,7 +309,7 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-alert-box' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-gsap-code-box' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -236,7 +322,7 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-alert-box' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-gsap-code-box' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -265,7 +351,7 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .bw-alert-box' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .bw-gsap-code-box' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -277,7 +363,7 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 				'name' => 'style_alert_typography1',
 				'label' => __( 'Typography', 'blackwidgets' ),
 				'scheme' => Typography::TYPOGRAPHY_1,
-				'selector' => '{{WRAPPER}} .bw-alert-box',
+				'selector' => '{{WRAPPER}} .bw-gsap-code-box',
 			]
 		);
 
@@ -287,7 +373,7 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_alert_text_shadow',
 				'label' => __( 'Text Shadow', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .bw-alert-box',
+				'selector' => '{{WRAPPER}} .bw-gsap-code-box',
 			]
         );
         
@@ -312,7 +398,7 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .bw-alert-box i' => 'font-size: {{SIZE}}{{UNIT}} !important;',
+					'{{WRAPPER}} .bw-gsap-code-box i' => 'font-size: {{SIZE}}{{UNIT}} !important;',
 				],
 			]
 		);
@@ -328,7 +414,7 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .bw-alert-box i' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .bw-gsap-code-box i' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -339,7 +425,7 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_Icon_alert_text_shadow',
 				'label' => __( 'Text Shadow', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .bw-alert-box i',
+				'selector' => '{{WRAPPER}} .bw-gsap-code-box i',
 			]
         );
 
@@ -363,12 +449,43 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
         $type 	        = isset($settings['widget_type']) ? $settings['widget_type'] : '';
         $message        = isset($settings['widget_text']) ? $settings['widget_text'] : '';
 
-		// Render
-        echo '<div class="bw-alert-box ' . $type . '">';
-            \Elementor\Icons_Manager::render_icon( $settings['icon_widget'], [ 'aria-hidden' => 'true' ] );
-            echo $message;
+		$options 		= get_option('plugin_options') ? get_option('plugin_options') : '';
+        $gsap_options  	= isset($options['gsap_options']) ? $options['gsap_options'] : '';
 
-        echo '</div>';
+		// Content - HTML
+		$html_code		= isset($settings['widget_html_content'])	? $settings['widget_html_content']		: '';
+		$shared_class	= isset($settings['widget_html_class'])	? $settings['widget_html_class']		: '';
+		$html_trigger	= isset($settings['widget_html_js_gsap_timeline_scroll_trigger'])	? $settings['widget_html_js_gsap_timeline_scroll_trigger']		: '';
+		$html_js_from	= isset($settings['widget_html_js_tl_from'])	? $settings['widget_html_js_tl_from']		: '';
+		$html_js_to		= isset($settings['widget_html_js_tl_to'])	? $settings['widget_html_js_tl_to']		: '';
+
+		$data_id                	= 'bw_' . uniqid();
+		$script_id              	= '#' . $data_id;
+
+
+		// Render
+		echo '<div class="bw-gsap-code-box" id="'. $script_id .'">';
+			echo $html_code;
+		echo '</div>';
+
+
+		if ( isset($gsap_options) && !empty($gsap_options) ) {
+			echo '<script>
+				jQuery(window).ready(function($) {
+					gsap.registerPlugin(ScrollTrigger);
+					const tl = gsap.timeline({
+						scrollTrigger: {
+						'. $html_trigger .'
+					}});
+					tl.from(".'. $shared_class .'", {
+						'. $html_js_from .'
+					})
+					tl.to(".'. $shared_class .'", {
+						'. $html_js_to .'
+					})
+				});
+				</script>';
+		}
 
 	}
 

@@ -122,6 +122,11 @@ class Black_Widgets {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/admin/class-black-widgets-icons.php';
 
 		/**
+		 * Load settings.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/dashboard/dashboard.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */

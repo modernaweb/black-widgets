@@ -1,0 +1,490 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+ 
+.toplevel_page_black-widgets img {
+    max-height: 20px !important;
+    z-index: 999 !important;
+    opacity: 1 !important;
+    max-width: 50px;
+}
+
+body.toplevel_page_black-widgets .bw-box-backend {
+    max-width: 800px;
+}
+
+body.toplevel_page_black-widgets .bw-box-backend .card {
+    max-width: 70%;
+    border-radius: 8px;
+    border: 1px solid #a0aeb947;
+    padding: 28px;
+}
+
+body.toplevel_page_black-widgets .bw-box-backend .card h2 {
+    margin: 0 0 28px 0;
+}
+
+body.toplevel_page_black-widgets .bw-box-backend .card p {
+    color: #3c4146;
+    margin: 0 0 28px 0!important;
+}
+
+body.toplevel_page_black-widgets .bw-box-backend .card .bw-banner {
+    max-height: unset !important;
+    max-width: 100% !important;
+    border-radius: 4px;
+    margin: 28px 0 0 0;
+}
+
+body.toplevel_page_black-widgets .bw-box-backend .bw-backend-heading strong, body.toplevel_page_black-widgets .bw-box-backend .bw-backend-heading a {
+    font-size: 11px;
+    font-weight: bold;
+    color: #696969;
+    margin: 0 7px;
+    text-decoration: none;
+}
+
+body.toplevel_page_black-widgets .bw-box-backend .bw-backend-heading a:hover {
+    color: #0719a3;
+}
+
+body.toplevel_page_black-widgets .bw-box-backend .card .bw-btn-box {
+    display: flex;
+    margin: 0 0 0 0 !important;
+}
+
+body.toplevel_page_black-widgets .bw-box-backend .bw-btn {
+    padding: 7px 24px 9px;
+    background: #444;
+    color: #fff;
+    border-radius: 2px;
+    line-height: 1.4;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.27s ease;
+    display: block;
+}
+
+body.toplevel_page_black-widgets .bw-box-backend .bw-btn.bw-uq {
+    background: #0719a3;
+    margin-right: 10px;
+}
+
+body.toplevel_page_black-widgets .bw-box-backend .bw-btn:hover {
+    background: #000;
+}
+
+/* BLack Widgets Settings */
+#bw-wrap {
+    padding: 40px;
+}
+
+#bw-wrap h1 {
+    border: unset;
+    font-size: 28px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    color: #000;
+}
+
+#bw-wrap hr {
+    border: 0;
+    height: 6px;
+    background-image: linear-gradient(to right, #0719a3, rgb(7 25 163 / 0.5), rgba(0, 0, 0, 0));
+    max-width: 40%;
+    margin: 0;
+}
+
+#bw-wrap .notice.is-dismissible {
+    margin: 0 0 40px 0;
+    background: rgb(70 180 80 / 14%);
+    border-top: unset;
+    border-right: unset;
+    border-bottom: unset;
+}
+
+#bw-wrap .notice-dismiss:before {
+    color: #000;
+    font-size: 18px;
+    margin-top: 2px;
+}
+
+#bw-wrap .notice.is-dismissible strong {
+    color: #46b450;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+/* Screen Options */
+#bw-wrap input[type=checkbox] {
+    background-color: #fff;
+    border: 1px solid #000;
+    padding: 9px;
+    min-width: 24px;
+    min-height: 24px;
+    transition: all .18s ease;
+    outline: 0;
+    margin: 2px 4px 12px 2px;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 0;
+}
+
+#bw-wrap input[type=checkbox]:focus {
+    box-shadow: unset;
+}
+
+#bw-wrap input[type=checkbox]:checked {
+    border-color: #0719a3;
+    background: #0719a3;
+    border-radius: 2px;
+    position: relative
+}
+
+#bw-wrap input[type=checkbox]:checked:before {
+    content: "";
+    font: normal;
+    position: absolute;
+    top: 9px;
+    left: 3px;
+    margin: 0;
+    vertical-align: middle;
+    line-height: 1;
+    border-right: 2px solid #fff!important;
+    border-bottom: 2px solid #fff!important;
+    transform: rotate(45deg);
+    transform-origin: 0 100%;
+    color: #fff;
+    transition: all .2s ease;
+    animation: bw-check-box 130ms 140ms cubic-bezier(.4,0,.29,1) forwards;
+}
+
+@keyframes bw-check-box {
+    0% {
+        width: 0;
+        height: 0;
+        border-color: #fff;
+        transform: translate3d(0,0,0) rotate(45deg)
+    }
+
+    33% {
+        width: 6px;
+        height: 0;
+        transform: translate3d(0,0,0) rotate(45deg)
+    }
+
+    100% {
+        width: 6px;
+        height: 12px;
+        border-color: #fff;
+        transform: translate3d(0,-12px,0) rotate(45deg)
+    }
+}
+
+#bw-wrap .bw-backend-btn {
+    padding: 12px 28px;
+    font-size: 12px;
+    border-radius: 0;
+    border: 0 solid;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0);
+    outline: 1px solid;
+    outline-color: rgba(0, 0, 0, 0.5);
+    outline-offset: 0px;
+    text-shadow: none;
+    -webkit-transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+    background-color: #0719a3 !important;
+    /* background-image: linear-gradient(90deg, #0719a3 0%, #283bcb 50%, #4656cf 100%) !important; */
+    box-shadow: 0 14px 45px -14px #0719a3 !important;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+#bw-wrap .bw-backend-btn:focus,
+#bw-wrap .bw-backend-btn:hover {
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 0, 0, 0.2);
+    outline-color: rgba(0, 0, 0, 0);
+    outline-offset: 15px;
+    background-color: #000 !important;
+    /* background-image: linear-gradient(90deg, #000 0%, #222 50%, #333 100%) !important; */
+    box-shadow: 0 14px 45px -14px #000 !important;
+}
+
+.gsap-cdn {
+    display: none;
+}
+
+.gsap-cdn.enable {
+    display: block;
+}
+
+#bw-wrap .form-table input[type=text] {
+    max-width: 422px;
+    width: 100%;
+    padding: 4px 9px;
+    border-radius: 2px;
+    border: 1px solid #dbdbdb;
+}
+
+/* Elementor Environment*/
+#elementor-panel.elementor-panel {
+    background: #000;
+}
+
+#elementor-panel-elements-search-area {
+    background-color: #000;
+}
+
+.elementor-panel .elementor-element>.eicon-lock {
+    color: #555;
+}
+
+#elementor-panel .elementor-element {
+    background: #000 !important;
+    background: linear-gradient(-45deg, #181818 50%, #202124 100%) !important;
+    color: #fff !important;
+    transition: all .02s ease !important;
+}
+
+#elementor-panel .elementor-element .icon,
+#elementor-panel .elementor-element .title {
+    color: #888 !important;
+    transition: all .3s ease !important;
+}
+
+.elementor-history-item,
+#elementor-panel .elementor-element:hover .icon,
+#elementor-panel .elementor-element:hover .title {
+    color: #fff !important;
+}
+
+#elementor-panel-elements-search-input {
+    background-color: #1F1F1F;
+    color: #797979;
+}
+
+/* Elementor Controller */
+#elementor-panel-history:not(.elementor-empty),
+#elementor-panel .elementor-control.elementor-control-type-divider .elementor-control-content,
+#elementor-panel .elementor-control {
+    background: #1F1F1F;
+}
+
+#elementor-panel .elementor-control-type-dimensions .elementor-link-dimensions .elementor-linked,
+#elementor-panel .elementor-control-type-dimensions .elementor-control-dimension-label {
+    color: #6d7882;
+}
+
+#elementor-panel .elementor-panel-heading-title {
+    color: #6d7882;
+}
+
+#elementor-panel .select2-container--default .select2-selection--single,
+#elementor-panel-elements-search-input:focus {
+    background: #333;
+}
+
+.elementor-revision-item__wrapper,
+.elementor-history-item,
+.elementor-editor-active .select2-dropdown,
+#elementor-panel .select2-dropdown,
+#elementor-panel .select2-container--default .select2-selection--single,
+#elementor-panel .select2-container:not(.select2-container--open):not(.select2-container--focus) .select2-selection--multiple,
+#elementor-panel .select2-container:not(.select2-container--open):not(.select2-container--focus) .select2-selection--single,
+#elementor-panel .elementor-control-media .elementor-control-input-wrapper,
+#elementor-panel .elementor-control.elementor-control-type-divider .elementor-control-content,
+#elementor-panel .elementor-control-type-tab,
+#elementor-panel .pickr,
+#elementor-panel .e-global__popover-toggle,
+#elementor-panel .elementor-control-type-popover_toggle .elementor-control-popover-toggle-toggle-label,
+#elementor-panel .elementor-panel-heading,
+#elementor-panel .elementor-choices .elementor-choices-label,
+#elementor-panel .elementor-control-responsive-switchers__holder,
+#elementor-panel .elementor-control-type-url .elementor-control-url-more,
+#elementor-panel .elementor-control-dynamic-switcher,
+#elementor-panel .elementor-input-style:not(:focus),
+#elementor-panel input:not(:focus), select:not(:focus),
+#elementor-panel textarea:not(:focus) {
+    border-color: #3E3E3E !important;
+}
+
+.elementor-history-item:hover,
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border-color: #E3E3E3;
+}
+
+.elementor-panel .elementor-controls-popover:before {
+    border-bottom-color: #111;
+}
+
+#elementor-panel .elementor-controls-popover div.elementor-control {
+    background-color: #111;
+}
+
+.elementor-revision-item__wrapper,
+#elementor-panel .elementor-controls-popover {
+    background: #111;
+}
+
+.elementor-revision-item__wrapper:hover,
+#elementor-panel .elementor-control-media__content__upload-button,
+#elementor-panel .elementor-slider,
+#elementor-panel .elementor-control-type-switcher .elementor-switch,
+#elementor-panel .elementor-control-type-switcher .elementor-switch-label,
+#elementor-panel .elementor-control-responsive-switchers__holder,
+#elementor-panel .elementor-control-dynamic-switcher {
+    background: #3E3E3E;
+}
+
+#elementor-panel .elementor-control-responsive-switchers__holder {
+    background: #1F1F1F;
+    border-color: #1F1F1F !important;
+}
+
+#elementor-panel .elementor-responsive-switchers-open .elementor-control-responsive-switchers__holder {
+    background: #000;
+    border-color: #3E3E3E !important;
+}
+
+.elementor-history-item-current,
+.elementor-history-item:hover,
+#elementor-panel .elementor-slider .noUi-handle,
+#elementor-panel .elementor-control-type-switcher .elementor-switch-handle {
+    background: #6d7882 ;
+}
+
+.elementor-editor-active .select2-dropdown,
+#elementor-panel .elementor-control.elementor-control-separator-before:before {
+    background-color: #3E3E3E;
+}
+
+#elementor-panel .elementor-control-type-switcher .elementor-switch-input:checked~.elementor-switch-label {
+    background-color: #000;
+}
+
+#elementor-panel .elementor-control-type-dimensions .elementor-link-dimensions:not(.unlinked),
+#elementor-panel .elementor-control-type-tab.elementor-tab-active {
+    background: #3E3E3E;
+    border-color: #3E3E3E;
+}
+
+/* Elementor Border */
+#elementor-panel.elementor-panel .elementor-panel-menu-item,
+#elementor-panel.elementor-panel .elementor-panel-navigation {
+    background: #222;
+    color: #6d7882;
+}
+
+#elementor-panel.elementor-panel .elementor-panel-menu-item:hover {
+    background: #333;
+}
+
+#elementor-panel.elementor-panel .elementor-panel-menu-item-exit-to-dashboard .elementor-panel-menu-item-icon,
+#elementor-panel.elementor-panel .elementor-panel-menu-item-exit-to-dashboard .elementor-panel-menu-item-title,
+#elementor-panel.elementor-panel .elementor-panel-menu-item a {
+    color: #6d7882;
+}
+
+#elementor-panel.elementor-panel .elementor-panel-navigation .elementor-panel-navigation-tab.elementor-active {
+    background-image: unset;
+    background: #111;
+    border-bottom: 3px solid #888;
+}
+
+#elementor-panel.elementor-panel #elementor-panel-header {
+    background-color: #111;
+    background: linear-gradient(-10deg, #181818 50%, #202124 100%) !important;
+    color: #6d7882;
+}
+
+/* Elementor Global Settings */
+.elementor-panel .elementor-panel-scheme-buttons,
+#elementor-panel.elementor-panel .elementor-panel-box {
+    background: #1F1F1F;
+}
+
+#elementor-panel.elementor-panel .elementor-panel-scheme-color-system-items {
+    border-color: #3E3E3E !important;
+}
+
+/* Elementor Message */
+.elementor-panel .elementor-panel-alert.elementor-panel-alert-warning {
+    background-color: #000;
+    color: #ccc;
+}
+
+#elementor-mode-switcher {
+    background: #6d7882;
+    color: #fff;
+}
+
+#elementor-mode-switcher:hover {
+    background: #000;
+}
+
+#elementor-panel.elementor-panel .elementor-nerd-box img,
+#elementor-panel-get-pro-elements .elementor-nerd-box-icon {
+    filter: saturate(14) !important;
+}
+
+.elementor-nerd-box .elementor-button.elementor-nerd-box-link {
+    background: #333;
+    color: #6d7882;
+}
+
+.elementor-nerd-box .elementor-button.elementor-nerd-box-link:hover {
+    background: #1F1F1F;
+}
+
+
+/* Ctrl E — Finder */
+.elementor-templates-modal .dialog-buttons-wrapper,
+.elementor-templates-modal .dialog-header {
+    background: #000;
+    -webkit-box-shadow: 0 0 8px rgba(122, 101, 101, 0.1);
+    box-shadow: 0 0 8px rgba(122, 101, 101, 0.1);
+}
+.elementor-templates-modal .dialog-widget-content {
+    background: #222;
+}
+.elementor-finder__results__category__title {
+    background: #111;
+}
+.elementor-finder__results__item.elementor-active * {
+    background: #444;
+}
+
+/* Elementor Loading */
+#elementor-loading {
+    background: #1F1F1F;
+}
+#elementor-loading .elementor-loader {
+    background: #000;
+}
+#elementor-loading .elementor-loader-box {
+    background-color: #1F1F1F;
+}
+
+#elementor-try-safe-mode.elementor-safe-mode-toast {
+    background: #000;
+}
+
+#elementor-try-safe-mode .elementor-safe-mode-button {
+    background: #111;
+    border-radius: 2px;
+}
+
+/* Other pages */
+#elementor-editor-button, #elementor-switch-mode-button {
+    background: #1F1F1F;
+    border-color: #1F1F1F;
+    color: #6d7882;
+}
+#elementor-editor-button, #elementor-switch-mode-button:hover {
+    color: #ccc;
+}
