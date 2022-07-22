@@ -2,13 +2,13 @@
 Contributors: skalanter, modernaweb
 Donate link: http://modernaweb.net/
 Tags: page builder, editor, elementor widgets, elementor addon, typography
-Stable tag: 1.2.5
-Tested up to: 5.8
+Stable tag: 1.2.6
+Tested up to: 5.9
 Requires PHP: 5.6
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Free add-on for Elementor, You can add ability more customization with visual effects and better UX. ✌
+Free add-on for Elementor, You can add more customization with visual effects and better UX. ✌
 
 
 ## Description
@@ -31,7 +31,7 @@ We will add more widgets with more and more styles that may surprise you in the 
 
 ### Dsgn
 
-Dsgn is a simple way to start a website to start easily, quickly, and free. This is Free & + Fresh Templates Design for Elementor and Black Widgets.
+Dsgn is a simple way to start a website easily, quickly, and free. This is Free & + Fresh Templates Design for Elementor and Black Widgets.
 
 [Dsgn Templates](https://modernaweb.net/dsgn/)
 [Our Solutions](https://modernaweb.net/dsgn/solutions/)
@@ -58,7 +58,7 @@ Dsgn is a simple way to start a website to start easily, quickly, and free. This
 *   Black Icon Box Pro
 *   Black Call to Action
 *   Black Blockquote
-*   Black Typography
+*   Black Typography + (for experts)
 *   Black Box
 *   Black Trigger (for experts)
 *   Black Horizontal (for experts)
@@ -104,6 +104,11 @@ WordPress 4.9+
 
 
 ## Changelog
+
+= 1.2.6 — 2022-1-31 =
+- Compatibility: WordPress v5.9
+- Compatibility: Elementor v3.5
+- Added: An option for movements on typography widget
 
 = 1.2.5 — 2021-10-17 =
 - Compatibility: Elementor Pro

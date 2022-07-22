@@ -558,6 +558,214 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
             ]
         );
 
+		$options = get_option('plugin_options') ? get_option('plugin_options') : '';
+		$gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
+		if( isset($gsap_options) && !empty($gsap_options) ) {
+
+			// Enable Image Movement Animate
+			$this->add_control(
+				'text_movement2',
+				[
+					'label' 		=> __( 'Text Movement Animate → From', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::SWITCHER,
+					'label_on' 		=> __( 'Enable', 'blackwidgets' ),
+					'label_off' 	=> __( 'Disable', 'blackwidgets' ),
+					'return_value' 	=> 'on',
+					'default' 		=> 'off',
+				]
+			);
+
+			// Start From
+			$this->add_control(
+				'trigger_hook2',
+				[
+					'label' 		=> __( 'Start Point', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'placeholder'   => '0.1',
+					'default'       => '0.1',
+					'condition' 	=> [ 
+						'text_movement2' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Length
+			$this->add_control(
+				'duration2',
+				[
+					'label' 		=> __( 'Duration', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'placeholder'   => '0.4',
+					'default'       => '0.4',
+					'condition' 	=> [ 
+						'text_movement2' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Vertical Movement
+			$this->add_control(
+				'vertical_movement2',
+				[
+					'label' 		=> __( 'Vertical Movement', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'condition' 	=> [ 
+						'text_movement2' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Horizontal Movement
+			$this->add_control(
+				'horizontal_movement2',
+				[
+					'label' 		=> __( 'Horizontal Movement', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'condition' 	=> [ 
+						'text_movement2' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Opacity at End
+			$this->add_control(
+				'opacity2',
+				[
+					'label' 		=> __( 'Opacity at End', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'condition' 	=> [ 
+						'text_movement2' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Rotation at End
+			$this->add_control(
+				'rotation2',
+				[
+					'label' 		=> __( 'Rotation at End', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'condition' 	=> [ 
+						'text_movement2' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+
+			// Enable Image Movement Animate
+			$this->add_control(
+				'text_movement',
+				[
+					'label' 		=> __( 'Text Movement Animate → To', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::SWITCHER,
+					'label_on' 		=> __( 'Enable', 'blackwidgets' ),
+					'label_off' 	=> __( 'Disable', 'blackwidgets' ),
+					'return_value' 	=> 'on',
+					'default' 		=> 'off',
+				]
+			);
+
+			// Start From
+			$this->add_control(
+				'trigger_hook',
+				[
+					'label' 		=> __( 'Start Point', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'placeholder'   => '0.1',
+					'default'       => '0.1',
+					'condition' 	=> [ 
+						'text_movement' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Length
+			$this->add_control(
+				'duration',
+				[
+					'label' 		=> __( 'Duration', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'placeholder'   => '0.4',
+					'default'       => '0.4',
+					'condition' 	=> [ 
+						'text_movement' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Vertical Movement
+			$this->add_control(
+				'vertical_movement',
+				[
+					'label' 		=> __( 'Vertical Movement', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'condition' 	=> [ 
+						'text_movement' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Horizontal Movement
+			$this->add_control(
+				'horizontal_movement',
+				[
+					'label' 		=> __( 'Horizontal Movement', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'condition' 	=> [ 
+						'text_movement' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Opacity at End
+			$this->add_control(
+				'opacity',
+				[
+					'label' 		=> __( 'Opacity at End', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'condition' 	=> [ 
+						'text_movement' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Rotation at End
+			$this->add_control(
+				'rotation',
+				[
+					'label' 		=> __( 'Rotation at End', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'condition' 	=> [ 
+						'text_movement' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+		}
+
 		$this->end_controls_section();
 		// End
 
@@ -1956,6 +2164,20 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
         $custom_style_x         = ($type2 == 'custom-style')                             ? 'custom-style'								: '';
         $repeat                 = isset($settings['repetitive_repeat'])                  ? $settings['repetitive_repeat']				: '';
         $other_style            = isset($settings['repetitive_repeat_other_style'])      ? $settings['repetitive_repeat_other_style']	: '';
+		// To
+		$duration	            = !empty($settings['duration']) 						?  $settings['duration'] 							: '';
+		$trigger_hook	        = !empty($settings['trigger_hook']) 					?  $settings['trigger_hook'] 						: '';
+		$horizontal_movement	= !empty($settings['horizontal_movement']) 				? 'x: "' . $settings['horizontal_movement'] . '",' 	: '';
+		$vertical_movement		= !empty($settings['vertical_movement']) 				? 'y: "' . $settings['vertical_movement'] . '",' 	: '';
+		$opacity				= !empty( $settings['opacity'] ) 						? 'opacity: "' . $settings['opacity'] . '",' 		: '';
+		$rotation				= !empty($settings['rotation']) 						? 'rotation: "' . $settings['rotation'] . '",' 		: '';
+		//From
+		$duration2	            = !empty($settings['duration2']) 						?  $settings['duration2'] 							: '';
+		$trigger_hook2	        = !empty($settings['trigger_hook2']) 					?  $settings['trigger_hook2'] 						: '';
+		$horizontal_movement2	= !empty($settings['horizontal_movement2']) 				? 'x: "' . $settings['horizontal_movement2'] . '",' 	: '';
+		$vertical_movement2		= !empty($settings['vertical_movement2']) 				? 'y: "' . $settings['vertical_movement2'] . '",' 	: '';
+		$opacity2				= !empty( $settings['opacity2'] ) 						? 'opacity: "' . $settings['opacity2'] . '",' 		: '';
+		$rotation2				= !empty($settings['rotation2']) 						? 'rotation: "' . $settings['rotation2'] . '",' 		: '';
 		// Overlay 
 		$overlay				= isset($settings['overlay_section_enable'])			? $settings['overlay_section_enable']			: '';
 		// Gradient
@@ -1991,7 +2213,8 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		//ID Settings
 		$data_id				= 'bw_' . uniqid();
 		$script_id				= '#' . $data_id;
-		$image_movement			= ''; //$settings['image_movement']
+		$text_movement			= $settings['text_movement'];
+		$text_movement2			= $settings['text_movement2'];
 		//Transform Normal Styles 
 		// Normal Move 
 		$translatex 			= isset( $move_normal_x["size"] ) 						? $move_normal_x["size"] . $move_normal_x["unit"] : '';
@@ -2021,6 +2244,9 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$unique_z_index			= isset($settings['unique_z_index'])					? '#'.$data_id.' .bw-unique {z-index:'.$settings['unique_z_index'].'; position: relative;}'          			 	: '';
 		// Create a Custom CSS for Normal and Hover Styles
 		$normal_transform_style = ($normal_transform == 'normal_transform')				? "#$data_id { $perspective transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; -webkit-transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; $scale3dx }" : '';
+
+		$options = get_option('plugin_options') ? get_option('plugin_options') : '';
+        $gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
 
 		echo '<style>'.$normal_transform_style.' '.$z_index.' '.$unique_z_index.'</style>';
 
@@ -2102,6 +2328,38 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			echo '</div>';
 			if ( $overlay == 'overlay_enable' ) echo '<div class="bw-overlay"></div>';
         echo '</div>';
+
+		if ( isset($gsap_options) && !empty($gsap_options) ) {
+
+			if ($text_movement2 == 'on') {
+				$tlfrom = 'tl.from("#'. $data_id .'", { ' . $opacity2 . $rotation2 . $horizontal_movement2 . $vertical_movement2 . ' duration: '.$duration2.' })';
+			} else {
+				$tlfrom = '';
+			}
+			if ($text_movement == 'on') {
+				$tlto = 'tl.to("#'. $data_id .'", { ' . $opacity . $rotation . $horizontal_movement . $vertical_movement . ' duration: '.$duration.' })';
+			} else {
+				$tlto = '';
+			}
+
+			echo '<script>
+					jQuery(window).ready(function($) {
+						gsap.registerPlugin(ScrollTrigger);
+						ScrollTrigger.config({ limitCallbacks: true });
+						const tl = gsap.timeline({
+							scrollTrigger: {
+							trigger: "#'. $data_id .'",
+							start: "center bottom",
+							end: "center top",
+							scrub: true,
+							// markers: true
+							}
+						});
+						'.$tlfrom.'
+						'.$tlto.'
+					});
+				</script>';
+		}
 
 	}
 

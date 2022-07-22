@@ -2,13 +2,13 @@
 /**
  * Plugin Name: Black Widgets
  * Plugin URI: https://modernaweb.net/black-widgets
- * Description: The black building widgets for Elementor. 
+ * Description: Build web pages with black widgets.
  * Author: Modernaweb Studio
- * Version: 1.2.5
+ * Version: 1.2.6
  * Author URI: https://modernaweb.net/
  * Text Domain: blackwidgets
  * Domain Path: /languages
- * lack Widgets is distributed in the hope that it will be useful,
+ * Black Widgets is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
@@ -27,7 +27,7 @@ if (!defined('ABSPATH')) {
 define( 'BLACK_WIDGETS_PLUGIN_BASENAME', plugin_basename(__FILE__));
 define( 'BLACK_WIDGETS_PLUGIN_PATH', trailingslashit(plugin_dir_path(__FILE__)));
 define( 'BLACK_WIDGETS_PLUGIN_URL', trailingslashit(plugins_url('/', __FILE__)));
-define( 'BLACK_WIDGETS_VERSION', '1.2.5' );
+define( 'BLACK_WIDGETS_VERSION', '1.2.6' );
 define( 'BLACK_WIDGETS_ASSET_PATH', wp_upload_dir()['basedir'] . '/black-widgets');
 define( 'BLACK_WIDGETS_ASSET_URL', wp_upload_dir()['baseurl'] . '/black-widgets');
 

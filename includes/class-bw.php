@@ -198,7 +198,7 @@ final class BLACK_WIDGETS_Modernaweb_Plugin {
 		$message = sprintf(
 			/* translators: 1: Plugin name 2: Elementor */
 			esc_html__( '"%1$s" requires "%2$s" to be installed and activated.', 'elementor-test-extension' ),
-			'<strong>' . esc_html__( 'This is Elementor extension', 'elementor-test-extension' ) . '</strong>',
+			'<strong>' . esc_html__( 'Black Widgets is Elementor extension', 'elementor-test-extension' ) . '</strong>',
 			'<strong>' . esc_html__( 'Elementor Plugin', 'elementor-test-extension' ) . '</strong>'
 		);
 
@@ -290,6 +290,7 @@ final class BLACK_WIDGETS_Modernaweb_Plugin {
 		// require_once( __DIR__ . '/widgets/bw-loop.php' );
 		require_once( __DIR__ . '/widgets/bw-box.php' );
 		// require_once( __DIR__ . '/widgets/bw-modale.php' ); 
+		// require_once( __DIR__ . '/widgets/bw-menu-x.php' );  // Navigation Menu with responsive size and more + logo and other header styles!
 
         // Register widget
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Title() );

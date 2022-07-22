@@ -461,6 +461,13 @@
     font-style: italic;
 }
 
+/* Custom Class - Dark */
+.bw-dark .bw-title-box.bw-t-1:before,
+.bw-dark .bw-title-box.bw-t-6:after,
+.bw-dark .bw-title-box.bw-t-2:before {
+    background: #fff;
+}
+
 /**
  * Black Button
  */
