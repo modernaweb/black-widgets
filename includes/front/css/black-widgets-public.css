@@ -511,7 +511,7 @@
 
 /* Modern > Type1 */
 .bw-button-box.modern.m-1 {
-    overflow: hidden;
+    /* overflow: hidden; */
     padding-top: 14px;
     padding-bottom: 14px;
 }
@@ -731,7 +731,6 @@
     border: none;
     border-radius: 4px;
     min-width: 200px;
-    padding: 0 34px;
     box-shadow: 0 10px 60px -24px #000;
     cursor: pointer;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -771,6 +770,8 @@
     font-size: 18px;
     line-height: 68px;
     text-transform: uppercase;
+    padding: 0 34px;
+    display: block;
 }
 
 .bw-button-box.modern.m-4 .shape {
@@ -806,7 +807,6 @@
 /* Modern > Type5 */
 .bw-button-box.modern.m-5 .bw-btn {
     position: relative;
-    margin: auto;
     padding: 14px 18px 17px 22px;
     transition: all 1.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
     text-align: center;
@@ -1743,12 +1743,13 @@
     background: #000;
     color: #fff;
     text-transform: uppercase;
-    padding: 12px 22px;
+    padding: 18px 42px;
     border-radius: 2px;
     box-shadow: 0px 17px 10px -10px rgba(0, 0, 0, 0.4);
     cursor: pointer;
     transition: all ease-in-out 300ms;
     font-size: 14px;
+    line-height: 2;
     letter-spacing: 2px;
     font-weight: 800;
     -webkit-transform: scale(0.95);
@@ -2109,7 +2110,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 22px 44px 22px 24px;
+    padding: 32px 44px 32px 24px;
     background: #000;
     border: none;
     border-radius: 4px;
@@ -2233,6 +2234,7 @@
 .bw-button-box.gradient .bw-btn {
     width: 200px;
     font-size: 14px;
+    line-height: 2;
     font-weight: 600;
     color: #fff;
     cursor: pointer;
@@ -2298,6 +2300,108 @@
 .bw-button-box.simple:hover .bw-btn:before {
     width: 100%;
 }
+
+/* Custom */
+.bw-button-box.custom .bw-custom-btn.after,
+.bw-button-box.custom .bw-custom-btn.before{
+    display: flex;
+    align-items: center;
+}
+
+.bw-button-box.custom .bw-custom-btn.up,
+.bw-button-box.custom .bw-custom-btn.down {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bw-button-box.custom .bw-custom-btn.up span ,
+.bw-button-box.custom .bw-custom-btn.down span {
+    display: block;
+}
+
+.bw-custom-btn.before .bw-custom-icon-shape {
+    padding: 0 14px 0 0;
+}
+
+.bw-custom-btn.after .bw-custom-icon-shape {
+    padding: 0 0 0 14px;
+}
+
+.bw-custom-btn.down .bw-custom-icon-shape {
+    padding: 14px 0 0 0;
+}
+
+.bw-custom-btn.up .bw-custom-icon-shape {
+    padding: 0 0 14px 0;
+}
+
+.bw-button-box .bw-custom-btn .bw-custom-icon-shape svg,
+.bw-button-box .bw-custom-btn .bw-custom-icon-shape i {
+    transition: all .21s ease-in-out;
+    -moz-transition: all .21s ease-in-out;
+    -o-transition: all .21s ease-in-out;
+    -webkit-transition: all .21s ease-in-out;
+}
+
+.bw-button-box .bw-custom-btn .bw-custom-icon-shape svg {
+    height: auto;
+}
+
+
+/* General Alignment */
+.bw-button-box.left,
+.bw-button-box.right,
+.bw-button-box.center {
+    display: flex;
+}
+
+.bw-button-box.center {
+    justify-content: space-around;
+}
+
+.bw-button-box.right {
+    justify-content: flex-end;
+}
+
+.bw-button-box.left {
+    justify-content: flex-start;
+}
+
+.bw-button-box.noise.n-1 .bw-btn.bw-btn-n-1,
+.bw-button-box.noise.n-2 .bw-btn.bw-btn-n-2 {
+    width: inherit;
+}
+
+.bw-button-box.simple,
+.bw-button-box.abstract.a-1,
+.bw-button-box.fancy.f-5,
+.bw-button-box.fancy.f-2 {
+    display: block;
+    width: fit-content;
+}
+
+.bw-button-box.simple.center,
+.bw-button-box.abstract.a-1.center,
+.bw-button-box.fancy.f-5.center,
+.bw-button-box.fancy.f-2.center,
+.bw-button-box.noise.n-1.center,
+.bw-button-box.noise.n-2.center {
+    margin: auto;
+}
+
+.bw-button-box.simple.right,
+.bw-button-box.abstract.a-1.right,
+.bw-button-box.fancy.f-5.right,
+.bw-button-box.fancy.f-2.right,
+.bw-button-box.noise.n-1.right,
+.bw-button-box.noise.n-2.right {
+    float: right;
+}
+
+
+
+
 
 /**
  * Black Title Animate
@@ -4770,3 +4874,243 @@
     display: inline;
     min-width: 100%;
 }
+
+
+
+
+
+
+
+
+
+/**
+ * Black Nav
+ */
+ .bw-nav {
+    display: block;
+}
+
+.bw-nav.style3.right,
+.bw-nav.style0.right {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+}
+
+.bw-nav.style1.right li a,
+.bw-nav.style2.right a,
+.bw-nav.style3.right a,
+.bw-nav.style0.right a {
+    text-align: right;
+    display: inline-flex;
+}
+
+.bw-nav.style5.right a:hover,
+.bw-nav.style4.right a:hover,
+.bw-nav.style3.right a {
+    padding: 0 14px 0 0;
+}
+
+.bw-nav.style4.right a:before,
+.bw-nav.style3.right a:before {
+    left: auto;
+    right: 0;
+}
+
+.bw-nav.style3.right a:hover {
+    padding: 0 20px 0 0;
+}
+
+
+.bw-nav.left {
+    text-align: left;
+}
+
+.bw-nav.center {
+    text-align: center;
+}
+
+.bw-nav.right {
+    text-align: right;
+}
+
+.bw-nav ul,
+.bw-nav ol {
+    margin: 0;
+}
+
+.bw-nav a {
+    display: block
+}
+
+.bw-nav.style0 a {
+    padding: 0 0 2px 0;
+    margin: 0 0 7px 0;
+    width: fit-content;
+    position: relative;
+}
+
+.bw-nav.style0 a:after {
+    position: absolute;
+    display: block;
+    content: '';
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: calc(100% - 0);
+    height: 2px;
+    background: #000;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    z-index: -1;
+    transition: transform .23s ease;
+}
+
+.bw-nav.style0 a:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.bw-nav.style1 li a {
+    background-color: transparent;
+    background-image: linear-gradient( 180deg , transparent 90%, #000 0);
+    background-size: 0% 100%;
+    background-repeat: no-repeat;
+    -webkit-transition: background-size 0.4s ease;
+    -moz-transition: background-size 0.4s ease;
+    transition: background-size 0.4s ease;
+    text-decoration: unset;
+    width: fit-content;
+}
+
+.bw-nav.style1 li:hover a,
+.bw-nav.style1 li:focus a {
+    text-decoration: none;
+    background-size: 100% 100%;
+}
+
+.bw-nav.style2 li {
+    margin: 0 0 12px 0;
+}
+
+.bw-nav.style2 a {
+    width: fit-content;
+    padding: 0 0 2px 0;
+    transition: all 0.23s ease;
+    position: relative;
+}
+
+.bw-nav.style2 a:before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    transition: all 0.23s ease;
+    width: 100%;
+    height: 2px;
+    background: #000;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.bw-nav.style2 a:hover:before {
+    visibility: visible;
+    opacity: 1;
+    bottom: 0px;
+}
+
+.bw-nav.style3 a {
+    margin: 0 0 12px 0;
+    padding: 0 0 0 14px;
+    transition: all 0.23s ease;
+    position: relative;
+}
+
+.bw-nav.style3 a:before {
+    content: '●';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    transition: all 0.23s ease;
+}
+
+.bw-nav.style3 a:hover {
+    padding: 0 0 0 20px;
+}
+
+.bw-nav.style4 a {
+    margin: 0 0 10px 0;
+    padding: 0 0 0 0;
+    transition: all 0.23s ease;
+    position: relative;
+}
+
+.bw-nav.style4 a:before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: #000;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    transition: all 0.23s ease;
+}
+
+.bw-nav.style4 a:hover {
+    padding: 0 0 0 16px;
+}
+
+.bw-nav.style4 a:hover:before {
+    width: 12px;
+}
+
+.bw-nav.style5 a {
+    margin: 0 0 10px 0;
+    padding: 0 0 0 0;
+    transition: all 0.23s ease;
+}
+
+.bw-nav.style5 a:hover {
+    padding: 0 0 0 12px;
+}
+
+.bw-nav.style6 a {
+    position: relative;
+    line-height: 40px;
+    margin: 0;
+    transition: all 0.17s ease;
+    background: transparent;
+    padding: 10px 35px;
+    z-index: 999;
+}
+
+.bw-nav.style6 a:before {
+    content: '';
+    position: absolute;
+    transition: all 0.17s ease;
+    background-image: none;
+    background-size: cover;
+    background-repeat: no-repeat;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    visibility: hidden;
+    z-index: -1;
+}
+
+.bw-nav.style6 a:hover:before {
+    background-image: url('../img/bg-btn.png');
+    opacity: 1;
+    visibility: visible;
+}
+
+.bw-nav.style6 a:hover {
+    background: #1c1c1c;
+    color: #fff;
+}
+

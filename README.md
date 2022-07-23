@@ -121,6 +121,15 @@ WordPress 4.9+
 
 ## Changelog
 
+### 1.3.0 — 2021-08-04
+
+- Compatibility: WordPress v6.0
+- Compatibility: Elementor v3.0
+- Added: New widget: Black Flat Nav
+- Added: Custom Button Styles
+- Added: Button Alignment
+- Fixed: UI and UX of the magic links
+
 ### 1.2.0 — 2021-08-04
 
 - Compatibility: WordPress v5.8.0

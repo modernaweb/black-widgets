@@ -278,10 +278,10 @@ class BLACK_WIDGETS_Icon extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Icon Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+				// 'scheme' => [
+				// 	'type' => Color::get_type(),
+				// 	'value' => Color::COLOR_1,
+				// ],
 				'selectors' => [
 					'{{WRAPPER}} .bw-icon-box .bw-icon-into i' => 'color: {{VALUE}}',
 				],
