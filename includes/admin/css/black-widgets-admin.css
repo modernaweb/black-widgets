@@ -8,8 +8,12 @@
     z-index: 999 !important;
     opacity: 1 !important;
     max-width: 50px;
- }
+}
  
+#adminmenu .toplevel_page_black-widgets img {
+    padding: 7px 0 0 !important;
+}
+
 body.toplevel_page_black-widgets .bw-box-backend {
     max-width: 800px;
 }

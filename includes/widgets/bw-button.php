@@ -277,10 +277,6 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Icon', 'blackwidgets' ),
 				'type' => Controls_Manager::ICONS,
-				'default' => [
-					'value' => 'eicon eicon-nerd',
-					'library' => 'elementor',
-				],
 			]
 		);
 
