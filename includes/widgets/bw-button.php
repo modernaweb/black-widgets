@@ -93,7 +93,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 	 * @since 1.0.0
 	 * @access protected
 	 */
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		// Start
 		// Content section
@@ -236,6 +236,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			[
 				'label'     => __( 'Text Alignment', 'blackwidgets' ),
 				'type'      => \Elementor\Controls_Manager::CHOOSE,
+				'default'	=> 'left',
 				'options'   => [
 					'left'   => [
 						'title' => __( 'Left', 'blackwidgets' ),
@@ -811,6 +812,9 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 
 		$custom_icon_position	= isset($settings['custom_icon_position'])		? $settings['custom_icon_position']		: '';
 
+		$data_id		= 'bw_' . uniqid();
+		$script_id		= '#' . $data_id;
+
 		// Render
         echo '<div class="bw-button-box ' . $type . ' ' . $modern_type . ' ' . $fancy_type . ' ' . $noise_type . ' ' . $abstract_type . ' ' . $alignment . '">';
 			switch ($type) {
@@ -875,7 +879,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 							echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn">' . $text . '<span><?xml version="1.0" ?><!DOCTYPE svg  PUBLIC \'-//W3C//DTD SVG 1.1//EN\'  \'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\'><svg height="512px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="512px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="160,115.4 180.7,96 352,256 180.7,416 160,396.7 310.5,256 "/></svg></span></a>';
 						break;
 						case 'a-2':
-							echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn"><div id="btx-a1">' . $text . '</div></a>';
+							echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn"><div class="btx-a1" id="' . $script_id . '">' . $text . '</div></a>';
 							echo '
 							<script>
 								jQuery(document).ready(function () {
@@ -886,7 +890,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 									const TEXT = \'' . $text . '\';
 									const DELAY = ~~(300 / FPS);
 									const FRAME_COUNT = ~~(DURATION / 200) * FPS
-									const $Element = document.getElementById(\'btx-a1\');
+									const $Element = document.getElementById(\'' . $script_id . '\');
 									let frameIndex = 0;
 									let timeoutId = undefined;
 									function resetText() {

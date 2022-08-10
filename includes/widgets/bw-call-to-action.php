@@ -93,7 +93,7 @@ class BLACK_WIDGETS_Call_To_Action extends \Elementor\Widget_Base {
 	 * @since 1.0.0
 	 * @access protected
 	 */
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		// Start
 		// Content section

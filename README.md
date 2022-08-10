@@ -124,11 +124,33 @@ WordPress 4.9+
 ### 1.3.0 — 2021-08-04
 
 - Compatibility: WordPress v6.0
-- Compatibility: Elementor v3.0
+- Compatibility: Elementor v3.7
 - Added: New widget: Black Flat Nav
 - Added: Custom Button Styles
 - Added: Button Alignment
+- Added: Custom Button Styling
+- Added: Image Trigger with GSAP
 - Fixed: UI and UX of the magic links
+
+
+
+
+
+### 1.2.6 — 2022-1-31 =
+- Compatibility: WordPress v5.9
+- Compatibility: Elementor v3.5
+- Added: An option for movements on typography widget
+
+### 1.2.5 — 2021-10-17 =
+- Compatibility: Elementor Pro
+- Added: An option to use GSAP CDN (for experts)
+- Added: An option to use ScrollTrigger CDN (for experts)
+- Added: An option to use Tween CDN (for experts)
+- Added: An option to use Timeline CDN (for experts)
+- Added: New Widget: Black Trigger
+- Added: New Widget: Black Horizontal
+- Added: An option to create movements image (for experts)
+- Fixed: Font icons on widgets
 
 ### 1.2.0 — 2021-08-04
 

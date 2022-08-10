@@ -116,7 +116,9 @@ class BLACK_WIDGETS_Nav extends \Elementor\Widget_Base {
 	 * @return string nav index.
 	 */
 	protected function get_nav_menu_index() {
-		return $this->nav_menu_index++;
+		
+		// return $this->nav_menu_index++;
+		return true;
 	}
 
 	/**
@@ -127,7 +129,7 @@ class BLACK_WIDGETS_Nav extends \Elementor\Widget_Base {
 	 * @since 1.0.0
 	 * @access protected
 	 */
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		// Start
 		// Content section
@@ -220,6 +222,21 @@ class BLACK_WIDGETS_Nav extends \Elementor\Widget_Base {
 				],
 				'toggle'    => true,
                 'default'   => 'left',
+			]
+		);
+
+
+		$this->add_control(
+			'custom_icon_before_nav',
+			[
+				'label' => __( 'Icon', 'blackwidgets' ),
+				'type' => Controls_Manager::ICONS,
+				'condition'  => [
+					'custom_nav_styles' => [
+						'style7',
+						'style8',
+					],
+				],
 			]
 		);
 
@@ -468,9 +485,26 @@ class BLACK_WIDGETS_Nav extends \Elementor\Widget_Base {
 
 		// Color
 		$this->add_control(
-			'widget_shape3_solid_color',
+			'widget_shape3_normal_solid_color',
 			[
-				'label' => __( 'Shape 3 Color', 'blackwidgets' ),
+				'label' => __( 'Shape 3 Normal Color', 'blackwidgets' ),
+				'type' => Controls_Manager::COLOR,
+				'condition'  => [
+					'custom_nav_styles' => [
+						'style3',
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bw-nav.style3 a:before' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		// Color
+		$this->add_control(
+			'widget_shape3_hover_solid_color',
+			[
+				'label' => __( 'Shape 3 Hover Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'condition'  => [
 					'custom_nav_styles' => [
@@ -486,6 +520,91 @@ class BLACK_WIDGETS_Nav extends \Elementor\Widget_Base {
 		$this->end_controls_section();
 		// End
 
+
+		// Start
+		// Icon Style Section
+		$this->start_controls_section(
+			'shapex_section',
+			[
+				'label' => __( 'Shape Styles', 'blackwidgets' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+				'condition'  => [
+					'custom_nav_styles' => [
+						'style7',
+						'style8',
+					],
+				],
+			]
+		);
+
+
+
+		$this->add_control(
+			'style_icon_nav_size',
+			[
+				'label' => __( 'Icon Size', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 200,
+						'step' => 5,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bw-nav.style7 li a img, {{WRAPPER}} .bw-nav.style7 li a i, {{WRAPPER}} .bw-nav.style7 li a svg, {{WRAPPER}} .bw-nav.style8 li a img, {{WRAPPER}} .bw-nav.style8 li a i, {{WRAPPER}} .bw-nav.style8 li a svg' => 'font-size: {{SIZE}}{{UNIT}} !important; width: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+
+
+
+		// Style Subtitle Tabs
+		$this->start_controls_tabs('black_widget_icon_1_tab');
+		$this->start_controls_tab(
+			'icon_tab_1_normal',
+			[
+				'label' => __( 'Normal', 'blackwidgets' ),
+			]
+		);
+
+		// SVG
+		$this->add_control(
+			'widget_icon_link_solid_color',
+			[
+				'label' => __( 'Link SVG Color', 'blackwidgets' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bw-nav.style7 li a i, {{WRAPPER}} .bw-nav.style7 li a svg, {{WRAPPER}} .bw-nav.style8 li a i, {{WRAPPER}} .bw-nav.style8 li a svg' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'icon_tab_1_hover',
+			[
+				'label' => __( 'Hover', 'blackwidgets' ),
+			]
+		);
+
+		// Color
+		$this->add_control(
+			'widget_icon_link_hover_solid_color',
+			[
+				'label' => __( 'Link SVG Color', 'blackwidgets' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bw-nav.style7 a:hover i, {{WRAPPER}} .bw-nav.style7 a:hover svg, {{WRAPPER}} .bw-nav.style8 a:hover i, {{WRAPPER}} .bw-nav.style8 a:hover svg' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+		// End
 
 	}
 
@@ -506,19 +625,51 @@ class BLACK_WIDGETS_Nav extends \Elementor\Widget_Base {
 		$alignment          = isset($settings['widget_alignment'])      ? $settings['widget_alignment']         : '';
         $custom_nav_styles	= isset($settings['custom_nav_styles'])		? $settings['custom_nav_styles']		: '';
 
+        $befor_nav          = isset($settings['custom_icon_before_nav']) ? $settings['custom_icon_before_nav']['value'] : '';
+
+		if ( is_array( $befor_nav ) ) {
+			$bw_icon_svg_code	 = '<img src="'. $befor_nav['url'] . '" />';
+		} else {
+			$bw_icon_svg_code	 = '<i class="'. $befor_nav .'"></i>';
+		}
 
 
-        // $befor_nav          = $settings['custom_icon_before_nav']['value'];
+		switch ($custom_nav_styles) {
+			case 'style7':
+				$args = [
+					'echo'          => false,
+					'menu'          => $settings['menu'],
+					'menu_class'    => 'bw-menu-box',
+					'menu_id'       => 'menu-' . $this->get_nav_menu_index() . '-' . $this->get_id(),
+					'fallback_cb'   => '__return_empty_string',
+					'link_before'        => $bw_icon_svg_code,
+					'container'     => '',
+				];
+				break;
 
-		$args = [
-			'echo'          => false,
-			'menu'          => $settings['menu'],
-			'menu_class'    => 'bw-menu-box',
-			'menu_id'       => 'menu-' . $this->get_nav_menu_index() . '-' . $this->get_id(),
-			'fallback_cb'   => '__return_empty_string',
-            // 'before'        => '<i class="'.$befor_nav.'"></i>',
-			'container'     => '',
-		];
+			case 'style8':
+				$args = [
+					'echo'          => false,
+					'menu'          => $settings['menu'],
+					'menu_class'    => 'bw-menu-box',
+					'menu_id'       => 'menu-' . $this->get_nav_menu_index() . '-' . $this->get_id(),
+					'fallback_cb'   => '__return_empty_string',
+					'link_after'        => $bw_icon_svg_code,
+					'container'     => '',
+				];
+				break;
+			
+			default:
+				$args = [
+					'echo'          => false,
+					'menu'          => $settings['menu'],
+					'menu_class'    => 'bw-menu-box',
+					'menu_id'       => 'menu-' . $this->get_nav_menu_index() . '-' . $this->get_id(),
+					'fallback_cb'   => '__return_empty_string',
+					'container'     => '',
+				];
+				break;
+		}
 
 		$menu_html = wp_nav_menu( $args );
         

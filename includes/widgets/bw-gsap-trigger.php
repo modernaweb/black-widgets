@@ -19,6 +19,8 @@ use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Color;
 use Elementor\Group_Control_Text_Shadow;
+use Elementor\Group_Control_Image_Size;
+// use Elementor\Group_Control_Css_Filter;
 
 /**
  * Elementor title Widget.
@@ -93,7 +95,10 @@ class BLACK_WIDGETS_GSAP_Trigger extends \Elementor\Widget_Base {
 	 * @since 1.0.0
 	 * @access protected
 	 */
-	protected function _register_controls() {
+	protected function register_controls() {
+
+
+
 
 		// Start
 		// Content section
@@ -117,8 +122,10 @@ class BLACK_WIDGETS_GSAP_Trigger extends \Elementor\Widget_Base {
 					// 'text' 				=> __( 'Text', 'blackwidgets' ),
 					// 'shape'				=> __( 'Shape', 'blackwidgets' ),
 					// 'nested_div' 		=> __( 'Nested Div', 'blackwidgets' ),
+					'image' 				=> __( 'Image', 'blackwidgets' ),
 					// 'image_sequence' 	=> __( 'Image Sequence', 'blackwidgets' ),
 					// 'video_sequence' 	=> __( 'Video Sequence', 'blackwidgets' ),
+					// 'video_sequence' 	=> __( 'Elementor Template', 'blackwidgets' ),
 				],
 				'description' => __( 'We create some skin before, you can use these or no! make a new custom type.', 'blackwidgets' ),
 			]
@@ -143,6 +150,11 @@ ONLINE
 </h3>
 ',
 				'description' => __( 'Put your HTML tags here, please check the example structure', 'blackwidgets' ),
+				'condition'  => [
+					'widget_type' => [
+						'html',
+					],
+				],
 			]
 		);
 
@@ -154,8 +166,45 @@ ONLINE
 				'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => __( 'bw-eg', 'blackwidgets' ),
                 'description' => __( 'use the shared class for each line, like the example', 'blackwidgets' ),
+				'condition'  => [
+					'widget_type' => [
+						'html',
+					],
+				],
 			]
 		);
+
+
+		$this->add_control(
+			'image',
+			[
+				'label' => __( 'Choose Image', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::MEDIA,
+				'default' => [
+					'url' => \Elementor\Utils::get_placeholder_image_src(),
+				],
+				'condition'  => [
+					'widget_type' => [
+						'image',
+					],
+				],
+			]
+        );
+
+		$this->add_group_control(
+			Group_Control_Image_Size::get_type(),
+			[
+				'name' => 'thumbnail', // // Usage: `{name}_size` and `{name}_custom_dimension`, in this case `thumbnail_size` and `thumbnail_custom_dimension`.
+				'exclude' => [ 'custom' ],
+				'include' => [],
+				'default' => 'full',
+				'condition'  => [
+					'widget_type' => [
+						'image',
+					],
+				],
+			]
+        );
 
 
 		$this->end_controls_section();
@@ -164,10 +213,417 @@ ONLINE
 		// Start
 		// Content section
 		$this->start_controls_section(
+			'content_image_js',
+			[
+				'label' => __( 'JS for Image', 'blackwidgets' ),
+				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+				'condition'  => [
+					'widget_type' => [
+						'image',
+					],
+				],
+			]
+		);
+
+		$this->add_control(
+			'image_trigger_class',
+			[
+				'label' => __( 'Add A Unique Trigger Class', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( 'bw-image-1', 'blackwidgets' ),
+				'placeholder' => __( 'bw-image-1', 'blackwidgets' ),
+				'description' => __( 'it should be unique and add manually', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'image_start_point',
+			[
+				'label' => __( 'Start Point', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( 'center bottom', 'blackwidgets' ),
+				'placeholder' => __( 'top bottom', 'blackwidgets' ),
+				'description' => __( '----', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'image_end_point',
+			[
+				'label' => __( 'End Point', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( 'center top', 'blackwidgets' ),
+				'placeholder' => __( 'top bottom', 'blackwidgets' ),
+				'description' => __( '----', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'image_toggle_actions',
+			[
+				'label' => __( 'Toggle Actions', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '', 'blackwidgets' ),
+				'placeholder' => __( 'none none none none', 'blackwidgets' ),
+				'description' => __( '----', 'blackwidgets' ),
+				]
+			);
+
+		$this->add_control(
+			'image_scrub',
+			[
+				'label' => __( 'Scrub', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( 'true', 'blackwidgets' ),
+				'placeholder' => __( 'false', 'blackwidgets' ),
+				'description' => __( '----', 'blackwidgets' ),
+				]
+			);
+			
+		// // Enable Title Section
+		// $this->add_control(
+		// 	'image_markers',
+		// 	[
+		// 		'label' 		=> __( 'Markers', 'blackwidgets' ),
+		// 		'type' 			=> \Elementor\Controls_Manager::SWITCHER,
+		// 		'label_on' 		=> __( 'true', 'blackwidgets' ),
+		// 		'label_off' 	=> __( 'false', 'blackwidgets' ),
+		// 		'default' 		=> 'false',
+		// 		'description' => __( 'enable it to to show the markers', 'blackwidgets' ),
+		// 	]
+		// );
+
+
+		$this->add_control(
+			'hr_image_1',
+			[
+				'type' => \Elementor\Controls_Manager::DIVIDER,
+			]
+		);
+
+		$this->add_control(
+			'element_opacity_from',
+			[
+				'label' => __( 'Opacity', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '1', 'blackwidgets' ),
+				'placeholder' => __( '1', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'element_duration_from',
+			[
+				'label' => __( 'Duration', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '0.9', 'blackwidgets' ),
+				'placeholder' => __( '0.4', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'element_rotationx_from',
+			[
+				'label' => __( 'RotationX', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '0', 'blackwidgets' ),
+				'placeholder' => __( '3', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'element_rotationy_from',
+			[
+				'label' => __( 'RotationY', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '0', 'blackwidgets' ),
+				'placeholder' => __( '3', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'element_scalex_from',
+			[
+				'label' => __( 'ScaleX', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '1', 'blackwidgets' ),
+				'placeholder' => __( '1', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'element_scaley_from',
+			[
+				'label' => __( 'ScaleY', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '1', 'blackwidgets' ),
+				'placeholder' => __( '1', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'element_scalez_from',
+			[
+				'label' => __( 'ScaleZ', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '0', 'blackwidgets' ),
+				'placeholder' => __( '0', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'element_skewx_from',
+			[
+				'label' => __( 'SkewX', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '26', 'blackwidgets' ),
+				'placeholder' => __( '0', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'element_skewy_from',
+			[
+				'label' => __( 'SkewY', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '-42', 'blackwidgets' ),
+				'placeholder' => __( '0', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'element_movex_from',
+			[
+				'label' => __( 'MoveX', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '0', 'blackwidgets' ),
+				'placeholder' => __( '0', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'element_movey_from',
+			[
+				'label' => __( 'MoveY', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '0', 'blackwidgets' ),
+				'placeholder' => __( '0', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'element_movez_from',
+			[
+				'label' => __( 'MoveZ', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '0', 'blackwidgets' ),
+				'placeholder' => __( '0', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'element_autoalpha_from',
+			[
+				'label' => __( 'Auto Alpha', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '1', 'blackwidgets' ),
+				'placeholder' => __( '1', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'element_perspective_from',
+			[
+				'label' => __( 'Preserve', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '50', 'blackwidgets' ),
+				'placeholder' => __( '0', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'element_transformstyle_from',
+			[
+				'label' => __( 'Transform Style', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( 'preserve-3d', 'blackwidgets' ),
+				'placeholder' => __( 'preserve-3d', 'blackwidgets' ),
+			]
+		);
+
+
+		$this->add_control(
+			'hr_element_2',
+			[
+				'type' => \Elementor\Controls_Manager::DIVIDER,
+			]
+		);
+
+		$this->add_control(
+			'element_opacity_to',
+			[
+				'label' => __( 'Opacity', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '1', 'blackwidgets' ),
+				'placeholder' => __( '1', 'blackwidgets' ),
+			]
+		);
+		
+		$this->add_control(
+			'element_duration_to',
+			[
+				'label' => __( 'Duration', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '0.5', 'blackwidgets' ),
+				'placeholder' => __( '0.4', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'element_rotationx_to',
+			[
+				'label' => __( 'RotationX', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '0', 'blackwidgets' ),
+				'placeholder' => __( '0', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'element_rotationy_to',
+			[
+				'label' => __( 'RotationY', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '0', 'blackwidgets' ),
+				'placeholder' => __( '0', 'blackwidgets' ),
+			]
+		);
+		
+		$this->add_control(
+			'element_scalex_to',
+			[
+				'label' => __( 'ScaleX', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '1', 'blackwidgets' ),
+				'placeholder' => __( '0', 'blackwidgets' ),
+			]
+		);
+		
+		$this->add_control(
+			'element_scaley_to',
+			[
+				'label' => __( 'ScaleY', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '1', 'blackwidgets' ),
+				'placeholder' => __( '1', 'blackwidgets' ),
+			]
+		);
+		
+		$this->add_control(
+			'element_scalez_to',
+			[
+				'label' => __( 'ScaleZ', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '0', 'blackwidgets' ),
+				'placeholder' => __( '0', 'blackwidgets' ),
+			]
+		);
+		
+		$this->add_control(
+			'element_skewx_to',
+			[
+				'label' => __( 'SkewX', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '0', 'blackwidgets' ),
+				'placeholder' => __( '0', 'blackwidgets' ),
+			]
+		);
+		
+		$this->add_control(
+			'element_skewy_to',
+			[
+				'label' => __( 'SkewY', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '0', 'blackwidgets' ),
+				'placeholder' => __( '0', 'blackwidgets' ),
+			]
+		);
+		
+		$this->add_control(
+			'element_movex_to',
+			[
+				'label' => __( 'MoveX', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '0', 'blackwidgets' ),
+				'placeholder' => __( '0', 'blackwidgets' ),
+			]
+		);
+		
+		$this->add_control(
+			'element_movey_to',
+			[
+				'label' => __( 'MoveY', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '0', 'blackwidgets' ),
+				'placeholder' => __( '0', 'blackwidgets' ),
+			]
+		);
+		
+		$this->add_control(
+			'element_movez_to',
+			[
+				'label' => __( 'MoveZ', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '0', 'blackwidgets' ),
+				'placeholder' => __( '0', 'blackwidgets' ),
+			]
+		);
+		
+		$this->add_control(
+			'element_autoalpha_to',
+			[
+				'label' => __( 'Auto Alpha', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '1', 'blackwidgets' ),
+				'placeholder' => __( '1', 'blackwidgets' ),
+			]
+		);
+		
+		$this->add_control(
+			'element_perspective_to',
+			[
+				'label' => __( 'Preserve', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '0', 'blackwidgets' ),
+				'placeholder' => __( '0', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'element_transformstyle_to',
+			[
+				'label' => __( 'Transform Style', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( 'preserve-3d', 'blackwidgets' ),
+				'placeholder' => __( 'preserve-3d', 'blackwidgets' ),
+			]
+		);
+
+
+		$this->end_controls_section();
+
+		// Start
+		// Content section
+		$this->start_controls_section(
 			'content_html_js',
 			[
 				'label' => __( 'JS for HTML Content', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+				'condition'  => [
+					'widget_type' => [
+						'html',
+					],
+				],
 			]
 		);
 
@@ -265,7 +721,7 @@ transformStyle: "preserve-3d",
 				'name' => 'widget_box_background',
 				'label' => __( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .bw-gsap-code-box',
+				'selector' => '{{WRAPPER}} .bw-img-trigger-x, {{WRAPPER}} .bw-gsap-code-box',
 			]
 		);
 
@@ -275,7 +731,7 @@ transformStyle: "preserve-3d",
 			[
 				'name' => 'widget_box_border',
 				'label' => __( 'Border', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .bw-gsap-code-box',
+				'selector' => '{{WRAPPER}} .bw-img-trigger-x, {{WRAPPER}} .bw-gsap-code-box',
 			]
 		);
 
@@ -285,7 +741,7 @@ transformStyle: "preserve-3d",
 			[
 				'name' => 'widget_box_box_shadow',
 				'label' => __( 'Box Shadow', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .bw-gsap-code-box',
+				'selector' => '{{WRAPPER}} .bw-img-trigger-x, {{WRAPPER}} .bw-gsap-code-box',
 			]
 		);
 
@@ -296,7 +752,7 @@ transformStyle: "preserve-3d",
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-gsap-code-box' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-img-trigger-x, {{WRAPPER}} .bw-gsap-code-box' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -309,7 +765,7 @@ transformStyle: "preserve-3d",
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-gsap-code-box' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-img-trigger-x, {{WRAPPER}} .bw-gsap-code-box' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -322,7 +778,7 @@ transformStyle: "preserve-3d",
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-gsap-code-box' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-img-trigger-x, {{WRAPPER}} .bw-gsap-code-box' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -337,6 +793,11 @@ transformStyle: "preserve-3d",
 			[
 				'label' => __( 'Typography Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+				'condition'  => [
+					'widget_type' => [
+						'html',
+					],
+				],
 			]
         );
 
@@ -346,10 +807,6 @@ transformStyle: "preserve-3d",
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-gsap-code-box' => 'color: {{VALUE}}',
 				],
@@ -409,10 +866,6 @@ transformStyle: "preserve-3d",
 			[
 				'label' => __( 'Icon Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-gsap-code-box i' => 'color: {{VALUE}}',
 				],
@@ -443,49 +896,154 @@ transformStyle: "preserve-3d",
 	 */
 	protected function render() {
 
-		$settings   	= $this->get_settings_for_display();
+		$settings   					= $this->get_settings_for_display();
 
 		// Variables
-        $type 	        = isset($settings['widget_type']) ? $settings['widget_type'] : '';
-        $message        = isset($settings['widget_text']) ? $settings['widget_text'] : '';
-
-		$options 		= get_option('plugin_options') ? get_option('plugin_options') : '';
-        $gsap_options  	= isset($options['gsap_options']) ? $options['gsap_options'] : '';
-
+        $type 	        				= isset($settings['widget_type']) 									? $settings['widget_type'] 									: '';
+        $message        				= isset($settings['widget_text']) 									? $settings['widget_text'] 									: '';
+		$options 						= get_option('plugin_options') 										? get_option('plugin_options') 								: '';
+        $gsap_options  					= isset($options['gsap_options']) 									? $options['gsap_options'] 									: '';
 		// Content - HTML
-		$html_code		= isset($settings['widget_html_content'])	? $settings['widget_html_content']		: '';
-		$shared_class	= isset($settings['widget_html_class'])	? $settings['widget_html_class']		: '';
-		$html_trigger	= isset($settings['widget_html_js_gsap_timeline_scroll_trigger'])	? $settings['widget_html_js_gsap_timeline_scroll_trigger']		: '';
-		$html_js_from	= isset($settings['widget_html_js_tl_from'])	? $settings['widget_html_js_tl_from']		: '';
-		$html_js_to		= isset($settings['widget_html_js_tl_to'])	? $settings['widget_html_js_tl_to']		: '';
+		$html_code						= isset($settings['widget_html_content'])							? $settings['widget_html_content']							: '';
+		$shared_class					= isset($settings['widget_html_class'])								? $settings['widget_html_class']							: '';
+		$html_trigger					= isset($settings['widget_html_js_gsap_timeline_scroll_trigger'])	? $settings['widget_html_js_gsap_timeline_scroll_trigger']	: '';
+		$html_js_from					= isset($settings['widget_html_js_tl_from'])						? $settings['widget_html_js_tl_from']						: '';
+		$html_js_to						= isset($settings['widget_html_js_tl_to'])							? $settings['widget_html_js_tl_to']							: '';
+		// Content - Image
+		$img_class						= isset($settings['image_trigger_class'])							? $settings['image_trigger_class']							: '';
 
-		$data_id                	= 'bw_' . uniqid();
-		$script_id              	= '#' . $data_id;
+		$image_trigger_class			= isset($settings['image_trigger_class']) 							? $settings['image_trigger_class'] 							: '';
+		$image_start_point				= isset($settings['image_start_point']) 							? $settings['image_start_point'] 							: '';
+		$image_end_point				= isset($settings['image_end_point']) 								? $settings['image_end_point'] 								: '';
+		$image_toggle_actions			= isset($settings['image_toggle_actions'])							? $settings['image_toggle_actions'] 						: '';
+		$image_scrub					= isset($settings['image_scrub']) 									? $settings['image_scrub'] 									: '';
+		$image_markers					= isset($settings['image_markers']) 								? $settings['image_markers'] 								: '';
+
+		$element_opacity_from           = isset($settings['element_opacity_from'])              			? $settings['element_opacity_from'] 						: '';
+		$element_duration_from          = isset($settings['element_duration_from'])             			? $settings['element_duration_from'] 						: '';
+		$element_rotationx_from			= isset($settings['element_rotationx_from'])             			? $settings['element_rotationx_from'] 						: '';
+		$element_rotationy_from			= isset($settings['element_rotationy_from'])             			? $settings['element_rotationy_from'] 						: '';
+		$element_scalex_from            = isset($settings['element_scalex_from'])               			? $settings['element_scalex_from'] 							: '';
+		$element_scaley_from            = isset($settings['element_scaley_from'])               			? $settings['element_scaley_from'] 							: '';
+		$element_scalez_from            = isset($settings['element_scalez_from'])               			? $settings['element_scalez_from'] 							: '';
+		$element_skewx_from             = isset($settings['element_skewx_from'])                			? $settings['element_skewx_from'] 							: '';
+		$element_skewy_from             = isset($settings['element_skewy_from'])                			? $settings['element_skewy_from'] 							: '';
+		$element_movex_from             = isset($settings['element_movex_from'])                			? $settings['element_movex_from'] 							: '';
+		$element_movey_from             = isset($settings['element_movey_from'])                			? $settings['element_movey_from'] 							: '';
+		$element_movez_from             = isset($settings['element_movez_from'])                			? $settings['element_movez_from'] 							: '';
+		$element_autoalpha_from         = isset($settings['element_autoalpha_from'])            			? $settings['element_autoalpha_from'] 						: '';
+		$element_perspective_from		= isset($settings['element_perspective_from'])						? $settings['element_perspective_from']						: '';
+		$element_transformstyle_from    = isset($settings['element_transformstyle_from'])       			? $settings['element_transformstyle_from'] 					: '';
+
+		$element_opacity_to           	= isset($settings['element_opacity_to'])              				? $settings['element_opacity_to'] 							: '';
+		$element_duration_to          	= isset($settings['element_duration_to'])             				? $settings['element_duration_to'] 							: '';
+		$element_rotationx_to          	= isset($settings['element_rotationx_to'])             				? $settings['element_rotationx_to']							: '';
+		$element_rotationy_to          	= isset($settings['element_rotationy_to'])             				? $settings['element_rotationy_to']							: '';
+		$element_scalex_to            	= isset($settings['element_scalex_to'])               				? $settings['element_scalex_to'] 							: '';
+		$element_scaley_to            	= isset($settings['element_scaley_to'])               				? $settings['element_scaley_to'] 							: '';
+		$element_scalez_to            	= isset($settings['element_scalez_to'])               				? $settings['element_scalez_to'] 							: '';
+		$element_skewx_to             	= isset($settings['element_skewx_to'])                				? $settings['element_skewx_to'] 							: '';
+		$element_skewy_to             	= isset($settings['element_skewy_to'])                				? $settings['element_skewy_to'] 							: '';
+		$element_movex_to             	= isset($settings['element_movex_to'])                				? $settings['element_movex_to'] 							: '';
+		$element_movey_to             	= isset($settings['element_movey_to'])                				? $settings['element_movey_to'] 							: '';
+		$element_movez_to             	= isset($settings['element_movez_to'])                				? $settings['element_movez_to'] 							: '';
+		$element_autoalpha_to         	= isset($settings['element_autoalpha_to'])            				? $settings['element_autoalpha_to'] 						: '';
+		$element_perspective_to			= isset($settings['element_perspective_to'])						? $settings['element_perspective_to'] 						: '';
+		$element_transformstyle_to    	= isset($settings['element_transformstyle_to'])       				? $settings['element_transformstyle_to'] 					: '';
+
+
+
+		$data_id		= 'bw_' . uniqid();
+		$script_id		= '#' . $data_id;
 
 
 		// Render
-		echo '<div class="bw-gsap-code-box" id="'. $script_id .'">';
-			echo $html_code;
-		echo '</div>';
+		switch ($type) {
+			case 'html':
+				echo '<div class="bw-gsap-code-box" id="'. $script_id .'">';
+					echo $html_code;
+				echo '</div>';
+		
+				if ( isset($gsap_options) && !empty($gsap_options) ) {
+					echo '<script>
+						jQuery(window).ready(function($) {
+							gsap.registerPlugin(ScrollTrigger);
+							const tl = gsap.timeline({
+								scrollTrigger: {
+								'. $html_trigger .'
+							}});
+							tl.from(".'. $shared_class .'", {
+								'. $html_js_from .'
+							})
+							tl.to(".'. $shared_class .'", {
+								'. $html_js_to .'
+							})
+						});
+						</script>';
+				}
+				break;
+			
+			case 'image':
+				echo '<div class="bw-gsap-img" id="'. $script_id .'">';
+					echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail', $settings ) . '" class="bw-img-trigger-x '. $image_trigger_class .'">';
+				echo '</div>';
+				if ( isset($gsap_options) && !empty($gsap_options) ) {
+					echo '<script>
+						jQuery(window).ready(function($) {
+							gsap.registerPlugin(ScrollTrigger);
+							const tl = gsap.timeline({
+								scrollTrigger: {
+								trigger:		".'. $image_trigger_class .'",
+								start:			"'. $image_start_point .'",
+								end:			"'. $image_end_point .'",
+								toggleActions:	"'. $image_toggle_actions .'",
+								scrub: 			"'. $image_scrub .'",
+								markers: 		false,
+							}});
+							tl.from(".'. $img_class .'", {
+								opacity:				'. $element_opacity_from .',
+								duration:				'. $element_duration_from .',
+								rotateX:				'. $element_rotationx_from .',
+								rotateY:				'. $element_rotationy_from .',
+								scaleX:					'. $element_scalex_from .',
+								scaleY:					'. $element_scaley_from .',
+								scaleZ:					'. $element_scalez_from .',
+								skewX:					'. $element_skewx_from .',
+								skewY:					'. $element_skewy_from .',
+								x:						'. $element_movex_from .',
+								y:						'. $element_movey_from .',
+								z:						'. $element_movez_from .',
+								autoAlpha:				'. $element_autoalpha_from .',
+								transformPerspective:	'. $element_perspective_from .',
+								transformStyle:			"'. $element_transformstyle_from .'",
+							})
+							tl.to(".'. $img_class .'", {
+								opacity:				'. $element_opacity_to .',
+								duration:				'. $element_duration_to .',
+								rotateX:				'. $element_rotationx_to .',
+								rotateY:				'. $element_rotationy_to .',
+								scaleX:					'. $element_scalex_to .',
+								scaleY:					'. $element_scaley_to .',
+								scaleZ:					'. $element_scalez_to .',
+								skewX:					'. $element_skewx_to .',
+								skewY:					'. $element_skewy_to .',
+								x:						'. $element_movex_to .',
+								y:						'. $element_movey_to .',
+								z:						'. $element_movez_to .',
+								autoAlpha:				'. $element_autoalpha_to .',
+								transformPerspective:	'. $element_perspective_to .',
+								transformStyle:			"'. $element_transformstyle_to .'",
+							})
+						});
+						</script>';
+				}
+				break;
 
-
-		if ( isset($gsap_options) && !empty($gsap_options) ) {
-			echo '<script>
-				jQuery(window).ready(function($) {
-					gsap.registerPlugin(ScrollTrigger);
-					const tl = gsap.timeline({
-						scrollTrigger: {
-						'. $html_trigger .'
-					}});
-					tl.from(".'. $shared_class .'", {
-						'. $html_js_from .'
-					})
-					tl.to(".'. $shared_class .'", {
-						'. $html_js_to .'
-					})
-				});
-				</script>';
+			default:
+				echo 'There is not content available now! SOON!!!!';
+				break;
 		}
+
 
 	}
 

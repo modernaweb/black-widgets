@@ -57,7 +57,7 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Black Image', 'blackwidgets' );
+		return __( 'Black Image Pro', 'blackwidgets' );
 	}
 
 	/**
@@ -96,7 +96,7 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 	 * @since 1.0.0
 	 * @access protected
 	 */
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		// Start
 		// Content section
