@@ -4110,9 +4110,13 @@
     position: relative;
     transition: all .5s ease;
     display: inline-block;
-    padding: 0 24px 0 0;
+    padding: 0 14px 0 0;
     margin: 0 0 0 0;
     color: rgba(0, 0, 0, .8);
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 1px;
 }
 
 .bw-magic-link .bw-magic-anchor:hover {
@@ -4128,7 +4132,7 @@
     height: 1px;
     background: currentColor;
     position: absolute;
-    right: 10px;
+    right: 3px;
     top: calc(50% - 0px);
     transform-origin: right center;
     transition: all .5s ease;
@@ -4139,7 +4143,7 @@
 .bw-magic-link .bw-magic-anchor:hover:before {
     transform-origin: right center;
     opacity: 1;
-    right: -24px;
+    right: -21px;
 }
 
 .bw-magic-link .bw-magic-anchor:hover:after {
@@ -4176,8 +4180,8 @@
 .bw-magic-link .bw-magic-wheel svg {
     z-index: 1;
     position: absolute;
-    top: 17px;
-    left: 0;
+    top: 10px;
+    left: -30px;
     width: auto;
     height: auto;
 }
@@ -4206,11 +4210,22 @@
 }
 
 .bw-magic-link .bw-magic-wheel span {
-    z-index: 2;
     position: relative;
+    transition: all .5s ease-in-out;
     display: inline-block;
-    font-family: "Roboto", Helvetica, Arial, sans-serif;
-    font-size: 1.5em;
+    padding: 0 14px 0 0;
+    margin: 10px 0 0 0;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 1.4;
+    z-index: 999;
+    position: relative;
+}
+
+.bw-magic-link .bw-magic-wheel:hover span {
+    color: #000;
 }
 
 .bw-magic-link .bw-magic-wheel:hover {
