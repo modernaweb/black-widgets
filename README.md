@@ -130,7 +130,8 @@ WordPress 4.9+
 - Added: Button Alignment
 - Added: Custom Button Styling
 - Added: Image Trigger with GSAP
-- Fixed: UI and UX of the magic links
+- Removed: Scheme from some widgets
+- Fixed: Some issues on UI and UX of the magic links
 
 
 

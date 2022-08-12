@@ -183,6 +183,7 @@ class BLACK_WIDGETS_Nav extends \Elementor\Widget_Base {
 					'style6'        => __( 'Style 6 ', 'blackwidgets' ),
 					'style7'        => __( 'Style 7 ', 'blackwidgets' ),
 					'style8'        => __( 'Style 8 ', 'blackwidgets' ),
+					'style9'        => __( 'Style 9 ', 'blackwidgets' ),
 				],
 			]
 		);
@@ -513,6 +514,48 @@ class BLACK_WIDGETS_Nav extends \Elementor\Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-nav.style3 a:hover:before' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+		// End
+
+		// Start
+		// Style section
+		$this->start_controls_section(
+			'shape9_section',
+			[
+				'label' => __( 'Shape Styles', 'blackwidgets' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+				'condition'  => [
+					'custom_nav_styles' => [
+						'style9',
+					],
+				],
+			]
+		);
+
+		// Color
+		$this->add_control(
+			'widget_decoration_normal_solid_color',
+			[
+				'label' => __( 'Normal Underline Color', 'blackwidgets' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bw-nav.style9 a' => 'text-decoration-color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		// Color
+		$this->add_control(
+			'widget_decoration_hover_solid_color',
+			[
+				'label' => __( 'Hover Underline Color', 'blackwidgets' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bw-nav.style9 a:hover' => 'text-decoration-color: {{VALUE}} !important;',
 				],
 			]
 		);

@@ -149,8 +149,8 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 				'show_external' => true,
 				'default' => [
 					'url' => '',
-					'is_external' => true,
-					'nofollow' => true,
+					'is_external' => false,
+					'nofollow' => false,
 				],
 			]
 		);
@@ -373,10 +373,6 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-magic-link a' => 'color: {{VALUE}}',
 				],
@@ -514,10 +510,6 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-magic-link a:hover' => 'color: {{VALUE}}',
 				],
@@ -832,10 +824,6 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-magic-link .bw-magic-heart span svg' => 'fill: {{VALUE}}',
 				],
@@ -853,10 +841,6 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-magic-link .bw-magic-wheel svg g line, {{WRAPPER}} .bw-magic-link .bw-magic-wheel svg g polyline, {{WRAPPER}} .bw-magic-link .bw-magic-wheel svg g circle' => 'stroke: {{VALUE}} !important',
 				],

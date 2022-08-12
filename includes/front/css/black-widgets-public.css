@@ -3791,6 +3791,13 @@
     text-transform: capitalize;
 }
 
+.bw-magic-link a.bw-magic-pullttb,
+.bw-magic-link a.bw-magic-pullbtt,
+.bw-magic-link a.bw-magic-pullltr,
+.bw-magic-link .bw-magic-pullrtl a {
+    color: #000;
+}
+
 .bw-magic-link a.bw-magic-pullltr:before,
 .bw-magic-link a.bw-magic-pullrtl:before {
     position: absolute;
@@ -3843,6 +3850,26 @@
     height: 100%;
 }
 
+.bw-magic-link a.bw-magic-pullttb,
+.bw-magic-link a.bw-magic-pullbtt,
+.bw-magic-link a.bw-magic-pullltr,
+.bw-magic-link a.bw-magic-pullrtl {
+    color: #000;
+    padding: 0 9px 0 9px;
+    line-height: 1.8;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.bw-magic-link a.bw-magic-pullltr:before,
+.bw-magic-link a.bw-magic-pullrtl:before,
+.bw-magic-link a.bw-magic-pullttb:before,
+.bw-magic-link a.bw-magic-pullbtt:before {
+    transition: all 0.37s cubic-bezier(0.99, 0.15, 0.3, 0.88);
+    background: #b2b2b2;
+    border-radius: 2px;
+}
+
 
 /* Heart Beat */
 
@@ -3855,7 +3882,7 @@
     color: #000;
     letter-spacing: 0px;
     text-align: center;
-    line-height: 20px;
+    line-height: 2.4;
     font-weight: 700;
     transition: all 0.25s ease-out;
     cursor: pointer;
@@ -3867,7 +3894,7 @@
     position: relative;
     margin-right: 0;
     line-height: 0;
-    margin-left: 32px;
+    margin-left: 42px;
     background: #282828;
     border-radius: 20px;
     padding: 3px;
@@ -3937,22 +3964,25 @@
 .bw-magic-link .bw-magic-liner {
     display: inline-block;
     padding: 0 14px;
+    margin-left: -14px;
     font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 2px;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.8;
+    letter-spacing: 0.05em;
     position: relative;
-    color: #353535;
+    color: #000;
 }
 
 .bw-magic-link .bw-magic-liner:before {
     content: '';
     width: 0;
     height: 1px;
-    background: #353535;
+    background: #000;
     position: absolute;
-    left: 0;
+    left: 0px;
     top: 50%;
-    transition: all ease 0.3s;
+    transition: all cubic-bezier(0.22, 0.61, 0.36, 1) 0.3s;
 }
 
 .bw-magic-link .bw-magic-liner:hover:before {
@@ -3968,9 +3998,9 @@
     border-bottom: 1px dashed #33c79d;
     display: inline-block;
     position: relative;
-    padding: 0 .2em;
-    -webkit-transition: all 250ms;
-    transition: all 250ms;
+    padding: 0 12px;
+    -webkit-transition: all 250ms ease-in-out;
+    transition: all 250ms ease-in-out;
     z-index: 1000;
     font-size: 20px;
     font-weight: 600;
@@ -3987,6 +4017,7 @@
     position: absolute;
     -webkit-transition: height 250ms;
     transition: height 250ms;
+    border-radius: 3px;
 }
 
 .bw-magic-link .bw-magic-modern:hover {
@@ -4002,11 +4033,11 @@
 
 .bw-magic-link .bw-magic-arrow {
     text-align: left;
-    font-size: 14px;
-    text-transform: capitalize;
-    letter-spacing: 1px;
-    font-weight: 600;
-    transition: all ease 0.3s;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-weight: 700;
+    transition: all 0.47s cubic-bezier(1, 0.45, 0.56, 0.7);
 }
 
 .bw-magic-link .bw-magic-arrow span {
@@ -4014,7 +4045,7 @@
 }
 
 .bw-magic-link .bw-magic-arrow:hover span {
-    padding-left: 9px;
+    padding-left: 7px;
 }
 
 .bw-magic-link .bw-magic-arrow:hover {
@@ -4024,8 +4055,20 @@
 
 /* Simple */
 
+.bw-magic-link .bw-magic-simple {
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    font-weight: 700;
+    transition: all 0.67s cubic-bezier(1, 0.45, 0.56, 0.7);
+    text-decoration-color: transparent !important;
+    text-decoration-style: solid !important;
+    text-decoration-line: underline !important;
+    transition: text-decoration-color 0.2s ease !important;
+}
+
 .bw-magic-link .bw-magic-simple:hover {
     color: #000;
+    text-decoration-color: #000 !important;
 }
 
 
@@ -4067,25 +4110,25 @@
     position: relative;
     transition: all .5s ease;
     display: inline-block;
-    padding: 0 30px 0 20px;
+    padding: 0 24px 0 0;
     margin: 0 0 0 0;
     color: rgba(0, 0, 0, .8);
 }
 
 .bw-magic-link .bw-magic-anchor:hover {
-    padding: 0 40px 0 0;
-    margin: 0 0 0 -20px;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
 }
 
 .bw-magic-link .bw-magic-anchor:before,
 .bw-magic-link .bw-magic-anchor:after {
     content: '';
     display: inline-block;
-    width: 12px;
+    width: 10px;
     height: 1px;
     background: currentColor;
     position: absolute;
-    right: 20px;
+    right: 10px;
     top: calc(50% - 0px);
     transform-origin: right center;
     transition: all .5s ease;
@@ -4096,7 +4139,7 @@
 .bw-magic-link .bw-magic-anchor:hover:before {
     transform-origin: right center;
     opacity: 1;
-    right: 14px;
+    right: -24px;
 }
 
 .bw-magic-link .bw-magic-anchor:hover:after {
@@ -5588,4 +5631,20 @@
 .bw-nav.style8 ul li img,
 .bw-nav.style8 ul li svg {
     padding-left: 7px;
+}
+
+.bw-nav.style9 a {
+    text-decoration-color: transparent !important;
+    text-decoration-style: solid !important;
+    text-decoration-line: underline !important;
+}
+
+.bw-nav.style9 a:hover {
+    color: #000;
+    text-decoration-color: #000 !important;
+}
+
+.bw-nav a,
+.bw-nav a i {
+    transition: all 0.21s cubic-bezier(1, 0.45, 0.56, 0.7) !important;
 }
