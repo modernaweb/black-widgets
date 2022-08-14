@@ -134,6 +134,20 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'shape_widget',
+			[
+				'label' => __( 'SVG Shape', 'blackwidgets' ),
+				'type' => Controls_Manager::ICONS,
+				'condition'  => [
+					'widget_type' => [
+						'bw-t-1',
+					],
+				],
+				'description' => __( 'Upload your custom SVG shape, then add <em> and </em> around of the text! you\'ll see the shape under the text with a simple animate.', 'blackwidgets' ),
+			]
+		);
+
 		// Select tag
 		$this->add_control(
 			'widget_html_tag_title',
@@ -2155,6 +2169,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 
 		// Variables
         $type 	                = isset($settings['widget_type'])                        ? $settings['widget_type']						: '';
+		$shape 	                = isset($settings['shape_widget'])						 ? $settings['shape_widget']					: '';
 		$title_tag 				= isset($settings['widget_html_tag_title'])				 ? $settings['widget_html_tag_title']			: '';
         $title 			        = isset($settings['widget_title'])                       ? $settings['widget_title']					: '';
         $alignment 		        = isset($settings['widget_alignment'])                   ? $settings['widget_alignment']				: '';
@@ -2247,6 +2262,10 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 
 		$options = get_option('plugin_options') ? get_option('plugin_options') : '';
         $gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
+
+	
+		$second_bw_id			= 'second_bw_' . uniqid();
+		$second_bwscript_id		= '#' . $second_bw_id;
 
 		echo '<style>'.$normal_transform_style.' '.$z_index.' '.$unique_z_index.'</style>';
 
@@ -2359,6 +2378,44 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 						'.$tlto.'
 					});
 				</script>';
+
+				if( $shape ) {
+					echo '<div class="bw-code-em" id="' . $second_bw_id . '">';
+						\Elementor\Icons_Manager::render_icon( $settings['shape_widget'], [ 'aria-hidden' => 'true' ] );
+					echo '</div>';
+
+					echo '<script>
+					
+					jQuery(window).ready(function($) {
+						jQuery( "' . $second_bwscript_id . '" ).appendTo( $( "'. $script_id .' em" ) );
+
+						var scroll = jQuery(window).scrollTop();
+						var objectSelect = jQuery("'. $script_id .'");
+						var bottom = jQuery(window).height();
+						var objectPosition = objectSelect.offset().top - bottom;
+						if (scroll > objectPosition) {
+							jQuery("'. $script_id .' .bw-code-em").addClass("run");
+						} else {
+							jQuery("'. $script_id .' .bw-code-em").removeClass("run");
+						}
+
+					});
+					
+					jQuery(window).scroll(function($) {    
+						var scroll = jQuery(window).scrollTop();
+						var objectSelect = jQuery("'. $script_id .'");
+						var bottom = jQuery(window).height();
+						var objectPosition = objectSelect.offset().top - bottom;
+						if (scroll > objectPosition) {
+							jQuery("'. $script_id .' .bw-code-em").addClass("run");
+						} else {
+							jQuery("'. $script_id .' .bw-code-em").removeClass("run");
+						}
+					});
+					</script>';
+
+				}
+
 		}
 
 	}

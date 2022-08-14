@@ -3843,6 +3843,10 @@
     background-color: #222;
 }
 
+.bw-image-grow-cover.ltr {
+    left: 0;
+}
+
 .bw-load-img img {
     display: block;
     position: relative;
@@ -5650,6 +5654,36 @@
     text-align: right;
 }
 
+.bw-typograpgy.bw-t-1.left,
+.bw-typograpgy.bw-t-2.left,
+.bw-typograpgy.bw-t-1.center,
+.bw-typograpgy.bw-t-2.center,
+.bw-typograpgy.bw-t-1.right,
+.bw-typograpgy.bw-t-2.right {
+    display: flex;
+}
+
+.bw-typograpgy.bw-t-1.left,
+.bw-typograpgy.bw-t-2.left {
+    justify-content: flex-start;
+}
+
+.bw-typograpgy.bw-t-1.center,
+.bw-typograpgy.bw-t-2.center {
+    justify-content: center;
+}
+
+.bw-typograpgy.bw-t-1.right,
+.bw-typograpgy.bw-t-2.right {
+    justify-content: flex-end;
+}
+
+.bw-t-1 .bw-typograpgy-main-title.bw-block {
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    white-space: nowrap;
+}
+
 
 /* Simple Style */
 
@@ -5660,6 +5694,73 @@
 
 .bw-typograpgy.bw-t-1 .bw-typograpgy-main-title {
     display: block;
+}
+
+.bw-typograpgy-wrap em {
+    position: relative;
+}
+
+.bw-typograpgy-wrap em .bw-code-em {
+    position: absolute;
+    top: auto;
+    bottom: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transition: all .38s ease;
+    -webkit-transition: all .38s ease;
+    -moz-transition: all .38s ease;
+    -ms-transition: all .38s ease;
+    -o-transition: all .38s ease;
+    width: 100%;
+    height: auto;
+}
+
+.bw-typograpgy-wrap em .bw-code-em svg {
+    width: 100%;
+    height: auto;
+}
+
+.bw-typograpgy-wrap em .bw-code-em path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    opacity: 0;
+}
+
+@keyframes bwsvg {
+    0% {
+        stroke-dashoffset: 1;
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+.bw-typograpgy-wrap em {
+    background-image: none!important;
+}
+
+@keyframes bw-animated {
+    100% {
+        /* creates the drawing effect */
+        stroke-dashoffset: 0;
+    }
+}
+
+.bw-typograpgy-wrap em .bw-code-em.run path {
+    opacity: 1;
+    /* beginning of L */
+    stroke-dasharray: 10000;
+    stroke-dashoffset: 10000;
+    /* animation: bw-animated 3s linear forwards 1s; */
+    animation: bw-animated 3.7s cubic-bezier(.65, 0, .35, 1) forwards;
 }
 
 
@@ -5773,6 +5874,13 @@
     display: unset !important;
 }
 
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-1,
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-2,
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-3,
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-4,
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-5,
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-6,
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-7,
 .bw-typograpgy-wrap .bw-rotation-1 .bw-typography-this-title,
 .bw-typograpgy-wrap .bw-rotation-2 .bw-typography-this-title,
 .bw-typograpgy-wrap .bw-rotation-3 .bw-typography-this-title,
@@ -5784,6 +5892,7 @@
     white-space: nowrap;
 }
 
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-1,
 .bw-typograpgy-wrap .bw-rotation-1 .bw-typography-this-title {
     transform: rotate( -180deg);
     -webkit-transform: rotate( -180deg);
@@ -5792,6 +5901,7 @@
     -o-transform: rotate( -180deg);
 }
 
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-2,
 .bw-typograpgy-wrap .bw-rotation-2 .bw-typography-this-title {
     transform: rotate( -90deg);
     -webkit-transform: rotate( -90deg);
@@ -5800,6 +5910,7 @@
     -o-transform: rotate( -90deg);
 }
 
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-3,
 .bw-typograpgy-wrap .bw-rotation-3 .bw-typography-this-title {
     transform: rotate( -45deg);
     -webkit-transform: rotate( -45deg);
@@ -5808,6 +5919,7 @@
     -o-transform: rotate( -45deg);
 }
 
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-4,
 .bw-typograpgy-wrap .bw-rotation-4 .bw-typography-this-title {
     transform: rotate( 0deg);
     -webkit-transform: rotate( 0deg);
@@ -5816,6 +5928,7 @@
     -o-transform: rotate( 0deg);
 }
 
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-5,
 .bw-typograpgy-wrap .bw-rotation-5 .bw-typography-this-title {
     transform: rotate( 45deg);
     -webkit-transform: rotate( 45deg);
@@ -5824,6 +5937,7 @@
     -o-transform: rotate( 45deg);
 }
 
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-6,
 .bw-typograpgy-wrap .bw-rotation-6 .bw-typography-this-title {
     transform: rotate( 90deg);
     -webkit-transform: rotate( 90deg);
@@ -5832,6 +5946,7 @@
     -o-transform: rotate( 90deg);
 }
 
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-7,
 .bw-typograpgy-wrap .bw-rotation-7 .bw-typography-this-title {
     transform: rotate( 180deg);
     -webkit-transform: rotate( 180deg);

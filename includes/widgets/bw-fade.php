@@ -194,6 +194,26 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 			]
         );
 
+		$this->add_control(
+			'img_grow',
+			[
+				'label' => __( 'Image Grow From', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'rtl',
+				'options' => [
+					'rtl' => __( 'Right To Left', 'blackwidgets' ),
+					'ltr' => __( 'Left To Right', 'blackwidgets' ),
+					'ttb' => __( 'Top To Bottom', 'blackwidgets' ),
+					'btt' => __( 'Bottom To Top', 'blackwidgets' ),
+				],
+				'condition'  => [
+					'widget_type' => [
+						'bw-t-1',
+					],
+				],
+			]
+		);
+
 		$this->end_controls_section();
 		// End
 
@@ -953,7 +973,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 					'unit' => 'px',
 					'size' => 0,
 				],
-				'description' => __( 'movement on the diagram Z - do not leave empty!', 'blackwidgets' ),
+				'description' => __( 'Movement on the diagram Z - do not leave empty!', 'blackwidgets' ),
 			]
 		);
 
@@ -1221,6 +1241,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$settings   				= $this->get_settings_for_display();
 		// Variables
         $type 	        			= isset($settings['widget_type']) 						? $settings['widget_type'] 							: '';
+		$img_grow					= isset($settings['img_grow']) 							? $settings['img_grow']								: '';
         $image_URL 	       			= isset( $settings['image']['url']) 					?  $settings['image']['url'] 						: '';
         $image_link 	   			= isset($settings['image_link']) 						? $settings['image_link'] 							: '';
 		$target            			= isset($settings['image_link_url']['is_external']) 	? 'target="_blank"' 								: '';
@@ -1321,8 +1342,8 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 				echo '<div class="bw-load-img bw-cursor-' . $cursor .'" id="'. $data_id .'">';
 					echo '<div class="bw-img ' . $settings['hover_animation'] . '">';
 						if ( $image_link == 'yes') { echo '<a href="' . $settings['image_link_url']['url'] . '"' . $target . $nofollow . ' class="bw-image-link">'; }
-						echo '<div class="bw-image-grow-cover"></div>';
-							echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail', $settings ) . '" class="">';
+						echo '<div class="bw-image-grow-cover ' . $img_grow . '"></div>';
+							echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail', $settings ) . '" class="' . $img_grow . '">';
 						if ( $image_link == 'yes'){ echo '</a>'; }
 					echo '</div>';
 				echo '</div>';

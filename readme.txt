@@ -2,9 +2,9 @@
 Contributors: skalanter, modernaweb
 Donate link: http://modernaweb.net/
 Tags: page builder, editor, elementor widgets, elementor addon, typography
-Stable tag: 1.2.6
-Tested up to: 5.9
-Requires PHP: 5.6
+Stable tag: 1.3.0
+Tested up to: 6.0
+Requires PHP: 7.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -104,6 +104,23 @@ WordPress 4.9+
 
 
 ## Changelog
+
+= 1.3.0 — 2022-08-14 =
+- Compatibility: WordPress v6.0
+- Compatibility: Elementor v3.7
+- Added: New widget: Black Flat Nav
+- Added: Custom Black Button Styles
+- Added: Black Button Alignment(s)
+- Added: Custom Button Styling
+- Added: Image Trigger with GSAP
+- Added: Link item to Black List
+- Added: 4 direction for the Black Fade Image
+- Improved: Dark Mode
+- Removed: Scheme from some widgets
+- Fixed: Some issues on UI and UX of the Black Magic Links
+- Fixed: Some issues on the Black Flip Box widget
+- Fixed: Some issues on the Black Typography widget
+- Fixed: Some minor issue
 
 = 1.2.6 — 2022-1-31 =
 - Compatibility: WordPress v5.9
