@@ -273,11 +273,29 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			]
 		);
 
+		// Enable Title Section
+		$this->add_control(
+			'custom_btn_show',
+			[
+				'label' 		=> __( 'Do You Need Icon/shape?', 'blackwidgets' ),
+				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
+				'label_on' 		=> __( 'Yes', 'blackwidgets' ),
+				'label_off' 	=> __( 'No!', 'blackwidgets' ),
+				'return_value' 	=> 'enablenow',
+				'default' 		=> 'false',
+			]
+		);
+
 		$this->add_control(
 			'custom_icon_widget',
 			[
 				'label' => __( 'Icon', 'blackwidgets' ),
 				'type' => Controls_Manager::ICONS,
+				'condition'  => [
+					'custom_btn_show' => [
+						'enablenow',
+					],
+				],
 			]
 		);
 
@@ -293,6 +311,11 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 					'before'		=> __( 'Before', 'blackwidgets' ),
 					'up' 			=> __( 'Up', 'blackwidgets' ),
 					'down' 			=> __( 'Down ', 'blackwidgets' ),
+				],
+				'condition'  => [
+					'custom_btn_show' => [
+						'enablenow',
+					],
 				],
 			]
 		);
@@ -376,7 +399,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-button-box .bw-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-button-box .bw-btn, {{WRAPPER}} .bw-button-box.abstract.a-2 .bw-btn .btx-a1' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -483,7 +506,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-button-box .bw-btn:hover' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-button-box .bw-btn:hover, {{WRAPPER}} .bw-button-box .bw-btn, {{WRAPPER}} .bw-button-box.abstract.a-2 .bw-btn:hover .btx-a1' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -708,6 +731,34 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			]
 		);
 
+		// Padding
+		$this->add_responsive_control(
+			'style_wrapper_padding_normal',
+			[
+				'label' => __( 'Padding For Wrapper', 'blackwidgets' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-button-box .bw-custom-btn .bw-custom-icon-shape,
+					 {{WRAPPER}} .bw-button-box .bw-custom-btn .bw-custom-icon-shape' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// margin
+		$this->add_responsive_control(
+			'style_wrapper_margin_normal',
+			[
+				'label' => __( 'Margin For Wrapper', 'blackwidgets' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-button-box .bw-custom-btn .bw-custom-icon-shape,
+					 {{WRAPPER}} .bw-button-box .bw-custom-btn .bw-custom-icon-shape' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
 		$this->end_controls_tab();
 
 		$this->start_controls_tab(
@@ -779,6 +830,34 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			]
 		);
 
+		// Padding
+		$this->add_responsive_control(
+			'style_wrapper_padding_hover',
+			[
+				'label' => __( 'Padding For Wrapper', 'blackwidgets' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-button-box .bw-custom-btn:hover .bw-custom-icon-shape,
+					 {{WRAPPER}} .bw-button-box .bw-custom-btn:hover .bw-custom-icon-shape' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// margin
+		$this->add_responsive_control(
+			'style_wrapper_margin_hover',
+			[
+				'label' => __( 'Margin For Wrapper', 'blackwidgets' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-button-box .bw-custom-btn:hover .bw-custom-icon-shape,
+					 {{WRAPPER}} .bw-button-box .bw-custom-btn:hover .bw-custom-icon-shape' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
 		$this->end_controls_tab();
 		$this->end_controls_tabs(); // End Tabs	
 
@@ -811,6 +890,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$alignment 				= isset($settings['widget_alignment']) 			? $settings['widget_alignment']			: '';
 
 		$custom_icon_position	= isset($settings['custom_icon_position'])		? $settings['custom_icon_position']		: '';
+		$enable_custom_shape	= 'enablenow' === $settings['custom_btn_show']	? $settings['custom_btn_show']			: '';
 
 		$data_id		= 'bw_' . uniqid();
 		$script_id		= '#' . $data_id;
@@ -946,9 +1026,11 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 						case 'before':
 						case 'up':
 							echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn bw-custom-btn ' . $custom_icon_position . '">';
-								echo '<span class="bw-custom-icon-shape">';
-									\Elementor\Icons_Manager::render_icon( $settings['custom_icon_widget'], [ 'aria-hidden' => 'true' ] );
-								echo '</span>';
+								if ( $enable_custom_shape ){
+									echo '<span class="bw-custom-icon-shape">';
+										\Elementor\Icons_Manager::render_icon( $settings['custom_icon_widget'], [ 'aria-hidden' => 'true' ] );
+									echo '</span>';
+								}
 								echo $text;
 							echo '</a>';
 						break;
@@ -956,9 +1038,11 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 						case 'down':
 							echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn bw-custom-btn ' . $custom_icon_position . '">';
 								echo $text;
-								echo '<span class="bw-custom-icon-shape">';
-									\Elementor\Icons_Manager::render_icon( $settings['custom_icon_widget'], [ 'aria-hidden' => 'true' ] );
-								echo '</span>';
+								if ( $enable_custom_shape ){
+									echo '<span class="bw-custom-icon-shape">';
+										\Elementor\Icons_Manager::render_icon( $settings['custom_icon_widget'], [ 'aria-hidden' => 'true' ] );
+									echo '</span>';
+								}
 							echo '</a>';
 						break;
 						default:

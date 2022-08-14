@@ -889,7 +889,7 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 		$settings   	= $this->get_settings_for_display();
 
 		// Variables
-		$type 	        	= isset($settings['widget_type']) 				? $settings['widget_type'] 					: '';
+		$type 	        	= isset($settings['widget_type']) 				? $settings['widget_type']				: '';
         $text 	        	= isset($settings['widget_text']) 				? $settings['widget_text'] 				: '';
 		$target         	= $settings['website_link']['is_external'] 		? 'target="_blank"' 					: '';
 		$nofollow       	= $settings['website_link']['nofollow'] 		? ' rel="nofollow"'						: '';

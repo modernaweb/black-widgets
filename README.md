@@ -126,15 +126,20 @@ WordPress 4.9+
 - Compatibility: WordPress v6.0
 - Compatibility: Elementor v3.7
 - Added: New widget: Black Flat Nav
-- Added: Custom Button Styles
-- Added: Button Alignment
+- Added: Custom Black Button Styles
+- Added: Black Button Alignment(s)
 - Added: Custom Button Styling
 - Added: Image Trigger with GSAP
+- Added: Link item to Black List
+- Improved: Dark Mode
 - Removed: Scheme from some widgets
-- Fixed: Some issues on UI and UX of the magic links
+- Fixed: Some issues on UI and UX of the Black Magic Links
+- Fixed: Some issues on the Black Flip Box widget
 
 
 
+
+- Fixed: Some minor issue
 
 
 ### 1.2.6 — 2022-1-31 =

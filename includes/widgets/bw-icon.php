@@ -133,6 +133,8 @@ class BLACK_WIDGETS_Icon extends \Elementor\Widget_Base {
 			]
 		);
 
+
+
 		// Alignment
 		$this->add_responsive_control(
 			'widget_alignment',

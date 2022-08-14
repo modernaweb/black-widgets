@@ -580,8 +580,6 @@ class BLACK_WIDGETS_Nav extends \Elementor\Widget_Base {
 			]
 		);
 
-
-
 		$this->add_control(
 			'style_icon_nav_size',
 			[
@@ -600,9 +598,6 @@ class BLACK_WIDGETS_Nav extends \Elementor\Widget_Base {
 				],
 			]
 		);
-
-
-
 
 		// Style Subtitle Tabs
 		$this->start_controls_tabs('black_widget_icon_1_tab');
