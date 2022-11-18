@@ -263,7 +263,7 @@ ONLINE
 			[
 				'label' => __( 'Toggle Actions', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '', 'blackwidgets' ),
+				'default' => __( 'none none none none', 'blackwidgets' ),
 				'placeholder' => __( 'none none none none', 'blackwidgets' ),
 				'description' => __( '----', 'blackwidgets' ),
 				]
@@ -984,9 +984,9 @@ transformStyle: "preserve-3d",
 				break;
 			
 			case 'image':
-				echo '<div class="bw-gsap-img" id="'. $script_id .'">';
-					echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail', $settings ) . '" class="bw-img-trigger-x '. $image_trigger_class .'">';
-				echo '</div>';
+				echo '<div class="bw-gsap-img" id="'. $script_id .'"><div class="'. $image_trigger_class .'">';
+					echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail', $settings ) . '" class="bw-img-trigger-x">';
+				echo '</div></div>';
 				if ( isset($gsap_options) && !empty($gsap_options) ) {
 					echo '<script>
 						jQuery(window).ready(function($) {

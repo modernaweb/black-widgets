@@ -292,6 +292,7 @@ final class BLACK_WIDGETS_Modernaweb_Plugin {
 		require_once( __DIR__ . '/widgets/bw-nav.php' );
 		// require_once( __DIR__ . '/widgets/bw-modale.php' ); 
 		// require_once( __DIR__ . '/widgets/bw-menu-x.php' );  // Navigation Menu with responsive size and more + logo and other header styles!
+		//require_once( __DIR__ . '/widgets/bw-sentence.php' );
 
         // Register widget
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Title() );
@@ -314,6 +315,7 @@ final class BLACK_WIDGETS_Modernaweb_Plugin {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Box() );
 		// \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Modale() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Nav() );
+		// \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Sentence() );
 
         if( isset($gsap_options) && !empty($gsap_options) ) {
             // require_once( __DIR__ . '/widgets/bw-sequence.php' );
@@ -339,7 +341,7 @@ final class BLACK_WIDGETS_Modernaweb_Plugin {
 	
 	}
 	
-	public function bw_style_before_section_start ( $element, $section_id, $args ) {
+	/* public function bw_style_before_section_start ( $element, $section_id, $args ) {
 		// @var \Elementor\Element_Base $element | https://code.elementor.com/php-hooks/
 		if ( 'section' === $element->get_name() && 'section_background' === $section_id ) {
 	 
@@ -388,18 +390,18 @@ final class BLACK_WIDGETS_Modernaweb_Plugin {
 
 			$element->end_controls_section();
 		}
-	 }
+	 } */
 
-	 public function bw_css_pattern ( $element ) {
+	/*  public function bw_css_pattern ( $element ) {
 		
 		$settings = $element->get_settings();
 		if (isset($settings['bw_custom_section_enable_css_pattern']) && $settings['bw_custom_section_enable_css_pattern'] == 'css_enable' ){
 			$element->add_render_attribute( '_wrapper', 'id', $settings['bw_custom_section_css_pattern'] );
 		}
 
-	 }
+	 } */
 
-	 function bw_css_js() {
+	 /* function bw_css_js() {
 
 		?>
 			<script>
@@ -409,7 +411,7 @@ final class BLACK_WIDGETS_Modernaweb_Plugin {
 			</script>
 		<?php
 
-	 }
+	 } */
 
 }
 

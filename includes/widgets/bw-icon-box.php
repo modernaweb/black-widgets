@@ -442,6 +442,24 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			]
         );
 
+		// Enable Paragraph Section
+		$this->add_control(
+			'widget_svg_animate',
+			[
+				'label' 		=> __( 'SVG Animate!', 'blackwidgets' ),
+				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
+				'label_on' 		=> __( 'Yes', 'blackwidgets' ),
+				'label_off' 	=> __( 'No !', 'blackwidgets' ),
+				'return_value' 	=> 'bw-iconbox-svg-animate',
+				'default' 		=> 'off',
+				'condition'  => [
+					'widget_icon_image_enable' => [
+						'icon_image_enable',
+					],
+				],
+			]
+		);
+
 		$this->end_controls_section();
 		// End
 
@@ -1786,10 +1804,15 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 		$paragraph_align		= isset($settings['content_paragraph_text_alignment'])			? $settings['content_paragraph_text_alignment']	: '';
 		$link_align				= isset($settings['content_link_text_alignment'])				? $settings['content_link_text_alignment']		: '';
 
+		$svg_animate			= 'bw-iconbox-svg-animate' === $settings['widget_svg_animate']				? $settings['widget_svg_animate'] 				: '';
+		$data_id				= 'bw_' . uniqid();
+		$animate_id				= '#' . $data_id;
+
+
 		// Render 
 		switch ($position) {
 			case 'position-2':
-				echo '<div class="bw-iconbox bw-' . $position . '">';
+				echo '<div id="' . $data_id . '" class="bw-iconbox bw-' . $position . ' ' . $svg_animate . '">';
 					// Title
 					if ( $enable_title ) echo '<' . $title_tag . ' class="bw-it-is-title ' . $title_align . '">' . $title . '</' . $title_tag . '>';
 					// Subtitle
@@ -1805,7 +1828,7 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 
 				case 'position-3':
 				case 'position-4':
-					echo '<div class="bw-iconbox bw-' . $position . '">';
+					echo '<div id="' . $data_id . '" class="bw-iconbox bw-' . $position . ' ' . $svg_animate . '">';
 						echo '<div class="bw-image-wrap">';
 							// Image
 							if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>'; elseif ( $svgcode == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div>'; else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif;
@@ -1825,7 +1848,7 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 
 			case 'position-5':
 			case 'position-6':
-				echo '<div class="bw-iconbox bw-' . $position . '">';
+				echo '<div id="' . $data_id . '" class="bw-iconbox bw-' . $position . ' ' . $svg_animate . '">';
 					echo '<div class="bw-wrapper">';
 					// Image
 					if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>'; elseif ( $svgcode == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div>';else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif;
@@ -1846,9 +1869,9 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 				break;
 
 			default:
-				echo '<div class="bw-iconbox bw-' . $position . '">';
+				echo '<div id="' . $data_id . '" class="bw-iconbox bw-' . $position . ' ' . $svg_animate . '">';
 					// Image
-					echo '<div class="bw-iconbox-icon"><div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div></div>';
+					echo '<div class="bw-iconbox-icon-svg-code"><div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div></div>';
 					if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>'; elseif ( $svgcode == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div>'; else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif;
 					// elseif ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>';  else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>';
 					// Title
@@ -1862,6 +1885,34 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 				echo '</div>';
 				break;
 		}
+	
+		echo '<script>		
+		
+			jQuery(window).ready(function($) {
+				var scroll = jQuery(window).scrollTop();
+				var objectSelect = jQuery("'. $animate_id .'");
+				var bottom = jQuery(window).height();
+				var objectPosition = objectSelect.offset().top - bottom;
+				if (scroll > objectPosition) {
+					jQuery("'. $animate_id .'").addClass("run");
+				} else {
+					jQuery("'. $animate_id .'").removeClass("run");
+				}
+			});
+
+			jQuery(window).scroll(function($) {
+					var top = jQuery("body").offset();
+					var scroll = jQuery(window).scrollTop();
+					var objectSelect = jQuery("'. $animate_id .'");
+					var bottom = jQuery(window).height();
+					var objectPosition = objectSelect.offset().top - bottom;
+					if (scroll > objectPosition) {
+						jQuery("'. $animate_id .'").addClass("run");
+					} else {
+						jQuery("'. $animate_id .'").removeClass("run");
+					}
+			});
+			</script>';
 
 	}
 

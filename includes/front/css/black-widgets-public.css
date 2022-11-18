@@ -5452,6 +5452,40 @@
     letter-spacing: -1px;
 }
 
+.bw-iconbox.bw-iconbox-svg-animate .bw-iconbox-icon path,
+.bw-iconbox.bw-iconbox-svg-animate .bw-iconbox-icon {
+    transition: all .38s ease;
+    -webkit-transition: all .38s ease;
+    -moz-transition: all .38s ease;
+    -ms-transition: all .38s ease;
+    -o-transition: all .38s ease;
+}
+
+.bw-iconbox.bw-iconbox-svg-animate .bw-iconbox-icon path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    /* opacity: 0; */
+}
+
+.bw-iconbox.bw-iconbox-svg-animate .bw-iconbox-icon {
+    background-image: none !important;
+}
+
+@keyframes bwxanimate {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+.bw-iconbox.bw-iconbox-svg-animate.run .bw-iconbox-icon path {
+    opacity: 1;
+    /* beginning of L */
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 2000;
+    /* animation: bw-animated 3s linear forwards 1s; */
+    animation: bwxanimate 6s cubic-bezier(.65, 0, .35, 1) forwards;
+}
+
 
 /**
  * Black Call To Action - CTA
@@ -6704,3 +6738,14 @@
     -ms-transition: all 0.21s cubic-bezier(1, 0.45, 0.56, 0.7) !important;
     -o-transition: all 0.21s cubic-bezier(1, 0.45, 0.56, 0.7) !important;
 }
+
+
+/* Parallax */
+.bw-parallax {
+    min-height: 400px;
+    background: transparent;
+}
+
+/* .bw-parallax-x > .e-container{
+    z-index: 9999999999;
+} */

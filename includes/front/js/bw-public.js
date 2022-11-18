@@ -211,4 +211,18 @@ jQuery(window).scroll(function(event) {
     // run on scroll
     animateOnScroll($accentTexts, anim_accentText);
 
+    /**
+     * Get background image from css to data on div
+     */
+    // var jqoce = ".bw-parallax-x";
+    // var bg = jQuery(jqoce).css("background-image");
+    // bg = bg.replace('url(','').replace(')','').replace(/\"/gi, "");
+    // jQuery(jqoce).addClass("parallax-window");
+    // jQuery(jqoce).attr("data-parallax", "scroll");
+    // jQuery(jqoce).attr("data-image-src", bg);
+    // jQuery(jqoce).attr("data-z-index", "99999");
+    
+    
+
+
 }); // end window load wrapper
