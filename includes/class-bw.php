@@ -292,7 +292,7 @@ final class BLACK_WIDGETS_Modernaweb_Plugin {
 		require_once( __DIR__ . '/widgets/bw-nav.php' );
 		// require_once( __DIR__ . '/widgets/bw-modale.php' ); 
 		// require_once( __DIR__ . '/widgets/bw-menu-x.php' );  // Navigation Menu with responsive size and more + logo and other header styles!
-		//require_once( __DIR__ . '/widgets/bw-sentence.php' );
+		require_once( __DIR__ . '/widgets/bw-sentence.php' );
 
         // Register widget
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Title() );
@@ -315,7 +315,7 @@ final class BLACK_WIDGETS_Modernaweb_Plugin {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Box() );
 		// \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Modale() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Nav() );
-		// \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Sentence() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new BLACK_WIDGETS_Sentence() );
 
         if( isset($gsap_options) && !empty($gsap_options) ) {
             // require_once( __DIR__ . '/widgets/bw-sequence.php' );
