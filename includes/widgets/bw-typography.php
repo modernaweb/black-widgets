@@ -1325,7 +1325,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_control(
 			'gradient_color_title_enable',
 			[
-				'label' 		=> __( 'Text Gradient', 'blackwidgets' ),
+				'label' 		=> __( 'Text Gradient/Image', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
 				'label_on' 		=> __( 'Yes', 'blackwidgets' ),
 				'label_off' 	=> __( 'No !', 'blackwidgets' ),
@@ -1341,7 +1341,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			[
 				'name' => 'unique_widget_typography_title_gradient',
 				'label' => __( 'Title Background', 'blackwidgets' ),
-				'types' => [ 'classic', 'gradient', 'video' ],
+				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}}  .bw-typograpgy-repetitive',
 				'condition'  => [
 					'gradient_color_title_enable' => [
@@ -2228,8 +2228,12 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		//ID Settings
 		$data_id				= 'bw_' . uniqid();
 		$script_id				= '#' . $data_id;
-		$text_movement			= $settings['text_movement'];
-		$text_movement2			= $settings['text_movement2'];
+		$options = get_option('plugin_options') ? get_option('plugin_options') : '';
+		$gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
+		if( isset($gsap_options) && !empty($gsap_options) ) {
+			$text_movement			= $settings['text_movement'];
+			$text_movement2			= $settings['text_movement2'];
+		}
 		//Transform Normal Styles 
 		// Normal Move 
 		$translatex 			= isset( $move_normal_x["size"] ) 						? $move_normal_x["size"] . $move_normal_x["unit"] : '';

@@ -2,8 +2,8 @@
 Contributors: skalanter, modernaweb
 Donate link: http://modernaweb.net/
 Tags: page builder, editor, elementor widgets, elementor addon, typography
-Stable tag: 1.3.0
-Tested up to: 6.0
+Stable tag: 1.3.1
+Tested up to: 6.1
 Requires PHP: 7.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -104,6 +104,13 @@ WordPress 4.9+
 
 
 ## Changelog
+
+= 1.3.1 — 202X-XX-XX =
+- Compatibility: WordPress v6.1
+- Compatibility: Elementor v4
+- Added: New widget: Black Sentence
+- Improved: First set-up notice related to GSAP
+- Fixed: PHP Deprecated on the "register_widget_type" hook
 
 = 1.3.0 — 2022-08-14 =
 - Compatibility: WordPress v6.0

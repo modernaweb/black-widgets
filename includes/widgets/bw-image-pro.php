@@ -1489,8 +1489,12 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 		//ID Settings
 		$data_id                	= 'bw_' . uniqid();
 		$script_id              	= '#' . $data_id;
-		$image_movement 			= $settings['image_movement'];
-		$image_movement2 			= $settings['image_movement2'];
+		$options = get_option('plugin_options') ? get_option('plugin_options') : '';
+		$gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
+		if( isset($gsap_options) && !empty($gsap_options) ) {
+			$image_movement 			= $settings['image_movement'];
+			$image_movement2 			= $settings['image_movement2'];
+		}
 		//Transform Normal Styles 
 		// Normal Move 
 		$translatex 				= isset( $move_normal_x["size"] ) 						? $move_normal_x["size"] . $move_normal_x["unit"] : '';

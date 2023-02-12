@@ -671,52 +671,55 @@ class BLACK_WIDGETS_Nav extends \Elementor\Widget_Base {
 			$bw_icon_svg_code	 = '<i class="'. $befor_nav .'"></i>';
 		}
 
+		$allmenus = $this->get_available_menus();
 
-		switch ($custom_nav_styles) {
-			case 'style7':
-				$args = [
-					'echo'          => false,
-					'menu'          => $settings['menu'],
-					'menu_class'    => 'bw-menu-box',
-					'menu_id'       => 'menu-' . $this->get_nav_menu_index() . '-' . $this->get_id(),
-					'fallback_cb'   => '__return_empty_string',
-					'link_before'        => $bw_icon_svg_code,
-					'container'     => '',
-				];
-				break;
+		if ( ! empty( $allmenus ) ) {
+			switch ($custom_nav_styles) {
+				case 'style7':
+					$args = [
+						'echo'          => false,
+						'menu'          => $settings['menu'],
+						'menu_class'    => 'bw-menu-box',
+						'menu_id'       => 'menu-' . $this->get_nav_menu_index() . '-' . $this->get_id(),
+						'fallback_cb'   => '__return_empty_string',
+						'link_before'        => $bw_icon_svg_code,
+						'container'     => '',
+					];
+					break;
 
-			case 'style8':
-				$args = [
-					'echo'          => false,
-					'menu'          => $settings['menu'],
-					'menu_class'    => 'bw-menu-box',
-					'menu_id'       => 'menu-' . $this->get_nav_menu_index() . '-' . $this->get_id(),
-					'fallback_cb'   => '__return_empty_string',
-					'link_after'        => $bw_icon_svg_code,
-					'container'     => '',
-				];
-				break;
+				case 'style8':
+					$args = [
+						'echo'          => false,
+						'menu'          => $settings['menu'],
+						'menu_class'    => 'bw-menu-box',
+						'menu_id'       => 'menu-' . $this->get_nav_menu_index() . '-' . $this->get_id(),
+						'fallback_cb'   => '__return_empty_string',
+						'link_after'        => $bw_icon_svg_code,
+						'container'     => '',
+					];
+					break;
+				
+				default:
+					$args = [
+						'echo'          => false,
+						'menu'          => $settings['menu'],
+						'menu_class'    => 'bw-menu-box',
+						'menu_id'       => 'menu-' . $this->get_nav_menu_index() . '-' . $this->get_id(),
+						'fallback_cb'   => '__return_empty_string',
+						'container'     => '',
+					];
+					break;
+			}
+
+			$menu_html = wp_nav_menu( $args );
 			
-			default:
-				$args = [
-					'echo'          => false,
-					'menu'          => $settings['menu'],
-					'menu_class'    => 'bw-menu-box',
-					'menu_id'       => 'menu-' . $this->get_nav_menu_index() . '-' . $this->get_id(),
-					'fallback_cb'   => '__return_empty_string',
-					'container'     => '',
-				];
-				break;
+			// Render
+			
+
+			echo '<div class="bw-nav ' . $custom_nav_styles . ' ' . $alignment . '">';
+				echo $menu_html;
+			echo '</div>';
 		}
-
-		$menu_html = wp_nav_menu( $args );
-        
-		// Render
-        
-
-        echo '<div class="bw-nav ' . $custom_nav_styles . ' ' . $alignment . '">';
-            echo $menu_html;
-        echo '</div>';
 
 	}
 

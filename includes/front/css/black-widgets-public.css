@@ -6788,7 +6788,11 @@
     width: 220px;
 }
 
-
+.bw-sentence .bw-gradient {
+    -webkit-text-fill-color: transparent !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+}
 
 
 
