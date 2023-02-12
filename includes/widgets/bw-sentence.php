@@ -107,7 +107,6 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 			]
 		);
 
-
 		// Select tag
 		$this->add_control(
 			'widget_html_tag_title',
@@ -176,6 +175,39 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 				],
 			]
 		);
+
+		// Enable Title Section
+		$repeater->add_control(
+			'item_link',
+			[
+				'label' 		=> __( 'Link', 'blackwidgets' ),
+				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
+				'label_on' 		=> __( 'Yes', 'blackwidgets' ),
+				'label_off' 	=> __( 'No !', 'blackwidgets' ),
+				'return_value' 	=> 'link_enable',
+			]
+		);
+
+		$repeater->add_control(
+			'widget_link_url',
+			[
+				'label' => __( 'Link', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::URL,
+				'placeholder' => __( 'https://your-link.com', 'blackwidgets' ),
+				'show_external' => true,
+				'default' => [
+					'url' => '',
+					'is_external' => false,
+					'nofollow' => false,
+                ],
+				'condition'  => [
+					'item_link' => [
+						'link_enable',
+					],
+				],
+				'separator' => 'after',
+			]
+        );
 
 		// Z-Index
 		$repeater->add_control(
@@ -253,7 +285,6 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 			]
 		);
 
-
 		// Color
 		$repeater->add_control(
 			'sentence_title_solid_color_normal',
@@ -261,7 +292,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 				'label' => __( 'Title Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a' => 'color: {{VALUE}}',
 				],
 				'condition'  => [
 					'sentence_type' => [
@@ -277,7 +308,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 			[
 				'name' => 'sentence_title_typography_normal',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}',
+				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a',
 				'condition'  => [
 					'sentence_type' => [
 						'bw-t-1',
@@ -326,7 +357,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 				'label' => __( 'Text Stroke Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}' => '-webkit-text-stroke-color: {{VALUE}}',
+					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a' => '-webkit-text-stroke-color: {{VALUE}}',
 				],
 				'condition'  => [
 					'widget_stroke_title_enable' => [
@@ -350,7 +381,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}' => '-webkit-text-stroke-width: {{SIZE}}{{UNIT}} !important;',
+					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a' => '-webkit-text-stroke-width: {{SIZE}}{{UNIT}} !important;',
 				],
 				'condition'  => [
 					'widget_stroke_title_enable' => [
@@ -389,7 +420,6 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 			]
 		);
 
-
 		// Background
 		$repeater->add_group_control(
 			Group_Control_Background::get_type(),
@@ -397,7 +427,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 				'name' => 'unique_widget_typography_title_gradient',
 				'label' => __( 'Title Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}',
+				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a',
 				'condition'  => [
 					'gradient_color_title_enable' => [
 						'gradient_enable',
@@ -405,7 +435,6 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 				],
 			]
 		);
-
 
 		$repeater->add_control(
 			'hr1',
@@ -685,7 +714,6 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 			]
 		);
 
-
 		// Background Color
 		$repeater->add_group_control(
 			Group_Control_Background::get_type(),
@@ -711,7 +739,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 				'label' => __( 'Title Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}:hover' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}:hover, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a:hover' => 'color: {{VALUE}}',
 				],
 				'condition'  => [
 					'sentence_type' => [
@@ -727,7 +755,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 			[
 				'name' => 'sentence_title_typography_hover',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}:hover',
+				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}:hover, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a:hover',
 				'condition'  => [
 					'sentence_type' => [
 						'bw-t-1',
@@ -809,8 +837,6 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->end_controls_tab();
 		$repeater->end_controls_tabs(); // End Tabs
 
-
-
 		$this->add_control(
 			'sentence',
 			[
@@ -835,60 +861,45 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 			]
 		);
 
-
-
 		$this->end_controls_section();
 		// End
-
-		// Start
-		// Content section
-		$this->start_controls_section(
-			'custom_section',
-			[
-				'label' => __( 'Custom Content', 'blackwidgets' ),
-				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
-				// 'condition'  => [
-				// 	'widget_type' => [
-				// 		'custom',
-				// 	],
-				// ],
-			]
-		);
-
-
-		$this->end_controls_section();
-		// End
-
-		// Start
-		// Style section
-		$this->start_controls_section(
-			'style_section',
-			[
-				'label' => __( 'Box Style', 'blackwidgets' ),
-				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
-			]
-		);
-
-
-
-		$this->end_controls_section();
-        // End
 
 		// Start
 		// Typography section
 		$this->start_controls_section(
-			'icon_section',
+			'all_general_typography_section',
 			[
-				'label' => __( 'Icon Style', 'blackwidgets' ),
+				'label' => __( 'General Typography', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
-				'condition'  => [
-					'widget_type' => [
-						'custom',
-					],
-				],
 			]
         );
 
+		// Color
+		$this->add_control(
+			'all_general_color_sentence',
+			[
+				'label' => __( 'Title Color', 'blackwidgets' ),
+				'type' => Controls_Manager::COLOR,
+				'scheme' => [
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bw-sentence .bw-t-1' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		// Typography
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'all_general_typography_sentence',
+				'label' => __( 'Typography', 'blackwidgets' ),
+				'scheme' => Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1',
+			]
+		);
 
 		$this->end_controls_section();
 
@@ -913,39 +924,26 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$script_id				= '#' . $data_id;
 
 		// Render
-        // echo '<div class="bw-sentence bw-showcase bw-showcase-type-1">';
-		// 	echo '<h1>';
-		// 		echo '<span>Example</span>';
-		// 		echo '<span>Box</span>';
-		// 		echo '<span>Second Text</span>';
-		// 	echo '</h1>';
-		// echo '</div>';
-
-
-
-
-		// Render
         if ( $settings['sentence'] ) {
 			echo '<div class="bw-sentence bw-showcase">';
 				echo '<' . $title_tag . ' class="bw-sentence-items">';
 					foreach (  $settings['sentence'] as $item ) {
 
-
 						// inner settings for each item
-						
-						// $link			= isset($item['link_list']['url'])				? $item['link_list']['url']				: '';
-						// $target			= $item['link_list']['is_external']				? 'target="_blank"' 					: '';
-						// $nofollow		= $item['link_list']['nofollow'] 				? ' rel="nofollow"'						: '';
+						if(isset($item['widget_link_url'])) {
+							$link			= isset($item['widget_link_url']['url'])			? $item['widget_link_url']['url']		: '';
+							$target			= $item['widget_link_url']['is_external']			? 'target="_blank"' 					: '';
+							$nofollow		= $item['widget_link_url']['nofollow'] 				? ' rel="nofollow"'						: '';
+						}
 
 						$gradient			= isset($item['gradient_color_title_enable'])	? $item['gradient_color_title_enable']	: '';
 						$gradient_txt		= ($gradient == 'gradient_enable')				? 'bw-gradient'							: '';
 
-
 						if( $item['sentence_type'] == 'bw-t-1' ) {
 							echo '<span class="elementor-repeater-item-' . $item['_id'] . ' '.$item['sentence_type'].' '.$gradient_txt.'">';
-							//link here - can come from bw-list as an example
-								echo $item['sentence_title'];
-							// close tag </a>
+								if(isset($item['widget_link_url'])) { echo '<a href="' . $item['widget_link_url']['url'] . '"' . $target . $nofollow . ' class="bw-item-link' . $type . '">'; }
+									echo $item['sentence_title'];
+								if(isset($item['widget_link_url'])) { echo '</a>'; }
 							echo '</span>';	
 						}
 
@@ -953,16 +951,16 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 							$position = isset($item['sentence_image_position'])			? $item['sentence_image_position']		: '';
 							echo '<span class="elementor-repeater-item-' . $item['_id'] . ' '.$item['sentence_type'].' bw-sentence-'.$position.'">';
 								// echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $item['sentence_image']['id'], 'thumbnail', $settings ) . '">';
-								echo '<img src="' . $item['sentence_image']['url'] . '">';
+								if(isset($item['widget_link_url'])) { echo '<a href="' . $item['widget_link_url']['url'] . '"' . $target . $nofollow . ' class="bw-item-link' . $type . '">'; }
+									echo '<img src="' . $item['sentence_image']['url'] . '">';
+								if(isset($item['widget_link_url'])) { echo '</a>'; }
 							echo '</span>';	
 						}
-
 	
 					}
 				echo '</' . $title_tag . '>';
 			echo '</div>';
 		}
-
 
 	}
 

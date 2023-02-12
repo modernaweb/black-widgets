@@ -227,7 +227,7 @@ body.toplevel_page_black-widgets .bw-box-backend .bw-btn:hover {
 }
 
 #bw-wrap .form-table input[type=text] {
-    max-width: 422px;
+    max-width: 520px;
     width: 100%;
     padding: 4px 9px;
     border-radius: 2px;
@@ -524,4 +524,12 @@ select:not(:focus),
     background: #3E3E3E;
     border-color: #3E3E3E;
     color: #6d7882;
+}
+
+.elementor-control-type-repeater .elementor-repeater-row-tools {
+    background-color: #393939 !important;
+}
+
+.elementor-control-type-repeater .elementor-repeater-row-controls {
+    border-color: #393939 !important;
 }
