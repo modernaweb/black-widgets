@@ -95,7 +95,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 	 * @since 1.0.0
 	 * @access protected
 	 */
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		// Start
 		// Content section
@@ -131,6 +131,42 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 				'default' => __( 'Black Widget Title', 'blackwidgets' ),
 				'placeholder' => __( 'Type your title here', 'blackwidgets' ),
 				'description' => __( 'You can use all other HTML tags into the title field e.g. code, mark, abbr, blockquote and  ...', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'shape_widget',
+			[
+				'label' => __( 'SVG Shape', 'blackwidgets' ),
+				'type' => Controls_Manager::ICONS,
+				'condition'  => [
+					'widget_type' => [
+						'bw-t-1',
+					],
+				],
+				'description' => __( 'Upload your custom SVG shape, then add <em> and </em> around of the text! you\'ll see the shape under the text with a simple animate.', 'blackwidgets' ),
+			]
+		);
+
+		// Select tag
+		$this->add_control(
+			'widget_html_tag_title',
+			[
+				'label' => __( 'HTML Tag', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'div',
+				'options' => [
+					'div' 	=> __( 'div', 'blackwidgets' ),
+					'h1' 	=> __( 'H1', 'blackwidgets' ),
+					'h2' 	=> __( 'H2', 'blackwidgets' ),
+					'h3' 	=> __( 'H3', 'blackwidgets' ),
+					'h4' 	=> __( 'H4', 'blackwidgets' ),
+					'h5' 	=> __( 'H5', 'blackwidgets' ),
+					'h6' 	=> __( 'H6', 'blackwidgets' ),
+					'p' 	=> __( 'p', 'blackwidgets' ),
+					'span' 	=> __( 'span', 'blackwidgets' ),
+				],
+				'description' => __( 'Choose an HTML tag, it can help you to SEO and beautifully of the UI design with follow the structure of your website.', 'blackwidgets' ),
 			]
 		);
 
@@ -461,15 +497,15 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 				'options'   => [
 					'left'   => [
 						'title' => __( 'Left', 'blackwidgets' ),
-						'icon'  => 'fa fa-align-left',
+						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
 						'title' => __( 'Center', 'blackwidgets' ),
-						'icon'  => 'fa fa-align-center',
+						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [
 						'title' => __( 'Right', 'blackwidgets' ),
-						'icon'  => 'fa fa-align-right',
+						'icon'  => 'eicon-text-align-right',
 					],
 				],
 				'default'   => 'center',
@@ -535,6 +571,214 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 				],
             ]
         );
+
+		$options = get_option('plugin_options') ? get_option('plugin_options') : '';
+		$gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
+		if( isset($gsap_options) && !empty($gsap_options) ) {
+
+			// Enable Image Movement Animate
+			$this->add_control(
+				'text_movement2',
+				[
+					'label' 		=> __( 'Text Movement Animate → From', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::SWITCHER,
+					'label_on' 		=> __( 'Enable', 'blackwidgets' ),
+					'label_off' 	=> __( 'Disable', 'blackwidgets' ),
+					'return_value' 	=> 'on',
+					'default' 		=> 'off',
+				]
+			);
+
+			// Start From
+			$this->add_control(
+				'trigger_hook2',
+				[
+					'label' 		=> __( 'Start Point', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'placeholder'   => '0.1',
+					'default'       => '0.1',
+					'condition' 	=> [ 
+						'text_movement2' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Length
+			$this->add_control(
+				'duration2',
+				[
+					'label' 		=> __( 'Duration', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'placeholder'   => '0.4',
+					'default'       => '0.4',
+					'condition' 	=> [ 
+						'text_movement2' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Vertical Movement
+			$this->add_control(
+				'vertical_movement2',
+				[
+					'label' 		=> __( 'Vertical Movement', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'condition' 	=> [ 
+						'text_movement2' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Horizontal Movement
+			$this->add_control(
+				'horizontal_movement2',
+				[
+					'label' 		=> __( 'Horizontal Movement', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'condition' 	=> [ 
+						'text_movement2' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Opacity at End
+			$this->add_control(
+				'opacity2',
+				[
+					'label' 		=> __( 'Opacity at End', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'condition' 	=> [ 
+						'text_movement2' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Rotation at End
+			$this->add_control(
+				'rotation2',
+				[
+					'label' 		=> __( 'Rotation at End', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'condition' 	=> [ 
+						'text_movement2' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+
+			// Enable Image Movement Animate
+			$this->add_control(
+				'text_movement',
+				[
+					'label' 		=> __( 'Text Movement Animate → To', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::SWITCHER,
+					'label_on' 		=> __( 'Enable', 'blackwidgets' ),
+					'label_off' 	=> __( 'Disable', 'blackwidgets' ),
+					'return_value' 	=> 'on',
+					'default' 		=> 'off',
+				]
+			);
+
+			// Start From
+			$this->add_control(
+				'trigger_hook',
+				[
+					'label' 		=> __( 'Start Point', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'placeholder'   => '0.1',
+					'default'       => '0.1',
+					'condition' 	=> [ 
+						'text_movement' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Length
+			$this->add_control(
+				'duration',
+				[
+					'label' 		=> __( 'Duration', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'placeholder'   => '0.4',
+					'default'       => '0.4',
+					'condition' 	=> [ 
+						'text_movement' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Vertical Movement
+			$this->add_control(
+				'vertical_movement',
+				[
+					'label' 		=> __( 'Vertical Movement', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'condition' 	=> [ 
+						'text_movement' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Horizontal Movement
+			$this->add_control(
+				'horizontal_movement',
+				[
+					'label' 		=> __( 'Horizontal Movement', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'condition' 	=> [ 
+						'text_movement' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Opacity at End
+			$this->add_control(
+				'opacity',
+				[
+					'label' 		=> __( 'Opacity at End', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'condition' 	=> [ 
+						'text_movement' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Rotation at End
+			$this->add_control(
+				'rotation',
+				[
+					'label' 		=> __( 'Rotation at End', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'condition' 	=> [ 
+						'text_movement' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+		}
 
 		$this->end_controls_section();
 		// End
@@ -1071,6 +1315,42 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'gradient_color1',
+			[
+				'type' => \Elementor\Controls_Manager::DIVIDER,
+			]
+		);
+
+		$this->add_control(
+			'gradient_color_title_enable',
+			[
+				'label' 		=> __( 'Text Gradient/Image', 'blackwidgets' ),
+				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
+				'label_on' 		=> __( 'Yes', 'blackwidgets' ),
+				'label_off' 	=> __( 'No !', 'blackwidgets' ),
+				'return_value' 	=> 'gradient_enable',
+				// 'default' 		=> 'false',
+			]
+		);
+
+
+		// Background
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'unique_widget_typography_title_gradient',
+				'label' => __( 'Title Background', 'blackwidgets' ),
+				'types' => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}}  .bw-typograpgy-repetitive',
+				'condition'  => [
+					'gradient_color_title_enable' => [
+						'gradient_enable',
+					],
+				],
+			]
+		);
+
 		$this->end_controls_section();
 		// End
 
@@ -1315,6 +1595,43 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 				'condition'  => [
 					'unique_widget_stroke_title_enable' => [
 						'stroke_enable',
+					],
+				],
+			]
+		);
+
+
+		$this->add_control(
+			'gradient_color2',
+			[
+				'type' => \Elementor\Controls_Manager::DIVIDER,
+			]
+		);
+
+		$this->add_control(
+			'gradient_color_unique_widget_enable',
+			[
+				'label' 		=> __( 'Text Gradient', 'blackwidgets' ),
+				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
+				'label_on' 		=> __( 'Yes', 'blackwidgets' ),
+				'label_off' 	=> __( 'No !', 'blackwidgets' ),
+				'return_value' 	=> 'unique_gradient_enable',
+				// 'default' 		=> 'false',
+			]
+		);
+
+
+		// Background
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'unique_widget_typography_unique_widget_gradient',
+				'label' => __( 'Title Background', 'blackwidgets' ),
+				'types' => [ 'classic', 'gradient', 'video' ],
+				'selector' => '{{WRAPPER}} .bw-typograpgy-repetitive.bw-unique',
+				'condition'  => [
+					'gradient_color_unique_widget_enable' => [
+						'unique_gradient_enable',
 					],
 				],
 			]
@@ -1852,6 +2169,8 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 
 		// Variables
         $type 	                = isset($settings['widget_type'])                        ? $settings['widget_type']						: '';
+		$shape 	                = isset($settings['shape_widget'])						 ? $settings['shape_widget']					: '';
+		$title_tag 				= isset($settings['widget_html_tag_title'])				 ? $settings['widget_html_tag_title']			: '';
         $title 			        = isset($settings['widget_title'])                       ? $settings['widget_title']					: '';
         $alignment 		        = isset($settings['widget_alignment'])                   ? $settings['widget_alignment']				: '';
         $vertical				= isset($settings['vertical_title_display'])			 ? $settings['vertical_title_display']			: '';
@@ -1860,8 +2179,25 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
         $custom_style_x         = ($type2 == 'custom-style')                             ? 'custom-style'								: '';
         $repeat                 = isset($settings['repetitive_repeat'])                  ? $settings['repetitive_repeat']				: '';
         $other_style            = isset($settings['repetitive_repeat_other_style'])      ? $settings['repetitive_repeat_other_style']	: '';
+		// To
+		$duration	            = !empty($settings['duration']) 						?  $settings['duration'] 							: '';
+		$trigger_hook	        = !empty($settings['trigger_hook']) 					?  $settings['trigger_hook'] 						: '';
+		$horizontal_movement	= !empty($settings['horizontal_movement']) 				? 'x: "' . $settings['horizontal_movement'] . '",' 	: '';
+		$vertical_movement		= !empty($settings['vertical_movement']) 				? 'y: "' . $settings['vertical_movement'] . '",' 	: '';
+		$opacity				= !empty( $settings['opacity'] ) 						? 'opacity: "' . $settings['opacity'] . '",' 		: '';
+		$rotation				= !empty($settings['rotation']) 						? 'rotation: "' . $settings['rotation'] . '",' 		: '';
+		//From
+		$duration2	            = !empty($settings['duration2']) 						?  $settings['duration2'] 							: '';
+		$trigger_hook2	        = !empty($settings['trigger_hook2']) 					?  $settings['trigger_hook2'] 						: '';
+		$horizontal_movement2	= !empty($settings['horizontal_movement2']) 				? 'x: "' . $settings['horizontal_movement2'] . '",' 	: '';
+		$vertical_movement2		= !empty($settings['vertical_movement2']) 				? 'y: "' . $settings['vertical_movement2'] . '",' 	: '';
+		$opacity2				= !empty( $settings['opacity2'] ) 						? 'opacity: "' . $settings['opacity2'] . '",' 		: '';
+		$rotation2				= !empty($settings['rotation2']) 						? 'rotation: "' . $settings['rotation2'] . '",' 		: '';
 		// Overlay 
 		$overlay				= isset($settings['overlay_section_enable'])			? $settings['overlay_section_enable']			: '';
+		// Gradient
+		$set_gradient			= isset($settings['gradient_color_title_enable'])		? $settings['gradient_color_title_enable']		: '';
+		$gradient				= ($set_gradient == 'gradient_enable')					? 'bw-gradient'									: '';
         // Custom Style for shape
         $style_1_type           = isset($settings['tab_style_1_type'])                  ? $settings['tab_style_1_type']					: '';
         $image_id_1		        = isset($settings['tab_style_1_image']['url']) 		    ?  $settings['tab_style_1_image']['url']        : ''; // Image 1
@@ -1892,7 +2228,12 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		//ID Settings
 		$data_id				= 'bw_' . uniqid();
 		$script_id				= '#' . $data_id;
-		$image_movement			= ''; //$settings['image_movement']
+		$options = get_option('plugin_options') ? get_option('plugin_options') : '';
+		$gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
+		if( isset($gsap_options) && !empty($gsap_options) ) {
+			$text_movement			= $settings['text_movement'];
+			$text_movement2			= $settings['text_movement2'];
+		}
 		//Transform Normal Styles 
 		// Normal Move 
 		$translatex 			= isset( $move_normal_x["size"] ) 						? $move_normal_x["size"] . $move_normal_x["unit"] : '';
@@ -1923,42 +2264,49 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		// Create a Custom CSS for Normal and Hover Styles
 		$normal_transform_style = ($normal_transform == 'normal_transform')				? "#$data_id { $perspective transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; -webkit-transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; $scale3dx }" : '';
 
+		$options = get_option('plugin_options') ? get_option('plugin_options') : '';
+        $gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
+
+	
+		$second_bw_id			= 'second_bw_' . uniqid();
+		$second_bwscript_id		= '#' . $second_bw_id;
+
 		echo '<style>'.$normal_transform_style.' '.$z_index.' '.$unique_z_index.'</style>';
 
 		// Render
-        echo '<div class="bw-typograpgy '.$type.' '.$alignment.' '.$custom_style_x.'">';
+        echo '<div class="bw-typograpgy '.$type.' '.$alignment.' '.$custom_style_x.' '.$gradient.'">';
 			echo '<div class="bw-typograpgy-wrap" id="'. $data_id .'">';
 			switch ($type) {
 				case 'bw-t-1': // Type 1
-					echo '<div class="bw-typograpgy-main-title bw-'.$vertical.' '.$vertical_rotation.' bw-typography-this-title">'.$title.'</div>';
+					echo '<'.$title_tag.' class="bw-typograpgy-main-title bw-'.$vertical.' '.$vertical_rotation.' bw-typography-this-title">'.$title.'</'.$title_tag.'>';
 					break;
 				case 'bw-t-2':// Type 2
 					echo '<div class="bw-typograpgy-with-title bw-'.$vertical.' '.$type2.' '.$vertical_rotation.'">';
 					switch ($type2) {
 						case 'style-x-1':
 							echo '<span class="line-1"></span>';
-							echo '<span class="bw-bw-t-2-text bw-typography-this-title">'.$title.'</span>';
+							echo '<'.$title_tag.' class="bw-bw-t-2-text bw-typography-this-title">'.$title.'</'.$title_tag.'>';
 							break;
 						case 'style-x-2':
-							echo '<span class="bw-bw-t-2-text bw-typography-this-title">'.$title.'</span>';
+							echo '<'.$title_tag.' class="bw-bw-t-2-text bw-typography-this-title">'.$title.'</'.$title_tag.'>';
 							echo '<span class="line-2"></span>';
 							break;
 						case 'style-x-3':
 							echo '<span class="line-1"></span>';
-							echo '<span class="bw-bw-t-2-text bw-typography-this-title">'.$title.'</span>';
+							echo '<'.$title_tag.' class="bw-bw-t-2-text bw-typography-this-title">'.$title.'</'.$title_tag.'>';
 							echo '<span class="line-2"></span>';
 							break;
 						case 'style-x-4':
 							echo '<span class="line-1"></span>';
-							echo '<span class="bw-bw-t-2-text bw-typography-this-title">'.$title.'</span>';
+							echo '<'.$title_tag.' class="bw-bw-t-2-text bw-typography-this-title">'.$title.'</'.$title_tag.'>';
 							break;
 						case 'style-x-5':
-							echo '<span class="bw-bw-t-2-text bw-typography-this-title">'.$title.'</span>';
+							echo '<'.$title_tag.' class="bw-bw-t-2-text bw-typography-this-title">'.$title.'</'.$title_tag.'>';
 							echo '<span class="line-2"></span>';
 							break;
 						case 'style-x-6':
 							echo '<span class="line-1"></span>';
-							echo '<span class="bw-bw-t-2-text bw-typography-this-title">'.$title.'</span>';
+							echo '<'.$title_tag.' class="bw-bw-t-2-text bw-typography-this-title">'.$title.'</'.$title_tag.'>';
 							echo '<span class="line-2"></span>';
 							break;
 						case 'custom-style':
@@ -1968,7 +2316,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 								else: echo '<div class="bw-iconbox-img"><img src="'.$image_id_1.'" class="bw-iconbox-image"></div>';
 								endif;
 							echo '</span>';
-							echo '<span class="bw-bw-t-2-text '.$alignment.' bw-typography-this-title">'.$title.'</span>';
+							echo '<'.$title_tag.' class="bw-bw-t-2-text '.$alignment.' bw-typography-this-title">'.$title.'</'.$title_tag.'>';
 							echo '<span class="bw-right-bottom '.$alignment_2.'">';
 								if ( $style_2_type == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset_2, [ 'aria-hidden' => 'true' ] ); echo '</div>';
 								elseif ( $style_2_type == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode_2.'</div>';
@@ -1978,7 +2326,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 							break;
 						default:
 							echo '<span class="line-1"></span>';
-							echo '<span class="bw-bw-t-2-text bw-typography-this-title">'.$title.'</span>';
+							echo '<'.$title_tag.' class="bw-bw-t-2-text bw-typography-this-title">'.$title.'</'.$title_tag.'>';
 							break;
 					}
 					echo '</div>';
@@ -1988,21 +2336,91 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 						$count = 1;
 						while( $count <= $repeat ) {
 							if ($count == $other_style) {
-								echo '<div class="bw-typograpgy-repetitive bw-unique bw-typography-this-title">'.$title.'</div>';
+								echo '<'.$title_tag.' class="bw-typograpgy-repetitive bw-unique bw-typography-this-title">'.$title.'</'.$title_tag.'>';
 							} else {
-								echo '<div class="bw-typograpgy-repetitive bw-typography-this-title">'.$title.'</div>';
+								echo '<'.$title_tag.' class="bw-typograpgy-repetitive bw-typography-this-title">'.$title.'</'.$title_tag.'>';
 							}
 							$count++;
 						}
 						if ( !empty($vertical) ) echo '</div>';
 					break;
 				default: // simple
-					echo '<div class="bw-typograpgy-main-title bw-'.$vertical.' '.$vertical_rotation.' bw-typography-this-title">'.$title.'</div>';
+					echo '<'.$title_tag.' class="bw-typograpgy-main-title bw-'.$vertical.' '.$vertical_rotation.' bw-typography-this-title">'.$title.'</'.$title_tag.'>';
 					break;
 			}
 			echo '</div>';
 			if ( $overlay == 'overlay_enable' ) echo '<div class="bw-overlay"></div>';
         echo '</div>';
+
+		if ( isset($gsap_options) && !empty($gsap_options) ) {
+
+			if ($text_movement2 == 'on') {
+				$tlfrom = 'tl.from("#'. $data_id .'", { ' . $opacity2 . $rotation2 . $horizontal_movement2 . $vertical_movement2 . ' duration: '.$duration2.' })';
+			} else {
+				$tlfrom = '';
+			}
+			if ($text_movement == 'on') {
+				$tlto = 'tl.to("#'. $data_id .'", { ' . $opacity . $rotation . $horizontal_movement . $vertical_movement . ' duration: '.$duration.' })';
+			} else {
+				$tlto = '';
+			}
+
+			echo '<script>
+					jQuery(window).ready(function($) {
+						gsap.registerPlugin(ScrollTrigger);
+						ScrollTrigger.config({ limitCallbacks: true });
+						const tl = gsap.timeline({
+							scrollTrigger: {
+							trigger: "#'. $data_id .'",
+							start: "center bottom",
+							end: "center top",
+							scrub: true,
+							// markers: true
+							}
+						});
+						'.$tlfrom.'
+						'.$tlto.'
+					});
+				</script>';
+
+				if( $shape ) {
+					echo '<div class="bw-code-em" id="' . $second_bw_id . '">';
+						\Elementor\Icons_Manager::render_icon( $settings['shape_widget'], [ 'aria-hidden' => 'true' ] );
+					echo '</div>';
+
+					echo '<script>
+					
+					jQuery(window).ready(function($) {
+						jQuery( "' . $second_bwscript_id . '" ).appendTo( $( "'. $script_id .' em" ) );
+
+						var scroll = jQuery(window).scrollTop();
+						var objectSelect = jQuery("'. $script_id .'");
+						var bottom = jQuery(window).height();
+						var objectPosition = objectSelect.offset().top - bottom;
+						if (scroll > objectPosition) {
+							jQuery("'. $script_id .' .bw-code-em").addClass("run");
+						} else {
+							jQuery("'. $script_id .' .bw-code-em").removeClass("run");
+						}
+
+					});
+					
+					jQuery(window).scroll(function($) {    
+						var scroll = jQuery(window).scrollTop();
+						var objectSelect = jQuery("'. $script_id .'");
+						var bottom = jQuery(window).height();
+						var objectPosition = objectSelect.offset().top - bottom;
+						if (scroll > objectPosition) {
+							jQuery("'. $script_id .' .bw-code-em").addClass("run");
+						} else {
+							jQuery("'. $script_id .' .bw-code-em").removeClass("run");
+						}
+					});
+					</script>';
+
+				}
+
+		}
 
 	}
 

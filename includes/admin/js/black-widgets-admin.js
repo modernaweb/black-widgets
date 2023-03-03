@@ -1,4 +1,4 @@
-(function( $ ) {
+jQuery(document).ready(function($) {
 	'use strict';
 
 	/**
@@ -29,4 +29,7 @@
 	 * practising this, we should strive to set a better example in our own work.
 	 */
 
-})( jQuery );
+     $('.bw-checked').parents().eq(3).addClass('bw-available');
+     $('.bw-available').find('.gsap-cdn').removeClass('gsap-cdn');
+
+});

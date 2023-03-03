@@ -8,8 +8,12 @@
     z-index: 999 !important;
     opacity: 1 !important;
     max-width: 50px;
- }
+}
  
+#adminmenu .toplevel_page_black-widgets img {
+    padding: 7px 0 0 !important;
+}
+
 body.toplevel_page_black-widgets .bw-box-backend {
     max-width: 800px;
 }
@@ -231,4 +235,20 @@ body.toplevel_page_black-widgets .bw-box-backend .bw-btn:hover {
     background-color: #000 !important;
     /* background-image: linear-gradient(90deg, #000 0%, #222 50%, #333 100%) !important; */
     box-shadow: 0 14px 45px -14px #000 !important;
+}
+
+.gsap-cdn {
+    display: none;
+}
+
+.gsap-cdn.enable {
+    display: block;
+}
+
+#bw-wrap .form-table input[type=text] {
+    max-width: 520px;
+    width: 100%;
+    padding: 4px 9px;
+    border-radius: 2px;
+    border: 1px solid #dbdbdb;
 }

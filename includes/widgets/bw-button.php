@@ -93,7 +93,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 	 * @since 1.0.0
 	 * @access protected
 	 */
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		// Start
 		// Content section
@@ -224,9 +224,34 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 				'show_external' => true,
 				'default' => [
 					'url' => '',
-					'is_external' => true,
-					'nofollow' => true,
+					'is_external' => false,
+					'nofollow' => false,
 				],
+			]
+		);
+
+		// Alignment
+		$this->add_responsive_control(
+			'widget_alignment',
+			[
+				'label'     => __( 'Text Alignment', 'blackwidgets' ),
+				'type'      => \Elementor\Controls_Manager::CHOOSE,
+				'default'	=> 'left',
+				'options'   => [
+					'left'   => [
+						'title' => __( 'Left', 'blackwidgets' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => __( 'Center', 'blackwidgets' ),
+						'icon'  => 'eicon-text-align-center',
+					],
+					'right'  => [
+						'title' => __( 'Right', 'blackwidgets' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+				],
+				'toggle'    => true,
 			]
 		);
 
@@ -247,6 +272,55 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 				],
 			]
 		);
+
+		// Enable Title Section
+		$this->add_control(
+			'custom_btn_show',
+			[
+				'label' 		=> __( 'Do You Need Icon/shape?', 'blackwidgets' ),
+				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
+				'label_on' 		=> __( 'Yes', 'blackwidgets' ),
+				'label_off' 	=> __( 'No!', 'blackwidgets' ),
+				'return_value' 	=> 'enablenow',
+				'default' 		=> 'false',
+			]
+		);
+
+		$this->add_control(
+			'custom_icon_widget',
+			[
+				'label' => __( 'Icon', 'blackwidgets' ),
+				'type' => Controls_Manager::ICONS,
+				'condition'  => [
+					'custom_btn_show' => [
+						'enablenow',
+					],
+				],
+			]
+		);
+
+		// Select type of the title
+		$this->add_control(
+			'custom_icon_position',
+			[
+				'label' => __( 'Select Type', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'after',
+				'options' => [
+					'after'			=> __( 'After', 'blackwidgets' ),
+					'before'		=> __( 'Before', 'blackwidgets' ),
+					'up' 			=> __( 'Up', 'blackwidgets' ),
+					'down' 			=> __( 'Down ', 'blackwidgets' ),
+				],
+				'condition'  => [
+					'custom_btn_show' => [
+						'enablenow',
+					],
+				],
+			]
+		);
+
+
 
 		$this->end_controls_section();
 		// End
@@ -325,7 +399,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-button-box .bw-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-button-box .bw-btn, {{WRAPPER}} .bw-button-box.abstract.a-2 .bw-btn .btx-a1' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -432,7 +506,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-button-box .bw-btn:hover' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-button-box .bw-btn:hover, {{WRAPPER}} .bw-button-box .bw-btn, {{WRAPPER}} .bw-button-box.abstract.a-2 .bw-btn:hover .btx-a1' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -507,10 +581,10 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Button Text Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+				// 'scheme' => [
+				// 	'type' => Color::get_type(),
+				// 	'value' => Color::COLOR_1,
+				// ],
 				'selectors' => [
 					'{{WRAPPER}} .bw-button-box .bw-btn' => 'color: {{VALUE}}',
 				],
@@ -523,7 +597,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			[
 				'name' => 'btn_typography1',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'scheme' => Typography::TYPOGRAPHY_1,
+				// 'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-button-box .bw-btn',
 			]
 		);
@@ -543,10 +617,10 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Button Text Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+				// 'scheme' => [
+				// 	'type' => Color::get_type(),
+				// 	'value' => Color::COLOR_1,
+				// ],
 				'selectors' => [
 					'{{WRAPPER}} .bw-button-box .bw-btn:hover' => 'color: {{VALUE}}',
 				],
@@ -559,7 +633,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			[
 				'name' => 'btn_hover_typography1',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'scheme' => Typography::TYPOGRAPHY_1,
+				// 'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-button-box .bw-btn:hover',
 			]
 		);
@@ -569,6 +643,226 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 
 		$this->end_controls_section();
 		// End
+
+
+		// Start
+		// Typography section
+		$this->start_controls_section(
+			'icon_section',
+			[
+				'label' => __( 'Icon Style', 'blackwidgets' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+				'condition'  => [
+					'widget_type' => [
+						'custom',
+					],
+				],
+			]
+        );
+
+		// Style Subtitle Tabs
+		$this->start_controls_tabs('black_widget_3_tab');
+		$this->start_controls_tab(
+			'tab_3_normal',
+			[
+				'label' => __( 'Normal', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'style_icon_size_normal',
+			[
+				'label' => __( 'Icon Size', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 200,
+						'step' => 5,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bw-button-box .bw-custom-btn .bw-custom-icon-shape svg,
+					 {{WRAPPER}} .bw-button-box .bw-custom-btn .bw-custom-icon-shape i' => 'font-size: {{SIZE}}{{UNIT}} !important; width: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		// Color
+		$this->add_control(
+			'style_icon_color_normal',
+			[
+				'label' => __( 'Icon Color', 'blackwidgets' ),
+				'type' => Controls_Manager::COLOR,
+				// 'scheme' => [
+				// 	'type' => Color::get_type(),
+				// 	'value' => Color::COLOR_1,
+				// ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-button-box .bw-custom-btn .bw-custom-icon-shape svg,
+					 {{WRAPPER}} .bw-button-box .bw-custom-btn .bw-custom-icon-shape i' => 'color: {{VALUE}}; fill: {{VALUE}}',
+				],
+			]
+		);
+
+		// Text shadow
+		$this->add_group_control(
+			Group_Control_Text_Shadow::get_type(),
+			[
+				'name' => 'style_icon_text_shadow_normal',
+				'label' => __( 'Text Shadow', 'blackwidgets' ),
+				'selector' => '{{WRAPPER}} .bw-button-box .bw-custom-btn .bw-custom-icon-shape svg,
+							   {{WRAPPER}} .bw-button-box .bw-custom-btn .bw-custom-icon-shape i',
+			]
+		);
+
+		// Padding
+		$this->add_responsive_control(
+			'style_icon_text_padding_normal',
+			[
+				'label' => __( 'Padding', 'blackwidgets' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-button-box .bw-custom-btn .bw-custom-icon-shape svg,
+					 {{WRAPPER}} .bw-button-box .bw-custom-btn .bw-custom-icon-shape i' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Padding
+		$this->add_responsive_control(
+			'style_wrapper_padding_normal',
+			[
+				'label' => __( 'Padding For Wrapper', 'blackwidgets' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-button-box .bw-custom-btn .bw-custom-icon-shape,
+					 {{WRAPPER}} .bw-button-box .bw-custom-btn .bw-custom-icon-shape' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// margin
+		$this->add_responsive_control(
+			'style_wrapper_margin_normal',
+			[
+				'label' => __( 'Margin For Wrapper', 'blackwidgets' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-button-box .bw-custom-btn .bw-custom-icon-shape,
+					 {{WRAPPER}} .bw-button-box .bw-custom-btn .bw-custom-icon-shape' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'tab_3_hover',
+			[
+				'label' => __( 'Hover', 'blackwidgets' ),
+			]
+		);
+
+		$this->add_control(
+			'style_icon_size_hover',
+			[
+				'label' => __( 'Icon Size', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 200,
+						'step' => 5,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bw-button-box .bw-custom-btn:hover .bw-custom-icon-shape svg,
+					 {{WRAPPER}} .bw-button-box .bw-custom-btn:hover .bw-custom-icon-shape i' => 'font-size: {{SIZE}}{{UNIT}} !important; width: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		// Color
+		$this->add_control(
+			'style_icon_color_hover',
+			[
+				'label' => __( 'Icon Color', 'blackwidgets' ),
+				'type' => Controls_Manager::COLOR,
+				// 'scheme' => [
+				// 	'type' => Color::get_type(),
+				// 	'value' => Color::COLOR_1,
+				// ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-button-box .bw-custom-btn:hover .bw-custom-icon-shape svg,
+					 {{WRAPPER}} .bw-button-box .bw-custom-btn:hover .bw-custom-icon-shape i' => 'color: {{VALUE}}; fill: {{VALUE}}',
+				],
+			]
+		);
+
+		// Text shadow
+		$this->add_group_control(
+			Group_Control_Text_Shadow::get_type(),
+			[
+				'name' => 'style_icon_text_shadow_hover',
+				'label' => __( 'Text Shadow', 'blackwidgets' ),
+				'selector' => '{{WRAPPER}} .bw-button-box .bw-custom-btn:hover .bw-custom-icon-shape svg,
+							   {{WRAPPER}} .bw-button-box .bw-custom-btn:hover .bw-custom-icon-shape i',
+			]
+		);
+
+		// Padding
+		$this->add_responsive_control(
+			'style_icon_text_padding_hover',
+			[
+				'label' => __( 'Padding', 'blackwidgets' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-button-box .bw-custom-btn:hover .bw-custom-icon-shape svg,
+					 {{WRAPPER}} .bw-button-box .bw-custom-btn:hover .bw-custom-icon-shape i' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Padding
+		$this->add_responsive_control(
+			'style_wrapper_padding_hover',
+			[
+				'label' => __( 'Padding For Wrapper', 'blackwidgets' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-button-box .bw-custom-btn:hover .bw-custom-icon-shape,
+					 {{WRAPPER}} .bw-button-box .bw-custom-btn:hover .bw-custom-icon-shape' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// margin
+		$this->add_responsive_control(
+			'style_wrapper_margin_hover',
+			[
+				'label' => __( 'Margin For Wrapper', 'blackwidgets' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-button-box .bw-custom-btn:hover .bw-custom-icon-shape,
+					 {{WRAPPER}} .bw-button-box .bw-custom-btn:hover .bw-custom-icon-shape' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+		$this->end_controls_tabs(); // End Tabs	
+
+
+		$this->end_controls_section();
 
 	}
 
@@ -582,21 +876,27 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 	 */
 	protected function render() {
 
-		$settings   	= $this->get_settings_for_display();
-
+		$settings   			= $this->get_settings_for_display();
 		// Variables
-        $type 	        	= isset($settings['widget_type']) 				? $settings['widget_type'] 				: '';
-        // $position        = isset($settings['widget_alignment']) 			? $settings['widget_alignment'] 		: '';
-        $modern_type		= isset($settings['widget_modern_type']) 		? $settings['widget_modern_type'] 		: '';
-        $noise_type			= isset($settings['widget_noise_type']) 		? $settings['widget_noise_type'] 		: '';
-        $fancy_type			= isset($settings['widget_fancy_type']) 		? $settings['widget_fancy_type'] 		: '';
-        $abstract_type		= isset($settings['widget_abstract_type']) 		? $settings['widget_abstract_type'] 	: '';
-        $text 	        	= isset($settings['widget_text']) 				? $settings['widget_text'] 				: '';
-		$target         	= $settings['website_link']['is_external'] 		? 'target="_blank"' 					: '';
-		$nofollow       	= $settings['website_link']['nofollow'] 		? ' rel="nofollow"'						: '';
+        $type 	        		= isset($settings['widget_type']) 				? $settings['widget_type'] 				: '';
+        // $position        	= isset($settings['widget_alignment']) 			? $settings['widget_alignment'] 		: '';
+        $modern_type			= isset($settings['widget_modern_type']) 		? $settings['widget_modern_type'] 		: '';
+        $noise_type				= isset($settings['widget_noise_type']) 		? $settings['widget_noise_type'] 		: '';
+        $fancy_type				= isset($settings['widget_fancy_type']) 		? $settings['widget_fancy_type'] 		: '';
+        $abstract_type			= isset($settings['widget_abstract_type']) 		? $settings['widget_abstract_type'] 	: '';
+        $text 	        		= isset($settings['widget_text']) 				? $settings['widget_text'] 				: '';
+		$target         		= $settings['website_link']['is_external'] 		? 'target="_blank"' 					: '';
+		$nofollow       		= $settings['website_link']['nofollow'] 		? ' rel="nofollow"'						: '';
+		$alignment 				= isset($settings['widget_alignment']) 			? $settings['widget_alignment']			: '';
+
+		$custom_icon_position	= isset($settings['custom_icon_position'])		? $settings['custom_icon_position']		: '';
+		$enable_custom_shape	= 'enablenow' === $settings['custom_btn_show']	? $settings['custom_btn_show']			: '';
+
+		$data_id		= 'bw_' . uniqid();
+		$script_id		= '#' . $data_id;
 
 		// Render
-        echo '<div class="bw-button-box ' . $type . ' ' . $modern_type . ' ' . $fancy_type . ' ' . $noise_type . ' ' . $abstract_type . '">';
+        echo '<div class="bw-button-box ' . $type . ' ' . $modern_type . ' ' . $fancy_type . ' ' . $noise_type . ' ' . $abstract_type . ' ' . $alignment . '">';
 			switch ($type) {
 				case 'modern':
 					switch ($modern_type) {
@@ -659,7 +959,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 							echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn">' . $text . '<span><?xml version="1.0" ?><!DOCTYPE svg  PUBLIC \'-//W3C//DTD SVG 1.1//EN\'  \'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\'><svg height="512px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="512px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="160,115.4 180.7,96 352,256 180.7,416 160,396.7 310.5,256 "/></svg></span></a>';
 						break;
 						case 'a-2':
-							echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn"><div id="btx-a1">' . $text . '</div></a>';
+							echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn"><div class="btx-a1" id="' . $script_id . '">' . $text . '</div></a>';
 							echo '
 							<script>
 								jQuery(document).ready(function () {
@@ -670,7 +970,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 									const TEXT = \'' . $text . '\';
 									const DELAY = ~~(300 / FPS);
 									const FRAME_COUNT = ~~(DURATION / 200) * FPS
-									const $Element = document.getElementById(\'btx-a1\');
+									const $Element = document.getElementById(\'' . $script_id . '\');
 									let frameIndex = 0;
 									let timeoutId = undefined;
 									function resetText() {
@@ -719,6 +1019,37 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 							echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn">' . $text . '</a>';
 						break;
 					}
+				break;
+				case'custom':
+					
+					switch ($custom_icon_position) {
+						case 'before':
+						case 'up':
+							echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn bw-custom-btn ' . $custom_icon_position . '">';
+								if ( $enable_custom_shape ){
+									echo '<span class="bw-custom-icon-shape">';
+										\Elementor\Icons_Manager::render_icon( $settings['custom_icon_widget'], [ 'aria-hidden' => 'true' ] );
+									echo '</span>';
+								}
+								echo $text;
+							echo '</a>';
+						break;
+						case 'after':
+						case 'down':
+							echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn bw-custom-btn ' . $custom_icon_position . '">';
+								echo $text;
+								if ( $enable_custom_shape ){
+									echo '<span class="bw-custom-icon-shape">';
+										\Elementor\Icons_Manager::render_icon( $settings['custom_icon_widget'], [ 'aria-hidden' => 'true' ] );
+									echo '</span>';
+								}
+							echo '</a>';
+						break;
+						default:
+							echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn bw-custom-btn">' . $text . '</a>';
+						break;
+					}
+
 				break;
 				default:
 					echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn">' . $text . '</a>';

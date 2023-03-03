@@ -157,15 +157,6 @@ class Black_Widgets_Admin {
 			array($this, 'black_widgets_settings')
 		);
 
-		// add_submenu_page(
-		// 	$menu_slug,
-		// 	__( 'Codedsgn', 'blackwidgets' ),
-		// 	__( 'Codedsgn', 'blackwidgets' ),
-		// 	$capability,
-		// 	'black-widgets-dsgn',
-		// 	array($this, 'black_widgets_dsgn')
-		// );
-
     }
 
 	public function blackwidgets() {
@@ -179,8 +170,9 @@ class Black_Widgets_Admin {
 			'plugin_options',
 			'bw_polugin_options_validate'
 		);
+
 		add_settings_section(
-			'black_widgets_settings_example_setting', // ID used to identify this section and with which to register options
+			'black_widgets_settings_setting', // ID used to identify this section and with which to register options
 			'General Settings',  // Title to be displayed on the administration page
 			array( $this, 'section_text_fn' ), // Callback used to render the description of the section
 			'black_widgets_settings_general_settings' // Page on which to add this section of options
@@ -191,8 +183,69 @@ class Black_Widgets_Admin {
 			'Black Elementor Environment',
 			array( $this, 'bw_setting_chb1_fn' ),
 			'black_widgets_settings_general_settings',
-			'black_widgets_settings_example_setting'
+			'black_widgets_settings_setting'
 		);
+
+        add_settings_field(
+            'bw_gsap_options',
+            'JS → CDN',
+            array( $this, 'bw_setting_chb2_gsap_fn' ),
+            'black_widgets_settings_general_settings',
+            'black_widgets_settings_setting',
+            [
+                'label_for' => 'bw_gsap_options',
+                'class' => 'gsap-option'
+            ]
+        );
+
+        add_settings_field(
+            'bw_option_gsap_cdn1',
+            'GSAP CDN',
+            array( $this, 'bw_setting_gsap_cdn1_fn' ),
+            'black_widgets_settings_general_settings',
+            'black_widgets_settings_setting',
+            [
+                'label_for' => 'bw_option_gsap_cdn1',
+                'class' => 'gsap-cdn'
+            ]
+        );
+
+        add_settings_field(
+            'bw_option_gsap_cdn2',
+            'ScrollTrigger CDN',
+            array( $this, 'bw_setting_gsap_cdn2_fn' ),
+            'black_widgets_settings_general_settings',
+            'black_widgets_settings_setting',
+            [
+                'label_for' => 'bw_option_gsap_cdn2',
+                'class' => 'gsap-cdn'
+            ]
+        );
+
+        add_settings_field(
+            'bw_option_gsap_cdn3',
+            'Tween Or Timeline JS CDN',
+            array( $this, 'bw_setting_gsap_cdn3_fn' ),
+            'black_widgets_settings_general_settings',
+            'black_widgets_settings_setting',
+            [
+                'label_for' => 'bw_option_gsap_cdn3',
+                'class' => 'gsap-cdn'
+            ]
+        );
+
+        add_settings_field(
+            'bw_option_gsap_cdn4',
+            'Tween Or Timeline JS CDN',
+            array( $this, 'bw_setting_gsap_cdn4_fn' ),
+            'black_widgets_settings_general_settings',
+            'black_widgets_settings_setting',
+            [
+                'label_for' => 'bw_option_gsap_cdn4',
+                'class' => 'gsap-cdn'
+            ]
+        );
+
 	}
 
 	// Section HTML, displayed before the first option
@@ -209,17 +262,55 @@ class Black_Widgets_Admin {
 		echo "<input ".$checked." id='bw_dark_style_chb1' name='plugin_options[bw_dark_style]' type='checkbox' />";
 	}
 
+    // CHECKBOX - Name: plugin_options[bw_dark_style]
+    function bw_setting_chb2_gsap_fn() {
+        $checked = '';
+        $checked_class = '';
+        // $options = get_option('plugin_options');
+        if ( get_option('plugin_options') ): $options = get_option('plugin_options'); else: $options = ''; endif;
+        if(isset($options['gsap_options']) && $options['gsap_options']) { $checked = ' checked="checked" '; $checked_class = 'class="bw-checked"'; }
+        echo "<input ".$checked." id='bw_gsap_options' name='plugin_options[gsap_options]' type='checkbox' $checked_class />";
+        echo '<p> After enable it, you can find new widgets on Elementor environment.</p>';
+    }
+
+    // CDN 1 - Name: plugin_options[bw_dark_style]
+    function bw_setting_gsap_cdn1_fn() {
+        $options = get_option('plugin_options');
+        if ( get_option('plugin_options') ): $options = get_option('plugin_options'); else: $options = ''; endif;
+        $cdn1 = (isset($options['bw_gsap_cdn1']) && $options['bw_gsap_cdn1']) ? $options['bw_gsap_cdn1'] : '';
+        echo "<input id='bw_option_gsap_cdn1' name='plugin_options[bw_gsap_cdn1]' type='text' value='$cdn1' />";
+    }
+
+    // CDN 2 - Name: plugin_options[bw_dark_style]
+    function bw_setting_gsap_cdn2_fn() {
+        $options = get_option('plugin_options');
+        if ( get_option('plugin_options') ): $options = get_option('plugin_options'); else: $options = ''; endif;
+        $cdn2 = (isset($options['bw_gsap_cdn2']) && $options['bw_gsap_cdn2']) ? $options['bw_gsap_cdn2'] : '';
+        echo "<input id='bw_option_gsap_cdn2' name='plugin_options[bw_gsap_cdn2]' type='text' value='$cdn2' />";
+    }
+
+    // CDN 3 - Name: plugin_options[bw_dark_style]
+    function bw_setting_gsap_cdn3_fn() {
+        $options = get_option('plugin_options');
+        if ( get_option('plugin_options') ): $options = get_option('plugin_options'); else: $options = ''; endif;
+        $cdn3 = (isset($options['bw_gsap_cdn3']) && $options['bw_gsap_cdn3']) ? $options['bw_gsap_cdn3'] : '';
+        echo "<input id='bw_option_gsap_cdn3' name='plugin_options[bw_gsap_cdn3]' type='text' value='$cdn3' />";
+    }
+
+    // CDN 3 - Name: plugin_options[bw_dark_style]
+    function bw_setting_gsap_cdn4_fn() {
+        $options = get_option('plugin_options');
+        if ( get_option('plugin_options') ): $options = get_option('plugin_options'); else: $options = ''; endif;
+        $cdn4 = (isset($options['bw_gsap_cdn4']) && $options['bw_gsap_cdn4']) ? $options['bw_gsap_cdn4'] : '';
+        echo "<input id='bw_option_gsap_cdn4' name='plugin_options[bw_gsap_cdn4]' type='text' value='$cdn4' />";
+    }
+
+
 	// Display the admin options page
 	function black_widgets_settings() {
 	
 		require_once( __DIR__ . '/black-widgets-settings.php');
 
 	}
-	// Display the admin options page
-	// function black_widgets_dsgn() {
-	// 	require_once( __DIR__ . '/black-widgets-dsgn.php');
-	// }
-
-
 
 }

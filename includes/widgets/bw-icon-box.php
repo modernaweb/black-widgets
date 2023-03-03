@@ -95,7 +95,7 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 	 * @since 1.0.0
 	 * @access protected
 	 */
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		// Start
 		// Content section
@@ -322,8 +322,8 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 				'show_external' => true,
 				'default' => [
 					'url' => '',
-					'is_external' => true,
-					'nofollow' => true,
+					'is_external' => false,
+					'nofollow' => false,
                 ],
 				'condition'  => [
 					'widget_link_enable' => [
@@ -441,6 +441,24 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 				],
 			]
         );
+
+		// Enable Paragraph Section
+		$this->add_control(
+			'widget_svg_animate',
+			[
+				'label' 		=> __( 'SVG Animate!', 'blackwidgets' ),
+				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
+				'label_on' 		=> __( 'Yes', 'blackwidgets' ),
+				'label_off' 	=> __( 'No !', 'blackwidgets' ),
+				'return_value' 	=> 'bw-iconbox-svg-animate',
+				'default' 		=> 'off',
+				'condition'  => [
+					'widget_icon_image_enable' => [
+						'icon_image_enable',
+					],
+				],
+			]
+		);
 
 		$this->end_controls_section();
 		// End
@@ -673,10 +691,6 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Normal Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox .bw-it-is-title' => 'color: {{VALUE}}',
 				],
@@ -697,10 +711,6 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Hover Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox:hover .bw-it-is-title' => 'color: {{VALUE}}',
 				],
@@ -758,15 +768,15 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 				'options'   => [
 					'left'   => [
 						'title' => __( 'Left', 'blackwidgets' ),
-						'icon'  => 'fa fa-align-left',
+						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
 						'title' => __( 'Center', 'blackwidgets' ),
-						'icon'  => 'fa fa-align-center',
+						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [
 						'title' => __( 'Right', 'blackwidgets' ),
-						'icon'  => 'fa fa-align-right',
+						'icon'  => 'eicon-text-align-right',
 					],
 				],
 				'toggle'    => true,
@@ -864,10 +874,6 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Normal Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox .bw-it-is-subtitle' => 'color: {{VALUE}}',
 				],
@@ -888,10 +894,6 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Hover Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox:hover .bw-it-is-subtitle' => 'color: {{VALUE}}',
 				],
@@ -949,15 +951,15 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 				'options'   => [
 					'left'   => [
 						'title' => __( 'Left', 'blackwidgets' ),
-						'icon'  => 'fa fa-align-left',
+						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
 						'title' => __( 'Center', 'blackwidgets' ),
-						'icon'  => 'fa fa-align-center',
+						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [
 						'title' => __( 'Right', 'blackwidgets' ),
-						'icon'  => 'fa fa-align-right',
+						'icon'  => 'eicon-text-align-right',
 					],
 				],
 				'toggle'    => true,
@@ -1055,10 +1057,6 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Normal Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox .bw-it-is-paragraph' => 'color: {{VALUE}}',
 				],
@@ -1079,10 +1077,6 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Hover Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox:hover .bw-it-is-paragraph' => 'color: {{VALUE}}',
 				],
@@ -1140,15 +1134,15 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 				'options'   => [
 					'left'   => [
 						'title' => __( 'Left', 'blackwidgets' ),
-						'icon'  => 'fa fa-align-left',
+						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
 						'title' => __( 'Center', 'blackwidgets' ),
-						'icon'  => 'fa fa-align-center',
+						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [
 						'title' => __( 'Right', 'blackwidgets' ),
-						'icon'  => 'fa fa-align-right',
+						'icon'  => 'eicon-text-align-right',
 					],
 				],
 				'toggle'    => true,
@@ -1246,10 +1240,6 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Normal Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox .bw-btn' => 'color: {{VALUE}}',
 				],
@@ -1270,10 +1260,6 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Hover Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox .bw-btn:hover' => 'color: {{VALUE}}',
 				],
@@ -1331,15 +1317,15 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 				'options'   => [
 					'left'   => [
 						'title' => __( 'Left', 'blackwidgets' ),
-						'icon'  => 'fa fa-align-left',
+						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
 						'title' => __( 'Center', 'blackwidgets' ),
-						'icon'  => 'fa fa-align-center',
+						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [
 						'title' => __( 'Right', 'blackwidgets' ),
-						'icon'  => 'fa fa-align-right',
+						'icon'  => 'eicon-text-align-right',
 					],
 				],
 				'toggle'    => true,
@@ -1437,10 +1423,6 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Normal Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon i' => 'color: {{VALUE}}',
 				],
@@ -1472,10 +1454,6 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Hover Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon:hover i' => 'color: {{VALUE}}',
 				],
@@ -1809,15 +1787,15 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 		$paragraph				= isset($settings['widget_paragraph'])							? $settings['widget_paragraph']					: '';
 		// Image Or Icon
 		$enable_icon_image		= 'icon_image_enable' === $settings['widget_icon_image_enable']	? $settings['widget_icon_image_enable'] 		: '';
-		$icon_image				= isset( $settings['widget_icon_image_type'] )					? $settings['widget_icon_image_type']			: '';
+		$icon_image				= isset($settings['widget_icon_image_type'])					? $settings['widget_icon_image_type']			: '';
 		$iconset				= isset($settings['widget_icon'])								? $settings['widget_icon']						: ''; // Icon
 		$svgcode				= isset($settings['widget_code'])								? $settings['widget_code']						: ''; // Icon
 		// Link
 		$enable_link			= 'link_enable' === $settings['widget_link_enable']				? $settings['widget_link_enable'] 				: '';
 		$link					= isset($settings['widget_link_url']['url'])					? $settings['widget_link_url']['url']			: ''; // Link URL
 		$link_text 	        	= isset($settings['widget_link_text'])							? $settings['widget_link_text'] 				: ''; // Link Text
-		$link_target         	= $settings['widget_link_url']['is_external'] 					? 'target="_blank"' 							: '';
-		$link_nofollow       	= $settings['widget_link_url']['nofollow'] 						? ' rel="nofollow"'								: '';
+		$link_target         	= isset($settings['widget_link_url']['is_external'])			? 'target="_blank"' 							: '';
+		$link_nofollow       	= isset($settings['widget_link_url']['nofollow'] )				? ' rel="nofollow"'								: '';
 		// Position Options
 		$position				= isset( $settings['widget_position'] )							? $settings['widget_position']					: '';
 		// Alignment
@@ -1826,10 +1804,15 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 		$paragraph_align		= isset($settings['content_paragraph_text_alignment'])			? $settings['content_paragraph_text_alignment']	: '';
 		$link_align				= isset($settings['content_link_text_alignment'])				? $settings['content_link_text_alignment']		: '';
 
+		$svg_animate			= 'bw-iconbox-svg-animate' === $settings['widget_svg_animate']				? $settings['widget_svg_animate'] 				: '';
+		$data_id				= 'bw_' . uniqid();
+		$animate_id				= '#' . $data_id;
+
+
 		// Render 
 		switch ($position) {
 			case 'position-2':
-				echo '<div class="bw-iconbox bw-' . $position . '">';
+				echo '<div id="' . $data_id . '" class="bw-iconbox bw-' . $position . ' ' . $svg_animate . '">';
 					// Title
 					if ( $enable_title ) echo '<' . $title_tag . ' class="bw-it-is-title ' . $title_align . '">' . $title . '</' . $title_tag . '>';
 					// Subtitle
@@ -1845,7 +1828,7 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 
 				case 'position-3':
 				case 'position-4':
-					echo '<div class="bw-iconbox bw-' . $position . '">';
+					echo '<div id="' . $data_id . '" class="bw-iconbox bw-' . $position . ' ' . $svg_animate . '">';
 						echo '<div class="bw-image-wrap">';
 							// Image
 							if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>'; elseif ( $svgcode == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div>'; else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif;
@@ -1865,7 +1848,7 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 
 			case 'position-5':
 			case 'position-6':
-				echo '<div class="bw-iconbox bw-' . $position . '">';
+				echo '<div id="' . $data_id . '" class="bw-iconbox bw-' . $position . ' ' . $svg_animate . '">';
 					echo '<div class="bw-wrapper">';
 					// Image
 					if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>'; elseif ( $svgcode == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div>';else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif;
@@ -1886,9 +1869,10 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 				break;
 
 			default:
-				echo '<div class="bw-iconbox bw-' . $position . '">';
+				echo '<div id="' . $data_id . '" class="bw-iconbox bw-' . $position . ' ' . $svg_animate . '">';
 					// Image
-					echo '<div class="bw-iconbox-icon"><div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div></div>';
+					echo '<div class="bw-iconbox-icon-svg-code"><div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div></div>';
+					if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>'; elseif ( $svgcode == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div>'; else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif;
 					// elseif ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>';  else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>';
 					// Title
 					if ( $enable_title ) echo '<' . $title_tag . ' class="bw-it-is-title ' . $title_align . '">' . $title . '</' . $title_tag . '>';
@@ -1901,6 +1885,34 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 				echo '</div>';
 				break;
 		}
+	
+		echo '<script>		
+		
+			jQuery(window).ready(function($) {
+				var scroll = jQuery(window).scrollTop();
+				var objectSelect = jQuery("'. $animate_id .'");
+				var bottom = jQuery(window).height();
+				var objectPosition = objectSelect.offset().top - bottom;
+				if (scroll > objectPosition) {
+					jQuery("'. $animate_id .'").addClass("run");
+				} else {
+					jQuery("'. $animate_id .'").removeClass("run");
+				}
+			});
+
+			jQuery(window).scroll(function($) {
+					var top = jQuery("body").offset();
+					var scroll = jQuery(window).scrollTop();
+					var objectSelect = jQuery("'. $animate_id .'");
+					var bottom = jQuery(window).height();
+					var objectPosition = objectSelect.offset().top - bottom;
+					if (scroll > objectPosition) {
+						jQuery("'. $animate_id .'").addClass("run");
+					} else {
+						jQuery("'. $animate_id .'").removeClass("run");
+					}
+			});
+			</script>';
 
 	}
 

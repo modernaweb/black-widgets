@@ -1,72 +1,16 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-<path style="fill:#000000;" d="M469.333,0h-384C61.813,0,42.667,19.135,42.667,42.667V192C19.146,192,0,211.135,0,234.667v234.667
-	C0,492.865,19.146,512,42.667,512h234.667C300.854,512,320,492.865,320,469.333h149.333c23.521,0,42.667-19.135,42.667-42.667v-384
-	C512,19.135,492.854,0,469.333,0z"/>
-<path style="fill:#5C6671;" d="M85.333,21.333h384c11.771,0,21.333,9.573,21.333,21.333v42.667H64V42.667
-	C64,30.906,73.563,21.333,85.333,21.333z"/>
-<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-42.2631" y1="647.7943" x2="-24.9841" y2="639.7373" gradientTransform="matrix(21.3333 0 0 -21.3333 996.3334 13791.667)">
-	<stop  offset="0" style="stop-color:#FFFFFF;stop-opacity:0.2"/>
-	<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
-</linearGradient>
-<path style="fill:url(#SVGID_1_);" d="M85.333,21.333h384c11.771,0,21.333,9.573,21.333,21.333v42.667H64V42.667
-	C64,30.906,73.563,21.333,85.333,21.333z"/>
-<path style="fill:#f7f7f7;" d="M298.667,469.333c0,11.76-9.563,21.333-21.333,21.333H42.667c-11.771,0-21.333-9.573-21.333-21.333
-	V234.667c0-11.76,9.563-21.333,21.333-21.333h234.667c11.771,0,21.333,9.573,21.333,21.333V469.333z"/>
-<path style="fill:#FFFFFF;" d="M469.333,448H320V234.667C320,211.135,300.854,192,277.333,192H64v-85.333h426.667v320
-	C490.667,438.427,481.104,448,469.333,448z"/>
-<g>
-	<circle style="fill:#f7f7f7;" cx="96" cy="53.333" r="10.667"/>
-	<circle style="fill:#f7f7f7;" cx="138.667" cy="53.333" r="10.667"/>
-	<circle style="fill:#f7f7f7;" cx="181.333" cy="53.333" r="10.667"/>
-	<path style="fill:#000000;" d="M365.792,131.125l-24.458,24.458v-6.25c0-5.896-4.771-10.667-10.667-10.667
-		c-5.896,0-10.667,4.771-10.667,10.667v32c0,5.896,4.771,10.667,10.667,10.667h32c5.896,0,10.667-4.771,10.667-10.667
-		c0-5.896-4.771-10.667-10.667-10.667h-6.25l24.458-24.458c4.167-4.167,4.167-10.917,0-15.083
-		C376.708,126.958,369.958,126.958,365.792,131.125z"/>
-</g>
-<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="-34.9964" y1="634.1912" x2="-25.2895" y2="624.4843" gradientTransform="matrix(21.3333 0 0 -21.3333 996.3334 13791.667)">
-	<stop  offset="0" style="stop-color:#000000;stop-opacity:0.1"/>
-	<stop  offset="1" style="stop-color:#000000;stop-opacity:0"/>
-</linearGradient>
-<path style="fill:url(#SVGID_2_);" d="M469.333,448c11.771,0,21.333-9.573,21.333-21.333v-38.978L307.488,204.51l0,0
-	c7.727,7.725,12.512,18.391,12.512,30.156V448H469.333z"/>
-<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="-46.9171" y1="640.1777" x2="-21.612" y2="628.3822" gradientTransform="matrix(21.3333 0 0 -21.3333 996.3334 13791.667)">
-	<stop  offset="0" style="stop-color:#FFFFFF;stop-opacity:0.2"/>
-	<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
-</linearGradient>
-<path style="fill:url(#SVGID_3_);" d="M469.333,0h-384C61.813,0,42.667,19.135,42.667,42.667V192C19.146,192,0,211.135,0,234.667
-	v234.667C0,492.865,19.146,512,42.667,512h234.667C300.854,512,320,492.865,320,469.333h149.333
-	c23.521,0,42.667-19.135,42.667-42.667v-384C512,19.135,492.854,0,469.333,0z"/>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2560" height="2560" viewBox="0 0 2560 2560">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_2" data-name="Rectangle 2" width="2560" height="2560" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-Custom_Size_1">
+      <rect width="2560" height="2560"/>
+    </clipPath>
+  </defs>
+  <g id="Custom_Size_1" data-name="Custom Size – 1" clip-path="url(#clip-Custom_Size_1)">
+    <g id="Black_Widgets" data-name="Black Widgets" clip-path="url(#clip-path)">
+      <rect id="Rectangle_1" data-name="Rectangle 1" width="2560" height="2560" rx="512" fill="#fff"/>
+      <path id="Path_1" data-name="Path 1" d="M70,492.3V-720H550.711q122.914,0,201.629,49.25T869.36-544.89q38.305,76.611,38.305,158.273,0,100.183-47.566,170.059t-129.228,94.29v-42.094q114.5,26.1,173.847,108.6t59.352,187.738q0,107.76-41.252,188.58T800.327,446.839Q719.086,492.3,599.539,492.3ZM275.418,301.195H574.283q53.038,0,95.132-21.468A162.314,162.314,0,0,0,735.5,219.112Q759.5,179.964,759.5,126.084q0-48.829-21.047-87.555T676.992-23.348Q636.582-46.5,580.176-46.5H275.418Zm0-537.116H548.185q43.777,0,78.294-16.837A129.916,129.916,0,0,0,681.2-302.43q20.2-32.833,20.2-80.82,0-63.141-40.41-105.234T548.185-530.578H275.418Z" transform="translate(764.27 1393.85)"/>
+    </g>
+  </g>
 </svg>

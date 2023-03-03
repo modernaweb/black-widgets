@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2560" height="2560" viewBox="0 0 2560 2560">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_2" data-name="Rectangle 2" width="2560" height="2560" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-Custom_Size_1">
+      <rect width="2560" height="2560"/>
+    </clipPath>
+  </defs>
+  <g id="Custom_Size_1" data-name="Custom Size – 1" clip-path="url(#clip-Custom_Size_1)">
+    <g id="Black_Widgets" data-name="Black Widgets" clip-path="url(#clip-path)">
+      <rect id="Rectangle_1" data-name="Rectangle 1" width="2560" height="2560" rx="512" fill="#1c1c1c"/>
+      <path id="Path_1" data-name="Path 1" d="M70,1160.816V-720H815.8q190.694,0,312.816,76.408t181.551,195.265q59.429,118.857,59.429,245.551,0,155.429-73.8,263.837t-200.49,146.286V142.041q177.633,40.49,269.714,168.49T1457.1,601.8q0,167.184-64,292.571t-190.041,195.918q-126.041,70.531-311.51,70.531Zm318.694-296.49H852.367q82.286,0,147.592-33.306a251.821,251.821,0,0,0,102.53-94.041q37.225-60.735,37.225-144.327,0-75.755-32.653-135.837t-95.347-96Q949.02,324.9,861.51,324.9H388.694Zm0-833.306H811.878Q879.8,31.02,933.347,4.9a201.558,201.558,0,0,0,84.9-77.061q31.347-50.939,31.347-125.388,0-97.959-62.694-163.265t-175.02-65.306H388.694Z" transform="translate(517.755 1059.592)" fill="#fff"/>
+    </g>
+  </g>
+</svg>
