@@ -3,28 +3,44 @@
 **Contributors:** skalanter, modernaweb \
 **Donate link:** http://modernaweb.net/ \
 **Tags:** page builder, editor, elementor widgets, elementor addon, typography \
-**Stable tag:** 1.1.5 \
-**Tested up to:** 5.7.1 \
-**Requires PHP:** 5.6 \
-**License:** GPLv2 or later \
-**License URI:** https://www.gnu.org/licenses/gpl-2.0.html
+**Stable tag:** 1.3.0 \
+**Tested up to:** 6.0 \
+**Requires PHP:** 7.2 \
+**License:** GPLv3 or later \
+**License URI:** https://www.gnu.org/licenses/gpl-3.0.html
 
-Free add-on for Elementor, You can add ability more customization with visual effects. ✌
+Free add-on for Elementor, You can add ability more customization with visual effects and better UX. ✌
 
 
 ## Description
 
-Black Widgets is a free add-on for Elementor page builder and you can add ability more customization with visual effect(s). like a fade animate for images and a line border like what is used in Modernaweb.Black Widgets started with 14 widgets improved with better UX to use, more than 70 types for beginners starters, and full customization of each widget (you can be called ability building new styles) for experts.
+Black Widgets is a free add-on for Elementor; with this plugin, you can create unique elements with the ability to customize on your website.
 
-- New availability - v1.1.0: Now you can set CSS Transform (2D & 3D CSS Styles) for image and typography widget
-- New availability - v1.1.5: Now you can create an awesome typography
 
-We will add more widgets with more and more styles, that may surprise you in the future, for now, add black widgets to your WordPress, and don't miss future updates.
+We will add more widgets with more and more styles that may surprise you in the future; for now, add black widgets to your WordPress, and don't miss future updates.
+
+
+[WPHive Review](https://wphive.com/plugins/black-widgets/)
+
+
+### Create your own styles
+
+✔️ 17 Widgets
+⚡ An Awesome Typography
+⚡ Great Animate
+⚡ CSS Transform (2D & 3D CSS Styles)
+
+### Dsgn
+
+Dsgn is a simple way to start a website to start easily, quickly, and free. This is Free & + Fresh Templates Design for Elementor and Black Widgets.
+
+[Dsgn Templates](https://modernaweb.net/dsgn/)
+[Our Solutions](https://modernaweb.net/dsgn/solutions/)
+
 
 — Enjoy 😉
 
 [Our Website](http://modernaweb.net/)
-
 
 ### Available Widgets
 
@@ -44,6 +60,7 @@ We will add more widgets with more and more styles, that may surprise you in the
 *   Black Call to Action
 *   Black Blockquote
 *   Black Typography
+*   Black Box
 
 
 Live Demo & Demo Importer — Coming Soon 
@@ -78,38 +95,70 @@ WordPress 4.9+
 
 ### 1. Black Widgets Screenshot 1
 
-[missing image]
+![Black Widgets Screenshot 1](https://ps.w.org/black-widgets/assets/screenshot-1.png)
 
 ### 2. Black Widgets Screenshot 2
 
-[missing image]
+![Black Widgets Screenshot 2](https://ps.w.org/black-widgets/assets/screenshot-2.png)
 
 ### 3. Black Widgets Screenshot 3
 
-[missing image]
+![Black Widgets Screenshot 3](https://ps.w.org/black-widgets/assets/screenshot-3.png)
 
 ### 4. Black Widgets Screenshot 4
 
-[missing image]
+![Black Widgets Screenshot 4](https://ps.w.org/black-widgets/assets/screenshot-4.png)
 
 ### 5. Black Widgets Screenshot 5
 
-[missing image]
+![Black Widgets Screenshot 5](https://ps.w.org/black-widgets/assets/screenshot-5.png)
 
 ### 6. Black Widgets Screenshot 6
 
-[missing image]
+![Black Widgets Screenshot 6](https://ps.w.org/black-widgets/assets/screenshot-6.png)
 
 
 
 ## Changelog
 
-### What is next?
+### 1.3.0 — 2022-08-14
+- Compatibility: WordPress v6.0
+- Compatibility: Elementor v3.7
+- Added: New widget: Black Flat Nav
+- Added: Custom Black Button Styles
+- Added: Black Button Alignment(s)
+- Added: Custom Button Styling
+- Added: Image Trigger with GSAP
+- Added: Link item to Black List
+- Added: 4 direction for the Black Fade Image
+- Improved: Dark Mode
+- Removed: Scheme from some widgets
+- Fixed: Some issues on UI and UX of the Black Magic Links
+- Fixed: Some issues on the Black Flip Box widget
+- Fixed: Some issues on the Black Typography widget
+- Fixed: Some minor issue
 
-- Add some new widgets
-- CSS variables
-- Main Animate
-- More compatibility
+### 1.2.6 — 2022-1-31 =
+- Compatibility: WordPress v5.9
+- Compatibility: Elementor v3.5
+- Added: An option for movements on typography widget
+
+### 1.2.5 — 2021-10-17 =
+- Compatibility: Elementor Pro
+- Added: An option to use GSAP CDN (for experts)
+- Added: An option to use ScrollTrigger CDN (for experts)
+- Added: An option to use Tween CDN (for experts)
+- Added: An option to use Timeline CDN (for experts)
+- Added: New Widget: Black Trigger
+- Added: New Widget: Black Horizontal
+- Added: An option to create movements image (for experts)
+- Fixed: Font icons on widgets
+
+### 1.2.0 — 2021-08-04
+
+- Compatibility: WordPress v5.8.0
+- Compatibility: Elementor v3.3.0
+- Added: New widget: Black Box
 
 ### 1.1.5 — 2021-04-29
 
@@ -170,4 +219,4 @@ After activating the add-on, you redirect to [this page](https://i.postimg.cc/d3
 Unfortunately not, it's not possible, but I have good news, you can use Elementor with your page builder together(mostly).
 
 ### How can I see Black Widgets' road map?
-For now, the road map is private. but we'll publish it for you.
+For now, the road map is private. But we'll publish it for you.

@@ -94,7 +94,7 @@ class BLACK_WIDGETS_Flip_Ix extends \Elementor\Widget_Base {
 	 * @since 1.0.0
 	 * @access protected
 	 */
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		// Start
 		// Content section
@@ -430,15 +430,15 @@ class BLACK_WIDGETS_Flip_Ix extends \Elementor\Widget_Base {
 				'options'   => [
 					'left'   => [
 						'title' => __( 'Left', 'blackwidgets' ),
-						'icon'  => 'fa fa-align-left',
+						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
 						'title' => __( 'Center', 'blackwidgets' ),
-						'icon'  => 'fa fa-align-center',
+						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [
 						'title' => __( 'Right', 'blackwidgets' ),
-						'icon'  => 'fa fa-align-right',
+						'icon'  => 'eicon-text-align-right',
 					],
 				],
 				'toggle'    => true,

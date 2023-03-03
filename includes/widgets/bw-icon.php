@@ -93,7 +93,7 @@ class BLACK_WIDGETS_Icon extends \Elementor\Widget_Base {
 	 * @since 1.0.0
 	 * @access protected
 	 */
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		// Start
 		// Content section
@@ -133,6 +133,8 @@ class BLACK_WIDGETS_Icon extends \Elementor\Widget_Base {
 			]
 		);
 
+
+
 		// Alignment
 		$this->add_responsive_control(
 			'widget_alignment',
@@ -142,15 +144,15 @@ class BLACK_WIDGETS_Icon extends \Elementor\Widget_Base {
 				'options'   => [
 					'left'   => [
 						'title' => __( 'Left', 'blackwidgets' ),
-						'icon'  => 'fa fa-align-left',
+						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
 						'title' => __( 'Center', 'blackwidgets' ),
-						'icon'  => 'fa fa-align-center',
+						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [
 						'title' => __( 'Right', 'blackwidgets' ),
-						'icon'  => 'fa fa-align-right',
+						'icon'  => 'eicon-text-align-right',
 					],
 				],
 				'default'   => 'center',
@@ -278,10 +280,10 @@ class BLACK_WIDGETS_Icon extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Icon Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+				// 'scheme' => [
+				// 	'type' => Color::get_type(),
+				// 	'value' => Color::COLOR_1,
+				// ],
 				'selectors' => [
 					'{{WRAPPER}} .bw-icon-box .bw-icon-into i' => 'color: {{VALUE}}',
 				],

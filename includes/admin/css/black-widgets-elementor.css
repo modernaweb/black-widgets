@@ -2,7 +2,7 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
- 
+
 .toplevel_page_black-widgets img {
     max-height: 20px !important;
     z-index: 999 !important;
@@ -37,7 +37,8 @@ body.toplevel_page_black-widgets .bw-box-backend .card .bw-banner {
     margin: 28px 0 0 0;
 }
 
-body.toplevel_page_black-widgets .bw-box-backend .bw-backend-heading strong, body.toplevel_page_black-widgets .bw-box-backend .bw-backend-heading a {
+body.toplevel_page_black-widgets .bw-box-backend .bw-backend-heading strong,
+body.toplevel_page_black-widgets .bw-box-backend .bw-backend-heading a {
     font-size: 11px;
     font-weight: bold;
     color: #696969;
@@ -78,6 +79,7 @@ body.toplevel_page_black-widgets .bw-box-backend .bw-btn:hover {
 
 
 /* BLack Widgets Settings */
+
 #bw-wrap {
     padding: 40px;
 }
@@ -119,7 +121,9 @@ body.toplevel_page_black-widgets .bw-box-backend .bw-btn:hover {
     font-size: 16px;
 }
 
+
 /* Screen Options */
+
 #bw-wrap input[type=checkbox] {
     background-color: #fff;
     border: 1px solid #000;
@@ -160,7 +164,7 @@ body.toplevel_page_black-widgets .bw-box-backend .bw-btn:hover {
     transform-origin: 0 100%;
     color: #fff;
     transition: all .2s ease;
-    animation: bw-check-box 130ms 140ms cubic-bezier(.4,0,.29,1) forwards;
+    animation: bw-check-box 130ms 140ms cubic-bezier(.4, 0, .29, 1) forwards;
 }
 
 @keyframes bw-check-box {
@@ -168,20 +172,18 @@ body.toplevel_page_black-widgets .bw-box-backend .bw-btn:hover {
         width: 0;
         height: 0;
         border-color: #fff;
-        transform: translate3d(0,0,0) rotate(45deg)
+        transform: translate3d(0, 0, 0) rotate(45deg)
     }
-
     33% {
         width: 6px;
         height: 0;
-        transform: translate3d(0,0,0) rotate(45deg)
+        transform: translate3d(0, 0, 0) rotate(45deg)
     }
-
     100% {
         width: 6px;
         height: 12px;
         border-color: #fff;
-        transform: translate3d(0,-12px,0) rotate(45deg)
+        transform: translate3d(0, -12px, 0) rotate(45deg)
     }
 }
 
@@ -216,7 +218,25 @@ body.toplevel_page_black-widgets .bw-box-backend .bw-btn:hover {
     box-shadow: 0 14px 45px -14px #000 !important;
 }
 
+.gsap-cdn {
+    display: none;
+}
+
+.gsap-cdn.enable {
+    display: block;
+}
+
+#bw-wrap .form-table input[type=text] {
+    max-width: 520px;
+    width: 100%;
+    padding: 4px 9px;
+    border-radius: 2px;
+    border: 1px solid #dbdbdb;
+}
+
+
 /* Elementor Environment*/
+
 #elementor-panel.elementor-panel {
     background: #000;
 }
@@ -253,7 +273,9 @@ body.toplevel_page_black-widgets .bw-box-backend .bw-btn:hover {
     color: #797979;
 }
 
+
 /* Elementor Controller */
+
 #elementor-panel-history:not(.elementor-empty),
 #elementor-panel .elementor-control.elementor-control-type-divider .elementor-control-content,
 #elementor-panel .elementor-control {
@@ -293,7 +315,8 @@ body.toplevel_page_black-widgets .bw-box-backend .bw-btn:hover {
 #elementor-panel .elementor-control-type-url .elementor-control-url-more,
 #elementor-panel .elementor-control-dynamic-switcher,
 #elementor-panel .elementor-input-style:not(:focus),
-#elementor-panel input:not(:focus), select:not(:focus),
+#elementor-panel input:not(:focus),
+select:not(:focus),
 #elementor-panel textarea:not(:focus) {
     border-color: #3E3E3E !important;
 }
@@ -340,7 +363,7 @@ body.toplevel_page_black-widgets .bw-box-backend .bw-btn:hover {
 .elementor-history-item:hover,
 #elementor-panel .elementor-slider .noUi-handle,
 #elementor-panel .elementor-control-type-switcher .elementor-switch-handle {
-    background: #6d7882 ;
+    background: #6d7882;
 }
 
 .elementor-editor-active .select2-dropdown,
@@ -358,7 +381,9 @@ body.toplevel_page_black-widgets .bw-box-backend .bw-btn:hover {
     border-color: #3E3E3E;
 }
 
+
 /* Elementor Border */
+
 #elementor-panel.elementor-panel .elementor-panel-menu-item,
 #elementor-panel.elementor-panel .elementor-panel-navigation {
     background: #222;
@@ -387,7 +412,9 @@ body.toplevel_page_black-widgets .bw-box-backend .bw-btn:hover {
     color: #6d7882;
 }
 
+
 /* Elementor Global Settings */
+
 .elementor-panel .elementor-panel-scheme-buttons,
 #elementor-panel.elementor-panel .elementor-panel-box {
     background: #1F1F1F;
@@ -397,7 +424,9 @@ body.toplevel_page_black-widgets .bw-box-backend .bw-btn:hover {
     border-color: #3E3E3E !important;
 }
 
+
 /* Elementor Message */
+
 .elementor-panel .elementor-panel-alert.elementor-panel-alert-warning {
     background-color: #000;
     color: #ccc;
@@ -428,29 +457,37 @@ body.toplevel_page_black-widgets .bw-box-backend .bw-btn:hover {
 
 
 /* Ctrl E — Finder */
+
 .elementor-templates-modal .dialog-buttons-wrapper,
 .elementor-templates-modal .dialog-header {
     background: #000;
     -webkit-box-shadow: 0 0 8px rgba(122, 101, 101, 0.1);
     box-shadow: 0 0 8px rgba(122, 101, 101, 0.1);
 }
+
 .elementor-templates-modal .dialog-widget-content {
     background: #222;
 }
+
 .elementor-finder__results__category__title {
     background: #111;
 }
+
 .elementor-finder__results__item.elementor-active * {
     background: #444;
 }
 
+
 /* Elementor Loading */
+
 #elementor-loading {
     background: #1F1F1F;
 }
+
 #elementor-loading .elementor-loader {
     background: #000;
 }
+
 #elementor-loading .elementor-loader-box {
     background-color: #1F1F1F;
 }
@@ -464,12 +501,35 @@ body.toplevel_page_black-widgets .bw-box-backend .bw-btn:hover {
     border-radius: 2px;
 }
 
+
 /* Other pages */
-#elementor-editor-button, #elementor-switch-mode-button {
+
+#elementor-editor-button,
+#elementor-switch-mode-button {
     background: #1F1F1F;
     border-color: #1F1F1F;
     color: #6d7882;
 }
-#elementor-editor-button, #elementor-switch-mode-button:hover {
+
+#elementor-editor-button,
+#elementor-switch-mode-button:hover {
     color: #ccc;
+}
+
+.elementor-control-type-repeater .elementor-repeater-row-tools>div:not(.elementor-repeater-row-handle-sortable) {
+    background: #000;
+}
+
+.elementor-control-type-dimensions .elementor-link-dimensions.unlinked {
+    background: #3E3E3E;
+    border-color: #3E3E3E;
+    color: #6d7882;
+}
+
+.elementor-control-type-repeater .elementor-repeater-row-tools {
+    background-color: #393939 !important;
+}
+
+.elementor-control-type-repeater .elementor-repeater-row-controls {
+    border-color: #393939 !important;
 }

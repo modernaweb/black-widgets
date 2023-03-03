@@ -93,7 +93,7 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 	 * @since 1.0.0
 	 * @access protected
 	 */
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		// Start
 		// Content section
@@ -149,8 +149,8 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 				'show_external' => true,
 				'default' => [
 					'url' => '',
-					'is_external' => true,
-					'nofollow' => true,
+					'is_external' => false,
+					'nofollow' => false,
 				],
 			]
 		);
@@ -373,10 +373,6 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-magic-link a' => 'color: {{VALUE}}',
 				],
@@ -514,10 +510,6 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-magic-link a:hover' => 'color: {{VALUE}}',
 				],
@@ -832,10 +824,6 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-magic-link .bw-magic-heart span svg' => 'fill: {{VALUE}}',
 				],
@@ -853,10 +841,6 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-magic-link .bw-magic-wheel svg g line, {{WRAPPER}} .bw-magic-link .bw-magic-wheel svg g polyline, {{WRAPPER}} .bw-magic-link .bw-magic-wheel svg g circle' => 'stroke: {{VALUE}} !important',
 				],
@@ -905,7 +889,7 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 		$settings   	= $this->get_settings_for_display();
 
 		// Variables
-		$type 	        	= isset($settings['widget_type']) 				? $settings['widget_type'] 					: '';
+		$type 	        	= isset($settings['widget_type']) 				? $settings['widget_type']				: '';
         $text 	        	= isset($settings['widget_text']) 				? $settings['widget_text'] 				: '';
 		$target         	= $settings['website_link']['is_external'] 		? 'target="_blank"' 					: '';
 		$nofollow       	= $settings['website_link']['nofollow'] 		? ' rel="nofollow"'						: '';

@@ -8,6 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+
 use Elementor\Plugin;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
@@ -56,7 +57,7 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Black Image', 'blackwidgets' );
+		return __( 'Black Image Pro', 'blackwidgets' );
 	}
 
 	/**
@@ -95,7 +96,7 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 	 * @since 1.0.0
 	 * @access protected
 	 */
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		// Start
 		// Content section
@@ -127,15 +128,15 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 				'options'   => [
 					'left'   => [
 						'title' => __( 'Left', 'blackwidgets' ),
-						'icon'  => 'fa fa-align-left',
+						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
 						'title' => __( 'Center', 'blackwidgets' ),
-						'icon'  => 'fa fa-align-center',
+						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [
 						'title' => __( 'Right', 'blackwidgets' ),
-						'icon'  => 'fa fa-align-right',
+						'icon'  => 'eicon-text-align-right',
 					],
 				],
 				'default'   => 'center',
@@ -187,106 +188,213 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 			]
         );
 
-		// // Enable Image Movement Animate
-		// $this->add_control(
-		// 	'image_movement',
-		// 	[
-		// 		'label' 		=> __( 'Image Movement Animate', 'blackwidgets' ),
-		// 		'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-		// 		'label_on' 		=> __( 'Enable', 'blackwidgets' ),
-		// 		'label_off' 	=> __( 'Disable', 'blackwidgets' ),
-		// 		'return_value' 	=> 'on',
-		// 		'default' 		=> 'off',
-		// 	]
-		// );
+		$options = get_option('plugin_options') ? get_option('plugin_options') : '';
+		$gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
+		if( isset($gsap_options) && !empty($gsap_options) ) {
 
-		// // Start From
-		// $this->add_control(
-		// 	'trigger_hook',
-		// 	[
-		// 		'label' 		=> __( 'Start Point', 'blackwidgets' ),
-		// 		'type' 			=> \Elementor\Controls_Manager::TEXT,
-		// 		'placeholder'   => '0.1',
-		// 		'default'       => '0.1',
-		// 		'condition' 	=> [ 
-		// 			'image_movement' 	=> [
-		// 				'on',
-		// 			],
-		// 		],
-		// 	]
-		// );
+			// Enable Image Movement Animate
+			$this->add_control(
+				'image_movement2',
+				[
+					'label' 		=> __( 'Image Movement Animate → From', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::SWITCHER,
+					'label_on' 		=> __( 'Enable', 'blackwidgets' ),
+					'label_off' 	=> __( 'Disable', 'blackwidgets' ),
+					'return_value' 	=> 'on',
+					'default' 		=> 'off',
+				]
+			);
 
-		// // Length
-		// $this->add_control(
-		// 	'duration',
-		// 	[
-		// 		'label' 		=> __( 'Length Movement', 'blackwidgets' ),
-		// 		'type' 			=> \Elementor\Controls_Manager::TEXT,
-		// 		'placeholder'   => '100%',
-		// 		'default'       => '100%',
-		// 		'condition' 	=> [ 
-		// 			'image_movement' 	=> [
-		// 				'on',
-		// 			],
-		// 		],
-		// 	]
-		// );
+			// Start From
+			$this->add_control(
+				'trigger_hook2',
+				[
+					'label' 		=> __( 'Start Point', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'placeholder'   => '0.1',
+					'default'       => '0.1',
+					'condition' 	=> [ 
+						'image_movement2' 	=> [
+							'on',
+						],
+					],
+				]
+			);
 
-		// // Vertical Movement
-		// $this->add_control(
-		// 	'vertical_movement',
-		// 	[
-		// 		'label' 		=> __( 'Vertical Movement', 'blackwidgets' ),
-		// 		'type' 			=> \Elementor\Controls_Manager::TEXT,
-		// 		'condition' 	=> [ 
-		// 			'image_movement' 	=> [
-		// 				'on',
-		// 			],
-		// 		],
-		// 	]
-		// );
+			// Length
+			$this->add_control(
+				'duration2',
+				[
+					'label' 		=> __( 'Duration', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'placeholder'   => '0.4',
+					'default'       => '0.4',
+					'condition' 	=> [ 
+						'image_movement2' 	=> [
+							'on',
+						],
+					],
+				]
+			);
 
-		// // Horizontal Movement
-		// $this->add_control(
-		// 	'horizontal_movement',
-		// 	[
-		// 		'label' 		=> __( 'Horizontal Movement', 'blackwidgets' ),
-		// 		'type' 			=> \Elementor\Controls_Manager::TEXT,
-		// 		'condition' 	=> [ 
-		// 			'image_movement' 	=> [
-		// 				'on',
-		// 			],
-		// 		],
-		// 	]
-		// );
+			// Vertical Movement
+			$this->add_control(
+				'vertical_movement2',
+				[
+					'label' 		=> __( 'Vertical Movement', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'condition' 	=> [ 
+						'image_movement2' 	=> [
+							'on',
+						],
+					],
+				]
+			);
 
-		// // Opacity at End
-		// $this->add_control(
-		// 	'opacity',
-		// 	[
-		// 		'label' 		=> __( 'Opacity at End', 'blackwidgets' ),
-		// 		'type' 			=> \Elementor\Controls_Manager::TEXT,
-		// 		'condition' 	=> [ 
-		// 			'image_movement' 	=> [
-		// 				'on',
-		// 			],
-		// 		],
-		// 	]
-		// );
+			// Horizontal Movement
+			$this->add_control(
+				'horizontal_movement2',
+				[
+					'label' 		=> __( 'Horizontal Movement', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'condition' 	=> [ 
+						'image_movement2' 	=> [
+							'on',
+						],
+					],
+				]
+			);
 
-		// // Rotation at End
-		// $this->add_control(
-		// 	'rotation',
-		// 	[
-		// 		'label' 		=> __( 'Rotation at End', 'blackwidgets' ),
-		// 		'type' 			=> \Elementor\Controls_Manager::TEXT,
-		// 		'condition' 	=> [ 
-		// 			'image_movement' 	=> [
-		// 				'on',
-		// 			],
-		// 		],
-		// 	]
-		// );
+			// Opacity at End
+			$this->add_control(
+				'opacity2',
+				[
+					'label' 		=> __( 'Opacity at End', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'condition' 	=> [ 
+						'image_movement2' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Rotation at End
+			$this->add_control(
+				'rotation2',
+				[
+					'label' 		=> __( 'Rotation at End', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'condition' 	=> [ 
+						'image_movement2' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+
+			// Enable Image Movement Animate
+			$this->add_control(
+				'image_movement',
+				[
+					'label' 		=> __( 'Image Movement Animate → To', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::SWITCHER,
+					'label_on' 		=> __( 'Enable', 'blackwidgets' ),
+					'label_off' 	=> __( 'Disable', 'blackwidgets' ),
+					'return_value' 	=> 'on',
+					'default' 		=> 'off',
+				]
+			);
+
+			// Start From
+			$this->add_control(
+				'trigger_hook',
+				[
+					'label' 		=> __( 'Start Point', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'placeholder'   => '0.1',
+					'default'       => '0.1',
+					'condition' 	=> [ 
+						'image_movement' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Length
+			$this->add_control(
+				'duration',
+				[
+					'label' 		=> __( 'Duration', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'placeholder'   => '0.4',
+					'default'       => '0.4',
+					'condition' 	=> [ 
+						'image_movement' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Vertical Movement
+			$this->add_control(
+				'vertical_movement',
+				[
+					'label' 		=> __( 'Vertical Movement', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'condition' 	=> [ 
+						'image_movement' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Horizontal Movement
+			$this->add_control(
+				'horizontal_movement',
+				[
+					'label' 		=> __( 'Horizontal Movement', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'condition' 	=> [ 
+						'image_movement' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Opacity at End
+			$this->add_control(
+				'opacity',
+				[
+					'label' 		=> __( 'Opacity at End', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'condition' 	=> [ 
+						'image_movement' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			// Rotation at End
+			$this->add_control(
+				'rotation',
+				[
+					'label' 		=> __( 'Rotation at End', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'condition' 	=> [ 
+						'image_movement' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+		}
 
 		// Enable Image Movement Animate
 		$this->add_control(
@@ -515,11 +623,11 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 					'{{WRAPPER}} .bw-image img:hover'
 			]
 		);
-		
+
 		$this->add_control(
 			'hover_animation',
 			[
-				'label' => __( 'Hover Animation', 'plugin-domain' ),
+				'label' => __( 'Hover Animation', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::HOVER_ANIMATION,
 				'prefix_class' => 'elementor-animation-',
 			]
@@ -944,9 +1052,9 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 		$this->add_control(
 			'image_pro_anime',
 			[
-				'label' => __( 'Type Custom Animate', 'plugin-domain' ),
+				'label' => __( 'Type Custom Animate', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'all 0.23s ease', 'plugin-domain' ),
+				'default' => __( 'all 0.23s ease', 'blackwidgets' ),
 			]
 		);
 
@@ -1327,12 +1435,21 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 		// $img_url 	   				= isset($settings['image_link_url'])					? $settings['image_link_url']						: '';
 		$target            			= isset($settings['image_link_url']['is_external']) 	? 'target="_blank"' 								: '';
         $nofollow          			= isset($settings['image_link_url']['nofollow']) 		? ' rel="nofollow"' 								: '';
+		// To
 		$duration	            	= !empty($settings['duration']) 						?  $settings['duration'] 							: '';
 		$trigger_hook	        	= !empty($settings['trigger_hook']) 					?  $settings['trigger_hook'] 						: '';
 		$horizontal_movement		= !empty($settings['horizontal_movement']) 				? 'x: "' . $settings['horizontal_movement'] . '",' 	: '';
 		$vertical_movement			= !empty($settings['vertical_movement']) 				? 'y: "' . $settings['vertical_movement'] . '",' 	: '';
 		$opacity					= !empty( $settings['opacity'] ) 						? 'opacity: "' . $settings['opacity'] . '",' 		: '';
 		$rotation					= !empty($settings['rotation']) 						? 'rotation: "' . $settings['rotation'] . '",' 		: '';
+		//From
+		$duration2	            	= !empty($settings['duration2']) 						?  $settings['duration2'] 							: '';
+		$trigger_hook2	        	= !empty($settings['trigger_hook2']) 					?  $settings['trigger_hook2'] 						: '';
+		$horizontal_movement2		= !empty($settings['horizontal_movement2']) 				? 'x: "' . $settings['horizontal_movement2'] . '",' 	: '';
+		$vertical_movement2			= !empty($settings['vertical_movement2']) 				? 'y: "' . $settings['vertical_movement2'] . '",' 	: '';
+		$opacity2					= !empty( $settings['opacity2'] ) 						? 'opacity: "' . $settings['opacity2'] . '",' 		: '';
+		$rotation2					= !empty($settings['rotation2']) 						? 'rotation: "' . $settings['rotation2'] . '",' 		: '';
+		// Paralax
 		$parallax					= isset($settings['image_parllax'])						? $settings['image_parllax']						: '';
 		// $imagelink					= isset($settings['bw_image_link']['url'])				? $settings['bw_image_link']['url']						: '';
 		// Transform Option
@@ -1372,7 +1489,12 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 		//ID Settings
 		$data_id                	= 'bw_' . uniqid();
 		$script_id              	= '#' . $data_id;
-		$image_movement 			= ''; //$settings['image_movement']
+		$options = get_option('plugin_options') ? get_option('plugin_options') : '';
+		$gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
+		if( isset($gsap_options) && !empty($gsap_options) ) {
+			$image_movement 			= $settings['image_movement'];
+			$image_movement2 			= $settings['image_movement2'];
+		}
 		//Transform Normal Styles 
 		// Normal Move 
 		$translatex 				= isset( $move_normal_x["size"] ) 						? $move_normal_x["size"] . $move_normal_x["unit"] : '';
@@ -1427,6 +1549,9 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 		//Return all of the styles
 		echo "<style> $normal_transform_style $hover_transform_style</style>";
 
+		$options = get_option('plugin_options') ? get_option('plugin_options') : '';
+        $gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
+
         // Render
         echo '<div class="bw-image" style="text-align: ' . $alignment . ';">';
 
@@ -1442,38 +1567,43 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 
 		echo '</div>';
 
-		if ( $image_movement == 'on') {
+		if ( isset($gsap_options) && !empty($gsap_options) ) {
+
+			if ($image_movement2 == 'on') {
+				$tlfrom = 'tl.from("#'. $data_id .'", { ' . $opacity2 . $rotation2 . $horizontal_movement2 . $vertical_movement2 . ' duration: '.$duration2.' })';
+			} else {
+				$tlfrom = '';
+			}
+			if ($image_movement == 'on') {
+				$tlto = 'tl.to("#'. $data_id .'", { ' . $opacity . $rotation . $horizontal_movement . $vertical_movement . ' duration: '.$duration.' })';
+			} else {
+				$tlto = '';
+			}
+
 			echo '<script>
-				( function( $ ) {
-					$( document ).ready( function() {
-						var attr = "' . $script_id . '",
-							duration = "'.$duration.'",
-							trigger_hook = "'.$trigger_hook.'";
-						if (typeof attr !== typeof undefined && attr !== false) {
-							var controller = new ScrollMagic.Controller();
-							var data_id = attr;
-							var scr_img = data_id + " img";
-							console.log(data_id);
-							console.log(scr_img);
-							new ScrollMagic.Scene({
-								triggerElement: attr,
-								duration: duration,
-								triggerHook: trigger_hook
-							})
-							.setTween( scr_img , {  ' . $opacity . $rotation . $horizontal_movement . $vertical_movement . '  } ).addTo( controller );
-						}
-					}); // end document ready
-				})( jQuery );
+					jQuery(window).ready(function($) {
+						gsap.registerPlugin(ScrollTrigger);
+						ScrollTrigger.config({ limitCallbacks: true });
+						const tl = gsap.timeline({
+							scrollTrigger: {
+							trigger: "#'. $data_id .'",
+							start: "center bottom",
+							end: "center top",
+							scrub: true,
+							// markers: true
+							}
+						});
+						'.$tlfrom.'
+						'.$tlto.'
+					});
 				</script>';
 		}
 
 		if ( $parallax == 'bw-parallax') {
 			echo '<script>
 			jQuery(document).ready(function () {
-
 					var image = document.getElementsByClassName("bw-parallax");
 					new simpleParallax(image);
-
 				});
 			</script>';
 		}

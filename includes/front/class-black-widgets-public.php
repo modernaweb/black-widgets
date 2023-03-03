@@ -95,9 +95,41 @@ class Black_Widgets_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script('bw-jquery-plugins', plugin_dir_url( __FILE__ ) . 'js/bw-jquery-plugins.js', array(), '1.0.0', 'true' );
-		wp_enqueue_script('bw-public', plugin_dir_url( __FILE__ ) . 'js/bw-public.js', array(), '1.0.0', 'true' );
+		wp_enqueue_script('bw-jquery-plugins', plugin_dir_url( __FILE__ ) . 'js/bw-jquery-plugins.js', array('jquery'), '1.0.0', 'true' );
+		wp_enqueue_script('bw-public', plugin_dir_url( __FILE__ ) . 'js/bw-public.js', array('jquery'), '1.0.0', 'true' );
 
+        // Load options
+        $options = get_option('plugin_options') ? get_option('plugin_options') : '';
+        $gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
+        $bw_gsap_cdn1  = isset($options['bw_gsap_cdn1']) ? $options['bw_gsap_cdn1'] : '';
+        $bw_gsap_cdn2  = isset($options['bw_gsap_cdn2']) ? $options['bw_gsap_cdn2'] : '';
+        $bw_gsap_cdn3  = isset($options['bw_gsap_cdn3']) ? $options['bw_gsap_cdn3'] : '';
+        $bw_gsap_cdn4  = isset($options['bw_gsap_cdn4']) ? $options['bw_gsap_cdn4'] : '';
+
+        if( isset($gsap_options) && !empty($gsap_options) ) {
+            if( isset($bw_gsap_cdn1) && !empty($bw_gsap_cdn1) ) {
+                wp_register_script( 'GSAP', $bw_gsap_cdn1, array(), '1.2.5', 'true' );
+                wp_enqueue_script('GSAP');
+            }
+
+            if( isset($bw_gsap_cdn2) && !empty($bw_gsap_cdn2) ) {
+                wp_register_script( 'GSAP-ScrollTrigger', $bw_gsap_cdn2, array(), '1.2.5', 'true' );
+                wp_enqueue_script('GSAP-ScrollTrigger');
+            }
+
+            if( isset($bw_gsap_cdn3) && !empty($bw_gsap_cdn3) ) {
+                wp_register_script( 'TimelineMax', $bw_gsap_cdn3, array(), '1.2.5', 'true' );
+                wp_enqueue_script('TimelineMax');
+            }
+
+            if( isset($bw_gsap_cdn4) && !empty($bw_gsap_cdn4) ) {
+                wp_register_script( 'TweenLite', $bw_gsap_cdn4, array(), '1.2.5', 'true' );
+                wp_enqueue_script('TweenLite');
+            }
+
+            // wp_enqueue_script('bw-cdn-uses', plugin_dir_url( __FILE__ ) . 'js/bw-cdn-uses.js', array(), '1.2.5', 'true' );
+
+        }
 
 	}
 

@@ -93,7 +93,7 @@ class BLACK_WIDGETS_List extends \Elementor\Widget_Base {
 	 * @since 1.0.0
 	 * @access protected
 	 */
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		// Start
 		// Content section
@@ -128,6 +128,16 @@ class BLACK_WIDGETS_List extends \Elementor\Widget_Base {
 			]
 		);
 
+		$repeater->add_control(
+			'link_list',
+			[
+				'label' => __( 'Link', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::URL,
+				'placeholder' => __( 'https://your-link.com', 'blackwidgets' ),
+				'show_external' => true,
+			]
+		);
+
 		$this->add_control(
 			'list',
 			[
@@ -136,14 +146,20 @@ class BLACK_WIDGETS_List extends \Elementor\Widget_Base {
 				'fields' => $repeater->get_controls(),
 				'default' => [
 					[
-						'list_title' => __( 'Item content #1', 'blackwidgets' ),
-						'icon_widget' => [
+						'list_title' 	=> __( 'Item content #1', 'blackwidgets' ),
+						'icon_widget' 	=> [
                             'value' => 'eicon eicon-check',
                         ],
 					],
 					[
-                        'list_title' => __( 'Item content #2', 'blackwidgets' ),
-						'icon_widget' => [
+                        'list_title' 	=> __( 'Item content #2', 'blackwidgets' ),
+						'icon_widget' 	=> [
+                            'value' => 'eicon eicon-check',
+                        ],
+					],
+					[
+                        'list_title' 	=> __( 'Item content #3', 'blackwidgets' ),
+						'icon_widget' 	=> [
                             'value' => 'eicon eicon-check',
                         ],
 					],
@@ -328,6 +344,15 @@ class BLACK_WIDGETS_List extends \Elementor\Widget_Base {
 			]
 		);
 
+		// Style Subtitle Tabs
+		$this->start_controls_tabs('black_widget_1_tab');
+		$this->start_controls_tab(
+			'tab_1_normal',
+			[
+				'label' => __( 'Normal', 'blackwidgets' ),
+			]
+		);
+
 		// Color
 		$this->add_control(
 			'icon_color',
@@ -433,6 +458,124 @@ class BLACK_WIDGETS_List extends \Elementor\Widget_Base {
 			]
 		);
 
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'tab_2_hover',
+			[
+				'label' => __( 'Hover', 'blackwidgets' ),
+			]
+		);
+
+
+		// Color
+		$this->add_control(
+			'icon_hover_color',
+			[
+				'label' => __( 'Color', 'blackwidgets' ),
+				'type' => Controls_Manager::COLOR,
+				'scheme' => [
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bw-list .bw-list-item:hover i' => 'color: {{VALUE}}',
+				],
+			]
+        );
+
+		$this->add_control(
+			'icon_hover_size',
+			[
+				'label' => __( 'Icon Size', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 200,
+						'step' => 5,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bw-list .bw-list-item:hover i' => 'font-size: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		// Background
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'icon_hover_background',
+				'label' => __( 'Background', 'blackwidgets' ),
+				'types' => [ 'classic', 'gradient', 'video' ],
+				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover i',
+			]
+		);
+
+		// Margin
+		$this->add_responsive_control(
+			'icon_hover_margin',
+			[
+				'label' => __( 'Margin', 'blackwidgets' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-list .bw-list-item:hover i' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Padding
+		$this->add_responsive_control(
+			'icon_hover_padding',
+			[
+				'label' => __( 'Padding', 'blackwidgets' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-list .bw-list-item:hover i' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Border
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' => 'icon_hover_border',
+				'label' => __( 'Border', 'blackwidgets' ),
+				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover i',
+			]
+		);
+
+		// Border Radius
+		$this->add_control(
+			'icon_hover_border_radius', //param_name
+			[
+				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-list .bw-list-item:hover i' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Box shadow
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name' => 'icon_hover_box_shadow',
+				'label' => __( 'Box Shadow', 'blackwidgets' ),
+				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover i',
+			]
+		);
+
+		$this->end_controls_tab();
+		$this->end_controls_tabs(); // End Tabs		
+
 		$this->end_controls_section();
         // End
 
@@ -442,6 +585,15 @@ class BLACK_WIDGETS_List extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Text Settings', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		// Style Subtitle Tabs
+		$this->start_controls_tabs('black_widget_2_tab');
+		$this->start_controls_tab(
+			'tab_3_normal',
+			[
+				'label' => __( 'Normal', 'blackwidgets' ),
 			]
 		);
 
@@ -542,6 +694,117 @@ class BLACK_WIDGETS_List extends \Elementor\Widget_Base {
 			]
 		);
 
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'tab_4_hover',
+			[
+				'label' => __( 'Hover', 'blackwidgets' ),
+			]
+		);
+
+
+		// Typography
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'text_hover_typography',
+				'label' => __( 'Typography', 'blackwidgets' ),
+				'scheme' => Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover span',
+			]
+		);
+
+		// Color
+		$this->add_control(
+			'text_hover_color',
+			[
+				'label' => __( 'Color', 'blackwidgets' ),
+				'type' => Controls_Manager::COLOR,
+				'scheme' => [
+					'type' => Color::get_type(),
+					'value' => Color::COLOR_1,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bw-list .bw-list-item:hover span' => 'color: {{VALUE}}',
+				],
+			]
+        );
+
+		// Background
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'text_hover_background',
+				'label' => __( 'Background', 'blackwidgets' ),
+				'types' => [ 'classic', 'gradient', 'video' ],
+				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover span',
+			]
+		);
+
+		// Margin
+		$this->add_responsive_control(
+			'text_hover_margin',
+			[
+				'label' => __( 'Margin', 'blackwidgets' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-list .bw-list-item:hover span' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Padding
+		$this->add_responsive_control(
+			'text_hover_padding',
+			[
+				'label' => __( 'Padding', 'blackwidgets' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-list .bw-list-item:hover span' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Border
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' => 'text_hover_border',
+				'label' => __( 'Border', 'blackwidgets' ),
+				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover span',
+			]
+		);
+
+		// Border Radius
+		$this->add_control(
+			'text_hover_border_radius', //param_name
+			[
+				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-list .bw-list-item:hover span' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Box shadow
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name' => 'text_hover_box_shadow',
+				'label' => __( 'Box Shadow', 'blackwidgets' ),
+				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover span',
+			]
+		);
+
+
+		$this->end_controls_tab();
+		$this->end_controls_tabs(); // End Tabs		
+
 		$this->end_controls_section();
         // End
 
@@ -560,20 +823,42 @@ class BLACK_WIDGETS_List extends \Elementor\Widget_Base {
 		$settings   	= $this->get_settings_for_display();
 
 		// Variables
-        $type 	        = isset($settings['widget_type']) ? $settings['widget_type'] : '';
+        $type 	        = isset($settings['widget_type'])				? $settings['widget_type'] 				: '';
 
 		// Render
         if ( $settings['list'] ) {
 			echo '<div class="bw-list">';
 			foreach (  $settings['list'] as $item ) {
-				echo '<div class="bw-list-item">';
-					echo '<span class="bw-icon-section">';
-						\Elementor\Icons_Manager::render_icon( $item['icon_widget'], [ 'aria-hidden' => 'true' ] );
-					echo '</span>';
-					echo '<span class="elementor-repeater-item-' . $item['_id'] . '">';
-						echo $item['list_title'];
-					echo '</span>';
-                echo '</div>';
+
+					$link			= isset($item['link_list']['url'])			? $item['link_list']['url']				: '';
+					$target			= $item['link_list']['is_external']			? 'target="_blank"' 					: '';
+					$nofollow		= $item['link_list']['nofollow'] 			? ' rel="nofollow"'						: '';
+
+					if( $link ) {
+						echo '<div class="bw-list-item">';
+							echo '<a href="' . $item['link_list']['url'] . '"' . $target . $nofollow . ' class="bw-list-item-link' . $type . '">';
+								echo '<div class="bw-list-content">';
+									echo '<span class="bw-icon-section">';
+										\Elementor\Icons_Manager::render_icon( $item['icon_widget'], [ 'aria-hidden' => 'true' ] );
+									echo '</span>';
+									echo '<span class="elementor-repeater-item-' . $item['_id'] . '">';
+										echo $item['list_title'];
+									echo '</span>';
+								echo '</div>';
+							echo '</a>';
+						echo '</div>';
+					} else {
+						echo '<div class="bw-list-item">';
+							echo '<div class="bw-list-content">';
+								echo '<span class="bw-icon-section">';
+									\Elementor\Icons_Manager::render_icon( $item['icon_widget'], [ 'aria-hidden' => 'true' ] );
+								echo '</span>';
+								echo '<span class="elementor-repeater-item-' . $item['_id'] . '">';
+									echo $item['list_title'];
+								echo '</span>';
+							echo '</div>';
+						echo '</div>';
+					}
 			}
 			echo '</div>';
 		}
