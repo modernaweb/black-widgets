@@ -106,6 +106,7 @@ WordPress 4.9+
 
 ## Changelog
 
+
 = 1.3.1 — 2023-03-04 =
 - Compatibility: WordPress v6.1
 - Compatibility: Elementor v3.11
