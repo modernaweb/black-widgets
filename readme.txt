@@ -4,7 +4,7 @@ Donate link: http://modernaweb.net/
 Tags: page builder, editor, elementor widgets, elementor addon, typography
 Stable tag: 1.3.1
 Tested up to: 6.1
-Requires PHP: 7.2
+Requires PHP: 7.4
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -13,7 +13,7 @@ Free add-on for Elementor, You can add more customization with visual effects an
 
 ## Description
 
-Black Widgets is a free add-on for Elementor; with this plugin, you can create unique elements with the ability to customize on your website.
+Black Widgets is a free add-on for Elementor; with this plugin, you can create unique elements with the ability to customize your website.
 
 
 We will add more widgets with more and more styles that may surprise you in the future; for now, add black widgets to your WordPress, and don't miss future updates.
@@ -60,6 +60,7 @@ Dsgn is a simple way to start a website easily, quickly, and free. This is Free 
 *   Black Blockquote
 *   Black Typography + (for experts)
 *   Black Box
+*   Black Sentence
 *   Black Trigger (for experts)
 *   Black Horizontal (for experts)
 
@@ -105,12 +106,14 @@ WordPress 4.9+
 
 ## Changelog
 
-= 1.3.1 — 202X-XX-XX =
+
+= 1.3.1 — 2023-03-04 =
 - Compatibility: WordPress v6.1
-- Compatibility: Elementor v4
+- Compatibility: Elementor v3.11
 - Added: New widget: Black Sentence
 - Improved: First set-up notice related to GSAP
 - Fixed: PHP Deprecated on the "register_widget_type" hook
+- Fixed: Some minor issue
 
 = 1.3.0 — 2022-08-14 =
 - Compatibility: WordPress v6.0
