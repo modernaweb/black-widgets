@@ -9,7 +9,7 @@
 **License:** GPLv3 or later \
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.html
 
-Free add-on for Elementor, You can add ability more customization with visual effects and better UX. ✌
+Free add-on for Elementor! With this add-on, you can add more visual effects and improve your website's user experience. ✌
 
 
 ## Description
