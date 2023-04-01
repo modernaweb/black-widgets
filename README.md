@@ -14,6 +14,7 @@ Free add-on for Elementor, You can add ability more customization with visual ef
 
 ## Description
 
+
 Black Widgets is a free add-on for Elementor; with this plugin, you can create unique elements with the ability to customize your website.
 
 
@@ -127,6 +128,7 @@ WordPress 4.9+
 
 
 ## Changelog
+
 
 ### 1.3.2 — 2023-04-01
 - Compatibility: WordPress v6.2
