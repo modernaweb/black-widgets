@@ -39,6 +39,8 @@ body.toplevel_page_black-widgets .bw-box-backend .card .bw-banner {
     max-width: 100% !important;
     border-radius: 4px;
     margin: 28px 0 0 0;
+    border: 1px solid #efefef;
+    box-shadow: 0 0 60px -28px rgba(0 0 0 / 40%);
 }
 
 body.toplevel_page_black-widgets .bw-box-backend .bw-backend-heading strong, body.toplevel_page_black-widgets .bw-box-backend .bw-backend-heading a {
@@ -82,19 +84,23 @@ body.toplevel_page_black-widgets .bw-box-backend .bw-btn:hover {
 
 
  #elementor-panel-category-black_widgets .elementor-element {
-     background: #000;
-     background: linear-gradient(-45deg, #000 0%, #222 50%, #000 100%);
-     color: #fff;
+     background: #0C0D0E;
+     /* background: linear-gradient(-45deg, #000 0%, #222 50%, #000 100%); */
+     color: #9DA5AE;
      transition: all .02s ease !important;
  }
  
+ #elementor-panel-category-black_widgets .elementor-element:hover {
+    background: #000 !important;
+}
+
  #elementor-panel-category-black_widgets .elementor-element .icon, #elementor-panel-category-black_widgets .elementor-element .title {
-     color: #fff;
+     color: #9DA5AE;
      transition: all .3s ease !important;
  }
  
  #elementor-panel-category-black_widgets .elementor-element:hover .icon, #elementor-panel-category-black_widgets .elementor-element:hover .title {
-     color: #fcb92c;
+     color: #fff;
  }
  
  

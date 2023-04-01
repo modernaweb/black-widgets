@@ -5172,6 +5172,18 @@
     z-index: 9;
 }
 
+.bw-iconbox.bw-box-left {
+    text-align: left;
+}
+
+.bw-iconbox.bw-box-center {
+    text-align: center;
+}
+
+.bw-iconbox.bw-box-right {
+    text-align: right;
+}
+
 .bw-iconbox h1,
 .bw-iconbox h2,
 .bw-iconbox h3,
@@ -5219,10 +5231,20 @@
     text-align: right;
 }
 
+.bw-iconbox img,
+.bw-iconbox svg,
+.bw-iconbox .bw-iconbox-icon i {
+    margin-bottom: 20px;
+
+}
+
+
+
+
 
 /* Position 1 */
 
-.bw-iconbox.bw-position-1 .bw-iconbox-icon i {
+.bw-position-1 i {
     margin: 0;
 }
 
@@ -5487,6 +5509,68 @@
 }
 
 
+/* right positioning */
+.bw-box-right.bw-position-3,
+.bw-box-right.bw-position-4 {
+    direction: rtl;
+    text-align: right;
+}
+
+.bw-box-right.bw-position-3 .bw-image-wrap,
+.bw-box-right.bw-position-4 .bw-image-wrap {
+    float: right;
+}
+
+.bw-box-right.bw-position-3 .bw-content-wrap,
+.bw-box-right.bw-position-4 .bw-content-wrap {
+    float: left;
+    padding-left: 0;
+    padding-right: 18px;
+}
+
+.bw-box-right.bw-position-4 .bw-content-wrap {
+    border-left: 0;
+    border-right: 2px solid #D2D2D2;
+}
+
+.bw-box-right.bw-position-3 .bw-content-wrap a:hover,
+.bw-box-right.bw-position-4 .bw-content-wrap a:hover {
+    padding-left: 0;
+    padding-right: 18px;
+}
+
+.bw-box-right.bw-position-3 .bw-content-wrap a:before,
+.bw-box-right.bw-position-4 .bw-content-wrap a:before {
+    right: 0;
+    left: auto;
+}
+
+.bw-box-right.bw-position-5 .bw-wrapper,
+.bw-box-right.bw-position-6 .bw-wrapper {
+    flex-direction: row-reverse;
+}
+
+.bw-box-right.bw-position-5{
+    border-left: 0px;
+    border-right: 7px solid #000;
+}
+
+.bw-box-right.bw-position-5 .bw-wrapper .bw-iconbox-icon,
+.bw-box-right.bw-position-6 .bw-wrapper .bw-iconbox-icon {
+    margin: 0 0 0 12px;
+}
+
+.bw-box-right.bw-position-5 .bw-wrapper .bw-typography-wrapper,
+.bw-box-right.bw-position-6 .bw-wrapper .bw-typography-wrapper {
+    float: left;
+}
+
+.bw-position-5 .bw-wrapper .bw-iconbox-img,
+.bw-position-6 .bw-wrapper .bw-iconbox-img {
+    margin: 0 12px;
+}
+
+
 /**
  * Black Call To Action - CTA
  */
@@ -5666,6 +5750,28 @@
     }
 }
 
+.bw-blockquote-right {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.bw-blockquote-right .bw-icon-into {
+    padding-right: 0;
+    padding-left: 12px;
+}
+
+.bw-blockquote-right .content {
+    padding-left: 0;
+    padding-right: 20px;
+    border-left: 0 solid;
+    border-right: 4px solid;
+    text-align: right;
+}
+
+.bw-blockquote-right .bw-icon-into img,
+.bw-blockquote-right .bw-icon-into svg {
+    float: right;
+}
 
 /**
  * Black Typography
