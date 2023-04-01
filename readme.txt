@@ -2,8 +2,8 @@
 Contributors: skalanter, modernaweb
 Donate link: http://modernaweb.net/
 Tags: page builder, editor, elementor widgets, elementor addon, typography
-Stable tag: 1.3.1
-Tested up to: 6.1
+Stable tag: 1.3.2
+Tested up to: 6.2
 Requires PHP: 7.4
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -58,11 +58,11 @@ Dsgn is a simple way to start a website easily, quickly, and free. This is Free 
 *   Black Icon Box Pro
 *   Black Call to Action
 *   Black Blockquote
-*   Black Typography + (for experts)
+*   Black Typography(for experts)
 *   Black Box
 *   Black Sentence
-*   Black Trigger (for experts)
-*   Black Horizontal (for experts)
+*   Black Trigger(for experts)
+*   Black Horizontal(for experts)
 
 
 Live Demo & Demo Importer — Coming Soon 
@@ -102,10 +102,17 @@ WordPress 4.9+
 4. Black Widgets Screenshot 4
 5. Black Widgets Screenshot 5
 6. Black Widgets Screenshot 6
+7. Black Widgets Screenshot 7
 
 
 ## Changelog
 
+
+= 1.3.2 — 2023-04-01 =
+- Compatibility: WordPress v6.2
+- Compatibility: Elementor v3.12
+- Added: Box style and positioning for Black Icon Box Widget
+- Fixed: Some minor issue
 
 = 1.3.1 — 2023-03-04 =
 - Compatibility: WordPress v6.1
@@ -132,7 +139,7 @@ WordPress 4.9+
 - Fixed: Some issues on the Black Typography widget
 - Fixed: Some minor issue
 
-= 1.2.6 — 2022-1-31 =
+= 1.2.6 — 2022-01-31 =
 - Compatibility: WordPress v5.9
 - Compatibility: Elementor v3.5
 - Added: An option for movements on typography widget

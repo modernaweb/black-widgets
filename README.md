@@ -3,8 +3,8 @@
 **Contributors:** skalanter, modernaweb \
 **Donate link:** http://modernaweb.net/ \
 **Tags:** page builder, editor, elementor widgets, elementor addon, typography \
-**Stable tag:** 1.3.1 \
-**Tested up to:** 6.1 \
+**Stable tag:** 1.3.2 \
+**Tested up to:** 6.2 \
 **Requires PHP:** 7.4 \
 **License:** GPLv3 or later \
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.html
@@ -121,10 +121,20 @@ WordPress 4.9+
 
 ![Black Widgets Screenshot 6](https://ps.w.org/black-widgets/assets/screenshot-6.png)
 
+### 7. Black Widgets Screenshot 7
+
+![Black Widgets Screenshot 7](https://ps.w.org/black-widgets/assets/screenshot-7.png)
+
 
 
 ## Changelog
 
+
+### 1.3.2 — 2023-04-01
+- Compatibility: WordPress v6.2
+- Compatibility: Elementor v3.12
+- Added: Box style and positioning for Black Icon Box Widget
+- Fixed: Some minor issue
 
 ### 1.3.1 — 2023-03-04
 - Compatibility: WordPress v6.1
@@ -151,7 +161,7 @@ WordPress 4.9+
 - Fixed: Some issues on the Black Typography widget
 - Fixed: Some minor issue
 
-### 1.2.6 — 2022-1-31
+### 1.2.6 — 2022-01-31
 - Compatibility: WordPress v5.9
 - Compatibility: Elementor v3.5
 - Added: An option for movements on typography widget

@@ -196,6 +196,27 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			]
         );
 
+
+		// Alignment
+		$this->add_responsive_control(
+			'widget_alignment',
+			[
+				'label'     => __( 'Text Alignment', 'blackwidgets' ),
+				'type'      => \Elementor\Controls_Manager::CHOOSE,
+				'options'   => [
+					'left'   => [
+						'title' => __( 'Left', 'blackwidgets' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'right'  => [
+						'title' => __( 'Right', 'blackwidgets' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+				],
+				'toggle'    => true,
+			]
+		);
+
 		$this->end_controls_section();
 		// End
 
@@ -398,6 +419,70 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->end_controls_section();
         // End
 
+
+
+		// Start
+		// Box Style section
+		$this->start_controls_section(
+			'content_style_section',
+			[
+				'label' => __( 'Content Style', 'blackwidgets' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		// Margin
+		$this->add_responsive_control(
+			'content_style_margin',
+			[
+				'label' => __( 'Margin', 'blackwidgets' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-blockquote .content' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Padding
+		$this->add_responsive_control(
+			'content_style_padding',
+			[
+				'label' => __( 'Padding', 'blackwidgets' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-blockquote .content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Border
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' => 'content_style_border',
+				'label' => __( 'Border', 'blackwidgets' ),
+				'selector' => '{{WRAPPER}} .bw-blockquote .content',
+			]
+		);
+
+		// Border Radius
+		$this->add_control(
+			'content_style_border_radius', //param_name
+			[
+				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+					'{{WRAPPER}} .bw-blockquote .content' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+		// End
+
 		// Start
 		// Quote Style section
 		$this->start_controls_section(
@@ -495,30 +580,6 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 				'label' => __( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-blockquote .content .bw-description',
-			]
-		);
-
-		// Alignment
-		$this->add_responsive_control(
-			'content_quote_text_alignment',
-			[
-				'label'     => __( 'Text Alignment', 'blackwidgets' ),
-				'type'      => \Elementor\Controls_Manager::CHOOSE,
-				'options'   => [
-					'left'   => [
-						'title' => __( 'Left', 'blackwidgets' ),
-						'icon'  => 'eicon-text-align-left',
-					],
-					'center' => [
-						'title' => __( 'Center', 'blackwidgets' ),
-						'icon'  => 'eicon-text-align-center',
-					],
-					'right'  => [
-						'title' => __( 'Right', 'blackwidgets' ),
-						'icon'  => 'eicon-text-align-right',
-					],
-				],
-				'toggle'    => true,
 			]
 		);
 
@@ -684,30 +745,6 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Alignment
-		$this->add_responsive_control(
-			'content_name_text_alignment',
-			[
-				'label'     => __( 'Text Alignment', 'blackwidgets' ),
-				'type'      => \Elementor\Controls_Manager::CHOOSE,
-				'options'   => [
-					'left'   => [
-						'title' => __( 'Left', 'blackwidgets' ),
-						'icon'  => 'eicon-text-align-left',
-					],
-					'center' => [
-						'title' => __( 'Center', 'blackwidgets' ),
-						'icon'  => 'eicon-text-align-center',
-					],
-					'right'  => [
-						'title' => __( 'Right', 'blackwidgets' ),
-						'icon'  => 'eicon-text-align-right',
-					],
-				],
-				'toggle'    => true,
-			]
-		);
-
 		// Margin
 		$this->add_responsive_control(
 			'content_name__margin',
@@ -839,7 +876,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .bw-blockquote .bw-icon-into svg' => 'max-width: {{SIZE}}{{UNIT}} !important; max-height: {{SIZE}}{{UNIT}} !important;',
+					'{{WRAPPER}} .bw-blockquote .bw-icon-into svg' => 'width: {{SIZE}}{{UNIT}} !important; height: {{SIZE}}{{UNIT}} !important; max-width: {{SIZE}}{{UNIT}} !important; max-height: {{SIZE}}{{UNIT}} !important;',
 				],
 				'condition'  => [
 					'quote_type' => [
@@ -961,7 +998,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
         $name			= isset($settings['widget_title']) 				? $settings['widget_title']					: '';
 
 		// Render
-		echo '<div class="bw-blockquote">';
+		echo '<div class="bw-blockquote bw-blockquote-'. $alignment .'">';
 			echo '<div class="bw-icon-into">';
 				switch ($type) {
 					case 'svg-1':

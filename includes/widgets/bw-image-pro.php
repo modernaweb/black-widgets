@@ -644,7 +644,7 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'transform_section',
 			[
-				'label' => __( '2D & 3D Normal Transfrom Style', 'blackwidgets' ),
+				'label' => __( '2D & 3D Normal Transform Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -653,7 +653,7 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 		$this->add_control(
 			'transform_normal_option',
 			[
-				'label' 		=> __( 'Transfrom Style', 'blackwidgets' ),
+				'label' 		=> __( 'Transform Style', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
 				'label_on' 		=> __( 'Enable', 'blackwidgets' ),
 				'label_off' 	=> __( 'Disable', 'blackwidgets' ),
@@ -1067,7 +1067,7 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'transform_section_hover',
 			[
-				'label' => __( '2D & 3D Hover Transfrom Style', 'blackwidgets' ),
+				'label' => __( '2D & 3D Hover Transform Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -1076,7 +1076,7 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 		$this->add_control(
 			'transform_hover_option',
 			[
-				'label' 		=> __( 'Transfrom Style', 'blackwidgets' ),
+				'label' 		=> __( 'Transform Style', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
 				'label_on' 		=> __( 'Enable', 'blackwidgets' ),
 				'label_off' 	=> __( 'Disable', 'blackwidgets' ),

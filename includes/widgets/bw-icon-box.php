@@ -111,7 +111,7 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_position',
 			[
-				'label' => __( 'Icon Box Position(s)', 'blackwidgets' ),
+				'label' => __( 'Icon Box Position', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'position-5',
 				'options' => [
@@ -470,6 +470,64 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Box Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		// Alignment
+		$this->add_responsive_control(
+			'box_text_alignment',
+			[
+				'label'     => __( 'Box Alignment', 'blackwidgets' ),
+				'type'      => \Elementor\Controls_Manager::CHOOSE,
+				'options'   => [
+					'left'   => [
+						'title' => __( 'Left', 'blackwidgets' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => __( 'Center', 'blackwidgets' ),
+						'icon'  => 'eicon-text-align-center',
+					],
+					'right'  => [
+						'title' => __( 'Right', 'blackwidgets' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+				],
+				'toggle'    => true,
+				'condition'  => [
+					'widget_position' => [
+						'position-1',
+						'position-2',
+					],
+				],
+			]
+		);
+
+		// Alignment
+		$this->add_responsive_control(
+			'box_b_text_alignment',
+			[
+				'label'     => __( 'Box Alignment', 'blackwidgets' ),
+				'type'      => \Elementor\Controls_Manager::CHOOSE,
+				'options'   => [
+					'left'   => [
+						'title' => __( 'Left', 'blackwidgets' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'right'  => [
+						'title' => __( 'Right', 'blackwidgets' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+				],
+				'toggle'    => true,
+				'condition'  => [
+					'widget_position' => [
+						'position-3',
+						'position-4',
+						'position-5',
+						'position-6',
+					],
+				],
 			]
 		);
 
@@ -1500,29 +1558,29 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			]
 		);
 
-		// // Alignment
-		// $this->add_responsive_control(
-		// 	'content_icon_text_alignment',
-		// 	[
-		// 		'label'     => __( 'Icon Alignment', 'blackwidgets' ),
-		// 		'type'      => \Elementor\Controls_Manager::CHOOSE,
-		// 		'options'   => [
-		// 			'left'   => [
-		// 				'title' => __( 'Left', 'blackwidgets' ),
-		// 				'icon'  => 'fas fa-long-arrow-alt-left',
-		// 			],
-		// 			'center' => [
-		// 				'title' => __( 'Center', 'blackwidgets' ),
-		// 				'icon'  => 'fas fa-compress-arrows-alt',
-		// 			],
-		// 			'right'  => [
-		// 				'title' => __( 'Right', 'blackwidgets' ),
-		// 				'icon'  => 'fas fa-long-arrow-alt-right',
-		// 			],
-		// 		],
-		// 		'toggle'    => true,
-		// 	]
-		// );
+		// Alignment
+		$this->add_responsive_control(
+			'the_icon_alignment',
+			[
+				'label'     => __( 'Icon Position', 'blackwidgets' ),
+				'type'      => \Elementor\Controls_Manager::CHOOSE,
+				'options'   => [
+					'left'   => [
+						'title' => __( 'Left', 'blackwidgets' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => __( 'Center', 'blackwidgets' ),
+						'icon'  => 'eicon-text-align-center',
+					],
+					'right'  => [
+						'title' => __( 'Right', 'blackwidgets' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+				],
+				'toggle'    => true,
+			]
+		);
 
 		// Margin
 		$this->add_responsive_control(
@@ -1799,12 +1857,17 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 		// Position Options
 		$position				= isset( $settings['widget_position'] )							? $settings['widget_position']					: '';
 		// Alignment
+		$box_align				= isset($settings['box_text_alignment'])						? $settings['box_text_alignment']				: '';
+		$box_b_align			= isset($settings['box_b_text_alignment'])						? $settings['box_b_text_alignment']				: '';
 		$title_align			= isset($settings['content_title_text_alignment'])				? $settings['content_title_text_alignment']		: '';
 		$subtitle_align			= isset($settings['content_subtitle_text_alignment'])			? $settings['content_subtitle_text_alignment']	: '';
 		$paragraph_align		= isset($settings['content_paragraph_text_alignment'])			? $settings['content_paragraph_text_alignment']	: '';
 		$link_align				= isset($settings['content_link_text_alignment'])				? $settings['content_link_text_alignment']		: '';
 
-		$svg_animate			= 'bw-iconbox-svg-animate' === $settings['widget_svg_animate']				? $settings['widget_svg_animate'] 				: '';
+		// Icon Position:
+		$icon_position			= isset($settings['the_icon_alignment'])						? $settings['the_icon_alignment']				: '';
+
+		$svg_animate			= 'bw-iconbox-svg-animate' === $settings['widget_svg_animate']	? $settings['widget_svg_animate'] 				: '';
 		$data_id				= 'bw_' . uniqid();
 		$animate_id				= '#' . $data_id;
 
@@ -1812,13 +1875,13 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 		// Render 
 		switch ($position) {
 			case 'position-2':
-				echo '<div id="' . $data_id . '" class="bw-iconbox bw-' . $position . ' ' . $svg_animate . '">';
+				echo '<div id="' . $data_id . '" class="bw-iconbox bw-box-'.$box_align.' bw-' . $position . ' ' . $svg_animate . '">';
 					// Title
 					if ( $enable_title ) echo '<' . $title_tag . ' class="bw-it-is-title ' . $title_align . '">' . $title . '</' . $title_tag . '>';
 					// Subtitle
 					if ( $enable_subtitle ) echo '<' . $subtitle_tag . ' class="bw-it-is-subtitle ' . $subtitle_align . '">' . $subtitle . '</' . $subtitle_tag . '>';
 					// Image
-					if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>'; elseif ( $svgcode == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div>'; else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif;
+					if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon ' . $icon_position . '">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>'; elseif ( $icon_image == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw ' . $box_align . '">'.$svgcode.'</div>'; else: echo '<div class="bw-iconbox-img ' . $box_align . '"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif;
 					// Paragraph
 					if ( $enable_paragraph ) echo '<p class="bw-it-is-paragraph ' . $paragraph_align . '">' . $paragraph . '</p>';
 					// Link
@@ -1828,10 +1891,10 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 
 				case 'position-3':
 				case 'position-4':
-					echo '<div id="' . $data_id . '" class="bw-iconbox bw-' . $position . ' ' . $svg_animate . '">';
+					echo '<div id="' . $data_id . '" class="bw-iconbox bw-box-'.$box_b_align.' bw-' . $position . ' ' . $svg_animate . '">';
 						echo '<div class="bw-image-wrap">';
 							// Image
-							if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>'; elseif ( $svgcode == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div>'; else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif;
+							if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon  ' . $icon_position . '">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>'; elseif ( $icon_image == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div>'; else: echo '<div class="bw-iconbox-img  ' . $box_align . '"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif;
 						echo '</div>';
 						echo '<div class="bw-content-wrap">';
 							// Title
@@ -1848,10 +1911,10 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 
 			case 'position-5':
 			case 'position-6':
-				echo '<div id="' . $data_id . '" class="bw-iconbox bw-' . $position . ' ' . $svg_animate . '">';
+				echo '<div id="' . $data_id . '" class="bw-iconbox bw-box-'.$box_b_align.' bw-' . $position . ' ' . $svg_animate . '">';
 					echo '<div class="bw-wrapper">';
 					// Image
-					if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>'; elseif ( $svgcode == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div>';else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif;
+					if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon  ' . $icon_position . '">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>'; elseif ( $icon_image == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div>';else: echo '<div class="bw-iconbox-img ' . $box_align . '"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif;
 						echo '<div class="bw-typography-wrapper">';
 							echo '<div class="bw-icon-box-title">';
 								// Title
@@ -1869,21 +1932,21 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 				break;
 
 			default:
-				echo '<div id="' . $data_id . '" class="bw-iconbox bw-' . $position . ' ' . $svg_animate . '">';
-					// Image
-					echo '<div class="bw-iconbox-icon-svg-code"><div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div></div>';
-					if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>'; elseif ( $svgcode == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div>'; else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif;
-					// elseif ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>';  else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>';
-					// Title
-					if ( $enable_title ) echo '<' . $title_tag . ' class="bw-it-is-title ' . $title_align . '">' . $title . '</' . $title_tag . '>';
-					// Subtitle
-					if ( $enable_subtitle ) echo '<' . $subtitle_tag . ' class="bw-it-is-subtitle ' . $subtitle_align . '">' . $subtitle . '</' . $subtitle_tag . '>';
-					// Paragraph
-					if ( $enable_paragraph ) echo '<p class="bw-it-is-paragraph ' . $paragraph_align . '">' . $paragraph . '</p>';
-					// Link
-					if ( $enable_link ) echo '<a href="' . $link . '"' . $link_target . $link_nofollow . ' class="bw-btn ' . $link_align . '">' . $link_text . '</a>';
-				echo '</div>';
-				break;
+				echo '<div id="' . $data_id . '" class="bw-iconbox bw-box-'.$box_align.' bw-' . $position . ' ' . $svg_animate . '">';
+						// Image
+						// echo '<div class="bw-iconbox-icon-svg-code"><div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div></div>';
+						if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon ' . $icon_position . '">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] );echo '</div>'; elseif ( $icon_image == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div>'; else: echo '<div class="bw-iconbox-img ' . $box_align . '"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif;
+						// elseif ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>';  else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>';
+						// Title
+						if ( $enable_title ) echo '<' . $title_tag . ' class="bw-it-is-title ' . $title_align . '">' . $title . '</' . $title_tag . '>';
+						// Subtitle
+						if ( $enable_subtitle ) echo '<' . $subtitle_tag . ' class="bw-it-is-subtitle ' . $subtitle_align . '">' . $subtitle . '</' . $subtitle_tag . '>';
+						// Paragraph
+						if ( $enable_paragraph ) echo '<p class="bw-it-is-paragraph ' . $paragraph_align . '">' . $paragraph . '</p>';
+						// Link
+						if ( $enable_link ) echo '<a href="' . $link . '"' . $link_target . $link_nofollow . ' class="bw-btn ' . $link_align . '">' . $link_text . '</a>';
+					echo '</div>';
+					break;
 		}
 	
 		echo '<script>		
