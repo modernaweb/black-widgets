@@ -5824,6 +5824,21 @@
     white-space: nowrap;
 }
 
+.bw-typograpgy-animate .bw-char {
+    text-transform: none;
+}
+
+.bw-typograpgy-animate span.char {
+    display: inline-block;
+    white-space: break-spaces;
+}
+
+.bw-typograpgy-animate .char-wrap {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+
 
 /* Simple Style */
 
@@ -6875,6 +6890,23 @@
 /* .bw-sentence .bw-sentence-items span {
     margin: 0 5px;
 } */
+
+
+.bw-sentence .bw-sentence-items.bw-left {
+    justify-content: start;
+}
+
+.bw-sentence .bw-sentence-items.bw-center {
+    justify-content: center;
+}
+
+.bw-sentence .bw-sentence-items.bw-strech {
+    justify-content: space-between;
+}
+
+.bw-sentence .bw-sentence-items.bw-right {
+    justify-content: end;
+}
 
 .bw-sentence .bw-sentence-items span {
     margin: 0 5px;

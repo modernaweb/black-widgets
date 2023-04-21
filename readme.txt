@@ -108,6 +108,16 @@ WordPress 4.9+
 ## Changelog
 
 
+= 1.3.3 — 2023-__-__ =
+
+
+- Added: New Option: "Sentence Alignment" for Black Sentence
+- Added: New Feature: "On Scroll" for Black Typography
+- Removed: The StyleFix 1.0.3 & PrefixFree library from Elementor environment
+- Fixed: Some minor issue
+
+
+
 = 1.3.2 — 2023-04-01 =
 - Compatibility: WordPress v6.2
 - Compatibility: Elementor v3.12

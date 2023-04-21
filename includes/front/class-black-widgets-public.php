@@ -127,6 +127,7 @@ class Black_Widgets_Public {
                 wp_enqueue_script('TweenLite');
             }
 
+			wp_enqueue_script('bw-gsap-css-script', plugin_dir_url( __FILE__ ) . 'js/bw-gsap-css-script.js', array(), '1.2.5', 'true' );
             // wp_enqueue_script('bw-cdn-uses', plugin_dir_url( __FILE__ ) . 'js/bw-cdn-uses.js', array(), '1.2.5', 'true' );
 
         }

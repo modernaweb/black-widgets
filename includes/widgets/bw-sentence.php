@@ -869,7 +869,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'all_general_typography_section',
 			[
-				'label' => __( 'General Typography', 'blackwidgets' ),
+				'label' => __( 'General Settings', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
         );
@@ -901,6 +901,36 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 			]
 		);
 
+		//Flex Box Style:
+		// Alignment
+		$this->add_responsive_control(
+			'justify_positioning',
+			[
+				'label'     => __( 'Sentence Alignment', 'blackwidgets' ),
+				'type'      => \Elementor\Controls_Manager::CHOOSE,
+				'options'   => [
+					'left'   => [
+						'title' => __( 'From Start', 'blackwidgets' ),
+						'icon'  => 'eicon-h-align-left',
+					],
+					'center' => [
+						'title' => __( 'On Center', 'blackwidgets' ),
+						'icon'  => 'eicon-h-align-center',
+					],
+					'strech' => [
+						'title' => __( 'Strech', 'blackwidgets' ),
+						'icon'  => 'eicon-h-align-stretch',
+					],
+					'right'  => [
+						'title' => __( 'From Right', 'blackwidgets' ),
+						'icon'  => 'eicon-h-align-right',
+					],
+				],
+				'default'   => 'center',
+				'toggle'    => true,
+			]
+		);
+
 		$this->end_controls_section();
 
 	}
@@ -917,8 +947,9 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 
 		$settings   			= $this->get_settings_for_display();
 		// Variables
-		$type 	                = isset($settings['sentence_type'])							? $settings['sentence_type']					: '';
-		$title_tag 				= isset($settings['widget_html_tag_title']) 	? $settings['widget_html_tag_title'] 									: '';
+		$type 	                = isset($settings['sentence_type'])				? $settings['sentence_type']				: '';
+		$title_tag 				= isset($settings['widget_html_tag_title']) 	? $settings['widget_html_tag_title']		: '';
+		$justify 	            = isset($settings['justify_positioning'])		? $settings['justify_positioning']			: '';
 		
 		$data_id				= 'bw_' . uniqid();
 		$script_id				= '#' . $data_id;
@@ -926,7 +957,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		// Render
         if ( $settings['sentence'] ) {
 			echo '<div class="bw-sentence bw-showcase">';
-				echo '<' . $title_tag . ' class="bw-sentence-items">';
+				echo '<' . $title_tag . ' class="bw-sentence-items bw-'.$justify.'">';
 					foreach (  $settings['sentence'] as $item ) {
 
 						// inner settings for each item
