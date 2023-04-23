@@ -218,6 +218,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 						'bw-scroll-e-5' 	=> __( 'Animate 5', 'blackwidgets' ),
 						'bw-scroll-e-6' 	=> __( 'Animate 6', 'blackwidgets' ),
 						'bw-scroll-e-7' 	=> __( 'Animate 7', 'blackwidgets' ),
+						'bw-scroll-e-8' 	=> __( 'Animate 8', 'blackwidgets' ),
 					],
 					'condition'  => [
 						'widget_type' => [
@@ -2379,7 +2380,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 						if ( !empty($vertical) ) echo '</div>';
 					break;
 				case 'bw-t-4': // Type 4
-					echo '<h2 class="bw-typograpgy-animate words chars splitting" bw-data-splitting bw-data-splitting bw-data-'.$type4.' id="scrub'.$data_id.'" data-scrub="true">';
+					echo '<h2 class="bw-typograpgy-animate words chars splitting '.$vertical_rotation.'" bw-data-splitting bw-data-splitting bw-data-'.$type4.' id="scrub'.$data_id.'" data-scrub="true">';
 						echo '<span class="word" data-word="'.$title.'" style="--word-index:0;">';
 							echo $title;
 						echo '</span>';

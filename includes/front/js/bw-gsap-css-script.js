@@ -32,6 +32,7 @@ const typographyFX_4 = [...document.querySelectorAll('.bw-typograpgy-animate[bw-
 const typographyFX_5 = [...document.querySelectorAll('.bw-typograpgy-animate[bw-data-splitting][bw-data-bw-scroll-e-5]')];
 const typographyFX_6 = [...document.querySelectorAll('.bw-typograpgy-animate[bw-data-splitting][bw-data-bw-scroll-e-6]')];
 const typographyFX_7 = [...document.querySelectorAll('.bw-typograpgy-animate[bw-data-splitting][bw-data-bw-scroll-e-7]')];
+const typographyFX_8 = [...document.querySelectorAll('.bw-typograpgy-animate[bw-data-splitting][bw-data-bw-scroll-e-8]')];
 
 // GSAP Scroll Triggers
 const scroll = () => {
@@ -222,6 +223,36 @@ const scroll = () => {
                 }
             }, 0);
         }
+    });
+
+    typographyFX_8.forEach(title => {
+        const chars = title.querySelectorAll('.char');
+        gsap.fromTo(chars, { 
+            'will-change': 'opacity, transform', 
+            opacity: 0,
+            x: 0,
+            y: 50,
+            z: -50,
+            rotationX: -80,
+            filter: 'blur(24px) opacity(0)',
+            transformOrigin: '50% 0%'
+        }, 
+        {
+            opacity: 1, 
+            x: 0,
+            y: 0,
+            z: 0,
+            rotationX: 0,
+            filter: 'blur(0px) opacity(1)',
+            ease: 'power4',
+            stagger: 0.03,
+            scrollTrigger: {
+                trigger: title,
+                start: 'center+=20% bottom',
+                end: '+=50%',
+                // scrub: true
+            }
+        });
     });
 
 };
