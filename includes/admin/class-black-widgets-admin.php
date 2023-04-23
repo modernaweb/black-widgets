@@ -224,7 +224,7 @@ class Black_Widgets_Admin {
 
         add_settings_field(
             'bw_option_gsap_cdn3',
-            'Tween Or Timeline JS CDN',
+            'TimelineMax CDN',
             array( $this, 'bw_setting_gsap_cdn3_fn' ),
             'black_widgets_settings_general_settings',
             'black_widgets_settings_setting',
@@ -236,7 +236,7 @@ class Black_Widgets_Admin {
 
         add_settings_field(
             'bw_option_gsap_cdn4',
-            'Tween Or Timeline JS CDN',
+            'TweenMax CDN',
             array( $this, 'bw_setting_gsap_cdn4_fn' ),
             'black_widgets_settings_general_settings',
             'black_widgets_settings_setting',
@@ -270,7 +270,7 @@ class Black_Widgets_Admin {
         if ( get_option('plugin_options') ): $options = get_option('plugin_options'); else: $options = ''; endif;
         if(isset($options['gsap_options']) && $options['gsap_options']) { $checked = ' checked="checked" '; $checked_class = 'class="bw-checked"'; }
         echo "<input ".$checked." id='bw_gsap_options' name='plugin_options[gsap_options]' type='checkbox' $checked_class />";
-        echo '<p> After enable it, you can find new widgets on Elementor environment.</p>';
+        echo '<p> After enabling it, you can find new widgets in the Elementor environment. Additionally, some widgets will have new features enabled for your enjoyment. </p>';
     }
 
     // CDN 1 - Name: plugin_options[bw_dark_style]
@@ -297,14 +297,13 @@ class Black_Widgets_Admin {
         echo "<input id='bw_option_gsap_cdn3' name='plugin_options[bw_gsap_cdn3]' type='text' value='$cdn3' />";
     }
 
-    // CDN 3 - Name: plugin_options[bw_dark_style]
+    // CDN 4 - Name: plugin_options[bw_dark_style]
     function bw_setting_gsap_cdn4_fn() {
         $options = get_option('plugin_options');
         if ( get_option('plugin_options') ): $options = get_option('plugin_options'); else: $options = ''; endif;
         $cdn4 = (isset($options['bw_gsap_cdn4']) && $options['bw_gsap_cdn4']) ? $options['bw_gsap_cdn4'] : '';
         echo "<input id='bw_option_gsap_cdn4' name='plugin_options[bw_gsap_cdn4]' type='text' value='$cdn4' />";
     }
-
 
 	// Display the admin options page
 	function black_widgets_settings() {

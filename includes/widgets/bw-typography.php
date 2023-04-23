@@ -97,6 +97,9 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 	 */
 	protected function register_controls() {
 
+		$options = get_option('plugin_options') ? get_option('plugin_options') : '';
+		$gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
+
 		// Start
 		// Content section
 		$this->start_controls_section(
@@ -118,6 +121,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 					'bw-t-1' 	=> __( 'Simple', 'blackwidgets' ),
 					'bw-t-2' 	=> __( 'With Shapes', 'blackwidgets' ),
 					'bw-t-3' 	=> __( 'Repetitive', 'blackwidgets' ),
+					'bw-t-4' 	=> __( 'On Scroll', 'blackwidgets' ),
 				],
 			]
 		);
@@ -130,7 +134,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::TEXT,
 				'default' => __( 'Black Widget Title', 'blackwidgets' ),
 				'placeholder' => __( 'Type your title here', 'blackwidgets' ),
-				'description' => __( 'You can use all other HTML tags into the title field e.g. code, mark, abbr, blockquote and  ...', 'blackwidgets' ),
+				'description' => __( 'You can use all other HTML tags into the title field e.g. code, mark, abbr, blockquote and ...', 'blackwidgets' ),
 			]
 		);
 
@@ -194,6 +198,36 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 				],
 			]
 		);
+
+		$options = get_option('plugin_options') ? get_option('plugin_options') : '';
+		$gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
+		if( isset($gsap_options) && !empty($gsap_options) ) {
+			// Go on scroll 
+			// Select type of the typography you want
+			$this->add_control(
+				'widget_type_4',
+				[
+					'label' => __( 'Select Animate On Scroll', 'blackwidgets' ),
+					'type' => \Elementor\Controls_Manager::SELECT,
+					'default' => 'bw-scroll-e-1',
+					'options' => [
+						'bw-scroll-e-1' 	=> __( 'Animate 1', 'blackwidgets' ),
+						'bw-scroll-e-2' 	=> __( 'Animate 2', 'blackwidgets' ),
+						'bw-scroll-e-3' 	=> __( 'Animate 3', 'blackwidgets' ),
+						'bw-scroll-e-4' 	=> __( 'Animate 4', 'blackwidgets' ),
+						'bw-scroll-e-5' 	=> __( 'Animate 5', 'blackwidgets' ),
+						'bw-scroll-e-6' 	=> __( 'Animate 6', 'blackwidgets' ),
+						'bw-scroll-e-7' 	=> __( 'Animate 7', 'blackwidgets' ),
+						'bw-scroll-e-8' 	=> __( 'Animate 8', 'blackwidgets' ),
+					],
+					'condition'  => [
+						'widget_type' => [
+							'bw-t-4',
+						],
+					],
+				]
+			);
+		}
 
         // Style Subtitle Tabs
         $this->start_controls_tabs('tabx');
@@ -1119,7 +1153,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}}  .bw-typograpgy-repetitive' => 'color: {{VALUE}}; -webkit-text-fill-color: {{VALUE}}',
+					'{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-repetitive' => 'color: {{VALUE}}; -webkit-text-fill-color: {{VALUE}}',
 				],
 			]
 		);
@@ -1130,7 +1164,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 				'name' => 'content_typography1',
 				'label' => __( 'Typography', 'blackwidgets' ),
 				'scheme' => Typography::TYPOGRAPHY_1,
-				'selector' => '{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}}  .bw-typograpgy-repetitive',
+				'selector' => '{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-repetitive',
 			]
 		);
 
@@ -1139,7 +1173,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			[
 				'name' => 'text_shadow1',
 				'label' => __( 'Text Shadow', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}}  .bw-typograpgy-repetitive',
+				'selector' => '{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-repetitive',
 			]
 		);
 
@@ -1156,7 +1190,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 				'name' => 'widget_typography_title_background',
 				'label' => __( 'Title Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
-				'selector' => '{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}}  .bw-typograpgy-repetitive',
+				'selector' => '{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-repetitive',
 			]
 		);
 
@@ -1175,7 +1209,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}}  .bw-typograpgy-repetitive' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-repetitive' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1187,7 +1221,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}}  .bw-typograpgy-repetitive' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-repetitive' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1205,7 +1239,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			[
 				'name' => 'widget_typography_title_border',
 				'label' => __( 'Title Border', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}}  .bw-typograpgy-repetitive',
+				'selector' => '{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-repetitive',
 			]
 		);
 
@@ -1217,7 +1251,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}}  .bw-typograpgy-repetitive' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-repetitive' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);	
@@ -1228,7 +1262,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			[
 				'name' => 'widget_typography_title_box_shadow',
 				'label' => __( 'Title Box Shadow', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}}  .bw-typograpgy-repetitive',
+				'selector' => '{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-repetitive',
 			]
 		);
 
@@ -1281,7 +1315,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 					'value' => Color::COLOR_1,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}}  .bw-typograpgy-repetitive' => '-webkit-text-stroke-color: {{VALUE}}',
+					'{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-repetitive' => '-webkit-text-stroke-color: {{VALUE}}',
 				],
 				'condition'  => [
 					'widget_stroke_title_enable' => [
@@ -1305,7 +1339,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}}  .bw-typograpgy-repetitive' => '-webkit-text-stroke-width: {{SIZE}}{{UNIT}} !important;',
+					'{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-repetitive' => '-webkit-text-stroke-width: {{SIZE}}{{UNIT}} !important;',
 				],
 				'condition'  => [
 					'widget_stroke_title_enable' => [
@@ -1342,7 +1376,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 				'name' => 'unique_widget_typography_title_gradient',
 				'label' => __( 'Title Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}}  .bw-typograpgy-repetitive',
+				'selector' => '{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-repetitive',
 				'condition'  => [
 					'gradient_color_title_enable' => [
 						'gradient_enable',
@@ -2176,6 +2210,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
         $vertical				= isset($settings['vertical_title_display'])			 ? $settings['vertical_title_display']			: '';
         $vertical_rotation		= isset($settings['vertical_rotation'])					 ? $settings['vertical_rotation']				: '';
         $type2 		            = isset($settings['widget_type_2'])                      ? $settings['widget_type_2']					: '';
+        $type4 		            = isset($settings['widget_type_4'])                      ? $settings['widget_type_4']					: '';
         $custom_style_x         = ($type2 == 'custom-style')                             ? 'custom-style'								: '';
         $repeat                 = isset($settings['repetitive_repeat'])                  ? $settings['repetitive_repeat']				: '';
         $other_style            = isset($settings['repetitive_repeat_other_style'])      ? $settings['repetitive_repeat_other_style']	: '';
@@ -2343,6 +2378,14 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 							$count++;
 						}
 						if ( !empty($vertical) ) echo '</div>';
+					break;
+				case 'bw-t-4': // Type 4
+					echo '<h2 class="bw-typograpgy-animate words chars splitting '.$vertical_rotation.'" bw-data-splitting bw-data-splitting bw-data-'.$type4.' id="scrub'.$data_id.'" data-scrub="true">';
+						echo '<span class="word" data-word="'.$title.'" style="--word-index:0;">';
+							echo $title;
+						echo '</span>';
+					echo '</h2>';
+
 					break;
 				default: // simple
 					echo '<'.$title_tag.' class="bw-typograpgy-main-title bw-'.$vertical.' '.$vertical_rotation.' bw-typography-this-title">'.$title.'</'.$title_tag.'>';

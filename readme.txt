@@ -8,7 +8,7 @@ Requires PHP: 7.4
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Free add-on for Elementor, You can add more customization with visual effects and better UX. ✌
+Free add-on for Elementor! With this add-on, you can add more visual effects and improve your website's user experience. ✌
 
 
 ## Description
@@ -106,6 +106,16 @@ WordPress 4.9+
 
 
 ## Changelog
+
+
+= 1.3.3 — 2023-__-__ =
+
+
+- Added: New Option: "Sentence Alignment" for Black Sentence
+- Added: New Feature: "On Scroll" for Black Typography
+- Removed: The StyleFix 1.0.3 & PrefixFree library from Elementor environment
+- Fixed: Some minor issue
+
 
 
 = 1.3.2 — 2023-04-01 =

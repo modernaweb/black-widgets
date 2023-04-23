@@ -172,8 +172,9 @@ final class BLACK_WIDGETS_Modernaweb_Plugin {
 		});
 
 		add_action('elementor/editor/before_enqueue_scripts', function() {
-			wp_enqueue_script('bw-jquery-plugins', plugin_dir_url( __FILE__ ) . 'front/js/bw-jquery-plugins.js', array(), '1.0.0', 'true' );
+			wp_enqueue_script('ele-bw-jquery-plugins', plugin_dir_url( __FILE__ ) . 'front/js/ele-bw-jquery-plugins.js', array(), '1.0.0', 'true' );
 			wp_enqueue_script('bw-public', plugin_dir_url( __FILE__ ) . 'front/js/bw-public.js', array(), '1.0.0', 'true' );
+
 		});
 
 		// add_action( 'elementor/element/before_section_start', [ $this, 'bw_style_before_section_start' ] , 10, 3 );
