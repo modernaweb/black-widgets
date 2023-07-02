@@ -211,8 +211,23 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 				[
 					'label' 		=> __( 'Start Point', 'blackwidgets' ),
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
-					'placeholder'   => '0.1',
-					'default'       => '0.1',
+					'placeholder'   => 'center',
+					'default'       => 'center',
+					'condition' 	=> [ 
+						'image_movement2' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			$this->add_control(
+				'trigger_hook4',
+				[
+					'label' 		=> __( 'End Point', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'placeholder'   => 'bottom',
+					'default'       => 'bottom',
 					'condition' 	=> [ 
 						'image_movement2' 	=> [
 							'on',
@@ -313,8 +328,23 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 				[
 					'label' 		=> __( 'Start Point', 'blackwidgets' ),
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
-					'placeholder'   => '0.1',
-					'default'       => '0.1',
+					'placeholder'   => 'center',
+					'default'       => 'center',
+					'condition' 	=> [ 
+						'image_movement' 	=> [
+							'on',
+						],
+					],
+				]
+			);
+
+			$this->add_control(
+				'trigger_hook3',
+				[
+					'label' 		=> __( 'End Point', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::TEXT,
+					'placeholder'   => 'top',
+					'default'       => 'top',
 					'condition' 	=> [ 
 						'image_movement' 	=> [
 							'on',
@@ -1438,6 +1468,7 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 		// To
 		$duration	            	= !empty($settings['duration']) 						?  $settings['duration'] 							: '';
 		$trigger_hook	        	= !empty($settings['trigger_hook']) 					?  $settings['trigger_hook'] 						: '';
+		$trigger_hook3	        	= !empty($settings['trigger_hook3']) 					?  $settings['trigger_hook3'] 						: '';
 		$horizontal_movement		= !empty($settings['horizontal_movement']) 				? 'x: "' . $settings['horizontal_movement'] . '",' 	: '';
 		$vertical_movement			= !empty($settings['vertical_movement']) 				? 'y: "' . $settings['vertical_movement'] . '",' 	: '';
 		$opacity					= !empty( $settings['opacity'] ) 						? 'opacity: "' . $settings['opacity'] . '",' 		: '';
@@ -1445,7 +1476,8 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 		//From
 		$duration2	            	= !empty($settings['duration2']) 						?  $settings['duration2'] 							: '';
 		$trigger_hook2	        	= !empty($settings['trigger_hook2']) 					?  $settings['trigger_hook2'] 						: '';
-		$horizontal_movement2		= !empty($settings['horizontal_movement2']) 				? 'x: "' . $settings['horizontal_movement2'] . '",' 	: '';
+		$trigger_hook4	        	= !empty($settings['trigger_hook4']) 					?  $settings['trigger_hook4'] 						: '';
+		$horizontal_movement2		= !empty($settings['horizontal_movement2'])				? 'x: "' . $settings['horizontal_movement2'] . '",' 	: '';
 		$vertical_movement2			= !empty($settings['vertical_movement2']) 				? 'y: "' . $settings['vertical_movement2'] . '",' 	: '';
 		$opacity2					= !empty( $settings['opacity2'] ) 						? 'opacity: "' . $settings['opacity2'] . '",' 		: '';
 		$rotation2					= !empty($settings['rotation2']) 						? 'rotation: "' . $settings['rotation2'] . '",' 		: '';
@@ -1587,8 +1619,8 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 						const tl = gsap.timeline({
 							scrollTrigger: {
 							trigger: "#'. $data_id .'",
-							start: "center bottom",
-							end: "center top",
+							start: "'. $trigger_hook2 .' '. $trigger_hook4 .'",
+							end: "'. $trigger_hook .' '. $trigger_hook3 .'",
 							scrub: true,
 							// markers: true
 							}

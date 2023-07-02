@@ -24,10 +24,11 @@ We will add more widgets with more and more styles that may surprise you in the 
 
 ### Create your own styles
 
-✔️ 17 Widgets
+✔️ 21 Widgets
 ⚡ An Awesome Typography
 ⚡ Great Animate
-⚡ CSS Transform (2D & 3D CSS Styles)
+⚡ CSS Transform(2D & 3D CSS Styles)
+⚡ Scroll Trigger(with CDN)
 
 ### Dsgn
 
@@ -60,6 +61,7 @@ Dsgn is a simple way to start a website easily, quickly, and free. This is Free 
 *   Black Blockquote
 *   Black Typography(for experts)
 *   Black Box
+*   Black Flat Nav(menu)
 *   Black Sentence
 *   Black Trigger(for experts)
 *   Black Horizontal(for experts)
@@ -112,8 +114,10 @@ WordPress 4.9+
 
 
 - Added: New Option: "Sentence Alignment" for Black Sentence
-- Added: New Feature: "On Scroll" for Black Typography
+- Added: New Feature: "On Scroll" for Black Typography with Scrub
 - Removed: The StyleFix 1.0.3 & PrefixFree library from Elementor environment
+- Changed: GSAP Trigger default to controller options(including Start Point and End Point)
+
 - Fixed: Some minor issue
 
 
