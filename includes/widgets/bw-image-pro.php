@@ -1523,10 +1523,10 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 		$script_id              	= '#' . $data_id;
 		$options = get_option('plugin_options') ? get_option('plugin_options') : '';
 		$gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
-		if( isset($gsap_options) && !empty($gsap_options) ) {
-			$image_movement 			= $settings['image_movement'];
-			$image_movement2 			= $settings['image_movement2'];
-		}
+			if( isset($gsap_options) && !empty($gsap_options) ) {
+				$image_movement 			= $settings['image_movement'];
+				$image_movement2 			= $settings['image_movement2'];
+			}
 		//Transform Normal Styles 
 		// Normal Move 
 		$translatex 				= isset( $move_normal_x["size"] ) 						? $move_normal_x["size"] . $move_normal_x["unit"] : '';
@@ -1619,8 +1619,8 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 						const tl = gsap.timeline({
 							scrollTrigger: {
 							trigger: "#'. $data_id .'",
-							start: "'. $trigger_hook2 .' '. $trigger_hook4 .'",
-							end: "'. $trigger_hook .' '. $trigger_hook3 .'",
+							start: "'. $trigger_hook2 .' '. $trigger_hook4 .'",    //start
+							end: "'. $trigger_hook .' '. $trigger_hook3 .'",       //end
 							scrub: true,
 							// markers: true
 							}

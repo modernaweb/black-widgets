@@ -3,8 +3,8 @@
 **Contributors:** skalanter, modernaweb \
 **Donate link:** http://modernaweb.net/ \
 **Tags:** page builder, editor, elementor widgets, elementor addon, typography \
-**Stable tag:** 1.3.2 \
-**Tested up to:** 6.2 \
+**Stable tag:** 1.3.3 \
+**Tested up to:** 6.3 \
 **Requires PHP:** 7.4 \
 **License:** GPLv3 or later \
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.html
@@ -26,10 +26,11 @@ We will add more widgets with more and more styles that may surprise you in the 
 
 ### Create your own styles
 
-✔️ 17 Widgets
+✔️ 21 Widgets
 ⚡ An Awesome Typography
-⚡ Great Animate
-⚡ CSS Transform (2D & 3D CSS Styles)
+⚡ Great Animate with AnimeJS and GSAP
+⚡ CSS Transform(2D & 3D CSS Styles)
+⚡ Scroll Trigger(with CDN)
 
 ### Dsgn
 
@@ -67,7 +68,8 @@ Dsgn is a simple way to start a website to start easily, quickly, and free. This
 *   Black Horizontal (for experts)
 
 
-Live Demo & Demo Importer — Coming Soon 
+Live Demo & Demo Importer — Coming Soon.
+Furthermore, currently, we are working on Onward theme to make it compatible with WooCommerce. It would be an abnormal theme ✴️.
 
 
 ### Features
@@ -130,14 +132,15 @@ WordPress 4.9+
 ## Changelog
 
 
-= 1.3.3 — 2023-__-__ =
-
-
+### 1.3.3 — 2023-08-08
+- Compatibility: WordPress v6.3
+- Compatibility: Elementor v3.15
+- Compatibility: Enabled options for Experiments and Features in Elementor
 - Added: New Option: "Sentence Alignment" for Black Sentence
 - Added: New Feature: "On Scroll" for Black Typography
 - Removed: The StyleFix 1.0.3 & PrefixFree library from Elementor environment
+- Fixed: Default trigger for image pro
 - Fixed: Some minor issue
-
 
 ### 1.3.2 — 2023-04-01
 - Compatibility: WordPress v6.2
