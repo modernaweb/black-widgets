@@ -5841,6 +5841,9 @@
 
 
 /* Simple Style */
+.bw-typograpgy-wrap {
+    word-break: break-all;
+}
 
 .bw-typograpgy.bw-t-1 {
     position: relative;

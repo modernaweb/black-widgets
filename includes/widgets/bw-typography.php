@@ -229,6 +229,24 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			);
 		}
 
+		// Scrub Title
+		$this->add_responsive_control(
+			'title_scrub',
+			[
+				'label' 		=> __( 'Scrub on scrolling up and down', 'blackwidgets' ),
+				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
+				'label_on' 		=> __( 'Enable', 'blackwidgets' ),
+				'label_off' 	=> __( 'Disable', 'blackwidgets' ),
+				'return_value' 	=> 'scrub_mode',
+				'default' 		=> 'off',
+				'condition'  => [
+					'widget_type' => [
+						'bw-t-4',
+					],
+				],
+			]
+		);
+
         // Style Subtitle Tabs
         $this->start_controls_tabs('tabx');
         $this->start_controls_tab(
@@ -2207,6 +2225,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$title_tag 				= isset($settings['widget_html_tag_title'])				 ? $settings['widget_html_tag_title']			: '';
         $title 			        = isset($settings['widget_title'])                       ? $settings['widget_title']					: '';
         $alignment 		        = isset($settings['widget_alignment'])                   ? $settings['widget_alignment']				: '';
+        $title_scrub			= isset($settings['title_scrub'])                        ? $settings['title_scrub']						: '';
         $vertical				= isset($settings['vertical_title_display'])			 ? $settings['vertical_title_display']			: '';
         $vertical_rotation		= isset($settings['vertical_rotation'])					 ? $settings['vertical_rotation']				: '';
         $type2 		            = isset($settings['widget_type_2'])                      ? $settings['widget_type_2']					: '';
@@ -2380,7 +2399,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 						if ( !empty($vertical) ) echo '</div>';
 					break;
 				case 'bw-t-4': // Type 4
-					echo '<h2 class="bw-typograpgy-animate words chars splitting '.$vertical_rotation.'" bw-data-splitting bw-data-splitting bw-data-'.$type4.' id="scrub'.$data_id.'" data-scrub="true">';
+					echo '<h2 class="bw-typograpgy-animate words chars splitting '.$vertical_rotation.'" '.$title_scrub.' bw-data-splitting bw-data-splitting bw-data-'.$type4.' id="scrub'.$data_id.'" data-scrub="true">';
 						echo '<span class="word" data-word="'.$title.'" style="--word-index:0;">';
 							echo $title;
 						echo '</span>';
