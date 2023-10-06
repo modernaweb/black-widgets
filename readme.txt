@@ -2,7 +2,7 @@
 Contributors: skalanter, modernaweb
 Donate link: http://modernaweb.net/
 Tags: page builder, editor, elementor widgets, elementor addon, typography
-Stable tag: 1.3.3
+Stable tag: 1.3.4
 Tested up to: 6.3
 Requires PHP: 7.4
 License: GPLv3 or later
@@ -108,6 +108,13 @@ WordPress 4.9+
 
 
 ## Changelog
+
+
+= 1.3.4 — 2023-08-08
+
+- Updated: Anime.js 
+- Changed: Some widget icons
+- Improved: Fade animate
 
 
 = 1.3.3 — 2023-08-08

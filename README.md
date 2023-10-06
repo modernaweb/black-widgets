@@ -3,7 +3,7 @@
 **Contributors:** skalanter, modernaweb \
 **Donate link:** http://modernaweb.net/ \
 **Tags:** page builder, editor, elementor widgets, elementor addon, typography \
-**Stable tag:** 1.3.3 \
+**Stable tag:** 1.3.4 \
 **Tested up to:** 6.3 \
 **Requires PHP:** 7.4 \
 **License:** GPLv3 or later \

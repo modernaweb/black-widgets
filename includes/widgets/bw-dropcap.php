@@ -68,7 +68,7 @@ class BLACK_WIDGETS_Dropcap extends \Elementor\Widget_Base {
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'eicon-font';
+		return 'eicon-post-content';
 	}
 
 	/**

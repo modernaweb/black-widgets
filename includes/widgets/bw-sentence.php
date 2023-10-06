@@ -229,7 +229,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 			]
 		);
 
-		$repeater->add_control(
+		$repeater->add_responsive_control(
 			'sentence_image_width',
 			[
 				'label' => __( 'Image width', 'blackwidgets' ),

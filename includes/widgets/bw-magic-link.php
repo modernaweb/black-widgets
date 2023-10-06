@@ -68,7 +68,7 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'eicon-link';
+		return 'eicon-editor-external-link';
 	}
 
 	/**

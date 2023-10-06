@@ -70,7 +70,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'eicon-container';
+		return 'eicon-animation';
 	}
 
 	/**

@@ -68,7 +68,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'eicon-t-letter-bold';
+		return 'eicon-animated-headline';
 	}
 
 	/**

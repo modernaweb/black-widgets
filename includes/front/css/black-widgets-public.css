@@ -1007,6 +1007,9 @@
 
 
 /* Modern > Type5 */
+.bw-button-box.modern.m-5 {
+    min-height: 56px;
+}
 
 .bw-button-box.modern.m-5 .bw-btn {
     display: block;
@@ -1043,6 +1046,7 @@
     font-size: 14px;
     font-weight: 900;
     letter-spacing: 0.25em;
+    line-height: 32px;
     text-transform: uppercase;
     vertical-align: middle;
     transition: all 1.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
@@ -5592,6 +5596,7 @@
     -o-border-radius: 12px;
 }
 
+
 .bw-cta .bw-cta-title {
     font-size: 44px;
     margin: 0 0 34px 0;
@@ -5660,6 +5665,11 @@
 
 @media(max-width: 780px) {
     .bw-cta {
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
         padding: 50px 25px;
     }
     .bw-cta .bw-cta-button a {
@@ -5780,6 +5790,11 @@
 .bw-typograpgy {
     position: relative;
     display: block;
+    word-break: keep-all;
+}
+
+.bw-typograpgy-main-title {
+    word-break: keep-all !important;
 }
 
 .bw-typograpgy.left {
@@ -6135,6 +6150,7 @@
     -webkit-text-fill-color: transparent !important;
     -webkit-background-clip: text !important;
     background-clip: text !important;
+    word-break: keep-all !important;
 }
 
 
