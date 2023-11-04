@@ -4,7 +4,8 @@
 **Donate link:** http://modernaweb.net/ \
 **Tags:** page builder, editor, elementor widgets, elementor addon, typography \
 **Stable tag:** 1.3.4 \
-**Tested up to:** 6.3 \
+**Requires at least:** 5.3 \
+**Tested up to:** 6.4 \
 **Requires PHP:** 7.4 \
 **License:** GPLv3 or later \
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.html
@@ -17,9 +18,7 @@ Free add-on for Elementor! With this add-on, you can add more visual effects and
 
 Black Widgets is a free add-on for Elementor; with this plugin, you can create unique elements with the ability to customize your website.
 
-
 We will add more widgets with more and more styles that may surprise you in the future; for now, add black widgets to your WordPress, and don't miss future updates.
-
 
 [WPHive Review](https://wphive.com/plugins/black-widgets/)
 
@@ -32,62 +31,63 @@ We will add more widgets with more and more styles that may surprise you in the 
 ⚡ CSS Transform(2D & 3D CSS Styles)
 ⚡ Scroll Trigger(with CDN)
 
-### Dsgn
+### ✹ Dsgn
 
-Dsgn is a simple way to start a website to start easily, quickly, and free. This is Free & + Fresh Templates Design for Elementor and Black Widgets.
+Dsgn is a simple way to start a website easily, quickly, and free. This is Free & + Fresh Templates Design for Elementor and Black Widgets.
 
 [Dsgn Templates](https://modernaweb.net/dsgn/)
 [Our Solutions](https://modernaweb.net/dsgn/solutions/)
 
-
 — Enjoy 😉
 
-[Our Website](http://modernaweb.net/)
+[Black Widgets Demo](https://modernaweb.net/black-widgets/)
 
 ### Available Widgets
 
-*   Black Title
-*   Black Button
-*   Black Image
-*   Black Flip Box
-*   Black Title Animate
-*   Black Magic Link
-*   Black Drop Cap
-*   Black Fade
-*   Black Alert
-*   Black Icon
-*   Black List
-*   Black Social Links
-*   Black Icon Box Pro
-*   Black Call to Action
-*   Black Blockquote
-*   Black Typography + (for experts)
-*   Black Box
-*   Black Sentence
-*   Black Trigger (for experts)
-*   Black Horizontal (for experts)
+*   [Black Title](https://modernaweb.net/black-widgets/all-widgets/black-title/)
+*   [Black Button](https://modernaweb.net/black-widgets/all-widgets/black-button/)
+*   [Black Image Pro](https://modernaweb.net/black-widgets/all-widgets/black-image/)
+*   [Black Flip Box](https://modernaweb.net/black-widgets/all-widgets/black-flip-box/)
+*   [Black Title Animate](https://modernaweb.net/black-widgets/all-widgets/black-title-animate/)
+*   [Black Magic Link](https://modernaweb.net/black-widgets/all-widgets/black-magic-link/)
+*   [Black Drop Cap](https://modernaweb.net/black-widgets/all-widgets/black-dropcap/)
+*   [Black Fade](https://modernaweb.net/black-widgets/all-widgets/black-fade/)
+*   [Black Alert](https://modernaweb.net/black-widgets/all-widgets/black-alert/)
+*   [Black Icon](https://modernaweb.net/black-widgets/all-widgets/black-icon/)
+*   [Black List](https://modernaweb.net/black-widgets/all-widgets/black-list/)
+*   [Black Social Links](https://modernaweb.net/black-widgets/all-widgets/black-social-links/)
+*   [Black Icon Box Pro](https://modernaweb.net/black-widgets/all-widgets/black-icon-box-pro/)
+*   [Black Call to Action](https://modernaweb.net/black-widgets/all-widgets/black-call-to-action/)
+*   [Black Blockquote](https://modernaweb.net/black-widgets/all-widgets/black-blockquote/)
+*   [Black Typography(for experts)](https://modernaweb.net/black-widgets/all-widgets/black-typography/)
+*   [Black Box](https://modernaweb.net/black-widgets/all-widgets/black-box/)
+*   [Black Flat Nav(menu)](https://modernaweb.net/black-widgets/all-widgets/black-flat-nav/)
+*   [Black Sentence](https://modernaweb.net/black-widgets/all-widgets/black-sentence/)
+*   [Black Trigger(for experts)](https://modernaweb.net/black-widgets/all-widgets/black-trigger/)
+*   [Black Horizontal(for experts)](https://modernaweb.net/black-widgets/all-widgets/black-horizontal/)
 
-
-Live Demo & Demo Importer — Coming Soon.
-Furthermore, currently, we are working on Onward theme to make it compatible with WooCommerce. It would be an abnormal theme ✴️.
 
 
 ### Features
 
-- 2D & 3D Animat
-- Blur Background Style
-- Repetitive Typography
-- Typography
+- [Builder Tools By Elementor](https://modernaweb.net/black-widgets/features/builder-tools/)
+- [Typography](https://modernaweb.net/black-widgets/features/typography/)
+- [GSAP Animate](https://modernaweb.net/black-widgets/features/gsap-animate/)
+- [What's New](https://modernaweb.net/black-widgets/support/whats-new/)
 
 
 ### Support
 
 If you found an issue or have a new suggestion, contact us: [ **modernawebdesign@gmail.com** ](mailto:modernawebdesign@gmail.com)
 
+- [Contact Us](https://modernaweb.net/contact/)
+- [Solutions](https://modernaweb.net/black-widgets/support/solutions/)
+- [Documentation](https://modernaweb.net/black-widgets/features/documentation/)
+- [Get Creative](https://modernaweb.net/black-widgets/support/get-creative/)
 
 ## Upgrade Notice
 
-WordPress 4.9+
+WordPress 5.3+
 
 
 ## Installation
@@ -131,6 +131,13 @@ WordPress 4.9+
 
 ## Changelog
 
+### 1.3.4 — 2023-11-05
+- Compatibility: WordPress v6.4
+- Compatibility: Elementor v3.17
+- Updated: Anime.js 
+- Changed: Some widget icons
+- Improved: Fade animate
+- Fixed: Some minor issue
 
 ### 1.3.3 — 2023-08-08
 - Compatibility: WordPress v6.3
