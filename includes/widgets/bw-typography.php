@@ -544,7 +544,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_alignment',
 			[
-				'label'     => __( 'Text Alignment', 'blackwidgets' ),
+				'label'     => __( 'Text Alignment', 'blackwidgets' ), //all items!
 				'type'      => \Elementor\Controls_Manager::CHOOSE,
 				'options'   => [
 					'left'   => [
@@ -566,6 +566,9 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
                     'widget_type_2!' => [
                         'custom-style',
                     ],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bw-typograpgy .' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -2326,6 +2329,9 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$second_bwscript_id		= '#' . $second_bw_id;
 
 		echo '<style>'.$normal_transform_style.' '.$z_index.' '.$unique_z_index.'</style>';
+
+
+		
 
 		// Render
         echo '<div class="bw-typograpgy '.$type.' '.$alignment.' '.$custom_style_x.' '.$gradient.'">';

@@ -65,164 +65,140 @@ jQuery(document).ready(function() {
 
 });
 
-jQuery(window).scroll(function(event) {
-
-    /* GLOBAL ANIMATE-ON-SCROLL FUNCTION */
+jQuery(function($) {
+    const $window = $(window);
+    const $growImages = $('.bw-load-img');
+    const $fadeImages = $('.anim-scroll.image-fade');
+    const $simpleFades = $('.anim-scroll.simple-fade');
+    const $accentLines = $('.bw-line');
+    const $accentTexts = $('.bw-fade-text .bw-animate-text');
+  
+    let throttleTimeout;
+    let debounceTimeout;
+  
+    // Throttle scroll event
+    $window.on('scroll', function() {
+      if (!throttleTimeout) {
+        throttleTimeout = setTimeout(function() {
+          throttleTimeout = null;
+          onScroll();
+        }, 100);
+      }
+    });
+  
+    // Debounce resize event
+    $window.on('resize', function() {
+      clearTimeout(debounceTimeout);
+      debounceTimeout = setTimeout(onResize, 100);
+    });
+  
+    function onScroll() {
+      animateOnScroll($growImages, anim_growImage);
+      animateOnScroll($fadeImages, anim_fadeImage);
+      animateOnScroll($simpleFades, anim_simpleFade);
+      animateOnScroll($accentLines, anim_accentLine);
+      animateOnScroll($accentTexts, anim_accentText);
+    }
+  
+    function onResize() {
+      // Adjust any necessary elements on window resize
+    }
+  
     function animateOnScroll($elem, animFunction) {
-        $elem.each(function() {
-            let $elem = jQuery(this);
-            jQuery(this).waypoint(function() {
-                if (!$elem.hasClass('visible')) {
-                    animFunction($elem);
-                    $elem.addClass('visible');
-                }
-            }, { offset: '100%' });
-        });
+      $elem.each(function() {
+        const elem = this;
+        if (isElementInViewport(elem) && !$(elem).hasClass('visible')) {
+          animFunction($(elem));
+          $(elem).addClass('visible');
+        }
+      });
     }
-
-    // USE load-pic id enywhere to load imgae as well
-    /* IMAGE GROW */
-    // store elements
-    let $growImages = jQuery('.bw-load-img');
-    // stagger text animation
+  
+    function isElementInViewport(element) {
+      const rect = element.getBoundingClientRect();
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      return rect.top < windowHeight;
+    }
+  
     function anim_growImage($elem) {
-        // animate cover
-        // let cover = $elem.find('.bw-image-grow-cover')[0];
-        // anime({
-        //     targets: cover,
-        //     translateX: [0, '-100%'],
-        //     duration: 1500,
-        //     easing: 'cubicBezier(.63, .01, 0, 1)'
-        // });
-        // animate image
-        // let img = $elem.find('img')[0];
-        // anime({
-        //     targets: img,
-        //     translateX: [-64, 0],
-        //     scale: [1.5, 1],
-        //     duration: 1500,
-        //     easing: 'cubicBezier(.63, .01, 0, 1)'
-        // });
-        // animate cover
-        let cover_ltr = $elem.find('.bw-image-grow-cover.ltr')[0];
-        anime({
-            targets: cover_ltr,
-            translateX: [0, '100%'],
-            duration: 1500,
-            easing: 'cubicBezier(.63, .01, 0, 1)'
-        });
-        let cover_rtl = $elem.find('.bw-image-grow-cover.rtl')[0];
-        anime({
-            targets: cover_rtl,
-            translateX: [0, '-100%'],
-            duration: 1500,
-            easing: 'cubicBezier(.63, .01, 0, 1)'
-        });
-        let cover_ttb = $elem.find('.bw-image-grow-cover.ttb')[0];
-        anime({
-            targets: cover_ttb,
-            translateY: [0, '100%'],
-            duration: 1500,
-            easing: 'cubicBezier(.63, .01, 0, 1)'
-        });
-        let cover_btt = $elem.find('.bw-image-grow-cover.btt')[0];
-        anime({
-            targets: cover_btt,
-            translateY: [0, '-100%'],
-            duration: 1500,
-            easing: 'cubicBezier(.63, .01, 0, 1)'
-        });
-        // animate image
-        let img = $elem.find('img')[0];
-        anime({
-            targets: img,
-            translateX: [-64, 0],
-            scale: [1.75, 1],
-            duration: 1500,
-            easing: 'cubicBezier(.63, .01, 0, 1)'
-        });
-
+      const cover_ltr = $elem.find('.bw-image-grow-cover.ltr')[0];
+      anime({
+        targets: cover_ltr,
+        translateX: [0, '100%'],
+        duration: 1500,
+        easing: 'cubicBezier(.63, .01, 0, 1)'
+      });
+  
+      const cover_rtl = $elem.find('.bw-image-grow-cover.rtl')[0];
+      anime({
+        targets: cover_rtl,
+        translateX: [0, '-100%'],
+        duration: 1500,
+        easing: 'cubicBezier(.63, .01, 0, 1)'
+      });
+  
+      const cover_ttb = $elem.find('.bw-image-grow-cover.ttb')[0];
+      anime({
+        targets: cover_ttb,
+        translateY: [0, '100%'],
+        duration: 1500,
+        easing: 'cubicBezier(.63, .01, 0, 1)'
+      });
+  
+      const cover_btt = $elem.find('.bw-image-grow-cover.btt')[0];
+      anime({
+        targets: cover_btt,
+        translateY: [0, '-100%'],
+        duration: 1500,
+        easing: 'cubicBezier(.63, .01, 0, 1)'
+      });
+  
+      const img = $elem.find('img')[0];
+      anime({
+        targets: img,
+        translateX: [-64, 0],
+        scale: [1.75, 1],
+        duration: 1500,
+        easing: 'cubicBezier(.63, .01, 0, 1)'
+      });
     }
-    // run on scroll
-    animateOnScroll($growImages, anim_growImage);
-
-    /* IMAGE FADE */
-    // store elements
-    let $fadeImages = jQuery('.anim-scroll.image-fade');
-    // stagger text animation
+  
     function anim_fadeImage($elem) {
-        // animate
-        anime({
-            targets: $elem[0],
-            translateY: [40, 0],
-            opacity: [0, 1],
-            duration: 500,
-            easing: 'cubicBezier(0.25, 0.1, 0.25, 1)'
-        });
+      anime({
+        targets: $elem[0],
+        translateY: [40, 0],
+        opacity: [0, 1],
+        duration: 500,
+        easing: 'cubicBezier(0.25, 0.1, 0.25, 1)'
+      });
     }
-    // run on scroll
-    animateOnScroll($fadeImages, anim_fadeImage);
-
-    /* SIMPLE FADE */
-    // store elements
-    let $simpleFades = jQuery('.anim-scroll.simple-fade');
-    // stagger text animation
+  
     function anim_simpleFade($elem) {
-        // animate
-        anime({
-            targets: $elem[0],
-            opacity: [0, 1],
-            duration: 500,
-            easing: 'cubicBezier(0.25, 0.1, 0.25, 1)'
-        });
+      anime({
+        targets: $elem[0],
+        opacity: [0, 1],
+        duration: 500,
+        easing: 'cubicBezier(0.25, 0.1, 0.25, 1)'
+      });
     }
-    // run on scroll
-    animateOnScroll($simpleFades, anim_simpleFade);
-
-    // animate accent lines
-    let $accentLines = jQuery('.bw-line');
-    // or whatever the common class for these is
-    // grow accent line animation
+  
     function anim_accentLine($elem) {
-        // animate
-        anime({
-            targets: $elem[0],
-            width: [0, '100%'],
-            duration: 500,
-            easing: 'cubicBezier(0.25, 0.1, 0.25, 1)'
-        });
+      anime({
+        targets: $elem[0],
+        width: [0, '100%'],
+        duration: 500,
+        easing: 'cubicBezier(0.25, 0.1, 0.25, 1)'
+      });
     }
-    // run on scroll
-    animateOnScroll($accentLines, anim_accentLine);
-
-    // animate accent to text
-    let $accentTexts = jQuery('.bw-fade-text .bw-animate-text');
-    // or whatever the common class for these is
-    // grow accent line animation
+  
     function anim_accentText($elem) {
-        // animate
-        anime({
-            targets: $elem[0],
-            top: 0,
-            delay: 600,
-            easing: 'easeOutElastic(1, 1.1)'
-        });
+      anime({
+        targets: $elem[0],
+        top: 0,
+        delay: 600,
+        easing: 'easeOutElastic(1, 1.1)'
+      });
     }
-    // run on scroll
-    animateOnScroll($accentTexts, anim_accentText);
-
-    /**
-     * Get background image from css to data on div
-     */
-    // var jqoce = ".bw-parallax-x";
-    // var bg = jQuery(jqoce).css("background-image");
-    // bg = bg.replace('url(','').replace(')','').replace(/\"/gi, "");
-    // jQuery(jqoce).addClass("parallax-window");
-    // jQuery(jqoce).attr("data-parallax", "scroll");
-    // jQuery(jqoce).attr("data-image-src", bg);
-    // jQuery(jqoce).attr("data-z-index", "99999");
-    
-    
-
-
-}); // end window load wrapper
+  });
+  
+  

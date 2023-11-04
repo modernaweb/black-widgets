@@ -68,7 +68,7 @@ class BLACK_WIDGETS_List extends \Elementor\Widget_Base {
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'eicon-editor-list-ul';
+		return 'eicon-bullet-list';
 	}
 
 	/**

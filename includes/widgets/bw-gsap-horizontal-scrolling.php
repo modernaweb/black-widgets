@@ -70,7 +70,7 @@ class BLACK_WIDGETS_GSAP_HORIZONTAL_SCROLLING extends \Elementor\Widget_Base {
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'eicon-scroll';
+		return 'eicon-slider-push';
 	}
 
 	/**
