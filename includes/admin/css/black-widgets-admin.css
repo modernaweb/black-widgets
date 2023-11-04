@@ -88,6 +88,7 @@ body.toplevel_page_black-widgets .bw-box-backend .bw-btn:hover {
      /* background: linear-gradient(-45deg, #000 0%, #222 50%, #000 100%); */
      color: #9DA5AE;
      transition: all .02s ease !important;
+     border: 0 !important;
  }
  
  #elementor-panel-category-black_widgets .elementor-element:hover {

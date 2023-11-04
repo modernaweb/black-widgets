@@ -254,6 +254,7 @@ body.toplevel_page_black-widgets .bw-box-backend .bw-btn:hover {
     background: linear-gradient(-45deg, #181818 50%, #202124 100%) !important;
     color: #fff !important;
     transition: all .02s ease !important;
+    border: 0 !important;
 }
 
 #elementor-panel .elementor-element .icon,

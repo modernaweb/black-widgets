@@ -6042,6 +6042,10 @@
     display: block !important;
 }
 
+.bw-typography-this-title {
+    word-break: break-word;
+}
+
 .bw-typograpgy-wrap .bw-wrapper-unset .bw-typograpgy-repetitive.bw-typography-this-title,
 .bw-typograpgy-wrap .bw-wrapper-block .bw-typograpgy-repetitive.bw-typography-this-title {
     display: unset !important;
