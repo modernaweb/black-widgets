@@ -6187,7 +6187,7 @@
     -o-transition: all .38s ease;
 }
 
-.bw-hover-box.bw-style-1 .bw-content-box .bw-title {
+.bw-hover-box.bw-style-1 .bw-title {
     font-weight: 500;
     color: #353640;
     font-size: 28px;
@@ -6196,7 +6196,7 @@
     padding: 0;
 }
 
-.bw-hover-box.bw-style-1 .bw-content-box .bw-description {
+.bw-hover-box.bw-style-1 .bw-description {
     color: #62636b;
     font-weight: 500;
     font-size: 16px;

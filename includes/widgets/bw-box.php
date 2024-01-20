@@ -511,6 +511,69 @@ class BLACK_WIDGETS_Box extends \Elementor\Widget_Base {
 
 		$this->end_controls_section();
 
+		// Start
+		// Start Style section
+		$this->start_controls_section(
+			'typography_section',
+			[
+				'label' => __( 'Typography', 'blackwidgets' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+
+		// Color
+		$this->add_control(
+			'title_solid_color',
+			[
+				'label' => __( 'Title Color', 'blackwidgets' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bw-hover-box .bw-content-box .bw-title' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		// Typography
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'title_typography',
+				'label' => __( 'Title Typography', 'blackwidgets' ),
+				'scheme' => Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .bw-hover-box .bw-content-box .bw-title',
+			]
+		);
+
+		// Color
+		$this->add_control(
+			'subtitle_solid_color',
+			[
+				'label' => __( 'Subtitle Color', 'blackwidgets' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bw-hover-box .bw-content-box .bw-description' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		// Typography
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'subtitle_typography',
+				'label' => __( 'Subtitle Typography', 'blackwidgets' ),
+				'scheme' => Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .bw-hover-box .bw-content-box .bw-description',
+			]
+		);
+
+
+		$this->end_controls_section();
+		// End Style Section
+		// End
+
+
 
 		// Start
 		// Style section
