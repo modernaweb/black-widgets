@@ -100,8 +100,22 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => __( 'Content', 'blackwidgets' ),
+				'label' => esc_html__( 'Content', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'custom_panel_alert',
+			[
+				'type' => \Elementor\Controls_Manager::ALERT,
+				'alert_type' => 'info',     /* info, success, warning, danger */
+				'heading' => esc_html__( 'Feel free to edit. Check this widget\'s demo.', 'blackwidgets' ),
+				'content' => sprintf(
+					'%s <a href="https://modernaweb.net/black-widgets/all-widgets/black-button/" target="_blank">%s</a>',
+					esc_html__( 'Check ', 'blackwidgets' ),
+					esc_html__( 'Demo', 'blackwidgets' )
+				),
 			]
 		);
 
@@ -109,35 +123,35 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_type',
 			[
-				'label' => __( 'Select Type', 'blackwidgets' ),
+				'label' => esc_html__( 'Select Type', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'minimal',
 				'options' => [
-					'minimal' 	=> __( 'Minimal', 'blackwidgets' ),
-					'modern' 	=> __( 'Modern', 'blackwidgets' ),
-					'noise' 	=> __( 'Noise', 'blackwidgets' ),
-					'fancy' 	=> __( 'Fancy', 'blackwidgets' ),
-					'abstract' 	=> __( 'Abstract', 'blackwidgets' ),
-					'gradient' 	=> __( 'Gradient', 'blackwidgets' ),
-					'simple' 	=> __( 'Simple', 'blackwidgets' ),
-					'custom' 	=> __( 'Custom', 'blackwidgets' ),
+					'minimal' 	=> esc_html__( 'Minimal', 'blackwidgets' ),
+					'modern' 	=> esc_html__( 'Modern', 'blackwidgets' ),
+					'noise' 	=> esc_html__( 'Noise', 'blackwidgets' ),
+					'fancy' 	=> esc_html__( 'Fancy', 'blackwidgets' ),
+					'abstract' 	=> esc_html__( 'Abstract', 'blackwidgets' ),
+					'gradient' 	=> esc_html__( 'Gradient', 'blackwidgets' ),
+					'simple' 	=> esc_html__( 'Simple', 'blackwidgets' ),
+					'custom' 	=> esc_html__( 'Custom', 'blackwidgets' ),
 				],
-				'description' => __( 'We create some skin before, you can use these or no! make a new custom type.', 'blackwidgets' ),
+				'description' => esc_html__( 'We create some skin before, you can use these or no! make a new custom type.', 'blackwidgets' ),
 			]
 		);
 		
 		$this->add_control(
 			'widget_modern_type',
 			[
-				'label' => __( 'Modern Skin', 'blackwidgets' ),
+				'label' => esc_html__( 'Modern Skin', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'm-1',
 				'options' => [
-					'm-1' 	=> __( 'Type 1', 'blackwidgets' ),
-					'm-2' 	=> __( 'Type 2', 'blackwidgets' ),
-					'm-3' 	=> __( 'Type 3', 'blackwidgets' ),
-					'm-4' 	=> __( 'Type 4', 'blackwidgets' ),
-					'm-5' 	=> __( 'Type 5', 'blackwidgets' ),
+					'm-1' 	=> esc_html__( 'Type 1', 'blackwidgets' ),
+					'm-2' 	=> esc_html__( 'Type 2', 'blackwidgets' ),
+					'm-3' 	=> esc_html__( 'Type 3', 'blackwidgets' ),
+					'm-4' 	=> esc_html__( 'Type 4', 'blackwidgets' ),
+					'm-5' 	=> esc_html__( 'Type 5', 'blackwidgets' ),
 				],
 				'condition'  => [
 					'widget_type' => [
@@ -150,13 +164,13 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_noise_type',
 			[
-				'label' => __( 'Noise Skin', 'blackwidgets' ),
+				'label' => esc_html__( 'Noise Skin', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'n-1',
 				'options' => [
-					'n-1' 	=> __( 'Type 1', 'blackwidgets' ),
-					'n-2' 	=> __( 'Type 2', 'blackwidgets' ),
-					'n-3' 	=> __( 'Type 3', 'blackwidgets' ),
+					'n-1' 	=> esc_html__( 'Type 1', 'blackwidgets' ),
+					'n-2' 	=> esc_html__( 'Type 2', 'blackwidgets' ),
+					'n-3' 	=> esc_html__( 'Type 3', 'blackwidgets' ),
 				],
 				'condition'  => [
 					'widget_type' => [
@@ -169,15 +183,15 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_fancy_type',
 			[
-				'label' => __( 'Fancy Skin', 'blackwidgets' ),
+				'label' => esc_html__( 'Fancy Skin', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'f-1',
 				'options' => [
-					'f-1' 	=> __( 'Type 1', 'blackwidgets' ),
-					'f-2' 	=> __( 'Type 2', 'blackwidgets' ),
-					'f-3' 	=> __( 'Type 3', 'blackwidgets' ),
-					'f-4' 	=> __( 'Type 4', 'blackwidgets' ),
-					'f-5' 	=> __( 'Type 5', 'blackwidgets' ),
+					'f-1' 	=> esc_html__( 'Type 1', 'blackwidgets' ),
+					'f-2' 	=> esc_html__( 'Type 2', 'blackwidgets' ),
+					'f-3' 	=> esc_html__( 'Type 3', 'blackwidgets' ),
+					'f-4' 	=> esc_html__( 'Type 4', 'blackwidgets' ),
+					'f-5' 	=> esc_html__( 'Type 5', 'blackwidgets' ),
 				],
 				'condition'  => [
 					'widget_type' => [
@@ -190,12 +204,12 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_abstract_type',
 			[
-				'label' => __( 'Abstract Skin', 'blackwidgets' ),
+				'label' => esc_html__( 'Abstract Skin', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'a-1',
 				'options' => [
-					'a-1' 	=> __( 'Type 1', 'blackwidgets' ),
-					'a-2' 	=> __( 'Type 2', 'blackwidgets' ),
+					'a-1' 	=> esc_html__( 'Type 1', 'blackwidgets' ),
+					'a-2' 	=> esc_html__( 'Type 2', 'blackwidgets' ),
 				],
 				'condition'  => [
 					'widget_type' => [
@@ -208,19 +222,19 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_text',
 			[
-				'label' => __( 'Button Text', 'blackwidgets' ),
+				'label' => esc_html__( 'Button Text', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Lets started', 'blackwidgets' ),
-				'placeholder' => __( 'Type your title here', 'blackwidgets' ),
+				'default' => esc_html__( 'Lets started', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'Type your title here', 'blackwidgets' ),
 			]
 		);
         
 		$this->add_control(
 			'website_link',
 			[
-				'label' => __( 'Link', 'blackwidgets' ),
+				'label' => esc_html__( 'Link', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::URL,
-				'placeholder' => __( 'https://your-link.com', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'https://your-link.com', 'blackwidgets' ),
 				'show_external' => true,
 				'default' => [
 					'url' => '',
@@ -234,24 +248,27 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_alignment',
 			[
-				'label'     => __( 'Text Alignment', 'blackwidgets' ),
+				'label'     => esc_html__( 'Text Alignment', 'blackwidgets' ),
 				'type'      => \Elementor\Controls_Manager::CHOOSE,
 				'default'	=> 'left',
 				'options'   => [
 					'left'   => [
-						'title' => __( 'Left', 'blackwidgets' ),
+						'title' => esc_html__( 'Left', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => __( 'Center', 'blackwidgets' ),
+						'title' => esc_html__( 'Center', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [
-						'title' => __( 'Right', 'blackwidgets' ),
+						'title' => esc_html__( 'Right', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
 				'toggle'    => true,
+				'selectors' => [
+					'{{WRAPPER}} .bw-button-wrapper' => 'text-align: {{VALUE}};',
+				],
 			]
 		);
 
@@ -263,7 +280,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'custom_section',
 			[
-				'label' => __( 'Custom Content', 'blackwidgets' ),
+				'label' => esc_html__( 'Custom Content', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 				'condition'  => [
 					'widget_type' => [
@@ -277,10 +294,10 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->add_control(
 			'custom_btn_show',
 			[
-				'label' 		=> __( 'Do You Need Icon/shape?', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Do You Need Icon/shape?', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-				'label_on' 		=> __( 'Yes', 'blackwidgets' ),
-				'label_off' 	=> __( 'No!', 'blackwidgets' ),
+				'label_on' 		=> esc_html__( 'Yes', 'blackwidgets' ),
+				'label_off' 	=> esc_html__( 'No!', 'blackwidgets' ),
 				'return_value' 	=> 'enablenow',
 				'default' 		=> 'false',
 			]
@@ -289,7 +306,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->add_control(
 			'custom_icon_widget',
 			[
-				'label' => __( 'Icon', 'blackwidgets' ),
+				'label' => esc_html__( 'Icon', 'blackwidgets' ),
 				'type' => Controls_Manager::ICONS,
 				'condition'  => [
 					'custom_btn_show' => [
@@ -303,14 +320,14 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->add_control(
 			'custom_icon_position',
 			[
-				'label' => __( 'Select Type', 'blackwidgets' ),
+				'label' => esc_html__( 'Select Type', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'after',
 				'options' => [
-					'after'			=> __( 'After', 'blackwidgets' ),
-					'before'		=> __( 'Before', 'blackwidgets' ),
-					'up' 			=> __( 'Up', 'blackwidgets' ),
-					'down' 			=> __( 'Down ', 'blackwidgets' ),
+					'after'			=> esc_html__( 'After', 'blackwidgets' ),
+					'before'		=> esc_html__( 'Before', 'blackwidgets' ),
+					'up' 			=> esc_html__( 'Up', 'blackwidgets' ),
+					'down' 			=> esc_html__( 'Down ', 'blackwidgets' ),
 				],
 				'condition'  => [
 					'custom_btn_show' => [
@@ -330,7 +347,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section',
 			[
-				'label' => __( 'Box Style', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -340,7 +357,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_1_normal',
 			[
-				'label' => __( 'Normal', 'blackwidgets' ),
+				'label' => esc_html__( 'Normal', 'blackwidgets' ),
 			]
 		);
 
@@ -349,9 +366,33 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_box_background',
-				'label' => __( 'Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-button-box .bw-btn',
+			]
+		);
+
+		$this->add_control(
+			'widget_normal_style_blur',
+			[
+				'label' => esc_html__( 'Blur', 'blackwidgets' ),
+				'description' => esc_html__( 'Background (only for color) with low opacity is required.', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+						'step' => 1,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bw-button-box .bw-btn' => 'backdrop-filter: blur({{SIZE}}{{UNIT}}) !important;',
+				],
 			]
 		);
 
@@ -360,13 +401,42 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'wrapper_widget_box_background',
-				'label' => __( 'Wrapper Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Wrapper Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-button-box.modern.m-4 .btn-wrapper',
 				'condition'  => [
 					'widget_modern_type' => [
 						'm-4',
 					],
+				],
+			]
+		);
+
+		$this->add_control(
+			'widget_wrapper_normal_style_blur',
+			[
+				'label' => esc_html__( 'Blur', 'blackwidgets' ),
+				'description' => esc_html__( 'Background (only for color) with low opacity is required.', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+						'step' => 1,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'condition'  => [
+					'widget_modern_type' => [
+						'm-4',
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bw-button-box.modern.m-4 .btn-wrapper' => 'backdrop-filter: blur({{SIZE}}{{UNIT}}) !important;',
 				],
 			]
 		);
@@ -382,7 +452,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
-				'label' => __( 'Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -395,7 +465,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
-				'label' => __( 'Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -416,7 +486,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_box_border',
-				'label' => __( 'Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-button-box .bw-btn',
 			]
 		);
@@ -426,7 +496,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_box_box_shadow',
-				'label' => __( 'Box Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-button-box .bw-btn',
 			]
 		);
@@ -434,7 +504,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_box_border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -447,7 +517,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_1_hover',
 			[
-				'label' => __( 'Hover', 'blackwidgets' ),
+				'label' => esc_html__( 'Hover', 'blackwidgets' ),
 			]
 		);
 
@@ -456,9 +526,33 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_hover_box_background',
-				'label' => __( 'Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', ],
 				'selector' => '{{WRAPPER}} .bw-button-box .bw-btn:hover',
+			]
+		);
+
+		$this->add_control(
+			'widget_hover_style_blur',
+			[
+				'label' => esc_html__( 'Blur', 'blackwidgets' ),
+				'description' => esc_html__( 'Background (only for color) with low opacity is required.', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+						'step' => 1,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bw-button-box .bw-btn:hover' => 'backdrop-filter: blur({{SIZE}}{{UNIT}}) !important;',
+				],
 			]
 		);
 
@@ -467,13 +561,42 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'wrapper_widget_hover_box_background',
-				'label' => __( 'Wrapper Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Wrapper Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-button-box.modern.m-4 .btn-wrapper:hover',
 				'condition'  => [
 					'widget_modern_type' => [
 						'm-4',
 					],
+				],
+			]
+		);
+
+		$this->add_control(
+			'widget_wrapper_hover_style_blur',
+			[
+				'label' => esc_html__( 'Blur', 'blackwidgets' ),
+				'description' => esc_html__( 'Background (only for color) with low opacity is required.', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+						'step' => 1,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'condition'  => [
+					'widget_modern_type' => [
+						'm-4',
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bw-button-box.modern.m-4 .btn-wrapper:hover' => 'backdrop-filter: blur({{SIZE}}{{UNIT}}) !important;',
 				],
 			]
 		);
@@ -489,7 +612,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_hover_box_margin',
 			[
-				'label' => __( 'Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -502,7 +625,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_hover_box_padding',
 			[
-				'label' => __( 'Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -523,7 +646,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_hover_box_border',
-				'label' => __( 'Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-button-box .bw-btn:hover',
 			]
 		);
@@ -533,7 +656,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_hover_box_box_shadow',
-				'label' => __( 'Box Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-button-box .bw-btn:hover',
 			]
 		);
@@ -541,7 +664,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_hover_box_border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -561,7 +684,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'typography1_section',
 			[
-				'label' => __( 'Button Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'Button Typography', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -571,7 +694,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_2_normal',
 			[
-				'label' => __( 'Normal', 'blackwidgets' ),
+				'label' => esc_html__( 'Normal', 'blackwidgets' ),
 			]
 		);
 
@@ -579,7 +702,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_btn_solid_color',
 			[
-				'label' => __( 'Button Text Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Button Text Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				// 'scheme' => [
 				// 	'type' => Color::get_type(),
@@ -596,7 +719,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'btn_typography1',
-				'label' => __( 'Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'Typography', 'blackwidgets' ),
 				// 'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-button-box .bw-btn',
 			]
@@ -607,7 +730,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_2_hover',
 			[
-				'label' => __( 'Hover', 'blackwidgets' ),
+				'label' => esc_html__( 'Hover', 'blackwidgets' ),
 			]
 		);
 
@@ -615,7 +738,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_btn_hover_solid_color',
 			[
-				'label' => __( 'Button Text Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Button Text Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				// 'scheme' => [
 				// 	'type' => Color::get_type(),
@@ -632,7 +755,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'btn_hover_typography1',
-				'label' => __( 'Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'Typography', 'blackwidgets' ),
 				// 'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-button-box .bw-btn:hover',
 			]
@@ -650,7 +773,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'icon_section',
 			[
-				'label' => __( 'Icon Style', 'blackwidgets' ),
+				'label' => esc_html__( 'Icon Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 				'condition'  => [
 					'widget_type' => [
@@ -665,14 +788,14 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_3_normal',
 			[
-				'label' => __( 'Normal', 'blackwidgets' ),
+				'label' => esc_html__( 'Normal', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'style_icon_size_normal',
 			[
-				'label' => __( 'Icon Size', 'blackwidgets' ),
+				'label' => esc_html__( 'Icon Size', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -693,7 +816,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_icon_color_normal',
 			[
-				'label' => __( 'Icon Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Icon Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				// 'scheme' => [
 				// 	'type' => Color::get_type(),
@@ -711,7 +834,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'style_icon_text_shadow_normal',
-				'label' => __( 'Text Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-button-box .bw-custom-btn .bw-custom-icon-shape svg,
 							   {{WRAPPER}} .bw-button-box .bw-custom-btn .bw-custom-icon-shape i',
 			]
@@ -721,7 +844,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_icon_text_padding_normal',
 			[
-				'label' => __( 'Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -735,7 +858,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_wrapper_padding_normal',
 			[
-				'label' => __( 'Padding For Wrapper', 'blackwidgets' ),
+				'label' => esc_html__( 'Padding For Wrapper', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -749,7 +872,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_wrapper_margin_normal',
 			[
-				'label' => __( 'Margin For Wrapper', 'blackwidgets' ),
+				'label' => esc_html__( 'Margin For Wrapper', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -764,14 +887,14 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_3_hover',
 			[
-				'label' => __( 'Hover', 'blackwidgets' ),
+				'label' => esc_html__( 'Hover', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'style_icon_size_hover',
 			[
-				'label' => __( 'Icon Size', 'blackwidgets' ),
+				'label' => esc_html__( 'Icon Size', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -792,7 +915,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_icon_color_hover',
 			[
-				'label' => __( 'Icon Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Icon Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				// 'scheme' => [
 				// 	'type' => Color::get_type(),
@@ -810,7 +933,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'style_icon_text_shadow_hover',
-				'label' => __( 'Text Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-button-box .bw-custom-btn:hover .bw-custom-icon-shape svg,
 							   {{WRAPPER}} .bw-button-box .bw-custom-btn:hover .bw-custom-icon-shape i',
 			]
@@ -820,7 +943,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_icon_text_padding_hover',
 			[
-				'label' => __( 'Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -834,7 +957,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_wrapper_padding_hover',
 			[
-				'label' => __( 'Padding For Wrapper', 'blackwidgets' ),
+				'label' => esc_html__( 'Padding For Wrapper', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -848,7 +971,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_wrapper_margin_hover',
 			[
-				'label' => __( 'Margin For Wrapper', 'blackwidgets' ),
+				'label' => esc_html__( 'Margin For Wrapper', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -887,7 +1010,8 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
         $text 	        		= isset($settings['widget_text']) 				? $settings['widget_text'] 				: '';
 		$target         		= $settings['website_link']['is_external'] 		? 'target="_blank"' 					: '';
 		$nofollow       		= $settings['website_link']['nofollow'] 		? ' rel="nofollow"'						: '';
-		$alignment 				= isset($settings['widget_alignment']) 			? $settings['widget_alignment']			: '';
+		// $alignment 				= isset($settings['widget_alignment']) 			? $settings['widget_alignment']			: '';
+		$alignment 				= '';
 
 		$custom_icon_position	= isset($settings['custom_icon_position'])		? $settings['custom_icon_position']		: '';
 		$enable_custom_shape	= 'enablenow' === $settings['custom_btn_show']	? $settings['custom_btn_show']			: '';
@@ -896,7 +1020,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$script_id		= '#' . $data_id;
 
 		// Render
-        echo '<div class="bw-button-box ' . $type . ' ' . $modern_type . ' ' . $fancy_type . ' ' . $noise_type . ' ' . $abstract_type . ' ' . $alignment . '">';
+        echo '<div class="bw-button-wrapper"><div class="bw-button-box ' . $type . ' ' . $modern_type . ' ' . $fancy_type . ' ' . $noise_type . ' ' . $abstract_type . ' ' . $alignment . '">';
 			switch ($type) {
 				case 'modern':
 					switch ($modern_type) {
@@ -1055,7 +1179,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 					echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn">' . $text . '</a>';
 				break;
 			}
-		echo '</div>';
+		echo '</div></div>';
 
 	}
 

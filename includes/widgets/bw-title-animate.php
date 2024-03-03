@@ -100,8 +100,22 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => __( 'Content', 'blackwidgets' ),
+				'label' => esc_html__( 'Content', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'custom_panel_alert',
+			[
+				'type' => \Elementor\Controls_Manager::ALERT,
+				'alert_type' => 'info',     /* info, success, warning, danger */
+				'heading' => esc_html__( 'Feel free to edit. Check this widget\'s demo.', 'blackwidgets' ),
+				'content' => sprintf(
+					'%s <a href="https://modernaweb.net/black-widgets/all-widgets/black-title-animate/" target="_blank">%s</a>',
+					esc_html__( 'Check ', 'blackwidgets' ),
+					esc_html__( 'Demo', 'blackwidgets' )
+				),
 			]
 		);
 
@@ -109,26 +123,26 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_type',
 			[
-				'label' => __( 'Select Type', 'blackwidgets' ),
+				'label' => esc_html__( 'Select Type', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'simple',
 				'options' => [
-					'simple' 		=> __( 'Simple', 'blackwidgets' ),
-					'classic' 		=> __( 'Classic', 'blackwidgets' ),
-					'liner'			=> __( 'Liner', 'blackwidgets' ),
-					'effective' 	=> __( 'Effective', 'blackwidgets' ),
-					'typing' 		=> __( 'Typing', 'blackwidgets' ),
-					'fft' 			=> __( 'Fade From Top', 'blackwidgets' ),
-					'ffl' 			=> __( 'Fade From Left', 'blackwidgets' ),
-					'ffr' 			=> __( 'Fade From Right', 'blackwidgets' ),
-					'ffb' 			=> __( 'Fade From Bottom', 'blackwidgets' ),
-					'fade_in' 		=> __( 'Fade In', 'blackwidgets' ),
-					'fade_out' 		=> __( 'Fade Out', 'blackwidgets' ),
-					'glitch_one' 	=> __( 'Glitch 1', 'blackwidgets' ),
-					'glitch_two' 	=> __( 'Glitch 2', 'blackwidgets' ),
-					'ffb2' 			=> __( 'Fade From Bottom2', 'blackwidgets' ),
+					'simple' 		=> esc_html__( 'Simple', 'blackwidgets' ),
+					'classic' 		=> esc_html__( 'Classic', 'blackwidgets' ),
+					'liner'			=> esc_html__( 'Liner', 'blackwidgets' ),
+					'effective' 	=> esc_html__( 'Effective', 'blackwidgets' ),
+					'typing' 		=> esc_html__( 'Typing', 'blackwidgets' ),
+					'fft' 			=> esc_html__( 'Fade From Top', 'blackwidgets' ),
+					'ffl' 			=> esc_html__( 'Fade From Left', 'blackwidgets' ),
+					'ffr' 			=> esc_html__( 'Fade From Right', 'blackwidgets' ),
+					'ffb' 			=> esc_html__( 'Fade From Bottom', 'blackwidgets' ),
+					'fade_in' 		=> esc_html__( 'Fade In', 'blackwidgets' ),
+					'fade_out' 		=> esc_html__( 'Fade Out', 'blackwidgets' ),
+					'glitch_one' 	=> esc_html__( 'Glitch 1', 'blackwidgets' ),
+					'glitch_two' 	=> esc_html__( 'Glitch 2', 'blackwidgets' ),
+					'ffb2' 			=> esc_html__( 'Fade From Bottom2', 'blackwidgets' ),
 				],
-				'description' => __( 'We create some skin before, you can use these or no! make a new custom type.', 'blackwidgets' ),
+				'description' => esc_html__( 'We create some skin before, you can use these or no! make a new custom type.', 'blackwidgets' ),
 			]
 		);
 
@@ -136,10 +150,10 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_title_before',
 			[
-				'label' => __( 'Before Title', 'blackwidgets' ),
+				'label' => esc_html__( 'Before Title', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Before', 'blackwidgets' ),
-				'placeholder' => __( 'Type your title here', 'blackwidgets' ),
+				'default' => esc_html__( 'Before', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'Type your title here', 'blackwidgets' ),
 				'condition'  => [
 					'widget_type' => [
 						'simple',
@@ -157,10 +171,10 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_title_main_text',
 			[
-				'label' => __( 'Main Title', 'blackwidgets' ),
+				'label' => esc_html__( 'Main Title', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Content', 'blackwidgets' ),
-				'placeholder' => __( 'Type your title here', 'blackwidgets' ),
+				'default' => esc_html__( 'Content', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'Type your title here', 'blackwidgets' ),
 				'condition'  => [
 					'widget_type' => [
 						'simple',
@@ -178,10 +192,10 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_title_main_text_classic',
 			[
-				'label' => __( 'Symbol (Just Single Character) ', 'blackwidgets' ),
+				'label' => esc_html__( 'Symbol (Just Single Character) ', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '&', 'blackwidgets' ),
-				'placeholder' => __( 'Set symbol', 'blackwidgets' ),
+				'default' => esc_html__( '&', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'Set symbol', 'blackwidgets' ),
 				'condition'  => [
 					'widget_type' => [
 						'classic',
@@ -194,10 +208,10 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_title_glitch',
 			[
-				'label' => __( 'Glitch Text', 'blackwidgets' ),
+				'label' => esc_html__( 'Glitch Text', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Glitch•', 'blackwidgets' ),
-				'placeholder' => __( 'Type your title here', 'blackwidgets' ),
+				'default' => esc_html__( 'Glitch•', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'Type your title here', 'blackwidgets' ),
 				'condition'  => [
 					'widget_type' => [
 						'glitch_one',
@@ -211,10 +225,10 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_title_for_liner',
 			[
-				'label' => __( 'Main Title', 'blackwidgets' ),
+				'label' => esc_html__( 'Main Title', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Find Your Element', 'blackwidgets' ),
-				'placeholder' => __( 'Type your title here', 'blackwidgets' ),
+				'default' => esc_html__( 'Find Your Element', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'Type your title here', 'blackwidgets' ),
 				'condition'  => [
 					'widget_type' => [
 						'liner',
@@ -226,7 +240,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_title_for_liner_top',
 			[
-				'label' => __( 'Start Range From Bottom', 'blackwidgets' ),
+				'label' => esc_html__( 'Start Range From Bottom', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -255,10 +269,10 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_title_la',
 			[
-				'label' => __( 'Text 1', 'blackwidgets' ),
+				'label' => esc_html__( 'Text 1', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Set', 'blackwidgets' ),
-				'placeholder' => __( 'Type your title here', 'blackwidgets' ),
+				'default' => esc_html__( 'Set', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'Type your title here', 'blackwidgets' ),
 				'condition'  => [
 					'widget_type' => [
 						'effective',
@@ -273,10 +287,10 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_title_lb',
 			[
-				'label' => __( 'Text 2', 'blackwidgets' ),
+				'label' => esc_html__( 'Text 2', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Ready', 'blackwidgets' ),
-				'placeholder' => __( 'Type your title here', 'blackwidgets' ),
+				'default' => esc_html__( 'Ready', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'Type your title here', 'blackwidgets' ),
 				'condition'  => [
 					'widget_type' => [
 						'effective',
@@ -291,10 +305,10 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_title_lc',
 			[
-				'label' => __( 'Text 3', 'blackwidgets' ),
+				'label' => esc_html__( 'Text 3', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Go', 'blackwidgets' ),
-				'placeholder' => __( 'Type your title here', 'blackwidgets' ),
+				'default' => esc_html__( 'Go', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'Type your title here', 'blackwidgets' ),
 				'condition'  => [
 					'widget_type' => [
 						'effective',
@@ -307,10 +321,10 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_title_typing',
 			[
-				'label' => __( 'Typing Text', 'blackwidgets' ),
+				'label' => esc_html__( 'Typing Text', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Hello Goodbye', 'blackwidgets' ),
-				'placeholder' => __( 'Type your title here', 'blackwidgets' ),
+				'default' => esc_html__( 'Hello Goodbye', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'Type your title here', 'blackwidgets' ),
 				'condition'  => [
 					'widget_type' => [
 						'typing',
@@ -323,10 +337,10 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_title_after',
 			[
-				'label' => __( 'After Title', 'blackwidgets' ),
+				'label' => esc_html__( 'After Title', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'After', 'blackwidgets' ),
-				'placeholder' => __( 'Type your title here', 'blackwidgets' ),
+				'default' => esc_html__( 'After', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'Type your title here', 'blackwidgets' ),
 				'condition'  => [
 					'widget_type' => [
 						'simple',
@@ -348,7 +362,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'tag_section',
 			[
-				'label' => __( 'HTML Tag Setting', 'blackwidgets' ),
+				'label' => esc_html__( 'HTML Tag Setting', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -357,21 +371,24 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_html_tag',
 			[
-				'label' => __( 'HTML Tag', 'blackwidgets' ),
+				'label' => esc_html__( 'HTML Tag', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'h1',
 				'options' => [
-					'div' 	=> __( 'div', 'blackwidgets' ),
-					'h1' 	=> __( 'H1', 'blackwidgets' ),
-					'h2' 	=> __( 'H2', 'blackwidgets' ),
-					'h3' 	=> __( 'H3', 'blackwidgets' ),
-					'h4' 	=> __( 'H4', 'blackwidgets' ),
-					'h5' 	=> __( 'H5', 'blackwidgets' ),
-					'h6' 	=> __( 'H6', 'blackwidgets' ),
-					'p' 	=> __( 'p', 'blackwidgets' ),
-					'span' 	=> __( 'span', 'blackwidgets' ),
+					'div' 	=> esc_html__( 'div', 'blackwidgets' ),
+					'h1' 	=> esc_html__( 'H1', 'blackwidgets' ),
+					'h2' 	=> esc_html__( 'H2', 'blackwidgets' ),
+					'h3' 	=> esc_html__( 'H3', 'blackwidgets' ),
+					'h4' 	=> esc_html__( 'H4', 'blackwidgets' ),
+					'h5' 	=> esc_html__( 'H5', 'blackwidgets' ),
+					'h6' 	=> esc_html__( 'H6', 'blackwidgets' ),
+					'p' 	=> esc_html__( 'p', 'blackwidgets' ),
+					'span' 	=> esc_html__( 'span', 'blackwidgets' ),
 				],
-				'description' => __( 'Choose an HTML tag, it can help you to SEO and beautifully of the UI design with follow the structure of your website.', 'blackwidgets' ),
+				'description' => esc_html__( 'Choose an HTML tag, it can help you to SEO and beautifully of the UI design with follow the structure of your website.', 'blackwidgets' ),
+				// 'selectors' => [
+				// 	'{{WRAPPER}} .bw-button-wrapper' => 'text-align: {{VALUE}};',
+				// ],
 			]
 		);
 
@@ -383,7 +400,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section',
 			[
-				'label' => __( 'Box Style', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -392,7 +409,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
-				'label' => __( 'Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -405,7 +422,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
-				'label' => __( 'Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -419,7 +436,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_box_background',
-				'label' => __( 'Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', ],
 				'selector' => '{{WRAPPER}} .bw-title-animate',
 			]
@@ -429,19 +446,19 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_alignment',
 			[
-				'label'     => __( 'Text Alignment', 'blackwidgets' ),
+				'label'     => esc_html__( 'Text Alignment', 'blackwidgets' ),
 				'type'      => \Elementor\Controls_Manager::CHOOSE,
 				'options'   => [
 					'left'   => [
-						'title' => __( 'Left', 'blackwidgets' ),
+						'title' => esc_html__( 'Left', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => __( 'Center', 'blackwidgets' ),
+						'title' => esc_html__( 'Center', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [
-						'title' => __( 'Right', 'blackwidgets' ),
+						'title' => esc_html__( 'Right', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -454,7 +471,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_box_border',
-				'label' => __( 'Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-title-animate',
 			]
 		);
@@ -463,7 +480,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_box_border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -477,7 +494,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_box_box_shadow',
-				'label' => __( 'Box Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-title-animate',
 			]
 		);
@@ -490,7 +507,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section_before_typo',
 			[
-				'label' => __( 'Before Text Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'Before Text Typography', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 				'condition'  => [
 					'widget_type!' => [
@@ -511,7 +528,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_before_title_color',
 			[
-				'label' => __( 'Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Color::get_type(),
@@ -528,7 +545,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'style_before_title_typography1',
-				'label' => __( 'Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'Typography', 'blackwidgets' ),
 				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-before',
 			]
@@ -539,7 +556,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'style_before_title_text_shadow',
-				'label' => __( 'Text Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-before',
 			]
 		);
@@ -556,7 +573,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'style_before_title_background',
-				'label' => __( 'Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-before',
 			]
@@ -573,7 +590,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_before_title_margin',
 			[
-				'label' => __( 'Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -586,7 +603,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_before_title_padding',
 			[
-				'label' => __( 'Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -607,7 +624,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'style_before_title_border',
-				'label' => __( 'Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-before',
 			]
 		);
@@ -616,7 +633,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_before_title_border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -630,7 +647,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'style_before_title_box_shadow',
-				'label' => __( 'Box Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-before',
 			]
 		);
@@ -643,7 +660,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section_main_typo',
 			[
-				'label' => __( 'Animate Text Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'Animate Text Typography', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 				'condition'  => [
 					'widget_type!' => [
@@ -657,7 +674,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_title_color',
 			[
-				'label' => __( 'Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Color::get_type(),
@@ -674,7 +691,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'style_main_title_typography1',
-				'label' => __( 'Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'Typography', 'blackwidgets' ),
 				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-animate-text',
 			]
@@ -685,7 +702,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'style_main_title_text_shadow',
-				'label' => __( 'Text Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-animate-text',
 			]
 		);
@@ -702,7 +719,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'style_main_title_background',
-				'label' => __( 'Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-animate-text',
 			]
@@ -719,7 +736,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_title_margin',
 			[
-				'label' => __( 'Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -732,7 +749,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_title_padding',
 			[
-				'label' => __( 'Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -753,7 +770,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'style_main_title_border',
-				'label' => __( 'Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-animate-text',
 			]
 		);
@@ -762,7 +779,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_title_border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -776,7 +793,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'style_main_title_box_shadow',
-				'label' => __( 'Box Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-animate-text',
 			]
 		);
@@ -789,7 +806,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section_symbol_typo',
 			[
-				'label' => __( 'Symbol Text Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'Symbol Text Typography', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 				'condition'  => [
 					'widget_type' => [
@@ -803,7 +820,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_symbol_title_color',
 			[
-				'label' => __( 'Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Color::get_type(),
@@ -820,7 +837,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'style_symbol_title_typography1',
-				'label' => __( 'Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'Typography', 'blackwidgets' ),
 				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-symbol',
 			]
@@ -831,7 +848,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'style_symbol_title_text_shadow',
-				'label' => __( 'Text Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-symbol',
 			]
 		);
@@ -848,7 +865,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'style_symbol_title_background',
-				'label' => __( 'Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-symbol',
 			]
@@ -865,7 +882,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_symbol_title_margin',
 			[
-				'label' => __( 'Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -878,7 +895,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_symbol_title_padding',
 			[
-				'label' => __( 'Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -899,7 +916,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'style_symbol_title_border',
-				'label' => __( 'Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-symbol',
 			]
 		);
@@ -908,7 +925,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_symbol_title_border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -922,7 +939,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'style_symbol_title_box_shadow',
-				'label' => __( 'Box Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-symbol',
 			]
 		);
@@ -936,7 +953,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section_after_typo',
 			[
-				'label' => __( 'After Text Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'After Text Typography', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 				'condition'  => [
 					'widget_type!' => [
@@ -957,7 +974,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_after_title_color',
 			[
-				'label' => __( 'Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Color::get_type(),
@@ -974,7 +991,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'style_after_title_typography1',
-				'label' => __( 'Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'Typography', 'blackwidgets' ),
 				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-after',
 			]
@@ -985,7 +1002,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'style_after_title_text_shadow',
-				'label' => __( 'Text Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-after',
 			]
 		);
@@ -1002,7 +1019,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'style_after_title_background',
-				'label' => __( 'Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-after',
 			]
@@ -1019,7 +1036,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_after_title_margin',
 			[
-				'label' => __( 'Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -1032,7 +1049,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_after_title_padding',
 			[
-				'label' => __( 'Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -1053,7 +1070,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'style_after_title_border',
-				'label' => __( 'Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-after',
 			]
 		);
@@ -1062,7 +1079,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_after_title_border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -1076,7 +1093,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'style_after_title_box_shadow',
-				'label' => __( 'Box Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-after',
 			]
 		);
@@ -1089,7 +1106,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section_symbol_line',
 			[
-				'label' => __( 'Line Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Line Color', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 				'condition'  => [
 					'widget_type' => [
@@ -1105,7 +1122,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_after_line_color',
 			[
-				'label' => __( 'Line Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Line Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Color::get_type(),
@@ -1120,7 +1137,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_after_line_width',
 			[
-				'label' => __( 'Line Width', 'blackwidgets' ),
+				'label' => esc_html__( 'Line Width', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range' => [
@@ -1144,7 +1161,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_after_line_height',
 			[
-				'label' => __( 'Line Height', 'blackwidgets' ),
+				'label' => esc_html__( 'Line Height', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range' => [
@@ -1208,6 +1225,7 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 
 		$HTML   		= isset($settings['widget_html_tag']) 					? $settings['widget_html_tag']					: '';
 		$alignment 		= isset($settings['widget_alignment']) 					? $settings['widget_alignment']					: '';
+		// $alignment 		=  '';
 
 		$data_id                = 'bw-' . uniqid();
 

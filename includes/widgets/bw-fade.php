@@ -102,8 +102,22 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => __( 'Content', 'blackwidgets' ),
+				'label' => esc_html__( 'Content', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'custom_panel_alert',
+			[
+				'type' => \Elementor\Controls_Manager::ALERT,
+				'alert_type' => 'info',     /* info, success, warning, danger */
+				'heading' => esc_html__( 'Feel free to edit. Check this widget\'s demo.', 'blackwidgets' ),
+				'content' => sprintf(
+					'%s <a href="https://modernaweb.net/black-widgets/all-widgets/black-fade/" target="_blank">%s</a>',
+					esc_html__( 'Check ', 'blackwidgets' ),
+					esc_html__( 'Demo', 'blackwidgets' )
+				),
 			]
 		);
 
@@ -111,22 +125,22 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_type',
 			[
-				'label' => __( 'Select Type', 'blackwidgets' ),
+				'label' => esc_html__( 'Select Type', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'bw-t-2',
 				'options' => [
-					'bw-t-1' => __( 'Image', 'blackwidgets' ),
-					'bw-t-2' => __( 'Line 1', 'blackwidgets' ),
-					'bw-t-3' => __( 'Line 2', 'blackwidgets' ),
+					'bw-t-1' => esc_html__( 'Image', 'blackwidgets' ),
+					'bw-t-2' => esc_html__( 'Line 1', 'blackwidgets' ),
+					'bw-t-3' => esc_html__( 'Line 2', 'blackwidgets' ),
 				],
-				'description' => __( 'It just work with scroll down and does not work on first section. it works once', 'blackwidgets' ),
+				'description' => esc_html__( 'It just work with scroll down and does not work on first section. it works once', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'image',
 			[
-				'label' => __( 'Choose Image', 'blackwidgets' ),
+				'label' => esc_html__( 'Choose Image', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::MEDIA,
 				'default' => [
 					'url' => \Elementor\Utils::get_placeholder_image_src(),
@@ -159,12 +173,12 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_control(
 			'image_link',
 			[
-				'label' => __( 'Add link for Image?', 'blackwidgets' ),
+				'label' => esc_html__( 'Add link for Image?', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'no',
 				'options' => [
-					'no' => __( 'No', 'blackwidgets' ),
-					'yes' => __( 'Yes', 'blackwidgets' ),
+					'no' => esc_html__( 'No', 'blackwidgets' ),
+					'yes' => esc_html__( 'Yes', 'blackwidgets' ),
 				],
 				'condition'  => [
 					'widget_type' => [
@@ -177,9 +191,9 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_control(
 			'image_link_url',
 			[
-				'label' => __( 'Link', 'blackwidgets' ),
+				'label' => esc_html__( 'Link', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::URL,
-				'placeholder' => __( 'https://your-link.com', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'https://your-link.com', 'blackwidgets' ),
 				'show_external' => true,
 				'default' => [
 					'url' => '',
@@ -197,14 +211,14 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_control(
 			'img_grow',
 			[
-				'label' => __( 'Image Grow From', 'blackwidgets' ),
+				'label' => esc_html__( 'Image Grow From', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'rtl',
 				'options' => [
-					'rtl' => __( 'Right To Left', 'blackwidgets' ),
-					'ltr' => __( 'Left To Right', 'blackwidgets' ),
-					'ttb' => __( 'Top To Bottom', 'blackwidgets' ),
-					'btt' => __( 'Bottom To Top', 'blackwidgets' ),
+					'rtl' => esc_html__( 'Right To Left', 'blackwidgets' ),
+					'ltr' => esc_html__( 'Left To Right', 'blackwidgets' ),
+					'ttb' => esc_html__( 'Top To Bottom', 'blackwidgets' ),
+					'btt' => esc_html__( 'Bottom To Top', 'blackwidgets' ),
 				],
 				'condition'  => [
 					'widget_type' => [
@@ -222,7 +236,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section',
 			[
-				'label' => __( 'Box Style', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -232,7 +246,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_box_background',
-				'label' => __( 'Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-line, {{WRAPPER}} .bw-load-img',
 			]
@@ -249,7 +263,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
-				'label' => __( 'Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -262,7 +276,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
-				'label' => __( 'Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -283,7 +297,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_box_border',
-				'label' => __( 'Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-line, {{WRAPPER}} .bw-load-img',
 			]
 		);
@@ -291,7 +305,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_border_radius_for_fade', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -310,7 +324,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_box_box_shadow',
-				'label' => __( 'Box Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-line, {{WRAPPER}} .bw-load-img',
 			]
 		);
@@ -323,7 +337,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'line_style_section',
 			[
-				'label' => __( 'Image & line  Style', 'blackwidgets' ),
+				'label' => esc_html__( 'Image & line  Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -331,7 +345,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_control(
 			'start_width',
 			[
-				'label' => __( 'Start line width', 'blackwidgets' ),
+				'label' => esc_html__( 'Start line width', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range' => [
@@ -362,7 +376,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'line_border',
-				'label' => __( 'Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-line',
 				'condition'  => [
 					'widget_type' => [
@@ -375,7 +389,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_control(
 			'img_width',
 			[
-				'label' => __( 'Image Width', 'blackwidgets' ),
+				'label' => esc_html__( 'Image Width', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range' => [
@@ -406,7 +420,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'img_background',
-				'label' => __( 'Image Cover X', 'blackwidgets' ),
+				'label' => esc_html__( 'Image Cover X', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-load-img .bw-image-grow-cover ',
 				'condition'  => [
@@ -414,14 +428,14 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 						'bw-t-1',
 					],
 				],
-				'description' => __( 'After change style, scroll down to see changes', 'blackwidgets' ),
+				'description' => esc_html__( 'After change style, scroll down to see changes', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'hover_animation',
 			[
-				'label' => __( 'Image Hover Animation', 'blackwidgets' ),
+				'label' => esc_html__( 'Image Hover Animation', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::HOVER_ANIMATION,
 				'prefix_class' => 'elementor-animation-',
 				'condition'  => [
@@ -441,7 +455,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'transform_section',
 			[
-				'label' => __( '2D & 3D Normal Transform Style', 'blackwidgets' ),
+				'label' => esc_html__( '2D & 3D Normal Transform Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 				'condition'  => [
 					'widget_type' => [
@@ -455,10 +469,10 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_control(
 			'transform_normal_option',
 			[
-				'label' 		=> __( 'Transform Style', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Transform Style', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-				'label_on' 		=> __( 'Enable', 'blackwidgets' ),
-				'label_off' 	=> __( 'Disable', 'blackwidgets' ),
+				'label_on' 		=> esc_html__( 'Enable', 'blackwidgets' ),
+				'label_off' 	=> esc_html__( 'Disable', 'blackwidgets' ),
 				'return_value' 	=> 'normal_transform',
 				'default' 		=> 'off',
 			]
@@ -475,7 +489,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'transform_tab_move',
 			[
-				'label' => __( 'Move', 'blackwidgets' ),
+				'label' => esc_html__( 'Move', 'blackwidgets' ),
 			]
 		);
 
@@ -484,7 +498,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'move_normal_x',
 			[
-				'label' => __( 'Move on → X', 'blackwidgets' ),
+				'label' => esc_html__( 'Move on → X', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -498,14 +512,14 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 					'unit' => 'px',
 					'size' => 0,
 				],
-				'description' => __( 'movement on the diagram X - do not leave empty!', 'blackwidgets' ),
+				'description' => esc_html__( 'movement on the diagram X - do not leave empty!', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'move_normal_y',
 			[
-				'label' => __( 'Move on ↑ Y', 'blackwidgets' ),
+				'label' => esc_html__( 'Move on ↑ Y', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -519,14 +533,14 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 					'unit' => 'px',
 					'size' => 0,
 				],
-				'description' => __( 'movement on the diagram Y - do not leave empty!', 'blackwidgets' ),
+				'description' => esc_html__( 'movement on the diagram Y - do not leave empty!', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'move_normal_z',
 			[
-				'label' => __( 'Move on ↙ Z', 'blackwidgets' ),
+				'label' => esc_html__( 'Move on ↙ Z', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -540,7 +554,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 					'unit' => 'px',
 					'size' => 0,
 				],
-				'description' => __( 'movement on the diagram Z - do not leave empty!', 'blackwidgets' ),
+				'description' => esc_html__( 'movement on the diagram Z - do not leave empty!', 'blackwidgets' ),
 			]
 		);
 
@@ -550,7 +564,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'transform_tab_scale',
 			[
-				'label' => __( 'Scale', 'blackwidgets' ),
+				'label' => esc_html__( 'Scale', 'blackwidgets' ),
 			]
 		);
 
@@ -559,7 +573,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'scale_normal_x',
 			[
-				'label' => __( 'Scale on → X', 'blackwidgets' ),
+				'label' => esc_html__( 'Scale on → X', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'deg' ],
 				'range' => [
@@ -573,14 +587,14 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 					'unit' => 'deg',
 					'size' => 1,
 				],
-				'description' => __( 'set 1.1 to scale on left and right - do not set 0', 'blackwidgets' ),
+				'description' => esc_html__( 'set 1.1 to scale on left and right - do not set 0', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'scale_normal_y',
 			[
-				'label' => __( 'Scale on ↑ Y', 'blackwidgets' ),
+				'label' => esc_html__( 'Scale on ↑ Y', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'deg' ],
 				'range' => [
@@ -594,14 +608,14 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 					'unit' => 'deg',
 					'size' => 1,
 				],
-				'description' => __( 'set 1.1 to scale on top and bottom - do not set 0', 'blackwidgets' ),
+				'description' => esc_html__( 'set 1.1 to scale on top and bottom - do not set 0', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'scale_normal_z',
 			[
-				'label' => __( 'Scale on ↙ Z', 'blackwidgets' ),
+				'label' => esc_html__( 'Scale on ↙ Z', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'deg' ],
 				'range' => [
@@ -615,14 +629,14 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 					'unit' => 'deg',
 					'size' => 1,
 				],
-				'description' => __( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
+				'description' => esc_html__( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'perspective',
 			[
-				'label' => __( 'Self Perspective ◊', 'blackwidgets' ),
+				'label' => esc_html__( 'Self Perspective ◊', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'ps' ],
 				'range' => [
@@ -636,14 +650,14 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 					'unit' => 'px',
 					'size' => 0,
 				],
-				'description' => __( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
+				'description' => esc_html__( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'perspective_child',
 			[
-				'label' => __( 'Children Perspective ◊', 'blackwidgets' ),
+				'label' => esc_html__( 'Children Perspective ◊', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'ps' ],
 				'range' => [
@@ -657,7 +671,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 					'unit' => 'px',
 					'size' => 0,
 				],
-				'description' => __( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
+				'description' => esc_html__( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
 			]
 		);
 
@@ -667,7 +681,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'transform_tab_rotate',
 			[
-				'label' => __( 'Rotate', 'blackwidgets' ),
+				'label' => esc_html__( 'Rotate', 'blackwidgets' ),
 			]
 		);
 
@@ -676,7 +690,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'rotate_normal_x',
 			[
-				'label' => __( 'Rotate on → X', 'blackwidgets' ),
+				'label' => esc_html__( 'Rotate on → X', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'deg' ],
 				'range' => [
@@ -696,7 +710,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'rotate_normal_y',
 			[
-				'label' => __( 'Rotate on ↑ Y', 'blackwidgets' ),
+				'label' => esc_html__( 'Rotate on ↑ Y', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'deg' ],
 				'range' => [
@@ -716,7 +730,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'rotate_normal_z',
 			[
-				'label' => __( 'Rotate on ↙ Z', 'blackwidgets' ),
+				'label' => esc_html__( 'Rotate on ↙ Z', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'deg' ],
 				'range' => [
@@ -739,7 +753,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'transform_tab_skew',
 			[
-				'label' => __( 'Skew', 'blackwidgets' ),
+				'label' => esc_html__( 'Skew', 'blackwidgets' ),
 			]
 		);
 
@@ -748,7 +762,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'skew_normal_x',
 			[
-				'label' => __( 'Skew on → X ▱', 'blackwidgets' ),
+				'label' => esc_html__( 'Skew on → X ▱', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'deg' ],
 				'range' => [
@@ -768,7 +782,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'skew_normal_y',
 			[
-				'label' => __( 'Skew on ↑ Y ▱', 'blackwidgets' ),
+				'label' => esc_html__( 'Skew on ↑ Y ▱', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'deg' ],
 				'range' => [
@@ -799,7 +813,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'image_pro_cursor_animate',
 			[
-				'label' => __( 'Cursor & Hover Animate', 'blackwidgets' ),
+				'label' => esc_html__( 'Cursor & Hover Animate', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 				'condition'  => [
 					'widget_type' => [
@@ -813,55 +827,55 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_cursor',
 			[
-				'label' => __( 'Select Cursor Style', 'blackwidgets' ),
+				'label' => esc_html__( 'Select Cursor Style', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'default',
 				'options' => [
-					'auto' 			=> __( 'auto', 'blackwidgets' ),
-					'default' 		=> __( 'default', 'blackwidgets' ),
-					'none' 			=> __( 'none', 'blackwidgets' ),
-					'pointer' 		=> __( 'pointer', 'blackwidgets' ),
-					'not-Allowed' 	=> __( 'not-Allowed', 'blackwidgets' ),
-					'wait' 			=> __( 'wait', 'blackwidgets' ),
-					'progress' 		=> __( 'progress', 'blackwidgets' ),
-					'help' 			=> __( 'help', 'blackwidgets' ),
-					'context-menu' 	=> __( 'context-menu', 'blackwidgets' ),
-					'cell' 			=> __( 'cell', 'blackwidgets' ),
-					'crosshair' 	=> __( 'crosshair', 'blackwidgets' ),
-					'text' 			=> __( 'text', 'blackwidgets' ),
-					'wetical-text' 	=> __( 'wetical-text', 'blackwidgets' ),
-					'grab' 			=> __( 'grab', 'blackwidgets' ),
-					'grabbing' 		=> __( 'grabbing', 'blackwidgets' ),
-					'alias' 		=> __( 'alias', 'blackwidgets' ),
-					'copy' 			=> __( 'copy', 'blackwidgets' ),
-					'move' 			=> __( 'move', 'blackwidgets' ),
-					'zoom-in'		=> __( 'zoom-in', 'blackwidgets' ),
-					'zoom-out' 		=> __( 'zoom-out', 'blackwidgets' ),
-					'col-resize' 	=> __( 'col-resize', 'blackwidgets' ),
-					'row-resize' 	=> __( 'row-resize', 'blackwidgets' ),
-					'nesw-resize' 	=> __( 'nesw-resize', 'blackwidgets' ),
-					'newse-resize' 	=> __( 'newse-resize', 'blackwidgets' ),
-					'ew-resize' 	=> __( 'ew-resize', 'blackwidgets' ),
-					'ns-resize' 	=> __( 'ns-resize', 'blackwidgets' ),
-					'n-resize' 		=> __( 'n-resize', 'blackwidgets' ),
-					'w-resize' 		=> __( 'w-resize', 'blackwidgets' ),
-					's-resize' 		=> __( 's-resize', 'blackwidgets' ),
-					'e-resize' 		=> __( 'e-resize', 'blackwidgets' ),
-					'nw-resize' 	=> __( 'nw-resize', 'blackwidgets' ),
-					'ne-resize' 	=> __( 'ne-resize', 'blackwidgets' ),
-					'sw-resize' 	=> __( 'sw-resize', 'blackwidgets' ),
-					'se-resize'		=> __( 'se-resize', 'blackwidgets' ),
+					'auto' 			=> esc_html__( 'auto', 'blackwidgets' ),
+					'default' 		=> esc_html__( 'default', 'blackwidgets' ),
+					'none' 			=> esc_html__( 'none', 'blackwidgets' ),
+					'pointer' 		=> esc_html__( 'pointer', 'blackwidgets' ),
+					'not-Allowed' 	=> esc_html__( 'not-Allowed', 'blackwidgets' ),
+					'wait' 			=> esc_html__( 'wait', 'blackwidgets' ),
+					'progress' 		=> esc_html__( 'progress', 'blackwidgets' ),
+					'help' 			=> esc_html__( 'help', 'blackwidgets' ),
+					'context-menu' 	=> esc_html__( 'context-menu', 'blackwidgets' ),
+					'cell' 			=> esc_html__( 'cell', 'blackwidgets' ),
+					'crosshair' 	=> esc_html__( 'crosshair', 'blackwidgets' ),
+					'text' 			=> esc_html__( 'text', 'blackwidgets' ),
+					'wetical-text' 	=> esc_html__( 'wetical-text', 'blackwidgets' ),
+					'grab' 			=> esc_html__( 'grab', 'blackwidgets' ),
+					'grabbing' 		=> esc_html__( 'grabbing', 'blackwidgets' ),
+					'alias' 		=> esc_html__( 'alias', 'blackwidgets' ),
+					'copy' 			=> esc_html__( 'copy', 'blackwidgets' ),
+					'move' 			=> esc_html__( 'move', 'blackwidgets' ),
+					'zoom-in'		=> esc_html__( 'zoom-in', 'blackwidgets' ),
+					'zoom-out' 		=> esc_html__( 'zoom-out', 'blackwidgets' ),
+					'col-resize' 	=> esc_html__( 'col-resize', 'blackwidgets' ),
+					'row-resize' 	=> esc_html__( 'row-resize', 'blackwidgets' ),
+					'nesw-resize' 	=> esc_html__( 'nesw-resize', 'blackwidgets' ),
+					'newse-resize' 	=> esc_html__( 'newse-resize', 'blackwidgets' ),
+					'ew-resize' 	=> esc_html__( 'ew-resize', 'blackwidgets' ),
+					'ns-resize' 	=> esc_html__( 'ns-resize', 'blackwidgets' ),
+					'n-resize' 		=> esc_html__( 'n-resize', 'blackwidgets' ),
+					'w-resize' 		=> esc_html__( 'w-resize', 'blackwidgets' ),
+					's-resize' 		=> esc_html__( 's-resize', 'blackwidgets' ),
+					'e-resize' 		=> esc_html__( 'e-resize', 'blackwidgets' ),
+					'nw-resize' 	=> esc_html__( 'nw-resize', 'blackwidgets' ),
+					'ne-resize' 	=> esc_html__( 'ne-resize', 'blackwidgets' ),
+					'sw-resize' 	=> esc_html__( 'sw-resize', 'blackwidgets' ),
+					'se-resize'		=> esc_html__( 'se-resize', 'blackwidgets' ),
 				],
-				'description' => __( 'It just work with scroll down and does not work on first section. it works once', 'blackwidgets' ),
+				'description' => esc_html__( 'It just work with scroll down and does not work on first section. it works once', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'image_pro_anime',
 			[
-				'label' => __( 'Type Custom Animate', 'blackwidgets' ),
+				'label' => esc_html__( 'Type Custom Animate', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'all 0.23s ease', 'blackwidgets' ),
+				'default' => esc_html__( 'all 0.23s ease', 'blackwidgets' ),
 			]
 		);
 
@@ -874,7 +888,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'transform_section_hover',
 			[
-				'label' => __( '2D & 3D Hover Transform Style', 'blackwidgets' ),
+				'label' => esc_html__( '2D & 3D Hover Transform Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 				'condition'  => [
 					'widget_type' => [
@@ -888,10 +902,10 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_control(
 			'transform_hover_option',
 			[
-				'label' 		=> __( 'Transform Style', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Transform Style', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-				'label_on' 		=> __( 'Enable', 'blackwidgets' ),
-				'label_off' 	=> __( 'Disable', 'blackwidgets' ),
+				'label_on' 		=> esc_html__( 'Enable', 'blackwidgets' ),
+				'label_off' 	=> esc_html__( 'Disable', 'blackwidgets' ),
 				'return_value' 	=> 'hover_transform',
 				'default' 		=> 'off',
 			]
@@ -908,7 +922,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'transform_tab_move_hover',
 			[
-				'label' => __( 'Move', 'blackwidgets' ),
+				'label' => esc_html__( 'Move', 'blackwidgets' ),
 			]
 		);
 
@@ -917,7 +931,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'move_hover_x',
 			[
-				'label' => __( 'Move on → X', 'blackwidgets' ),
+				'label' => esc_html__( 'Move on → X', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -931,14 +945,14 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 					'unit' => 'px',
 					'size' => 0,
 				],
-				'description' => __( 'movement on the diagram X - do not leave empty!', 'blackwidgets' ),
+				'description' => esc_html__( 'movement on the diagram X - do not leave empty!', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'move_hover_y',
 			[
-				'label' => __( 'Move on ↑ Y', 'blackwidgets' ),
+				'label' => esc_html__( 'Move on ↑ Y', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -952,14 +966,14 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 					'unit' => 'px',
 					'size' => 0,
 				],
-				'description' => __( 'movement on the diagram Y - do not leave empty!', 'blackwidgets' ),
+				'description' => esc_html__( 'movement on the diagram Y - do not leave empty!', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'move_hover_z',
 			[
-				'label' => __( 'Move on ↙ Z', 'blackwidgets' ),
+				'label' => esc_html__( 'Move on ↙ Z', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -973,7 +987,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 					'unit' => 'px',
 					'size' => 0,
 				],
-				'description' => __( 'Movement on the diagram Z - do not leave empty!', 'blackwidgets' ),
+				'description' => esc_html__( 'Movement on the diagram Z - do not leave empty!', 'blackwidgets' ),
 			]
 		);
 
@@ -983,7 +997,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'transform_tab_scale_hover',
 			[
-				'label' => __( 'Scale', 'blackwidgets' ),
+				'label' => esc_html__( 'Scale', 'blackwidgets' ),
 			]
 		);
 
@@ -992,7 +1006,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'scale_hover_x',
 			[
-				'label' => __( 'Scale on → X', 'blackwidgets' ),
+				'label' => esc_html__( 'Scale on → X', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'deg' ],
 				'range' => [
@@ -1006,14 +1020,14 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 					'unit' => 'deg',
 					'size' => 1,
 				],
-				'description' => __( 'set 1.1 to scale on left and right - do not set 0', 'blackwidgets' ),
+				'description' => esc_html__( 'set 1.1 to scale on left and right - do not set 0', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'scale_hover_y',
 			[
-				'label' => __( 'Scale on ↑ Y', 'blackwidgets' ),
+				'label' => esc_html__( 'Scale on ↑ Y', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'deg' ],
 				'range' => [
@@ -1027,14 +1041,14 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 					'unit' => 'deg',
 					'size' => 1,
 				],
-				'description' => __( 'set 1.1 to scale on top and bottom - do not set 0', 'blackwidgets' ),
+				'description' => esc_html__( 'set 1.1 to scale on top and bottom - do not set 0', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'scale_hover_z',
 			[
-				'label' => __( 'Scale on ↙ Z', 'blackwidgets' ),
+				'label' => esc_html__( 'Scale on ↙ Z', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'deg' ],
 				'range' => [
@@ -1048,14 +1062,14 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 					'unit' => 'deg',
 					'size' => 1,
 				],
-				'description' => __( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
+				'description' => esc_html__( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'perspective_hover',
 			[
-				'label' => __( 'Self Perspective ◊', 'blackwidgets' ),
+				'label' => esc_html__( 'Self Perspective ◊', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'ps' ],
 				'range' => [
@@ -1069,14 +1083,14 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 					'unit' => 'px',
 					'size' => 0,
 				],
-				'description' => __( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
+				'description' => esc_html__( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'perspective_child_hover',
 			[
-				'label' => __( 'Children Perspective ◊', 'blackwidgets' ),
+				'label' => esc_html__( 'Children Perspective ◊', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'ps' ],
 				'range' => [
@@ -1090,7 +1104,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 					'unit' => 'px',
 					'size' => 0,
 				],
-				'description' => __( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
+				'description' => esc_html__( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
 			]
 		);
 
@@ -1100,7 +1114,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'transform_tab_rotate_hover',
 			[
-				'label' => __( 'Rotate', 'blackwidgets' ),
+				'label' => esc_html__( 'Rotate', 'blackwidgets' ),
 			]
 		);
 
@@ -1109,7 +1123,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'rotate_hover_x',
 			[
-				'label' => __( 'Rotate on → X', 'blackwidgets' ),
+				'label' => esc_html__( 'Rotate on → X', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'deg' ],
 				'range' => [
@@ -1129,7 +1143,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'rotate_hover_y',
 			[
-				'label' => __( 'Rotate on ↑ Y', 'blackwidgets' ),
+				'label' => esc_html__( 'Rotate on ↑ Y', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'deg' ],
 				'range' => [
@@ -1149,7 +1163,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'rotate_hover_z',
 			[
-				'label' => __( 'Rotate on ↙ Z', 'blackwidgets' ),
+				'label' => esc_html__( 'Rotate on ↙ Z', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'deg' ],
 				'range' => [
@@ -1172,7 +1186,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'transform_tab_skew_hover',
 			[
-				'label' => __( 'Skew', 'blackwidgets' ),
+				'label' => esc_html__( 'Skew', 'blackwidgets' ),
 			]
 		);
 
@@ -1181,7 +1195,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'skew_hover_x',
 			[
-				'label' => __( 'Skew on → X ▱', 'blackwidgets' ),
+				'label' => esc_html__( 'Skew on → X ▱', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'deg' ],
 				'range' => [
@@ -1201,7 +1215,7 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'skew_hover_y',
 			[
-				'label' => __( 'Skew on ↑ Y ▱', 'blackwidgets' ),
+				'label' => esc_html__( 'Skew on ↑ Y ▱', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'deg' ],
 				'range' => [

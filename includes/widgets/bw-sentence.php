@@ -102,8 +102,22 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => __( 'Content', 'blackwidgets' ),
+				'label' => esc_html__( 'Content', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'custom_panel_alert',
+			[
+				'type' => \Elementor\Controls_Manager::ALERT,
+				'alert_type' => 'info',     /* info, success, warning, danger */
+				'heading' => esc_html__( 'Feel free to edit. Check this widget\'s demo.', 'blackwidgets' ),
+				'content' => sprintf(
+					'%s <a href="https://modernaweb.net/black-widgets/all-widgets/black-sentence/" target="_blank">%s</a>',
+					esc_html__( 'Check ', 'blackwidgets' ),
+					esc_html__( 'Demo', 'blackwidgets' )
+				),
 			]
 		);
 
@@ -111,21 +125,21 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_html_tag_title',
 			[
-				'label' => __( 'HTML Tag', 'blackwidgets' ),
+				'label' => esc_html__( 'HTML Tag', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'h1',
 				'options' => [
-					'div' => __( 'div', 'blackwidgets' ),
-					'h1' => __( 'H1', 'blackwidgets' ),
-					'h2' => __( 'H2', 'blackwidgets' ),
-					'h3' => __( 'H3', 'blackwidgets' ),
-					'h4' => __( 'H4', 'blackwidgets' ),
-					'h5' => __( 'H5', 'blackwidgets' ),
-					'h6' => __( 'H6', 'blackwidgets' ),
-					'p' => __( 'p', 'blackwidgets' ),
-					'span' => __( 'span', 'blackwidgets' ),
+					'div' => esc_html__( 'div', 'blackwidgets' ),
+					'h1' => esc_html__( 'H1', 'blackwidgets' ),
+					'h2' => esc_html__( 'H2', 'blackwidgets' ),
+					'h3' => esc_html__( 'H3', 'blackwidgets' ),
+					'h4' => esc_html__( 'H4', 'blackwidgets' ),
+					'h5' => esc_html__( 'H5', 'blackwidgets' ),
+					'h6' => esc_html__( 'H6', 'blackwidgets' ),
+					'p' => esc_html__( 'p', 'blackwidgets' ),
+					'span' => esc_html__( 'span', 'blackwidgets' ),
 				],
-				'description' => __( 'Choose an HTML tag, it can help you to SEO and beautifully of the UI design with follow the structure of your website.', 'blackwidgets' ),
+				'description' => esc_html__( 'Choose an HTML tag, it can help you to SEO and beautifully of the UI design with follow the structure of your website.', 'blackwidgets' ),
 			]
 		);
 
@@ -134,23 +148,23 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'sentence_type',
 			[
-				'label' => __( 'Select Type', 'blackwidgets' ),
+				'label' => esc_html__( 'Select Type', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'bw-t-1',
 				'options' => [
-					'bw-t-1' 	=> __( 'Text', 'blackwidgets' ),
-					'bw-t-2' 	=> __( 'Image', 'blackwidgets' ),
-					// 'bw-t-3' 	=> __( 'SVG/Shape', 'blackwidgets' ),
-					// 'bw-t-4' 	=> __( 'video', 'blackwidgets' ),
+					'bw-t-1' 	=> esc_html__( 'Text', 'blackwidgets' ),
+					'bw-t-2' 	=> esc_html__( 'Image', 'blackwidgets' ),
+					// 'bw-t-3' 	=> esc_html__( 'SVG/Shape', 'blackwidgets' ),
+					// 'bw-t-4' 	=> esc_html__( 'video', 'blackwidgets' ),
 				],
 			]
 		);
 
 		$repeater->add_control(
 			'sentence_title', [
-				'label' => __( 'Title', 'blackwidgets' ),
+				'label' => esc_html__( 'Title', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Make it look amazing ;)' , 'blackwidgets' ),
+				'default' => esc_html__( 'Make it look amazing ;)' , 'blackwidgets' ),
 				'label_block' => true,
 				'condition'  => [
 					'sentence_type' => [
@@ -163,7 +177,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'sentence_image',
 			[
-				'label' => __( 'Choose Image', 'blackwidgets' ),
+				'label' => esc_html__( 'Choose Image', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::MEDIA,
 				'default' => [
 					'url' => \Elementor\Utils::get_placeholder_image_src(),
@@ -180,10 +194,10 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'item_link',
 			[
-				'label' 		=> __( 'Link', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Link', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-				'label_on' 		=> __( 'Yes', 'blackwidgets' ),
-				'label_off' 	=> __( 'No !', 'blackwidgets' ),
+				'label_on' 		=> esc_html__( 'Yes', 'blackwidgets' ),
+				'label_off' 	=> esc_html__( 'No !', 'blackwidgets' ),
 				'return_value' 	=> 'link_enable',
 			]
 		);
@@ -191,9 +205,9 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'widget_link_url',
 			[
-				'label' => __( 'Link', 'blackwidgets' ),
+				'label' => esc_html__( 'Link', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::URL,
-				'placeholder' => __( 'https://your-link.com', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'https://your-link.com', 'blackwidgets' ),
 				'show_external' => true,
 				'default' => [
 					'url' => '',
@@ -213,7 +227,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'sentence_z_index',
 			[
-				'label' => __( 'z-index', 'blackwidgets' ),
+				'label' => esc_html__( 'z-index', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'number' ],
 				'range' => [
@@ -232,7 +246,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->add_responsive_control(
 			'sentence_image_width',
 			[
-				'label' => __( 'Image width', 'blackwidgets' ),
+				'label' => esc_html__( 'Image width', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range' => [
@@ -263,7 +277,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->start_controls_tab(
 			'normal_style',
 			[
-				'label' => __( 'Normal', 'blackwidgets' ),
+				'label' => esc_html__( 'Normal', 'blackwidgets' ),
 			]
 		);
 
@@ -272,7 +286,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'unique_widget_bg',
-				'label' => __( 'Title Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Title Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}',
 			]
@@ -289,7 +303,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'sentence_title_solid_color_normal',
 			[
-				'label' => __( 'Title Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Title Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a' => 'color: {{VALUE}}',
@@ -307,7 +321,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'sentence_title_typography_normal',
-				'label' => __( 'Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'Typography', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a',
 				'condition'  => [
 					'sentence_type' => [
@@ -337,10 +351,10 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'widget_stroke_title_enable',
 			[
-				'label' 		=> __( 'Text Stroke', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Text Stroke', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-				'label_on' 		=> __( 'Yes', 'blackwidgets' ),
-				'label_off' 	=> __( 'No !', 'blackwidgets' ),
+				'label_on' 		=> esc_html__( 'Yes', 'blackwidgets' ),
+				'label_off' 	=> esc_html__( 'No !', 'blackwidgets' ),
 				'return_value' 	=> 'stroke_enable',
 				// 'default' 		=> 'false',
 				'condition'  => [
@@ -354,7 +368,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'widget_stroke_stroke_color',
 			[
-				'label' => __( 'Text Stroke Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Text Stroke Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a' => '-webkit-text-stroke-color: {{VALUE}}',
@@ -370,7 +384,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->add_responsive_control(
 			'widget_stroke_stroke_width',
 			[
-				'label' => __( 'Text Stroke Size', 'blackwidgets' ),
+				'label' => esc_html__( 'Text Stroke Size', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -406,10 +420,10 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'gradient_color_title_enable',
 			[
-				'label' 		=> __( 'Text Gradient/Image', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Text Gradient/Image', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-				'label_on' 		=> __( 'Yes', 'blackwidgets' ),
-				'label_off' 	=> __( 'No !', 'blackwidgets' ),
+				'label_on' 		=> esc_html__( 'Yes', 'blackwidgets' ),
+				'label_off' 	=> esc_html__( 'No !', 'blackwidgets' ),
 				'return_value' 	=> 'gradient_enable',
 				// 'default' 		=> 'false',
 				'condition'  => [
@@ -425,7 +439,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'unique_widget_typography_title_gradient',
-				'label' => __( 'Title Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Title Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a',
 				'condition'  => [
@@ -452,7 +466,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->add_responsive_control(
 			'widget_box_margin_normal',
 			[
-				'label' => __( 'Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -465,7 +479,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->add_responsive_control(
 			'widget_box_padding_normal',
 			[
-				'label' => __( 'Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -479,7 +493,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_box_border_normal',
-				'label' => __( 'Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}',
 			]
 		);
@@ -487,7 +501,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'widget_box_border_radius_normal', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -501,7 +515,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_box_box_shadow_normal',
-				'label' => __( 'Box Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}',
 			]
 		);
@@ -521,12 +535,12 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'sentence_image_position_normal',
 			[
-				'label' => __( 'Position', 'blackwidgets' ),
+				'label' => esc_html__( 'Position', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'normal',
 				'options' => [
-					'normal' 	=> __( 'Normal', 'blackwidgets' ),
-					'absolut' 	=> __( 'Absolut', 'blackwidgets' ),
+					'normal' 	=> esc_html__( 'Normal', 'blackwidgets' ),
+					'absolut' 	=> esc_html__( 'Absolut', 'blackwidgets' ),
 				],
 				'condition'  => [
 					'sentence_type' => [
@@ -540,15 +554,15 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->add_responsive_control(
 			'sentence_image_horizontal_position_normal',
 			[
-				'label'     => __( 'Horizontal Orientation', 'blackwidgets' ),
+				'label'     => esc_html__( 'Horizontal Orientation', 'blackwidgets' ),
 				'type'      => \Elementor\Controls_Manager::CHOOSE,
 				'options'   => [
 					'left'   => [
-						'title' => __( 'Left', 'blackwidgets' ),
+						'title' => esc_html__( 'Left', 'blackwidgets' ),
 						'icon'  => 'eicon-h-align-left',
 					],
 					'right'  => [
-						'title' => __( 'Right', 'blackwidgets' ),
+						'title' => esc_html__( 'Right', 'blackwidgets' ),
 						'icon'  => 'eicon-h-align-right',
 					],
 				],
@@ -565,7 +579,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'sentence_image_position_left_normal',
 			[
-				'label' => __( 'Offset', 'blackwidgets' ),
+				'label' => esc_html__( 'Offset', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range' => [
@@ -595,7 +609,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'sentence_image_position_right_normal',
 			[
-				'label' => __( 'Offset', 'blackwidgets' ),
+				'label' => esc_html__( 'Offset', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range' => [
@@ -625,15 +639,15 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->add_responsive_control(
 			'sentence_image_vertical_position_normal',
 			[
-				'label'     => __( 'Vertical Orientation', 'blackwidgets' ),
+				'label'     => esc_html__( 'Vertical Orientation', 'blackwidgets' ),
 				'type'      => \Elementor\Controls_Manager::CHOOSE,
 				'options'   => [
 					'top'   => [
-						'title' => __( 'Top', 'blackwidgets' ),
+						'title' => esc_html__( 'Top', 'blackwidgets' ),
 						'icon'  => 'eicon-v-align-top',
 					],
 					'bottom'  => [
-						'title' => __( 'Bottom', 'blackwidgets' ),
+						'title' => esc_html__( 'Bottom', 'blackwidgets' ),
 						'icon'  => 'eicon-v-align-bottom',
 					],
 				],
@@ -650,7 +664,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'sentence_image_position_top_normal',
 			[
-				'label' => __( 'Offset', 'blackwidgets' ),
+				'label' => esc_html__( 'Offset', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range' => [
@@ -680,7 +694,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'sentence_image_position_bottom_normal',
 			[
-				'label' => __( 'Offset', 'blackwidgets' ),
+				'label' => esc_html__( 'Offset', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range' => [
@@ -710,7 +724,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->start_controls_tab(
 			'hover_style',
 			[
-				'label' => __( 'Hover', 'blackwidgets' ),
+				'label' => esc_html__( 'Hover', 'blackwidgets' ),
 			]
 		);
 
@@ -719,7 +733,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'unique_widget_bg_hover',
-				'label' => __( 'Title Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Title Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}:hover, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}:hover',
 			]
@@ -736,7 +750,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'sentence_title_solid_color_hover',
 			[
-				'label' => __( 'Title Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Title Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}:hover, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a:hover' => 'color: {{VALUE}}',
@@ -754,7 +768,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'sentence_title_typography_hover',
-				'label' => __( 'Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'Typography', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}:hover, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a:hover',
 				'condition'  => [
 					'sentence_type' => [
@@ -780,7 +794,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->add_responsive_control(
 			'widget_box_margin_hover',
 			[
-				'label' => __( 'Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -793,7 +807,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->add_responsive_control(
 			'widget_box_padding_hover',
 			[
-				'label' => __( 'Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -807,7 +821,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_box_border_hover',
-				'label' => __( 'Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}:hover, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}:hover',
 			]
 		);
@@ -815,7 +829,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'widget_box_border_radius_hover', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -829,7 +843,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_box_box_shadow_hover',
-				'label' => __( 'Box Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}:hover, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}:hover',
 			]
 		);
@@ -840,21 +854,21 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$this->add_control(
 			'sentence',
 			[
-				'label' => __( 'Sentence Repeater', 'blackwidgets' ),
+				'label' => esc_html__( 'Sentence Repeater', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::REPEATER,
 				'fields' => $repeater->get_controls(),
 				'default' => [
 					[
-						'sentence_title' 	=> __( 'Hello', 'blackwidgets' ),
+						'sentence_title' 	=> esc_html__( 'Hello', 'blackwidgets' ),
 					],
 					[
-                        'sentence_title' 	=> __( 'everybody,', 'blackwidgets' ),
+                        'sentence_title' 	=> esc_html__( 'everybody,', 'blackwidgets' ),
 					],
 					[
-                        'sentence_title' 	=> __( 'this is', 'blackwidgets' ),
+                        'sentence_title' 	=> esc_html__( 'this is', 'blackwidgets' ),
 					],
 					[
-                        'sentence_title' 	=> __( 'the black sentence.', 'blackwidgets' ),
+                        'sentence_title' 	=> esc_html__( 'the black sentence.', 'blackwidgets' ),
 					],
 				],
 				'title_field' => '{{{ sentence_title }}}',
@@ -869,7 +883,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'all_general_typography_section',
 			[
-				'label' => __( 'General Settings', 'blackwidgets' ),
+				'label' => esc_html__( 'General Settings', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
         );
@@ -878,7 +892,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$this->add_control(
 			'all_general_color_sentence',
 			[
-				'label' => __( 'Title Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Title Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Color::get_type(),
@@ -895,7 +909,7 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'all_general_typography_sentence',
-				'label' => __( 'Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'Typography', 'blackwidgets' ),
 				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1',
 			]
@@ -906,23 +920,23 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'justify_positioning',
 			[
-				'label'     => __( 'Sentence Alignment', 'blackwidgets' ),
+				'label'     => esc_html__( 'Sentence Alignment', 'blackwidgets' ),
 				'type'      => \Elementor\Controls_Manager::CHOOSE,
 				'options'   => [
 					'left'   => [
-						'title' => __( 'From Start', 'blackwidgets' ),
+						'title' => esc_html__( 'From Start', 'blackwidgets' ),
 						'icon'  => 'eicon-h-align-left',
 					],
 					'center' => [
-						'title' => __( 'On Center', 'blackwidgets' ),
+						'title' => esc_html__( 'On Center', 'blackwidgets' ),
 						'icon'  => 'eicon-h-align-center',
 					],
 					'strech' => [
-						'title' => __( 'Strech', 'blackwidgets' ),
+						'title' => esc_html__( 'Strech', 'blackwidgets' ),
 						'icon'  => 'eicon-h-align-stretch',
 					],
 					'right'  => [
-						'title' => __( 'From Right', 'blackwidgets' ),
+						'title' => esc_html__( 'From Right', 'blackwidgets' ),
 						'icon'  => 'eicon-h-align-right',
 					],
 				],

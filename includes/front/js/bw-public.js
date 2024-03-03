@@ -65,13 +65,14 @@ jQuery(document).ready(function() {
 
 });
 
-jQuery(function($) {
-    const $window = $(window);
-    const $growImages = $('.bw-load-img');
-    const $fadeImages = $('.anim-scroll.image-fade');
-    const $simpleFades = $('.anim-scroll.simple-fade');
-    const $accentLines = $('.bw-line');
-    const $accentTexts = $('.bw-fade-text .bw-animate-text');
+// jQuery(function($) {
+jQuery(window).scroll(function(event) {
+    const $window = jQuery(window);
+    const $growImages = jQuery('.bw-load-img');
+    const $fadeImages = jQuery('.anim-scroll.image-fade');
+    const $simpleFades = jQuery('.anim-scroll.simple-fade');
+    const $accentLines = jQuery('.bw-line');
+    const $accentTexts = jQuery('.bw-fade-text .bw-animate-text');
   
     let throttleTimeout;
     let debounceTimeout;
@@ -107,9 +108,9 @@ jQuery(function($) {
     function animateOnScroll($elem, animFunction) {
       $elem.each(function() {
         const elem = this;
-        if (isElementInViewport(elem) && !$(elem).hasClass('visible')) {
-          animFunction($(elem));
-          $(elem).addClass('visible');
+        if (isElementInViewport(elem) && !jQuery(elem).hasClass('visible')) {
+          animFunction(jQuery(elem));
+          jQuery(elem).addClass('visible');
         }
       });
     }

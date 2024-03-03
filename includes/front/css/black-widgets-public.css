@@ -143,6 +143,22 @@
 }
 
 
+/* Blur Class */
+.bw-blur > .elementor-widget-wrap {
+    backdrop-filter: blur(12px) !important;
+}
+
+/* extra margin */
+.no-margin {
+    margin-bottom: 0 !important;
+}
+
+
+/* Black Image */
+.bw-image img {
+    transition: all 0.17s ease;
+}
+
 /* Black Alignment */
 
 .bw-left {
@@ -2918,7 +2934,7 @@
 .bw-button-box.abstract.a-1,
 .bw-button-box.fancy.f-5,
 .bw-button-box.fancy.f-2 {
-    display: block;
+    /* display: block; */
     width: fit-content;
 }
 

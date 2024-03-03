@@ -105,8 +105,22 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => __( 'Content', 'blackwidgets' ),
+				'label' => esc_html__( 'Content', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'custom_panel_alert',
+			[
+				'type' => \Elementor\Controls_Manager::ALERT,
+				'alert_type' => 'info',     /* info, success, warning, danger */
+				'heading' => esc_html__( 'Feel free to edit. Check this widget\'s demo.', 'blackwidgets' ),
+				'content' => sprintf(
+					'%s <a href="https://modernaweb.net/black-widgets/all-widgets/black-typography/" target="_blank">%s</a>',
+					esc_html__( 'Check ', 'blackwidgets' ),
+					esc_html__( 'Demo', 'blackwidgets' )
+				),
 			]
 		);
 
@@ -114,14 +128,14 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_type',
 			[
-				'label' => __( 'Select Type', 'blackwidgets' ),
+				'label' => esc_html__( 'Select Type', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'bw-t-1',
 				'options' => [
-					'bw-t-1' 	=> __( 'Simple', 'blackwidgets' ),
-					'bw-t-2' 	=> __( 'With Shapes', 'blackwidgets' ),
-					'bw-t-3' 	=> __( 'Repetitive', 'blackwidgets' ),
-					'bw-t-4' 	=> __( 'On Scroll', 'blackwidgets' ),
+					'bw-t-1' 	=> esc_html__( 'Simple', 'blackwidgets' ),
+					'bw-t-2' 	=> esc_html__( 'With Shapes', 'blackwidgets' ),
+					'bw-t-3' 	=> esc_html__( 'Repetitive', 'blackwidgets' ),
+					'bw-t-4' 	=> esc_html__( 'On Scroll', 'blackwidgets' ),
 				],
 			]
 		);
@@ -130,25 +144,25 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_title',
 			[
-				'label' => __( 'Title', 'blackwidgets' ),
+				'label' => esc_html__( 'Title', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Black Widget Title', 'blackwidgets' ),
-				'placeholder' => __( 'Type your title here', 'blackwidgets' ),
-				'description' => __( 'You can use all other HTML tags into the title field e.g. code, mark, abbr, blockquote and ...', 'blackwidgets' ),
+				'default' => esc_html__( 'Black Widget Title', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'Type your title here', 'blackwidgets' ),
+				'description' => esc_html__( 'You can use all other HTML tags into the title field e.g. code, mark, abbr, blockquote and ...', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'shape_widget',
 			[
-				'label' => __( 'SVG Shape', 'blackwidgets' ),
+				'label' => esc_html__( 'SVG Shape', 'blackwidgets' ),
 				'type' => Controls_Manager::ICONS,
 				'condition'  => [
 					'widget_type' => [
 						'bw-t-1',
 					],
 				],
-				'description' => __( 'Upload your custom SVG shape, then add <em> and </em> around of the text! you\'ll see the shape under the text with a simple animate.', 'blackwidgets' ),
+				'description' => esc_html__( 'Upload your custom SVG shape, then add <em> and </em> around of the text! you\'ll see the shape under the text with a simple animate.', 'blackwidgets' ),
 			]
 		);
 
@@ -156,21 +170,21 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_html_tag_title',
 			[
-				'label' => __( 'HTML Tag', 'blackwidgets' ),
+				'label' => esc_html__( 'HTML Tag', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'div',
 				'options' => [
-					'div' 	=> __( 'div', 'blackwidgets' ),
-					'h1' 	=> __( 'H1', 'blackwidgets' ),
-					'h2' 	=> __( 'H2', 'blackwidgets' ),
-					'h3' 	=> __( 'H3', 'blackwidgets' ),
-					'h4' 	=> __( 'H4', 'blackwidgets' ),
-					'h5' 	=> __( 'H5', 'blackwidgets' ),
-					'h6' 	=> __( 'H6', 'blackwidgets' ),
-					'p' 	=> __( 'p', 'blackwidgets' ),
-					'span' 	=> __( 'span', 'blackwidgets' ),
+					'div' 	=> esc_html__( 'div', 'blackwidgets' ),
+					'h1' 	=> esc_html__( 'H1', 'blackwidgets' ),
+					'h2' 	=> esc_html__( 'H2', 'blackwidgets' ),
+					'h3' 	=> esc_html__( 'H3', 'blackwidgets' ),
+					'h4' 	=> esc_html__( 'H4', 'blackwidgets' ),
+					'h5' 	=> esc_html__( 'H5', 'blackwidgets' ),
+					'h6' 	=> esc_html__( 'H6', 'blackwidgets' ),
+					'p' 	=> esc_html__( 'p', 'blackwidgets' ),
+					'span' 	=> esc_html__( 'span', 'blackwidgets' ),
 				],
-				'description' => __( 'Choose an HTML tag, it can help you to SEO and beautifully of the UI design with follow the structure of your website.', 'blackwidgets' ),
+				'description' => esc_html__( 'Choose an HTML tag, it can help you to SEO and beautifully of the UI design with follow the structure of your website.', 'blackwidgets' ),
 			]
 		);
 
@@ -179,17 +193,17 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_type_2',
 			[
-				'label' => __( 'Select Type', 'blackwidgets' ),
+				'label' => esc_html__( 'Select Type', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'style-x-1',
 				'options' => [
-					'style-x-1' 	=> __( 'Style 1', 'blackwidgets' ),
-					'style-x-2' 	=> __( 'Style 2', 'blackwidgets' ),
-					'style-x-3' 	=> __( 'Style 3', 'blackwidgets' ),
-					'style-x-4' 	=> __( 'Style 4', 'blackwidgets' ),
-					'style-x-5' 	=> __( 'Style 5', 'blackwidgets' ),
-					'style-x-6' 	=> __( 'Style 6', 'blackwidgets' ),
-					'custom-style' 	=> __( 'Custom Style', 'blackwidgets' ),
+					'style-x-1' 	=> esc_html__( 'Style 1', 'blackwidgets' ),
+					'style-x-2' 	=> esc_html__( 'Style 2', 'blackwidgets' ),
+					'style-x-3' 	=> esc_html__( 'Style 3', 'blackwidgets' ),
+					'style-x-4' 	=> esc_html__( 'Style 4', 'blackwidgets' ),
+					'style-x-5' 	=> esc_html__( 'Style 5', 'blackwidgets' ),
+					'style-x-6' 	=> esc_html__( 'Style 6', 'blackwidgets' ),
+					'custom-style' 	=> esc_html__( 'Custom Style', 'blackwidgets' ),
 				],
 				'condition'  => [
 					'widget_type' => [
@@ -207,18 +221,18 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			$this->add_control(
 				'widget_type_4',
 				[
-					'label' => __( 'Select Animate On Scroll', 'blackwidgets' ),
+					'label' => esc_html__( 'Select Animate On Scroll', 'blackwidgets' ),
 					'type' => \Elementor\Controls_Manager::SELECT,
 					'default' => 'bw-scroll-e-1',
 					'options' => [
-						'bw-scroll-e-1' 	=> __( 'Animate 1', 'blackwidgets' ),
-						'bw-scroll-e-2' 	=> __( 'Animate 2', 'blackwidgets' ),
-						'bw-scroll-e-3' 	=> __( 'Animate 3', 'blackwidgets' ),
-						'bw-scroll-e-4' 	=> __( 'Animate 4', 'blackwidgets' ),
-						'bw-scroll-e-5' 	=> __( 'Animate 5', 'blackwidgets' ),
-						'bw-scroll-e-6' 	=> __( 'Animate 6', 'blackwidgets' ),
-						'bw-scroll-e-7' 	=> __( 'Animate 7', 'blackwidgets' ),
-						'bw-scroll-e-8' 	=> __( 'Animate 8', 'blackwidgets' ),
+						'bw-scroll-e-1' 	=> esc_html__( 'Animate 1', 'blackwidgets' ),
+						'bw-scroll-e-2' 	=> esc_html__( 'Animate 2', 'blackwidgets' ),
+						'bw-scroll-e-3' 	=> esc_html__( 'Animate 3', 'blackwidgets' ),
+						'bw-scroll-e-4' 	=> esc_html__( 'Animate 4', 'blackwidgets' ),
+						'bw-scroll-e-5' 	=> esc_html__( 'Animate 5', 'blackwidgets' ),
+						'bw-scroll-e-6' 	=> esc_html__( 'Animate 6', 'blackwidgets' ),
+						'bw-scroll-e-7' 	=> esc_html__( 'Animate 7', 'blackwidgets' ),
+						'bw-scroll-e-8' 	=> esc_html__( 'Animate 8', 'blackwidgets' ),
 					],
 					'condition'  => [
 						'widget_type' => [
@@ -233,10 +247,10 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'title_scrub',
 			[
-				'label' 		=> __( 'Scrub on scrolling up and down', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Scrub on scrolling up and down', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-				'label_on' 		=> __( 'Enable', 'blackwidgets' ),
-				'label_off' 	=> __( 'Disable', 'blackwidgets' ),
+				'label_on' 		=> esc_html__( 'Enable', 'blackwidgets' ),
+				'label_off' 	=> esc_html__( 'Disable', 'blackwidgets' ),
 				'return_value' 	=> 'scrub_mode',
 				'default' 		=> 'off',
 				'condition'  => [
@@ -252,7 +266,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
         $this->start_controls_tab(
             'tab_style_1',
             [
-                'label' => __( 'Left or Top', 'blackwidgets' ),
+                'label' => esc_html__( 'Left or Top', 'blackwidgets' ),
 				'condition'  => [
 					'widget_type_2' => [
 						'custom-style',
@@ -264,13 +278,13 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
             $this->add_control(
                 'tab_style_1_type',
                 [
-                    'label' => __( 'How exactly does it work?', 'blackwidgets' ),
+                    'label' => esc_html__( 'How exactly does it work?', 'blackwidgets' ),
                     'type' => \Elementor\Controls_Manager::SELECT,
                     'default' => 'enable_icon',
                     'options' => [
-                        'enable_icon'       => __( 'With ICON', 'blackwidgets' ),
-                        'enable_image'      => __( 'With IMAGE or SVG', 'blackwidgets' ),
-                        'enable_code'       => __( 'With SVG Code', 'blackwidgets' ),
+                        'enable_icon'       => esc_html__( 'With ICON', 'blackwidgets' ),
+                        'enable_image'      => esc_html__( 'With IMAGE or SVG', 'blackwidgets' ),
+                        'enable_code'       => esc_html__( 'With SVG Code', 'blackwidgets' ),
                     ],
                     'condition'  => [
                         'widget_type_2' => [
@@ -283,15 +297,15 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
             $this->add_responsive_control(
                 'widget_1_alignment',
                 [
-                    'label'     => __( 'Text Alignment', 'blackwidgets' ),
+                    'label'     => esc_html__( 'Text Alignment', 'blackwidgets' ),
                     'type'      => \Elementor\Controls_Manager::CHOOSE,
                     'options'   => [
                         'left-right'   => [
-                            'title' => __( 'Left', 'blackwidgets' ),
+                            'title' => esc_html__( 'Left', 'blackwidgets' ),
                             'icon'  => 'eicon-arrow-left',
                         ],
                         'top-bottom' => [
-                            'title' => __( 'Top', 'blackwidgets' ),
+                            'title' => esc_html__( 'Top', 'blackwidgets' ),
                             'icon'  => 'eicon-arrow-up',
                         ],
                     ],
@@ -302,15 +316,18 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
                             'custom-style',
                         ],
                     ],
+					// 'selectors' => [
+					// 	'{{WRAPPER}} .bw-typograpgy .bw-left-top' => 'text-align: {{VALUE}};',
+					// ],
                 ]
             );
 
             $this->add_control(
                 'tab_style_1_code',
                 [
-                    'label' => __( 'CODE', 'blackwidgets' ),
+                    'label' => esc_html__( 'CODE', 'blackwidgets' ),
                     'type' => \Elementor\Controls_Manager::TEXT,
-                    'default' => __( 'SVG CODE HERE', 'blackwidgets' ),
+                    'default' => esc_html__( 'SVG CODE HERE', 'blackwidgets' ),
                     'condition'  => [
                         'widget_type_2' => [
                             'custom-style',
@@ -325,7 +342,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
             $this->add_control(
                 'tab_style_1_icon',
                 [
-                    'label' => __( 'Choose Icon', 'blackwidgets' ),
+                    'label' => esc_html__( 'Choose Icon', 'blackwidgets' ),
                     'type' => Controls_Manager::ICONS,
                     'default' => [
                         'value' => 'eicon eicon-nerd',
@@ -345,7 +362,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
             $this->add_control(
                 'tab_style_1_image',
                 [
-                    'label' => __( 'Choose Image', 'blackwidgets' ),
+                    'label' => esc_html__( 'Choose Image', 'blackwidgets' ),
                     'type' => \Elementor\Controls_Manager::MEDIA,
                     'default' => [
                         'url' => \Elementor\Utils::get_placeholder_image_src(),
@@ -365,7 +382,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
         $this->start_controls_tab(
             'tab_style_2',
             [
-                'label' => __( 'Right or Bottom', 'bw' ),
+                'label' => esc_html__( 'Right or Bottom', 'bw' ),
 				'condition'  => [
                     'widget_type_2' => [
                         'custom-style',
@@ -377,13 +394,13 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
             $this->add_control(
                 'tab_style_2_type',
                 [
-                    'label' => __( 'How exactly does it work?', 'blackwidgets' ),
+                    'label' => esc_html__( 'How exactly does it work?', 'blackwidgets' ),
                     'type' => \Elementor\Controls_Manager::SELECT,
                     'default' => 'enable_icon',
                     'options' => [
-                        'enable_icon'       => __( 'With ICON', 'blackwidgets' ),
-                        'enable_image'      => __( 'With IMAGE or SVG', 'blackwidgets' ),
-                        'enable_code'       => __( 'With SVG Code', 'blackwidgets' ),
+                        'enable_icon'       => esc_html__( 'With ICON', 'blackwidgets' ),
+                        'enable_image'      => esc_html__( 'With IMAGE or SVG', 'blackwidgets' ),
+                        'enable_code'       => esc_html__( 'With SVG Code', 'blackwidgets' ),
                     ],
                     'condition'  => [
                         'widget_type_2' => [
@@ -396,15 +413,15 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
             $this->add_responsive_control(
                 'widget_2_alignment',
                 [
-                    'label'     => __( 'Text Alignment', 'blackwidgets' ),
+                    'label'     => esc_html__( 'Text Alignment', 'blackwidgets' ),
                     'type'      => \Elementor\Controls_Manager::CHOOSE,
                     'options'   => [
                         'left-right'   => [
-                            'title' => __( 'Right', 'blackwidgets' ),
+                            'title' => esc_html__( 'Right', 'blackwidgets' ),
                             'icon'  => 'eicon-arrow-right',
                         ],
                         'top-bottom' => [
-                            'title' => __( 'Bottom', 'blackwidgets' ),
+                            'title' => esc_html__( 'Bottom', 'blackwidgets' ),
                             'icon'  => 'eicon-arrow-down',
                         ],
                     ],
@@ -415,15 +432,18 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
                             'custom-style',
                         ],
                     ],
+					// 'selectors' => [
+					// 	'{{WRAPPER}} .bw-typograpgy .bw-right-bottom' => 'text-align: {{VALUE}};',
+					// ],
                 ]
             );
 
             $this->add_control(
                 'tab_style_2_code',
                 [
-                    'label' => __( 'CODE', 'blackwidgets' ),
+                    'label' => esc_html__( 'CODE', 'blackwidgets' ),
                     'type' => \Elementor\Controls_Manager::TEXT,
-                    'default' => __( 'SVG CODE HERE', 'blackwidgets' ),
+                    'default' => esc_html__( 'SVG CODE HERE', 'blackwidgets' ),
                     'condition'  => [
                         'widget_type_2' => [
                             'custom-style',
@@ -438,7 +458,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
             $this->add_control(
                 'tab_style_2_icon',
                 [
-                    'label' => __( 'Choose Icon', 'blackwidgets' ),
+                    'label' => esc_html__( 'Choose Icon', 'blackwidgets' ),
                     'type' => Controls_Manager::ICONS,
                     'default' => [
                         'value' => 'eicon eicon-nerd',
@@ -458,7 +478,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
             $this->add_control(
                 'tab_style_2_image',
                 [
-                    'label' => __( 'Choose Image', 'blackwidgets' ),
+                    'label' => esc_html__( 'Choose Image', 'blackwidgets' ),
                     'type' => \Elementor\Controls_Manager::MEDIA,
                     'default' => [
                         'url' => \Elementor\Utils::get_placeholder_image_src(),
@@ -480,26 +500,26 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
         $this->add_control(
             'repetitive_repeat',
             [
-                'label' => __( 'How many repeat you need?', 'blackwidgets' ),
+                'label' => esc_html__( 'How many repeat you need?', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => '7',
                 'options' => [
-                    '1'     => __( '1', 'blackwidgets' ),
-                    '2'     => __( '2', 'blackwidgets' ),
-                    '3'     => __( '3', 'blackwidgets' ),
-                    '4'     => __( '4', 'blackwidgets' ),
-                    '5'     => __( '5', 'blackwidgets' ),
-                    '6'     => __( '6', 'blackwidgets' ),
-                    '7'     => __( '7', 'blackwidgets' ),
-                    '8'     => __( '8', 'blackwidgets' ),
-                    '9'     => __( '9', 'blackwidgets' ),
-                    '10'    => __( '10', 'blackwidgets' ),
-                    '11'    => __( '11', 'blackwidgets' ),
-                    '12'    => __( '12', 'blackwidgets' ),
-                    '13'    => __( '13', 'blackwidgets' ),
-                    '14'    => __( '14', 'blackwidgets' ),
-                    '15'    => __( '15', 'blackwidgets' ),
-                    '16'    => __( '16', 'blackwidgets' ),
+                    '1'     => esc_html__( '1', 'blackwidgets' ),
+                    '2'     => esc_html__( '2', 'blackwidgets' ),
+                    '3'     => esc_html__( '3', 'blackwidgets' ),
+                    '4'     => esc_html__( '4', 'blackwidgets' ),
+                    '5'     => esc_html__( '5', 'blackwidgets' ),
+                    '6'     => esc_html__( '6', 'blackwidgets' ),
+                    '7'     => esc_html__( '7', 'blackwidgets' ),
+                    '8'     => esc_html__( '8', 'blackwidgets' ),
+                    '9'     => esc_html__( '9', 'blackwidgets' ),
+                    '10'    => esc_html__( '10', 'blackwidgets' ),
+                    '11'    => esc_html__( '11', 'blackwidgets' ),
+                    '12'    => esc_html__( '12', 'blackwidgets' ),
+                    '13'    => esc_html__( '13', 'blackwidgets' ),
+                    '14'    => esc_html__( '14', 'blackwidgets' ),
+                    '15'    => esc_html__( '15', 'blackwidgets' ),
+                    '16'    => esc_html__( '16', 'blackwidgets' ),
                 ],
 				'condition'  => [
 					'widget_type' => [
@@ -512,26 +532,26 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
         $this->add_control(
             'repetitive_repeat_other_style',
             [
-                'label' => __( 'Set Other Style for which repeat?', 'blackwidgets' ),
+                'label' => esc_html__( 'Set Other Style for which repeat?', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => '4',
                 'options' => [
-                    '1'     => __( '1', 'blackwidgets' ),
-                    '2'     => __( '2', 'blackwidgets' ),
-                    '3'     => __( '3', 'blackwidgets' ),
-                    '4'     => __( '4', 'blackwidgets' ),
-                    '5'     => __( '5', 'blackwidgets' ),
-                    '6'     => __( '6', 'blackwidgets' ),
-                    '7'     => __( '7', 'blackwidgets' ),
-                    '8'     => __( '8', 'blackwidgets' ),
-                    '9'     => __( '9', 'blackwidgets' ),
-                    '10'    => __( '10', 'blackwidgets' ),
-                    '11'    => __( '11', 'blackwidgets' ),
-                    '12'    => __( '12', 'blackwidgets' ),
-                    '13'    => __( '13', 'blackwidgets' ),
-                    '14'    => __( '14', 'blackwidgets' ),
-                    '15'    => __( '15', 'blackwidgets' ),
-                    '16'    => __( '16', 'blackwidgets' ),
+                    '1'     => esc_html__( '1', 'blackwidgets' ),
+                    '2'     => esc_html__( '2', 'blackwidgets' ),
+                    '3'     => esc_html__( '3', 'blackwidgets' ),
+                    '4'     => esc_html__( '4', 'blackwidgets' ),
+                    '5'     => esc_html__( '5', 'blackwidgets' ),
+                    '6'     => esc_html__( '6', 'blackwidgets' ),
+                    '7'     => esc_html__( '7', 'blackwidgets' ),
+                    '8'     => esc_html__( '8', 'blackwidgets' ),
+                    '9'     => esc_html__( '9', 'blackwidgets' ),
+                    '10'    => esc_html__( '10', 'blackwidgets' ),
+                    '11'    => esc_html__( '11', 'blackwidgets' ),
+                    '12'    => esc_html__( '12', 'blackwidgets' ),
+                    '13'    => esc_html__( '13', 'blackwidgets' ),
+                    '14'    => esc_html__( '14', 'blackwidgets' ),
+                    '15'    => esc_html__( '15', 'blackwidgets' ),
+                    '16'    => esc_html__( '16', 'blackwidgets' ),
                 ],
 				'condition'  => [
 					'widget_type' => [
@@ -544,31 +564,31 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_alignment',
 			[
-				'label'     => __( 'Text Alignment', 'blackwidgets' ), //all items!
+				'label'     => esc_html__( 'Text Alignment', 'blackwidgets' ), //all items!
 				'type'      => \Elementor\Controls_Manager::CHOOSE,
 				'options'   => [
 					'left'   => [
-						'title' => __( 'Left', 'blackwidgets' ),
+						'title' => esc_html__( 'Left', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => __( 'Center', 'blackwidgets' ),
+						'title' => esc_html__( 'Center', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [
-						'title' => __( 'Right', 'blackwidgets' ),
+						'title' => esc_html__( 'Right', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
 				'default'   => 'center',
 				'toggle'    => true,
-				'condition'  => [
-                    'widget_type_2!' => [
-                        'custom-style',
-                    ],
-				],
+				// 'condition'  => [
+                //     'widget_type_2' => [
+                //         'custom-style',
+                //     ],
+				// ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-typograpgy .' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-typograpgy' => 'text-align: {{VALUE}};',
 				],
 			]
 		);
@@ -577,10 +597,10 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'vertical_title_option',
 			[
-				'label' 		=> __( 'Vertical Title', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Vertical Title', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-				'label_on' 		=> __( 'Enable', 'blackwidgets' ),
-				'label_off' 	=> __( 'Disable', 'blackwidgets' ),
+				'label_on' 		=> esc_html__( 'Enable', 'blackwidgets' ),
+				'label_off' 	=> esc_html__( 'Disable', 'blackwidgets' ),
 				'return_value' 	=> 'vertical_mode',
 				'default' 		=> 'off',
 			]
@@ -589,12 +609,12 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
         $this->add_control(
             'vertical_title_display',
             [
-                'label' => __( 'Reset Wrapper:', 'blackwidgets' ),
+                'label' => esc_html__( 'Reset Wrapper:', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'block',
                 'options' => [
-                    'block'     => __( 'Block', 'blackwidgets' ),
-                    'unset'     => __( 'unset', 'blackwidgets' ),
+                    'block'     => esc_html__( 'Block', 'blackwidgets' ),
+                    'unset'     => esc_html__( 'unset', 'blackwidgets' ),
                 ],
 				'condition'  => [
 					'vertical_title_option' => [
@@ -607,17 +627,17 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
         $this->add_control(
             'vertical_rotation',
             [
-                'label' => __( 'Reset Wrapper:', 'blackwidgets' ),
+                'label' => esc_html__( 'Reset Wrapper:', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'bw-rotation-1',
                 'options' => [
-                    'bw-rotation-1'     => __( '-180deg', 'blackwidgets' ),
-                    'bw-rotation-2'     => __( '-90deg', 'blackwidgets' ),
-                    'bw-rotation-3'     => __( '-45deg', 'blackwidgets' ),
-                    'bw-rotation-4'     => __( '0', 'blackwidgets' ),
-                    'bw-rotation-5'     => __( '45deg', 'blackwidgets' ),
-                    'bw-rotation-6'     => __( '90deg', 'blackwidgets' ),
-                    'bw-rotation-7'     => __( '180deg', 'blackwidgets' ),
+                    'bw-rotation-1'     => esc_html__( '-180deg', 'blackwidgets' ),
+                    'bw-rotation-2'     => esc_html__( '-90deg', 'blackwidgets' ),
+                    'bw-rotation-3'     => esc_html__( '-45deg', 'blackwidgets' ),
+                    'bw-rotation-4'     => esc_html__( '0', 'blackwidgets' ),
+                    'bw-rotation-5'     => esc_html__( '45deg', 'blackwidgets' ),
+                    'bw-rotation-6'     => esc_html__( '90deg', 'blackwidgets' ),
+                    'bw-rotation-7'     => esc_html__( '180deg', 'blackwidgets' ),
                 ],
 				'condition'  => [
 					'vertical_title_option' => [
@@ -635,10 +655,10 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			$this->add_control(
 				'text_movement2',
 				[
-					'label' 		=> __( 'Text Movement Animate → From', 'blackwidgets' ),
+					'label' 		=> esc_html__( 'Text Movement Animate → From', 'blackwidgets' ),
 					'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-					'label_on' 		=> __( 'Enable', 'blackwidgets' ),
-					'label_off' 	=> __( 'Disable', 'blackwidgets' ),
+					'label_on' 		=> esc_html__( 'Enable', 'blackwidgets' ),
+					'label_off' 	=> esc_html__( 'Disable', 'blackwidgets' ),
 					'return_value' 	=> 'on',
 					'default' 		=> 'off',
 				]
@@ -648,7 +668,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			$this->add_control(
 				'trigger_hook2',
 				[
-					'label' 		=> __( 'Start Point', 'blackwidgets' ),
+					'label' 		=> esc_html__( 'Start Point', 'blackwidgets' ),
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
 					'placeholder'   => '0.1',
 					'default'       => '0.1',
@@ -664,7 +684,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			$this->add_control(
 				'duration2',
 				[
-					'label' 		=> __( 'Duration', 'blackwidgets' ),
+					'label' 		=> esc_html__( 'Duration', 'blackwidgets' ),
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
 					'placeholder'   => '0.4',
 					'default'       => '0.4',
@@ -680,7 +700,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			$this->add_control(
 				'vertical_movement2',
 				[
-					'label' 		=> __( 'Vertical Movement', 'blackwidgets' ),
+					'label' 		=> esc_html__( 'Vertical Movement', 'blackwidgets' ),
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
 					'condition' 	=> [ 
 						'text_movement2' 	=> [
@@ -694,7 +714,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			$this->add_control(
 				'horizontal_movement2',
 				[
-					'label' 		=> __( 'Horizontal Movement', 'blackwidgets' ),
+					'label' 		=> esc_html__( 'Horizontal Movement', 'blackwidgets' ),
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
 					'condition' 	=> [ 
 						'text_movement2' 	=> [
@@ -708,7 +728,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			$this->add_control(
 				'opacity2',
 				[
-					'label' 		=> __( 'Opacity at End', 'blackwidgets' ),
+					'label' 		=> esc_html__( 'Opacity at End', 'blackwidgets' ),
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
 					'condition' 	=> [ 
 						'text_movement2' 	=> [
@@ -722,7 +742,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			$this->add_control(
 				'rotation2',
 				[
-					'label' 		=> __( 'Rotation at End', 'blackwidgets' ),
+					'label' 		=> esc_html__( 'Rotation at End', 'blackwidgets' ),
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
 					'condition' 	=> [ 
 						'text_movement2' 	=> [
@@ -737,10 +757,10 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			$this->add_control(
 				'text_movement',
 				[
-					'label' 		=> __( 'Text Movement Animate → To', 'blackwidgets' ),
+					'label' 		=> esc_html__( 'Text Movement Animate → To', 'blackwidgets' ),
 					'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-					'label_on' 		=> __( 'Enable', 'blackwidgets' ),
-					'label_off' 	=> __( 'Disable', 'blackwidgets' ),
+					'label_on' 		=> esc_html__( 'Enable', 'blackwidgets' ),
+					'label_off' 	=> esc_html__( 'Disable', 'blackwidgets' ),
 					'return_value' 	=> 'on',
 					'default' 		=> 'off',
 				]
@@ -750,7 +770,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			$this->add_control(
 				'trigger_hook',
 				[
-					'label' 		=> __( 'Start Point', 'blackwidgets' ),
+					'label' 		=> esc_html__( 'Start Point', 'blackwidgets' ),
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
 					'placeholder'   => '0.1',
 					'default'       => '0.1',
@@ -766,7 +786,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			$this->add_control(
 				'duration',
 				[
-					'label' 		=> __( 'Duration', 'blackwidgets' ),
+					'label' 		=> esc_html__( 'Duration', 'blackwidgets' ),
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
 					'placeholder'   => '0.4',
 					'default'       => '0.4',
@@ -782,7 +802,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			$this->add_control(
 				'vertical_movement',
 				[
-					'label' 		=> __( 'Vertical Movement', 'blackwidgets' ),
+					'label' 		=> esc_html__( 'Vertical Movement', 'blackwidgets' ),
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
 					'condition' 	=> [ 
 						'text_movement' 	=> [
@@ -796,7 +816,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			$this->add_control(
 				'horizontal_movement',
 				[
-					'label' 		=> __( 'Horizontal Movement', 'blackwidgets' ),
+					'label' 		=> esc_html__( 'Horizontal Movement', 'blackwidgets' ),
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
 					'condition' 	=> [ 
 						'text_movement' 	=> [
@@ -810,7 +830,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			$this->add_control(
 				'opacity',
 				[
-					'label' 		=> __( 'Opacity at End', 'blackwidgets' ),
+					'label' 		=> esc_html__( 'Opacity at End', 'blackwidgets' ),
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
 					'condition' 	=> [ 
 						'text_movement' 	=> [
@@ -824,7 +844,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			$this->add_control(
 				'rotation',
 				[
-					'label' 		=> __( 'Rotation at End', 'blackwidgets' ),
+					'label' 		=> esc_html__( 'Rotation at End', 'blackwidgets' ),
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
 					'condition' 	=> [ 
 						'text_movement' 	=> [
@@ -843,7 +863,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'overlay_section',
 			[
-				'label' => __( 'Overlay', 'blackwidgets' ),
+				'label' => esc_html__( 'Overlay', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -852,10 +872,10 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'overlay_section_enable',
 			[
-				'label' 		=> __( 'Do you need overlay?', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Do you need overlay?', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-				'label_on' 		=> __( 'Yes', 'blackwidgets' ),
-				'label_off' 	=> __( 'No !', 'blackwidgets' ),
+				'label_on' 		=> esc_html__( 'Yes', 'blackwidgets' ),
+				'label_off' 	=> esc_html__( 'No !', 'blackwidgets' ),
 				'return_value' 	=> 'overlay_enable',
 				// 'default' 		=> 'false',
 			]
@@ -866,7 +886,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_overlay_background',
-				'label' => __( 'Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-typograpgy .bw-overlay',
 				'fields_options' => [
@@ -894,7 +914,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_icon_opacity',
 			[
-				'label' => __( 'Opacity', 'blackwidgets' ),
+				'label' => esc_html__( 'Opacity', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -913,7 +933,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_icon_backdrop_filter',
 			[
-				'label' => __( 'Backdrop Filter Blur', 'blackwidgets' ),
+				'label' => esc_html__( 'Backdrop Filter Blur', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -934,7 +954,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_overlay_typography_title_border',
-				'label' => __( 'Title Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Title Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-typograpgy .bw-overlay',
 			]
 		);
@@ -943,7 +963,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_overlay_typography_title_border_radius', 
 			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -960,7 +980,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section',
 			[
-				'label' => __( 'Box Style', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -970,7 +990,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_1_normal',
 			[
-				'label' => __( 'Normal', 'blackwidgets' ),
+				'label' => esc_html__( 'Normal', 'blackwidgets' ),
 			]
 		);
 
@@ -979,7 +999,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_box_background',
-				'label' => __( 'Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-typograpgy',
 			]
@@ -996,7 +1016,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
-				'label' => __( 'Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -1009,7 +1029,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
-				'label' => __( 'Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -1030,7 +1050,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_box_border',
-				'label' => __( 'Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-typograpgy',
 			]
 		);
@@ -1040,7 +1060,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_box_box_shadow',
-				'label' => __( 'Box Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-typograpgy',
 			]
 		);
@@ -1048,7 +1068,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_border_radius', 
 			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -1061,7 +1081,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_1_hover',
 			[
-				'label' => __( 'Hover', 'blackwidgets' ),
+				'label' => esc_html__( 'Hover', 'blackwidgets' ),
 			]
 		);
 
@@ -1070,7 +1090,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_hover_box_background',
-				'label' => __( 'Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', ],
 				'selector' => '{{WRAPPER}} .bw-typograpgy:hover',
 			]
@@ -1087,7 +1107,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_hover_box_margin',
 			[
-				'label' => __( 'Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -1100,7 +1120,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_hover_box_padding',
 			[
-				'label' => __( 'Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -1121,7 +1141,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_hover_box_border',
-				'label' => __( 'Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-typograpgy:hover',
 			]
 		);
@@ -1131,7 +1151,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_hover_box_box_shadow',
-				'label' => __( 'Box Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-typograpgy:hover',
 			]
 		);
@@ -1139,7 +1159,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_hover_box_border_radius',
 			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -1159,7 +1179,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'typography1_section',
 			[
-				'label' => __( 'Title Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'Title Typography', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -1167,7 +1187,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_title_solid_color',
 			[
-				'label' => __( 'Title Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Title Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Color::get_type(),
@@ -1183,7 +1203,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'content_typography1',
-				'label' => __( 'Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'Typography', 'blackwidgets' ),
 				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-repetitive',
 			]
@@ -1193,7 +1213,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'text_shadow1',
-				'label' => __( 'Text Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-repetitive',
 			]
 		);
@@ -1209,7 +1229,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_typography_title_background',
-				'label' => __( 'Title Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Title Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-repetitive',
 			]
@@ -1226,7 +1246,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_typography_title_margin',
 			[
-				'label' => __( 'Title Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Title Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -1238,7 +1258,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_typography_title_padding',
 			[
-				'label' => __( 'Title Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Title Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -1259,7 +1279,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_typography_title_border',
-				'label' => __( 'Title Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Title Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-repetitive',
 			]
 		);
@@ -1268,7 +1288,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_typography_title_border_radius', 
 			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -1282,7 +1302,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_typography_title_box_shadow',
-				'label' => __( 'Title Box Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Title Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-repetitive',
 			]
 		);
@@ -1297,12 +1317,12 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_control(
 			'z_index',
 			[
-				'label' => __( 'Z-Index', 'blackwidgets' ),
+				'label' => esc_html__( 'Z-Index', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::NUMBER,
 				'min' => -99999,
 				'max' => 999999,
 				'step' => 9,
-				'description' => __( 'If you using the 2D / 3D style, so z-index will be disabled.', 'blackwidgets' ),
+				'description' => esc_html__( 'If you using the 2D / 3D style, so z-index will be disabled.', 'blackwidgets' ),
 			]
 		);
 
@@ -1317,10 +1337,10 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_stroke_title_enable',
 			[
-				'label' 		=> __( 'Text Stroke', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Text Stroke', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-				'label_on' 		=> __( 'Yes', 'blackwidgets' ),
-				'label_off' 	=> __( 'No !', 'blackwidgets' ),
+				'label_on' 		=> esc_html__( 'Yes', 'blackwidgets' ),
+				'label_off' 	=> esc_html__( 'No !', 'blackwidgets' ),
 				'return_value' 	=> 'stroke_enable',
 				// 'default' 		=> 'false',
 			]
@@ -1329,7 +1349,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_stroke_stroke_color',
 			[
-				'label' => __( 'Text Stroke Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Text Stroke Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Color::get_type(),
@@ -1349,7 +1369,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_stroke_stroke_width',
 			[
-				'label' => __( 'Text Stroke Size', 'blackwidgets' ),
+				'label' => esc_html__( 'Text Stroke Size', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -1380,10 +1400,10 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_control(
 			'gradient_color_title_enable',
 			[
-				'label' 		=> __( 'Text Gradient/Image', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Text Gradient/Image', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-				'label_on' 		=> __( 'Yes', 'blackwidgets' ),
-				'label_off' 	=> __( 'No !', 'blackwidgets' ),
+				'label_on' 		=> esc_html__( 'Yes', 'blackwidgets' ),
+				'label_off' 	=> esc_html__( 'No !', 'blackwidgets' ),
 				'return_value' 	=> 'gradient_enable',
 				// 'default' 		=> 'false',
 			]
@@ -1395,7 +1415,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'unique_widget_typography_title_gradient',
-				'label' => __( 'Title Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Title Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-repetitive',
 				'condition'  => [
@@ -1414,7 +1434,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'unique_typography1_section',
 			[
-				'label' => __( 'Unique Title Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'Unique Title Typography', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 				'condition'  => [
 					'widget_type' => [
@@ -1428,7 +1448,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_control(
 			'unique_widget_title_solid_color',
 			[
-				'label' => __( 'Title Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Title Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Color::get_type(),
@@ -1445,7 +1465,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'unique_content_typography1',
-				'label' => __( 'Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'Typography', 'blackwidgets' ),
 				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-typograpgy-repetitive.bw-unique',
 			]
@@ -1456,7 +1476,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'unique_text_shadow1',
-				'label' => __( 'Text Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-typograpgy-repetitive.bw-unique',
 			]
 		);
@@ -1473,7 +1493,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'unique_widget_typography_title_background',
-				'label' => __( 'Title Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Title Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-typograpgy-repetitive.bw-unique',
 			]
@@ -1490,7 +1510,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'unique_widget_typography_title_margin',
 			[
-				'label' => __( 'Title Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Title Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -1503,7 +1523,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'unique_widget_typography_title_padding',
 			[
-				'label' => __( 'Title Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Title Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -1524,7 +1544,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'unique_widget_typography_title_border',
-				'label' => __( 'Title Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Title Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-typograpgy-repetitive.bw-unique',
 			]
 		);
@@ -1533,7 +1553,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'unique_widget_typography_title_border_radius', 
 			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -1547,7 +1567,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'unique_widget_typography_title_box_shadow',
-				'label' => __( 'Title Box Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Title Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-typograpgy-repetitive.bw-unique',
 			]
 		);
@@ -1562,12 +1582,12 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_control(
 			'unique_z_index',
 			[
-				'label' => __( 'Z-Index', 'blackwidgets' ),
+				'label' => esc_html__( 'Z-Index', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::NUMBER,
 				'min' => -99999,
 				'max' => 999999,
 				'step' => 9,
-				'description' => __( 'If you using the 2D / 3D style, so z-index will be disabled.', 'blackwidgets' ),
+				'description' => esc_html__( 'If you using the 2D / 3D style, so z-index will be disabled.', 'blackwidgets' ),
 			]
 		);
 
@@ -1582,10 +1602,10 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_control(
 			'unique_widget_stroke_title_enable',
 			[
-				'label' 		=> __( 'Text Stroke', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Text Stroke', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-				'label_on' 		=> __( 'Yes', 'blackwidgets' ),
-				'label_off' 	=> __( 'No !', 'blackwidgets' ),
+				'label_on' 		=> esc_html__( 'Yes', 'blackwidgets' ),
+				'label_off' 	=> esc_html__( 'No !', 'blackwidgets' ),
 				'return_value' 	=> 'stroke_enable',
 				// 'default' 		=> 'false',
 			]
@@ -1594,7 +1614,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		// $this->add_control(
 		// 	'unique_widget_stroke_fill_color',
 		// 	[
-		// 		'label' => __( 'Text Stroke Color', 'blackwidgets' ),
+		// 		'label' => esc_html__( 'Text Stroke Color', 'blackwidgets' ),
 		// 		'type' => Controls_Manager::COLOR,
 		// 		'scheme' => [
 		// 			'type' => Color::get_type(),
@@ -1614,7 +1634,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_control(
 			'unique_widget_stroke_stroke_color',
 			[
-				'label' => __( 'Text Stroke Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Text Stroke Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Color::get_type(),
@@ -1634,7 +1654,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'unique_widget_stroke_stroke_width',
 			[
-				'label' => __( 'Text Stroke Size', 'blackwidgets' ),
+				'label' => esc_html__( 'Text Stroke Size', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -1666,10 +1686,10 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_control(
 			'gradient_color_unique_widget_enable',
 			[
-				'label' 		=> __( 'Text Gradient', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Text Gradient', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-				'label_on' 		=> __( 'Yes', 'blackwidgets' ),
-				'label_off' 	=> __( 'No !', 'blackwidgets' ),
+				'label_on' 		=> esc_html__( 'Yes', 'blackwidgets' ),
+				'label_off' 	=> esc_html__( 'No !', 'blackwidgets' ),
 				'return_value' 	=> 'unique_gradient_enable',
 				// 'default' 		=> 'false',
 			]
@@ -1681,7 +1701,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'unique_widget_typography_unique_widget_gradient',
-				'label' => __( 'Title Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Title Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-typograpgy-repetitive.bw-unique',
 				'condition'  => [
@@ -1700,7 +1720,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'transform_section',
 			[
-				'label' => __( '2D & 3D Normal Transform Style', 'blackwidgets' ),
+				'label' => esc_html__( '2D & 3D Normal Transform Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -1709,10 +1729,10 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_control(
 			'transform_normal_option',
 			[
-				'label' 		=> __( 'Transform Style', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Transform Style', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-				'label_on' 		=> __( 'Enable', 'blackwidgets' ),
-				'label_off' 	=> __( 'Disable', 'blackwidgets' ),
+				'label_on' 		=> esc_html__( 'Enable', 'blackwidgets' ),
+				'label_off' 	=> esc_html__( 'Disable', 'blackwidgets' ),
 				'return_value' 	=> 'normal_transform',
 				'default' 		=> 'off',
 			]
@@ -1729,7 +1749,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'transform_tab_move',
 			[
-				'label' => __( 'Move', 'blackwidgets' ),
+				'label' => esc_html__( 'Move', 'blackwidgets' ),
 			]
 		);
 
@@ -1738,7 +1758,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'move_normal_x',
 			[
-				'label' => __( 'Move on → X', 'blackwidgets' ),
+				'label' => esc_html__( 'Move on → X', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -1752,14 +1772,14 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 					'unit' => 'px',
 					'size' => 0,
 				],
-				'description' => __( 'movement on the diagram X - do not leave empty!', 'blackwidgets' ),
+				'description' => esc_html__( 'movement on the diagram X - do not leave empty!', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'move_normal_y',
 			[
-				'label' => __( 'Move on ↑ Y', 'blackwidgets' ),
+				'label' => esc_html__( 'Move on ↑ Y', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -1773,14 +1793,14 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 					'unit' => 'px',
 					'size' => 0,
 				],
-				'description' => __( 'movement on the diagram Y - do not leave empty!', 'blackwidgets' ),
+				'description' => esc_html__( 'movement on the diagram Y - do not leave empty!', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'move_normal_z',
 			[
-				'label' => __( 'Move on ↙ Z', 'blackwidgets' ),
+				'label' => esc_html__( 'Move on ↙ Z', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -1794,7 +1814,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 					'unit' => 'px',
 					'size' => 0,
 				],
-				'description' => __( 'movement on the diagram Z - do not leave empty!', 'blackwidgets' ),
+				'description' => esc_html__( 'movement on the diagram Z - do not leave empty!', 'blackwidgets' ),
 			]
 		);
 
@@ -1804,7 +1824,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'transform_tab_scale',
 			[
-				'label' => __( 'Scale', 'blackwidgets' ),
+				'label' => esc_html__( 'Scale', 'blackwidgets' ),
 			]
 		);
 
@@ -1813,7 +1833,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'scale_normal_x',
 			[
-				'label' => __( 'Scale on → X', 'blackwidgets' ),
+				'label' => esc_html__( 'Scale on → X', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'deg' ],
 				'range' => [
@@ -1827,14 +1847,14 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 					'unit' => 'deg',
 					'size' => 1,
 				],
-				'description' => __( 'set 1.1 to scale on left and right - do not set 0', 'blackwidgets' ),
+				'description' => esc_html__( 'set 1.1 to scale on left and right - do not set 0', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'scale_normal_y',
 			[
-				'label' => __( 'Scale on ↑ Y', 'blackwidgets' ),
+				'label' => esc_html__( 'Scale on ↑ Y', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'deg' ],
 				'range' => [
@@ -1848,14 +1868,14 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 					'unit' => 'deg',
 					'size' => 1,
 				],
-				'description' => __( 'set 1.1 to scale on top and bottom - do not set 0', 'blackwidgets' ),
+				'description' => esc_html__( 'set 1.1 to scale on top and bottom - do not set 0', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'scale_normal_z',
 			[
-				'label' => __( 'Scale on ↙ Z', 'blackwidgets' ),
+				'label' => esc_html__( 'Scale on ↙ Z', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'deg' ],
 				'range' => [
@@ -1869,14 +1889,14 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 					'unit' => 'deg',
 					'size' => 1,
 				],
-				'description' => __( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
+				'description' => esc_html__( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'perspective',
 			[
-				'label' => __( 'Self Perspective ◊', 'blackwidgets' ),
+				'label' => esc_html__( 'Self Perspective ◊', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'ps' ],
 				'range' => [
@@ -1890,14 +1910,14 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 					'unit' => 'px',
 					'size' => 0,
 				],
-				'description' => __( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
+				'description' => esc_html__( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'perspective_child',
 			[
-				'label' => __( 'Children Perspective ◊', 'blackwidgets' ),
+				'label' => esc_html__( 'Children Perspective ◊', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'ps' ],
 				'range' => [
@@ -1911,7 +1931,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 					'unit' => 'px',
 					'size' => 0,
 				],
-				'description' => __( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
+				'description' => esc_html__( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
 			]
 		);
 
@@ -1921,7 +1941,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'transform_tab_rotate',
 			[
-				'label' => __( 'Rotate', 'blackwidgets' ),
+				'label' => esc_html__( 'Rotate', 'blackwidgets' ),
 			]
 		);
 
@@ -1930,7 +1950,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'rotate_normal_x',
 			[
-				'label' => __( 'Rotate on → X', 'blackwidgets' ),
+				'label' => esc_html__( 'Rotate on → X', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'deg' ],
 				'range' => [
@@ -1950,7 +1970,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'rotate_normal_y',
 			[
-				'label' => __( 'Rotate on ↑ Y', 'blackwidgets' ),
+				'label' => esc_html__( 'Rotate on ↑ Y', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'deg' ],
 				'range' => [
@@ -1970,7 +1990,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'rotate_normal_z',
 			[
-				'label' => __( 'Rotate on ↙ Z', 'blackwidgets' ),
+				'label' => esc_html__( 'Rotate on ↙ Z', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'deg' ],
 				'range' => [
@@ -1993,7 +2013,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'transform_tab_skew',
 			[
-				'label' => __( 'Skew', 'blackwidgets' ),
+				'label' => esc_html__( 'Skew', 'blackwidgets' ),
 			]
 		);
 
@@ -2002,7 +2022,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'skew_normal_x',
 			[
-				'label' => __( 'Skew on → X ▱', 'blackwidgets' ),
+				'label' => esc_html__( 'Skew on → X ▱', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'deg' ],
 				'range' => [
@@ -2022,7 +2042,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'skew_normal_y',
 			[
-				'label' => __( 'Skew on ↑ Y ▱', 'blackwidgets' ),
+				'label' => esc_html__( 'Skew on ↑ Y ▱', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'deg' ],
 				'range' => [
@@ -2052,7 +2072,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'line_section',
 			[
-				'label' => __( 'Line Styles', 'blackwidgets' ),
+				'label' => esc_html__( 'Line Styles', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 				'condition'  => [
 					'widget_type' => [
@@ -2068,7 +2088,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_line_width',
 			[
-				'label' => __( 'Line Width', 'blackwidgets' ),
+				'label' => esc_html__( 'Line Width', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -2087,7 +2107,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_line_height',
 			[
-				'label' => __( 'Line Height', 'blackwidgets' ),
+				'label' => esc_html__( 'Line Height', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -2108,7 +2128,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_line_background',
-				'label' => __( 'Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-typograpgy.bw-t-2 .line-1, {{WRAPPER}} .bw-typograpgy.bw-t-2 .line-2',
 			]
@@ -2117,7 +2137,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_line_box_margin',
 			[
-				'label' => __( 'Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'allowed_dimensions' => ['top', 'bottom'],
@@ -2132,7 +2152,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_line_box_border',
-				'label' => __( 'Title Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Title Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-typograpgy.bw-t-2 .line-1, {{WRAPPER}} .bw-typograpgy.bw-t-2 .line-2',
 			]
 		);
@@ -2141,7 +2161,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_line_box_border_radius', 
 			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -2158,7 +2178,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'icon_section',
 			[
-				'label' => __( 'Icon Styles', 'blackwidgets' ),
+				'label' => esc_html__( 'Icon Styles', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 				'condition'  => [
 					'widget_type' => [
@@ -2174,7 +2194,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_icon_width',
 			[
-				'label' => __( 'Icon Size', 'blackwidgets' ),
+				'label' => esc_html__( 'Icon Size', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -2193,7 +2213,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_icon_color',
 			[
-				'label' => __( 'Icon Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Icon Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Color::get_type(),
@@ -2227,7 +2247,8 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$shape 	                = isset($settings['shape_widget'])						 ? $settings['shape_widget']					: '';
 		$title_tag 				= isset($settings['widget_html_tag_title'])				 ? $settings['widget_html_tag_title']			: '';
         $title 			        = isset($settings['widget_title'])                       ? $settings['widget_title']					: '';
-        $alignment 		        = isset($settings['widget_alignment'])                   ? $settings['widget_alignment']				: '';
+        // $alignment 		        = isset($settings['widget_alignment'])                   ? $settings['widget_alignment']				: '';
+        $alignment 		        = '';
         $title_scrub			= isset($settings['title_scrub'])                        ? $settings['title_scrub']						: '';
         $vertical				= isset($settings['vertical_title_display'])			 ? $settings['vertical_title_display']			: '';
         $vertical_rotation		= isset($settings['vertical_rotation'])					 ? $settings['vertical_rotation']				: '';
@@ -2261,11 +2282,13 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$iconset_1				= isset($settings['tab_style_1_icon'])                  ? $settings['tab_style_1_icon']                 : ''; // Icon 1
 		$svgcode_1				= isset($settings['tab_style_1_code'])                  ? $settings['tab_style_1_code']                 : ''; // Code 1
         $alignment_1            = isset($settings['widget_1_alignment'])                ? $settings['widget_1_alignment']               : '';
+        // $alignment_1            = '';
         $style_2_type           = isset($settings['tab_style_2_type'])                  ? $settings['tab_style_2_type']                 : '';
         $image_id_2		        = isset($settings['tab_style_2_image']['url']) 		    ?  $settings['tab_style_2_image']['url']        : ''; // Image 2
 		$iconset_2				= isset($settings['tab_style_2_icon'])                  ? $settings['tab_style_2_icon']                 : ''; // Icon 2
 		$svgcode_2				= isset($settings['tab_style_2_code'])                  ? $settings['tab_style_2_code']                 : ''; // Code 2
         $alignment_2            = isset($settings['widget_2_alignment'])                ? $settings['widget_2_alignment']               : '';
+        // $alignment_2            = '';
 		// Transform Option
 		$normal_transform		= isset($settings['transform_normal_option'])			? $settings['transform_normal_option']			: '';
 		//Transform Styles

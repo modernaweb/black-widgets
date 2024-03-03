@@ -4,7 +4,7 @@
  * Plugin URI: https://modernaweb.net/black-widgets
  * Description: Build web pages with black widgets.
  * Author: Modernaweb Studio
- * Version: 1.3.4
+ * Version: 1.3.5
  * Author URI: https://modernaweb.net/
  * Text Domain: blackwidgets
  * Domain Path: /languages
