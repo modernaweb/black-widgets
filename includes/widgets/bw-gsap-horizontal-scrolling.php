@@ -102,33 +102,46 @@ class BLACK_WIDGETS_GSAP_HORIZONTAL_SCROLLING extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => __( 'Content', 'blackwidgets' ),
+				'label' => esc_html__( 'Content', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
 
+		$this->add_control(
+			'custom_panel_alert',
+			[
+				'type' => \Elementor\Controls_Manager::ALERT,
+				'alert_type' => 'info',     /* info, success, warning, danger */
+				'heading' => esc_html__( 'Feel free to edit. Check this widget\'s demo.', 'blackwidgets' ),
+				'content' => sprintf(
+					'%s <a href="https://modernaweb.net/black-widgets/all-widgets/black-horizontal/" target="_blank">%s</a>',
+					esc_html__( 'Check ', 'blackwidgets' ),
+					esc_html__( 'Demo', 'blackwidgets' )
+				),
+			]
+		);
 
 		// Select type of the title
 		$this->add_control(
 			'widget_type',
 			[
-				'label' => __( 'Select Content', 'blackwidgets' ),
+				'label' => esc_html__( 'Select Content', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'style_1',
 				'options' => [
-					'style_1' 				=> __( 'Style 1', 'blackwidgets' ),
+					'style_1' 				=> esc_html__( 'Style 1', 'blackwidgets' ),
 				],
-				'description' => __( 'Do not forget every template and this section should be full-screen', 'blackwidgets' ),
+				'description' => esc_html__( 'Do not forget every template and this section should be full-screen', 'blackwidgets' ),
 			]
 		);
 
 		$repeater = new \Elementor\Repeater();
 
 		$elementor_tpl = \Elementor\Plugin::instance()->templates_manager->get_source( 'local' )->get_items();        
-		$elementor_tpl_opts = [ '0' => __( 'Elementor template is not defined yet.', 'blackwidgets' ) ];
+		$elementor_tpl_opts = [ '0' => esc_html__( 'Elementor template is not defined yet.', 'blackwidgets' ) ];
 
 		if ( ! empty( $elementor_tpl ) ) {
-			$elementor_tpl_opts = [ '0' => __( 'Select elementor template', 'blackwidgets' ) ];
+			$elementor_tpl_opts = [ '0' => esc_html__( 'Select elementor template', 'blackwidgets' ) ];
 
 			foreach ( $elementor_tpl as $template ) {
 				$elementor_tpl_opts[ $template['template_id'] ] = $template['title'] . ' (' . $template['type'] . ')';
@@ -137,9 +150,9 @@ class BLACK_WIDGETS_GSAP_HORIZONTAL_SCROLLING extends \Elementor\Widget_Base {
 
 		$repeater->add_control(
 			'list_title', [
-				'label' => __( 'Title', 'blackwidgets' ),
+				'label' => esc_html__( 'Title', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'List Title' , 'blackwidgets' ),
+				'default' => esc_html__( 'List Title' , 'blackwidgets' ),
 				'label_block' => true,
 			]
 		);
@@ -147,7 +160,7 @@ class BLACK_WIDGETS_GSAP_HORIZONTAL_SCROLLING extends \Elementor\Widget_Base {
         $repeater->add_control(
             'custom_template',
             [
-                'label'			=> __( 'Custom Template', 'blackwidgets' ),
+                'label'			=> esc_html__( 'Custom Template', 'blackwidgets' ),
                 'type'			=> \Elementor\Controls_Manager::SELECT,
                 'default'		=> '0',
                 'options'		=> $elementor_tpl_opts,
@@ -158,12 +171,12 @@ class BLACK_WIDGETS_GSAP_HORIZONTAL_SCROLLING extends \Elementor\Widget_Base {
 		$this->add_control(
 			'list',
 			[
-				'label' => __( 'Repeater List', 'blackwidgets' ),
+				'label' => esc_html__( 'Repeater List', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::REPEATER,
 				'fields' => $repeater->get_controls(),
 				'default' => [
 					[
-						'list_title' => __( 'Item content #1', 'blackwidgets' ),
+						'list_title' => esc_html__( 'Item content #1', 'blackwidgets' ),
 						'custom_template' => [
                             'value' => '170',
                         ],
@@ -181,7 +194,7 @@ class BLACK_WIDGETS_GSAP_HORIZONTAL_SCROLLING extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'typo_section',
 			[
-				'label' => __( 'General Typography Style', 'blackwidgets' ),
+				'label' => esc_html__( 'General Typography Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
         );
@@ -190,7 +203,7 @@ class BLACK_WIDGETS_GSAP_HORIZONTAL_SCROLLING extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_alert_color',
 			[
-				'label' => __( 'Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type'  => Color::get_type(),
@@ -207,7 +220,7 @@ class BLACK_WIDGETS_GSAP_HORIZONTAL_SCROLLING extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'style_alert_typography1',
-				'label' => __( 'Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'Typography', 'blackwidgets' ),
 				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-x-section > .elementor',
 			]

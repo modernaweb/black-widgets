@@ -105,6 +105,20 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'custom_panel_alert',
+			[
+				'type' => \Elementor\Controls_Manager::ALERT,
+				'alert_type' => 'info',     /* info, success, warning, danger */
+				'heading' => esc_html__( 'Feel free to edit. Check this widget\'s demo.', 'blackwidgets' ),
+				'content' => sprintf(
+					'%s <a href="https://modernaweb.net/black-widgets/all-widgets/black-alert/" target="_blank">%s</a>',
+					esc_html__( 'Check ', 'blackwidgets' ),
+					esc_html__( 'Demo', 'blackwidgets' )
+				),
+			]
+		);
+
 		// Select type of the title
 		$this->add_control(
 			'widget_type',
@@ -180,6 +194,30 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 				'label' => __( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-alert-box',
+			]
+		);
+
+		$this->add_control(
+			'widget_normal_style_blur',
+			[
+				'label' => esc_html__( 'Blur', 'blackwidgets' ),
+				'description' => esc_html__( 'Background (only for color) with low opacity is required.', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+						'step' => 1,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bw-alert-box' => 'backdrop-filter: blur({{SIZE}}{{UNIT}}) !important;',
+				],
 			]
 		);
 

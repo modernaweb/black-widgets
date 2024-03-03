@@ -335,7 +335,7 @@ final class BLACK_WIDGETS_Modernaweb_Plugin {
 		$elements_manager->add_category(
 			'black_widgets',
 			[
-				'title' => __( 'Black Widgets', 'blackwidgets' ),
+				'title' => esc_html__( 'Black Widgets', 'blackwidgets' ),
 				'icon' => 'fa fa-plug',
 			]
 		);
@@ -350,17 +350,17 @@ final class BLACK_WIDGETS_Modernaweb_Plugin {
 				'bw_custom_section_settings',
 				[
 					'tab' => \Elementor\Controls_Manager::TAB_STYLE,
-					'label' => __( 'BW Custom Section Settings', 'blackwidgets' ),
+					'label' => esc_html__( 'BW Custom Section Settings', 'blackwidgets' ),
 				]
 			);
 
 			$element->add_control(
 				'bw_custom_section_enable_css_pattern',
 				[
-					'label' 		=> __( 'CSS Pattern For Background', 'blackwidgets' ),
+					'label' 		=> esc_html__( 'CSS Pattern For Background', 'blackwidgets' ),
 					'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-					'label_on' 		=> __( 'Yes', 'blackwidgets' ),
-					'label_off' 	=> __( 'No !', 'blackwidgets' ),
+					'label_on' 		=> esc_html__( 'Yes', 'blackwidgets' ),
+					'label_off' 	=> esc_html__( 'No !', 'blackwidgets' ),
 					'return_value' 	=> 'css_enable',
 					'default' 		=> 'off',
 				]
@@ -369,17 +369,17 @@ final class BLACK_WIDGETS_Modernaweb_Plugin {
 			$element->add_control(
 				'bw_custom_section_css_pattern',
 				[
-					'label' => __( 'CSS Pattern', 'blackwidgets' ),
+					'label' => esc_html__( 'CSS Pattern', 'blackwidgets' ),
 					'type' => \Elementor\Controls_Manager::SELECT,
 					'default' => 'bw-pattern-1',
 					'options' => [
-						'bw-pattern-1' 	=> __( 'Type 1', 'blackwidgets' ),
-						'bw-pattern-2' 	=> __( 'Type 2', 'blackwidgets' ),
-						'bw-pattern-3' 	=> __( 'Type 3', 'blackwidgets' ),
-						'bw-pattern-4' 	=> __( 'Type 4', 'blackwidgets' ),
-						'bw-pattern-5' 	=> __( 'Type 5', 'blackwidgets' ),
-						'bw-pattern-6' 	=> __( 'Type 6', 'blackwidgets' ),
-						'bw-pattern-7' 	=> __( 'Type 7', 'blackwidgets' ),
+						'bw-pattern-1' 	=> esc_html__( 'Type 1', 'blackwidgets' ),
+						'bw-pattern-2' 	=> esc_html__( 'Type 2', 'blackwidgets' ),
+						'bw-pattern-3' 	=> esc_html__( 'Type 3', 'blackwidgets' ),
+						'bw-pattern-4' 	=> esc_html__( 'Type 4', 'blackwidgets' ),
+						'bw-pattern-5' 	=> esc_html__( 'Type 5', 'blackwidgets' ),
+						'bw-pattern-6' 	=> esc_html__( 'Type 6', 'blackwidgets' ),
+						'bw-pattern-7' 	=> esc_html__( 'Type 7', 'blackwidgets' ),
 					],
 					'condition'  => [
 						'bw_custom_section_enable_css_pattern' => [

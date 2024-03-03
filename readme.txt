@@ -2,9 +2,9 @@
 Contributors: skalanter, modernaweb
 Donate link: http://modernaweb.net/
 Tags: page builder, editor, elementor widgets, elementor addon, typography
-Stable tag: 1.3.4
+Stable tag: 1.3.5
 Requires at least: 6.0
-Tested up to: 6.3
+Tested up to: 6.4
 Requires PHP: 7.4
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -106,6 +106,15 @@ WordPress 5.3+
 
 
 ## Changelog
+
+= 1.3.5 — 2024-03-03 =
+- Compatibility: Elementor v3.19 and all experiments and features
+- Added: Width option for Black Image Pro
+- Added: Blur option in the box settings for Black Image Pro, Black Button, Black Title, Black Alert, Black Icon Box Pro
+- Added: A general class for for blur(.bw-blur) for columns and extra margin-removal(.no-margin) for all widgets
+- Added: An alert with link above all widgets in the content section
+- Improved: Added some esc_html__ for text inputs for security reasons
+- Fixed: Some alignment issue on widgets
 
 = 1.3.4 — 2023-11-05 =
 - Compatibility: WordPress v6.4

@@ -105,8 +105,22 @@ class BLACK_WIDGETS_GSAP_Trigger extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => __( 'Content', 'blackwidgets' ),
+				'label' => esc_html__( 'Content', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'custom_panel_alert',
+			[
+				'type' => \Elementor\Controls_Manager::ALERT,
+				'alert_type' => 'info',     /* info, success, warning, danger */
+				'heading' => esc_html__( 'This For Expert', 'blackwidgets' ),
+				'content' => sprintf(
+					'%s <a href="https://gsap.com/" target="_blank">%s</a>',
+					esc_html__( 'Check ', 'blackwidgets' ),
+					esc_html__( 'gsap.com', 'blackwidgets' )
+				),
 			]
 		);
 
@@ -114,27 +128,27 @@ class BLACK_WIDGETS_GSAP_Trigger extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_type',
 			[
-				'label' => __( 'Select Content', 'blackwidgets' ),
+				'label' => esc_html__( 'Select Content', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'html',
 				'options' => [
-					'html' 				=> __( 'HTML', 'blackwidgets' ),
-					// 'text' 				=> __( 'Text', 'blackwidgets' ),
-					// 'shape'				=> __( 'Shape', 'blackwidgets' ),
-					// 'nested_div' 		=> __( 'Nested Div', 'blackwidgets' ),
-					'image' 				=> __( 'Image', 'blackwidgets' ),
-					// 'image_sequence' 	=> __( 'Image Sequence', 'blackwidgets' ),
-					// 'video_sequence' 	=> __( 'Video Sequence', 'blackwidgets' ),
-					// 'video_sequence' 	=> __( 'Elementor Template', 'blackwidgets' ),
+					'html' 				=> esc_html__( 'HTML', 'blackwidgets' ),
+					// 'text' 				=> esc_html__( 'Text', 'blackwidgets' ),
+					// 'shape'				=> esc_html__( 'Shape', 'blackwidgets' ),
+					// 'nested_div' 		=> esc_html__( 'Nested Div', 'blackwidgets' ),
+					'image' 				=> esc_html__( 'Image', 'blackwidgets' ),
+					// 'image_sequence' 	=> esc_html__( 'Image Sequence', 'blackwidgets' ),
+					// 'video_sequence' 	=> esc_html__( 'Video Sequence', 'blackwidgets' ),
+					// 'video_sequence' 	=> esc_html__( 'Elementor Template', 'blackwidgets' ),
 				],
-				'description' => __( 'We create some skin before, you can use these or no! make a new custom type.', 'blackwidgets' ),
+				'description' => esc_html__( 'We create some skin before, you can use these or no! make a new custom type.', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'widget_html_content',
 			[
-				'label' => __( 'HTML Code', 'blackwidgets' ),
+				'label' => esc_html__( 'HTML Code', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXTAREA,
 				'rows' => 21,
 				'default' =>
@@ -149,7 +163,7 @@ BUSINESS
 ONLINE
 </h3>
 ',
-				'description' => __( 'Put your HTML tags here, please check the example structure', 'blackwidgets' ),
+				'description' => esc_html__( 'Put your HTML tags here, please check the example structure', 'blackwidgets' ),
 				'condition'  => [
 					'widget_type' => [
 						'html',
@@ -162,10 +176,10 @@ ONLINE
 		$this->add_control(
 			'widget_html_class',
 			[
-				'label' => __( 'Shared Class', 'blackwidgets' ),
+				'label' => esc_html__( 'Shared Class', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __( 'bw-eg', 'blackwidgets' ),
-                'description' => __( 'use the shared class for each line, like the example', 'blackwidgets' ),
+                'default' => esc_html__( 'bw-eg', 'blackwidgets' ),
+                'description' => esc_html__( 'use the shared class for each line, like the example', 'blackwidgets' ),
 				'condition'  => [
 					'widget_type' => [
 						'html',
@@ -178,7 +192,7 @@ ONLINE
 		$this->add_control(
 			'image',
 			[
-				'label' => __( 'Choose Image', 'blackwidgets' ),
+				'label' => esc_html__( 'Choose Image', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::MEDIA,
 				'default' => [
 					'url' => \Elementor\Utils::get_placeholder_image_src(),
@@ -215,7 +229,7 @@ ONLINE
 		$this->start_controls_section(
 			'content_image_js',
 			[
-				'label' => __( 'JS for Image', 'blackwidgets' ),
+				'label' => esc_html__( 'JS for Image', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 				'condition'  => [
 					'widget_type' => [
@@ -228,55 +242,55 @@ ONLINE
 		$this->add_control(
 			'image_trigger_class',
 			[
-				'label' => __( 'Add A Unique Trigger Class', 'blackwidgets' ),
+				'label' => esc_html__( 'Add A Unique Trigger Class', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'bw-image-1', 'blackwidgets' ),
-				'placeholder' => __( 'bw-image-1', 'blackwidgets' ),
-				'description' => __( 'it should be unique and add manually', 'blackwidgets' ),
+				'default' => esc_html__( 'bw-image-1', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'bw-image-1', 'blackwidgets' ),
+				'description' => esc_html__( 'it should be unique and add manually', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'image_start_point',
 			[
-				'label' => __( 'Start Point', 'blackwidgets' ),
+				'label' => esc_html__( 'Start Point', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'center bottom', 'blackwidgets' ),
-				'placeholder' => __( 'top bottom', 'blackwidgets' ),
-				'description' => __( '----', 'blackwidgets' ),
+				'default' => esc_html__( 'center bottom', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'top bottom', 'blackwidgets' ),
+				'description' => esc_html__( '----', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'image_end_point',
 			[
-				'label' => __( 'End Point', 'blackwidgets' ),
+				'label' => esc_html__( 'End Point', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'center top', 'blackwidgets' ),
-				'placeholder' => __( 'top bottom', 'blackwidgets' ),
-				'description' => __( '----', 'blackwidgets' ),
+				'default' => esc_html__( 'center top', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'top bottom', 'blackwidgets' ),
+				'description' => esc_html__( '----', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'image_toggle_actions',
 			[
-				'label' => __( 'Toggle Actions', 'blackwidgets' ),
+				'label' => esc_html__( 'Toggle Actions', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'none none none none', 'blackwidgets' ),
-				'placeholder' => __( 'none none none none', 'blackwidgets' ),
-				'description' => __( '----', 'blackwidgets' ),
+				'default' => esc_html__( 'none none none none', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'none none none none', 'blackwidgets' ),
+				'description' => esc_html__( '----', 'blackwidgets' ),
 				]
 			);
 
 		$this->add_control(
 			'image_scrub',
 			[
-				'label' => __( 'Scrub', 'blackwidgets' ),
+				'label' => esc_html__( 'Scrub', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'true', 'blackwidgets' ),
-				'placeholder' => __( 'false', 'blackwidgets' ),
-				'description' => __( '----', 'blackwidgets' ),
+				'default' => esc_html__( 'true', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'false', 'blackwidgets' ),
+				'description' => esc_html__( '----', 'blackwidgets' ),
 				]
 			);
 			
@@ -284,12 +298,12 @@ ONLINE
 		// $this->add_control(
 		// 	'image_markers',
 		// 	[
-		// 		'label' 		=> __( 'Markers', 'blackwidgets' ),
+		// 		'label' 		=> esc_html__( 'Markers', 'blackwidgets' ),
 		// 		'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-		// 		'label_on' 		=> __( 'true', 'blackwidgets' ),
-		// 		'label_off' 	=> __( 'false', 'blackwidgets' ),
+		// 		'label_on' 		=> esc_html__( 'true', 'blackwidgets' ),
+		// 		'label_off' 	=> esc_html__( 'false', 'blackwidgets' ),
 		// 		'default' 		=> 'false',
-		// 		'description' => __( 'enable it to to show the markers', 'blackwidgets' ),
+		// 		'description' => esc_html__( 'enable it to to show the markers', 'blackwidgets' ),
 		// 	]
 		// );
 
@@ -304,150 +318,150 @@ ONLINE
 		$this->add_control(
 			'element_opacity_from',
 			[
-				'label' => __( 'Opacity', 'blackwidgets' ),
+				'label' => esc_html__( 'Opacity', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '1', 'blackwidgets' ),
-				'placeholder' => __( '1', 'blackwidgets' ),
+				'default' => esc_html__( '1', 'blackwidgets' ),
+				'placeholder' => esc_html__( '1', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'element_duration_from',
 			[
-				'label' => __( 'Duration', 'blackwidgets' ),
+				'label' => esc_html__( 'Duration', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '0.9', 'blackwidgets' ),
-				'placeholder' => __( '0.4', 'blackwidgets' ),
+				'default' => esc_html__( '0.9', 'blackwidgets' ),
+				'placeholder' => esc_html__( '0.4', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'element_rotationx_from',
 			[
-				'label' => __( 'RotationX', 'blackwidgets' ),
+				'label' => esc_html__( 'RotationX', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '0', 'blackwidgets' ),
-				'placeholder' => __( '3', 'blackwidgets' ),
+				'default' => esc_html__( '0', 'blackwidgets' ),
+				'placeholder' => esc_html__( '3', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'element_rotationy_from',
 			[
-				'label' => __( 'RotationY', 'blackwidgets' ),
+				'label' => esc_html__( 'RotationY', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '0', 'blackwidgets' ),
-				'placeholder' => __( '3', 'blackwidgets' ),
+				'default' => esc_html__( '0', 'blackwidgets' ),
+				'placeholder' => esc_html__( '3', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'element_scalex_from',
 			[
-				'label' => __( 'ScaleX', 'blackwidgets' ),
+				'label' => esc_html__( 'ScaleX', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '1', 'blackwidgets' ),
-				'placeholder' => __( '1', 'blackwidgets' ),
+				'default' => esc_html__( '1', 'blackwidgets' ),
+				'placeholder' => esc_html__( '1', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'element_scaley_from',
 			[
-				'label' => __( 'ScaleY', 'blackwidgets' ),
+				'label' => esc_html__( 'ScaleY', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '1', 'blackwidgets' ),
-				'placeholder' => __( '1', 'blackwidgets' ),
+				'default' => esc_html__( '1', 'blackwidgets' ),
+				'placeholder' => esc_html__( '1', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'element_scalez_from',
 			[
-				'label' => __( 'ScaleZ', 'blackwidgets' ),
+				'label' => esc_html__( 'ScaleZ', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '0', 'blackwidgets' ),
-				'placeholder' => __( '0', 'blackwidgets' ),
+				'default' => esc_html__( '0', 'blackwidgets' ),
+				'placeholder' => esc_html__( '0', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'element_skewx_from',
 			[
-				'label' => __( 'SkewX', 'blackwidgets' ),
+				'label' => esc_html__( 'SkewX', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '26', 'blackwidgets' ),
-				'placeholder' => __( '0', 'blackwidgets' ),
+				'default' => esc_html__( '26', 'blackwidgets' ),
+				'placeholder' => esc_html__( '0', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'element_skewy_from',
 			[
-				'label' => __( 'SkewY', 'blackwidgets' ),
+				'label' => esc_html__( 'SkewY', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '-42', 'blackwidgets' ),
-				'placeholder' => __( '0', 'blackwidgets' ),
+				'default' => esc_html__( '-42', 'blackwidgets' ),
+				'placeholder' => esc_html__( '0', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'element_movex_from',
 			[
-				'label' => __( 'MoveX', 'blackwidgets' ),
+				'label' => esc_html__( 'MoveX', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '0', 'blackwidgets' ),
-				'placeholder' => __( '0', 'blackwidgets' ),
+				'default' => esc_html__( '0', 'blackwidgets' ),
+				'placeholder' => esc_html__( '0', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'element_movey_from',
 			[
-				'label' => __( 'MoveY', 'blackwidgets' ),
+				'label' => esc_html__( 'MoveY', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '0', 'blackwidgets' ),
-				'placeholder' => __( '0', 'blackwidgets' ),
+				'default' => esc_html__( '0', 'blackwidgets' ),
+				'placeholder' => esc_html__( '0', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'element_movez_from',
 			[
-				'label' => __( 'MoveZ', 'blackwidgets' ),
+				'label' => esc_html__( 'MoveZ', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '0', 'blackwidgets' ),
-				'placeholder' => __( '0', 'blackwidgets' ),
+				'default' => esc_html__( '0', 'blackwidgets' ),
+				'placeholder' => esc_html__( '0', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'element_autoalpha_from',
 			[
-				'label' => __( 'Auto Alpha', 'blackwidgets' ),
+				'label' => esc_html__( 'Auto Alpha', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '1', 'blackwidgets' ),
-				'placeholder' => __( '1', 'blackwidgets' ),
+				'default' => esc_html__( '1', 'blackwidgets' ),
+				'placeholder' => esc_html__( '1', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'element_perspective_from',
 			[
-				'label' => __( 'Preserve', 'blackwidgets' ),
+				'label' => esc_html__( 'Preserve', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '50', 'blackwidgets' ),
-				'placeholder' => __( '0', 'blackwidgets' ),
+				'default' => esc_html__( '50', 'blackwidgets' ),
+				'placeholder' => esc_html__( '0', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'element_transformstyle_from',
 			[
-				'label' => __( 'Transform Style', 'blackwidgets' ),
+				'label' => esc_html__( 'Transform Style', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'preserve-3d', 'blackwidgets' ),
-				'placeholder' => __( 'preserve-3d', 'blackwidgets' ),
+				'default' => esc_html__( 'preserve-3d', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'preserve-3d', 'blackwidgets' ),
 			]
 		);
 
@@ -462,150 +476,150 @@ ONLINE
 		$this->add_control(
 			'element_opacity_to',
 			[
-				'label' => __( 'Opacity', 'blackwidgets' ),
+				'label' => esc_html__( 'Opacity', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '1', 'blackwidgets' ),
-				'placeholder' => __( '1', 'blackwidgets' ),
+				'default' => esc_html__( '1', 'blackwidgets' ),
+				'placeholder' => esc_html__( '1', 'blackwidgets' ),
 			]
 		);
 		
 		$this->add_control(
 			'element_duration_to',
 			[
-				'label' => __( 'Duration', 'blackwidgets' ),
+				'label' => esc_html__( 'Duration', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '0.5', 'blackwidgets' ),
-				'placeholder' => __( '0.4', 'blackwidgets' ),
+				'default' => esc_html__( '0.5', 'blackwidgets' ),
+				'placeholder' => esc_html__( '0.4', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'element_rotationx_to',
 			[
-				'label' => __( 'RotationX', 'blackwidgets' ),
+				'label' => esc_html__( 'RotationX', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '0', 'blackwidgets' ),
-				'placeholder' => __( '0', 'blackwidgets' ),
+				'default' => esc_html__( '0', 'blackwidgets' ),
+				'placeholder' => esc_html__( '0', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'element_rotationy_to',
 			[
-				'label' => __( 'RotationY', 'blackwidgets' ),
+				'label' => esc_html__( 'RotationY', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '0', 'blackwidgets' ),
-				'placeholder' => __( '0', 'blackwidgets' ),
+				'default' => esc_html__( '0', 'blackwidgets' ),
+				'placeholder' => esc_html__( '0', 'blackwidgets' ),
 			]
 		);
 		
 		$this->add_control(
 			'element_scalex_to',
 			[
-				'label' => __( 'ScaleX', 'blackwidgets' ),
+				'label' => esc_html__( 'ScaleX', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '1', 'blackwidgets' ),
-				'placeholder' => __( '0', 'blackwidgets' ),
+				'default' => esc_html__( '1', 'blackwidgets' ),
+				'placeholder' => esc_html__( '0', 'blackwidgets' ),
 			]
 		);
 		
 		$this->add_control(
 			'element_scaley_to',
 			[
-				'label' => __( 'ScaleY', 'blackwidgets' ),
+				'label' => esc_html__( 'ScaleY', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '1', 'blackwidgets' ),
-				'placeholder' => __( '1', 'blackwidgets' ),
+				'default' => esc_html__( '1', 'blackwidgets' ),
+				'placeholder' => esc_html__( '1', 'blackwidgets' ),
 			]
 		);
 		
 		$this->add_control(
 			'element_scalez_to',
 			[
-				'label' => __( 'ScaleZ', 'blackwidgets' ),
+				'label' => esc_html__( 'ScaleZ', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '0', 'blackwidgets' ),
-				'placeholder' => __( '0', 'blackwidgets' ),
+				'default' => esc_html__( '0', 'blackwidgets' ),
+				'placeholder' => esc_html__( '0', 'blackwidgets' ),
 			]
 		);
 		
 		$this->add_control(
 			'element_skewx_to',
 			[
-				'label' => __( 'SkewX', 'blackwidgets' ),
+				'label' => esc_html__( 'SkewX', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '0', 'blackwidgets' ),
-				'placeholder' => __( '0', 'blackwidgets' ),
+				'default' => esc_html__( '0', 'blackwidgets' ),
+				'placeholder' => esc_html__( '0', 'blackwidgets' ),
 			]
 		);
 		
 		$this->add_control(
 			'element_skewy_to',
 			[
-				'label' => __( 'SkewY', 'blackwidgets' ),
+				'label' => esc_html__( 'SkewY', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '0', 'blackwidgets' ),
-				'placeholder' => __( '0', 'blackwidgets' ),
+				'default' => esc_html__( '0', 'blackwidgets' ),
+				'placeholder' => esc_html__( '0', 'blackwidgets' ),
 			]
 		);
 		
 		$this->add_control(
 			'element_movex_to',
 			[
-				'label' => __( 'MoveX', 'blackwidgets' ),
+				'label' => esc_html__( 'MoveX', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '0', 'blackwidgets' ),
-				'placeholder' => __( '0', 'blackwidgets' ),
+				'default' => esc_html__( '0', 'blackwidgets' ),
+				'placeholder' => esc_html__( '0', 'blackwidgets' ),
 			]
 		);
 		
 		$this->add_control(
 			'element_movey_to',
 			[
-				'label' => __( 'MoveY', 'blackwidgets' ),
+				'label' => esc_html__( 'MoveY', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '0', 'blackwidgets' ),
-				'placeholder' => __( '0', 'blackwidgets' ),
+				'default' => esc_html__( '0', 'blackwidgets' ),
+				'placeholder' => esc_html__( '0', 'blackwidgets' ),
 			]
 		);
 		
 		$this->add_control(
 			'element_movez_to',
 			[
-				'label' => __( 'MoveZ', 'blackwidgets' ),
+				'label' => esc_html__( 'MoveZ', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '0', 'blackwidgets' ),
-				'placeholder' => __( '0', 'blackwidgets' ),
+				'default' => esc_html__( '0', 'blackwidgets' ),
+				'placeholder' => esc_html__( '0', 'blackwidgets' ),
 			]
 		);
 		
 		$this->add_control(
 			'element_autoalpha_to',
 			[
-				'label' => __( 'Auto Alpha', 'blackwidgets' ),
+				'label' => esc_html__( 'Auto Alpha', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '1', 'blackwidgets' ),
-				'placeholder' => __( '1', 'blackwidgets' ),
+				'default' => esc_html__( '1', 'blackwidgets' ),
+				'placeholder' => esc_html__( '1', 'blackwidgets' ),
 			]
 		);
 		
 		$this->add_control(
 			'element_perspective_to',
 			[
-				'label' => __( 'Preserve', 'blackwidgets' ),
+				'label' => esc_html__( 'Preserve', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( '0', 'blackwidgets' ),
-				'placeholder' => __( '0', 'blackwidgets' ),
+				'default' => esc_html__( '0', 'blackwidgets' ),
+				'placeholder' => esc_html__( '0', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'element_transformstyle_to',
 			[
-				'label' => __( 'Transform Style', 'blackwidgets' ),
+				'label' => esc_html__( 'Transform Style', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'preserve-3d', 'blackwidgets' ),
-				'placeholder' => __( 'preserve-3d', 'blackwidgets' ),
+				'default' => esc_html__( 'preserve-3d', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'preserve-3d', 'blackwidgets' ),
 			]
 		);
 
@@ -617,7 +631,7 @@ ONLINE
 		$this->start_controls_section(
 			'content_html_js',
 			[
-				'label' => __( 'JS for HTML Content', 'blackwidgets' ),
+				'label' => esc_html__( 'JS for HTML Content', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 				'condition'  => [
 					'widget_type' => [
@@ -631,7 +645,7 @@ ONLINE
 		$this->add_control(
 			'widget_html_js_gsap_timeline_scroll_trigger',
 			[
-				'label' => __( 'JS: GSAP timeline > scrollTrigger', 'blackwidgets' ),
+				'label' => esc_html__( 'JS: GSAP timeline > scrollTrigger', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXTAREA,
 				'rows' => 21,
 				'default' =>
@@ -644,14 +658,14 @@ start: "top center",
 end: "bottom",
 // markers: true, // enable it to to show the markers
 ',
-				'description' => __( 'Put your transform properties tags here for "from"', 'blackwidgets' ),
+				'description' => esc_html__( 'Put your transform properties tags here for "from"', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'widget_html_js_tl_from',
 			[
-				'label' => __( 'JS: GSAP tl.from', 'blackwidgets' ),
+				'label' => esc_html__( 'JS: GSAP tl.from', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXTAREA,
 				'rows' => 21,
 				'default' => 
@@ -671,14 +685,14 @@ y: "25",
 autoAlpha:1,
 transformStyle: "preserve-3d",
 ',
-				'description' => __( 'Put your transform properties tags here for "from"', 'blackwidgets' ),
+				'description' => esc_html__( 'Put your transform properties tags here for "from"', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'widget_html_js_tl_to',
 			[
-				'label' => __( 'JS: GSAP tl.to', 'blackwidgets' ),
+				'label' => esc_html__( 'JS: GSAP tl.to', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXTAREA,
 				'rows' => 21,
 				'default' => 
@@ -697,7 +711,7 @@ x: "0",
 y: "0",
 transformStyle: "preserve-3d",
 ',
-				'description' => __( 'Put your transform properties tags here for "to"', 'blackwidgets' ),
+				'description' => esc_html__( 'Put your transform properties tags here for "to"', 'blackwidgets' ),
 			]
 		);
 
@@ -709,7 +723,7 @@ transformStyle: "preserve-3d",
 		$this->start_controls_section(
 			'style_section',
 			[
-				'label' => __( 'Box Style', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -719,7 +733,7 @@ transformStyle: "preserve-3d",
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_box_background',
-				'label' => __( 'Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-img-trigger-x, {{WRAPPER}} .bw-gsap-code-box',
 			]
@@ -730,7 +744,7 @@ transformStyle: "preserve-3d",
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_box_border',
-				'label' => __( 'Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-img-trigger-x, {{WRAPPER}} .bw-gsap-code-box',
 			]
 		);
@@ -740,7 +754,7 @@ transformStyle: "preserve-3d",
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_box_box_shadow',
-				'label' => __( 'Box Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-img-trigger-x, {{WRAPPER}} .bw-gsap-code-box',
 			]
 		);
@@ -748,7 +762,7 @@ transformStyle: "preserve-3d",
 		$this->add_control(
 			'widget_box_border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -761,7 +775,7 @@ transformStyle: "preserve-3d",
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
-				'label' => __( 'Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -774,7 +788,7 @@ transformStyle: "preserve-3d",
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
-				'label' => __( 'Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -791,7 +805,7 @@ transformStyle: "preserve-3d",
 		$this->start_controls_section(
 			'typo_section',
 			[
-				'label' => __( 'Typography Style', 'blackwidgets' ),
+				'label' => esc_html__( 'Typography Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 				'condition'  => [
 					'widget_type' => [
@@ -805,7 +819,7 @@ transformStyle: "preserve-3d",
 		$this->add_control(
 			'style_alert_color',
 			[
-				'label' => __( 'Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bw-gsap-code-box' => 'color: {{VALUE}}',
@@ -818,7 +832,7 @@ transformStyle: "preserve-3d",
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'style_alert_typography1',
-				'label' => __( 'Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'Typography', 'blackwidgets' ),
 				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-gsap-code-box',
 			]
@@ -829,7 +843,7 @@ transformStyle: "preserve-3d",
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'style_alert_text_shadow',
-				'label' => __( 'Text Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-gsap-code-box',
 			]
         );
@@ -844,7 +858,7 @@ transformStyle: "preserve-3d",
 		$this->add_control(
 			'style_icon_alert_size',
 			[
-				'label' => __( 'Icon Size', 'blackwidgets' ),
+				'label' => esc_html__( 'Icon Size', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -864,7 +878,7 @@ transformStyle: "preserve-3d",
 		$this->add_control(
 			'style_icon_alert_color',
 			[
-				'label' => __( 'Icon Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Icon Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bw-gsap-code-box i' => 'color: {{VALUE}}',
@@ -877,7 +891,7 @@ transformStyle: "preserve-3d",
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'style_Icon_alert_text_shadow',
-				'label' => __( 'Text Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-gsap-code-box i',
 			]
         );

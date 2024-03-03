@@ -102,19 +102,33 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => __( 'Content', 'blackwidgets' ),
+				'label' => esc_html__( 'Content', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'custom_panel_alert',
+			[
+				'type' => \Elementor\Controls_Manager::ALERT,
+				'alert_type' => 'info',     /* info, success, warning, danger */
+				'heading' => esc_html__( 'Feel free to edit. Check this widget\'s demo.', 'blackwidgets' ),
+				'content' => sprintf(
+					'%s <a href="https://modernaweb.net/black-widgets/all-widgets/black-blockquote/" target="_blank">%s</a>',
+					esc_html__( 'Check ', 'blackwidgets' ),
+					esc_html__( 'Demo', 'blackwidgets' )
+				),
 			]
 		);
 
 		$this->add_control(
 			'widget_description',
 			[
-				'label' => __( 'Quote', 'blackwidgets' ),
+				'label' => esc_html__( 'Quote', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXTAREA,
 				'rows' => 5,
-				'default' => __( 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.', 'blackwidgets' ),
-				'placeholder' => __( 'Type your description here', 'blackwidgets' ),
+				'default' => esc_html__( 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'Type your description here', 'blackwidgets' ),
 			]
 		);
 
@@ -122,11 +136,11 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_title',
 			[
-				'label' => __( 'Name', 'blackwidgets' ),
+				'label' => esc_html__( 'Name', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Black Widget', 'blackwidgets' ),
-				'placeholder' => __( 'Type your title here', 'blackwidgets' ),
-				'description' => __( 'You can use all other HTML tags into the title field e.g. code, mark, abbr, blockquote and  ...', 'blackwidgets' ),
+				'default' => esc_html__( 'Black Widget', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'Type your title here', 'blackwidgets' ),
+				'description' => esc_html__( 'You can use all other HTML tags into the title field e.g. code, mark, abbr, blockquote and  ...', 'blackwidgets' ),
 			]
 		);
 
@@ -134,16 +148,16 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_control(
 			'quote_type',
 			[
-				'label' => __( 'Select Quote Icon', 'blackwidgets' ),
+				'label' => esc_html__( 'Select Quote Icon', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'svg-2',
 				'options' => [
-					'svg-1' 	=> __( 'SVG 1', 'blackwidgets' ),
-					'svg-2' 	=> __( 'SVG 2', 'blackwidgets' ),
-					'svg-3' 	=> __( 'SVG 3', 'blackwidgets' ),
-					'svg-4' 	=> __( 'SVG 4', 'blackwidgets' ),
-					'icon' 		=> __( 'Icon', 'blackwidgets' ),
-					'custom' 	=> __( 'Image/SVG', 'blackwidgets' ),
+					'svg-1' 	=> esc_html__( 'SVG 1', 'blackwidgets' ),
+					'svg-2' 	=> esc_html__( 'SVG 2', 'blackwidgets' ),
+					'svg-3' 	=> esc_html__( 'SVG 3', 'blackwidgets' ),
+					'svg-4' 	=> esc_html__( 'SVG 4', 'blackwidgets' ),
+					'icon' 		=> esc_html__( 'Icon', 'blackwidgets' ),
+					'custom' 	=> esc_html__( 'Image/SVG', 'blackwidgets' ),
 				],
 			]
 		);
@@ -151,7 +165,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_control(
 			'icon_widget',
 			[
-				'label' => __( 'Icon', 'blackwidgets' ),
+				'label' => esc_html__( 'Icon', 'blackwidgets' ),
 				'type' => Controls_Manager::ICONS,
 				'default' => [
 					'value' => 'eicon eicon-nerd',
@@ -168,7 +182,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_control(
 			'image_widget',
 			[
-				'label' => __( 'Choose Image', 'blackwidgets' ),
+				'label' => esc_html__( 'Choose Image', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::MEDIA,
 				'default' => [
 					'url' => \Elementor\Utils::get_placeholder_image_src(),
@@ -201,15 +215,15 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_alignment',
 			[
-				'label'     => __( 'Text Alignment', 'blackwidgets' ),
+				'label'     => esc_html__( 'Text Alignment', 'blackwidgets' ),
 				'type'      => \Elementor\Controls_Manager::CHOOSE,
 				'options'   => [
 					'left'   => [
-						'title' => __( 'Left', 'blackwidgets' ),
+						'title' => esc_html__( 'Left', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'right'  => [
-						'title' => __( 'Right', 'blackwidgets' ),
+						'title' => esc_html__( 'Right', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -225,7 +239,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section',
 			[
-				'label' => __( 'Box Style', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -235,7 +249,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_1_normal',
 			[
-				'label' => __( 'Normal', 'blackwidgets' ),
+				'label' => esc_html__( 'Normal', 'blackwidgets' ),
 			]
 		);
 
@@ -244,7 +258,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_box_background',
-				'label' => __( 'Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-blockquote',
 			]
@@ -261,7 +275,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
-				'label' => __( 'Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -274,7 +288,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
-				'label' => __( 'Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -295,7 +309,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_box_border',
-				'label' => __( 'Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-blockquote',
 			]
 		);
@@ -305,7 +319,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_box_box_shadow',
-				'label' => __( 'Box Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-blockquote',
 			]
 		);
@@ -313,7 +327,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_box_border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -326,7 +340,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_1_hover',
 			[
-				'label' => __( 'Hover', 'blackwidgets' ),
+				'label' => esc_html__( 'Hover', 'blackwidgets' ),
 			]
 		);
 
@@ -335,7 +349,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_hover_box_background',
-				'label' => __( 'Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', ],
 				'selector' => '{{WRAPPER}} .bw-blockquote:hover',
 			]
@@ -352,7 +366,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_hover_box_margin',
 			[
-				'label' => __( 'Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -365,7 +379,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_hover_box_padding',
 			[
-				'label' => __( 'Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -386,7 +400,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_hover_box_border',
-				'label' => __( 'Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-blockquote:hover',
 			]
 		);
@@ -396,7 +410,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_hover_box_box_shadow',
-				'label' => __( 'Box Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-blockquote:hover',
 			]
 		);
@@ -404,7 +418,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_hover_box_border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -426,7 +440,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content_style_section',
 			[
-				'label' => __( 'Content Style', 'blackwidgets' ),
+				'label' => esc_html__( 'Content Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -435,7 +449,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'content_style_margin',
 			[
-				'label' => __( 'Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -448,7 +462,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'content_style_padding',
 			[
-				'label' => __( 'Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -462,7 +476,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'content_style_border',
-				'label' => __( 'Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-blockquote .content',
 			]
 		);
@@ -471,7 +485,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_control(
 			'content_style_border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -488,7 +502,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'quote_style_section',
 			[
-				'label' => __( 'Quote Styles', 'blackwidgets' ),
+				'label' => esc_html__( 'Quote Styles', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -497,7 +511,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'quote_tab_1',
 			[
-				'label' => __( 'Normal', 'blackwidgets' ),
+				'label' => esc_html__( 'Normal', 'blackwidgets' ),
 			]
 		);
 
@@ -505,7 +519,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_icon_box_quote_normal_color',
 			[
-				'label' => __( 'Normal Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Normal Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Color::get_type(),
@@ -521,7 +535,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'quote_tab_2',
 			[
-				'label' => __( 'Hover', 'blackwidgets' ),
+				'label' => esc_html__( 'Hover', 'blackwidgets' ),
 			]
 		);
 
@@ -529,7 +543,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_icon_box_quote_hover_color',
 			[
-				'label' => __( 'Hover Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Hover Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Color::get_type(),
@@ -556,7 +570,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'content_quote_typographys',
-				'label' => __( 'Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'Typography', 'blackwidgets' ),
 				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-blockquote .content .bw-description',
 			]
@@ -567,7 +581,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'content_quote_text_shadow',
-				'label' => __( 'Text Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-blockquote .content .bw-description',
 			]
 		);
@@ -577,7 +591,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'content_quote_background',
-				'label' => __( 'Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-blockquote .content .bw-description',
 			]
@@ -587,7 +601,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'content_quote__margin',
 			[
-				'label' => __( 'Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -600,7 +614,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'content_quote__padding',
 			[
-				'label' => __( 'Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -614,7 +628,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'content_quote__border',
-				'label' => __( 'Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-blockquote .content .bw-description',
 			]
 		);
@@ -623,7 +637,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_control(
 			'content_quote__border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -637,7 +651,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'content_quote__box_shadow',
-				'label' => __( 'Box Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-blockquote .content .bw-description',
 			]
 		);
@@ -650,7 +664,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'name_style_section',
 			[
-				'label' => __( 'Name Styles', 'blackwidgets' ),
+				'label' => esc_html__( 'Name Styles', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -659,7 +673,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'name_tab_1',
 			[
-				'label' => __( 'Normal', 'blackwidgets' ),
+				'label' => esc_html__( 'Normal', 'blackwidgets' ),
 			]
 		);
 
@@ -667,7 +681,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_icon_box_name_normal_color',
 			[
-				'label' => __( 'Normal Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Normal Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Color::get_type(),
@@ -683,7 +697,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'name_tab_2',
 			[
-				'label' => __( 'Hover', 'blackwidgets' ),
+				'label' => esc_html__( 'Hover', 'blackwidgets' ),
 			]
 		);
 
@@ -691,7 +705,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_icon_box_name_hover_color',
 			[
-				'label' => __( 'Hover Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Hover Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Color::get_type(),
@@ -718,7 +732,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'content_name_typographys',
-				'label' => __( 'Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'Typography', 'blackwidgets' ),
 				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-blockquote .content .bw-name',
 			]
@@ -729,7 +743,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'content_name_text_shadow',
-				'label' => __( 'Text Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-blockquote .content .bw-name',
 			]
 		);
@@ -739,7 +753,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'content_name_background',
-				'label' => __( 'Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-blockquote .content .bw-name',
 			]
@@ -749,7 +763,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'content_name__margin',
 			[
-				'label' => __( 'Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -762,7 +776,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'content_name__padding',
 			[
-				'label' => __( 'Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -776,7 +790,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'content_name__border',
-				'label' => __( 'Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-blockquote .content .bw-name',
 			]
 		);
@@ -785,7 +799,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_control(
 			'content_name__border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -799,7 +813,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'content_name__box_shadow',
-				'label' => __( 'Box Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-blockquote .content .bw-name',
 			]
 		);
@@ -812,7 +826,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'icon_svg_image_style_section',
 			[
-				'label' => __( ' SVG/Image/Icon Styles', 'blackwidgets' ),
+				'label' => esc_html__( ' SVG/Image/Icon Styles', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -820,7 +834,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_icon_quote_size',
 			[
-				'label' => __( 'Icon Size', 'blackwidgets' ),
+				'label' => esc_html__( 'Icon Size', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -845,7 +859,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_icon_quote_color',
 			[
-				'label' => __( 'Icon Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Icon Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Color::get_type(),
@@ -865,7 +879,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_svg_quote_size',
 			[
-				'label' => __( 'SVG Size', 'blackwidgets' ),
+				'label' => esc_html__( 'SVG Size', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -893,7 +907,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_svg_quote_color',
 			[
-				'label' => __( 'SVG Color', 'blackwidgets' ),
+				'label' => esc_html__( 'SVG Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Color::get_type(),
@@ -917,7 +931,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'custom__margin',
 			[
-				'label' => __( 'Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -930,7 +944,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'custom__padding',
 			[
-				'label' => __( 'Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -944,7 +958,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'custom__border',
-				'label' => __( 'Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-blockquote .bw-icon-into i, {{WRAPPER}} .bw-blockquote .bw-icon-into img, {{WRAPPER}} .bw-blockquote .bw-icon-into svg',
 			]
 		);
@@ -953,7 +967,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 		$this->add_control(
 			'custom__border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -967,7 +981,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'custom__box_shadow',
-				'label' => __( 'Box Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-blockquote .bw-icon-into i, {{WRAPPER}} .bw-blockquote .bw-icon-into img, {{WRAPPER}} .bw-blockquote .bw-icon-into svg',
 			]
         );

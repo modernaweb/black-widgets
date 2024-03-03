@@ -143,6 +143,22 @@
 }
 
 
+/* Blur Class */
+.bw-blur > .elementor-widget-wrap {
+    backdrop-filter: blur(12px) !important;
+}
+
+/* extra margin */
+.no-margin {
+    margin-bottom: 0 !important;
+}
+
+
+/* Black Image */
+.bw-image img {
+    transition: all 0.17s ease;
+}
+
 /* Black Alignment */
 
 .bw-left {
@@ -2918,7 +2934,7 @@
 .bw-button-box.abstract.a-1,
 .bw-button-box.fancy.f-5,
 .bw-button-box.fancy.f-2 {
-    display: block;
+    /* display: block; */
     width: fit-content;
 }
 
@@ -6187,7 +6203,7 @@
     -o-transition: all .38s ease;
 }
 
-.bw-hover-box.bw-style-1 .bw-content-box .bw-title {
+.bw-hover-box.bw-style-1 .bw-title {
     font-weight: 500;
     color: #353640;
     font-size: 28px;
@@ -6196,7 +6212,7 @@
     padding: 0;
 }
 
-.bw-hover-box.bw-style-1 .bw-content-box .bw-description {
+.bw-hover-box.bw-style-1 .bw-description {
     color: #62636b;
     font-weight: 500;
     font-size: 16px;

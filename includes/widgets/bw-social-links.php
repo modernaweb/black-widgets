@@ -100,8 +100,22 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => __( 'Content', 'blackwidgets' ),
+				'label' => esc_html__( 'Content', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'custom_panel_alert',
+			[
+				'type' => \Elementor\Controls_Manager::ALERT,
+				'alert_type' => 'info',     /* info, success, warning, danger */
+				'heading' => esc_html__( 'Feel free to edit. Check this widget\'s demo.', 'blackwidgets' ),
+				'content' => sprintf(
+					'%s <a href="https://modernaweb.net/black-widgets/all-widgets/black-social-links/" target="_blank">%s</a>',
+					esc_html__( 'Check ', 'blackwidgets' ),
+					esc_html__( 'Demo', 'blackwidgets' )
+				),
 			]
 		);
 
@@ -109,16 +123,16 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_type',
 			[
-				'label' => __( 'Select Type', 'blackwidgets' ),
+				'label' => esc_html__( 'Select Type', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'bw-t1',
 				'options' => [
-					'bw-t1' => __( 'Type 1', 'blackwidgets' ),
-					'bw-t2' => __( 'Type 2', 'blackwidgets' ),
-					'bw-t3' => __( 'Type 3', 'blackwidgets' ),
-					'bw-t4' => __( 'Type 4', 'blackwidgets' ),
-					'bw-t5' => __( 'Type 5', 'blackwidgets' ),
-					'bw-t6' => __( 'Type 6 (social name)', 'blackwidgets' ),
+					'bw-t1' => esc_html__( 'Type 1', 'blackwidgets' ),
+					'bw-t2' => esc_html__( 'Type 2', 'blackwidgets' ),
+					'bw-t3' => esc_html__( 'Type 3', 'blackwidgets' ),
+					'bw-t4' => esc_html__( 'Type 4', 'blackwidgets' ),
+					'bw-t5' => esc_html__( 'Type 5', 'blackwidgets' ),
+					'bw-t6' => esc_html__( 'Type 6 (social name)', 'blackwidgets' ),
 				],
 			]
 		);
@@ -127,9 +141,9 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 
 		$repeater->add_control(
 			'social_name', [
-				'label' => __( 'Social Name', 'blackwidgets' ),
+				'label' => esc_html__( 'Social Name', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Facebook' , 'blackwidgets' ),
+				'default' => esc_html__( 'Facebook' , 'blackwidgets' ),
 				'label_block' => true,
 			]
 		);
@@ -137,7 +151,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'icon_widget',
 			[
-				'label' => __( 'Icon', 'blackwidgets' ),
+				'label' => esc_html__( 'Icon', 'blackwidgets' ),
 				'type' => Controls_Manager::ICONS,
 				'default' => [
 					'value' => 'eicon-facebook',
@@ -149,9 +163,9 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'website_link',
 			[
-				'label' => __( 'Link', 'blackwidgets' ),
+				'label' => esc_html__( 'Link', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::URL,
-				'placeholder' => __( 'https://your-link.com', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'https://your-link.com', 'blackwidgets' ),
 				'show_external' => true,
 				'default' => [
 					'url' => '',
@@ -164,18 +178,18 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_control(
 			'list',
 			[
-				'label' => __( 'Repeater List', 'blackwidgets' ),
+				'label' => esc_html__( 'Repeater List', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::REPEATER,
 				'fields' => $repeater->get_controls(),
 				'default' => [
 					[
-						'social_name' => __( 'Facebook', 'blackwidgets' ),
+						'social_name' => esc_html__( 'Facebook', 'blackwidgets' ),
 						'icon_widget' => [
 							'value' => 'eicon-facebook',
 						],
 					],
 					[
-						'social_name' => __( 'Twitter', 'blackwidgets' ),
+						'social_name' => esc_html__( 'Twitter', 'blackwidgets' ),
 						'icon_widget' => [
 							'value' => 'eicon-twitter',
 						],
@@ -189,11 +203,11 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_follow',
 			[
-				'label' => __( 'Title', 'blackwidgets' ),
+				'label' => esc_html__( 'Title', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Follow', 'blackwidgets' ),
-				'placeholder' => __( 'Type your follow here', 'blackwidgets' ),
-				'description' => __( 'Type text like it: Follow', 'blackwidgets' ),
+				'default' => esc_html__( 'Follow', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'Type your follow here', 'blackwidgets' ),
+				'description' => esc_html__( 'Type text like it: Follow', 'blackwidgets' ),
 				'condition'  => [
 					'widget_type' => [
 						'bw-t1',
@@ -210,7 +224,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section',
 			[
-				'label' => __( 'Box Style', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -220,7 +234,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_1_normal',
 			[
-				'label' => __( 'Normal', 'blackwidgets' ),
+				'label' => esc_html__( 'Normal', 'blackwidgets' ),
 			]
 		);
 
@@ -229,7 +243,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_box_background',
-				'label' => __( 'Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-social-links .bw-social',
 			]
@@ -246,7 +260,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
-				'label' => __( 'Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -259,7 +273,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
-				'label' => __( 'Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -280,7 +294,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_box_border',
-				'label' => __( 'Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-social-links .bw-social',
 			]
 		);
@@ -290,7 +304,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_box_box_shadow',
-				'label' => __( 'Box Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-social-links .bw-social',
 			]
 		);
@@ -298,7 +312,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_box_border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -311,7 +325,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_1_hover',
 			[
-				'label' => __( 'Hover', 'blackwidgets' ),
+				'label' => esc_html__( 'Hover', 'blackwidgets' ),
 			]
 		);
 
@@ -320,7 +334,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_hover_box_background',
-				'label' => __( 'Background', 'blackwidgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', ],
 				'selector' => '{{WRAPPER}} .bw-social-links .bw-social:hover',
 			]
@@ -337,7 +351,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_hover_box_margin',
 			[
-				'label' => __( 'Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -350,7 +364,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_hover_box_padding',
 			[
-				'label' => __( 'Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -371,7 +385,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_hover_box_border',
-				'label' => __( 'Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-social-links .bw-social:hover',
 			]
 		);
@@ -381,7 +395,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_hover_box_box_shadow',
-				'label' => __( 'Box Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-social-links .bw-social:hover',
 			]
 		);
@@ -389,7 +403,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_hover_box_border_radius', //param_name
 			[
-				'label' 		=> __( 'Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -411,7 +425,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section_typo',
 			[
-				'label' => __( 'Typography Styling', 'blackwidgets' ),
+				'label' => esc_html__( 'Typography Styling', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -421,7 +435,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_2_normal',
 			[
-				'label' => __( 'Normal', 'blackwidgets' ),
+				'label' => esc_html__( 'Normal', 'blackwidgets' ),
 			]
 		);
 
@@ -429,7 +443,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_social_name_color',
 			[
-				'label' => __( 'Social Name Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Social Name Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Color::get_type(),
@@ -446,7 +460,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'style_main_social_name_typography',
-				'label' => __( 'Social Name Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'Social Name Typography', 'blackwidgets' ),
 				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-social-links .bw-social .bw-social-name, {{WRAPPER}} .bw-social-links.bw-t6 .bw-social',
 			]
@@ -457,7 +471,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'style_main_social_name_text_shadow',
-				'label' => __( 'Social Name Text Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Social Name Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-social-links .bw-social .bw-social-name, {{WRAPPER}} .bw-social-links.bw-t6 .bw-social',
 			]
 		);
@@ -473,7 +487,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_follow_text_color',
 			[
-				'label' => __( 'Follow Link Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Follow Link Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Color::get_type(),
@@ -495,7 +509,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'style_main_follow_text_typography',
-				'label' => __( 'Follow Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'Follow Typography', 'blackwidgets' ),
 				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-social-links .bw-social .bw-follow-text',
 				'condition'  => [
@@ -511,7 +525,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'style_main_follow_text_text_shadow',
-				'label' => __( 'Follow Text Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Follow Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-social-links .bw-social .bw-follow-text',
 				'condition'  => [
 					'widget_type' => [
@@ -526,7 +540,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_social_name_margin',
 			[
-				'label' => __( 'Social Name Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Social Name Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -539,7 +553,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_social_name_padding',
 			[
-				'label' => __( 'Social Name Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Social Name Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -553,7 +567,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'style_main_social_name_border',
-				'label' => __( 'Social Name Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Social Name Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-social-links .bw-social .bw-social-name, {{WRAPPER}} .bw-social-links.bw-t6 .bw-social',
 			]
 		);
@@ -562,7 +576,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_social_name_border_radius', //param_name
 			[
-				'label' 		=> __( 'Social Name Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Social Name Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -575,7 +589,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_follow_text_margin',
 			[
-				'label' => __( 'Follow Text Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Follow Text Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -594,7 +608,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_follow_text_padding',
 			[
-				'label' => __( 'Follow Text Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Follow Text Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -613,7 +627,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'style_main_follow_text_border',
-				'label' => __( 'Follow Text Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Follow Text Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-social-links .bw-social .bw-follow-text',
 				'condition'  => [
 					'widget_type' => [
@@ -627,7 +641,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_follow_text_border_radius', //param_name
 			[
-				'label' 		=> __( 'Follow Text Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Follow Text Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -645,7 +659,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_2_hover',
 			[
-				'label' => __( 'Hover', 'blackwidgets' ),
+				'label' => esc_html__( 'Hover', 'blackwidgets' ),
 			]
 		);
 
@@ -653,7 +667,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_hover_main_social_name_color',
 			[
-				'label' => __( 'Social Name Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Social Name Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Color::get_type(),
@@ -670,7 +684,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'style_hover_main_social_name_typography',
-				'label' => __( 'Social Name Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'Social Name Typography', 'blackwidgets' ),
 				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-social-links .bw-social:hover .bw-social-name, {{WRAPPER}} .bw-social-links.bw-t6 .bw-social:hover',
 			]
@@ -681,7 +695,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'style_hover_main_social_name_text_shadow',
-				'label' => __( 'Social Name Text Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Social Name Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-social-links .bw-social:hover .bw-social-name, {{WRAPPER}} .bw-social-links.bw-t6 .bw-social:hover',
 			]
 		);
@@ -697,7 +711,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_hover_main_follow_text_color',
 			[
-				'label' => __( 'Follow link Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Follow link Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Color::get_type(),
@@ -719,7 +733,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'style_hover_main_follow_text_typography',
-				'label' => __( 'Follow Typography', 'blackwidgets' ),
+				'label' => esc_html__( 'Follow Typography', 'blackwidgets' ),
 				'scheme' => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bw-social-links .bw-social:hover .bw-follow-text',
 				'condition'  => [
@@ -735,7 +749,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'style_hover_main_follow_text_text_shadow',
-				'label' => __( 'Follow Text Shadow', 'blackwidgets' ),
+				'label' => esc_html__( 'Follow Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-social-links .bw-social:hover .bw-follow-text',
 				'condition'  => [
 					'widget_type' => [
@@ -750,7 +764,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_hover_main_social_name_margin',
 			[
-				'label' => __( 'Social Name Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Social Name Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -763,7 +777,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_hover_main_social_name_padding',
 			[
-				'label' => __( 'Social Name Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Social Name Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -777,7 +791,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'style_hover_main_social_name_border',
-				'label' => __( 'Social Name Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Social Name Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-social-links .bw-social:hover .bw-social-name, {{WRAPPER}} .bw-social-links.bw-t6 .bw-social:hover',
 			]
 		);
@@ -786,7 +800,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_hover_main_social_name_border_radius', //param_name
 			[
-				'label' 		=> __( 'Social Name Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Social Name Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -799,7 +813,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_hover_main_follow_text_margin',
 			[
-				'label' => __( 'Follow Text Margin', 'blackwidgets' ),
+				'label' => esc_html__( 'Follow Text Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -818,7 +832,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_hover_main_follow_text_padding',
 			[
-				'label' => __( 'Follow Text Padding', 'blackwidgets' ),
+				'label' => esc_html__( 'Follow Text Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -837,7 +851,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'style_hover_main_follow_text_border',
-				'label' => __( 'Follow Text Border', 'blackwidgets' ),
+				'label' => esc_html__( 'Follow Text Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-social-links .bw-social:hover .bw-follow-text',
 				'condition'  => [
 					'widget_type' => [
@@ -851,7 +865,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_hover_main_follow_text_border_radius', //param_name
 			[
-				'label' 		=> __( 'Follow Text Border Radius', 'blackwidgets' ),
+				'label' 		=> esc_html__( 'Follow Text Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -876,7 +890,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section_for_icon',
 			[
-				'label' => __( 'Icon Styling', 'blackwidgets' ),
+				'label' => esc_html__( 'Icon Styling', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 				'condition'  => [
 					'widget_type!' => [
@@ -891,7 +905,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_3_normal',
 			[
-				'label' => __( 'Normal', 'blackwidgets' ),
+				'label' => esc_html__( 'Normal', 'blackwidgets' ),
 			]
 		);
 
@@ -899,7 +913,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_icon_color',
 			[
-				'label' => __( 'Icon Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Icon Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Color::get_type(),
@@ -914,7 +928,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_icon',
 			[
-				'label' => __( 'Icon Size', 'blackwidgets' ),
+				'label' => esc_html__( 'Icon Size', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range' => [
@@ -939,7 +953,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_3_hover',
 			[
-				'label' => __( 'Hover', 'blackwidgets' ),
+				'label' => esc_html__( 'Hover', 'blackwidgets' ),
 			]
 		);
 
@@ -947,7 +961,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_hover_icon_color',
 			[
-				'label' => __( 'Icon Color', 'blackwidgets' ),
+				'label' => esc_html__( 'Icon Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Color::get_type(),
@@ -962,7 +976,7 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_hover_icon',
 			[
-				'label' => __( 'Icon Size', 'blackwidgets' ),
+				'label' => esc_html__( 'Icon Size', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range' => [
