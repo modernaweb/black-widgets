@@ -2,9 +2,9 @@
 Contributors: skalanter, modernaweb
 Donate link: http://modernaweb.net/
 Tags: page builder, editor, elementor widgets, elementor addon, typography
-Stable tag: 1.3.5
+Stable tag: 1.3.6
 Requires at least: 6.0
-Tested up to: 6.4
+Tested up to: 6.5
 Requires PHP: 7.4
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -106,6 +106,11 @@ WordPress 5.3+
 
 
 ## Changelog
+
+= 1.3.6 — 2024-XX-XX =
+- Added: SVG size and color style for Black Icon Box Pro
+
+
 
 = 1.3.5 — 2024-03-03 =
 - Compatibility: Elementor v3.19 and all experiments and features

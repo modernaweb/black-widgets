@@ -1549,6 +1549,30 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			]
 		);
 
+		// Color
+		$this->add_control(
+			'widget_svg_fill_icon_box_icon_normal_color',
+			[
+				'label' => esc_html__( 'SVG(fill) Normal Color', 'blackwidgets' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg' => 'fill: {{VALUE}}',
+				],
+			]
+		);
+
+		// Color
+		$this->add_control(
+			'widget_svg_stroke_icon_box_icon_normal_color',
+			[
+				'label' => esc_html__( 'SVG(stroke) Normal Color', 'blackwidgets' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg' => 'stroke: {{VALUE}}',
+				],
+			]
+		);
+
 		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
@@ -1556,7 +1580,7 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 				'name' => 'content_icon_normal_background',
 				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
-				'selector' => '{{WRAPPER}} .bw-iconbox .bw-iconbox-icon i',
+				'selector' => '{{WRAPPER}} .bw-iconbox .bw-iconbox-icon i, {{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg',
 			]
 		);
 
@@ -1580,6 +1604,28 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'widget_svg_fill_icon_box_icon_hover_color',
+			[
+				'label' => esc_html__( 'SVG(fill) Hover Color', 'blackwidgets' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon:hover svg' => 'fill: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_control(
+			'widget_svg_stroke_icon_box_icon_hover_color',
+			[
+				'label' => esc_html__( 'SVG(stroke) Hover Color', 'blackwidgets' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon:hover svg' => 'stroke: {{VALUE}}',
+				],
+			]
+		);
+
 		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
@@ -1587,7 +1633,7 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 				'name' => 'content_icon_hover_background',
 				'label' => esc_html__( 'Hover Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
-				'selector' => '{{WRAPPER}} .bw-iconbox .bw-iconbox-icon:hover i',
+				'selector' => '{{WRAPPER}} .bw-iconbox .bw-iconbox-icon:hover i, {{WRAPPER}} .bw-iconbox .bw-iconbox-icon:hover svg',
 			]
 		);
 
@@ -1616,6 +1662,25 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon i' => 'font-size: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'content_svg_icon_size',
+			[
+				'label' => esc_html__( 'SVG Width', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 200,
+						'step' => 5,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg' => 'width: {{SIZE}}{{UNIT}} !important; height: auto !important;',
 				],
 			]
 		);
@@ -1652,7 +1717,7 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon i' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon i, {{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1665,7 +1730,7 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon i' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon i, {{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1688,7 +1753,7 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon i' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon i, {{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1699,7 +1764,7 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			[
 				'name' => 'content_icon__box_shadow',
 				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .bw-iconbox .bw-iconbox-icon i',
+				'selector' => '{{WRAPPER}} .bw-iconbox .bw-iconbox-icon i, {{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg',
 			]
 		);
 
