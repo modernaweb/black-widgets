@@ -2241,13 +2241,17 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 	protected function render() {
 
 		$settings   	= $this->get_settings_for_display();
-
 		// Variables
         $type 	                = isset($settings['widget_type'])                        ? $settings['widget_type']						: '';
 		$shape 	                = isset($settings['shape_widget'])						 ? $settings['shape_widget']					: '';
+		// Added this for XSS — Vulnerable to Cross Site Scripting (XSS)
+		$allowed_tags 			= ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'];
 		$title_tag 				= isset($settings['widget_html_tag_title'])				 ? $settings['widget_html_tag_title']			: '';
+		// Validate the HTML tag
+		if (!in_array($title_tag, $allowed_tags)) {
+			$title_tag = 'div';
+		}
         $title 			        = isset($settings['widget_title'])                       ? $settings['widget_title']					: '';
-        // $alignment 		        = isset($settings['widget_alignment'])                   ? $settings['widget_alignment']				: '';
         $alignment 		        = '';
         $title_scrub			= isset($settings['title_scrub'])                        ? $settings['title_scrub']						: '';
         $vertical				= isset($settings['vertical_title_display'])			 ? $settings['vertical_title_display']			: '';
@@ -2343,53 +2347,47 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$unique_z_index			= isset($settings['unique_z_index'])					? '#'.$data_id.' .bw-unique {z-index:'.$settings['unique_z_index'].'; position: relative;}'          			 	: '';
 		// Create a Custom CSS for Normal and Hover Styles
 		$normal_transform_style = ($normal_transform == 'normal_transform')				? "#$data_id { $perspective transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; -webkit-transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; $scale3dx }" : '';
-
 		$options = get_option('plugin_options') ? get_option('plugin_options') : '';
         $gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
-
-	
 		$second_bw_id			= 'second_bw_' . uniqid();
 		$second_bwscript_id		= '#' . $second_bw_id;
 
 		echo '<style>'.$normal_transform_style.' '.$z_index.' '.$unique_z_index.'</style>';
-
-
-		
 
 		// Render
         echo '<div class="bw-typograpgy '.$type.' '.$alignment.' '.$custom_style_x.' '.$gradient.'">';
 			echo '<div class="bw-typograpgy-wrap" id="'. $data_id .'">';
 			switch ($type) {
 				case 'bw-t-1': // Type 1
-					echo '<'.$title_tag.' class="bw-typograpgy-main-title bw-'.$vertical.' '.$vertical_rotation.' bw-typography-this-title">'.$title.'</'.$title_tag.'>';
+					echo '<'.esc_attr($title_tag).' class="bw-typograpgy-main-title bw-'.$vertical.' '.$vertical_rotation.' bw-typography-this-title">'.esc_html($title).'</'.esc_attr($title_tag).'>';
 					break;
 				case 'bw-t-2':// Type 2
 					echo '<div class="bw-typograpgy-with-title bw-'.$vertical.' '.$type2.' '.$vertical_rotation.'">';
 					switch ($type2) {
 						case 'style-x-1':
 							echo '<span class="line-1"></span>';
-							echo '<'.$title_tag.' class="bw-bw-t-2-text bw-typography-this-title">'.$title.'</'.$title_tag.'>';
+							echo '<'.esc_attr($title_tag).' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'.esc_attr($title_tag).'>';
 							break;
 						case 'style-x-2':
-							echo '<'.$title_tag.' class="bw-bw-t-2-text bw-typography-this-title">'.$title.'</'.$title_tag.'>';
+							echo '<'.esc_attr($title_tag).' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'.esc_attr($title_tag).'>';
 							echo '<span class="line-2"></span>';
 							break;
 						case 'style-x-3':
 							echo '<span class="line-1"></span>';
-							echo '<'.$title_tag.' class="bw-bw-t-2-text bw-typography-this-title">'.$title.'</'.$title_tag.'>';
+							echo '<'.esc_attr($title_tag).' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'.esc_attr($title_tag).'>';
 							echo '<span class="line-2"></span>';
 							break;
 						case 'style-x-4':
 							echo '<span class="line-1"></span>';
-							echo '<'.$title_tag.' class="bw-bw-t-2-text bw-typography-this-title">'.$title.'</'.$title_tag.'>';
+							echo '<'.esc_attr($title_tag).' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'.esc_attr($title_tag).'>';
 							break;
 						case 'style-x-5':
-							echo '<'.$title_tag.' class="bw-bw-t-2-text bw-typography-this-title">'.$title.'</'.$title_tag.'>';
+							echo '<'.esc_attr($title_tag).' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'.esc_attr($title_tag).'>';
 							echo '<span class="line-2"></span>';
 							break;
 						case 'style-x-6':
 							echo '<span class="line-1"></span>';
-							echo '<'.$title_tag.' class="bw-bw-t-2-text bw-typography-this-title">'.$title.'</'.$title_tag.'>';
+							echo '<'.esc_attr($title_tag).' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'.esc_attr($title_tag).'>';
 							echo '<span class="line-2"></span>';
 							break;
 						case 'custom-style':
@@ -2399,7 +2397,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 								else: echo '<div class="bw-iconbox-img"><img src="'.$image_id_1.'" class="bw-iconbox-image"></div>';
 								endif;
 							echo '</span>';
-							echo '<'.$title_tag.' class="bw-bw-t-2-text '.$alignment.' bw-typography-this-title">'.$title.'</'.$title_tag.'>';
+							echo '<'.esc_attr($title_tag).' class="bw-bw-t-2-text '.$alignment.' bw-typography-this-title">'.esc_html($title).'</'.esc_attr($title_tag).'>';
 							echo '<span class="bw-right-bottom '.$alignment_2.'">';
 								if ( $style_2_type == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset_2, [ 'aria-hidden' => 'true' ] ); echo '</div>';
 								elseif ( $style_2_type == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode_2.'</div>';
@@ -2409,7 +2407,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 							break;
 						default:
 							echo '<span class="line-1"></span>';
-							echo '<'.$title_tag.' class="bw-bw-t-2-text bw-typography-this-title">'.$title.'</'.$title_tag.'>';
+							echo '<'.esc_attr($title_tag).' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'.esc_attr($title_tag).'>';
 							break;
 					}
 					echo '</div>';
@@ -2419,9 +2417,9 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 						$count = 1;
 						while( $count <= $repeat ) {
 							if ($count == $other_style) {
-								echo '<'.$title_tag.' class="bw-typograpgy-repetitive bw-unique bw-typography-this-title">'.$title.'</'.$title_tag.'>';
+								echo '<'.esc_attr($title_tag).' class="bw-typograpgy-repetitive bw-unique bw-typography-this-title">'.esc_html($title).'</'.esc_attr($title_tag).'>';
 							} else {
-								echo '<'.$title_tag.' class="bw-typograpgy-repetitive bw-typography-this-title">'.$title.'</'.$title_tag.'>';
+								echo '<'.esc_attr($title_tag).' class="bw-typograpgy-repetitive bw-typography-this-title">'.esc_html($title).'</'.esc_attr($title_tag).'>';
 							}
 							$count++;
 						}
@@ -2429,14 +2427,14 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 					break;
 				case 'bw-t-4': // Type 4
 					echo '<h2 class="bw-typograpgy-animate words chars splitting '.$vertical_rotation.'" '.$title_scrub.' bw-data-splitting bw-data-splitting bw-data-'.$type4.' id="scrub'.$data_id.'" data-scrub="true">';
-						echo '<span class="word" data-word="'.$title.'" style="--word-index:0;">';
+						echo '<span class="word" data-word="'.esc_html($title).'" style="--word-index:0;">';
 							echo $title;
 						echo '</span>';
 					echo '</h2>';
 
 					break;
 				default: // simple
-					echo '<'.$title_tag.' class="bw-typograpgy-main-title bw-'.$vertical.' '.$vertical_rotation.' bw-typography-this-title">'.$title.'</'.$title_tag.'>';
+					echo '<'.esc_attr($title_tag).' class="bw-typograpgy-main-title bw-'.$vertical.' '.$vertical_rotation.' bw-typography-this-title">'.esc_html($title).'</'.esc_attr($title_tag).'>';
 					break;
 			}
 			echo '</div>';

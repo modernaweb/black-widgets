@@ -1958,15 +1958,23 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 
 		// Variables
 		$settings   			= $this->get_settings_for_display();
-
 		// Title
 		$enable_title			= 'title_enable' === $settings['widget_title_enable']			? $settings['widget_title_enable'] 				: '';
-		$title 					= isset($settings['widget_title']) 								? $settings['widget_title']						: '';
+		$allowed_tags 			= ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'];
 		$title_tag 				= isset($settings['widget_html_tag_title']) 					? $settings['widget_html_tag_title']			: ''; // HTML Tag
+		// Validate the HTML tag
+		if (!in_array($title_tag, $allowed_tags)) {
+			$title_tag 			= 'h3';
+		}
+		$title 					= isset($settings['widget_title']) 								? $settings['widget_title']						: '';
 		// Subtitle
 		$enable_subtitle		= 'subtitle_enable' === $settings['widget_subtitle_enable']		? $settings['widget_subtitle_enable'] 			: '';
-		$subtitle				= isset($settings['widget_subtitle'])							? $settings['widget_subtitle']					: '';
 		$subtitle_tag			= isset($settings['widget_html_tag_subtitle']) 					? $settings['widget_html_tag_subtitle']			: ''; // HTML Tag
+		// Validate the HTML tag
+		if (!in_array($subtitle_tag, $allowed_tags)) {
+			$subtitle_tag 		= 'h4';
+		}
+		$subtitle				= isset($settings['widget_subtitle'])							? $settings['widget_subtitle']					: '';
 		// Paragraph
 		$enable_paragraph		= 'paragraph_enable' === $settings['widget_paragraph_enable']	? $settings['widget_paragraph_enable'] 			: '';
 		$paragraph				= isset($settings['widget_paragraph'])							? $settings['widget_paragraph']					: '';
@@ -1990,10 +1998,8 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 		$subtitle_align			= isset($settings['content_subtitle_text_alignment'])			? $settings['content_subtitle_text_alignment']	: '';
 		$paragraph_align		= isset($settings['content_paragraph_text_alignment'])			? $settings['content_paragraph_text_alignment']	: '';
 		$link_align				= isset($settings['content_link_text_alignment'])				? $settings['content_link_text_alignment']		: '';
-
 		// Icon Position:
 		$icon_position			= isset($settings['the_icon_alignment'])						? $settings['the_icon_alignment']				: '';
-
 		$svg_animate			= 'bw-iconbox-svg-animate' === $settings['widget_svg_animate']	? $settings['widget_svg_animate'] 				: '';
 		$data_id				= 'bw_' . uniqid();
 		$animate_id				= '#' . $data_id;
@@ -2004,15 +2010,15 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			case 'position-2':
 				echo '<div id="' . $data_id . '" class="bw-iconbox bw-box-'.$box_align.' bw-' . $position . ' ' . $svg_animate . '">';
 					// Title
-					if ( $enable_title ) echo '<' . $title_tag . ' class="bw-it-is-title ' . $title_align . '">' . $title . '</' . $title_tag . '>';
+					if ( $enable_title ) echo '<' .esc_attr($title_tag). ' class="bw-it-is-title ' . $title_align . '">' . esc_html($title) . '</' .esc_attr($title_tag). '>';
 					// Subtitle
-					if ( $enable_subtitle ) echo '<' . $subtitle_tag . ' class="bw-it-is-subtitle ' . $subtitle_align . '">' . $subtitle . '</' . $subtitle_tag . '>';
+					if ( $enable_subtitle ) echo '<' .esc_attr($subtitle_tag). ' class="bw-it-is-subtitle ' . $subtitle_align . '">' . esc_html($subtitle) . '</' .esc_attr($subtitle_tag). '>';
 					// Image
 					if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon ' . $icon_position . '">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>'; elseif ( $icon_image == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw ' . $box_align . '">'.$svgcode.'</div>'; else: echo '<div class="bw-iconbox-img ' . $box_align . '"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif;
 					// Paragraph
-					if ( $enable_paragraph ) echo '<p class="bw-it-is-paragraph ' . $paragraph_align . '">' . $paragraph . '</p>';
+					if ( $enable_paragraph ) echo '<p class="bw-it-is-paragraph ' . $paragraph_align . '">' . esc_html($paragraph) . '</p>';
 					// Link
-					if ( $enable_link ) echo '<a href="' . $link . '"' . $link_target . $link_nofollow . ' class="bw-btn ' . $link_align . '">' . $link_text . '</a>';
+					if ( $enable_link ) echo '<a href="' . $link . '"' . $link_target . $link_nofollow . ' class="bw-btn ' . $link_align . '">' . esc_html($link_text) . '</a>';
 				echo '</div>';
 				break;
 
@@ -2025,13 +2031,13 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 						echo '</div>';
 						echo '<div class="bw-content-wrap">';
 							// Title
-							if ( $enable_title ) echo '<' . $title_tag . ' class="bw-it-is-title ' . $title_align . '">' . $title . '</' . $title_tag . '>';
+							if ( $enable_title ) echo '<' .esc_attr($title_tag). ' class="bw-it-is-title ' . $title_align . '">' . esc_html($title) . '</' .esc_attr($title_tag). '>';
 							// Subtitle
-							if ( $enable_subtitle ) echo '<' . $subtitle_tag . ' class="bw-it-is-subtitle ' . $subtitle_align . '">' . $subtitle . '</' . $subtitle_tag . '>';
+							if ( $enable_subtitle ) echo '<' .esc_attr($subtitle_tag). ' class="bw-it-is-subtitle ' . $subtitle_align . '">' . esc_html($subtitle) . '</' .esc_attr($subtitle_tag). '>';
 							// Paragraph
-							if ( $enable_paragraph ) echo '<p class="bw-it-is-paragraph ' . $paragraph_align . '">' . $paragraph . '</p>';
+							if ( $enable_paragraph ) echo '<p class="bw-it-is-paragraph ' . $paragraph_align . '">' . esc_html($paragraph) . '</p>';
 							// Link
-							if ( $enable_link ) echo '<a href="' . $link . '"' . $link_target . $link_nofollow . ' class="bw-btn ' . $link_align . '">' . $link_text . '</a>';
+							if ( $enable_link ) echo '<a href="' . $link . '"' . $link_target . $link_nofollow . ' class="bw-btn ' . $link_align . '">' . esc_html($link_text) . '</a>';
 						echo '</div>';
 					echo '</div>';
 					break;
@@ -2045,14 +2051,14 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 						echo '<div class="bw-typography-wrapper">';
 							echo '<div class="bw-icon-box-title">';
 								// Title
-								if ( $enable_title ) echo '<' . $title_tag . ' class="bw-it-is-title ' . $title_align . '">' . $title . '</' . $title_tag . '>';
+								if ( $enable_title ) echo '<' .esc_attr($title_tag). ' class="bw-it-is-title ' . $title_align . '">' . esc_html($title) . '</' .esc_attr($title_tag). '>';
 								// Subtitle
-								if ( $enable_subtitle ) echo '<' . $subtitle_tag . ' class="bw-it-is-subtitle ' . $subtitle_align . '">' . $subtitle . '</' . $subtitle_tag . '>';
+								if ( $enable_subtitle ) echo '<' .esc_attr($subtitle_tag). ' class="bw-it-is-subtitle ' . $subtitle_align . '">' . esc_html($subtitle) . '</' .esc_attr($subtitle_tag). '>';
 							echo '</div>';
 							// Paragraph
-							if ( $enable_paragraph ) echo '<p class="bw-it-is-paragraph ' . $paragraph_align . '">' . $paragraph . '</p>';
+							if ( $enable_paragraph ) echo '<p class="bw-it-is-paragraph ' . $paragraph_align . '">' . esc_html($paragraph) . '</p>';
 							// Link
-							if ( $enable_link ) echo '<a href="' . $link . '"' . $link_target . $link_nofollow . ' class="bw-btn ' . $link_align . '">' . $link_text . '</a>';
+							if ( $enable_link ) echo '<a href="' . $link . '"' . $link_target . $link_nofollow . ' class="bw-btn ' . $link_align . '">' . esc_html($link_text) . '</a>';
 						echo '</div>';	
 					echo '</div>';
 				echo '</div>';
@@ -2065,13 +2071,13 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 						if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon ' . $icon_position . '">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] );echo '</div>'; elseif ( $icon_image == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div>'; else: echo '<div class="bw-iconbox-img ' . $box_align . '"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif;
 						// elseif ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>';  else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>';
 						// Title
-						if ( $enable_title ) echo '<' . $title_tag . ' class="bw-it-is-title ' . $title_align . '">' . $title . '</' . $title_tag . '>';
+						if ( $enable_title ) echo '<' .esc_attr($title_tag). ' class="bw-it-is-title ' . $title_align . '">' . esc_html($title) . '</' .esc_attr($title_tag). '>';
 						// Subtitle
-						if ( $enable_subtitle ) echo '<' . $subtitle_tag . ' class="bw-it-is-subtitle ' . $subtitle_align . '">' . $subtitle . '</' . $subtitle_tag . '>';
+						if ( $enable_subtitle ) echo '<' .esc_attr($subtitle_tag). ' class="bw-it-is-subtitle ' . $subtitle_align . '">' . esc_html($subtitle) . '</' .esc_attr($subtitle_tag). '>';
 						// Paragraph
-						if ( $enable_paragraph ) echo '<p class="bw-it-is-paragraph ' . $paragraph_align . '">' . $paragraph . '</p>';
+						if ( $enable_paragraph ) echo '<p class="bw-it-is-paragraph ' . $paragraph_align . '">' . esc_html($paragraph) . '</p>';
 						// Link
-						if ( $enable_link ) echo '<a href="' . $link . '"' . $link_target . $link_nofollow . ' class="bw-btn ' . $link_align . '">' . $link_text . '</a>';
+						if ( $enable_link ) echo '<a href="' . $link . '"' . $link_target . $link_nofollow . ' class="bw-btn ' . $link_align . '">' . esc_html($link_text) . '</a>';
 					echo '</div>';
 					break;
 		}

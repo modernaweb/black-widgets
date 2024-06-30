@@ -108,9 +108,8 @@ WordPress 5.3+
 ## Changelog
 
 = 1.3.6 — 2024-XX-XX =
-- Added: SVG size and color style for Black Icon Box Pro
-
-
+- Added: SVG size and color style for Black Icon Box Prov
+- Fixed: Cross-site scripting (XSS) vulnerability in some widgets; Thanks to Patchstack.
 
 = 1.3.5 — 2024-03-03 =
 - Compatibility: Elementor v3.19 and all experiments and features
