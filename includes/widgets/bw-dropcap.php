@@ -633,7 +633,7 @@ class BLACK_WIDGETS_Dropcap extends \Elementor\Widget_Base {
         $description	= isset($settings['widget_dropcap'])	? $settings['widget_dropcap']		: '';
 
 		// Render
-        echo '<div class="bw-dropcap-wrap"><p class="bw-dropcap">' . $description . '</p></div>';
+        echo '<div class="bw-dropcap-wrap"><p class="bw-dropcap">' . esc_html( $description ) . '</p></div>';
 
 	}
 

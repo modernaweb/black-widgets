@@ -333,6 +333,9 @@ class BLACK_WIDGETS_Marquee extends \Elementor\Widget_Base {
 		// Variables
 		// $type 	        = isset($settings['widget_type']) 				? $settings['widget_type'] : '';
 		$alignment		= isset($settings['widget_alignment']) 			? $settings['widget_alignment'] 					: '';
+        if ( ! in_array( $alignment, [ 'left', 'center', 'right' ] ) ) {
+            $alignment = 'center';
+        }
 
 		// Render
 		echo '<div class="bw-icon-box" style="text-align: ' . $alignment . ';">';

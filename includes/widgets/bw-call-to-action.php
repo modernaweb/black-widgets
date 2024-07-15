@@ -953,11 +953,11 @@ class BLACK_WIDGETS_Call_To_Action extends \Elementor\Widget_Base {
 		// Render
 		echo '<div class="bw-cta">';
 			echo '<div class="bw-cta-content">';
-				echo '<' . esc_attr($title_tag) . ' class="bw-cta-title">' . esc_html($title) . '</' . esc_attr($title_tag) . '>'; // Title
-				echo '<' . esc_attr($subtitle_tag) . ' class="bw-cta-subtitle">' . esc_html($subtitle) . '</' . esc_attr($subtitle_tag) . '>'; // Subtitle
+				echo '<' . $title_tag . ' class="bw-cta-title">' . esc_html($title) . '</' . $title_tag . '>'; // Title
+				echo '<' . $subtitle_tag . ' class="bw-cta-subtitle">' . esc_html($subtitle) . '</' . $subtitle_tag . '>'; // Subtitle
 			echo '</div>';
 			echo '<div class="bw-cta-button">';
-				echo '<a href="' . $link . '"' . $link_target . $link_nofollow . ' class="bw-cta-btn">' . esc_html($link_text) . ' ' . $icon_arrow . '</a>'; // Link
+				echo '<a href="' . esc_url( $link ) . '"' . $link_target . $link_nofollow . ' class="bw-cta-btn">' . esc_html($link_text) . ' ' . $icon_arrow . '</a>'; // Link
 			echo '</div>';
         echo '</div>';
 

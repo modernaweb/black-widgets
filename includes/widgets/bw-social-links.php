@@ -1023,24 +1023,24 @@ class BLACK_WIDGETS_Social_Links extends \Elementor\Widget_Base {
         $follow			= isset($settings['widget_follow']) ? $settings['widget_follow'] : '';
 
 		// Render
-		echo '<div class="bw-social-links ' . $type . '">';
+		echo '<div class="bw-social-links ' . esc_attr( $type ) . '">';
 			echo '<div class="bw-social-box">';
 			foreach (  $settings['list'] as $item ) {
 				$target 		= $item['website_link']['is_external'] ? ' target="_blank"' : '';
 				$nofollow 		= $item['website_link']['nofollow'] ? ' rel="nofollow"' : '';
 				if ( $type != 'bw-t6' && $type != 'bw-t1' ) {
-					echo '<a href="' . $item['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-social">';
+					echo '<a href="' . esc_url( $item['website_link']['url'] ) . '"' . $target . $nofollow . ' class="bw-social">';
 						\Elementor\Icons_Manager::render_icon( $item['icon_widget'], [ 'aria-hidden' => 'true' ] );
 					echo '</a>';
 				} elseif ( $type == 'bw-t1' ) {
-					echo '<a href="' . $item['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-social">';
+					echo '<a href="' . esc_url( $item['website_link']['url'] ) . '"' . $target . $nofollow . ' class="bw-social">';
 						\Elementor\Icons_Manager::render_icon( $item['icon_widget'], [ 'aria-hidden' => 'true' ] );
-						echo '<span class="bw-social-name">' . $item['social_name'] . '</span>';
-						echo '<span class="bw-follow-text">' . $follow . '</span>';
+						echo '<span class="bw-social-name">' . esc_html( $item['social_name'] ) . '</span>';
+						echo '<span class="bw-follow-text">' . esc_html( $follow ) . '</span>';
 					echo '</a>';
 				} else {
 					echo '<a href="' . $item['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-social">';
-						echo $item['social_name'];
+						echo esc_html( $item['social_name'] );
 					echo '</a>';
 				}
 			}

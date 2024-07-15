@@ -2261,20 +2261,6 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
         $custom_style_x         = ($type2 == 'custom-style')                             ? 'custom-style'								: '';
         $repeat                 = isset($settings['repetitive_repeat'])                  ? $settings['repetitive_repeat']				: '';
         $other_style            = isset($settings['repetitive_repeat_other_style'])      ? $settings['repetitive_repeat_other_style']	: '';
-		// To
-		$duration	            = !empty($settings['duration']) 						?  $settings['duration'] 							: '';
-		$trigger_hook	        = !empty($settings['trigger_hook']) 					?  $settings['trigger_hook'] 						: '';
-		$horizontal_movement	= !empty($settings['horizontal_movement']) 				? 'x: "' . $settings['horizontal_movement'] . '",' 	: '';
-		$vertical_movement		= !empty($settings['vertical_movement']) 				? 'y: "' . $settings['vertical_movement'] . '",' 	: '';
-		$opacity				= !empty( $settings['opacity'] ) 						? 'opacity: "' . $settings['opacity'] . '",' 		: '';
-		$rotation				= !empty($settings['rotation']) 						? 'rotation: "' . $settings['rotation'] . '",' 		: '';
-		//From
-		$duration2	            = !empty($settings['duration2']) 						?  $settings['duration2'] 							: '';
-		$trigger_hook2	        = !empty($settings['trigger_hook2']) 					?  $settings['trigger_hook2'] 						: '';
-		$horizontal_movement2	= !empty($settings['horizontal_movement2']) 				? 'x: "' . $settings['horizontal_movement2'] . '",' 	: '';
-		$vertical_movement2		= !empty($settings['vertical_movement2']) 				? 'y: "' . $settings['vertical_movement2'] . '",' 	: '';
-		$opacity2				= !empty( $settings['opacity2'] ) 						? 'opacity: "' . $settings['opacity2'] . '",' 		: '';
-		$rotation2				= !empty($settings['rotation2']) 						? 'rotation: "' . $settings['rotation2'] . '",' 		: '';
 		// Overlay 
 		$overlay				= isset($settings['overlay_section_enable'])			? $settings['overlay_section_enable']			: '';
 		// Gradient
@@ -2352,53 +2338,53 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 		$second_bw_id			= 'second_bw_' . uniqid();
 		$second_bwscript_id		= '#' . $second_bw_id;
 
-		echo '<style>'.$normal_transform_style.' '.$z_index.' '.$unique_z_index.'</style>';
+		echo '<style>'. esc_html( $normal_transform_style ) . ' ' . $z_index. ' ' . $unique_z_index.'</style>';
 
 		// Render
-        echo '<div class="bw-typograpgy '.$type.' '.$alignment.' '.$custom_style_x.' '.$gradient.'">';
+        echo '<div class="bw-typograpgy '. esc_attr( $type ) .' '.$alignment.' '.$custom_style_x.' '.$gradient.'">';
 			echo '<div class="bw-typograpgy-wrap" id="'. $data_id .'">';
 			switch ($type) {
 				case 'bw-t-1': // Type 1
-					echo '<'.esc_attr($title_tag).' class="bw-typograpgy-main-title bw-'.$vertical.' '.$vertical_rotation.' bw-typography-this-title">'.esc_html($title).'</'.esc_attr($title_tag).'>';
+					echo '<'. $title_tag .' class="bw-typograpgy-main-title bw-'. esc_attr( $vertical ) .' '. esc_attr( $vertical_rotation ) .' bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>';
 					break;
 				case 'bw-t-2':// Type 2
-					echo '<div class="bw-typograpgy-with-title bw-'.$vertical.' '.$type2.' '.$vertical_rotation.'">';
+					echo '<div class="bw-typograpgy-with-title bw-'. esc_attr( $vertical ) . ' ' . esc_attr( $type2 ) . ' ' . esc_attr( $vertical_rotation ) .'">';
 					switch ($type2) {
 						case 'style-x-1':
 							echo '<span class="line-1"></span>';
-							echo '<'.esc_attr($title_tag).' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'.esc_attr($title_tag).'>';
+							echo '<'. $title_tag .' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>';
 							break;
 						case 'style-x-2':
-							echo '<'.esc_attr($title_tag).' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'.esc_attr($title_tag).'>';
+							echo '<'. $title_tag .' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>';
 							echo '<span class="line-2"></span>';
 							break;
 						case 'style-x-3':
 							echo '<span class="line-1"></span>';
-							echo '<'.esc_attr($title_tag).' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'.esc_attr($title_tag).'>';
+							echo '<'. $title_tag .' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>';
 							echo '<span class="line-2"></span>';
 							break;
 						case 'style-x-4':
 							echo '<span class="line-1"></span>';
-							echo '<'.esc_attr($title_tag).' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'.esc_attr($title_tag).'>';
+							echo '<'. $title_tag .' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>';
 							break;
 						case 'style-x-5':
-							echo '<'.esc_attr($title_tag).' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'.esc_attr($title_tag).'>';
+							echo '<'. $title_tag .' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'.$title_tag .'>';
 							echo '<span class="line-2"></span>';
 							break;
 						case 'style-x-6':
 							echo '<span class="line-1"></span>';
-							echo '<'.esc_attr($title_tag).' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'.esc_attr($title_tag).'>';
+							echo '<'. $title_tag .' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>';
 							echo '<span class="line-2"></span>';
 							break;
 						case 'custom-style':
-							echo '<span class="bw-left-top '.$alignment_1.'">';
+							echo '<span class="bw-left-top '. esc_attr( $alignment_1 ) .'">';
 								if ( $style_1_type == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset_1, [ 'aria-hidden' => 'true' ] ); echo '</div>';
 								elseif ( $style_1_type == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode_1.'</div>';
 								else: echo '<div class="bw-iconbox-img"><img src="'.$image_id_1.'" class="bw-iconbox-image"></div>';
 								endif;
 							echo '</span>';
-							echo '<'.esc_attr($title_tag).' class="bw-bw-t-2-text '.$alignment.' bw-typography-this-title">'.esc_html($title).'</'.esc_attr($title_tag).'>';
-							echo '<span class="bw-right-bottom '.$alignment_2.'">';
+							echo '<'. $title_tag .' class="bw-bw-t-2-text '.$alignment.' bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>';
+							echo '<span class="bw-right-bottom '.esc_attr( $alignment_2 ) .'">';
 								if ( $style_2_type == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset_2, [ 'aria-hidden' => 'true' ] ); echo '</div>';
 								elseif ( $style_2_type == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode_2.'</div>';
 								else: echo '<div class="bw-iconbox-img"><img src="'.$image_id_2.'" class="bw-iconbox-image"></div>';
@@ -2407,34 +2393,34 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 							break;
 						default:
 							echo '<span class="line-1"></span>';
-							echo '<'.esc_attr($title_tag).' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'.esc_attr($title_tag).'>';
+							echo '<'. $title_tag .' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>';
 							break;
 					}
 					echo '</div>';
 					break;
 				case 'bw-t-3': // Type 3
-						if ( !empty($vertical) ) echo '<div class="bw-wrapper-'.$vertical.' '.$vertical_rotation.'">';
+						if ( !empty($vertical) ) echo '<div class="bw-wrapper-'. esc_attr( $vertical ) .' '. esc_attr( $vertical_rotation ) .'">';
 						$count = 1;
 						while( $count <= $repeat ) {
 							if ($count == $other_style) {
-								echo '<'.esc_attr($title_tag).' class="bw-typograpgy-repetitive bw-unique bw-typography-this-title">'.esc_html($title).'</'.esc_attr($title_tag).'>';
+								echo '<'. $title_tag .' class="bw-typograpgy-repetitive bw-unique bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>';
 							} else {
-								echo '<'.esc_attr($title_tag).' class="bw-typograpgy-repetitive bw-typography-this-title">'.esc_html($title).'</'.esc_attr($title_tag).'>';
+								echo '<'. $title_tag .' class="bw-typograpgy-repetitive bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>';
 							}
 							$count++;
 						}
 						if ( !empty($vertical) ) echo '</div>';
 					break;
 				case 'bw-t-4': // Type 4
-					echo '<h2 class="bw-typograpgy-animate words chars splitting '.$vertical_rotation.'" '.$title_scrub.' bw-data-splitting bw-data-splitting bw-data-'.$type4.' id="scrub'.$data_id.'" data-scrub="true">';
-						echo '<span class="word" data-word="'.esc_html($title).'" style="--word-index:0;">';
-							echo $title;
+					echo '<h2 class="bw-typograpgy-animate words chars splitting '. esc_attr( $vertical_rotation ) .'" '. esc_attr( $title_scrub ) .' bw-data-splitting bw-data-splitting bw-data-'. esc_attr( $type4 ) .' id="scrub'.$data_id.'" data-scrub="true">';
+						echo '<span class="word" data-word="'. esc_attr( $title ) .'" style="--word-index:0;">';
+							echo esc_html( $title );
 						echo '</span>';
 					echo '</h2>';
 
 					break;
 				default: // simple
-					echo '<'.esc_attr($title_tag).' class="bw-typograpgy-main-title bw-'.$vertical.' '.$vertical_rotation.' bw-typography-this-title">'.esc_html($title).'</'.esc_attr($title_tag).'>';
+					echo '<'. $title_tag .' class="bw-typograpgy-main-title bw-'. esc_attr( $vertical ) . ' ' . esc_attr( $vertical_rotation ) .' bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>';
 					break;
 			}
 			echo '</div>';
@@ -2442,19 +2428,28 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
         echo '</div>';
 
 		if ( isset($gsap_options) && !empty($gsap_options) ) {
-
 			if ($text_movement2 == 'on') {
+                $duration2 = ! empty( $settings['duration2'] ) ? esc_js( $settings['duration2'] ) : '';
+                $horizontal_movement2 = ! empty( $settings['horizontal_movement2'] ) ? 'x: "' . esc_js( $settings['horizontal_movement2'] ) . '",' : '';
+                $vertical_movement2 = ! empty( $settings['vertical_movement2'] ) ? 'y: "' . esc_js( $settings['vertical_movement2'] ) . '",' : '';
+                $opacity2 = ! empty( $settings['opacity2'] ) ? 'opacity: "' . esc_js( $settings['opacity2'] ) . '",' : '';
+                $rotation2 = ! empty( $settings['rotation2'] ) ? 'rotation: "' . esc_js( $settings['rotation2'] ) . '",' : '';
 				$tlfrom = 'tl.from("#'. $data_id .'", { ' . $opacity2 . $rotation2 . $horizontal_movement2 . $vertical_movement2 . ' duration: '.$duration2.' })';
 			} else {
 				$tlfrom = '';
 			}
 			if ($text_movement == 'on') {
-				$tlto = 'tl.to("#'. $data_id .'", { ' . $opacity . $rotation . $horizontal_movement . $vertical_movement . ' duration: '.$duration.' })';
-			} else {
+                $duration = ! empty( $settings['duration'] ) ? esc_js( $settings['duration'] ) : '';
+                $horizontal_movement = ! empty( $settings['horizontal_movement'] ) ? 'x: "' . esc_js( $settings['horizontal_movement'] ) . '",' : '';
+                $vertical_movement = ! empty( $settings['vertical_movement'] ) ? 'y: "' . esc_js( $settings['vertical_movement'] ) . '",' : '';
+                $opacity = ! empty( $settings['opacity'] ) ? 'opacity: "' . esc_js( $settings['opacity'] ) . '",' : '';
+                $rotation = ! empty( $settings['rotation'] ) ? 'rotation: "' . esc_js( $settings['rotation'] ) . '",' : '';
+                $tlto = 'tl.to("#'. $data_id .'", { ' . $opacity . $rotation . $horizontal_movement . $vertical_movement . ' duration: '.$duration.' })';
+            } else {
 				$tlto = '';
 			}
 
-			echo '<script>
+            echo '<script>
 					jQuery(window).ready(function($) {
 						gsap.registerPlugin(ScrollTrigger);
 						ScrollTrigger.config({ limitCallbacks: true });
@@ -2470,7 +2465,7 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 						'.$tlfrom.'
 						'.$tlto.'
 					});
-				</script>';
+			</script>';
 
 				if( $shape ) {
 					echo '<div class="bw-code-em" id="' . $second_bw_id . '">';
@@ -2478,33 +2473,31 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 					echo '</div>';
 
 					echo '<script>
-					
-					jQuery(window).ready(function($) {
-						jQuery( "' . $second_bwscript_id . '" ).appendTo( $( "'. $script_id .' em" ) );
+                        jQuery(window).ready(function($) {
+                            jQuery( "' . $second_bwscript_id . '" ).appendTo( $( "'. $script_id .' em" ) );
 
-						var scroll = jQuery(window).scrollTop();
-						var objectSelect = jQuery("'. $script_id .'");
-						var bottom = jQuery(window).height();
-						var objectPosition = objectSelect.offset().top - bottom;
-						if (scroll > objectPosition) {
-							jQuery("'. $script_id .' .bw-code-em").addClass("run");
-						} else {
-							jQuery("'. $script_id .' .bw-code-em").removeClass("run");
-						}
+                            var scroll = jQuery(window).scrollTop();
+                            var objectSelect = jQuery("'. $script_id .'");
+                            var bottom = jQuery(window).height();
+                            var objectPosition = objectSelect.offset().top - bottom;
+                            if (scroll > objectPosition) {
+                                jQuery("'. $script_id .' .bw-code-em").addClass("run");
+                            } else {
+                                jQuery("'. $script_id .' .bw-code-em").removeClass("run");
+                            }
+                        });
 
-					});
-					
-					jQuery(window).scroll(function($) {    
-						var scroll = jQuery(window).scrollTop();
-						var objectSelect = jQuery("'. $script_id .'");
-						var bottom = jQuery(window).height();
-						var objectPosition = objectSelect.offset().top - bottom;
-						if (scroll > objectPosition) {
-							jQuery("'. $script_id .' .bw-code-em").addClass("run");
-						} else {
-							jQuery("'. $script_id .' .bw-code-em").removeClass("run");
-						}
-					});
+                        jQuery(window).scroll(function($) {    
+                            var scroll = jQuery(window).scrollTop();
+                            var objectSelect = jQuery("'. $script_id .'");
+                            var bottom = jQuery(window).height();
+                            var objectPosition = objectSelect.offset().top - bottom;
+                            if (scroll > objectPosition) {
+                                jQuery("'. $script_id .' .bw-code-em").addClass("run");
+                            } else {
+                                jQuery("'. $script_id .' .bw-code-em").removeClass("run");
+                            }
+                        });
 					</script>';
 
 				}

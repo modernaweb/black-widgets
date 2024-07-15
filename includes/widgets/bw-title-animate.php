@@ -1234,15 +1234,15 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 
 
 
-echo '<div class="bw-title-animate ' . $alignment . '">';
+echo '<div class="bw-title-animate ' . esc_attr( $alignment ) . '">';
 	switch ($type) {
 		case 'simple':
 			?>
 			<div class="bw-title-anime bw-simple-wrap  <?php echo $data_id ?>">
 				<<?php echo $HTML; ?> class="bw-heading-animate">
-					<span class="bw-before"><?php echo $before_text; ?></span>
-					<span class="bw-simple <?php echo $data_id ?> bw-animate-text"><?php echo $main_text_text; ?></span>
-					<span class="bw-after"><?php echo $after_text; ?></span>
+					<span class="bw-before"><?php echo esc_html( $before_text ); ?></span>
+					<span class="bw-simple <?php echo $data_id ?> bw-animate-text"><?php echo esc_html( $main_text_text ); ?></span>
+					<span class="bw-after"><?php echo esc_html( $after_text ); ?></span>
 				</<?php echo $HTML; ?>>
 			</div>
 			<script>
@@ -1265,9 +1265,9 @@ echo '<div class="bw-title-animate ' . $alignment . '">';
 			<<?php echo $HTML; ?> class="bw-title-anime bw-classic bw-heading-animate <?php echo $data_id ?>">
 				<span class="bw-text-wrapper">
 					<span class="bw-line bw-line1"></span>
-					<span class="bw-letters bw-before"><?php echo $before_text; ?></span>
-					<span class="bw-letters bw-symbol"><?php echo $symbol; ?></span>
-					<span class="bw-letters bw-after"><?php echo $after_text; ?></span>
+					<span class="bw-letters bw-before"><?php echo esc_html( $before_text ); ?></span>
+					<span class="bw-letters bw-symbol"><?php echo esc_html( $symbol ); ?></span>
+					<span class="bw-letters bw-after"><?php echo esc_html( $after_text ); ?></span>
 					<span class="bw-line bw-line2"></span>
 				</span>
 			</<?php echo $HTML; ?>>
@@ -1289,7 +1289,7 @@ echo '<div class="bw-title-animate ' . $alignment . '">';
 			?>
 			<<?php echo $HTML; ?> class="bw-liner bw-heading-animate <?php echo $data_id ?>">
 			<span class="bw-text-wrapper">
-				<span class="bw-letters bw-animate-text"><?php echo $liner; ?></span>
+				<span class="bw-letters bw-animate-text"><?php echo esc_html( $liner ); ?></span>
 				<span class="bw-line"></span>
 			</span>
 			</<?php echo $HTML; ?>>
@@ -1311,9 +1311,9 @@ echo '<div class="bw-title-animate ' . $alignment . '">';
 		case 'effective':
 			?>
 			<<?php echo $HTML; ?> class="bw-effective bw-heading-animate <?php echo $data_id ?>">
-				<span class="bw-letters bw-letters-1 bw-animate-text"><?php echo $la; ?></span>
-				<span class="bw-letters bw-letters-2 bw-animate-text"><?php echo $lb; ?></span>
-				<span class="bw-letters bw-letters-3 bw-animate-text"><?php echo $lc; ?></span>
+				<span class="bw-letters bw-letters-1 bw-animate-text"><?php echo esc_html( $la ); ?></span>
+				<span class="bw-letters bw-letters-2 bw-animate-text"><?php echo esc_html( $lb ); ?></span>
+				<span class="bw-letters bw-letters-3 bw-animate-text"><?php echo esc_html( $lc ); ?></span>
 			</<?php echo $HTML; ?>>
 			<script>
 				jQuery(document).ready(function () {
@@ -1342,7 +1342,7 @@ echo '<div class="bw-title-animate ' . $alignment . '">';
 			<<?php echo $HTML; ?> class="bw-typing bw-heading-animate <?php echo $data_id ?>">
 			<span class="bw-text-wrapper">
 				<span class="bw-line bw-line1"></span>
-				<span class="bw-letters bw-animate-text"><?php echo $typetext; ?></span>
+				<span class="bw-letters bw-animate-text"><?php echo esc_html( $typetext ); ?></span>
 			</span>
 			</<?php echo $HTML; ?>>
 			<script>
@@ -1365,9 +1365,9 @@ echo '<div class="bw-title-animate ' . $alignment . '">';
 			?>
 			<<?php echo $HTML; ?> class="bw-fft bw-heading-animate <?php echo $data_id ?>">
 				<span class="bw-text-wrapper">
-					<span class="bw-before"><?php echo $before_text; ?></span>
-					<span class="bw-letters bw-animate-text"><?php echo $fft; ?></span>
-					<span class="bw-after"><?php echo $after_text; ?></span>
+					<span class="bw-before"><?php echo esc_html( $before_text ); ?></span>
+					<span class="bw-letters bw-animate-text"><?php echo esc_html( $fft ); ?></span>
+					<span class="bw-after"><?php echo esc_html( $after_text ); ?></span>
 				</span>
 			</<?php echo $HTML; ?>>
 			<script>
@@ -1389,9 +1389,9 @@ echo '<div class="bw-title-animate ' . $alignment . '">';
 			?>
 			<<?php echo $HTML; ?> class="bw-ffb bw-heading-animate <?php echo $data_id ?>">
 				<span class="bw-text-wrapper">
-				<span class="bw-before"><?php echo $before_text; ?></span>
-					<span class="bw-letters bw-animate-text"><?php echo $ffb; ?></span>
-					<span class="bw-after"><?php echo $after_text; ?></span>
+				<span class="bw-before"><?php echo esc_html( $before_text ); ?></span>
+					<span class="bw-letters bw-animate-text"><?php echo esc_html( $ffb ); ?></span>
+					<span class="bw-after"><?php echo esc_html( $after_text ); ?></span>
 				</span>
 			</<?php echo $HTML; ?>>
 			<script>
@@ -1412,7 +1412,7 @@ echo '<div class="bw-title-animate ' . $alignment . '">';
 		case 'ffb2': // Fade From Bottom
 			?>
 			<<?php echo $HTML; ?> class="bw-fade-text <?php echo $data_id ?>">
-				<span class="bw-animate-text"><?php echo $ffb2; ?></span>
+				<span class="bw-animate-text"><?php echo esc_html( $ffb2 ); ?></span>
 			</<?php echo $HTML; ?>>
 			<?php
 			break;
@@ -1420,9 +1420,9 @@ echo '<div class="bw-title-animate ' . $alignment . '">';
 			?>
 			<<?php echo $HTML; ?> class="bw-ffl bw-heading-animate <?php echo $data_id ?>">
 				<span class="bw-text-wrapper">
-					<span class="bw-before"><?php echo $before_text; ?></span>
-					<span class="bw-letters bw-animate-text"><?php echo $ffl; ?></span>
-					<span class="bw-after"><?php echo $after_text; ?></span>
+					<span class="bw-before"><?php echo esc_html( $before_text ); ?></span>
+					<span class="bw-letters bw-animate-text"><?php echo esc_html( $ffl ); ?></span>
+					<span class="bw-after"><?php echo esc_html( $after_text ); ?></span>
 				</span>
 			</<?php echo $HTML; ?>>
 			<script>
@@ -1444,9 +1444,9 @@ echo '<div class="bw-title-animate ' . $alignment . '">';
 			?>
 			<<?php echo $HTML; ?> class="bw-ffr bw-heading-animate <?php echo $data_id ?>">
 				<span class="bw-text-wrapper">
-				<span class="bw-before"><?php echo $before_text; ?></span>
-					<span class="bw-letters bw-animate-text"><?php echo $ffr; ?></span>
-					<span class="bw-after"><?php echo $after_text; ?></span>
+				<span class="bw-before"><?php echo esc_html( $before_text ); ?></span>
+					<span class="bw-letters bw-animate-text"><?php echo esc_html( $ffr ); ?></span>
+					<span class="bw-after"><?php echo esc_html( $after_text ); ?></span>
 				</span>
 			</<?php echo $HTML; ?>>
 			<script>
@@ -1467,8 +1467,8 @@ echo '<div class="bw-title-animate ' . $alignment . '">';
 		case 'fade_in':
 			?>
 			<<?php echo $HTML; ?> class="bw-fin bw-heading-animate <?php echo $data_id ?>">
-				<span class="bw-word bw-animate-text"><?php echo $fadein1; ?></span>
-				<span class="bw-word bw-animate-text"><?php echo $fadein2; ?></span>
+				<span class="bw-word bw-animate-text"><?php echo esc_html( $fadein1 ); ?></span>
+				<span class="bw-word bw-animate-text"><?php echo esc_html( $fadein2 ); ?></span>
 			</<?php echo $HTML; ?>>
 			<script>
 				jQuery(document).ready(function () {
@@ -1482,8 +1482,8 @@ echo '<div class="bw-title-animate ' . $alignment . '">';
 		case 'fade_out':
 			?>
 			<<?php echo $HTML; ?> class="bw-fout bw-heading-animate <?php echo $data_id ?>">
-				<span class="bw-word bw-animate-text"><?php echo $fadeout1; ?></span>
-				<span class="bw-word bw-animate-text"><?php echo $fadeout2; ?></span>
+				<span class="bw-word bw-animate-text"><?php echo esc_html( $fadeout1 ); ?></span>
+				<span class="bw-word bw-animate-text"><?php echo esc_html( $fadeout2 ); ?></span>
 			</<?php echo $HTML; ?>>		
 			<script>
 				jQuery(document).ready(function () {
@@ -1497,21 +1497,21 @@ echo '<div class="bw-title-animate ' . $alignment . '">';
 		case 'glitch_one':
 			?>
 			<<?php echo $HTML; ?> class="bw-glitch bw-heading-animate">
-				<span class="bw-glitch bw-animate-text" data-text="<?php echo $glitch; ?>"><?php echo $glitch; ?></span>
+				<span class="bw-glitch bw-animate-text" data-text="<?php echo esc_attr( $glitch ); ?>"><?php echo esc_html( $glitch ); ?></span>
 			</<?php echo $HTML; ?>>
 			<?php
 			break;
 		case 'glitch_two':
 			?>
 			<div class="bw-glitch-wrapper">
-				<<?php echo $HTML; ?> class="bw-glitch bw-animate-text" data-text="<?php echo $glitch; ?>"><?php echo $glitch; ?></<?php echo $HTML; ?>>
+				<<?php echo $HTML; ?> class="bw-glitch bw-animate-text" data-text="<?php echo esc_attr( $glitch ); ?>"><?php echo esc_html( $glitch ); ?></<?php echo $HTML; ?>>
 			</div>
 			<?php
 			break;
 		default: //Glitch Two is default
 			?>
 			<div class="bw-glitch-wrapper">
-				<<?php echo $HTML; ?> class="bw-glitch bw-heading-animate bw-animate-text" data-text="<?php echo $glitch; ?>"><?php echo $glitch; ?></<?php echo $HTML; ?>>
+				<<?php echo $HTML; ?> class="bw-glitch bw-heading-animate bw-animate-text" data-text="<?php echo esc_attr( $glitch ); ?>"><?php echo esc_html( $glitch ); ?></<?php echo $HTML; ?>>
 			</div>
 			<?php
 			break;

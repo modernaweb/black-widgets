@@ -1348,22 +1348,22 @@ class BLACK_WIDGETS_Fade extends \Elementor\Widget_Base {
 		$normal_transform_style 	= ($normal_transform == 'normal_transform') 			? "#$data_id { -webkit-transition: $animate; -o-transition: $animate; transition: $animate; $perspective transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; -webkit-transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; $scale3dx }" : '';
 		$hover_transform_style 		= ($hover_transform == 'hover_transform') 				? "#$data_id:hover { $perspective_hover transform: $perspective_child_hover $skew_hover $rotatex_hover $rotatey_hover $rotatez_hover $scale3d_hover $translate3d_hover; -webkit-transform: $perspective_child_hover $skew_hover $rotatex_hover $rotatey_hover $rotatez_hover $scale3d_hover $translate3d_hover; $scale3dx_hover }" : '';
 		//Return all of the styles
-		echo "<style> $normal_transform_style $hover_transform_style</style>";
+		echo "<style>" . esc_html( $normal_transform_style ) . " " . esc_html( $hover_transform_style ) . "</style>";
 
 		// Render
         switch ($type) {
 			case 'bw-t-1':
-				echo '<div class="bw-load-img bw-cursor-' . $cursor .'" id="'. $data_id .'">';
-					echo '<div class="bw-img ' . $settings['hover_animation'] . '">';
-						if ( $image_link == 'yes') { echo '<a href="' . $settings['image_link_url']['url'] . '"' . $target . $nofollow . ' class="bw-image-link">'; }
-						echo '<div class="bw-image-grow-cover ' . $img_grow . '"></div>';
-							echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail', $settings ) . '" class="' . $img_grow . '">';
+				echo '<div class="bw-load-img bw-cursor-' . esc_attr( $cursor ) .'" id="'. $data_id .'">';
+					echo '<div class="bw-img ' . esc_attr( $settings['hover_animation'] ) . '">';
+						if ( $image_link == 'yes') { echo '<a href="' . esc_url( $settings['image_link_url']['url'] ) . '"' . $target . $nofollow . ' class="bw-image-link">'; }
+						echo '<div class="bw-image-grow-cover ' . esc_attr( $img_grow ) . '"></div>';
+							echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail', $settings ) . '" class="' . esc_attr( $img_grow ) . '">';
 						if ( $image_link == 'yes'){ echo '</a>'; }
 					echo '</div>';
 				echo '</div>';
 				break;
 			default:
-				echo '<div class="bw-line ' . $type . '"></div>';
+				echo '<div class="bw-line ' . esc_attr( $type ) . '"></div>';
 				break;
 		}
 

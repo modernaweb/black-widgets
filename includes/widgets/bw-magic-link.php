@@ -908,6 +908,9 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 		$target         	= $settings['website_link']['is_external'] 		? 'target="_blank"' 					: '';
 		$nofollow       	= $settings['website_link']['nofollow'] 		? ' rel="nofollow"'						: '';
 
+        $type = esc_attr( $type );
+        $text = esc_html( $text );
+
 		// Render
 		switch ($type) {
 			case 'heart':

@@ -269,7 +269,7 @@ class BLACK_WIDGETS_GSAP_HORIZONTAL_SCROLLING extends \Elementor\Widget_Base {
 			echo '</div>';
 		}
 
-			echo '<script>
+        echo '<script>
 				jQuery(window).ready(function($) {
 					gsap.registerPlugin(ScrollTrigger);
 					let sections = gsap.utils.toArray(".bw-section > .elementor");
@@ -294,7 +294,7 @@ class BLACK_WIDGETS_GSAP_HORIZONTAL_SCROLLING extends \Elementor\Widget_Base {
 					};
 					}
 				});
-            </script>';
+        </script>';
 	}
 
 }

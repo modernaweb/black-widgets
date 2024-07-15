@@ -402,9 +402,9 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
         $message        = isset($settings['widget_text']) ? $settings['widget_text'] : '';
 
 		// Render
-        echo '<div class="bw-alert-box ' . $type . '">';
+        echo '<div class="bw-alert-box ' . esc_attr( $type ) . '">';
             \Elementor\Icons_Manager::render_icon( $settings['icon_widget'], [ 'aria-hidden' => 'true' ] );
-            echo $message;
+            echo esc_html( $message );
 
         echo '</div>';
 

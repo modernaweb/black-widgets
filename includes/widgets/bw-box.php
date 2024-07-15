@@ -1743,7 +1743,7 @@ class BLACK_WIDGETS_Box extends \Elementor\Widget_Base {
 		$normal_transform_style 	= ($normal_transform == 'normal_transform') 			? "#$data_id { -webkit-transition: $animate; -o-transition: $animate; transition: $animate; $perspective transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; -webkit-transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; $scale3dx }" : '';
 		$hover_transform_style 		= ($hover_transform == 'hover_transform') 				? "#$data_id:hover { $perspective_hover transform: $perspective_child_hover $skew_hover $rotatex_hover $rotatey_hover $rotatez_hover $scale3d_hover $translate3d_hover; -webkit-transform: $perspective_child_hover $skew_hover $rotatex_hover $rotatey_hover $rotatez_hover $scale3d_hover $translate3d_hover; $scale3dx_hover }" : '';
 		//Return all of the styles
-		echo "<style> $normal_transform_style $hover_transform_style</style>";
+		echo "<style>" . esc_html( $normal_transform_style ) . " " . esc_html( $hover_transform_style ) . "</style>";
 		// Variables
 		$type 			= isset($settings['widget_type']) 									? $settings['widget_type']													: '';
 		$allowed_tags 	= ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'];
@@ -1764,43 +1764,40 @@ class BLACK_WIDGETS_Box extends \Elementor\Widget_Base {
 		$target			= isset($settings['image_link_url']['is_external']) 				? 'target="_blank"'															: '';
         $nofollow		= isset($settings['image_link_url']['nofollow']) 					? ' rel="nofollow"'															: '';
 		
+        $cursor = esc_attr( $cursor );
+
 		// Render
 		if ( $type == 'bw-style-1' ) {
-			echo '<div class="bw-hover-box bw-cursor-' . $cursor .' ' . $type . '" id="'. $data_id .'">';
-				if ( isset($box_link) && $box_link == 'yes' ) { echo '<a href="' . $settings['box_link_url']['url'] . '"' . $target . $nofollow . ' class="bw-image-link">'; }
+			echo '<div class="bw-hover-box bw-cursor-' . $cursor .' ' . esc_attr( $type ) . '" id="'. $data_id .'">';
+				if ( isset($box_link) && $box_link == 'yes' ) { echo '<a href="' . esc_url( $settings['box_link_url']['url'] ) . '"' .  $target . $nofollow . ' class="bw-image-link">'; }
 					echo '<div class="bw-featured-image bw-hover-1">';
 							echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail', $settings ) . '" class="bw-img-tag bw-cursor-' . $cursor .' ' . $settings['hover_animation'] . '">';
 					echo '</div>';
-					echo '<div class="bw-content-box bw-' . $alignment . '">';
-						echo '<' . esc_attr($title_tag) . ' class="bw-title">' .esc_html($title). '</' . esc_attr($title_tag) . '>';
-						echo '<' . esc_attr($subtitle_tag) . ' class="bw-description"> ' .esc_html($subtitle). '</' . esc_attr($subtitle_tag) . '>';
+					echo '<div class="bw-content-box bw-' . esc_attr( $alignment ) . '">';
+						echo '<' . $title_tag . ' class="bw-title">' .esc_html($title). '</' . $title_tag . '>';
+						echo '<' . $subtitle_tag . ' class="bw-description"> ' .esc_html($subtitle). '</' . $subtitle_tag . '>';
 					echo '</div>';
 				if ( isset($box_link) && $box_link == 'yes' ){ echo '</a>'; }
 			echo '</div>';
 		} else if ( $type == 'bw-style-2' ) {
-			echo '<div class="bw-hover-box bw-cursor-' . $cursor .' ' . $type . '" id="'. $data_id .'">';
+			echo '<div class="bw-hover-box bw-cursor-' . $cursor .' ' . esc_attr( $type ) . '" id="'. $data_id .'">';
 			// echo '<div class="mw-portfolio-img">';
 				// echo '<a href="https://modernaweb.net/dsgn/" target="_blank" class="mw-portfolio-link">';
-		if ( isset($box_link) && $box_link == 'yes') { echo '<a href="' . $settings['box_link_url']['url'] . '"' . $target . $nofollow . ' class="bw-hero">'; }
+		if ( isset($box_link) && $box_link == 'yes') { echo '<a href="' . esc_url( $settings['box_link_url']['url'] ) . '"' . $target . $nofollow . ' class="bw-hero">'; }
 				// echo '<img src="https://res.cloudinary.com/modernaweb/images/f_auto,q_auto/v1616775327/portfolio-desgn/portfolio-desgn.png" class="mw-portfolio-hero">';
-					echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail', $settings ) . '" class="bw-img-tag bw-cursor-' . $cursor .' ' . $settings['hover_animation'] . '">';
+					echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail', $settings ) . '" class="bw-img-tag bw-cursor-' . $cursor .' ' . esc_attr( $settings['hover_animation'] ) . '">';
 					echo '<div class="bw-title-box">';
 						echo '<span class="bw-typography">';
-							echo '<' . esc_attr($title_tag) . ' class="bw-title">' .esc_html($title). '</' . esc_attr($title_tag) . '>';
-							echo '<' . esc_attr($subtitle_tag) . ' class="bw-description"> ' .esc_html($subtitle). '</' . esc_attr($subtitle_tag) . '>';
+							echo '<' . $title_tag . ' class="bw-title">' .esc_html($title). '</' . $title_tag . '>';
+							echo '<' . $subtitle_tag . ' class="bw-description"> ' .esc_html($subtitle). '</' . $subtitle_tag . '>';
 						echo '</span>';
 					echo '</div>';
 		if ( isset($box_link) && $box_link == 'yes' ){ echo '</a>'; }
 				// echo '</a>';
 			echo '</div>';
-		} else if ( $type == 'bw-style-6' ) {
-
 		} else {
 			echo '';
 		}
-
-
-
 
 	}
 
