@@ -962,16 +962,21 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 		$settings   			= $this->get_settings_for_display();
 		// Variables
 		$type 	                = isset($settings['sentence_type'])				? $settings['sentence_type']				: '';
+		$allowed_tags 			= ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'];
 		$title_tag 				= isset($settings['widget_html_tag_title']) 	? $settings['widget_html_tag_title']		: '';
+		// Validate the HTML tag
+		if (!in_array($title_tag, $allowed_tags)) {
+			$title_tag = 'h1';
+		}
+        $title 			        = isset($settings['widget_title'])				? $settings['widget_title']		: '';
 		$justify 	            = isset($settings['justify_positioning'])		? $settings['justify_positioning']			: '';
-		
 		$data_id				= 'bw_' . uniqid();
 		$script_id				= '#' . $data_id;
 
 		// Render
         if ( $settings['sentence'] ) {
 			echo '<div class="bw-sentence bw-showcase">';
-				echo '<' . $title_tag . ' class="bw-sentence-items bw-'.$justify.'">';
+				echo '<'. $title_tag .' class="bw-sentence-items bw-'. esc_attr( $justify ) .'">';
 					foreach (  $settings['sentence'] as $item ) {
 
 						// inner settings for each item
@@ -985,25 +990,26 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 						$gradient_txt		= ($gradient == 'gradient_enable')				? 'bw-gradient'							: '';
 
 						if( $item['sentence_type'] == 'bw-t-1' ) {
-							echo '<span class="elementor-repeater-item-' . $item['_id'] . ' '.$item['sentence_type'].' '.$gradient_txt.'">';
-								if(isset($item['widget_link_url'])) { echo '<a href="' . $item['widget_link_url']['url'] . '"' . $target . $nofollow . ' class="bw-item-link' . $type . '">'; }
-									echo $item['sentence_title'];
+							echo '<span class="elementor-repeater-item-' . $item['_id'] . ' '. esc_attr( $item['sentence_type'] ) .' '.$gradient_txt.'">';
+								if(isset($item['widget_link_url'])) { echo '<a href="' . esc_url( $item['widget_link_url']['url'] ) . '"' . $target . $nofollow . ' class="bw-item-link' . $type . '">'; }
+									// echo $item['sentence_title'];
+									echo esc_html($item['sentence_title']);
 								if(isset($item['widget_link_url'])) { echo '</a>'; }
 							echo '</span>';	
 						}
 
 						if( $item['sentence_type'] == 'bw-t-2' ) {
 							$position = isset($item['sentence_image_position'])			? $item['sentence_image_position']		: '';
-							echo '<span class="elementor-repeater-item-' . $item['_id'] . ' '.$item['sentence_type'].' bw-sentence-'.$position.'">';
+							echo '<span class="elementor-repeater-item-' . $item['_id'] . ' '. esc_attr( $item['sentence_type'] ).' bw-sentence-'. esc_attr( $position ) .'">';
 								// echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $item['sentence_image']['id'], 'thumbnail', $settings ) . '">';
-								if(isset($item['widget_link_url'])) { echo '<a href="' . $item['widget_link_url']['url'] . '"' . $target . $nofollow . ' class="bw-item-link' . $type . '">'; }
-									echo '<img src="' . $item['sentence_image']['url'] . '">';
+								if(isset($item['widget_link_url'])) { echo '<a href="' . esc_url( $item['widget_link_url']['url'] ) . '"' . $target . $nofollow . ' class="bw-item-link' . $type . '">'; }
+									echo '<img src="' . esc_url( $item['sentence_image']['url'] ) . '">';
 								if(isset($item['widget_link_url'])) { echo '</a>'; }
 							echo '</span>';	
 						}
 	
 					}
-				echo '</' . $title_tag . '>';
+				echo '</'. $title_tag .'>';
 			echo '</div>';
 		}
 

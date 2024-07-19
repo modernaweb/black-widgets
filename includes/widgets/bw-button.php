@@ -1019,13 +1019,15 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 		$data_id		= 'bw_' . uniqid();
 		$script_id		= '#' . $data_id;
 
+        $text = esc_html( $text );
+
 		// Render
-        echo '<div class="bw-button-wrapper"><div class="bw-button-box ' . $type . ' ' . $modern_type . ' ' . $fancy_type . ' ' . $noise_type . ' ' . $abstract_type . ' ' . $alignment . '">';
+        echo '<div class="bw-button-wrapper"><div class="bw-button-box ' . esc_attr( $type ) . ' ' . esc_attr( $modern_type ) . ' ' . esc_attr( $fancy_type ) . ' ' . esc_attr( $noise_type ) . ' ' . esc_attr( $abstract_type ) . ' ' . $alignment . '">';
 			switch ($type) {
 				case 'modern':
 					switch ($modern_type) {
 						case 'm-4':
-							echo '<div class="btn-wrapper"><a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn bw-btn-' . $modern_type . '">' . $text . '</a></div>';
+							echo '<div class="btn-wrapper"><a href="' . esc_url( $settings['website_link']['url'] ) . '"' . $target . $nofollow . ' class="bw-btn bw-btn-' . esc_attr( $modern_type ) . '">' . $text . '</a></div>';
 							echo '<!-- symbols -->
 							<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
 								<symbol id="donut" viewBox="0 0 14 14"><path fill="#000" fill-rule="nonzero" d="M7 12c2.76 0 5-2.24 5-5S9.76 2 7 2 2 4.24 2 7s2.24 5 5 5zm0 2c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></symbol>
@@ -1037,12 +1039,12 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 							</svg>';
 						break;
 						case 'm-5':
-							echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn">
+							echo '<a href="' . esc_url( $settings['website_link']['url'] ) . '"' . $target . $nofollow . ' class="bw-btn">
 									<span>' . $text . '</span>
 								</a>';
 						break;
 						default:
-							echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn">' . $text . '</a>';
+							echo '<a href="' . esc_url( $settings['website_link']['url'] ) . '"' . $target . $nofollow . ' class="bw-btn">' . $text . '</a>';
 						break;
 					}
 				break;
@@ -1050,7 +1052,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 					switch ($noise_type) {
 						case 'n-1':
 							echo '
-							<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn bw-btn-' . $noise_type . '">
+							<a href="' . esc_url( $settings['website_link']['url'] ) . '"' . $target . $nofollow . ' class="bw-btn bw-btn-' . esc_attr( $noise_type ) . '">
 								<div>' . $text . '</div>
 								<div>
 									<div>' . $text . '</div>
@@ -1061,37 +1063,36 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 						break;
 						case 'n-2':
 							echo '
-							<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn bw-btn-' . $noise_type . '">
+							<a href="' . esc_url( $settings['website_link']['url'] ) . '"' . $target . $nofollow . ' class="bw-btn bw-btn-' . esc_attr( $noise_type ) . '">
 								<div></div>
 								<div>' . $text . '</div>
 							</a>';
 						break;
 						case 'n-3':
 							echo '
-							<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn bw-btn-' . $noise_type . '" data-text="' . $text . '">
+							<a href="' . esc_url( $settings['website_link']['url'] ) . '"' . $target . $nofollow . ' class="bw-btn bw-btn-' . esc_attr( $noise_type ) . '" data-text="' . esc_attr( $text ) . '">
 								<div>' . $text . '</div>
 							</a>';
 						break;
 						default:
-							echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn">' . $text . '</a>';
+							echo '<a href="' . esc_url( $settings['website_link']['url'] ) . '"' . $target . $nofollow . ' class="bw-btn">' . $text . '</a>';
 						break;
 					}
 				break;
 				case 'abstract':
 					switch ($abstract_type) {
 						case 'a-1':
-							echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn">' . $text . '<span><?xml version="1.0" ?><!DOCTYPE svg  PUBLIC \'-//W3C//DTD SVG 1.1//EN\'  \'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\'><svg height="512px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="512px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="160,115.4 180.7,96 352,256 180.7,416 160,396.7 310.5,256 "/></svg></span></a>';
+							echo '<a href="' . esc_url( $settings['website_link']['url'] ) . '"' . $target . $nofollow . ' class="bw-btn">' . $text . '<span><?xml version="1.0" ?><!DOCTYPE svg  PUBLIC \'-//W3C//DTD SVG 1.1//EN\'  \'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\'><svg height="512px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="512px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="160,115.4 180.7,96 352,256 180.7,416 160,396.7 310.5,256 "/></svg></span></a>';
 						break;
 						case 'a-2':
-							echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn"><div class="btx-a1" id="' . $script_id . '">' . $text . '</div></a>';
-							echo '
-							<script>
+							echo '<a href="' . esc_url( $settings['website_link']['url'] ) . '"' . $target . $nofollow . ' class="bw-btn"><div class="btx-a1" id="' . $script_id . '">' . $text . '</div></a>';
+                            echo '<script>
 								jQuery(document).ready(function () {
 									\'use strict\';
 									const FPS = 7;
 									const DURATION = 200;
 									const CHARACTERS = \'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\';
-									const TEXT = \'' . $text . '\';
+									const TEXT = \'' . esc_js( $text ) . '\';
 									const DELAY = ~~(300 / FPS);
 									const FRAME_COUNT = ~~(DURATION / 200) * FPS
 									const $Element = document.getElementById(\'' . $script_id . '\');
@@ -1104,7 +1105,6 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 									}
 									function setRandomText() {
 										const text = Array.from({length: TEXT.length}).map(() => CHARACTERS[~~(Math.random() * CHARACTERS.length)]);
-										console.log(\' CHARACTERS.length \');
 										$Element.innerText = text.join(\'\');
 									}
 									function animate() {
@@ -1120,27 +1120,27 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 									$Element.addEventListener(\'mouseout\', resetText);
 									resetText();
 								});
-							</script>';
+						    </script>';
 						break;
 						default:
-							echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn">' . $text . '</a>';
+							echo '<a href="' . esc_url( $settings['website_link']['url'] ) . '"' . $target . $nofollow . ' class="bw-btn">' . $text . '</a>';
 						break;
 					}
 				break;
 				case'fancy':
 					switch ($fancy_type) {
 						case 'f-2':
-							echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn"><span></span><span></span><span></span><span></span>' . $text . '</a>';
+							echo '<a href="' . esc_url( $settings['website_link']['url'] ) . '"' . $target . $nofollow . ' class="bw-btn"><span></span><span></span><span></span><span></span>' . $text . '</a>';
 						break;
 						case 'f-3':
 						case 'f-4':
-							echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . '><div class="bw-btn"><div>' . $text . '</div><div>' . $text . '</div></div></a>';
+							echo '<a href="' . esc_url( $settings['website_link']['url'] ) . '"' . $target . $nofollow . '><div class="bw-btn"><div>' . $text . '</div><div>' . $text . '</div></div></a>';
 						break;
 						case 'f-5':
-							echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn"><svg><rect x="0" y="0" fill="none" width="100%" height="100%"/></svg>' . $text . '</a>';
+							echo '<a href="' . esc_url( $settings['website_link']['url'] ) . '"' . $target . $nofollow . ' class="bw-btn"><svg><rect x="0" y="0" fill="none" width="100%" height="100%"/></svg>' . $text . '</a>';
 						break;
 						default:
-							echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn">' . $text . '</a>';
+							echo '<a href="' . esc_url( $settings['website_link']['url'] ) . '"' . $target . $nofollow . ' class="bw-btn">' . $text . '</a>';
 						break;
 					}
 				break;
@@ -1149,7 +1149,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 					switch ($custom_icon_position) {
 						case 'before':
 						case 'up':
-							echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn bw-custom-btn ' . $custom_icon_position . '">';
+							echo '<a href="' . esc_url( $settings['website_link']['url'] ) . '"' . $target . $nofollow . ' class="bw-btn bw-custom-btn ' . esc_attr( $custom_icon_position ) . '">';
 								if ( $enable_custom_shape ){
 									echo '<span class="bw-custom-icon-shape">';
 										\Elementor\Icons_Manager::render_icon( $settings['custom_icon_widget'], [ 'aria-hidden' => 'true' ] );
@@ -1160,7 +1160,7 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 						break;
 						case 'after':
 						case 'down':
-							echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn bw-custom-btn ' . $custom_icon_position . '">';
+							echo '<a href="' . esc_url( $settings['website_link']['url'] ) . '"' . $target . $nofollow . ' class="bw-btn bw-custom-btn ' . esc_attr( $custom_icon_position ) . '">';
 								echo $text;
 								if ( $enable_custom_shape ){
 									echo '<span class="bw-custom-icon-shape">';
@@ -1170,13 +1170,13 @@ class BLACK_WIDGETS_Button extends \Elementor\Widget_Base {
 							echo '</a>';
 						break;
 						default:
-							echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn bw-custom-btn">' . $text . '</a>';
+							echo '<a href="' . esc_url( $settings['website_link']['url'] ) . '"' . $target . $nofollow . ' class="bw-btn bw-custom-btn">' . $text . '</a>';
 						break;
 					}
 
 				break;
 				default:
-					echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-btn">' . $text . '</a>';
+					echo '<a href="' . esc_url( $settings['website_link']['url'] ) . '"' . $target . $nofollow . ' class="bw-btn">' . $text . '</a>';
 				break;
 			}
 		echo '</div></div>';

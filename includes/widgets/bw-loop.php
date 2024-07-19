@@ -421,16 +421,6 @@ class BLACK_WIDGETS_Loop extends \Elementor\Widget_Base {
         endif;
 
         echo '</div>'; // end bw-loop
-
-
-
-
-
-	   
-
-
-
-
 	}
 
 }

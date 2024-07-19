@@ -977,32 +977,33 @@ transformStyle: "preserve-3d",
 				echo '<div class="bw-gsap-code-box" id="'. $script_id .'">';
 					echo $html_code;
 				echo '</div>';
-		
+
 				if ( isset($gsap_options) && !empty($gsap_options) ) {
-					echo '<script>
+                    echo '<script>
 						jQuery(window).ready(function($) {
 							gsap.registerPlugin(ScrollTrigger);
 							const tl = gsap.timeline({
 								scrollTrigger: {
 								'. $html_trigger .'
 							}});
-							tl.from(".'. $shared_class .'", {
+							tl.from(".'. esc_js( $shared_class ) .'", {
 								'. $html_js_from .'
 							})
-							tl.to(".'. $shared_class .'", {
+							tl.to(".'. esc_js( $shared_class ) .'", {
 								'. $html_js_to .'
 							})
 						});
-						</script>';
+					</script>';
 				}
 				break;
 			
 			case 'image':
-				echo '<div class="bw-gsap-img" id="'. $script_id .'"><div class="'. $image_trigger_class .'">';
+				echo '<div class="bw-gsap-img" id="'. $script_id .'"><div class="'. esc_attr( $image_trigger_class ) .'">';
 					echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail', $settings ) . '" class="bw-img-trigger-x">';
 				echo '</div></div>';
 				if ( isset($gsap_options) && !empty($gsap_options) ) {
-					echo '<script>
+                    echo '<script>';
+                    echo esc_js( '
 						jQuery(window).ready(function($) {
 							gsap.registerPlugin(ScrollTrigger);
 							const tl = gsap.timeline({
@@ -1031,7 +1032,7 @@ transformStyle: "preserve-3d",
 								transformPerspective:	'. $element_perspective_from .',
 								transformStyle:			"'. $element_transformstyle_from .'",
 							})
-							tl.to(".'. $img_class .'", {
+							tl.to(".'. esc_attr( $img_class ) .'", {
 								opacity:				'. $element_opacity_to .',
 								duration:				'. $element_duration_to .',
 								rotateX:				'. $element_rotationx_to .',
@@ -1048,8 +1049,8 @@ transformStyle: "preserve-3d",
 								transformPerspective:	'. $element_perspective_to .',
 								transformStyle:			"'. $element_transformstyle_to .'",
 							})
-						});
-						</script>';
+						});' );
+					echo '</script>';
 				}
 				break;
 

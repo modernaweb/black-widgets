@@ -1012,7 +1012,7 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
         $name			= isset($settings['widget_title']) 				? $settings['widget_title']					: '';
 
 		// Render
-		echo '<div class="bw-blockquote bw-blockquote-'. $alignment .'">';
+		echo '<div class="bw-blockquote bw-blockquote-'. esc_attr( $alignment ) .'">';
 			echo '<div class="bw-icon-into">';
 				switch ($type) {
 					case 'svg-1':
@@ -1036,8 +1036,8 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 				}
 			echo '</div>';
 			echo '<div class="content">';
-				echo '<p class="bw-description"> ' . $description . ' </p>';
-				echo '<p class="bw-name"><span>' . $name . '</span></p>';
+				echo '<p class="bw-description"> ' . esc_html( $description ) . ' </p>';
+				echo '<p class="bw-name"><span>' . esc_html( $name ) . '</span></p>';
 			echo '</div>';
         echo '</div>';
 

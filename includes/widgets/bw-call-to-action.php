@@ -125,7 +125,7 @@ class BLACK_WIDGETS_Call_To_Action extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Title', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => esc_html__( 'Let\'s get started today, <br /> Ever thought about joining us?', 'blackwidgets' ),
+				'default' => esc_html__( 'Let\'s get started today, Ever thought about joining us?', 'blackwidgets' ),
 				'placeholder' => esc_html__( 'Type your title here', 'blackwidgets' ),
 				'description' => esc_html__( 'You can use all other HTML tags into the title field e.g. code, mark, abbr, blockquote and  ...', 'blackwidgets' ),
 			]
@@ -928,36 +928,38 @@ class BLACK_WIDGETS_Call_To_Action extends \Elementor\Widget_Base {
 	protected function render() {
 
 		$settings   	= $this->get_settings_for_display();
-
 		// Variables
 		// $type 	        		= isset($settings['widget_type']) 								? $settings['widget_type'] 						: ''; // Widget Type
+		$allowed_tags 			= ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'];
 		// Title
-		$title 					= isset($settings['widget_title']) 								? $settings['widget_title']						: '';
-		$title_tag 				= isset($settings['widget_html_tag_title']) 					? $settings['widget_html_tag_title']			: ''; // HTML Tag
+		$title 					= isset($settings['widget_title'])					? $settings['widget_title']						: '';
+		$title_tag 				= isset($settings['widget_html_tag_title'])			? $settings['widget_html_tag_title']			: ''; // HTML Tag
+		if (!in_array($title_tag, $allowed_tags)) {
+			$title_tag = 'h3'; // esc_attr($title_tag)
+		}
 		// Subtitle
-		$subtitle				= isset($settings['widget_subtitle'])							? $settings['widget_subtitle']					: '';
-		$subtitle_tag			= isset($settings['widget_html_tag_subtitle']) 					? $settings['widget_html_tag_subtitle']			: ''; // HTML Tag
+		$subtitle				= isset($settings['widget_subtitle'])				? $settings['widget_subtitle']					: '';
+		$subtitle_tag			= isset($settings['widget_html_tag_subtitle'])		? $settings['widget_html_tag_subtitle']			: ''; // HTML Tag
+		if (!in_array($subtitle_tag, $allowed_tags)) {
+			$subtitle_tag = 'p'; // esc_attr($subtitle_tag)
+		}
 		// Button
-		$link					= isset($settings['widget_link_url']['url'])					? $settings['widget_link_url']['url']			: ''; // Link URL
-		$link_text 	        	= isset($settings['widget_link_text'])							? $settings['widget_link_text'] 				: ''; // Link Text
-		$link_target         	= $settings['widget_link_url']['is_external'] 					? 'target="_blank"' 							: '';
-		$link_nofollow       	= $settings['widget_link_url']['nofollow'] 						? ' rel="nofollow"'								: '';
+		$link					= isset($settings['widget_link_url']['url'])		? $settings['widget_link_url']['url']			: ''; // Link URL
+		$link_text 	        	= isset($settings['widget_link_text'])				? $settings['widget_link_text'] 				: ''; // Link Text
+		$link_target         	= $settings['widget_link_url']['is_external']		? 'target="_blank"' 							: '';
+		$link_nofollow       	= $settings['widget_link_url']['nofollow']			? ' rel="nofollow"'								: '';
 		$icon_arrow				= '<i class="demo-icon eicon-arrow-right"></i>';
 
 		// Render
 		echo '<div class="bw-cta">';
 			echo '<div class="bw-cta-content">';
-				echo '<' . $title_tag . ' class="bw-cta-title">' . $title . '</' . $title_tag . '>'; // Title
-				echo '<' . $subtitle_tag . ' class="bw-cta-subtitle">' . $subtitle . '</' . $subtitle_tag . '>'; // Subtitle
+				echo '<' . $title_tag . ' class="bw-cta-title">' . esc_html($title) . '</' . $title_tag . '>'; // Title
+				echo '<' . $subtitle_tag . ' class="bw-cta-subtitle">' . esc_html($subtitle) . '</' . $subtitle_tag . '>'; // Subtitle
 			echo '</div>';
 			echo '<div class="bw-cta-button">';
-				echo '<a href="' . $link . '"' . $link_target . $link_nofollow . ' class="bw-cta-btn">' . $link_text . ' ' . $icon_arrow . '</a>'; // Link
+				echo '<a href="' . esc_url( $link ) . '"' . $link_target . $link_nofollow . ' class="bw-cta-btn">' . esc_html($link_text) . ' ' . $icon_arrow . '</a>'; // Link
 			echo '</div>';
         echo '</div>';
-
-
-
-
 
 	}
 

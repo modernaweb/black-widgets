@@ -680,7 +680,7 @@ class BLACK_WIDGETS_Nav extends \Elementor\Widget_Base {
         $befor_nav          = isset($settings['custom_icon_before_nav']) ? $settings['custom_icon_before_nav']['value'] : '';
 
 		if ( is_array( $befor_nav ) ) {
-			$bw_icon_svg_code	 = '<img src="'. $befor_nav['url'] . '" />';
+			$bw_icon_svg_code	 = '<img src="'. esc_url( $befor_nav['url'] ) . '" />';
 		} else {
 			$bw_icon_svg_code	 = '<i class="'. $befor_nav .'"></i>';
 		}
@@ -730,7 +730,7 @@ class BLACK_WIDGETS_Nav extends \Elementor\Widget_Base {
 			// Render
 			
 
-			echo '<div class="bw-nav ' . $custom_nav_styles . ' ' . $alignment . '">';
+			echo '<div class="bw-nav ' . esc_attr( $custom_nav_styles ) . ' ' . esc_attr( $alignment ) . '">';
 				echo $menu_html;
 			echo '</div>';
 		}

@@ -1551,22 +1551,6 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 		// $img_url 	   				= isset($settings['image_link_url'])					? $settings['image_link_url']						: '';
 		$target            			= isset($settings['image_link_url']['is_external']) 	? 'target="_blank"' 								: '';
         $nofollow          			= isset($settings['image_link_url']['nofollow']) 		? ' rel="nofollow"' 								: '';
-		// To
-		$duration	            	= !empty($settings['duration']) 						?  $settings['duration'] 							: '';
-		$trigger_hook	        	= !empty($settings['trigger_hook']) 					?  $settings['trigger_hook'] 						: '';
-		$trigger_hook3	        	= !empty($settings['trigger_hook3']) 					?  $settings['trigger_hook3'] 						: '';
-		$horizontal_movement		= !empty($settings['horizontal_movement']) 				? 'x: "' . $settings['horizontal_movement'] . '",' 	: '';
-		$vertical_movement			= !empty($settings['vertical_movement']) 				? 'y: "' . $settings['vertical_movement'] . '",' 	: '';
-		$opacity					= !empty( $settings['opacity'] ) 						? 'opacity: "' . $settings['opacity'] . '",' 		: '';
-		$rotation					= !empty($settings['rotation']) 						? 'rotation: "' . $settings['rotation'] . '",' 		: '';
-		//From
-		$duration2	            	= !empty($settings['duration2']) 						?  $settings['duration2'] 							: '';
-		$trigger_hook2	        	= !empty($settings['trigger_hook2']) 					?  $settings['trigger_hook2'] 						: '';
-		$trigger_hook4	        	= !empty($settings['trigger_hook4']) 					?  $settings['trigger_hook4'] 						: '';
-		$horizontal_movement2		= !empty($settings['horizontal_movement2'])				? 'x: "' . $settings['horizontal_movement2'] . '",' 	: '';
-		$vertical_movement2			= !empty($settings['vertical_movement2']) 				? 'y: "' . $settings['vertical_movement2'] . '",' 	: '';
-		$opacity2					= !empty( $settings['opacity2'] ) 						? 'opacity: "' . $settings['opacity2'] . '",' 		: '';
-		$rotation2					= !empty($settings['rotation2']) 						? 'rotation: "' . $settings['rotation2'] . '",' 		: '';
 		// Paralax
 		$parallax					= isset($settings['image_parllax'])						? $settings['image_parllax']						: '';
 		// $imagelink					= isset($settings['bw_image_link']['url'])				? $settings['bw_image_link']['url']						: '';
@@ -1665,19 +1649,23 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 		$normal_transform_style 	= ($normal_transform == 'normal_transform')				? "#$data_id { -webkit-transition: $animate; -o-transition: $animate; transition: $animate; $perspective transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; -webkit-transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; $scale3dx }" : '';
 		$hover_transform_style 		= ($hover_transform == 'hover_transform')				? "#$data_id:hover { $perspective_hover transform: $perspective_child_hover $skew_hover $rotatex_hover $rotatey_hover $rotatez_hover $scale3d_hover $translate3d_hover; -webkit-transform: $perspective_child_hover $skew_hover $rotatex_hover $rotatey_hover $rotatez_hover $scale3d_hover $translate3d_hover; $scale3dx_hover }" : '';
 		//Return all of the styles
-		echo "<style> $normal_transform_style $hover_transform_style</style>";
+		echo "<style>" . esc_html( $normal_transform_style ) . " " . esc_html( $hover_transform_style ) . "</style>";
 
 		$options = get_option('plugin_options') ? get_option('plugin_options') : '';
         $gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
 
+        if ( ! in_array( $alignment, [ 'left', 'center', 'right' ] ) ) {
+            $alignment = 'center';
+        }
+
         // Render
         echo '<div class="bw-image" style="text-align: ' . $alignment . ';">';
 
-            echo '<div class="bw-img-' . $type . ' ' . $settings['hover_animation'] . ' bw-cursor-' . $cursor .'" id="'. $data_id .'">';
+            echo '<div class="bw-img-' . esc_attr( $type ) . ' ' . esc_attr( $settings['hover_animation'] ) . ' bw-cursor-' . esc_attr( $cursor ) .'" id="'. $data_id .'">';
 
-            if ( isset($image_link) && $image_link == 'yes') { echo '<a href="' . $settings['image_link_url']['url'] . '"' . $target . $nofollow . ' class="bw-image-link">'; }
+            if ( isset($image_link) && $image_link == 'yes') { echo '<a href="' . esc_url( $settings['image_link_url']['url'] ) . '"' . $target . $nofollow . ' class="bw-image-link">'; }
 
-				echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail', $settings ) . '" class=" ' . $parallax . ' bw-img-tag bw-cursor-' . $cursor .'">';
+				echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail', $settings ) . '" class=" ' . esc_attr( $parallax ) . ' bw-img-tag bw-cursor-' . esc_attr( $cursor ) .'">';
 
             if ( isset($image_link) && $image_link == 'yes'){ echo '</a>'; }
 
@@ -1686,14 +1674,28 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 		echo '</div>';
 
 		if ( isset($gsap_options) && !empty($gsap_options) ) {
+            $trigger_hook = ! empty( $settings['trigger_hook'] ) ? esc_js( $settings['trigger_hook'] ) : '';
+            $trigger_hook2 = ! empty( $settings['trigger_hook2'] ) ? esc_js( $settings['trigger_hook2'] ) : '';
+            $trigger_hook3 = ! empty( $settings['trigger_hook3'] ) ? esc_js( $settings['trigger_hook3'] ) : '';
+            $trigger_hook4 = ! empty( $settings['trigger_hook4'] ) ? esc_js( $settings['trigger_hook4'] ) : '';
 
-			if ($image_movement2 == 'on') {
-				$tlfrom = 'tl.from("#'. $data_id .'", { ' . $opacity2 . $rotation2 . $horizontal_movement2 . $vertical_movement2 . ' duration: '.$duration2.' })';
+            if ($image_movement2 == 'on') {
+                $duration2	= ! empty( $settings['duration2'] ) ? esc_js( $settings['duration2'] ) : '';
+                $horizontal_movement2 = ! empty($settings['horizontal_movement2']) ? 'x: "' . esc_js( $settings['horizontal_movement2'] ) . '",' : '';
+                $vertical_movement2	= ! empty($settings['vertical_movement2']) ? 'y: "' . esc_js( $settings['vertical_movement2'] ) . '",' : '';
+                $opacity2 = ! empty( $settings['opacity2'] ) ? 'opacity: "' . esc_js( $settings['opacity2'] ) . '",' : '';
+                $rotation2	= ! empty( $settings['rotation2'] ) ? 'rotation: "' . esc_js( $settings['rotation2'] ) . '",' : '';
+                $tlfrom = 'tl.from("#'. $data_id .'", { ' . $opacity2 . $rotation2 . $horizontal_movement2 . $vertical_movement2 . ' duration: '.$duration2.' })';
 			} else {
 				$tlfrom = '';
 			}
 			if ($image_movement == 'on') {
-				$tlto = 'tl.to("#'. $data_id .'", { ' . $opacity . $rotation . $horizontal_movement . $vertical_movement . ' duration: '.$duration.' })';
+                $duration = ! empty( $settings['duration']) ? esc_js( $settings['duration'] ) : '';
+                $horizontal_movement = ! empty( $settings['horizontal_movement'] ) ? 'x: "' . esc_js( $settings['horizontal_movement'] ) . '",' : '';
+                $vertical_movement = ! empty($settings['vertical_movement']) ? 'y: "' . esc_js( $settings['vertical_movement'] ) . '",' : '';
+                $opacity = ! empty( $settings['opacity'] ) ? 'opacity: "' . esc_js( $settings['opacity'] ) . '",' : '';
+                $rotation = !empty($settings['rotation']) ? 'rotation: "' . esc_js( $settings['rotation'] ) . '",' : '';
+                $tlto = 'tl.to("#'. $data_id .'", { ' . $opacity . $rotation . $horizontal_movement . $vertical_movement . ' duration: '.$duration.' })';
 			} else {
 				$tlto = '';
 			}
@@ -1705,16 +1707,15 @@ class BLACK_WIDGETS_Image_Pro extends \Elementor\Widget_Base {
 						const tl = gsap.timeline({
 							scrollTrigger: {
 							trigger: "#'. $data_id .'",
-							start: "'. $trigger_hook2 .' '. $trigger_hook4 .'",    //start
-							end: "'. $trigger_hook .' '. $trigger_hook3 .'",       //end
-							scrub: true,
-							// markers: true
+                            start: "'. $trigger_hook2 .' '. $trigger_hook4 .'",
+                            end: "'. $trigger_hook .' '. $trigger_hook3 .'",
+                            scrub: true,
 							}
 						});
 						'.$tlfrom.'
 						'.$tlto.'
 					});
-				</script>';
+			</script>';
 		}
 
 		if ( $parallax == 'bw-parallax') {

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Black Widgets\n"
-"POT-Creation-Date: 2024-03-03 13:28+0330\n"
+"POT-Creation-Date: 2024-07-19 22:21+0330\n"
 "PO-Revision-Date: 2020-05-23 23:07+0430\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -180,7 +180,7 @@ msgstr ""
 #: includes/widgets/bw-dropcap.php:151 includes/widgets/bw-icon-box.php:553
 #: includes/widgets/bw-icon-box.php:804 includes/widgets/bw-icon-box.php:987
 #: includes/widgets/bw-icon-box.php:1170 includes/widgets/bw-icon-box.php:1353
-#: includes/widgets/bw-icon-box.php:1536 includes/widgets/bw-icon-box.php:1728
+#: includes/widgets/bw-icon-box.php:1536 includes/widgets/bw-icon-box.php:1793
 #: includes/widgets/bw-image-pro.php:499 includes/widgets/bw-list.php:366
 #: includes/widgets/bw-list.php:610 includes/widgets/bw-magic-link.php:190
 #: includes/widgets/bw-nav.php:358 includes/widgets/bw-nav.php:621
@@ -302,7 +302,7 @@ msgstr ""
 #: includes/widgets/bw-icon-box.php:562 includes/widgets/bw-icon-box.php:677
 #: includes/widgets/bw-icon-box.php:876 includes/widgets/bw-icon-box.php:1059
 #: includes/widgets/bw-icon-box.php:1242 includes/widgets/bw-icon-box.php:1425
-#: includes/widgets/bw-icon-box.php:1557 includes/widgets/bw-icon-box.php:1737
+#: includes/widgets/bw-icon-box.php:1581 includes/widgets/bw-icon-box.php:1802
 #: includes/widgets/bw-icon.php:195 includes/widgets/bw-image-pro.php:508
 #: includes/widgets/bw-image-pro.php:632 includes/widgets/bw-list.php:203
 #: includes/widgets/bw-list.php:284 includes/widgets/bw-list.php:410
@@ -368,7 +368,7 @@ msgstr ""
 #: includes/widgets/bw-icon-box.php:637 includes/widgets/bw-icon-box.php:752
 #: includes/widgets/bw-icon-box.php:937 includes/widgets/bw-icon-box.php:1120
 #: includes/widgets/bw-icon-box.php:1303 includes/widgets/bw-icon-box.php:1486
-#: includes/widgets/bw-icon-box.php:1678 includes/widgets/bw-icon-box.php:1851
+#: includes/widgets/bw-icon-box.php:1743 includes/widgets/bw-icon-box.php:1916
 #: includes/widgets/bw-icon.php:206 includes/widgets/bw-image-pro.php:583
 #: includes/widgets/bw-image-pro.php:707 includes/widgets/bw-list.php:214
 #: includes/widgets/bw-list.php:321 includes/widgets/bw-list.php:447
@@ -415,7 +415,7 @@ msgstr ""
 #: includes/widgets/bw-icon-box.php:647 includes/widgets/bw-icon-box.php:762
 #: includes/widgets/bw-icon-box.php:960 includes/widgets/bw-icon-box.php:1143
 #: includes/widgets/bw-icon-box.php:1326 includes/widgets/bw-icon-box.php:1509
-#: includes/widgets/bw-icon-box.php:1701 includes/widgets/bw-icon-box.php:1874
+#: includes/widgets/bw-icon-box.php:1766 includes/widgets/bw-icon-box.php:1939
 #: includes/widgets/bw-icon.php:216 includes/widgets/bw-image-pro.php:593
 #: includes/widgets/bw-image-pro.php:717 includes/widgets/bw-list.php:224
 #: includes/widgets/bw-list.php:344 includes/widgets/bw-list.php:470
@@ -463,7 +463,7 @@ msgstr ""
 #: includes/widgets/bw-icon-box.php:655 includes/widgets/bw-icon-box.php:770
 #: includes/widgets/bw-icon-box.php:946 includes/widgets/bw-icon-box.php:1129
 #: includes/widgets/bw-icon-box.php:1312 includes/widgets/bw-icon-box.php:1495
-#: includes/widgets/bw-icon-box.php:1687 includes/widgets/bw-icon-box.php:1860
+#: includes/widgets/bw-icon-box.php:1752 includes/widgets/bw-icon-box.php:1925
 #: includes/widgets/bw-icon.php:224 includes/widgets/bw-image-pro.php:601
 #: includes/widgets/bw-image-pro.php:725 includes/widgets/bw-list.php:232
 #: includes/widgets/bw-list.php:330 includes/widgets/bw-list.php:456
@@ -515,7 +515,7 @@ msgstr ""
 #: includes/widgets/bw-icon-box.php:603 includes/widgets/bw-icon-box.php:718
 #: includes/widgets/bw-icon-box.php:910 includes/widgets/bw-icon-box.php:1093
 #: includes/widgets/bw-icon-box.php:1276 includes/widgets/bw-icon-box.php:1459
-#: includes/widgets/bw-icon-box.php:1651 includes/widgets/bw-icon-box.php:1824
+#: includes/widgets/bw-icon-box.php:1716 includes/widgets/bw-icon-box.php:1889
 #: includes/widgets/bw-icon.php:237 includes/widgets/bw-image-pro.php:549
 #: includes/widgets/bw-image-pro.php:673 includes/widgets/bw-list.php:245
 #: includes/widgets/bw-list.php:294 includes/widgets/bw-list.php:420
@@ -565,7 +565,7 @@ msgstr ""
 #: includes/widgets/bw-icon-box.php:616 includes/widgets/bw-icon-box.php:731
 #: includes/widgets/bw-icon-box.php:923 includes/widgets/bw-icon-box.php:1106
 #: includes/widgets/bw-icon-box.php:1289 includes/widgets/bw-icon-box.php:1472
-#: includes/widgets/bw-icon-box.php:1664 includes/widgets/bw-icon-box.php:1837
+#: includes/widgets/bw-icon-box.php:1729 includes/widgets/bw-icon-box.php:1902
 #: includes/widgets/bw-icon.php:250 includes/widgets/bw-image-pro.php:562
 #: includes/widgets/bw-image-pro.php:686 includes/widgets/bw-list.php:258
 #: includes/widgets/bw-list.php:307 includes/widgets/bw-list.php:433
@@ -671,7 +671,7 @@ msgstr ""
 #: includes/widgets/bw-alert.php:342 includes/widgets/bw-blockquote.php:837
 #: includes/widgets/bw-button.php:798 includes/widgets/bw-button.php:897
 #: includes/widgets/bw-gsap-trigger.php:861
-#: includes/widgets/bw-icon-box.php:1607 includes/widgets/bw-icon.php:289
+#: includes/widgets/bw-icon-box.php:1653 includes/widgets/bw-icon.php:289
 #: includes/widgets/bw-icon.php:345 includes/widgets/bw-icon.php:369
 #: includes/widgets/bw-list.php:389 includes/widgets/bw-list.php:504
 #: includes/widgets/bw-loop.php:318 includes/widgets/bw-marquee.php:275
@@ -799,7 +799,7 @@ msgstr ""
 #: includes/widgets/bw-icon-box.php:498 includes/widgets/bw-icon-box.php:528
 #: includes/widgets/bw-icon-box.php:890 includes/widgets/bw-icon-box.php:1073
 #: includes/widgets/bw-icon-box.php:1256 includes/widgets/bw-icon-box.php:1439
-#: includes/widgets/bw-icon-box.php:1631 includes/widgets/bw-icon.php:160
+#: includes/widgets/bw-icon-box.php:1696 includes/widgets/bw-icon.php:160
 #: includes/widgets/bw-image-pro.php:144 includes/widgets/bw-marquee.php:160
 #: includes/widgets/bw-nav.php:226 includes/widgets/bw-sentence.php:561
 #: includes/widgets/bw-title-animate.php:453 includes/widgets/bw-title.php:241
@@ -813,7 +813,7 @@ msgstr ""
 #: includes/widgets/bw-icon-box.php:506 includes/widgets/bw-icon-box.php:532
 #: includes/widgets/bw-icon-box.php:898 includes/widgets/bw-icon-box.php:1081
 #: includes/widgets/bw-icon-box.php:1264 includes/widgets/bw-icon-box.php:1447
-#: includes/widgets/bw-icon-box.php:1639 includes/widgets/bw-icon.php:168
+#: includes/widgets/bw-icon-box.php:1704 includes/widgets/bw-icon.php:168
 #: includes/widgets/bw-image-pro.php:152 includes/widgets/bw-marquee.php:168
 #: includes/widgets/bw-nav.php:234 includes/widgets/bw-sentence.php:565
 #: includes/widgets/bw-title-animate.php:461 includes/widgets/bw-title.php:249
@@ -834,7 +834,7 @@ msgstr ""
 #: includes/widgets/bw-dropcap.php:242 includes/widgets/bw-icon-box.php:668
 #: includes/widgets/bw-icon-box.php:824 includes/widgets/bw-icon-box.php:1007
 #: includes/widgets/bw-icon-box.php:1190 includes/widgets/bw-icon-box.php:1373
-#: includes/widgets/bw-icon-box.php:1567 includes/widgets/bw-icon-box.php:1747
+#: includes/widgets/bw-icon-box.php:1591 includes/widgets/bw-icon-box.php:1812
 #: includes/widgets/bw-image-pro.php:623 includes/widgets/bw-list.php:480
 #: includes/widgets/bw-list.php:716 includes/widgets/bw-magic-link.php:281
 #: includes/widgets/bw-nav.php:390 includes/widgets/bw-nav.php:642
@@ -872,7 +872,7 @@ msgstr ""
 #: includes/widgets/bw-call-to-action.php:800
 #: includes/widgets/bw-icon-box.php:832 includes/widgets/bw-icon-box.php:1015
 #: includes/widgets/bw-icon-box.php:1198 includes/widgets/bw-icon-box.php:1381
-#: includes/widgets/bw-icon-box.php:1575
+#: includes/widgets/bw-icon-box.php:1599
 msgid "Hover Color"
 msgstr ""
 
@@ -1096,7 +1096,7 @@ msgstr ""
 #: includes/widgets/bw-flipix.php:450 includes/widgets/bw-icon-box.php:502
 #: includes/widgets/bw-icon-box.php:894 includes/widgets/bw-icon-box.php:1077
 #: includes/widgets/bw-icon-box.php:1260 includes/widgets/bw-icon-box.php:1443
-#: includes/widgets/bw-icon-box.php:1635 includes/widgets/bw-icon.php:164
+#: includes/widgets/bw-icon-box.php:1700 includes/widgets/bw-icon.php:164
 #: includes/widgets/bw-image-pro.php:148 includes/widgets/bw-marquee.php:164
 #: includes/widgets/bw-nav.php:230 includes/widgets/bw-title-animate.php:457
 #: includes/widgets/bw-title.php:245 includes/widgets/bw-typography.php:575
@@ -1669,7 +1669,7 @@ msgid "Black Call To Action"
 msgstr ""
 
 #: includes/widgets/bw-call-to-action.php:128
-msgid "Let's get started today, <br /> Ever thought about joining us?"
+msgid "Let's get started today, Ever thought about joining us?"
 msgstr ""
 
 #: includes/widgets/bw-call-to-action.php:163
@@ -2415,19 +2415,39 @@ msgstr ""
 msgid "Icon Styles"
 msgstr ""
 
-#: includes/widgets/bw-icon-box.php:1588 includes/widgets/bw-icon-box.php:1756
+#: includes/widgets/bw-icon-box.php:1556
+msgid "SVG(fill) Normal Color"
+msgstr ""
+
+#: includes/widgets/bw-icon-box.php:1568
+msgid "SVG(stroke) Normal Color"
+msgstr ""
+
+#: includes/widgets/bw-icon-box.php:1610
+msgid "SVG(fill) Hover Color"
+msgstr ""
+
+#: includes/widgets/bw-icon-box.php:1621
+msgid "SVG(stroke) Hover Color"
+msgstr ""
+
+#: includes/widgets/bw-icon-box.php:1634 includes/widgets/bw-icon-box.php:1821
 msgid "Hover Background"
 msgstr ""
 
-#: includes/widgets/bw-icon-box.php:1627
+#: includes/widgets/bw-icon-box.php:1672
+msgid "SVG Width"
+msgstr ""
+
+#: includes/widgets/bw-icon-box.php:1692
 msgid "Icon Position"
 msgstr ""
 
-#: includes/widgets/bw-icon-box.php:1714
+#: includes/widgets/bw-icon-box.php:1779
 msgid "Image Styles"
 msgstr ""
 
-#: includes/widgets/bw-icon-box.php:1775
+#: includes/widgets/bw-icon-box.php:1840
 msgid "Image Size"
 msgstr ""
 

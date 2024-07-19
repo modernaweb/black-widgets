@@ -866,15 +866,26 @@ class BLACK_WIDGETS_Title extends \Elementor\Widget_Base {
 		$alignment 		= '';
 		$title 			= isset($settings['widget_title']) 				? $settings['widget_title'] 											: '';
 		$subtitle 		= isset($settings['widget_subtitle']) 			? $settings['widget_subtitle'] 											: '';
-		$title_tag 		= isset($settings['widget_html_tag_title']) 	? $settings['widget_html_tag_title'] 									: '';
-		$subtitle_tag   = isset($settings['widget_html_tag_subtitle']) 	? $settings['widget_html_tag_subtitle'] 								: '';
-		$shape 			= isset($settings['custom_shape']) 				? '<img src="' . $settings['custom_shape']['url'] . '" class="shape">' 	: '';
+
+		// Added this for XSS — Vulnerable to Cross Site Scripting (XSS)
+		$allowed_tags 			= ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'];
+		$title_tag 				= isset($settings['widget_html_tag_title'])				 ? $settings['widget_html_tag_title']					: '';
+		$subtitle_tag   		= isset($settings['widget_html_tag_subtitle']) 			 ? $settings['widget_html_tag_subtitle']				: '';
+		// Validate the HTML tag
+		if (!in_array($title_tag, $allowed_tags)) {
+			$title_tag = 'div';
+		}
+		if (!in_array($subtitle_tag, $allowed_tags)) {
+			$subtitle_tag = 'div';
+		}
+        $title 			        = isset($settings['widget_title'])                       ? $settings['widget_title']					: '';
+		$shape 			= isset($settings['custom_shape']) 				? '<img src="' . esc_url( $settings['custom_shape']['url'] ) . '" class="shape">' 	: '';
 
 		// Render
-		echo '<div class="bw-title-box ' . $type . ' ' . $alignment . '">';
-			echo '<div class="bw-title"><' . $title_tag . ' class="bw-div">' . $title . '</' . $title_tag . '></div>';
+		echo '<div class="bw-title-box ' . esc_attr( $type ) . ' ' . $alignment . '">';
+			echo '<div class="bw-title"><' . $title_tag . ' class="bw-div">' .esc_html($title). '</' . $title_tag . '></div>';
 			echo $shape;
-			echo '<div class="bw-subtitle"><' . $subtitle_tag . ' class="bw-div"> ' . $subtitle . '</' . $subtitle_tag . '></div>';
+			echo '<div class="bw-subtitle"><' . $subtitle_tag . ' class="bw-div"> ' .esc_html($subtitle). '</' . $subtitle_tag . '></div>';
 		echo '</div>';
 
 	}

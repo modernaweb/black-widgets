@@ -2,9 +2,9 @@
 Contributors: skalanter, modernaweb
 Donate link: http://modernaweb.net/
 Tags: page builder, editor, elementor widgets, elementor addon, typography
-Stable tag: 1.3.5
+Stable tag: 1.3.6
 Requires at least: 6.0
-Tested up to: 6.4
+Tested up to: 6.6
 Requires PHP: 7.4
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -102,10 +102,13 @@ WordPress 5.3+
 4. Black Widgets Screenshot 4
 5. Black Widgets Screenshot 5
 6. Black Widgets Screenshot 6
-7. Black Widgets Screenshot 7
 
 
 ## Changelog
+
+= 1.3.6 — 2024-07-19 =
+- Added: SVG size and color style for Black Icon Box Pro
+- Fixed: Cross-site scripting (XSS) vulnerability in all widgets; Thanks to Patchstack.
 
 = 1.3.5 — 2024-03-03 =
 - Compatibility: Elementor v3.19 and all experiments and features

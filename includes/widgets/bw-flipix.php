@@ -1500,18 +1500,18 @@ class BLACK_WIDGETS_Flip_Ix extends \Elementor\Widget_Base {
 		$target			= $settings['btn_link']['is_external'] 			? 'target="_blank"' 						: '';
 		$nofollow		= $settings['btn_link']['nofollow'] 			? ' rel="nofollow"'							: '';
 ?>
-<div class="bw-flipbox <?php echo $type . ' ' . $enable3d; ?> ">
+<div class="bw-flipbox <?php echo esc_attr( $type ) . ' ' . esc_attr( $enable3d ); ?> ">
 	<div class="bw-flip-card">
 		<div class="bw-front" id="bwflipbox">
 			<div class="title-box">
 				<?php \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); ?>
-				<h4><?php echo $title; ?></h4>
+				<h4><?php echo esc_html( $title ); ?></h4>
 				<p><?php 
 						if( strlen($description)<= 159 ) {
-							echo $description;
+							echo esc_html( $description );
 						} else {
 							$finish=substr( $description, 0, 159 ) . '...';
-							echo $finish;
+							echo esc_html( $finish );
 						}
 				?></p>
 			</div>
@@ -1519,16 +1519,16 @@ class BLACK_WIDGETS_Flip_Ix extends \Elementor\Widget_Base {
 		<div class="bw-back">
 			<div class="description">
 				<?php \Elementor\Icons_Manager::render_icon( $settings['widget_back_icon'], [ 'aria-hidden' => 'true' ] ); ?>
-				<h4><?php echo $backtitle; ?></h4>
+				<h4><?php echo esc_html( $backtitle ); ?></h4>
 				<p><?php 
 						if( strlen($backdesc)<= 300 ) {
-							echo $backdesc;
+							echo esc_html( $backdesc );
 						} else {
 							$finish=substr( $backdesc, 0, 300 ) . '...';
-							echo $finish;
+							echo esc_html( $finish );
 						}
 				?></p>
-				<a class="bw-button" href="<?php echo $settings['btn_link']['url']; ?>" <?php echo $target; ?> <?php echo $nofollow; ?>><?php echo $text; ?></a>
+				<a class="bw-button" href="<?php echo esc_url( $settings['btn_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?>><?php echo esc_html( $text ); ?></a>
 			</div>
 		</div>
 	</div>

@@ -850,13 +850,13 @@ class BLACK_WIDGETS_List extends \Elementor\Widget_Base {
 
 					if( $link ) {
 						echo '<div class="bw-list-item">';
-							echo '<a href="' . $item['link_list']['url'] . '"' . $target . $nofollow . ' class="bw-list-item-link' . $type . '">';
+							echo '<a href="' . esc_url( $item['link_list']['url'] ) . '"' . $target . $nofollow . ' class="bw-list-item-link' . esc_attr( $type ) . '">';
 								echo '<div class="bw-list-content">';
 									echo '<span class="bw-icon-section">';
 										\Elementor\Icons_Manager::render_icon( $item['icon_widget'], [ 'aria-hidden' => 'true' ] );
 									echo '</span>';
 									echo '<span class="elementor-repeater-item-' . $item['_id'] . '">';
-										echo $item['list_title'];
+										echo esc_html( $item['list_title'] );
 									echo '</span>';
 								echo '</div>';
 							echo '</a>';
@@ -868,7 +868,7 @@ class BLACK_WIDGETS_List extends \Elementor\Widget_Base {
 									\Elementor\Icons_Manager::render_icon( $item['icon_widget'], [ 'aria-hidden' => 'true' ] );
 								echo '</span>';
 								echo '<span class="elementor-repeater-item-' . $item['_id'] . '">';
-									echo $item['list_title'];
+									echo esc_html( $item['list_title'] );
 								echo '</span>';
 							echo '</div>';
 						echo '</div>';
