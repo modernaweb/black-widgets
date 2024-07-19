@@ -5,7 +5,7 @@
 **Tags:** page builder, editor, elementor widgets, elementor addon, typography \
 **Stable tag:** 1.3.6 \
 **Requires at least:** 5.3 \
-**Tested up to:** 6.5 \
+**Tested up to:** 6.6 \
 **Requires PHP:** 7.4 \
 **License:** GPLv3 or later \
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.html
@@ -123,19 +123,17 @@ WordPress 5.3+
 
 ![Black Widgets Screenshot 6](https://ps.w.org/black-widgets/assets/screenshot-6.png)
 
-### 7. Black Widgets Screenshot 7
-
-![Black Widgets Screenshot 7](https://ps.w.org/black-widgets/assets/screenshot-7.png)
-
 
 
 ## Changelog
 
-### 1.3.6 — 2024-XX-XX
-- Added: SVG size and color style for Black Icon Box Prov
-- Fixed: Cross-site scripting (XSS) vulnerability in some widgets; Thanks to Patchstack.
+### 1.3.6 — 2024-07-19
+
+- Added: SVG size and color style for Black Icon Box Pro
+- Fixed: Cross-site scripting (XSS) vulnerability in all widgets; Thanks to Patchstack.
 
 ### 1.3.5 — 2024-03-03
+
 - Compatibility: Elementor v3.19 and all experiments and features
 - Added: Width option for Black Image Pro
 - Added: Blur option in the box settings for Black Image Pro, Black Button, Black Title, Black Alert, Black Icon Box Pro
@@ -145,6 +143,7 @@ WordPress 5.3+
 - Fixed: Some alignment issue on widgets
 
 ### 1.3.4 — 2023-11-05
+
 - Compatibility: WordPress v6.4
 - Compatibility: Elementor v3.17
 - Updated: Anime.js 
@@ -153,6 +152,7 @@ WordPress 5.3+
 - Fixed: Some minor issue
 
 ### 1.3.3 — 2023-08-08
+
 - Compatibility: WordPress v6.3
 - Compatibility: Elementor v3.15
 - Compatibility: Enabled options for Experiments and Features in Elementor
@@ -163,12 +163,14 @@ WordPress 5.3+
 - Fixed: Some minor issue
 
 ### 1.3.2 — 2023-04-01
+
 - Compatibility: WordPress v6.2
 - Compatibility: Elementor v3.12
 - Added: Box style and positioning for Black Icon Box Widget
 - Fixed: Some minor issue
 
 ### 1.3.1 — 2023-03-04
+
 - Compatibility: WordPress v6.1
 - Compatibility: Elementor v3.11
 - Added: New widget: Black Sentence
@@ -177,6 +179,7 @@ WordPress 5.3+
 - Fixed: Some minor issue
 
 ### 1.3.0 — 2022-08-14
+
 - Compatibility: WordPress v6.0
 - Compatibility: Elementor v3.7
 - Added: New widget: Black Flat Nav
@@ -194,11 +197,13 @@ WordPress 5.3+
 - Fixed: Some minor issue
 
 ### 1.2.6 — 2022-01-31
+
 - Compatibility: WordPress v5.9
 - Compatibility: Elementor v3.5
 - Added: An option for movements on typography widget
 
 ### 1.2.5 — 2021-10-17
+
 - Compatibility: Elementor Pro
 - Added: An option to use GSAP CDN (for experts)
 - Added: An option to use ScrollTrigger CDN (for experts)
