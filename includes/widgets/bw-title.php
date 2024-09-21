@@ -862,8 +862,8 @@ class BLACK_WIDGETS_Title extends \Elementor\Widget_Base {
 
 		// Variables
 		$type 			= isset($settings['widget_type']) 				? $settings['widget_type'] 												: '';
-		// $alignment 		= isset($settings['widget_alignment']) 			? $settings['widget_alignment'] 										: '';
-		$alignment 		= '';
+		$alignment 		= isset($settings['widget_alignment']) 			? $settings['widget_alignment'] 										: '';
+		//$alignment 		= '';
 		$title 			= isset($settings['widget_title']) 				? $settings['widget_title'] 											: '';
 		$subtitle 		= isset($settings['widget_subtitle']) 			? $settings['widget_subtitle'] 											: '';
 
@@ -882,7 +882,7 @@ class BLACK_WIDGETS_Title extends \Elementor\Widget_Base {
 		$shape 			= isset($settings['custom_shape']) 				? '<img src="' . esc_url( $settings['custom_shape']['url'] ) . '" class="shape">' 	: '';
 
 		// Render
-		echo '<div class="bw-title-box ' . esc_attr( $type ) . ' ' . $alignment . '">';
+		echo '<div class="bw-title-box ' . esc_attr( $type ) . ' ' . esc_html( $alignment ) . '">';
 			echo '<div class="bw-title"><' . $title_tag . ' class="bw-div">' .esc_html($title). '</' . $title_tag . '></div>';
 			echo $shape;
 			echo '<div class="bw-subtitle"><' . $subtitle_tag . ' class="bw-div"> ' .esc_html($subtitle). '</' . $subtitle_tag . '></div>';
