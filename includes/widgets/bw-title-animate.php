@@ -1229,7 +1229,10 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 
 		$data_id                = 'bw-' . uniqid();
 
-
+        // wp_kses is rather slow so we manullay sanitize the html
+        if ( ! in_array( $HTML, ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'] ) ) {
+            $HTML = 'h1';
+        }
 
 
 

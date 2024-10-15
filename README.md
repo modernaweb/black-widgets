@@ -3,8 +3,8 @@
 **Contributors:** skalanter, modernaweb \
 **Donate link:** http://modernaweb.net/ \
 **Tags:** page builder, editor, elementor widgets, elementor addon, typography \
-**Stable tag:** 1.3.6 \
-**Requires at least:** 5.3 \
+**Stable tag:** 1.3.7 \
+**Requires at least:** 6.0 \
 **Tested up to:** 6.6 \
 **Requires PHP:** 7.4 \
 **License:** GPLv3 or later \
@@ -126,6 +126,11 @@ WordPress 5.3+
 
 
 ## Changelog
+
+### 1.3.7 — 2024-10-15
+
+- Fixed: Cross-site scripting (XSS) vulnerability in all widgets; Thanks to Patchstack
+- Fixed: Cross-site scripting (XSS) vulnerability in all widgets; Thanks to Wordfence.
 
 ### 1.3.6 — 2024-07-19
 
@@ -280,3 +285,6 @@ Unfortunately not, it's not possible, but I have good news, you can use Elemento
 
 ### How can I see Black Widgets' road map?
 For now, the road map is private. But we'll publish it for you.
+
+### How can I report security bugs?
+You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/black-widgets)

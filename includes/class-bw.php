@@ -80,8 +80,26 @@ final class BLACK_WIDGETS_Modernaweb_Plugin {
 		add_action( 'plugins_loaded', [ $this, 'init' ] );
 		// add_action( 'admin_menu', [ $this, 'black_widgets_reg_menu' ] );
 		add_filter('upload_mimes', [ $this, 'add_file_types_to_uploads' ]);
+        add_filter('wp_handle_upload_prefilter', [ $this, 'sanitize_svg' ] );
 
 	}
+
+	/**
+	 * Sanitizes SVG files to prevent XSS attacks.
+	 *
+	 * @param array $file The uploaded file data.
+	 * @return array The sanitized file data.
+	 */
+    public function sanitize_svg( $file ) {
+        if ( $file['type'] == 'image/svg+xml' ) {
+            $content = file_get_contents( $file['tmp_name'] );
+            $pattern = '/<script\b[^>]*>(.*?)<\/script>/is';
+            $content = preg_replace($pattern, '', $content);
+            file_put_contents( $file['tmp_name'], $content );
+        }
+    
+        return $file;
+    }
 
 	/**
 	 * Add SVG availablity

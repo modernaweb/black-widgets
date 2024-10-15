@@ -217,6 +217,7 @@
     height: 2px;
     background: #000;
     top: 0;
+    right: calc(50% - 22px);
 }
 
 .bw-title-box.bw-t-1.left:before {
@@ -263,6 +264,7 @@
     height: 2px;
     background: #000;
     bottom: 0;
+    right: calc(50% - 22px);
 }
 
 .bw-title-box.bw-t-2.left:before {
@@ -310,6 +312,7 @@
     height: 40px;
     background: rgba(0, 0, 0, 0.04);
     bottom: 0;
+    right: calc(50% - 72px);
     z-index: -1;
 }
 
@@ -358,6 +361,7 @@
     height: 64px;
     background: rgba(0, 0, 0, 0.03);
     bottom: 0;
+    right: calc(50% - 32px);
     z-index: -1;
 }
 
@@ -400,7 +404,6 @@
 .bw-title-box.bw-t-5 .bw-title div:before {
     content: '';
     position: absolute;
-    width: 32px;
     height: 4px;
     background: rgb(0, 0, 0);
     top: calc(50% - 2px);
@@ -415,14 +418,12 @@
 
 .bw-title-box.bw-t-5.left .bw-title div:before {
     left: 0;
-}
-
-.bw-title-box.bw-t-5.center .bw-title div:before {
-    display: none;
+    width: 32px;
 }
 
 .bw-title-box.bw-t-5.right .bw-title div:before {
     right: 0;
+    width: 32px;
 }
 
 .bw-title-box.bw-t-5 .bw-subtitle div {
@@ -457,6 +458,7 @@
     height: 64px;
     background: rgba(0, 0, 0, 0.03);
     bottom: 0;
+    right: calc(50% - 32px);
     z-index: -1;
 }
 
@@ -467,6 +469,7 @@
     height: 1px;
     background: #000;
     bottom: 20px;
+    right: calc(50% - 47px);
     z-index: -1;
 }
 
@@ -522,7 +525,6 @@
 .bw-title-box.bw-t-7:before {
     content: '';
     position: absolute;
-    width: 5px;
     height: 5px;
     background: #000;
     top: 5px;
@@ -537,32 +539,30 @@
 .bw-title-box.bw-t-7:after {
     content: '';
     position: absolute;
-    width: 24px;
     height: 1px;
     background: #000;
     top: 7px;
     z-index: -1;
 }
 
-.bw-title-box.bw-t-7.center:before,
-.bw-title-box.bw-t-7.center:after {
-    display: none;
-}
-
 .bw-title-box.bw-t-7.left:before {
     left: 0;
+    width: 5px;
 }
 
 .bw-title-box.bw-t-7.right:before {
     right: 0;
+    width: 5px;
 }
 
 .bw-title-box.bw-t-7.left:after {
     left: 8px;
+    width: 24px;
 }
 
 .bw-title-box.bw-t-7.right:after {
     right: 8px;
+    width: 24px;
 }
 
 .bw-title-box.bw-t-7 .bw-title div {
