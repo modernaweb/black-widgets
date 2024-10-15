@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Black Widgets\n"
-"POT-Creation-Date: 2024-07-19 22:21+0330\n"
+"POT-Creation-Date: 2024-10-15 22:49+0330\n"
 "PO-Revision-Date: 2020-05-23 23:07+0430\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -40,44 +40,44 @@ msgid "Elementor Icons"
 msgstr ""
 
 #. translators: 1: Plugin name 2: Elementor
-#: includes/class-bw.php:201
+#: includes/class-bw.php:219
 #, php-format
 msgid "\"%1$s\" requires \"%2$s\" to be installed and activated."
 msgstr ""
 
-#: includes/class-bw.php:202
+#: includes/class-bw.php:220
 msgid "Black Widgets is Elementor extension"
 msgstr ""
 
-#: includes/class-bw.php:203
+#: includes/class-bw.php:221
 msgid "Elementor Plugin"
 msgstr ""
 
 #. translators: 1: Plugin name 2: Elementor 3: Required Elementor version
 #. translators: 1: Plugin name 2: PHP 3: Required PHP version
-#: includes/class-bw.php:225 includes/class-bw.php:250
+#: includes/class-bw.php:243 includes/class-bw.php:268
 #, php-format
 msgid "\"%1$s\" requires \"%2$s\" version %3$s or greater."
 msgstr ""
 
-#: includes/class-bw.php:226
+#: includes/class-bw.php:244
 msgid "This is Elementor extension"
 msgstr ""
 
-#: includes/class-bw.php:227
+#: includes/class-bw.php:245
 msgid "Elementor"
 msgstr ""
 
-#: includes/class-bw.php:251
+#: includes/class-bw.php:269
 msgid "Elementor Test Extension"
 msgstr ""
 
-#: includes/class-bw.php:252
+#: includes/class-bw.php:270
 msgid "PHP"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-#: includes/class-bw.php:338
+#: includes/class-bw.php:356
 msgid "Black Widgets"
 msgstr ""
 
