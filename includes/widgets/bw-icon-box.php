@@ -3,6 +3,7 @@ namespace Elementor;
 namespace BLACK_WIDGETS_Modernaweb\Includes\Widgets;
 namespace Black_Widgets;
 
+
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
     exit;
@@ -21,6 +22,8 @@ use Elementor\Group_Control_Color;
 use Elementor\Group_Control_Text_Shadow;
 use Elementor\Group_Control_Image_Size;
 // use Elementor\Group_Control_Css_Filter;
+
+use enshrined\svgSanitize\Sanitizer;
 
 /**
  * Elementor title Widget.
@@ -2004,6 +2007,8 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 		$data_id				= 'bw_' . uniqid();
 		$animate_id				= '#' . $data_id;
 
+        $sanitizer = new Sanitizer();
+        $svgcode = $sanitizer->sanitize( $svgcode );
 
 		// Render 
 		switch ($position) {
