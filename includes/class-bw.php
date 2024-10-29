@@ -3,7 +3,8 @@
 namespace Elementor;
 namespace BLACK_WIDGETS_Modernaweb\Includes\Widgets;
 namespace Black_Widgets;
-use Elementor\Plugin;
+
+use enshrined\svgSanitize\Sanitizer;
 
 final class BLACK_WIDGETS_Modernaweb_Plugin {
 
@@ -92,9 +93,9 @@ final class BLACK_WIDGETS_Modernaweb_Plugin {
 	 */
     public function sanitize_svg( $file ) {
         if ( $file['type'] == 'image/svg+xml' ) {
+            $sanitizer = new Sanitizer();
             $content = file_get_contents( $file['tmp_name'] );
-            $pattern = '/<script\b[^>]*>(.*?)<\/script>/is';
-            $content = preg_replace($pattern, '', $content);
+            $content = $sanitizer->sanitize( $content );
             file_put_contents( $file['tmp_name'], $content );
         }
     

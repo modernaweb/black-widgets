@@ -22,6 +22,8 @@ use Elementor\Group_Control_Text_Shadow;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Css_Filter;
 
+use enshrined\svgSanitize\Sanitizer;
+
 /**
  * Elementor title Widget.
  *
@@ -2337,6 +2339,10 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
         $gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
 		$second_bw_id			= 'second_bw_' . uniqid();
 		$second_bwscript_id		= '#' . $second_bw_id;
+
+        $sanitizer = new Sanitizer();
+        $svgcode_1 = $sanitizer->sanitize( $svgcode_1 );
+        $svgcode_2 = $sanitizer->sanitize( $svgcode_2 );
 
 		echo '<style>'. esc_html( $normal_transform_style ) . ' ' . $z_index. ' ' . $unique_z_index.'</style>';
 

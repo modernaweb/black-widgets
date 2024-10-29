@@ -2,7 +2,7 @@
 Contributors: skalanter, modernaweb
 Donate link: http://modernaweb.net/
 Tags: page builder, editor, elementor widgets, elementor addon, typography
-Stable tag: 1.3.7
+Stable tag: 1.3.8
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -106,13 +106,16 @@ WordPress 5.3+
 
 ## Changelog
 
+= 1.3.8 — 2024-10-30 =
+- Improved: Using SVG by adding sanitizer on inputs — (Security Reasons)
+
 = 1.3.7 — 2024-10-15 =
-- Fixed: Cross-site scripting (XSS) vulnerability in all widgets; Thanks to Patchstack
-- Fixed: Cross-site scripting (XSS) vulnerability in all widgets; Thanks to Wordfence.
+- Fixed: Cross-site scripting (XSS) vulnerability for all widgets with SVG; Thanks to Patchstack
+- Fixed: Cross-site scripting (XSS) vulnerability for all widgets with SVG; Thanks to Wordfence
 
 = 1.3.6 — 2024-07-19 =
 - Added: SVG size and color style for Black Icon Box Pro
-- Fixed: Cross-site scripting (XSS) vulnerability in all widgets; Thanks to Patchstack.
+- Fixed: Cross-site scripting (XSS) vulnerability in all widgets; Thanks to Patchstack
 
 = 1.3.5 — 2024-03-03 =
 - Compatibility: Elementor v3.19 and all experiments and features

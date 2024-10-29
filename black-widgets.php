@@ -4,7 +4,7 @@
  * Plugin URI: https://modernaweb.net/black-widgets
  * Description: Build web pages with black widgets.
  * Author: Modernaweb Studio
- * Version: 1.3.7
+ * Version: 1.3.8
  * Author URI: https://modernaweb.net/
  * Text Domain: blackwidgets
  * Domain Path: /languages
@@ -27,7 +27,7 @@ if (!defined('ABSPATH')) {
 define( 'BLACK_WIDGETS_PLUGIN_BASENAME', plugin_basename(__FILE__));
 define( 'BLACK_WIDGETS_PLUGIN_PATH', trailingslashit(plugin_dir_path(__FILE__)));
 define( 'BLACK_WIDGETS_PLUGIN_URL', trailingslashit(plugins_url('/', __FILE__)));
-define( 'BLACK_WIDGETS_VERSION', '1.3.6' );
+define( 'BLACK_WIDGETS_VERSION', '1.3.8' );
 define( 'BLACK_WIDGETS_ASSET_PATH', wp_upload_dir()['basedir'] . '/black-widgets');
 define( 'BLACK_WIDGETS_ASSET_URL', wp_upload_dir()['baseurl'] . '/black-widgets');
 
@@ -37,6 +37,11 @@ define( 'BLACK_WIDGETS_ASSET_URL', wp_upload_dir()['baseurl'] . '/black-widgets'
  * @since 1.0.1
  */
 require_once BLACK_WIDGETS_PLUGIN_PATH . 'autoload.php';
+
+/**
+ * Composer
+ */
+require_once BLACK_WIDGETS_PLUGIN_PATH . 'vendor/autoload.php';
 
 /**
  * The code that runs during plugin activation.
