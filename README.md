@@ -127,6 +127,9 @@ WordPress 5.3+
 
 ## Changelog
 
+### 1.3.8 — 2024-10-30
+- Improved: Using SVG by adding sanitizer on inputs — (Security Reasons)
+
 ### 1.3.7 — 2024-10-15
 
 - Fixed: Cross-site scripting (XSS) vulnerability in all widgets; Thanks to Patchstack
