@@ -3,9 +3,9 @@
 **Contributors:** skalanter, modernaweb \
 **Donate link:** http://modernaweb.net/ \
 **Tags:** page builder, editor, elementor widgets, elementor addon, typography \
-**Stable tag:** 1.3.8 \
+**Stable tag:** 1.3.9 \
 **Requires at least:** 6.0 \
-**Tested up to:** 6.6 \
+**Tested up to:** 6.7 \
 **Requires PHP:** 7.4 \
 **License:** GPLv3 or later \
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.html
@@ -20,7 +20,7 @@ Black Widgets is a free add-on for Elementor; with this plugin, you can create u
 
 We will add more widgets with more and more styles that may surprise you in the future; for now, add black widgets to your WordPress, and don't miss future updates.
 
-[WPHive Review](https://wphive.com/plugins/black-widgets/)
+[Black Widgets Demo](https://modernaweb.net/black-widgets/)
 
 
 ### Create your own styles
@@ -39,8 +39,6 @@ Dsgn is a simple way to start a website easily, quickly, and free. This is Free 
 [Our Solutions](https://modernaweb.net/dsgn/solutions/)
 
 — Enjoy 😉
-
-[Black Widgets Demo](https://modernaweb.net/black-widgets/)
 
 ### Available Widgets
 
@@ -127,18 +125,22 @@ WordPress 5.3+
 
 ## Changelog
 
+### 1.3.9 — 2024-11-18
+- Compatibility: WordPress v6.7
+- Improved: Cross-site scripting (XSS) vulnerability for Magic Link widget; Thanks to Patchstack team
+
 ### 1.3.8 — 2024-10-30
 - Improved: Using SVG by adding sanitizer on inputs — (Security Reasons)
 
 ### 1.3.7 — 2024-10-15
 
 - Fixed: Cross-site scripting (XSS) vulnerability in all widgets; Thanks to Patchstack
-- Fixed: Cross-site scripting (XSS) vulnerability in all widgets; Thanks to Wordfence.
+- Fixed: Cross-site scripting (XSS) vulnerability in all widgets; Thanks to Wordfence team, Thanks to [Francesco Carlucci](https://francescocarlucci.com/)
 
 ### 1.3.6 — 2024-07-19
 
 - Added: SVG size and color style for Black Icon Box Pro
-- Fixed: Cross-site scripting (XSS) vulnerability in all widgets; Thanks to Patchstack.
+- Fixed: Cross-site scripting (XSS) vulnerability in all widgets; Thanks to Patchstack team
 
 ### 1.3.5 — 2024-03-03
 
