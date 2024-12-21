@@ -8,18 +8,14 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use Elementor\Plugin;
-use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Color;
-use Elementor\Core\Schemes\Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
-use Elementor\Group_Control_Color;
 use Elementor\Group_Control_Text_Shadow;
-use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Css_Filter;
 
 use enshrined\svgSanitize\Sanitizer;
@@ -1191,10 +1187,9 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Title Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],				
 				'selectors' => [
 					'{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-repetitive' => 'color: {{VALUE}}; -webkit-text-fill-color: {{VALUE}}',
 				],
@@ -1206,7 +1201,9 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			[
 				'name' => 'content_typography1',
 				'label' => esc_html__( 'Typography', 'blackwidgets' ),
-				'scheme' => Typography::TYPOGRAPHY_1,
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                ],
 				'selector' => '{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-repetitive',
 			]
 		);
@@ -1353,10 +1350,9 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Text Stroke Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],				
 				'selectors' => [
 					'{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-repetitive' => '-webkit-text-stroke-color: {{VALUE}}',
 				],
@@ -1452,10 +1448,9 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Title Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],				
 				'selectors' => [
 					'{{WRAPPER}} .bw-typograpgy-repetitive.bw-unique' => 'color: {{VALUE}}; -webkit-text-fill-color: {{VALUE}}',
 				],
@@ -1468,7 +1463,9 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			[
 				'name' => 'unique_content_typography1',
 				'label' => esc_html__( 'Typography', 'blackwidgets' ),
-				'scheme' => Typography::TYPOGRAPHY_1,
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                ],
 				'selector' => '{{WRAPPER}} .bw-typograpgy-repetitive.bw-unique',
 			]
 		);
@@ -1613,35 +1610,14 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// $this->add_control(
-		// 	'unique_widget_stroke_fill_color',
-		// 	[
-		// 		'label' => esc_html__( 'Text Stroke Color', 'blackwidgets' ),
-		// 		'type' => Controls_Manager::COLOR,
-		// 		'scheme' => [
-		// 			'type' => Color::get_type(),
-		// 			'value' => Color::COLOR_1,
-		// 		],
-		// 		'selectors' => [
-		// 			'{{WRAPPER}} .bw-typograpgy-repetitive.bw-unique' => '-webkit-text-fill-color: {{VALUE}}',
-		// 		],
-		// 		'condition'  => [
-		// 			'unique_widget_stroke_title_enable' => [
-		// 				'stroke_enable',
-		// 			],
-		// 		],
-		// 	]
-		// );
-
 		$this->add_control(
 			'unique_widget_stroke_stroke_color',
 			[
 				'label' => esc_html__( 'Text Stroke Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],				
 				'selectors' => [
 					'{{WRAPPER}} .bw-typograpgy-repetitive.bw-unique' => '-webkit-text-stroke-color: {{VALUE}}',
 				],
@@ -2217,10 +2193,9 @@ class BLACK_WIDGETS_Typography extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Icon Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],				
 				'selectors' => [
 					'{{WRAPPER}} .bw-typograpgy .custom-style i' => 'color: {{VALUE}}; -webkit-text-fill-color: {{VALUE}}',
 				],

@@ -8,16 +8,13 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use Elementor\Plugin;
-use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Color;
-use Elementor\Core\Schemes\Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
-use Elementor\Group_Control_Color;
 use Elementor\Group_Control_Text_Shadow;
 
 /**
@@ -530,10 +527,9 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],
 				'selectors' => [
 					'{{WRAPPER}} .bw-title-animate .bw-before' => 'color: {{VALUE}}',
 				],
@@ -546,7 +542,9 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_before_title_typography1',
 				'label' => esc_html__( 'Typography', 'blackwidgets' ),
-				'scheme' => Typography::TYPOGRAPHY_1,
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                ],
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-before',
 			]
 		);
@@ -676,10 +674,9 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],
 				'selectors' => [
 					'{{WRAPPER}} .bw-title-animate .bw-animate-text' => 'color: {{VALUE}}',
 				],
@@ -692,7 +689,9 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_main_title_typography1',
 				'label' => esc_html__( 'Typography', 'blackwidgets' ),
-				'scheme' => Typography::TYPOGRAPHY_1,
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                ],
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-animate-text',
 			]
 		);
@@ -822,10 +821,9 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],
 				'selectors' => [
 					'{{WRAPPER}} .bw-title-animate .bw-symbol' => 'color: {{VALUE}}',
 				],
@@ -838,7 +836,9 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_symbol_title_typography1',
 				'label' => esc_html__( 'Typography', 'blackwidgets' ),
-				'scheme' => Typography::TYPOGRAPHY_1,
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                ],
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-symbol',
 			]
 		);
@@ -976,10 +976,9 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],
 				'selectors' => [
 					'{{WRAPPER}} .bw-title-animate .bw-after' => 'color: {{VALUE}}',
 				],
@@ -992,7 +991,9 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_after_title_typography1',
 				'label' => esc_html__( 'Typography', 'blackwidgets' ),
-				'scheme' => Typography::TYPOGRAPHY_1,
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                ],
 				'selector' => '{{WRAPPER}} .bw-title-animate .bw-after',
 			]
 		);
@@ -1124,10 +1125,9 @@ class BLACK_WIDGETS_Title_Animate extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Line Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],
 				'selectors' => [
 					'{{WRAPPER}} .bw-title-animate .bw-line' => 'background-color: {{VALUE}} !important',
 				],

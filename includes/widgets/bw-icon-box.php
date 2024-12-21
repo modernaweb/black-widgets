@@ -9,19 +9,14 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use Elementor\Plugin;
-use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Color;
-use Elementor\Core\Schemes\Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
-use Elementor\Group_Control_Color;
 use Elementor\Group_Control_Text_Shadow;
 use Elementor\Group_Control_Image_Size;
-// use Elementor\Group_Control_Css_Filter;
 
 use enshrined\svgSanitize\Sanitizer;
 
@@ -856,7 +851,9 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			[
 				'name' => 'content_title_typographys',
 				'label' => esc_html__( 'Typography', 'blackwidgets' ),
-				'scheme' => Typography::TYPOGRAPHY_1,
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                ],
 				'selector' => '{{WRAPPER}} .bw-iconbox .bw-it-is-title',
 			]
 		);
@@ -1039,7 +1036,9 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			[
 				'name' => 'content_subtitle_typographys',
 				'label' => esc_html__( 'Typography', 'blackwidgets' ),
-				'scheme' => Typography::TYPOGRAPHY_1,
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                ],
 				'selector' => '{{WRAPPER}} .bw-iconbox .bw-it-is-subtitle',
 			]
 		);
@@ -1222,7 +1221,9 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			[
 				'name' => 'content_paragraph_typographys',
 				'label' => esc_html__( 'Typography', 'blackwidgets' ),
-				'scheme' => Typography::TYPOGRAPHY_1,
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                ],
 				'selector' => '{{WRAPPER}} .bw-iconbox .bw-it-is-paragraph',
 			]
 		);
@@ -1405,7 +1406,9 @@ class BLACK_WIDGETS_Icon_Box extends \Elementor\Widget_Base {
 			[
 				'name' => 'content_link_typographys',
 				'label' => esc_html__( 'Typography', 'blackwidgets' ),
-				'scheme' => Typography::TYPOGRAPHY_1,
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                ],
 				'selector' => '{{WRAPPER}} .bw-iconbox .bw-btn',
 			]
 		);

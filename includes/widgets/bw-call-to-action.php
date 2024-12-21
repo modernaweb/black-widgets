@@ -8,16 +8,13 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use Elementor\Plugin;
-use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Color;
-use Elementor\Core\Schemes\Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
-use Elementor\Group_Control_Color;
 use Elementor\Group_Control_Text_Shadow;
 
 /**
@@ -440,10 +437,9 @@ class BLACK_WIDGETS_Call_To_Action extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Normal Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],				
 				'selectors' => [
 					'{{WRAPPER}} .bw-cta .bw-cta-title' => 'color: {{VALUE}}',
 				],
@@ -464,10 +460,9 @@ class BLACK_WIDGETS_Call_To_Action extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Hover Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],				
 				'selectors' => [
 					'{{WRAPPER}} .bw-cta:hover .bw-cta-title' => 'color: {{VALUE}}',
 				],
@@ -490,7 +485,9 @@ class BLACK_WIDGETS_Call_To_Action extends \Elementor\Widget_Base {
 			[
 				'name' => 'content_title_typographys',
 				'label' => esc_html__( 'Typography', 'blackwidgets' ),
-				'scheme' => Typography::TYPOGRAPHY_1,
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                ],
 				'selector' => '{{WRAPPER}} .bw-cta .bw-cta-title',
 			]
 		);
@@ -602,10 +599,9 @@ class BLACK_WIDGETS_Call_To_Action extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Normal Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],				
 				'selectors' => [
 					'{{WRAPPER}} .bw-cta .bw-cta-subtitle' => 'color: {{VALUE}}',
 				],
@@ -626,10 +622,9 @@ class BLACK_WIDGETS_Call_To_Action extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Hover Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],				
 				'selectors' => [
 					'{{WRAPPER}} .bw-cta:hover .bw-cta-subtitle' => 'color: {{VALUE}}',
 				],
@@ -652,7 +647,9 @@ class BLACK_WIDGETS_Call_To_Action extends \Elementor\Widget_Base {
 			[
 				'name' => 'content_subtitle_typographys',
 				'label' => esc_html__( 'Typography', 'blackwidgets' ),
-				'scheme' => Typography::TYPOGRAPHY_1,
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                ],
 				'selector' => '{{WRAPPER}} .bw-cta .bw-cta-subtitle',
 			]
 		);
@@ -764,10 +761,9 @@ class BLACK_WIDGETS_Call_To_Action extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Normal Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],				
 				'selectors' => [
 					'{{WRAPPER}} .bw-cta .bw-cta-btn' => 'color: {{VALUE}}',
 				],
@@ -799,10 +795,9 @@ class BLACK_WIDGETS_Call_To_Action extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Hover Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],				
 				'selectors' => [
 					'{{WRAPPER}} .bw-cta .bw-cta-btn:hover' => 'color: {{VALUE}}',
 				],
@@ -836,7 +831,9 @@ class BLACK_WIDGETS_Call_To_Action extends \Elementor\Widget_Base {
 			[
 				'name' => 'content_link_typographys',
 				'label' => esc_html__( 'Typography', 'blackwidgets' ),
-				'scheme' => Typography::TYPOGRAPHY_1,
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                ],
 				'selector' => '{{WRAPPER}} .bw-cta .bw-cta-btn',
 			]
 		);

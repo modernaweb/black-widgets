@@ -8,16 +8,12 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use Elementor\Plugin;
-use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Color;
-use Elementor\Core\Schemes\Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
-use Elementor\Group_Control_Color;
 use Elementor\Group_Control_Text_Shadow;
 
 /**
@@ -399,7 +395,9 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_main_back_link_typography1',
 				'label' => esc_html__( 'Typography', 'blackwidgets' ),
-				'scheme' => Typography::TYPOGRAPHY_1,
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                ],
 				'selector' => '{{WRAPPER}} .bw-magic-link a',
 			]
 		);
@@ -536,7 +534,9 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_main_back_link_hover_typography1',
 				'label' => esc_html__( 'Typography', 'blackwidgets' ),
-				'scheme' => Typography::TYPOGRAPHY_1,
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                ],
 				'selector' => '{{WRAPPER}} .bw-magic-link a:hover',
 			]
 		);
@@ -910,23 +910,24 @@ class BLACK_WIDGETS_Magic_Link extends \Elementor\Widget_Base {
 
         $type = esc_attr( $type );
         $text = esc_html( $text );
+        $url = esc_url( $settings['website_link']['url'] );
 
 		// Render
 		switch ($type) {
 			case 'heart':
-				echo '<div class="bw-magic-link"><a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-magic-' . $type . '">' . $text . ' <span><?xml version="1.0" ?><!DOCTYPE svg  PUBLIC \'-//W3C//DTD SVG 1.1//EN\'  \'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\'><svg height="512px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="512px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="160,115.4 180.7,96 352,256 180.7,416 160,396.7 310.5,256 "/></svg></span></a></div>';
+				echo '<div class="bw-magic-link"><a href="' . $url . '"' . $target . $nofollow . ' class="bw-magic-' . $type . '">' . $text . ' <span><?xml version="1.0" ?><!DOCTYPE svg  PUBLIC \'-//W3C//DTD SVG 1.1//EN\'  \'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\'><svg height="512px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="512px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="160,115.4 180.7,96 352,256 180.7,416 160,396.7 310.5,256 "/></svg></span></a></div>';
 			break;
 			case 'liner':
-				echo '<div class="bw-magic-link"><a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-magic-' . $type . '">' . $text . '</a></div>';
+				echo '<div class="bw-magic-link"><a href="' . $url . '"' . $target . $nofollow . ' class="bw-magic-' . $type . '">' . $text . '</a></div>';
 			break;
 			case 'arrow':
-				echo '<div class="bw-magic-link"><a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-magic-' . $type . '">' . $text . '<span>  <i aria-hidden="true" class="fas fa-arrow-right"></i> </span></a></div>';
+				echo '<div class="bw-magic-link"><a href="' . $url . '"' . $target . $nofollow . ' class="bw-magic-' . $type . '">' . $text . '<span>  <i aria-hidden="true" class="fas fa-arrow-right"></i> </span></a></div>';
 			break;
 			case 'wheel':
-				echo '<div class="bw-magic-link"><a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-magic-' . $type . '"><svg><g><line x2="227.62" y1="31.28" y2="31.28"></line><polyline points="222.62 25.78 228.12 31.28 222.62 36.78"></polyline><circle cx="224.67" cy="30.94" r="30.5" transform="rotate(180 224.67 30.94) scale(1, -1) translate(0, -61)"></circle></g></svg><span>' . $text . '</span></a></div>';
+				echo '<div class="bw-magic-link"><a href="' . $url . '"' . $target . $nofollow . ' class="bw-magic-' . $type . '"><svg><g><line x2="227.62" y1="31.28" y2="31.28"></line><polyline points="222.62 25.78 228.12 31.28 222.62 36.78"></polyline><circle cx="224.67" cy="30.94" r="30.5" transform="rotate(180 224.67 30.94) scale(1, -1) translate(0, -61)"></circle></g></svg><span>' . $text . '</span></a></div>';
 			break;
 			default:
-				echo '<div class="bw-magic-link"><a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-magic-' . $type . '">' . $text . '</a></div>';
+				echo '<div class="bw-magic-link"><a href="' . $url . '"' . $target . $nofollow . ' class="bw-magic-' . $type . '">' . $text . '</a></div>';
 			break;
 		}
 

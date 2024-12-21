@@ -8,16 +8,13 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use Elementor\Plugin;
-use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Color;
-use Elementor\Core\Schemes\Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
-use Elementor\Group_Control_Color;
 use Elementor\Group_Control_Text_Shadow;
 
 /**
@@ -298,10 +295,9 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],
 				'selectors' => [
 					'{{WRAPPER}} .bw-alert-box' => 'color: {{VALUE}}',
 				],
@@ -314,7 +310,9 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 			[
 				'name' => 'style_alert_typography1',
 				'label' => __( 'Typography', 'blackwidgets' ),
-				'scheme' => Typography::TYPOGRAPHY_1,
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                ],
 				'selector' => '{{WRAPPER}} .bw-alert-box',
 			]
 		);
@@ -361,10 +359,9 @@ class BLACK_WIDGETS_Alert extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Icon Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],
 				'selectors' => [
 					'{{WRAPPER}} .bw-alert-box i' => 'color: {{VALUE}}',
 				],
