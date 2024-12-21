@@ -125,7 +125,7 @@ WordPress 5.3+
 
 ## Changelog
 
-### 1.3.9 — 2024-11-18
+### 1.3.9 — 2024-12-21
 - Compatibility: WordPress v6.7
 - Compatibility: Elementor v3.26
 - Improved: Cross-site scripting (XSS) vulnerability for Magic Link widget; Thanks to Patchstack team
