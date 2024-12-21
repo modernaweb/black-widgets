@@ -8,19 +8,15 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use Elementor\Plugin;
-use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Color;
-use Elementor\Core\Schemes\Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
-use Elementor\Group_Control_Color;
 use Elementor\Group_Control_Text_Shadow;
 use Elementor\Group_Control_Image_Size;
-use Elementor\Group_Control_Css_Filter;
 
 /**
  * Elementor title Widget.
@@ -521,10 +517,9 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Normal Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],				
 				'selectors' => [
 					'{{WRAPPER}} .bw-blockquote .content .bw-description' => 'color: {{VALUE}}',
 				],
@@ -545,10 +540,9 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Hover Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],				
 				'selectors' => [
 					'{{WRAPPER}} .bw-blockquote:hover .content .bw-description' => 'color: {{VALUE}}',
 				],
@@ -571,7 +565,9 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			[
 				'name' => 'content_quote_typographys',
 				'label' => esc_html__( 'Typography', 'blackwidgets' ),
-				'scheme' => Typography::TYPOGRAPHY_1,
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                ],
 				'selector' => '{{WRAPPER}} .bw-blockquote .content .bw-description',
 			]
 		);
@@ -683,10 +679,9 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Normal Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],				
 				'selectors' => [
 					'{{WRAPPER}} .bw-blockquote .content .bw-name' => 'color: {{VALUE}}',
 				],
@@ -707,10 +702,9 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Hover Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],				
 				'selectors' => [
 					'{{WRAPPER}} .bw-blockquote:hover .content .bw-name' => 'color: {{VALUE}}',
 				],
@@ -733,7 +727,9 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			[
 				'name' => 'content_name_typographys',
 				'label' => esc_html__( 'Typography', 'blackwidgets' ),
-				'scheme' => Typography::TYPOGRAPHY_1,
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                ],
 				'selector' => '{{WRAPPER}} .bw-blockquote .content .bw-name',
 			]
 		);
@@ -861,10 +857,9 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Icon Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],				
 				'selectors' => [
 					'{{WRAPPER}} .bw-blockquote .bw-icon-into i' => 'color: {{VALUE}}',
 				],
@@ -909,10 +904,9 @@ class BLACK_WIDGETS_Block_Quote extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'SVG Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],				
 				'selectors' => [
 					'{{WRAPPER}} .bw-blockquote .bw-icon-into svg, {{WRAPPER}} .bw-blockquote .bw-icon-into svg path' => 'fill: {{VALUE}} !important;',
 				],

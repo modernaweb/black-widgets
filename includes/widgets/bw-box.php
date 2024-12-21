@@ -8,17 +8,12 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use Elementor\Plugin;
-use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Color;
-use Elementor\Core\Schemes\Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
-use Elementor\Group_Control_Color;
-use Elementor\Group_Control_Text_Shadow;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Css_Filter;
 
@@ -554,7 +549,9 @@ class BLACK_WIDGETS_Box extends \Elementor\Widget_Base {
 			[
 				'name' => 'title_typography',
 				'label' => esc_html__( 'Title Typography', 'blackwidgets' ),
-				'scheme' => Typography::TYPOGRAPHY_1,
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                ],
 				'selector' => '{{WRAPPER}} .bw-hover-box .bw-content-box .bw-title',
 			]
 		);
@@ -577,7 +574,9 @@ class BLACK_WIDGETS_Box extends \Elementor\Widget_Base {
 			[
 				'name' => 'subtitle_typography',
 				'label' => esc_html__( 'Subtitle Typography', 'blackwidgets' ),
-				'scheme' => Typography::TYPOGRAPHY_1,
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                ],
 				'selector' => '{{WRAPPER}} .bw-hover-box .bw-content-box .bw-description',
 			]
 		);

@@ -8,19 +8,13 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use Elementor\Plugin;
-use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Color;
-use Elementor\Core\Schemes\Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
-use Elementor\Group_Control_Color;
-use Elementor\Group_Control_Text_Shadow;
-use Elementor\Group_Control_Image_Size;
-use Elementor\Group_Control_Css_Filter;
 
 /**
  * Elementor title Widget.
@@ -894,10 +888,9 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Title Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Color::get_type(),
-					'value' => Color::COLOR_1,
-				],
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],				
 				'selectors' => [
 					'{{WRAPPER}} .bw-sentence .bw-t-1' => 'color: {{VALUE}}',
 				],
@@ -910,7 +903,9 @@ class BLACK_WIDGETS_Sentence extends \Elementor\Widget_Base {
 			[
 				'name' => 'all_general_typography_sentence',
 				'label' => esc_html__( 'Typography', 'blackwidgets' ),
-				'scheme' => Typography::TYPOGRAPHY_1,
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                ],
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1',
 			]
 		);
