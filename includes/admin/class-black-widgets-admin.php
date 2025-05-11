@@ -142,16 +142,16 @@ class Black_Widgets_Admin {
 
 		add_submenu_page(
 			$menu_slug,
-			__( 'Dashboard', 'blackwidgets' ),
-			__( 'Dashboard', 'blackwidgets' ),
+			__( 'Dashboard', 'black-widgets' ),
+			__( 'Dashboard', 'black-widgets' ),
 			$capability,
 			$menu_slug
 		);
 
 		add_submenu_page(
 			$menu_slug,
-			__( 'Settings', 'blackwidgets' ),
-			__( 'Settings', 'blackwidgets' ),
+			__( 'Settings', 'black-widgets' ),
+			__( 'Settings', 'black-widgets' ),
 			$capability,
 			'black-widgets-settings',
 			array($this, 'black_widgets_settings')

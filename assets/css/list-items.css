@@ -1,0 +1,25 @@
+.bw-list .bw-list-item {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.bw-list .bw-list-item i {
+    font-size: 14px;
+    margin-right: 7px;
+}
+
+.bw-list .bw-list-item span {
+    font-size: 14px;
+    letter-spacing: 0.07px;
+    color: #1b1e2f;
+    font-weight: 400;
+}
+
+.bw-list .bw-list-item:hover span,
+.bw-list .bw-list-item:hover i {
+    transition: all .27s ease-in-out;
+    -webkit-transition: all .27s ease-in-out;
+    -moz-transition: all .27s ease-in-out;
+    -ms-transition: all .27s ease-in-out;
+    -o-transition: all .27s ease-in-out;
+}

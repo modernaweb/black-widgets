@@ -1,0 +1,32 @@
+.bw-text-marquee {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.bw-text-marquee:not(.bw-mos) {
+    display: flex;
+}
+
+.bw-text-marquee:not(.bw-mos) .bw-text-marquee-content {
+    min-width: 100%;
+    will-change: transform;
+    animation: bw-text-marquee linear infinite;
+}
+
+.bw-reverse .bw-text-marquee-content {
+    animation-direction: reverse !important;
+}
+
+.bw-text-marquee-text {
+    display: inline-block;
+    margin: 0 2px;
+}
+
+@keyframes bw-text-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}

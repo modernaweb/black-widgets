@@ -1,0 +1,12 @@
+.bw-image {
+    display: block;
+}
+
+.bw-image img {
+    display: inline-block;
+}
+
+.bw-parallax {
+    min-height: 400px;
+    background: transparent;
+}

@@ -1,0 +1,100 @@
+.bw-cta {
+    background: #000;
+    color: #fff;
+    width: auto;
+    padding: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+    box-shadow: 0px 20px 25px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+}
+
+
+.bw-cta .bw-cta-title {
+    font-size: 44px;
+    margin: 0 0 34px 0;
+    font-weight: 700;
+    letter-spacing: -0.06em;
+}
+
+.bw-cta .bw-cta-subtitle {
+    font-size: 23px;
+    margin: 0;
+    font-weight: 500;
+}
+
+.bw-cta .bw-cta-button {
+    transform: scale(0.9, 0.9);
+    -webkit-transform: scale(0.9, 0.9);
+    -moz-transform: scale(0.9, 0.9);
+    -ms-transform: scale(0.9, 0.9);
+    -o-transform: scale(0.9, 0.9);
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+}
+
+.bw-cta .bw-cta-button:hover {
+    transform: scale(1, 1);
+    -webkit-transform: scale(1, 1);
+    -moz-transform: scale(1, 1);
+    -ms-transform: scale(1, 1);
+    -o-transform: scale(1, 1);
+}
+
+.bw-cta .bw-cta-button a {
+    display: block;
+    color: #000;
+    background: #fff;
+    padding: 16px 38px 16px 28px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+    margin: 20px;
+    font-weight: 800;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+
+.bw-cta .bw-cta-button a i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 24px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.bw-cta .bw-cta-button a:hover i {
+    right: 14px;
+    opacity: 1;
+}
+
+@media(max-width: 780px) {
+    .bw-cta {
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 50px 25px;
+    }
+    .bw-cta .bw-cta-button a {
+        padding: 8px 14px;
+        font-size: 12px;
+        margin: 14px 10px;
+        display: block;
+    }
+}

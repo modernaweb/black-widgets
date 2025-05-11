@@ -1,0 +1,38 @@
+.bw-gsap-code-box .bw-eg {
+    transform-style: preserve-3d;
+    opacity: 1;
+    visibility: inherit;
+    transform: translate(0px, 25px) rotate(3deg) skew(26deg, -42deg) scale(1, 0);
+    color: #000;
+    line-height: 150px;
+}
+
+.bw-boxer {
+    position: relative;
+}
+
+.bw-bx {
+    min-width: 200px;
+    width: 100%;
+    margin: auto;
+    height: 100%;
+    background: #E4E4FA;
+    will-change: transform;
+    position: absolute;
+    z-index: -1;
+}
+
+.bw-boxer img {
+    padding: 10px;
+}
+
+.start-point {
+    transform-style: preserve-3d;
+    opacity: 1;
+    will-change: transform;
+    transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+    -webkit-transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+    -moz-transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+    -ms-transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+    -o-transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+}

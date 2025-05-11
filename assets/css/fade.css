@@ -1,0 +1,46 @@
+.bw-line {
+    height: 5px;
+    background: #000;
+    width: 40%;
+}
+
+.bw-line.bw-t-2 {
+    background: transparent;
+    border-bottom: 2px dotted #000;
+}
+
+.bw-load-img {
+    position: relative;
+    overflow: hidden;
+    /* cursor: pointer; */
+    min-height: 10px;
+}
+
+.bw-image-grow-cover {
+    position: absolute;
+    z-index: 1;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: #222;
+}
+
+.bw-image-grow-cover.ltr {
+    left: 0;
+}
+
+.bw-load-img img {
+    display: block;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    transform: translateX(-64px) scale(1.5);
+    -webkit-transform: translateX(-64px) scale(1.5);
+    -moz-transform: translateX(-64px) scale(1.5);
+    -ms-transform: translateX(-64px) scale(1.5);
+    -o-transform: translateX(-64px) scale(1.5);
+}
+
+.bw-image-grow-cover {
+    display: block;
+}

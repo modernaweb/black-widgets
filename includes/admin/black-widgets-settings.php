@@ -20,7 +20,7 @@ echo '<div id="bw-wrap">';
 		do_settings_sections('black_widgets_settings_general_settings');
 		?>
 		<p class="submit">
-			<input name="Submit" type="submit" class="bw-backend-btn button-primary" value="<?php _e('Save Changes' ,'blackwidgets'); ?>" />
+			<input name="Submit" type="submit" class="bw-backend-btn button-primary" value="<?php esc_attr_e('Save Changes' ,'black-widgets'); ?>" />
 		</p>
 		<?php
 	echo '</form>';

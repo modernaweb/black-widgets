@@ -1,0 +1,262 @@
+.black-tab--default.black-tab {
+    display: flex;
+    flex-direction: column;
+    font-family: inherit;
+}
+
+.black-tab--default .black-tab__inner {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 2rem;
+}
+
+.black-tab--default .black-tab__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.black-tab--default .black-tab__top-content {
+    margin-bottom: 2rem;
+}
+
+.black-tab--default .black-tab__tabs {
+    display: flex;
+    flex-direction: column;
+}
+
+.black-tab--default .black-tab__tab {
+    position: relative;
+    padding-left: 1.25rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.black-tab--default .black-tab__tab-header {
+    margin-bottom: 0.5rem;
+}
+
+.black-tab--default .black-tab__tab-title {
+    margin: 0;
+    font-weight: bold;
+    color: #777;
+}
+
+.black-tab--default .black-tab__tab-title:not(.black-tab__tab-title--active):hover {
+    color: #555;
+}
+
+.black-tab--default .black-tab__tab-title.black-tab__tab-title--active {
+    color: #000;
+}
+
+.black-tab--default .black-tab__tab-description {
+    margin: 0.25rem 0 0;
+    font-size: 0.9rem;
+    color: #555;
+    overflow: hidden;
+}
+
+.black-tab--default .black-tab__tab-timeline {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: #ccc;
+    overflow: hidden;
+}
+
+.black-tab--default .black-tab__tab--active .black-tab__tab-timeline {
+    width: 3px;
+}
+
+.black-tab--default .black-tab__timeline-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 0;
+    background-color: #000;
+}
+
+.black-tab--default .black-tab__right {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    height: auto;
+}
+
+.black-tab--default .black-tab__media {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.black-tab--default .black-tab__image,
+.black-tab--default .black-tab__video {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+.black-tab--default .black-tab__read-more {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.black-tab--default .black-tab__read-more:hover {
+    background-color: #2a2a2a;
+    color: #fff;
+}
+
+.black-tab--default .black-tab__read-more svg {
+    width: 16px;
+    height: 16px;
+    fill: #fff;
+    stroke: #fff;
+}
+
+@media (max-width: 768px) {
+    .black-tab--default .black-tab__inner {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/********************************************/
+
+.black-tab--vertical.black-tab {
+    font-family: inherit;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.black-tab--vertical .black-tab__tabs-wrapper {
+    display: flex;
+    justify-content: end;
+    background-color: #000;
+    padding: 0 5%;
+    border-radius: 4px;
+}
+
+.black-tab--vertical .black-tab__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+}
+
+.black-tab--vertical .black-tab__tab {
+    padding: 12px 16px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s;
+    flex: 1;
+    text-align: center;
+}
+
+.black-tab--vertical .black-tab__tab:hover,
+.black-tab--vertical .black-tab__tab--active {
+    color: #fff;
+}
+
+.black-tab--vertical .black-tab__content-area {
+    padding: 16px;
+    position: relative;
+}
+
+.black-tab--vertical .black-tab__panel {
+    display: none;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.black-tab--vertical .black-tab__panel--active {
+    display: flex;
+}
+
+.black-tab--vertical .black-tab__text-content {
+    flex: 1 1 50%;
+}
+
+.black-tab--vertical .black-tab__description {
+    margin-bottom: 1em;
+    line-height: 1.6;
+}
+
+.black-tab--vertical .black-tab__read-more {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 20px;
+    transition: background-color 0.3s;
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    gap: 8px;
+}
+
+.black-tab--vertical .black-tab__read-more-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.black-tab--vertical .black-tab__read-more-icon svg {
+    width: 16px;
+    height: 16px;
+    fill: #fff;
+    stroke: #fff;
+}
+
+.black-tab--vertical .black-tab__read-more:hover {
+    background-color: #2a2a2a;
+}
+
+.black-tab--vertical .black-tab__media {
+    flex: 1 1 45%;
+    max-width: 100%;
+    position: relative;
+}
+
+.black-tab--vertical .black-tab__media img,
+.black-tab--vertical .black-tab__media video {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .black-tab--vertical .black-tab__panel {
+        flex-direction: column;
+    }
+
+    .black-tab--vertical .black-tab__media {
+        order: 2;
+        margin-top: 20px;
+    }
+
+    .black-tab--vertical .black-tab__text-content {
+        order: 1;
+    }
+}

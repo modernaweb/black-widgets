@@ -2,9 +2,9 @@
 Contributors: skalanter, modernaweb
 Donate link: http://modernaweb.net/
 Tags: page builder, editor, elementor widgets, elementor addon, typography
-Stable tag: 1.3.9
+Stable tag: 1.4.0 DEV
 Requires at least: 6.0
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 7.4
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -103,6 +103,17 @@ WordPress 5.3+
 
 
 ## Changelog
+
+= 1.4.0 — 2025-05-XX =
+- Refactored: Plugin Structure
+- Improved: All Settings
+- Compatibility: WordPress v6.8
+- Compatibility: Elementor v3.28
+- Added: New widget: GSAP Tab
+- Added: New widget: GSAP Intractive Links
+- Fixed: Cross-site scripting (XSS) vulnerability for the Black List widget; Thanks to Patchstack team
+- Fixed: Cross-site scripting (XSS) vulnerability for uploading SVG and image as code by adding SVG sanitizer; Thanks to Patchstack team
+- Removed: Elementor Dark Mode Setting
 
 = 1.3.9 — 2024-12-21 =
 - Compatibility: WordPress v6.7

@@ -383,7 +383,7 @@ function Black_Widgets_elementor_icons( $tabs = array() ) {
 
 	$tabs['black_widgets_elementor_icons'] = array(
 		'name'          => 'black_widgets_elementor_icons',
-		'label'         => esc_html__( 'Elementor Icons', 'blackwidgets' ),
+		'label'         => esc_html__( 'Elementor Icons', 'black-widgets' ),
 		'labelIcon'     => 'demo-icon eicon-elementor-square',
 		'prefix'        => 'eicon-',
 		'displayPrefix' => 'eicon',

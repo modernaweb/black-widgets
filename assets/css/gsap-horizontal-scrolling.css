@@ -1,0 +1,15 @@
+.bw-horizontal-section {
+    width: 100%;
+    display: block;
+    overflow-y: hidden;
+}
+
+.bw-section {
+    display: flex;
+    width: 100%;
+}
+
+.bw-section>.elementor {
+    display: inline;
+    min-width: 100%;
+}
