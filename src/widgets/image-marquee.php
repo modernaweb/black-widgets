@@ -325,7 +325,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
 
 ?>
         <div class="<?php echo $classes; ?>" data-start="<?php echo $start;?>" data-end="<?php echo $end;?>" data-direction="<?php echo $direction;?>" data-duration="<?php echo $duration; ?>"> <?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-        <div class="bw-image-marquee-content" data-movement="<?php echo $movement; ?>">
+        <div class="bw-image-marquee-content" data-movement="<?php echo esc_attr( $movement ); ?>">
                 <?php foreach ( $images as $index => $image ): ?>
                 <?php if ( $index % 2 == 0 && isset($images[$index + 1]) && $animation == 'type2' ): ?>
                 <div class="bw-image-marquee-thumb bw-image-marquee-type2">

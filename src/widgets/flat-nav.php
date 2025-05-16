@@ -166,24 +166,34 @@ class FlatNav extends \Elementor\Widget_Base {
 			$this->add_control(
 				'menu',
 				[
-					'label'             => esc_html__( 'Select Menu', 'black-widgets' ),
-					'type'              => Controls_Manager::SELECT,
-					'options'           => $menus,
-					'default'           => array_keys( $menus )[0],
-					'save_default'      => true,
-					'description'       => sprintf( __( 'Go to the <a href="%s" target="_blank">Menus screen</a> to manage your menus; The menu should be flat', 'black-widgets' ), admin_url( 'nav-menus.php' ) ),
+					'label'				=> esc_html__( 'Select Menu', 'black-widgets' ),
+					'type'				=> Controls_Manager::SELECT,
+					'options'			=> $menus,
+					'default'			=> array_keys( $menus )[0],
+					'save_default'		=> true,
+					'description'		=> sprintf( 
+						// translators: %s is the URL to the Menus screen
+						__( 'Go to the <a href="%s" target="_blank">Menus screen</a> to manage your menus; The menu should be flat', 'black-widgets' ), 
+						admin_url( 'nav-menus.php' ) 
+					),
 				]
 			);
 		} else {
 			$this->add_control(
 				'menu',
 				[
-					'type'              => Controls_Manager::RAW_HTML,
-					'raw'               => sprintf( __( '<strong>There are no menus in your site.</strong><br>Go to the <a href="%s" target="_blank">Menus screen</a> to create one.', 'black-widgets' ), admin_url( 'nav-menus.php?action=edit&menu=0' ) ),
-					'content_classes'   => 'elementor-panel-alert elementor-panel-alert-info',
+					'type'				=> Controls_Manager::RAW_HTML,
+					'raw'				=> sprintf( 
+						// translators: %s is the URL to the Menus screen for creating a new menu
+						__( '<strong>There are no menus in your site.</strong><br>Go to the <a href="%s" target="_blank">Menus screen</a> to create one.', 'black-widgets' ), 
+						admin_url( 'nav-menus.php?action=edit&menu=0' ) 
+					),
+					'content_classes'	=> 'elementor-panel-alert elementor-panel-alert-info',
 				]
 			);
 		}
+
+
 
 		// Select type of the title
 		$this->add_control(
@@ -693,15 +703,15 @@ class FlatNav extends \Elementor\Widget_Base {
 		$allmenus = $this->get_available_menus();
 
 		if ( ! empty( $allmenus ) ) {
-			switch ($custom_nav_styles) {
+			switch ( $custom_nav_styles ) {
 				case 'style7':
 					$args = [
 						'echo'          => false,
 						'menu'          => $settings['menu'],
 						'menu_class'    => 'bw-menu-box',
-						'menu_id'       => 'menu-' . $this->get_nav_menu_index() . '-' . $this->get_id(),
+						'menu_id'       => 'menu-' . esc_attr( $this->get_nav_menu_index() ) . '-' . esc_attr( $this->get_id() ), // Escaped output
 						'fallback_cb'   => '__return_empty_string',
-						'link_before'        => $bw_icon_svg_code,
+						'link_before'   => $bw_icon_svg_code,
 						'container'     => '',
 					];
 					break;
@@ -711,9 +721,9 @@ class FlatNav extends \Elementor\Widget_Base {
 						'echo'          => false,
 						'menu'          => $settings['menu'],
 						'menu_class'    => 'bw-menu-box',
-						'menu_id'       => 'menu-' . $this->get_nav_menu_index() . '-' . $this->get_id(),
+						'menu_id'       => 'menu-' . esc_attr( $this->get_nav_menu_index() ) . '-' . esc_attr( $this->get_id() ), // Escaped output
 						'fallback_cb'   => '__return_empty_string',
-						'link_after'        => $bw_icon_svg_code,
+						'link_after'    => $bw_icon_svg_code,
 						'container'     => '',
 					];
 					break;
@@ -723,7 +733,7 @@ class FlatNav extends \Elementor\Widget_Base {
 						'echo'          => false,
 						'menu'          => $settings['menu'],
 						'menu_class'    => 'bw-menu-box',
-						'menu_id'       => 'menu-' . $this->get_nav_menu_index() . '-' . $this->get_id(),
+						'menu_id'       => 'menu-' . esc_attr( $this->get_nav_menu_index() ) . '-' . esc_attr( $this->get_id() ), // Escaped output
 						'fallback_cb'   => '__return_empty_string',
 						'container'     => '',
 					];
@@ -736,7 +746,7 @@ class FlatNav extends \Elementor\Widget_Base {
 			
 
 			echo '<div class="bw-nav ' . esc_attr( $custom_nav_styles ) . ' ' . esc_attr( $alignment ) . '">';
-				echo $menu_html;
+				echo wp_kses_post( $menu_html );
 			echo '</div>';
 
 		}

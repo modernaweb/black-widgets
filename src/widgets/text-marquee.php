@@ -444,12 +444,12 @@ class TextMarquee extends \Elementor\Widget_Base {
 
 ?>
         <div class="<?php echo $classes; ?>" data-start="<?php echo $start;?>" data-end="<?php echo $end;?>" data-direction="<?php echo $direction;?>" data-duration="<?php echo $duration; ?>" data-gap="<?php echo $gap; ?>"> <?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-            <div class="bw-text-marquee-content bw-text-marquee-content-<?php echo $type; ?>">
-                <span class="bw-text-marquee-text"><?php echo $text; ?></span>
-            </div>            
+            <div class="bw-text-marquee-content bw-text-marquee-content-<?php echo esc_attr( $type ); ?>">
+                <span class="bw-text-marquee-text"><?php echo esc_html( $text ); ?></span>
+            </div>
             <?php if ( ! $mos ): ?>
-            <div class="bw-text-marquee-content bw-text-marquee-content-<?php echo $type; ?>" aria-hidden="true">
-                <span class="bw-text-marquee-text"><?php echo $text; ?></span>
+            <div class="bw-text-marquee-content bw-text-marquee-content-<?php echo esc_attr( $type ); ?>" aria-hidden="true">
+                <span class="bw-text-marquee-text"><?php echo esc_html( $text ); ?></span>
             </div>
             <?php endif; ?>
         </div>

@@ -1712,20 +1712,20 @@ class ImagePro extends \Elementor\Widget_Base {
 			}
 
 			echo '<script>
-					jQuery(window).ready(function($) {
-						gsap.registerPlugin(ScrollTrigger);
-						ScrollTrigger.config({ limitCallbacks: true });
-						const tl = gsap.timeline({
-							scrollTrigger: {
-							trigger: "#'. $data_id .'",
-                            start: "'. $trigger_hook2 .' '. $trigger_hook4 .'",
-                            end: "'. $trigger_hook .' '. $trigger_hook3 .'",
-                            scrub: true,
-							}
-						});
-						'.$tlfrom.'
-						'.$tlto.'
+				jQuery(window).ready(function($) {
+					gsap.registerPlugin(ScrollTrigger);
+					ScrollTrigger.config({ limitCallbacks: true });
+					const tl = gsap.timeline({
+						scrollTrigger: {
+							trigger: "#' . $data_id . '",
+							start: "' . $trigger_hook2 . ' ' . $trigger_hook4 . '",
+							end: "' . $trigger_hook . ' ' . $trigger_hook3 . '",
+							scrub: true,
+						}
 					});
+					' . $tlfrom . '
+					' . $tlto . '
+				});
 			</script>';
 		}
 

@@ -2421,14 +2421,14 @@ class Typography extends \Elementor\Widget_Base {
 						case 'custom-style':
 							echo '<span class="bw-left-top '. esc_attr( $alignment_1 ) .'">';
 								if ( $style_1_type == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset_1, [ 'aria-hidden' => 'true' ] ); echo '</div>';
-								elseif ( $style_1_type == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode_1.'</div>';
+								elseif ( $style_1_type == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">' . wp_kses_post( $svgcode_1 ) . '</div>';
 								else: echo '<div class="bw-iconbox-img"><img src="'. esc_url( $image_id_1 ).'" class="bw-iconbox-image"></div>';
 								endif;
 							echo '</span>';
 							echo '<'. $title_tag .' class="bw-bw-t-2-text '.$alignment.' bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
 							echo '<span class="bw-right-bottom '.esc_attr( $alignment_2 ) .'">';
 								if ( $style_2_type == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset_2, [ 'aria-hidden' => 'true' ] ); echo '</div>';
-								elseif ( $style_2_type == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode_2.'</div>';
+								elseif ( $style_2_type == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">' . wp_kses_post( $svgcode_2 ) . '</div>';
 								else: echo '<div class="bw-iconbox-img"><img src="'. esc_url( $image_id_2 ).'" class="bw-iconbox-image"></div>';
 								endif;
 							echo '</span>';
@@ -2497,15 +2497,15 @@ class Typography extends \Elementor\Widget_Base {
 						ScrollTrigger.config({ limitCallbacks: true });
 						const tl = gsap.timeline({
 							scrollTrigger: {
-							trigger: "#'. $data_id .'",
+							trigger: "#' . $data_id . '",
 							start: "center bottom",
 							end: "center top",
 							scrub: true,
 							// markers: true
 							}
 						});
-						'.$tlfrom.'
-						'.$tlto.'
+						' . $tlfrom . '
+						' . $tlto . '
 					});
 			</script>';
 
@@ -2516,14 +2516,14 @@ class Typography extends \Elementor\Widget_Base {
 
 					echo '<script>
                         jQuery(window).ready(function($) {
-                            jQuery( "' . $second_bwscript_id . '" ).appendTo( $( "'. $script_id .' em" ) );
+							jQuery("'. $second_bwscript_id .'").appendTo( jQuery("'. $script_id .' em") );
 
                             const scroll = jQuery(window).scrollTop();
-                            const objectSelect = jQuery("'. $script_id .'");
+							const objectSelect = jQuery("'. $script_id .'");
                             const bottom = jQuery(window).height();
                             const objectPosition = objectSelect.offset().top - bottom;
                             if (scroll > objectPosition) {
-                                jQuery("'. $script_id .' .bw-code-em").addClass("run");
+								jQuery("'. $script_id .' .bw-code-em").addClass("run");
                             } else {
                                 jQuery("'. $script_id .' .bw-code-em").removeClass("run");
                             }
@@ -2531,7 +2531,7 @@ class Typography extends \Elementor\Widget_Base {
 
                         jQuery(window).scroll(function($) {    
                             const scroll = jQuery(window).scrollTop();
-                            const objectSelect = jQuery("'. $script_id .'");
+							const objectSelect = jQuery("'. $script_id .'");
                             const bottom = jQuery(window).height();
                             const objectPosition = objectSelect.offset().top - bottom;
                             if (scroll > objectPosition) {

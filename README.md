@@ -3,7 +3,7 @@
 **Contributors:** skalanter, modernaweb \
 **Donate link:** http://modernaweb.net/ \
 **Tags:** page builder, editor, elementor widgets, elementor addon, typography \
-**Stable tag:** 1.4.0 DEV \
+**Stable tag:** 1.4.0  DEV \
 **Requires at least:** 6.0 \
 **Tested up to:** 6.8 \
 **Requires PHP:** 7.4 \
@@ -30,6 +30,7 @@ We will add more widgets with more and more styles that may surprise you in the 
 ⚡ Great Animate with AnimeJS and GSAP
 ⚡ CSS Transform(2D & 3D CSS Styles)
 ⚡ Scroll Trigger(with CDN)
+⚡ Awards Elements
 
 ### ✹ Dsgn
 
@@ -125,11 +126,15 @@ WordPress 5.3+
 
 ## Changelog
 
-### 1.4.0 — 2025-05-XX
+### 1.4.0 — 2025-05-XX 
 - Refactored: Plugin Structure
 - Improved: All Settings
 - Compatibility: WordPress v6.8
 - Compatibility: Elementor v3.28
+- Added: New widget: Black Text Marquee
+- Added: New widget: Black Image Marquee
+- Added: New widget: Black Image Carousel
+- Added: New widget: Black Revealed Text
 - Added: New widget: GSAP Tab
 - Added: New widget: GSAP Intractive Links
 - Fixed: Cross-site scripting (XSS) vulnerability for the Black List widget; Thanks to Patchstack team

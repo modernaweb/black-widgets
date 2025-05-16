@@ -984,32 +984,33 @@ transformStyle: "preserve-3d",
 		// Render
 		switch ($type) {
 			case 'html':
-				echo '<div class="bw-gsap-code-box" id="'. $script_id .'">';
-					echo $html_code;
+				echo '<div class="bw-gsap-code-box" id="' . esc_attr( $script_id ) . '">';
+					echo wp_kses_post( $html_code );
 				echo '</div>';
 
 				if ( isset($gsap_options) && !empty($gsap_options) ) {
-                    echo '<script>
+					echo '<script>
 						jQuery(window).ready(function($) {
 							gsap.registerPlugin(ScrollTrigger);
 							const tl = gsap.timeline({
 								scrollTrigger: {
-								'. $html_trigger .'
-							}});
-							tl.from(".'. esc_js( $shared_class ) .'", {
-								'. $html_js_from .'
-							})
-							tl.to(".'. esc_js( $shared_class ) .'", {
-								'. $html_js_to .'
-							})
+									' . $html_trigger . '
+								}
+							});
+							tl.from(".' . $shared_class . '", {
+								' . $html_js_from . '
+							});
+							tl.to(".' . $shared_class . '", {
+								' . $html_js_to . '
+							});
 						});
 					</script>';
 				}
 				break;
 			
 			case 'image':
-				echo '<div class="bw-gsap-img" id="'. $script_id .'"><div class="'. esc_attr( $image_trigger_class ) .'">';
-					echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail', $settings ) . '" class="bw-img-trigger-x">';
+				echo '<div class="bw-gsap-img" id="' . esc_attr( $script_id ) . '"><div class="' . esc_attr( $image_trigger_class ) . '">';
+					echo '<img src="' . esc_url( Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail', $settings ) ) . '" class="bw-img-trigger-x">';
 				echo '</div></div>';
 				if ( isset($gsap_options) && !empty($gsap_options) ) {
                     echo '<script>';

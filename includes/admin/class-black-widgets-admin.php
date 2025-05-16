@@ -259,7 +259,7 @@ class Black_Widgets_Admin {
 		// $options = get_option('plugin_options');
 		if ( get_option('plugin_options') ): $options = get_option('plugin_options'); else: $options = ''; endif;
 		if(isset($options['bw_dark_style']) && $options['bw_dark_style']) { $checked = ' checked="checked" '; }
-		echo "<input ".$checked." id='bw_dark_style_chb1' name='plugin_options[bw_dark_style]' type='checkbox' />";
+		echo "<input " . esc_attr( $checked ) . " id='bw_dark_style_chb1' name='plugin_options[bw_dark_style]' type='checkbox' />";
 	}
 
     // CHECKBOX - Name: plugin_options[bw_dark_style]
@@ -269,7 +269,7 @@ class Black_Widgets_Admin {
         // $options = get_option('plugin_options');
         if ( get_option('plugin_options') ): $options = get_option('plugin_options'); else: $options = ''; endif;
         if(isset($options['gsap_options']) && $options['gsap_options']) { $checked = ' checked="checked" '; $checked_class = 'class="bw-checked"'; }
-        echo "<input ".$checked." id='bw_gsap_options' name='plugin_options[gsap_options]' type='checkbox' $checked_class />";
+		echo "<input " . esc_attr( $checked ) . " id='bw_gsap_options' name='plugin_options[gsap_options]' type='checkbox' " . esc_attr( $checked_class ) . " />";
         echo '<p> After enabling it, you can find new widgets in the Elementor environment. Additionally, some widgets will have new features enabled for your enjoyment. </p>';
     }
 
@@ -278,7 +278,7 @@ class Black_Widgets_Admin {
         $options = get_option('plugin_options');
         if ( get_option('plugin_options') ): $options = get_option('plugin_options'); else: $options = ''; endif;
         $cdn1 = (isset($options['bw_gsap_cdn1']) && $options['bw_gsap_cdn1']) ? $options['bw_gsap_cdn1'] : '';
-        echo "<input id='bw_option_gsap_cdn1' name='plugin_options[bw_gsap_cdn1]' type='text' value='$cdn1' />";
+		echo "<input id='bw_option_gsap_cdn1' name='plugin_options[bw_gsap_cdn1]' type='text' value='" . esc_attr( $cdn1 ) . "' />";
     }
 
     // CDN 2 - Name: plugin_options[bw_dark_style]
@@ -286,7 +286,7 @@ class Black_Widgets_Admin {
         $options = get_option('plugin_options');
         if ( get_option('plugin_options') ): $options = get_option('plugin_options'); else: $options = ''; endif;
         $cdn2 = (isset($options['bw_gsap_cdn2']) && $options['bw_gsap_cdn2']) ? $options['bw_gsap_cdn2'] : '';
-        echo "<input id='bw_option_gsap_cdn2' name='plugin_options[bw_gsap_cdn2]' type='text' value='$cdn2' />";
+		echo "<input id='bw_option_gsap_cdn2' name='plugin_options[bw_gsap_cdn2]' type='text' value='" . esc_attr( $cdn2 ) . "' />";
     }
 
     // CDN 3 - Name: plugin_options[bw_dark_style]
@@ -294,7 +294,7 @@ class Black_Widgets_Admin {
         $options = get_option('plugin_options');
         if ( get_option('plugin_options') ): $options = get_option('plugin_options'); else: $options = ''; endif;
         $cdn3 = (isset($options['bw_gsap_cdn3']) && $options['bw_gsap_cdn3']) ? $options['bw_gsap_cdn3'] : '';
-        echo "<input id='bw_option_gsap_cdn3' name='plugin_options[bw_gsap_cdn3]' type='text' value='$cdn3' />";
+		echo "<input id='bw_option_gsap_cdn3' name='plugin_options[bw_gsap_cdn3]' type='text' value='" . esc_attr( $cdn3 ) . "' />";
     }
 
     // CDN 4 - Name: plugin_options[bw_dark_style]
@@ -302,7 +302,7 @@ class Black_Widgets_Admin {
         $options = get_option('plugin_options');
         if ( get_option('plugin_options') ): $options = get_option('plugin_options'); else: $options = ''; endif;
         $cdn4 = (isset($options['bw_gsap_cdn4']) && $options['bw_gsap_cdn4']) ? $options['bw_gsap_cdn4'] : '';
-        echo "<input id='bw_option_gsap_cdn4' name='plugin_options[bw_gsap_cdn4]' type='text' value='$cdn4' />";
+		echo "<input id='bw_option_gsap_cdn4' name='plugin_options[bw_gsap_cdn4]' type='text' value='" . esc_attr( $cdn4 ) . "' />";
     }
 
 	// Display the admin options page

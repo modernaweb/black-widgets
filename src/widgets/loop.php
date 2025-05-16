@@ -393,7 +393,7 @@ class Loop extends \Elementor\Widget_Base {
 
                 // Article Content
                 echo '<div class="bw-loop-article-wrap">';
-                    echo '<a href="'. esc_url( get_the_permalink() ) .'"> '. esc_html( get_the_title() ).'</a>';
+                    echo '<a href="' . esc_url( get_the_permalink() ) .'"> ' . esc_html( get_the_title() ) . '</a>';
                 echo '</div>';
 
             endwhile;
@@ -407,13 +407,13 @@ class Loop extends \Elementor\Widget_Base {
                 'prev_text'     => sprintf( '<i></i> %1$s', __( 'Newer Posts', 'black-widgets' ) ),
                 'next_text'     => sprintf( '%1$s <i></i>', __( 'Older Posts', 'black-widgets' ) ),
             ] );
-            echo str_replace('span', 'a', $pagination);
+			echo esc_html( str_replace( 'span', 'a', $pagination ) );
             echo '</div>';
 
             wp_reset_postdata();
         else :
             echo '<p>';
-                _e( 'Sorry, no posts matched your criteria.', 'black-widgets' );
+				esc_html_e( 'Sorry, no posts matched your criteria.', 'black-widgets' );
             echo '</p>';
         endif;
 

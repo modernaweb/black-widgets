@@ -1352,7 +1352,7 @@ class InteractiveLinks extends \Elementor\Widget_Base {
         ?>
 
         <!-- Main container with encoded GSAP settings in a data attribute -->
-        <div class="bw-interactive-link-box" data-gsap-settings="<?php echo $encoded_data; ?>">
+        <div class="bw-interactive-link-box" data-gsap-settings="<?php echo esc_attr( $encoded_data ); ?>">
             <ul class="bw-il-menu">
                 <?php foreach ( $settings['menu_items'] as $item ) :
                     // Sanitize individual item fields
@@ -1366,11 +1366,11 @@ class InteractiveLinks extends \Elementor\Widget_Base {
                     ?>
                     <!-- Each menu item with data-image for hover preview -->
                     <li data-image="<?php echo esc_url( $img ); ?>">
-                        <a href="<?php echo $url; ?>"<?php echo $target . $nofollow; ?>>
-                            <<?php echo $tag; ?> class="bw-il-title"><?php echo $title; ?></<?php echo $tag; ?>>
+                        <a href="<?php echo esc_url( $url ); ?>"<?php echo esc_attr( $target . $nofollow ); ?>>
+                            <<?php echo esc_attr( $tag ); ?> class="bw-il-title"><?php echo esc_html( $title ); ?></<?php echo esc_attr( $tag ); ?>>
                         </a>
                         <?php if ( $description ) : ?>
-                            <p class="bw-il-description"><?php echo $description; ?></p>
+                            <p class="bw-il-description"><?php echo esc_html( $description ); ?></p>
                         <?php endif; ?>
                     </li>
                 <?php endforeach; ?>
