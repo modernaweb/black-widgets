@@ -52,8 +52,8 @@
     height: 100%;
 }
 
-.bw-swiper-type1 .bw-swiper-slide img, 
-.bw-swiper-type4 .bw-swiper-slide img {
+.bw-swiper-type1 .has-image img,
+.bw-swiper-type4 .has-image img {
     position: absolute;
 }
 

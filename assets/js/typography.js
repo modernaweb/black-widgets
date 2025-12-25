@@ -22,14 +22,14 @@ const scroll = () => {
     }
 
 
-    const typographyFX_1 = [...document.querySelectorAll('.bw-typograpgy-animate[bw-data-splitting][bw-data-bw-scroll-e-1]')];
-    const typographyFX_2 = [...document.querySelectorAll('.bw-typograpgy-animate[bw-data-splitting][bw-data-bw-scroll-e-2]')];
-    const typographyFX_3 = [...document.querySelectorAll('.bw-typograpgy-animate[bw-data-splitting][bw-data-bw-scroll-e-3]')];
-    const typographyFX_4 = [...document.querySelectorAll('.bw-typograpgy-animate[bw-data-splitting][bw-data-bw-scroll-e-4]')];
-    const typographyFX_5 = [...document.querySelectorAll('.bw-typograpgy-animate[bw-data-splitting][bw-data-bw-scroll-e-5]')];
-    const typographyFX_6 = [...document.querySelectorAll('.bw-typograpgy-animate[bw-data-splitting][bw-data-bw-scroll-e-6]')];
-    const typographyFX_7 = [...document.querySelectorAll('.bw-typograpgy-animate[bw-data-splitting][bw-data-bw-scroll-e-7]')];
-    const typographyFX_8 = [...document.querySelectorAll('.bw-typograpgy-animate[bw-data-splitting][bw-data-bw-scroll-e-8]')];
+    const typographyFX_1 = [...document.querySelectorAll('.bw-typograpgy-animate[bw-data-splitting][no-scrub][bw-data-bw-scroll-e-1]')];
+    const typographyFX_2 = [...document.querySelectorAll('.bw-typograpgy-animate[bw-data-splitting][no-scrub][bw-data-bw-scroll-e-2]')];
+    const typographyFX_3 = [...document.querySelectorAll('.bw-typograpgy-animate[bw-data-splitting][no-scrub][bw-data-bw-scroll-e-3]')];
+    const typographyFX_4 = [...document.querySelectorAll('.bw-typograpgy-animate[bw-data-splitting][no-scrub][bw-data-bw-scroll-e-4]')];
+    const typographyFX_5 = [...document.querySelectorAll('.bw-typograpgy-animate[bw-data-splitting][no-scrub][bw-data-bw-scroll-e-5]')];
+    const typographyFX_6 = [...document.querySelectorAll('.bw-typograpgy-animate[bw-data-splitting][no-scrub][bw-data-bw-scroll-e-6]')];
+    const typographyFX_7 = [...document.querySelectorAll('.bw-typograpgy-animate[bw-data-splitting][no-scrub][bw-data-bw-scroll-e-7]')];
+    const typographyFX_8 = [...document.querySelectorAll('.bw-typograpgy-animate[bw-data-splitting][no-scrub][bw-data-bw-scroll-e-8]')];
 
     const typographyFX_1S = [...document.querySelectorAll('.bw-typograpgy-animate[bw-data-splitting][scrub_mode][bw-data-bw-scroll-e-1]')];
     const typographyFX_2S = [...document.querySelectorAll('.bw-typograpgy-animate[bw-data-splitting][scrub_mode][bw-data-bw-scroll-e-2]')];
@@ -42,9 +42,9 @@ const scroll = () => {
 
     typographyFX_1.forEach(title => {
         const chars = title.querySelectorAll('.char');
-        gsap.fromTo(chars, { 
-            'will-change': 'opacity, transform', 
-            opacity: 0, 
+        gsap.fromTo(chars, {
+            'will-change': 'opacity, transform',
+            opacity: 0,
             scale: 0.4,
             rotation: 45,
             rotationZ: () => gsap.utils.random(-20,20),
@@ -67,9 +67,9 @@ const scroll = () => {
 
     typographyFX_1S.forEach(title => {
         const chars = title.querySelectorAll('.char');
-        gsap.fromTo(chars, { 
-            'will-change': 'opacity, transform', 
-            opacity: 0, 
+        gsap.fromTo(chars, {
+            'will-change': 'opacity, transform',
+            opacity: 0,
             scale: 0.4,
             rotation: 45,
             rotationZ: () => gsap.utils.random(-20,20),
@@ -92,18 +92,18 @@ const scroll = () => {
 
     typographyFX_2.forEach(title => {
         const chars = title.querySelectorAll('.char');
-        gsap.fromTo(chars, { 
-            'will-change': 'opacity, transform', 
-            opacity: 0, 
-            yPercent: 120, 
-            scaleY: 2.3, 
-            scaleX: 0.3, 
-        }, 
+        gsap.fromTo(chars, {
+            'will-change': 'opacity, transform',
+            opacity: 0,
+            yPercent: 120,
+            scaleY: 2.3,
+            scaleX: 0.3,
+        },
             {
-                opacity: 1, 
-                yPercent: 1, 
-                scaleY: 1, 
-                scaleX: 1, 
+                opacity: 1,
+                yPercent: 1,
+                scaleY: 1,
+                scaleX: 1,
                 ease: 'power4',
                 stagger: 0.06,
                 scrollTrigger: {
@@ -117,18 +117,18 @@ const scroll = () => {
 
     typographyFX_2S.forEach(title => {
         const chars = title.querySelectorAll('.char');
-        gsap.fromTo(chars, { 
-            'will-change': 'opacity, transform', 
-            opacity: 0, 
-            yPercent: 120, 
-            scaleY: 2.3, 
-            scaleX: 0.3, 
-        }, 
+        gsap.fromTo(chars, {
+            'will-change': 'opacity, transform',
+            opacity: 0,
+            yPercent: 120,
+            scaleY: 2.3,
+            scaleX: 0.3,
+        },
             {
-                opacity: 1, 
-                yPercent: 1, 
-                scaleY: 1, 
-                scaleX: 1, 
+                opacity: 1,
+                yPercent: 1,
+                scaleY: 1,
+                scaleX: 1,
                 ease: 'power4',
                 stagger: 0.06,
                 scrollTrigger: {
@@ -144,10 +144,10 @@ const scroll = () => {
         const words = title.querySelectorAll('.word');
         for (const word of words) {
             const chars = word.querySelectorAll('.char');
-            chars.forEach(char => gsap.set(char.parentNode, { perspective: 2000 })); 
-            gsap.fromTo(chars, { 
-                'will-change': 'opacity, transform', 
-                opacity: 0, 
+            chars.forEach(char => gsap.set(char.parentNode, { perspective: 2000 }));
+            gsap.fromTo(chars, {
+                'will-change': 'opacity, transform',
+                opacity: 0,
                 rotationX: -90,
                 yPercent: 50
             },
@@ -175,10 +175,10 @@ const scroll = () => {
         const words = title.querySelectorAll('.word');
         for (const word of words) {
             const chars = word.querySelectorAll('.char');
-            chars.forEach(char => gsap.set(char.parentNode, { perspective: 2000 })); 
-            gsap.fromTo(chars, { 
-                'will-change': 'opacity, transform', 
-                opacity: 0, 
+            chars.forEach(char => gsap.set(char.parentNode, { perspective: 2000 }));
+            gsap.fromTo(chars, {
+                'will-change': 'opacity, transform',
+                opacity: 0,
                 rotationX: -90,
                 yPercent: 50
             },
@@ -204,11 +204,11 @@ const scroll = () => {
     typographyFX_4.forEach(title => {
         const chars = title.querySelectorAll('.char');
         wrapElements(chars, 'span', 'char-wrap');
-        gsap.fromTo(chars, { 
-            'will-change': 'transform', 
+        gsap.fromTo(chars, {
+            'will-change': 'transform',
             transformOrigin: '0% 50%',
             xPercent: 105,
-        }, 
+        },
             {
                 duration: 1,
                 ease: 'expo',
@@ -226,11 +226,11 @@ const scroll = () => {
     typographyFX_4S.forEach(title => {
         const chars = title.querySelectorAll('.char');
         wrapElements(chars, 'span', 'char-wrap');
-        gsap.fromTo(chars, { 
-            'will-change': 'transform', 
+        gsap.fromTo(chars, {
+            'will-change': 'transform',
             transformOrigin: '0% 50%',
             xPercent: 105,
-        }, 
+        },
             {
                 duration: 1,
                 ease: 'expo',
@@ -248,8 +248,8 @@ const scroll = () => {
     typographyFX_5.forEach(title => {
         const chars = title.querySelectorAll('.char');
         wrapElements(chars, 'span', 'char-wrap');
-        gsap.fromTo(chars, { 
-            'will-change': 'transform', 
+        gsap.fromTo(chars, {
+            'will-change': 'transform',
             xPercent: -250,
             rotationZ: 45,
             scaleX: 6,
@@ -274,8 +274,8 @@ const scroll = () => {
     typographyFX_5S.forEach(title => {
         const chars = title.querySelectorAll('.char');
         wrapElements(chars, 'span', 'char-wrap');
-        gsap.fromTo(chars, { 
-            'will-change': 'transform', 
+        gsap.fromTo(chars, {
+            'will-change': 'transform',
             xPercent: -250,
             rotationZ: 45,
             scaleX: 6,
@@ -299,10 +299,10 @@ const scroll = () => {
 
     typographyFX_6.forEach(title => {
         const chars = title.querySelectorAll('.char');
-        chars.forEach(char => gsap.set(char.parentNode, { perspective: 2000 })); 
-        gsap.fromTo(chars, { 
-            'will-change': 'opacity, transform', 
-            opacity: 0, 
+        chars.forEach(char => gsap.set(char.parentNode, { perspective: 2000 }));
+        gsap.fromTo(chars, {
+            'will-change': 'opacity, transform',
+            opacity: 0,
             rotationY: 180,
             xPercent: -40,
             yPercent: 100
@@ -321,17 +321,17 @@ const scroll = () => {
                     trigger: title,
                     start: 'center+=20% bottom',
                     end: '+=50%',
-                    // scrub: 0.9 
+                    // scrub: 0.9
                 }
             });
     });
 
     typographyFX_6S.forEach(title => {
         const chars = title.querySelectorAll('.char');
-        chars.forEach(char => gsap.set(char.parentNode, { perspective: 2000 })); 
-        gsap.fromTo(chars, { 
-            'will-change': 'opacity, transform', 
-            opacity: 0, 
+        chars.forEach(char => gsap.set(char.parentNode, { perspective: 2000 }));
+        gsap.fromTo(chars, {
+            'will-change': 'opacity, transform',
+            opacity: 0,
             rotationY: 180,
             xPercent: -40,
             yPercent: 100
@@ -350,7 +350,7 @@ const scroll = () => {
                     trigger: title,
                     start: 'center+=20% bottom',
                     end: '+=50%',
-                    scrub: 0.9 
+                    scrub: 0.9
                 }
             });
     });
@@ -368,11 +368,11 @@ const scroll = () => {
         });
         for (const [wordPosition, word] of words.entries()) {
             tl.fromTo(word.querySelectorAll('.char'), {
-                'will-change': 'transform', 
+                'will-change': 'transform',
                 transformOrigin: () => !wordPosition%2 ? '50% 0%' : '50% 100%',
                 scaleY: 0,
                 filter: 'blur(24px) opacity(0)',
-            }, 
+            },
                 {
                     ease: 'power1.inOut',
                     scaleY: 1,
@@ -398,11 +398,11 @@ const scroll = () => {
         });
         for (const [wordPosition, word] of words.entries()) {
             tl.fromTo(word.querySelectorAll('.char'), {
-                'will-change': 'transform', 
+                'will-change': 'transform',
                 transformOrigin: () => !wordPosition%2 ? '50% 0%' : '50% 100%',
                 scaleY: 0,
                 filter: 'blur(24px) opacity(0)',
-            }, 
+            },
                 {
                     ease: 'power1.inOut',
                     scaleY: 1,
@@ -417,8 +417,8 @@ const scroll = () => {
 
     typographyFX_8.forEach(title => {
         const chars = title.querySelectorAll('.char');
-        gsap.fromTo(chars, { 
-            'will-change': 'opacity, transform', 
+        gsap.fromTo(chars, {
+            'will-change': 'opacity, transform',
             opacity: 0,
             x: 0,
             y: 50,
@@ -426,9 +426,9 @@ const scroll = () => {
             rotationX: -80,
             filter: 'blur(24px) opacity(0)',
             transformOrigin: '50% 0%'
-        }, 
+        },
             {
-                opacity: 1, 
+                opacity: 1,
                 x: 0,
                 y: 0,
                 z: 0,
@@ -447,8 +447,8 @@ const scroll = () => {
 
     typographyFX_8S.forEach(title => {
         const chars = title.querySelectorAll('.char');
-        gsap.fromTo(chars, { 
-            'will-change': 'opacity, transform', 
+        gsap.fromTo(chars, {
+            'will-change': 'opacity, transform',
             opacity: 0,
             x: 0,
             y: 50,
@@ -456,9 +456,9 @@ const scroll = () => {
             rotationX: -80,
             filter: 'blur(24px) opacity(0)',
             transformOrigin: '50% 0%'
-        }, 
+        },
             {
-                opacity: 1, 
+                opacity: 1,
                 x: 0,
                 y: 0,
                 z: 0,

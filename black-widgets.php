@@ -4,8 +4,10 @@
  * Plugin URI: https://modernaweb.net/black-widgets
  * Description: Build web pages with black widgets.
  * Author: Modernaweb Studio
- * Version: 1.4.0 dev 
+ * Version: 1.4.0-dev
  * Author URI: https://modernaweb.net/
+ * License: GPLv3 or later
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain: black-widgets
  * Domain Path: /languages
  * Black Widgets is distributed in the hope that it will be useful,
@@ -46,8 +48,10 @@ function black_widgets_activate() {
 function black_widgets_redirect() {
     if (get_option('black_widgets_do_activation_redirect', false)) {
 		delete_option('black_widgets_do_activation_redirect');
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         if(!isset($_GET['activate-multi'])) {
 			wp_redirect("admin.php?page=black-widgets");
+            exit;
 		}
 	}
 }

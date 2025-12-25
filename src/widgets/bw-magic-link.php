@@ -160,7 +160,7 @@ class MagicLink extends \Elementor\Widget_Base {
 				'placeholder' => esc_html__( 'Type your title here', 'black-widgets' ),
 			]
 		);
-        
+
 		$this->add_control(
 			'website_link',
 			[
@@ -230,6 +230,9 @@ class MagicLink extends \Elementor\Widget_Base {
 					],
 				],
 				'toggle'    => true,
+                'selectors' => [
+                    '{{WRAPPER}} .bw-magic-link' => 'text-align: {{VALUE}};',
+                ],
 			]
 		);
 
@@ -558,7 +561,7 @@ class MagicLink extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Color', 'black-widgets' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bw-magic-link a:hover' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .bw-magic-link a:hover,{{WRAPPER}} .bw-magic-link .bw-magic-wheel:hover span' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -687,11 +690,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Other Styles', 'black-widgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
-				'condition' 	=> [ 
-					'widget_type!' 	=> [
-						'simple',
-					],
-				],
 			]
 		);
 
@@ -716,7 +714,7 @@ class MagicLink extends \Elementor\Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bw-magic-link a.bw-magic-pullttb:before, {{WRAPPER}} .bw-magic-link a.bw-magic-pullbtt:before' => 'height: {{SIZE}}{{UNIT}};',
 				],
-				'condition' 	=> [ 
+				'condition' 	=> [
 					'widget_type' 	=> [
 						'pullttb',
 						'pullbtt',
@@ -746,7 +744,7 @@ class MagicLink extends \Elementor\Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bw-magic-link a.bw-magic-pullttb:hover:before, {{WRAPPER}} .bw-magic-link a.bw-magic-pullbtt:hover:before' => 'height: {{SIZE}}{{UNIT}};',
 				],
-				'condition' 	=> [ 
+				'condition' 	=> [
 					'widget_type' 	=> [
 						'pullttb',
 						'pullbtt',
@@ -776,7 +774,7 @@ class MagicLink extends \Elementor\Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bw-magic-link a.bw-magic-pullltr:before, {{WRAPPER}} .bw-magic-link a.bw-magic-pullrtl:before' => 'width: {{SIZE}}{{UNIT}};',
 				],
-				'condition' 	=> [ 
+				'condition' 	=> [
 					'widget_type' 	=> [
 						'pullltr',
 						'pullrtl',
@@ -806,7 +804,7 @@ class MagicLink extends \Elementor\Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bw-magic-link a.bw-magic-pullltr:hover:before, {{WRAPPER}} .bw-magic-link a.bw-magic-pullrtl:hover:before' => 'width: {{SIZE}}{{UNIT}};',
 				],
-				'condition' 	=> [ 
+				'condition' 	=> [
 					'widget_type' 	=> [
 						'pullltr',
 						'pullrtl',
@@ -836,13 +834,33 @@ class MagicLink extends \Elementor\Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bw-magic-link a.bw-magic-liner:before' => 'height: {{SIZE}}{{UNIT}};',
 				],
-				'condition' 	=> [ 
+				'condition' 	=> [
 					'widget_type' 	=> [
 						'liner',
 					],
 				],
 			]
 		);
+
+        $this->add_control(
+            'bg_section_label',
+            [
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'label' => esc_html__( 'Line Color', 'black-widgets' ),
+                'separator' => 'before',
+                'condition' 	=> [
+                    'widget_type' 	=> [
+                        'pullttb',
+                        'pullbtt',
+                        'pullltr',
+                        'pullrtl',
+                        'liner',
+                        'minimal',
+                        'heart',
+                    ],
+                ],
+            ]
+        );
 
 		// Background
 		$this->add_group_control(
@@ -852,20 +870,38 @@ class MagicLink extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Bg Color/Line Color', 'black-widgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-magic-link a.bw-magic-modern:before, {{WRAPPER}} .bw-magic-link a.bw-magic-minimal:after, {{WRAPPER}} .bw-magic-link a.bw-magic-liner:before, {{WRAPPER}} .bw-magic-link a.bw-magic-pullttb:before, {{WRAPPER}} .bw-magic-link a.bw-magic-pullbtt:before, {{WRAPPER}} .bw-magic-link a.bw-magic-pullltr:before, {{WRAPPER}} .bw-magic-link a.bw-magic-pullrtl:before, {{WRAPPER}} .bw-magic-link .bw-magic-heart span',
-				'condition' 	=> [ 
+				'condition' 	=> [
 					'widget_type' 	=> [
 						'pullttb',
 						'pullbtt',
 						'pullltr',
 						'pullrtl',
 						'liner',
-						'modern',
 						'minimal',
 						'heart',
 					],
 				],
 			]
 		);
+
+        // Color
+        $this->add_control(
+            'line_color_modern',
+            [
+                'label' => esc_html__( 'Line Color', 'black-widgets' ),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .bw-magic-link .bw-magic-modern' => 'border-bottom-color: {{VALUE}};',
+                    '{{WRAPPER}} .bw-magic-link .bw-magic-simple:hover' => 'text-decoration-color: {{VALUE}} !important;',
+                ],
+                'condition' 	=> [
+                    'widget_type' 	=> [
+                        'modern',
+                        'simple',
+                    ],
+                ],
+            ]
+        );
 
 		// Color
 		$this->add_control(
@@ -876,7 +912,7 @@ class MagicLink extends \Elementor\Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bw-magic-link .bw-magic-heart span svg' => 'fill: {{VALUE}}',
 				],
-				'condition' 	=> [ 
+				'condition' 	=> [
 					'widget_type' 	=> [
 						'heart',
 					],
@@ -893,7 +929,7 @@ class MagicLink extends \Elementor\Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bw-magic-link .bw-magic-wheel svg g line, {{WRAPPER}} .bw-magic-link .bw-magic-wheel svg g polyline, {{WRAPPER}} .bw-magic-link .bw-magic-wheel svg g circle' => 'stroke: {{VALUE}} !important',
 				],
-				'condition' 	=> [ 
+				'condition' 	=> [
 					'widget_type' 	=> [
 						'wheel',
 					],
@@ -956,7 +992,7 @@ class MagicLink extends \Elementor\Widget_Base {
 				echo '<div class="bw-magic-link ' . $alignment . '"><a href="' . esc_url( $settings['website_link']['url'] ) . '"' . $target . $nofollow . ' class="bw-magic-' . $type . '">' . $text . '</a></div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			break;
 			case 'arrow':
-				echo '<div class="bw-magic-link ' . $alignment . '"><a href="' . esc_url( $settings['website_link']['url'] ) . '"' . $target . $nofollow . ' class="bw-magic-' . $type . '">' . $text . '<span>  <i aria-hidden="true" class="fas fa-arrow-right"></i> </span></a></div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo '<div class="bw-magic-link ' . $alignment . '"><a href="' . esc_url( $settings['website_link']['url'] ) . '"' . $target . $nofollow . ' class="bw-magic-' . $type . '">' . $text . '<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="16" height="16" fill="currentColor"><path d="M438.6 233.4L278.6 73.37c-9.373-9.373-24.56-9.373-33.94 0s-9.373 24.56 0 33.94L370.7 224H24C10.75 224 0 234.8 0 248S10.75 272 24 272h346.7l-126.1 116.7c-9.373 9.373-9.373 24.56 0 33.94C250.3 426.5 255.1 428.3 260 428.3s9.373-1.811 13.06-5.498l160-160C448 257.9 448 242.1 438.6 233.4z"/></svg></span></a></div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			break;
 			case 'wheel':
 				echo '<div class="bw-magic-link ' . $alignment . '"><a href="' . esc_url( $settings['website_link']['url'] ) . '"' . $target . $nofollow . ' class="bw-magic-' . $type . '"><svg><g><line x2="227.62" y1="31.28" y2="31.28"></line><polyline points="222.62 25.78 228.12 31.28 222.62 36.78"></polyline><circle cx="224.67" cy="30.94" r="30.5" transform="rotate(180 224.67 30.94) scale(1, -1) translate(0, -61)"></circle></g></svg><span>' . $text . '</span></a></div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

@@ -32,7 +32,7 @@ class Typography extends \Elementor\Widget_Base {
         parent::__construct( $data, $args );
         wp_register_style( 'black-widgets-typography', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/typography.css', [], BLACK_WIDGETS_VERSION );
         // Since most of the js is created dynamically we use inline js
-        
+
         $options = get_option('plugin_options') ? get_option('plugin_options') : '';
         $gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
         $bw_gsap_cdn1  = isset($options['bw_gsap_cdn1']) ? $options['bw_gsap_cdn1'] : '';
@@ -53,7 +53,7 @@ class Typography extends \Elementor\Widget_Base {
                 return;
             }
 
-		    wp_register_script( 'black-widgets-typography', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/typography.js', [ 'GSAP', 'GSAP-ScrollTrigger', 'TimelineMax' ], BLACK_WIDGETS_VERSION );
+		    wp_register_script( 'black-widgets-typography', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/typography.js', [ 'GSAP', 'GSAP-ScrollTrigger', 'TimelineMax' ], BLACK_WIDGETS_VERSION, true );
             $this->script_deps = [ 'black-widgets-typography' ];
         }
     }
@@ -227,7 +227,7 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-        // With Shape 
+        // With Shape
 		// Select type of the typography you want
 		$this->add_control(
 			'widget_type_2',
@@ -255,7 +255,7 @@ class Typography extends \Elementor\Widget_Base {
 		$options = get_option('plugin_options') ? get_option('plugin_options') : '';
 		$gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
 		if( isset($gsap_options) && !empty($gsap_options) ) {
-			// Go on scroll 
+			// Go on scroll
 			// Select type of the typography you want
 			$this->add_control(
 				'widget_type_4',
@@ -711,7 +711,7 @@ class Typography extends \Elementor\Widget_Base {
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
 					'placeholder'   => '0.1',
 					'default'       => '0.1',
-					'condition' 	=> [ 
+					'condition' 	=> [
 						'text_movement2' 	=> [
 							'on',
 						],
@@ -727,7 +727,7 @@ class Typography extends \Elementor\Widget_Base {
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
 					'placeholder'   => '0.4',
 					'default'       => '0.4',
-					'condition' 	=> [ 
+					'condition' 	=> [
 						'text_movement2' 	=> [
 							'on',
 						],
@@ -741,7 +741,7 @@ class Typography extends \Elementor\Widget_Base {
 				[
 					'label' 		=> esc_html__( 'Vertical Movement', 'black-widgets' ),
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
-					'condition' 	=> [ 
+					'condition' 	=> [
 						'text_movement2' 	=> [
 							'on',
 						],
@@ -755,7 +755,7 @@ class Typography extends \Elementor\Widget_Base {
 				[
 					'label' 		=> esc_html__( 'Horizontal Movement', 'black-widgets' ),
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
-					'condition' 	=> [ 
+					'condition' 	=> [
 						'text_movement2' 	=> [
 							'on',
 						],
@@ -769,7 +769,7 @@ class Typography extends \Elementor\Widget_Base {
 				[
 					'label' 		=> esc_html__( 'Opacity at End', 'black-widgets' ),
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
-					'condition' 	=> [ 
+					'condition' 	=> [
 						'text_movement2' 	=> [
 							'on',
 						],
@@ -783,7 +783,7 @@ class Typography extends \Elementor\Widget_Base {
 				[
 					'label' 		=> esc_html__( 'Rotation at End', 'black-widgets' ),
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
-					'condition' 	=> [ 
+					'condition' 	=> [
 						'text_movement2' 	=> [
 							'on',
 						],
@@ -813,7 +813,7 @@ class Typography extends \Elementor\Widget_Base {
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
 					'placeholder'   => '0.1',
 					'default'       => '0.1',
-					'condition' 	=> [ 
+					'condition' 	=> [
 						'text_movement' 	=> [
 							'on',
 						],
@@ -829,7 +829,7 @@ class Typography extends \Elementor\Widget_Base {
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
 					'placeholder'   => '0.4',
 					'default'       => '0.4',
-					'condition' 	=> [ 
+					'condition' 	=> [
 						'text_movement' 	=> [
 							'on',
 						],
@@ -843,7 +843,7 @@ class Typography extends \Elementor\Widget_Base {
 				[
 					'label' 		=> esc_html__( 'Vertical Movement', 'black-widgets' ),
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
-					'condition' 	=> [ 
+					'condition' 	=> [
 						'text_movement' 	=> [
 							'on',
 						],
@@ -857,7 +857,7 @@ class Typography extends \Elementor\Widget_Base {
 				[
 					'label' 		=> esc_html__( 'Horizontal Movement', 'black-widgets' ),
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
-					'condition' 	=> [ 
+					'condition' 	=> [
 						'text_movement' 	=> [
 							'on',
 						],
@@ -871,7 +871,7 @@ class Typography extends \Elementor\Widget_Base {
 				[
 					'label' 		=> esc_html__( 'Opacity at End', 'black-widgets' ),
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
-					'condition' 	=> [ 
+					'condition' 	=> [
 						'text_movement' 	=> [
 							'on',
 						],
@@ -885,7 +885,7 @@ class Typography extends \Elementor\Widget_Base {
 				[
 					'label' 		=> esc_html__( 'Rotation at End', 'black-widgets' ),
 					'type' 			=> \Elementor\Controls_Manager::TEXT,
-					'condition' 	=> [ 
+					'condition' 	=> [
 						'text_movement' 	=> [
 							'on',
 						],
@@ -945,7 +945,7 @@ class Typography extends \Elementor\Widget_Base {
 			Group_Control_Css_Filter::get_type(),
 			[
 				'name' => 'widget_overlay_background_css_filter',
-				'selector' => 
+				'selector' =>
 					'{{WRAPPER}} .bw-typograpgy .bw-overlay'
 			]
 		);
@@ -1000,7 +1000,7 @@ class Typography extends \Elementor\Widget_Base {
 
 		// Border Radius
 		$this->add_responsive_control(
-			'widget_overlay_typography_title_border_radius', 
+			'widget_overlay_typography_title_border_radius',
 			[
 				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
@@ -1105,7 +1105,7 @@ class Typography extends \Elementor\Widget_Base {
 		);
 
 		$this->add_responsive_control(
-			'widget_box_border_radius', 
+			'widget_box_border_radius',
 			[
 				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
@@ -1230,7 +1230,7 @@ class Typography extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::COLOR,
                 'global' => [
                     'default' => Global_Colors::COLOR_PRIMARY,
-                ],				
+                ],
 				'selectors' => [
 					'{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-repetitive' => 'color: {{VALUE}}; -webkit-text-fill-color: {{VALUE}}',
 				],
@@ -1326,7 +1326,7 @@ class Typography extends \Elementor\Widget_Base {
 
 		// Border Radius
 		$this->add_responsive_control(
-			'widget_typography_title_border_radius', 
+			'widget_typography_title_border_radius',
 			[
 				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
@@ -1335,7 +1335,7 @@ class Typography extends \Elementor\Widget_Base {
 					'{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-repetitive' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
-		);	
+		);
 
 		// Box shadow
 		$this->add_group_control(
@@ -1393,7 +1393,7 @@ class Typography extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::COLOR,
                 'global' => [
                     'default' => Global_Colors::COLOR_PRIMARY,
-                ],				
+                ],
 				'selectors' => [
 					'{{WRAPPER}} .bw-bw-t-2-text, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-main-title, {{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-repetitive' => '-webkit-text-stroke-color: {{VALUE}}',
 				],
@@ -1491,7 +1491,7 @@ class Typography extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::COLOR,
                 'global' => [
                     'default' => Global_Colors::COLOR_PRIMARY,
-                ],				
+                ],
 				'selectors' => [
 					'{{WRAPPER}} .bw-typograpgy-repetitive.bw-unique' => 'color: {{VALUE}}; -webkit-text-fill-color: {{VALUE}}',
 				],
@@ -1591,7 +1591,7 @@ class Typography extends \Elementor\Widget_Base {
 
 		// Border Radius
 		$this->add_responsive_control(
-			'unique_widget_typography_title_border_radius', 
+			'unique_widget_typography_title_border_radius',
 			[
 				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
@@ -1600,7 +1600,7 @@ class Typography extends \Elementor\Widget_Base {
 					'{{WRAPPER}} .bw-typograpgy-repetitive.bw-unique' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
-		);	
+		);
 
 		// Box shadow
 		$this->add_group_control(
@@ -1678,7 +1678,7 @@ class Typography extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::COLOR,
                 'global' => [
                     'default' => Global_Colors::COLOR_PRIMARY,
-                ],				
+                ],
 				'selectors' => [
 					'{{WRAPPER}} .bw-typograpgy-repetitive.bw-unique' => '-webkit-text-stroke-color: {{VALUE}}',
 				],
@@ -2198,7 +2198,7 @@ class Typography extends \Elementor\Widget_Base {
 
 		// Border Radius
 		$this->add_responsive_control(
-			'widget_line_box_border_radius', 
+			'widget_line_box_border_radius',
 			[
 				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
@@ -2256,7 +2256,7 @@ class Typography extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::COLOR,
                 'global' => [
                     'default' => Global_Colors::COLOR_PRIMARY,
-                ],				
+                ],
 				'selectors' => [
 					'{{WRAPPER}} .bw-typograpgy .custom-style i' => 'color: {{VALUE}}; -webkit-text-fill-color: {{VALUE}}',
 				],
@@ -2291,7 +2291,9 @@ class Typography extends \Elementor\Widget_Base {
 		}
         $title 			        = isset($settings['widget_title'])                       ? $settings['widget_title']					: '';
         $alignment 		        = '';
-        $title_scrub			= isset($settings['title_scrub'])                        ? $settings['title_scrub']						: '';
+        $title_scrub = (empty($settings['title_scrub']) || $settings['title_scrub'] === 'off')
+            ? 'no-scrub'
+            : $settings['title_scrub'];
         $vertical				= isset($settings['vertical_title_display'])			 ? $settings['vertical_title_display']			: '';
         $vertical_rotation		= isset($settings['vertical_rotation'])					 ? $settings['vertical_rotation']				: '';
         $type2 		            = isset($settings['widget_type_2'])                      ? $settings['widget_type_2']					: '';
@@ -2299,20 +2301,20 @@ class Typography extends \Elementor\Widget_Base {
         $custom_style_x         = ($type2 == 'custom-style')                             ? 'custom-style'								: '';
         $repeat                 = isset($settings['repetitive_repeat'])                  ? $settings['repetitive_repeat']				: '';
         $other_style            = isset($settings['repetitive_repeat_other_style'])      ? $settings['repetitive_repeat_other_style']	: '';
-		// Overlay 
+		// Overlay
 		$overlay				= isset($settings['overlay_section_enable'])			? $settings['overlay_section_enable']			: '';
 		// Gradient
 		$set_gradient			= isset($settings['gradient_color_title_enable'])		? $settings['gradient_color_title_enable']		: '';
 		$gradient				= ($set_gradient == 'gradient_enable')					? 'bw-gradient'									: '';
         // Custom Style for shape
         $style_1_type           = isset($settings['tab_style_1_type'])                  ? $settings['tab_style_1_type']					: '';
-        $image_id_1		        = isset($settings['tab_style_1_image']['url']) 		    ?  $settings['tab_style_1_image']['url']        : ''; // Image 1
+        $image_1		        = isset($settings['tab_style_1_image']) 		        ?  $settings['tab_style_1_image']        : ''; // Image 1
 		$iconset_1				= isset($settings['tab_style_1_icon'])                  ? $settings['tab_style_1_icon']                 : ''; // Icon 1
 		$svgcode_1				= isset($settings['tab_style_1_code'])                  ? $settings['tab_style_1_code']                 : ''; // Code 1
         $alignment_1            = isset($settings['widget_1_alignment'])                ? $settings['widget_1_alignment']               : '';
         // $alignment_1            = '';
         $style_2_type           = isset($settings['tab_style_2_type'])                  ? $settings['tab_style_2_type']                 : '';
-        $image_id_2		        = isset($settings['tab_style_2_image']['url']) 		    ?  $settings['tab_style_2_image']['url']        : ''; // Image 2
+        $image_2		        = isset($settings['tab_style_2_image']) 		        ?  $settings['tab_style_2_image']        : ''; // Image 2
 		$iconset_2				= isset($settings['tab_style_2_icon'])                  ? $settings['tab_style_2_icon']                 : ''; // Icon 2
 		$svgcode_2				= isset($settings['tab_style_2_code'])                  ? $settings['tab_style_2_code']                 : ''; // Code 2
         $alignment_2            = isset($settings['widget_2_alignment'])                ? $settings['widget_2_alignment']               : '';
@@ -2342,13 +2344,13 @@ class Typography extends \Elementor\Widget_Base {
 			$text_movement			= $settings['text_movement'];
 			$text_movement2			= $settings['text_movement2'];
 		}
-		//Transform Normal Styles 
-		// Normal Move 
+		//Transform Normal Styles
+		// Normal Move
 		$translatex 			= isset( $move_normal_x["size"] ) 						? $move_normal_x["size"] . $move_normal_x["unit"] : '';
 		$translatey 			= isset( $move_normal_y["size"] ) 						? $move_normal_y["size"] . $move_normal_y["unit"] : '';
 		$translatez 			= isset( $move_normal_z["size"] ) 						? $move_normal_z["size"] . $move_normal_z["unit"] : '';
 		$translate3d 			= 'translate3d(' . $translatex . ', ' . $translatey . ', ' . $translatez . ')';
-		// Normal Scale 
+		// Normal Scale
 		$scalex 				= isset( $scale_normal_x["size"] ) 						? $scale_normal_x["size"] : '';
 		$scaley 				= isset( $scale_normal_y["size"] ) 						? $scale_normal_y["size"] : '';
 		$scalez 				= isset( $scale_normal_z["size"] ) 						? $scale_normal_z["size"] : '';
@@ -2380,62 +2382,83 @@ class Typography extends \Elementor\Widget_Base {
         $svgcode_1 = $sanitizer->sanitize( $svgcode_1 );
         $svgcode_2 = $sanitizer->sanitize( $svgcode_2 );
 
-		echo '<style>'. esc_html( $normal_transform_style ) . ' ' . $z_index. ' ' . $unique_z_index.'</style>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+		echo '<style>'. esc_html( $normal_transform_style ) . ' ' . $z_index. ' ' . $unique_z_index.'</style>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 		// Render
-        echo '<div class="bw-typograpgy '. esc_attr( $type ) .' '.$alignment.' '.$custom_style_x.' '.$gradient.'">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
-			echo '<div class="bw-typograpgy-wrap" id="'. $data_id .'">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+        echo '<div class="bw-typograpgy '. esc_attr( $type ) .' '.$alignment.' '.$custom_style_x.' '.$gradient.'">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo '<div class="bw-typograpgy-wrap" id="'. $data_id .'">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			switch ($type) {
 				case 'bw-t-1': // Type 1
-					echo '<'. $title_tag .' class="bw-typograpgy-main-title bw-'. esc_attr( $vertical ) .' '. esc_attr( $vertical_rotation ) .' bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+					echo '<'. $title_tag .' class="bw-typograpgy-main-title bw-'. esc_attr( $vertical ) .' '. esc_attr( $vertical_rotation ) .' bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					break;
 				case 'bw-t-2':// Type 2
 					echo '<div class="bw-typograpgy-with-title bw-'. esc_attr( $vertical ) . ' ' . esc_attr( $type2 ) . ' ' . esc_attr( $vertical_rotation ) .'">';
 					switch ($type2) {
 						case 'style-x-1':
 							echo '<span class="line-1"></span>';
-							echo '<'. $title_tag .' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+							echo '<'. $title_tag .' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							break;
 						case 'style-x-2':
-							echo '<'. $title_tag .' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+							echo '<'. $title_tag .' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							echo '<span class="line-2"></span>';
 							break;
 						case 'style-x-3':
 							echo '<span class="line-1"></span>';
-							echo '<'. $title_tag .' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+							echo '<'. $title_tag .' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							echo '<span class="line-2"></span>';
 							break;
 						case 'style-x-4':
 							echo '<span class="line-1"></span>';
-							echo '<'. $title_tag .' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+							echo '<'. $title_tag .' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							break;
 						case 'style-x-5':
-							echo '<'. $title_tag .' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'.$title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+							echo '<'. $title_tag .' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'.$title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							echo '<span class="line-2"></span>';
 							break;
 						case 'style-x-6':
 							echo '<span class="line-1"></span>';
-							echo '<'. $title_tag .' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+							echo '<'. $title_tag .' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							echo '<span class="line-2"></span>';
 							break;
 						case 'custom-style':
 							echo '<span class="bw-left-top '. esc_attr( $alignment_1 ) .'">';
 								if ( $style_1_type == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset_1, [ 'aria-hidden' => 'true' ] ); echo '</div>';
 								elseif ( $style_1_type == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">' . wp_kses_post( $svgcode_1 ) . '</div>';
-								else: echo '<div class="bw-iconbox-img"><img src="'. esc_url( $image_id_1 ).'" class="bw-iconbox-image"></div>';
+								else:
+                                    if ( ! empty( $image_1['id'] ) ) {
+                                        echo '<div class="bw-iconbox-img">';
+                                        echo wp_get_attachment_image( $image_1['id'], 'full', false, [
+                                            'class'   => 'bw-iconbox-image',
+                                            'alt'     => esc_attr__( 'Icon Image', 'black-widgets' ),
+                                            'loading' => 'lazy',
+                                        ]);
+                                        echo '</div>';
+                                    } elseif ( ! empty( $image_1['url'] ) ) {
+                                        echo '<div class="bw-iconbox-img"><img src="' . esc_url( $image_1['url'] ) . '" alt="' . esc_attr__( 'Icon Image', 'black-widgets' ) . '" class="bw-iconbox-image" loading="lazy"></div>';// phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
+                                    }
 								endif;
 							echo '</span>';
-							echo '<'. $title_tag .' class="bw-bw-t-2-text '.$alignment.' bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+							echo '<'. $title_tag .' class="bw-bw-t-2-text '.$alignment.' bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							echo '<span class="bw-right-bottom '.esc_attr( $alignment_2 ) .'">';
 								if ( $style_2_type == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset_2, [ 'aria-hidden' => 'true' ] ); echo '</div>';
 								elseif ( $style_2_type == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">' . wp_kses_post( $svgcode_2 ) . '</div>';
-								else: echo '<div class="bw-iconbox-img"><img src="'. esc_url( $image_id_2 ).'" class="bw-iconbox-image"></div>';
+								else:
+                                    if ( ! empty( $image_2['id'] ) ) {
+                                        echo '<div class="bw-iconbox-img">';
+                                        echo wp_get_attachment_image( $image_2['id'], 'full', false, [
+                                            'class'   => 'bw-iconbox-image',
+                                            'alt'     => esc_attr__( 'Icon Image', 'black-widgets' ),
+                                        ]);
+                                        echo '</div>';
+                                    } elseif ( ! empty( $image_2['url'] ) ) {
+                                        echo '<div class="bw-iconbox-img"><img src="' . esc_url( $image_2['url'] ) . '" alt="' . esc_attr__( 'Icon Image', 'black-widgets' ) . '" class="bw-iconbox-image"></div>';// phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
+                                    }
 								endif;
 							echo '</span>';
 							break;
 						default:
 							echo '<span class="line-1"></span>';
-							echo '<'. $title_tag .' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+							echo '<'. $title_tag .' class="bw-bw-t-2-text bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							break;
 					}
 					echo '</div>';
@@ -2445,16 +2468,16 @@ class Typography extends \Elementor\Widget_Base {
 						$count = 1;
 						while( $count <= $repeat ) {
 							if ($count == $other_style) {
-								echo '<'. $title_tag .' class="bw-typograpgy-repetitive bw-unique bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+								echo '<'. $title_tag .' class="bw-typograpgy-repetitive bw-unique bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							} else {
-								echo '<'. $title_tag .' class="bw-typograpgy-repetitive bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+								echo '<'. $title_tag .' class="bw-typograpgy-repetitive bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							}
 							$count++;
 						}
 						if ( !empty($vertical) ) echo '</div>';
 					break;
 				case 'bw-t-4': // Type 4
-					echo '<h2 class="bw-typograpgy-animate words chars splitting '. esc_attr( $vertical_rotation ) .'" '. esc_attr( $title_scrub ) .' bw-data-splitting bw-data-splitting bw-data-'. esc_attr( $type4 ) .' id="scrub'.$data_id.'" data-scrub="true">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+					echo '<h2 class="bw-typograpgy-animate words chars splitting '. esc_attr( $vertical_rotation ) .'" '. esc_attr( $title_scrub ) .' bw-data-splitting bw-data-splitting bw-data-'. esc_attr( $type4 ) .' id="scrub'.$data_id.'" data-scrub="true">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						echo '<span class="word" data-word="'. esc_attr( $title ) .'" style="--word-index:0;">';
 							echo esc_html( $title );
 						echo '</span>';
@@ -2462,7 +2485,7 @@ class Typography extends \Elementor\Widget_Base {
 
 					break;
 				default: // simple
-                    echo '<'. $title_tag .' class="bw-typograpgy-main-title bw-'. esc_attr( $vertical ) . ' ' . esc_attr( $vertical_rotation ) .' bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+                    echo '<'. $title_tag .' class="bw-typograpgy-main-title bw-'. esc_attr( $vertical ) . ' ' . esc_attr( $vertical_rotation ) .' bw-typography-this-title">'.esc_html($title).'</'. $title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     break;
 			}
 			echo '</div>';
@@ -2476,8 +2499,14 @@ class Typography extends \Elementor\Widget_Base {
                 $vertical_movement2 = ! empty( $settings['vertical_movement2'] ) ? 'y: "' . esc_js( $settings['vertical_movement2'] ) . '",' : '';
                 $opacity2 = ! empty( $settings['opacity2'] ) ? 'opacity: "' . esc_js( $settings['opacity2'] ) . '",' : '';
                 $rotation2 = ! empty( $settings['rotation2'] ) ? 'rotation: "' . esc_js( $settings['rotation2'] ) . '",' : '';
-				$tlfrom = 'tl.from("#'. $data_id .'", { ' . $opacity2 . $rotation2 . $horizontal_movement2 . $vertical_movement2 . ' duration: '.$duration2.' })';
-			} else {
+                $tlfrom = 'tl.from("#' . esc_js( $data_id ) . '", {' .
+                    esc_js( $opacity2 ) .
+                    esc_js( $rotation2 ) .
+                    esc_js( $horizontal_movement2 ) .
+                    esc_js( $vertical_movement2 ) .
+                    'duration: ' . floatval( $duration2 ) .
+                    '});';
+            } else {
 				$tlfrom = '';
 			}
 			if ($text_movement == 'on') {
@@ -2486,63 +2515,70 @@ class Typography extends \Elementor\Widget_Base {
                 $vertical_movement = ! empty( $settings['vertical_movement'] ) ? 'y: "' . esc_js( $settings['vertical_movement'] ) . '",' : '';
                 $opacity = ! empty( $settings['opacity'] ) ? 'opacity: "' . esc_js( $settings['opacity'] ) . '",' : '';
                 $rotation = ! empty( $settings['rotation'] ) ? 'rotation: "' . esc_js( $settings['rotation'] ) . '",' : '';
-                $tlto = 'tl.to("#'. $data_id .'", { ' . $opacity . $rotation . $horizontal_movement . $vertical_movement . ' duration: '.$duration.' })';
+                $tlto = 'tl.to("#' . esc_js( $data_id ) . '", {' .
+                    esc_js( $opacity ) .
+                    esc_js( $rotation ) .
+                    esc_js( $horizontal_movement ) .
+                    esc_js( $vertical_movement ) .
+                    'duration: ' . floatval( $duration ) .
+                    '});';
             } else {
 				$tlto = '';
 			}
 
             echo '<script>
-					jQuery(window).ready(function($) {
-						gsap.registerPlugin(ScrollTrigger);
-						ScrollTrigger.config({ limitCallbacks: true });
-						const tl = gsap.timeline({
-							scrollTrigger: {
-							trigger: "#' . $data_id . '",
-							start: "center bottom",
-							end: "center top",
-							scrub: true,
-							// markers: true
-							}
-						});
-						' . $tlfrom . '
-						' . $tlto . '
-					});
-			</script>';
+                  	jQuery(window).ready(function($) {
+                  		gsap.registerPlugin(ScrollTrigger);
+                  		ScrollTrigger.config({ limitCallbacks: true });
+                  		const tl = gsap.timeline({
+                  			scrollTrigger: {
+                  				trigger: "#' . esc_js($data_id) . '",
+                  				start: "center bottom",
+                  				end: "center top",
+                  				scrub: true,
+                  				// markers: true
+                  			}
+                  		});
+                  		' . esc_js($tlfrom) . '
+                  		' . esc_js($tlto) . '
+                  	});
+                  </script>';
 
-				if( $shape ) {
-					echo '<div class="bw-code-em" id="' . $second_bw_id . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
-						\Elementor\Icons_Manager::render_icon( $settings['shape_widget'], [ 'aria-hidden' => 'true' ] );
-					echo '</div>';
+            if( $shape ) {
+                echo '<div class="bw-code-em" id="' . esc_attr( $second_bw_id ) . '">';
+                \Elementor\Icons_Manager::render_icon( $settings['shape_widget'], [ 'aria-hidden' => 'true' ] );
+                echo '</div>';
 
-					echo '<script>
-                        jQuery(window).ready(function($) {
-							jQuery("'. $second_bwscript_id .'").appendTo( jQuery("'. $script_id .' em") );
+                echo '<script>
+                         jQuery(window).ready(function($) {
+                             jQuery("' . esc_attr( $second_bwscript_id ) . '").appendTo(jQuery("' . esc_attr( $script_id ) . ' em"));
 
-                            const scroll = jQuery(window).scrollTop();
-							const objectSelect = jQuery("'. $script_id .'");
-                            const bottom = jQuery(window).height();
-                            const objectPosition = objectSelect.offset().top - bottom;
-                            if (scroll > objectPosition) {
-								jQuery("'. $script_id .' .bw-code-em").addClass("run");
-                            } else {
-                                jQuery("'. $script_id .' .bw-code-em").removeClass("run");
-                            }
+                             const scroll = jQuery(window).scrollTop();
+                             const objectSelect = jQuery("' . esc_attr( $script_id ) . '");
+                             const bottom = jQuery(window).height();
+                             const objectPosition = objectSelect.offset().top - bottom;
+
+                             if (scroll > objectPosition) {
+                                 jQuery("' . esc_attr( $script_id ) . ' .bw-code-em").addClass("run");
+                             } else {
+                                 jQuery("' . esc_attr( $script_id ) . ' .bw-code-em").removeClass("run");
+                             }
                         });
 
-                        jQuery(window).scroll(function($) {    
+                        jQuery(window).scroll(function() {
                             const scroll = jQuery(window).scrollTop();
-							const objectSelect = jQuery("'. $script_id .'");
+                            const objectSelect = jQuery("' . esc_attr( $script_id ) . '");
                             const bottom = jQuery(window).height();
                             const objectPosition = objectSelect.offset().top - bottom;
+                
                             if (scroll > objectPosition) {
-                                jQuery("'. $script_id .' .bw-code-em").addClass("run");
+                                jQuery("' . esc_attr( $script_id ) . ' .bw-code-em").addClass("run");
                             } else {
-                                jQuery("'. $script_id .' .bw-code-em").removeClass("run");
+                                jQuery("' . esc_attr( $script_id ) . ' .bw-code-em").removeClass("run");
                             }
                         });
-					</script>';
-
-				}
+                </script>';
+            }
 
 		}
 

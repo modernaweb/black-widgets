@@ -1,9 +1,9 @@
-# Black Widgets For Elementor
+# Black Widgets
 
 **Contributors:** skalanter, modernaweb \
 **Donate link:** http://modernaweb.net/ \
 **Tags:** page builder, editor, elementor widgets, elementor addon, typography \
-**Stable tag:** 1.4.0  DEV \
+**Stable tag:** 1.4.0-dev \
 **Requires at least:** 6.0 \
 **Tested up to:** 6.8 \
 **Requires PHP:** 7.4 \

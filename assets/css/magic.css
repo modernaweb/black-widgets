@@ -20,8 +20,7 @@
     font-size: 15px;
     letter-spacing: -1px;
     line-height: 2;
-    text-align: center;
-    display: block;
+    display: inline-block;
     text-transform: capitalize;
 }
 
@@ -342,6 +341,7 @@
 /* Arrow */
 
 .bw-magic-link .bw-magic-arrow {
+    display: flex;
     width: fit-content;
     text-align: left;
     font-size: 15px;
@@ -368,11 +368,19 @@
 }
 
 .bw-magic-link .bw-magic-arrow span {
+    display: flex;
+    margin-left: 3px;
+    align-items: center;
     transition: all ease 0.3s;
     -webkit-transition: all ease 0.3s;
     -moz-transition: all ease 0.3s;
     -ms-transition: all ease 0.3s;
     -o-transition: all ease 0.3s;
+}
+
+.bw-magic-link .bw-magic-arrow span svg {
+    stroke: currentColor;
+    stroke-width: 35px;
 }
 
 .bw-magic-link .bw-magic-arrow:hover span {

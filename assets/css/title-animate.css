@@ -91,6 +91,10 @@
     display: inline-block;
 }
 
+.bw-title-animate .bw-liner .bw-animate-text {
+    display: block;
+}
+
 
 /* Effective - Ready Set Go! */
 
@@ -719,7 +723,6 @@
 }
 
 .bw-title-animate .bw-rotator-ceffect .bw-rotator-item {
-    background-image: linear-gradient(90deg, #ff5b5b, blue);
     color: transparent;
     background-clip: text;
     background-size: 200% auto;

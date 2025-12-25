@@ -1,62 +1,23 @@
-jQuery(document).ready(function() {
-    const $targetElements = jQuery('.bw-text-animate');
-
-    $targetElements.each(function() {
-        const split = jQuery(this).data('split') || 'none';
-        const text = jQuery(this).text();
-
-        let html;
-        if (split === 'none') {
-            html = '<span class="bw-text-animate-content">' + text + '</span>';
-        } else if (split === 'letter') {
-            html = text.replace(/\S/g, '<span class="bw-text-animate-content">$&</span>');
-        } else {
-            html = text.split(/\s+/).map(function(word) {
-                return '<span class="bw-text-animate-content">' + word + '</span>';
-            }).join(' ');
-        }
-        jQuery(this).html(html);
-    });
+function bwTextAnimateInit($scope) {
+    const $targetElements = $scope.find('.bw-text-animate');
 
     const handleVisibilityChange = (entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const animation = jQuery(entry.target).data('animation') || 'ftop';
-                const delay = parseInt(jQuery(entry.target).data('delay')) || 500;
+                const $el = jQuery(entry.target);
+                const animation = $el.data('animation') || 'ftop';
+                const delay = parseInt($el.data('delay')) || 500;
 
-                const timeline = anime.timeline({easing: 'easeOutExpo', duration: delay});
-                jQuery(entry.target).find('.bw-text-animate-content').each(function() {
-                    if (animation === 'ftop') {
-                        timeline.add({
-                            targets: this,
-                            translateY: ['-100%', 0],
-                            opacity: [0 ,1],
-                        });
-                    } else if (animation === 'fbottom') {
-                        timeline.add({
-                            targets: this,
-                            translateY: ['100%', 0],
-                            opacity: [0 ,1],
-                        });
-                    } else if (animation === 'fleft') {
-                        timeline.add({
-                            targets: this,
-                            translateX: [-100, 0],
-                            opacity: [0 ,1],
-                        });
-                    } else if (animation === 'fright') {
-                        timeline.add({
-                            targets: this,
-                            translateX: [100, 0],
-                            opacity: [0 ,1],
-                        });
-                    } else {
-                        timeline.add({
-                            targets: this,
-                            opacity: [0 ,1],
-                            duration: delay,
-                        });
-                    }
+                const timeline = anime.timeline({ easing: 'easeOutExpo', duration: delay });
+                $el.find('.bw-text-animate-content').each(function () {
+                    timeline.add({
+                        targets: this,
+                        translateY: animation === 'ftop' ? ['-100%', 0] :
+                            animation === 'fbottom' ? ['100%', 0] : undefined,
+                        translateX: animation === 'fleft' ? [-100, 0] :
+                            animation === 'fright' ? [100, 0] : undefined,
+                        opacity: [0, 1],
+                    });
                 });
 
                 observer.unobserve(entry.target);
@@ -68,7 +29,18 @@ jQuery(document).ready(function() {
         threshold: 0.4
     });
 
-    $targetElements.each(function() {
+    $targetElements.each(function () {
         observer.observe(this);
     });
+}
+
+jQuery(document).ready(function () {
+    bwTextAnimateInit(jQuery(document));
 });
+
+jQuery(window).on('elementor/frontend/init', function () {
+    elementorFrontend.hooks.addAction('frontend/element_ready/b_text_animate.default', function ($scope) {
+        bwTextAnimateInit($scope);
+    });
+});
+

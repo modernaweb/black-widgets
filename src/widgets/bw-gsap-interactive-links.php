@@ -12,12 +12,12 @@ use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
 
 
-class InteractiveLinks extends \Elementor\Widget_Base {
+class GSAPInteractiveLinks extends \Elementor\Widget_Base {
 
     /**
      * Constructor for the Interactive Links widget.
      *
-     * @since ?.?.?
+     * @since 1.4.0
      *
      * This method is automatically called when the widget is instantiated.
      * It registers the required CSS and JS files specific to the Interactive Links widget.
@@ -41,72 +41,73 @@ class InteractiveLinks extends \Elementor\Widget_Base {
         wp_register_script(
             'black-widgets-gsap-interactive-links',
             BLACK_WIDGETS_PLUGIN_URL . 'assets/js/interactive-links.js',
-            [ 'jquery', 'GSAP' ], // Script dependencies
-            BLACK_WIDGETS_VERSION // Version for cache busting
+            [ 'jquery', 'GSAP', 'GSAP-ScrollTrigger' ], // Script dependencies
+            BLACK_WIDGETS_VERSION, // Version for cache busting
+            true
         );
     }
 
     /**
-	 * Get widget name.
-	 *
-	 * Retrieve button widget name.
-	 *
-	 * @since ?.?.?
-	 * @access public
-	 *
-	 * @return string Widget name.
-	 */
-	public function get_name() {
-		return 'b_gsap_interactive_links';
-	}
+     * Get widget name.
+     *
+     * Retrieve button widget name.
+     *
+     * @since 1.4.0
+     * @access public
+     *
+     * @return string Widget name.
+     */
+    public function get_name() {
+        return 'b_gsap_interactive_links';
+    }
 
-	/**
-	 * Get widget title.
-	 *
-	 * Retrieve button widget title.
-	 *
-	 * @since ?.?.?
-	 * @access public
-	 *
-	 * @return string Widget title.
-	 */
-	public function get_title() {
-		return __( 'Black Interactive Links', 'black-widgets' );
-	}
+    /**
+     * Get widget title.
+     *
+     * Retrieve button widget title.
+     *
+     * @since 1.4.0
+     * @access public
+     *
+     * @return string Widget title.
+     */
+    public function get_title() {
+        return __( 'Black Interactive Links', 'black-widgets' );
+    }
 
-	/**
-	 * Get widget icon.
-	 *
-	 * Retrieve button widget icon.
-	 *
-	 * @since ?.?.?
-	 * @access public
-	 *
-	 * @return string Widget icon.
-	 */
-	public function get_icon() {
-		return 'eicon-menu-toggle';
-	}
+    /**
+     * Get widget icon.
+     *
+     * Retrieve button widget icon.
+     *
+     * @since 1.4.0
+     * @access public
+     *
+     * @return string Widget icon.
+     */
+    public function get_icon() {
+        return 'eicon-menu-toggle';
+    }
 
-	/**
-	 * Get widget categories.
-	 *
-	 * Retrieve the list of categories the button widget belongs to.
-	 *
-	 * @access public
-	 *
-	 * @return array Widget categories.
-     * @since ?.?.?
-	 */
-	public function get_categories() {
-		return [ 'black_widgets' ];
-	}
+    /**
+     * Get widget categories.
+     *
+     * Retrieve the list of categories the button widget belongs to.
+     *
+     * @access public
+     *
+     * @return array Widget categories.
+     * @since 1.4.0
+     */
+    public function get_categories() {
+        return [ 'black_widgets' ];
+    }
 
     /**
      * Returns an array of style handles to be enqueued with this widget.
      *
      * @return array List of style handles.
-     * @since ?.?.?
+     * @since 1.4.0
      */
     public function get_style_depends() {
         return [ 'black-widgets-gsap-interactive-links' ];
@@ -116,7 +117,7 @@ class InteractiveLinks extends \Elementor\Widget_Base {
      * Returns an array of script handles to be enqueued with this widget.
      *
      * @return array List of script handles.
-     * @since ?.?.?
+     * @since 1.4.0
      */
     public function get_script_depends() {
         return [ 'black-widgets-gsap-interactive-links' ];
@@ -126,7 +127,7 @@ class InteractiveLinks extends \Elementor\Widget_Base {
      * Determines whether this widget includes dynamic content.
      *
      * @return bool False, because the widget has no dynamic content.
-     * @since ?.?.?
+     * @since 1.4.0
      */
     protected function is_dynamic_content(): bool {
         return false;
@@ -138,7 +139,7 @@ class InteractiveLinks extends \Elementor\Widget_Base {
      * This is the main entry point to register all controls for the widget in Elementor editor.
      * It delegates control grouping to specialized private methods for better modularity.
      *
-     * @since ?.?.?
+     * @since 1.4.0
      * @access protected
      * @return void
      */
@@ -154,7 +155,7 @@ class InteractiveLinks extends \Elementor\Widget_Base {
      * content and settings, such as widget type, items list, title, description, link, and image.
      * The controls are grouped into a section with the tab "Content" in the Elementor editor.
      *
-     * @since ?.?.?
+     * @since 1.4.0
      * @access private
      * @return void
      */
@@ -280,7 +281,7 @@ class InteractiveLinks extends \Elementor\Widget_Base {
      * This method organizes the style-related controls into separate modular sections
      * such as box, list, items, titles, descriptions, and image hover effects.
      *
-     * @since ?.?.?
+     * @since 1.4.0
      * @access private
      * @return void
      */
@@ -301,7 +302,7 @@ class InteractiveLinks extends \Elementor\Widget_Base {
      * border, padding, margin, and box shadow for both normal and hover states. These controls
      * allow the user to customize the appearance of the widget box in the Elementor editor.
      *
-     * @since ?.?.?
+     * @since 1.4.0
      * @access private
      * @return void
      */
@@ -492,7 +493,7 @@ class InteractiveLinks extends \Elementor\Widget_Base {
      * It allows users to customize the typography, text color, background color, and hover effects
      * (text color, background color, and box shadow) for the list items.
      *
-     * @since ?.?.?
+     * @since 1.4.0
      * @access private
      * @return void
      */
@@ -723,7 +724,7 @@ class InteractiveLinks extends \Elementor\Widget_Base {
      * This method registers the style controls for links and titles within the widget.
      * It allows users to customize the typography, color, hover color, and padding for titles and link elements.
      *
-     * @since ?.?.?
+     * @since 1.4.0
      * @access private
      * @return void
      */
@@ -819,7 +820,7 @@ class InteractiveLinks extends \Elementor\Widget_Base {
      * It allows users to customize the typography, color, background, text shadow, padding, margin, and text alignment
      * for the description text in both normal and hover states.
      *
-     * @since ?.?.?
+     * @since 1.4.0
      * @access private
      * @return void
      */
@@ -989,7 +990,7 @@ class InteractiveLinks extends \Elementor\Widget_Base {
      * This method registers the style controls for the image container within the widget.
      * It allows users to customize the background, border, box shadow, padding, and margin for the image container.
      *
-     * @since ?.?.?
+     * @since 1.4.0
      * @access private
      * @return void
      */
@@ -1066,7 +1067,7 @@ class InteractiveLinks extends \Elementor\Widget_Base {
      * It allows users to customize the opacity, border, box shadow, border radius,
      * margin, and padding for the hover image in both normal and hover states.
      *
-     * @since ?.?.?
+     * @since 1.4.0
      * @access private
      * @return void
      */
@@ -1184,7 +1185,7 @@ class InteractiveLinks extends \Elementor\Widget_Base {
      * This method registers controls for customizing GSAP-based hover effects, such as rotation, translation, brightness,
      * fade-in/out durations, and animation duration for the image and main widget elements.
      *
-     * @since ?.?.?
+     * @since 1.4.0
      * @access private
      * @return void
      */
@@ -1312,13 +1313,13 @@ class InteractiveLinks extends \Elementor\Widget_Base {
     }
 
     /**
-	 * Render title widget output on the frontend.
-	 *
-	 * Written in PHP and used to generate the final HTML.
-	 *
-	 * @since ?.?.?
-	 * @access protected
-	 */
+     * Render title widget output on the frontend.
+     *
+     * Written in PHP and used to generate the final HTML.
+     *
+     * @since 1.4.0
+     * @access protected
+     */
     protected function render() {
         // Get the settings from the Elementor widget panel
         $settings = $this->get_settings_for_display();
@@ -1379,7 +1380,7 @@ class InteractiveLinks extends \Elementor\Widget_Base {
             <!-- Container for the hover image effect -->
             <div class="bw-il-image-container">
                 <div class="bw-il-hover-wrapper">
-                    <img class="bw-il-hover-image" src="" alt="Hover Preview" />
+                    <img class="bw-il-hover-image" src="" alt="Hover Preview" /> <?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
                 </div>
             </div>
         </div>
@@ -1387,5 +1388,3 @@ class InteractiveLinks extends \Elementor\Widget_Base {
         <?php
     }
 }
-
-class_alias('Modernaweb\BlackWidgets\Widgets\InteractiveLinks', 'Black_Widgets\BLACK_WIDGETS_INTERACTIVE_LINKS');

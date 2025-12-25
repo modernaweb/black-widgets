@@ -159,11 +159,9 @@ class Fade extends \Elementor\Widget_Base {
 		$this->add_group_control(
 			Group_Control_Image_Size::get_type(),
 			[
-				'name' => 'thumbnail', //
-				// Usage: `{name}_size` and `{name}_custom_dimension`, in this case `thumbnail_size` and `thumbnail_custom_dimension`.
-				'exclude' => [ 'custom' ],
-				'include' => [],
-				'default' => 'full',
+				'name' => 'full_size',
+                'include' => [ 'thumbnail', 'medium', 'large', 'full' ],
+                'default' => 'full',
 				'condition'  => [
 					'widget_type' => [
 						'bw-t-1',
@@ -345,7 +343,7 @@ class Fade extends \Elementor\Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'start_width',
 			[
 				'label' => esc_html__( 'Start line width', 'black-widgets' ),
@@ -389,7 +387,7 @@ class Fade extends \Elementor\Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'img_width',
 			[
 				'label' => esc_html__( 'Image Width', 'black-widgets' ),
@@ -1261,6 +1259,7 @@ class Fade extends \Elementor\Widget_Base {
 		$img_grow					= isset($settings['img_grow']) 							? $settings['img_grow']								: '';
         $image_URL 	       			= isset( $settings['image']['url']) 					?  $settings['image']['url'] 						: '';
         $image_link 	   			= isset($settings['image_link']) 						? $settings['image_link'] 							: '';
+        $image_size 	   			= isset($settings['full_size']) 						? $settings['full_size'] 							: 'full';
 		$target            			= isset($settings['image_link_url']['is_external']) 	? 'target="_blank"' 								: '';
         $nofollow          			= isset($settings['image_link_url']['nofollow']) 		? ' rel="nofollow"' 								: '';
 		// Transform Option
@@ -1283,7 +1282,7 @@ class Fade extends \Elementor\Widget_Base {
 		// Cursor and Animate
 		$cursor						= isset($settings['widget_cursor'])						? $settings['widget_cursor']						: 'auto';
 		$animate					= isset($settings['image_pro_anime'])					? $settings['image_pro_anime']						: 'all 0.3s ease';
-		//Transform Styles	
+		//Transform Styles
 		$move_hover_x				= isset($settings['move_hover_x'])						? $settings['move_hover_x']							: '0px';
 		$move_hover_y				= isset($settings['move_hover_y'])						? $settings['move_hover_y']							: '0px';
 		$move_hover_z				= isset($settings['move_hover_z'])						? $settings['move_hover_z']							: '0px';
@@ -1299,13 +1298,13 @@ class Fade extends \Elementor\Widget_Base {
 		$perspective_child_hover	= isset($settings['perspective_child_hover'])			? $settings['perspective_child_hover']				: '0px';
 		//ID Settings
 		$data_id                	= 'bw_' . uniqid();
-		//Transform Normal Styles 
-		// Normal Move 
+		//Transform Normal Styles
+		// Normal Move
 		$translatex 				= isset( $move_normal_x["size"] ) 						? $move_normal_x["size"] . $move_normal_x["unit"] : '';
 		$translatey 				= isset( $move_normal_y["size"] ) 						? $move_normal_y["size"] . $move_normal_y["unit"] : '';
 		$translatez 				= isset( $move_normal_z["size"] ) 						? $move_normal_z["size"] . $move_normal_z["unit"] : '';
 		$translate3d 				= 'translate3d(' . $translatex . ', ' . $translatey . ', ' . $translatez . ')';
-		// Normal Scale 
+		// Normal Scale
 		$scalex 					= isset( $scale_normal_x["size"] ) 						? $scale_normal_x["size"] : '';
 		$scaley 					= isset( $scale_normal_y["size"] ) 						? $scale_normal_y["size"] : '';
 		$scalez 					= isset( $scale_normal_z["size"] ) 						? $scale_normal_z["size"] : '';
@@ -1323,7 +1322,7 @@ class Fade extends \Elementor\Widget_Base {
 		$perspective 				=  isset( $perspective["size"] ) 						? 'perspective:' . $perspective["size"] . $perspective["unit"] . '; -webkit-perspective:' . $perspective["size"] . $perspective["unit"] . ';': '';
 		// Normal Child perspective
 		$perspective_child 			=  isset( $perspective_child["size"] ) 					? 'perspective(' . $perspective_child["size"] . $perspective_child["unit"] . ')': '';
-		//Transform Hover Styles 
+		//Transform Hover Styles
 		//Hover Move
 		$translatex_hover			= isset( $move_hover_x["size"] ) 						? $move_hover_x["size"] . $move_hover_x["unit"] : '';
 		$translatey_hover			= isset( $move_hover_y["size"] ) 						? $move_hover_y["size"] . $move_hover_y["unit"] : '';
@@ -1348,7 +1347,7 @@ class Fade extends \Elementor\Widget_Base {
 		// Hover Child perspective
 		$perspective_child_hover	= isset( $perspective_child_hover["size"] ) 			? 'perspective(' . $perspective_child_hover["size"] . $perspective_child_hover["unit"] . ')' : '';
 		// Create a Custom CSS for Normal and Hover Styles
-		$normal_transform_style 	= ($normal_transform == 'normal_transform') 			? "#$data_id { -webkit-transition: $animate; -o-transition: $animate; transition: $animate; $perspective transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; -webkit-transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; $scale3dx }" : ''; 
+		$normal_transform_style 	= ($normal_transform == 'normal_transform') 			? "#$data_id { -webkit-transition: $animate; -o-transition: $animate; transition: $animate; $perspective transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; -webkit-transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; $scale3dx }" : '';
 		$hover_transform_style 		= ($hover_transform == 'hover_transform') 				? "#$data_id:hover { $perspective_hover transform: $perspective_child_hover $skew_hover $rotatex_hover $rotatey_hover $rotatez_hover $scale3d_hover $translate3d_hover; -webkit-transform: $perspective_child_hover $skew_hover $rotatex_hover $rotatey_hover $rotatez_hover $scale3d_hover $translate3d_hover; $scale3dx_hover }" : '';
 		//Return all of the styles
 		echo "<style>" . esc_html( $normal_transform_style ) . " " . esc_html( $hover_transform_style ) . "</style>";
@@ -1360,7 +1359,10 @@ class Fade extends \Elementor\Widget_Base {
 					echo '<div class="bw-img ' . esc_attr( $settings['hover_animation'] ) . '">';
 						if ( $image_link == 'yes') { echo '<a href="' . esc_url( $settings['image_link_url']['url'] ) . '"' . $target . $nofollow . ' class="bw-image-link">'; } // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						echo '<div class="bw-image-grow-cover ' . esc_attr( $img_grow ) . '"></div>';
-							echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail', $settings ) . '" class="' . esc_attr( $img_grow ) . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                              $image_url = Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], $image_size, $settings );
+                              if ( $image_url ) {
+                                  echo '<img src="' . esc_url( $image_url ) . '" class="' . esc_attr( $img_grow ) . '">'; // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
+                              }
 						if ( $image_link == 'yes'){ echo '</a>'; }
 					echo '</div>';
 				echo '</div>';

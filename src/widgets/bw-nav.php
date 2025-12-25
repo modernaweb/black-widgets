@@ -121,7 +121,7 @@ class FlatNav extends \Elementor\Widget_Base {
 	 * @return string nav index.
 	 */
 	protected function get_nav_menu_index() {
-		
+
 		// return $this->nav_menu_index++;
 		return true;
 	}
@@ -171,10 +171,10 @@ class FlatNav extends \Elementor\Widget_Base {
 					'options'			=> $menus,
 					'default'			=> array_keys( $menus )[0],
 					'save_default'		=> true,
-					'description'		=> sprintf( 
+					'description'		=> sprintf(
 						// translators: %s is the URL to the Menus screen
-						__( 'Go to the <a href="%s" target="_blank">Menus screen</a> to manage your menus; The menu should be flat', 'black-widgets' ), 
-						admin_url( 'nav-menus.php' ) 
+						__( 'Go to the <a href="%s" target="_blank">Menus screen</a> to manage your menus; The menu should be flat', 'black-widgets' ),
+						admin_url( 'nav-menus.php' )
 					),
 				]
 			);
@@ -183,10 +183,10 @@ class FlatNav extends \Elementor\Widget_Base {
 				'menu',
 				[
 					'type'				=> Controls_Manager::RAW_HTML,
-					'raw'				=> sprintf( 
+					'raw'				=> sprintf(
 						// translators: %s is the URL to the Menus screen for creating a new menu
-						__( '<strong>There are no menus in your site.</strong><br>Go to the <a href="%s" target="_blank">Menus screen</a> to create one.', 'black-widgets' ), 
-						admin_url( 'nav-menus.php?action=edit&menu=0' ) 
+						__( '<strong>There are no menus in your site.</strong><br>Go to the <a href="%s" target="_blank">Menus screen</a> to create one.', 'black-widgets' ),
+						admin_url( 'nav-menus.php?action=edit&menu=0' )
 					),
 					'content_classes'	=> 'elementor-panel-alert elementor-panel-alert-info',
 				]
@@ -430,7 +430,7 @@ class FlatNav extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_tab();
-		$this->end_controls_tabs(); // End Tabs		
+		$this->end_controls_tabs(); // End Tabs
 
 		$this->end_controls_section();
 		// End
@@ -493,7 +493,7 @@ class FlatNav extends \Elementor\Widget_Base {
                                {{WRAPPER}} .bw-nav.style4 a:before,
                                {{WRAPPER}} .bw-nav.style6 a:hover:before',
 			]
-		);	
+		);
 
 		$this->end_controls_section();
 		// End
@@ -695,7 +695,7 @@ class FlatNav extends \Elementor\Widget_Base {
         $befor_nav          = isset($settings['custom_icon_before_nav']) ? $settings['custom_icon_before_nav']['value'] : '';
 
 		if ( is_array( $befor_nav ) ) {
-			$bw_icon_svg_code	 = '<img src="'. esc_url( $befor_nav['url'] ) . '" />';
+			$bw_icon_svg_code	 = '<img src="'. esc_url( $befor_nav['url'] ) . '" />'; // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
 		} else {
 			$bw_icon_svg_code	 = '<i class="'. $befor_nav .'"></i>';
 		}
@@ -727,7 +727,7 @@ class FlatNav extends \Elementor\Widget_Base {
 						'container'     => '',
 					];
 					break;
-				
+
 				default:
 					$args = [
 						'echo'          => false,
@@ -741,9 +741,9 @@ class FlatNav extends \Elementor\Widget_Base {
 			}
 
 			$menu_html = wp_nav_menu( $args );
-			
+
 			// Render
-			
+
 
 			echo '<div class="bw-nav ' . esc_attr( $custom_nav_styles ) . ' ' . esc_attr( $alignment ) . '">';
 				echo wp_kses_post( $menu_html );

@@ -109,7 +109,6 @@
 }
 
 .bw-flipbox .bw-flip-card .bw-back .bw-button {
-    background: linear-gradient(135deg, #333, #555);
     text-decoration: none;
     display: block;
     transition: all .6s ease-in-out;
@@ -120,7 +119,6 @@
 }
 
 .bw-flipbox .bw-flip-card .bw-back .bw-button:hover {
-    background: linear-gradient(135deg, #444, #666);
 }
 
 .bw-flipbox .bw-flip-card:nth-child(even):hover .bw-back {

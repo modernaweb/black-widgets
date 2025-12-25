@@ -263,6 +263,7 @@ class Title extends \Elementor\Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bw-title-box' => 'text-align: {{VALUE}};',
 				],
+                'render_type' => 'template',
 			]
 		);
 
@@ -577,7 +578,7 @@ class Title extends \Elementor\Widget_Base {
 					'{{WRAPPER}} .bw-title-box .bw-title .bw-div' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
-		);	
+		);
 
 		// Box shadow
 		$this->add_group_control(
@@ -737,7 +738,7 @@ class Title extends \Elementor\Widget_Base {
 					'{{WRAPPER}} .bw-title-box .bw-subtitle .bw-div' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
-		);	
+		);
 
 		// Box shadow
 		$this->add_group_control(
@@ -751,13 +752,123 @@ class Title extends \Elementor\Widget_Base {
 
 		$this->end_controls_section();
 		// End
-		
+
 		// Start
 		// Style section
 		$this->start_controls_section(
+			'shape_type_section',
+			[
+				'label' => esc_html__( 'Shape', 'black-widgets' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+        $this->add_control(
+            'widget_shape_before_solid_color',
+            [
+                'label' => esc_html__( 'Shape Before Color', 'black-widgets' ),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .bw-title-box:before' => 'background: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'widget_shape_after_solid_color',
+            [
+                'label' => esc_html__( 'Shape After Color', 'black-widgets' ),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .bw-title-box:after' => 'background: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'widget_shap_before_width',
+            [
+                'label' => esc_html__( 'Shape Before Width', 'black-widgets' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px' ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1000,
+                        'step' => 1,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .bw-title-box:before' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'widget_shap_before_height',
+            [
+                'label' => esc_html__( 'Shape Before Height', 'black-widgets' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px' ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1000,
+                        'step' => 1,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .bw-title-box:before' => 'height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'widget_shap_after_width',
+            [
+                'label' => esc_html__( 'Shape After Width', 'black-widgets' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px' ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1000,
+                        'step' => 1,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .bw-title-box:after' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'widget_shap_after_height',
+            [
+                'label' => esc_html__( 'Shape After Height', 'black-widgets' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px' ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1000,
+                        'step' => 1,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .bw-title-box:after' => 'height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // Start
+        // Style section
+        $this->start_controls_section(
 			'shape_section',
 			[
-				'label' => esc_html__( 'Shape Settings', 'black-widgets' ),
+				'label' => esc_html__( 'Custom Shape Settings', 'black-widgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 				'condition'  => [
 					'widget_type' => [
@@ -768,7 +879,7 @@ class Title extends \Elementor\Widget_Base {
 		);
 
 		// Position
-		$this->add_control(
+		$this->add_responsive_control(
 			'widget_shape_position',
 			[
 				'label' => esc_html__( 'Shape Poistion', 'black-widgets' ),
@@ -785,7 +896,7 @@ class Title extends \Elementor\Widget_Base {
 		);
 
 		// Top position
-		$this->add_control(
+		$this->add_responsive_control(
 			'widget_shape_top_position',
 			[
 				'label' => esc_html__( 'Top Position', 'black-widgets' ),
@@ -803,7 +914,7 @@ class Title extends \Elementor\Widget_Base {
 		);
 
 		// Left position
-		$this->add_control(
+		$this->add_responsive_control(
 			'widget_shape_left_position',
 			[
 				'label' => esc_html__( 'Left Position', 'black-widgets' ),
@@ -821,7 +932,7 @@ class Title extends \Elementor\Widget_Base {
 		);
 
 		// Bottom position
-		$this->add_control(
+		$this->add_responsive_control(
 			'widget_shape_bottom_position',
 			[
 				'label' => esc_html__( 'Bottom Position', 'black-widgets' ),
@@ -839,7 +950,7 @@ class Title extends \Elementor\Widget_Base {
 		);
 
 		// Right position
-		$this->add_control(
+		$this->add_responsive_control(
 			'widget_shape_right_position',
 			[
 				'label' => esc_html__( 'Right Position', 'black-widgets' ),
@@ -876,7 +987,10 @@ class Title extends \Elementor\Widget_Base {
 		// Variables
 		$type 			= isset($settings['widget_type']) 				? $settings['widget_type'] 												: '';
 		$alignment 		= isset($settings['widget_alignment']) 			? $settings['widget_alignment'] 										: '';
-		//$alignment 		= '';
+        $alignment_mobile  = $this->get_settings_for_display('widget_alignment_mobile');
+        $alignment_tablet  = $this->get_settings_for_display('widget_alignment_tablet');
+
+        //$alignment 		= '';
 		$title 			= isset($settings['widget_title']) 				? $settings['widget_title'] 											: '';
 		$subtitle 		= isset($settings['widget_subtitle']) 			? $settings['widget_subtitle'] 											: '';
 
@@ -892,10 +1006,10 @@ class Title extends \Elementor\Widget_Base {
 			$subtitle_tag = 'div';
 		}
         $title 			        = isset($settings['widget_title'])                       ? $settings['widget_title']					: '';
-		$shape 			= isset($settings['custom_shape']) 				? '<img src="' . esc_url( $settings['custom_shape']['url'] ) . '" class="shape">' 	: '';
+		$shape 			= isset($settings['custom_shape']) 				? '<img src="' . esc_url( $settings['custom_shape']['url'] ) . '" class="shape">' 	: ''; // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
 
-		// Render
-		echo '<div class="bw-title-box ' . esc_attr( $type ) . ' ' . esc_html( $alignment ) . '">';
+        // Render
+		echo '<div class="bw-title-box ' . esc_attr( $type ) . ' ' . esc_html( $alignment ) . ' tablet-' . esc_html( $alignment_tablet ) .' mobile-' . esc_html( $alignment_mobile ) . ' ">';
 			echo '<div class="bw-title"><' . $title_tag . ' class="bw-div">' .esc_html($title). '</' . $title_tag . '></div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $shape; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo '<div class="bw-subtitle"><' . $subtitle_tag . ' class="bw-div"> ' .esc_html($subtitle). '</' . $subtitle_tag . '></div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -903,6 +1017,6 @@ class Title extends \Elementor\Widget_Base {
 
 	}
 
-}	
+}
 
 class_alias('Modernaweb\BlackWidgets\Widgets\Title', 'Black_Widgets\BLACK_WIDGETS_Title');

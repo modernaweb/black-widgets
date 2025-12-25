@@ -2,6 +2,7 @@
 
 namespace Modernaweb\BlackWidgets\Widgets;
 
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
@@ -144,8 +145,8 @@ class GSAPTab extends Widget_Base {
 				'label'   => __( 'Tab Type', 'black-widgets' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => [
-					'default'      => __( 'Default', 'black-widgets' ),
-					'vertical_tab' => __( 'Vertical Tab', 'black-widgets' ),
+					'default'      => __( 'Vertical Tab', 'black-widgets' ),
+					'vertical_tab' => __( 'Horizontal  Tab', 'black-widgets' ),
 				],
 				'default' => 'default',
 			]
@@ -348,19 +349,66 @@ class GSAPTab extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'tabs_default',
-			[
-				'label'       => __( 'Tab Items', 'black-widgets' ),
-				'type'        => Controls_Manager::REPEATER,
-				'fields'      => $repeater->get_controls(),
-				'default'     => [],
-				'title_field' => '{{{ tab_title }}}',
-				'condition'   => [
-					'tab_type' => 'default',
-				],
-			]
-		);
+        $this->add_control(
+            'tabs_default',
+            [
+                'label'       => __( 'Tab Items', 'black-widgets' ),
+                'type'        => Controls_Manager::REPEATER,
+                'fields'      => $repeater->get_controls(),
+                'default'     => [
+                    [
+                        'tab_title'       => __( 'Sample Tab 1', 'black-widgets' ),
+                        'tab_title_tag'   => 'h3',
+                        'tab_description' => __( 'This is a short description for sample tab 1.', 'black-widgets' ),
+                        'media_type'      => 'image',
+                        'tab_image'       => [
+                            'url' => 'https://c.pxhere.com/photos/a1/56/pumpkin_vegetables_autumn_october_basket_savoy_potato_yam-1031553.jpg!d',
+                        ],
+                        'read_more_text'  => __( 'Read More', 'black-widgets' ),
+                        'read_more_link'  => [ 'url' => 'https://example.com' ],
+                        'read_more_icon'  => [
+                            'value'   => 'fas fa-arrow-right',
+                            'library' => 'fa-solid',
+                        ],
+                    ],
+                    [
+                        'tab_title'       => __( 'Sample Tab 2', 'black-widgets' ),
+                        'tab_title_tag'   => 'h3',
+                        'tab_description' => __( 'This is a short description for sample tab 2.', 'black-widgets' ),
+                        'media_type'      => 'image',
+                        'tab_image'       => [
+                            'url' => 'https://c.pxhere.com/photos/3c/85/jetty_pier_sea_sunset_dusk_dawn_ocean_water-764479.jpg!d',
+                        ],
+                        'read_more_text'  => __( 'Learn More', 'black-widgets' ),
+                        'read_more_link'  => [ 'url' => 'https://example.com' ],
+                        'read_more_icon'  => [
+                            'value'   => 'fas fa-info-circle',
+                            'library' => 'fa-solid',
+                        ],
+                    ],
+                    [
+                        'tab_title'       => __( 'Sample Tab 3', 'black-widgets' ),
+                        'tab_title_tag'   => 'h3',
+                        'tab_description' => __( 'This is a short description for sample tab 3.', 'black-widgets' ),
+                        'media_type'      => 'image',
+                        'tab_image'       => [
+                            'url' => 'https://c.pxhere.com/photos/a4/8f/mount_merapi_volcano_indonesia_lava_volcanic_dangerous_volcanism_cloud_covered-1126537.jpg!d',
+                        ],
+                        'read_more_text'  => __( 'Learn More', 'black-widgets' ),
+                        'read_more_link'  => [ 'url' => 'https://example.com' ],
+                        'read_more_icon'  => [
+                            'value'   => 'fas fa-info-circle',
+                            'library' => 'fa-solid',
+                        ],
+                    ],
+                ],
+                'title_field' => '{{{ tab_title }}}',
+                'condition'   => [
+                    'tab_type' => 'default',
+                ],
+            ]
+        );
+
     }
 
 	/**
@@ -467,19 +515,63 @@ class GSAPTab extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'tabs_vertical',
-			[
-				'label'       => __( 'Tab Items', 'black-widgets' ),
-				'type'        => Controls_Manager::REPEATER,
-				'fields'      => $repeater->get_controls(),
-				'default'     => [],
-				'title_field' => '{{{ tab_title }}}',
-				'condition'   => [
-					'tab_type' => 'vertical_tab',
-				],
-			]
-		);
+        $this->add_control(
+            'tabs_vertical',
+            [
+                'label'       => __( 'Tab Items', 'black-widgets' ),
+                'type'        => Controls_Manager::REPEATER,
+                'fields'      => $repeater->get_controls(),
+                'default'     => [
+                    [
+                        'tab_title'      => __( 'Vertical Tab 1', 'black-widgets' ),
+                        'tab_content'    => __( 'This is the description for vertical tab 1.', 'black-widgets' ),
+                        'media_type'     => 'image',
+                        'tab_image'      => [
+                            'url' => 'https://c.pxhere.com/photos/a1/56/pumpkin_vegetables_autumn_october_basket_savoy_potato_yam-1031553.jpg!d',
+                        ],
+                        'read_more_text' => __( 'Read More', 'black-widgets' ),
+                        'read_more_link' => [ 'url' => 'https://example.com' ],
+                        'read_more_icon' => [
+                            'value'   => 'fas fa-arrow-right',
+                            'library' => 'fa-solid',
+                        ],
+                    ],
+                    [
+                        'tab_title'      => __( 'Vertical Tab 2', 'black-widgets' ),
+                        'tab_content'    => __( 'This is the description for vertical tab 2.', 'black-widgets' ),
+                        'media_type'     => 'image',
+                        'tab_image'      => [
+                            'url' => 'https://c.pxhere.com/photos/3c/85/jetty_pier_sea_sunset_dusk_dawn_ocean_water-764479.jpg!d',
+                        ],
+                        'read_more_text' => __( 'Learn More', 'black-widgets' ),
+                        'read_more_link' => [ 'url' => 'https://example.com' ],
+                        'read_more_icon' => [
+                            'value'   => 'fas fa-info-circle',
+                            'library' => 'fa-solid',
+                        ],
+                    ],
+                    [
+                        'tab_title'      => __( 'Vertical Tab 3', 'black-widgets' ),
+                        'tab_content'    => __( 'This is the description for vertical tab 3.', 'black-widgets' ),
+                        'media_type'     => 'image',
+                        'tab_image'      => [
+                            'url' => 'https://c.pxhere.com/photos/a4/8f/mount_merapi_volcano_indonesia_lava_volcanic_dangerous_volcanism_cloud_covered-1126537.jpg!d',
+                        ],
+                        'read_more_text'  => __( 'Learn More', 'black-widgets' ),
+                        'read_more_link'  => [ 'url' => 'https://example.com' ],
+                        'read_more_icon' => [
+                            'value'   => 'fas fa-info-circle',
+                            'library' => 'fa-solid',
+                        ],
+                    ],
+                ],
+                'title_field' => '{{{ tab_title }}}',
+                'condition'   => [
+                    'tab_type' => 'vertical_tab',
+                ],
+            ]
+        );
+
     }
 
 	/**
@@ -494,13 +586,15 @@ class GSAPTab extends Widget_Base {
 
 	    $this->register_default_tabs_style_controls();
 
+	    $this->register_default_content_style_controls();
+
 	    $this->register_default_timeline_style_controls();
 
 	    $this->register_default_media_style_controls();
 
 	    $this->register_default_read_more_button_style_controls();
     }
-    
+
 	/**
 	 * Default Box style controls
 	 *
@@ -824,6 +918,45 @@ class GSAPTab extends Widget_Base {
 	}
 
 	/**
+	 * Content Style Controls
+	 *
+	 * @return void
+	 * @since 1.3.92
+	 * @access private
+	 */
+	private function register_default_content_style_controls() {
+
+		$this->start_controls_section(
+			'section_content_style',
+			[
+				'label' => __( 'Content', 'black-widgets' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+        $this->add_control(
+            'content_color',
+            [
+                'label' => esc_html__( 'Color', 'black-widgets' ),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .black-tab__content p' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'content_typography',
+                'selector' => '{{WRAPPER}} .black-tab__content p',
+            ]
+        );
+
+        $this->end_controls_section();
+	}
+
+	/**
 	 * Default Timeline Style Controls
 	 *
 	 * @return void
@@ -1095,244 +1228,197 @@ class GSAPTab extends Widget_Base {
 	 * @since 1.3.6
 	 * @access private
 	 */
-	private function register_default_read_more_button_style_controls() {
-		$this->start_controls_section(
-			'section_default_read_more_button_style',
-			[
-				'label' => __( 'Read More Button', 'black-widgets' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-				'condition' => [
-					'tab_type' => 'default',
-				],
-			]
-		);
+    private function register_default_read_more_button_style_controls() {
+        $this->start_controls_section(
+            'section_default_read_more_button_style',
+            [
+                'label' => __( 'Read More Button', 'black-widgets' ),
+                'tab'   => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'tab_type' => 'default',
+                ],
+            ]
+        );
 
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-				'name'     => 'default_read_more_button_typography',
-				'selector' => '{{WRAPPER}} .black-tab__read-more',
-			]
-		);
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'default_read_more_button_typography',
+                'selector' => '{{WRAPPER}} .black-tab__read-more',
+            ]
+        );
 
-		$this->start_controls_tabs(
-			'default_tabs_read_more_button_text_color'
-		);
+        $this->start_controls_tabs( 'default_tabs_read_more_button_style' );
 
-		$this->start_controls_tab(
-			'default_tab_read_more_button_text_color_normal',
-			[
-				'label' => __( 'Normal', 'black-widgets' ),
-			]
-		);
+        // Normal tab
+        $this->start_controls_tab(
+            'default_tab_read_more_button_normal',
+            [
+                'label' => __( 'Normal', 'black-widgets' ),
+            ]
+        );
 
-		$this->add_control(
-			'default_read_more_button_text_color_normal',
-			[
-				'label'     => __( 'Text Color', 'black-widgets' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .black-tab__read-more' => 'color: {{VALUE}};',
-				],
-			]
-		);
+        $this->add_control(
+            'default_read_more_button_text_color_normal',
+            [
+                'label'     => __( 'Text Color', 'black-widgets' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .black-tab__read-more' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
 
-		$this->end_controls_tab();
+        $this->add_control(
+            'default_read_more_button_background_color_normal',
+            [
+                'label'     => __( 'Background Color', 'black-widgets' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .black-tab__read-more' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
 
-		$this->start_controls_tab(
-			'default_tab_read_more_button_text_color_hover',
-			[
-				'label' => __( 'Hover', 'black-widgets' ),
-			]
-		);
+        $this->add_control(
+            'default_read_more_button_icon_color_normal',
+            [
+                'label'     => __( 'Icon Color', 'black-widgets' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .black-tab__read-more svg' => 'fill: {{VALUE}}; stroke: {{VALUE}};',
+                ],
+            ]
+        );
 
-		$this->add_control(
-			'default_read_more_button_text_color_hover',
-			[
-				'label'     => __( 'Text Color', 'black-widgets' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .black-tab__read-more:hover' => 'color: {{VALUE}};',
-				],
-			]
-		);
+        $this->end_controls_tab();
 
-		$this->end_controls_tab();
+        // Hover tab
+        $this->start_controls_tab(
+            'default_tab_read_more_button_hover',
+            [
+                'label' => __( 'Hover', 'black-widgets' ),
+            ]
+        );
 
-		$this->end_controls_tabs();
+        $this->add_control(
+            'default_read_more_button_text_color_hover',
+            [
+                'label'     => __( 'Text Color', 'black-widgets' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .black-tab__read-more:hover' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
 
-		$this->start_controls_tabs(
-			'default_tabs_read_more_button_background_color'
-		);
+        $this->add_control(
+            'default_read_more_button_background_color_hover',
+            [
+                'label'     => __( 'Background Color', 'black-widgets' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .black-tab__read-more:hover' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
 
-		$this->start_controls_tab(
-			'default_tab_read_more_button_background_color_normal',
-			[
-				'label' => __( 'Normal', 'black-widgets' ),
-			]
-		);
+        $this->add_control(
+            'default_read_more_button_icon_color_hover',
+            [
+                'label'     => __( 'Icon Color', 'black-widgets' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .black-tab__read-more:hover svg' => 'fill: {{VALUE}}; stroke: {{VALUE}};',
+                ],
+            ]
+        );
 
-		$this->add_control(
-			'default_read_more_button_background_color_normal',
-			[
-				'label'     => __( 'Background Color', 'black-widgets' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .black-tab__read-more' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
+        $this->end_controls_tab();
 
-		$this->end_controls_tab();
+        $this->end_controls_tabs();
 
-		$this->start_controls_tab(
-			'default_tab_read_more_button_background_color_hover',
-			[
-				'label' => __( 'Hover', 'black-widgets' ),
-			]
-		);
+        // Other button style controls
+        $this->add_responsive_control(
+            'default_read_more_button_padding',
+            [
+                'label'      => __( 'Padding', 'black-widgets' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
+                'selectors'  => [
+                    '{{WRAPPER}} .black-tab__read-more' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
 
-		$this->add_control(
-			'default_read_more_button_background_color_hover',
-			[
-				'label'     => __( 'Background Color', 'black-widgets' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .black-tab__read-more:hover' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'default_read_more_button_border',
+                'label'    => __( 'Border', 'black-widgets' ),
+                'selector' => '{{WRAPPER}} .black-tab__read-more',
+            ]
+        );
 
-		$this->end_controls_tab();
+        $this->add_control(
+            'default_read_more_button_border_radius',
+            [
+                'label'      => __( 'Border Radius', 'black-widgets' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%' ],
+                'selectors'  => [
+                    '{{WRAPPER}} .black-tab__read-more' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
 
-		$this->end_controls_tabs();
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name'     => 'default_read_more_button_box_shadow',
+                'label'    => __( 'Box Shadow', 'black-widgets' ),
+                'selector' => '{{WRAPPER}} .black-tab__read-more',
+            ]
+        );
 
-		$this->add_responsive_control(
-			'default_read_more_button_padding',
-			[
-				'label'      => __( 'Padding', 'black-widgets' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em' ],
-				'selectors'  => [
-					'{{WRAPPER}} .black-tab__read-more' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
+        $this->add_control(
+            'default_read_more_button_icon_spacing',
+            [
+                'label'      => __( 'Icon Spacing', 'black-widgets' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => [ 'px' ],
+                'range'      => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 50,
+                    ],
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .black-tab__read-more' => 'gap: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
 
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-			[
-				'name'     => 'default_read_more_button_border',
-				'label'    => __( 'Border', 'black-widgets' ),
-				'selector' => '{{WRAPPER}} .black-tab__read-more',
-			]
-		);
+        $this->add_control(
+            'default_read_more_button_icon_size',
+            [
+                'label'      => __( 'Icon Size', 'black-widgets' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'em' ],
+                'range'      => [
+                    'px' => [
+                        'min' => 5,
+                        'max' => 50,
+                    ],
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .black-tab__read-more svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
 
-		$this->add_control(
-			'default_read_more_button_border_radius',
-			[
-				'label'      => __( 'Border Radius', 'black-widgets' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%' ],
-				'selectors'  => [
-					'{{WRAPPER}} .black-tab__read-more' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name'     => 'default_read_more_button_box_shadow',
-				'label'    => __( 'Box Shadow', 'black-widgets' ),
-				'selector' => '{{WRAPPER}} .black-tab__read-more',
-			]
-		);
-
-		$this->add_control(
-			'default_read_more_button_icon_spacing',
-			[
-				'label'      => __( 'Icon Spacing', 'black-widgets' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px' ],
-				'range'      => [
-					'px' => [
-						'min' => 0,
-						'max' => 50,
-					],
-				],
-				'selectors'  => [
-					'{{WRAPPER}} .black-tab__read-more' => 'gap: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'default_read_more_button_icon_size',
-			[
-				'label'      => __( 'Icon Size', 'black-widgets' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em' ],
-				'range'      => [
-					'px' => [
-						'min' => 5,
-						'max' => 50,
-					],
-				],
-				'selectors'  => [
-					'{{WRAPPER}} .black-tab__read-more svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->start_controls_tabs(
-			'default_tabs_read_more_button_icon_color'
-		);
-
-		$this->start_controls_tab(
-			'default_tab_read_more_button_icon_color_normal',
-			[
-				'label' => __( 'Normal', 'black-widgets' ),
-			]
-		);
-
-		$this->add_control(
-			'default_read_more_button_icon_color_normal',
-			[
-				'label'     => __( 'Icon Color', 'black-widgets' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .black-tab__read-more svg' => 'fill: {{VALUE}}; stroke: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->end_controls_tab();
-
-		$this->start_controls_tab(
-			'default_tab_read_more_button_icon_color_hover',
-			[
-				'label' => __( 'Hover', 'black-widgets' ),
-			]
-		);
-
-		$this->add_control(
-			'default_read_more_button_icon_color_hover',
-			[
-				'label'     => __( 'Icon Color', 'black-widgets' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .black-tab__read-more:hover svg' => 'fill: {{VALUE}}; stroke: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->end_controls_tab();
-
-		$this->end_controls_tabs();
-
-		$this->end_controls_section();
-	}
+        $this->end_controls_section();
+    }
 
 	/**
 	 * Vertical Style Controls
@@ -2021,61 +2107,51 @@ class GSAPTab extends Widget_Base {
 			]
 		);
 
-		$this->end_controls_section();
+        $this->add_control(
+            'vertical_read_more_icon_color',
+            [
+                'label'     => __( 'Icon Color', 'black-widgets' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .black-tab__read-more-icon' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .black-tab__read-more-icon svg' => 'fill: {{VALUE}}; stroke: {{VALUE}};',
+                ],
+            ]
+        );
 
-		$this->start_controls_section(
-			'section_vertical_read_more_icon_style',
-			[
-				'label' => __( 'Read More Icon', 'black-widgets' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			]
-		);
+        $this->add_responsive_control(
+            'vertical_read_more_icon_size',
+            [
+                'label'      => __( 'Icon Size', 'black-widgets' ),
+                'type'       => Controls_Manager::SLIDER,
+                'range'      => [
+                    'px' => [
+                        'min' => 6,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .black-tab__read-more-icon, {{WRAPPER}} .black-tab__read-more-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
 
-		$this->add_control(
-			'vertical_read_more_icon_color',
-			[
-				'label'     => __( 'Icon Color', 'black-widgets' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .black-tab__read-more-icon' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .black-tab__read-more-icon svg' => 'fill: {{VALUE}}; stroke: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			'vertical_read_more_icon_size',
-			[
-				'label'      => __( 'Icon Size', 'black-widgets' ),
-				'type'       => Controls_Manager::SLIDER,
-				'range'      => [
-					'px' => [
-						'min' => 6,
-						'max' => 100,
-					],
-				],
-				'selectors'  => [
-					'{{WRAPPER}} .black-tab__read-more-icon, {{WRAPPER}} .black-tab__read-more-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			'vertical_read_more_icon_spacing',
-			[
-				'label'     => __( 'Icon Spacing', 'black-widgets' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-					'px' => [
-						'min' => 0,
-						'max' => 100,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .black-tab__read-more' => 'gap: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
+        $this->add_responsive_control(
+            'vertical_read_more_icon_spacing',
+            [
+                'label'     => __( 'Icon Spacing', 'black-widgets' ),
+                'type'      => Controls_Manager::SLIDER,
+                'range'     => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .black-tab__read-more' => 'gap: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
 
 		$this->end_controls_section();
 	}
@@ -2147,11 +2223,10 @@ class GSAPTab extends Widget_Base {
                         <div class="black-tab__media" data-tab-index="<?php echo esc_attr( $index ); ?>"
                             <?php echo $index === 0 ? '' : 'style="translate: none; rotate: none; scale: none; opacity: 0; transform: translate(0px, 0px); height: 0;"'; ?>>
                             <?php if ( $tab['media_type'] === 'image' && ! empty( $tab['tab_image']['url'] ) ): ?>
-                                <img src="<?php echo esc_url( $tab['tab_image']['url'] ); ?>"
-                                     alt="<?php echo esc_attr( $tab['tab_title'] ); ?>" class="black-tab__image"/>
+                                <img src="<?php echo esc_url( $tab['tab_image']['url'] ); ?>" alt="<?php echo esc_attr( $tab['tab_title'] ); ?>" class="black-tab__image"/> <?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
                             <?php elseif ( $tab['media_type'] === 'video' && ! empty( $tab['tab_video']['url'] ) ): ?>
                                 <video class="black-tab__video" src="<?php echo esc_url( $tab['tab_video']['url'] ); ?>"
-                                       controls></video>
+                                       muted autoplay loop></video>
                             <?php endif; ?>
 
                             <?php if ( ! empty( $tab['read_more_text'] ) ): ?>
@@ -2232,9 +2307,9 @@ class GSAPTab extends Widget_Base {
                                     </a>
 								<?php endif; ?>
 								<?php if ( $media_type === 'image' ) : ?>
-                                    <img src="<?php echo esc_url( $media_url ); ?>" alt="<?php echo esc_html($tab['tab_title'])?>"/>
+                                    <img src="<?php echo esc_url( $media_url ); ?>" alt="<?php echo esc_html($tab['tab_title'])?>"/> <?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 								<?php elseif ( $media_type === 'video' ) : ?>
-                                    <video src="<?php echo esc_url( $media_url ); ?>" controls></video>
+                                    <video src="<?php echo esc_url( $media_url ); ?>" muted autoplay loop></video>
 								<?php endif; ?>
                             </div>
 						<?php endif; ?>

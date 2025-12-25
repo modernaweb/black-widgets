@@ -1001,19 +1001,19 @@ class Sentence extends \Elementor\Widget_Base {
 									// echo $item['sentence_title'];
 									echo esc_html($item['sentence_title']);
 								if(isset($item['widget_link_url'])) { echo '</a>'; }
-							echo '</span>';	
+							echo '</span>';
 						}
 
 						if( $item['sentence_type'] == 'bw-t-2' ) {
 							$position = isset($item['sentence_image_position'])			? $item['sentence_image_position']		: '';
 							echo '<span class="elementor-repeater-item-' . esc_attr( $item['_id'] ) . ' '. esc_attr( $item['sentence_type'] ).' bw-sentence-'. esc_attr( $position ) .'">';
-								// echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $item['sentence_image']['id'], 'thumbnail', $settings ) . '">';
+								// echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $item['sentence_image']['id'], 'full', $settings ) . '">';
 								if(isset($item['widget_link_url'])) { echo '<a href="' . esc_url( $item['widget_link_url']['url'] ) . '"' . $target . $nofollow . ' class="bw-item-link' . $type . '">'; } // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-									echo '<img src="' . esc_url( $item['sentence_image']['url'] ) . '">';
-								if(isset($item['widget_link_url'])) { echo '</a>'; }
-							echo '</span>';	
+									echo '<img src="' . esc_url( $item['sentence_image']['url'] ) . '">'; // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
+                            if(isset($item['widget_link_url'])) { echo '</a>'; }
+							echo '</span>';
 						}
-	
+
 					}
 				echo '</'. $title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo '</div>';

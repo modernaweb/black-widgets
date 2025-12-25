@@ -1,8 +1,8 @@
-=== Black Widgets For Elementor ===
+=== Black Widgets ===
 Contributors: skalanter, modernaweb
 Donate link: http://modernaweb.net/
 Tags: page builder, editor, elementor widgets, elementor addon, typography
-Stable tag: 1.4.0  DEV
+Stable tag: 1.4.0-dev
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -105,7 +105,7 @@ WordPress 5.3+
 
 ## Changelog
 
-= 1.4.0 — 2025-05-XX = 
+= 1.4.0 — 2025-05-XX =
 - Refactored: Plugin Structure
 - Improved: All Settings
 - Compatibility: WordPress v6.8
@@ -148,7 +148,7 @@ WordPress 5.3+
 = 1.3.4 — 2023-11-05 =
 - Compatibility: WordPress v6.4
 - Compatibility: Elementor v3.17
-- Updated: Anime.js 
+- Updated: Anime.js
 - Changed: Some widget icons
 - Improved: Fade animate
 - Fixed: Some minor issue

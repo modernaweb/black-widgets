@@ -1,48 +1,101 @@
-jQuery(document).ready(function() {
-    jQuery('.bw-image-marquee:not(.bw-mos)').each(function() {
-        const duration =  jQuery(this).data('duration');
-        const $content = jQuery(this).find('.bw-image-marquee-content');
+function imageMarquee() {
+    const marquees = document.querySelectorAll('.bw-image-marquee-wrapper');
 
-        $content.css('animation-duration', duration + 's');
-    });
+    marquees.forEach(wrapper => {
+        const track = wrapper.querySelector('.bw-image-marquee-track');
+        const items = Array.from(track.children);
 
-    if (typeof gsap !== 'undefined') {
-        jQuery('.bw-image-marquee.bw-mos').each(function() {
-            const $section = jQuery(this);
-            const start = $section.data('start');
-            const end = $section.data('end');
+        const speed = parseFloat(wrapper.dataset.speed) || 20;
+        const rawDirection = (wrapper.dataset.direction || 'left').toLowerCase();
+        const type = wrapper.dataset.type || 'horizontal';
+        const useGsap = wrapper.dataset.gsapScroll === 'true';
+        const pauseOnHover = wrapper.dataset.pauseHover === 'true';
+        const startCondition = wrapper.dataset.gsapStart || "top bottom";
+        const endCondition = wrapper.dataset.gsapEnd || "bottom top";
+        const speedScroll = parseFloat(wrapper.dataset.speedScroll) || 1;
 
-            const $w = $section.find('.bw-image-marquee-content');
-            const movement = $w.data('movement');
-            const direction = $section.data('direction');
+        const isVertical = type === 'vertical';
 
-            if ( movement === 'hortizontal' ) {
-                const width = $w.outerWidth();
-                const [x, xEnd] = direction == 'ltr' ? [-1 * width, '100%'] : ['100%', -1 * width];
+        // normalize direction: allow left/right/up/down, and treat "right" as "down" in vertical mode for backward-compat
+        let direction;
+        if (isVertical) {
+            direction = (rawDirection === 'down' || rawDirection === 'right') ? 'down' : 'up';
+        } else {
+            direction = (rawDirection === 'right' || rawDirection === 'down') ? 'right' : 'left';
+        }
 
-                gsap.fromTo($w[0], { x }, {
-                    x: xEnd,
-                    scrollTrigger: { 
-                        start: start,
-                        end: end,
-                        trigger: $section[0], 
-                        scrub: true
+        // ensure we have enough content (2x wrapper) for seamless scroll in both directions
+        if (items.length > 0) {
+            cloneUntilFill(wrapper, track, items, 2, isVertical);
+        }
+
+        // add helper classes (useful for CSS mode too)
+        if (isVertical) {
+            track.classList.add('vertical', direction === 'down' ? 'scroll-down' : 'scroll-up');
+        } else {
+            track.classList.add(direction === 'right' ? 'scroll-right' : 'scroll-left');
+        }
+
+        // GSAP Mode
+        if (useGsap && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+
+            const scrollProp = isVertical ? 'y' : 'x';
+
+            // For negative direction (left/up): 0% -> -50%
+            // For positive direction (right/down): -50% -> 0%
+            const fromVal = (direction === 'right' || direction === 'down') ? '-50%' : '0%';
+            const toVal   = (direction === 'right' || direction === 'down') ? '0%'   : '-50%';
+
+            // set will-change for smoother perf
+            track.style.willChange = 'transform';
+
+            gsap.fromTo(track,
+                { [scrollProp]: fromVal },
+                {
+                    [scrollProp]: toVal,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: wrapper,
+                        start: startCondition,
+                        end: endCondition,
+                        scrub: speedScroll,
+                        invalidateOnRefresh: true
                     }
+                }
+            );
+        }
+        // CSS Animation Mode
+        else {
+            track.style.animationDuration = `${speed}s`;
+
+            if (pauseOnHover) {
+                wrapper.addEventListener('mouseenter', () => {
+                    track.style.animationPlayState = 'paused';
                 });
-            } else {
-                const height = $w.outerHeight();
-                const [y, yEnd] = direction === 'ltr' ? [-1 * height, '100%'] : ['100%', -1 * height];
-
-                gsap.fromTo($w[0], { y }, {
-                    y: yEnd,
-                    scrollTrigger: { 
-                        start: start,
-                        end: end,
-                        trigger: $section[0], 
-                        scrub: true
-                    }
+                wrapper.addEventListener('mouseleave', () => {
+                    track.style.animationPlayState = 'running';
                 });
             }
-        });
+        }
+    });
+}
+
+function cloneUntilFill(wrapper, track, items, multiplier = 2, isVertical = false) {
+    let attempts = 0;
+    const maxAttempts = multiplier * 3;
+
+    const getSize = () => isVertical ? track.scrollHeight : track.scrollWidth;
+    const getWrapperSize = () => isVertical ? wrapper.offsetHeight : wrapper.offsetWidth;
+
+    while (getSize() < getWrapperSize() * multiplier && attempts < maxAttempts) {
+        items.forEach(item => track.appendChild(item.cloneNode(true)));
+        attempts++;
     }
+}
+
+document.addEventListener('DOMContentLoaded', imageMarquee);
+
+jQuery(window).on('elementor/frontend/init', function () {
+    elementorFrontend.hooks.addAction('frontend/element_ready/b_image_marquee.default', imageMarquee);
 });

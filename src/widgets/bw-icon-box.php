@@ -29,7 +29,7 @@ class IconBox extends \Elementor\Widget_Base {
         parent::__construct( $data, $args );
         wp_register_style( 'black-widgets-icon-box', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/icon-box.css', [], BLACK_WIDGETS_VERSION );
 
-        wp_register_script( 'black-widgets-icon-box', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/icon-box.js', [ 'jquery' ], BLACK_WIDGETS_VERSION );
+        wp_register_script( 'black-widgets-icon-box', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/icon-box.js', [ 'jquery' ], BLACK_WIDGETS_VERSION, true );
     }
 
 	/**
@@ -455,9 +455,8 @@ class IconBox extends \Elementor\Widget_Base {
 			Group_Control_Image_Size::get_type(),
 			[
 				'name' => 'thumbnail', // // Usage: `{name}_size` and `{name}_custom_dimension`, in this case `thumbnail_size` and `thumbnail_custom_dimension`.
-				'exclude' => [ 'custom' ],
-				'include' => [],
-				'default' => 'full',
+                'include' => [ 'thumbnail', 'medium', 'large', 'full' ],
+                'default' => 'full',
 				'condition'  => [
 					'widget_icon_image_enable' => [
 						'icon_image_enable',
@@ -2005,6 +2004,7 @@ class IconBox extends \Elementor\Widget_Base {
 		$icon_image				= isset($settings['widget_icon_image_type'])					? $settings['widget_icon_image_type']			: '';
 		$iconset				= isset($settings['widget_icon'])								? $settings['widget_icon']						: ''; // Icon
 		$svgcode				= isset($settings['widget_code'])								? $settings['widget_code']						: ''; // Icon
+        $thumbnail				= isset($settings['thumbnail'])								? $settings['thumbnail']						: 'full';
 		// Link
 		$enable_link			= 'link_enable' === $settings['widget_link_enable']				? $settings['widget_link_enable'] 				: '';
 		$link					= isset($settings['widget_link_url']['url'])					? $settings['widget_link_url']['url']			: ''; // Link URL
@@ -2029,7 +2029,7 @@ class IconBox extends \Elementor\Widget_Base {
         $sanitizer = new Sanitizer();
         $svgcode = $sanitizer->sanitize( $svgcode );
 
-		// Render 
+		// Render
 		switch ($position) {
 			case 'position-2':
 				echo '<div id="' . $data_id . '" class="bw-iconbox bw-box-'. esc_attr( $box_align ).' bw-' . esc_attr( $position ) . ' ' . $svg_animate . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -2038,7 +2038,22 @@ class IconBox extends \Elementor\Widget_Base {
 					// Subtitle
 					if ( $enable_subtitle ) echo '<' . $subtitle_tag . ' class="bw-it-is-subtitle ' . esc_attr( $subtitle_align ) . '">' . esc_html($subtitle) . '</' . $subtitle_tag . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					// Image
-					if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon ' . esc_attr( $icon_position ) . '">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>'; elseif ( $icon_image == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw ' . esc_attr( $box_align ) . '">'.$svgcode.'</div>'; else: echo '<div class="bw-iconbox-img ' . esc_attr( $box_align ) . '"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                if ( $enable_icon_image ) {
+                    if ( $icon_image == 'enable_icon' ) {
+                        echo '<div class="bw-iconbox-icon ' . esc_attr( $icon_position ) . '">';
+                        \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] );
+                        echo '</div>';
+                    } elseif ( $icon_image == 'enable_code' ) {
+                        echo '<div class="bw-iconbox-img xcv--mw ' . esc_attr( $box_align ) . '">' . wp_kses_post( $svgcode ) . '</div>';
+                    } else {
+                        $image_url = Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], $thumbnail, $settings );
+                        if ( $image_url ) {
+                            echo '<div class="bw-iconbox-img ' . esc_attr( $box_align ) . '">';
+                            echo '<img src="' . esc_url( $image_url ) . '" class="bw-iconbox-image">';  // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
+                            echo '</div>';
+                        }
+                    }
+                }
 					// Paragraph
 					if ( $enable_paragraph ) echo '<p class="bw-it-is-paragraph ' . esc_attr( $paragraph_align ) . '">' . esc_html($paragraph) . '</p>';
 					// Link
@@ -2051,7 +2066,22 @@ class IconBox extends \Elementor\Widget_Base {
 					echo '<div id="' . $data_id . '" class="bw-iconbox bw-box-'. esc_attr( $box_b_align ) .' bw-' . esc_attr( $position ) . ' ' . $svg_animate . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						echo '<div class="bw-image-wrap">';
 							// Image
-							if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon  ' . esc_attr( $icon_position ) . '">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>'; elseif ( $icon_image == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div>'; else: echo '<div class="bw-iconbox-img  ' . esc_attr( $box_align ) . '"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            if ( $enable_icon_image ) {
+                if ( $icon_image == 'enable_icon' ) {
+                    echo '<div class="bw-iconbox-icon ' . esc_attr( $icon_position ) . '">';
+                    \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] );
+                    echo '</div>';
+                } elseif ( $icon_image == 'enable_code' ) {
+                    echo '<div class="bw-iconbox-img xcv--mw">' . wp_kses_post( $svgcode ) . '</div>';
+                } else {
+                    $image_url = Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], $thumbnail, $settings );
+                    if ( $image_url ) {
+                        echo '<div class="bw-iconbox-img ' . esc_attr( $box_align ) . '">';
+                        echo '<img src="' . esc_url( $image_url ) . '" class="bw-iconbox-image" alt="">';             // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
+                        echo '</div>';
+                    }
+                }
+            }
 						echo '</div>';
 						echo '<div class="bw-content-wrap">';
 							// Title
@@ -2071,7 +2101,22 @@ class IconBox extends \Elementor\Widget_Base {
 				echo '<div id="' . $data_id . '" class="bw-iconbox bw-box-'. esc_attr( $box_b_align ) .' bw-' . esc_attr( $position ) . ' ' . $svg_animate . '">';// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					echo '<div class="bw-wrapper">';
 					// Image
-					if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon  ' . esc_attr( $icon_position ) . '">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>'; elseif ( $icon_image == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div>';else: echo '<div class="bw-iconbox-img ' . esc_attr( $box_align ) . '"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            if ( $enable_icon_image ) {
+                if ( $icon_image == 'enable_icon' ) {
+                    echo '<div class="bw-iconbox-icon ' . esc_attr( $icon_position ) . '">';
+                    \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] );
+                    echo '</div>';
+                } elseif ( $icon_image == 'enable_code' ) {
+                    echo '<div class="bw-iconbox-img xcv--mw">' . wp_kses_post( $svgcode ) . '</div>';
+                } else {
+                    $image_url = Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], $thumbnail, $settings );
+                    if ( $image_url ) {
+                        echo '<div class="bw-iconbox-img ' . esc_attr( $box_align ) . '">';
+                        echo '<img src="' . esc_url( $image_url ) . '" class="bw-iconbox-image" alt="">';  // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
+                        echo '</div>';
+                    }
+                }
+            }
 						echo '<div class="bw-typography-wrapper">';
 							echo '<div class="bw-icon-box-title">';
 								// Title
@@ -2083,7 +2128,7 @@ class IconBox extends \Elementor\Widget_Base {
 							if ( $enable_paragraph ) echo '<p class="bw-it-is-paragraph ' . esc_attr( $paragraph_align ) . '">' . esc_html($paragraph) . '</p>';
 							// Link
 							if ( $enable_link ) echo '<a href="' . esc_url( $link ) . '"' . $link_target . $link_nofollow . ' class="bw-btn ' . esc_attr( $link_align ) . '">' . esc_html($link_text) . '</a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						echo '</div>';	
+						echo '</div>';
 					echo '</div>';
 				echo '</div>';
 				break;
@@ -2092,8 +2137,23 @@ class IconBox extends \Elementor\Widget_Base {
 				echo '<div id="' . $data_id . '" class="bw-iconbox bw-box-'. esc_attr( $box_align ) .' bw-' . esc_attr( $position ) . ' ' . $svg_animate . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						// Image
 						// echo '<div class="bw-iconbox-icon-svg-code"><div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div></div>';
-						if ( $enable_icon_image ) if ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon ' . esc_attr( $icon_position ) . '">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] );echo '</div>'; elseif ( $icon_image == 'enable_code' ): echo '<div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div>'; else: echo '<div class="bw-iconbox-img ' . esc_attr( $box_align ) . '"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>'; endif; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						// elseif ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>';  else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], 'thumbnail', $settings ) . '" class="bw-iconbox-image"></div>';
+                if ( $enable_icon_image ) {
+                    if ( $icon_image === 'enable_icon' ) {
+                        echo '<div class="bw-iconbox-icon ' . esc_attr( $icon_position ) . '">';
+                        \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] );
+                        echo '</div>';
+                    } elseif ( $icon_image === 'enable_code' ) {
+                        echo '<div class="bw-iconbox-img xcv--mw">' . wp_kses_post( $svgcode ) . '</div>';
+                    } else {
+                        $image_url = Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], $thumbnail, $settings );
+                        if ( $image_url ) {
+                            echo '<div class="bw-iconbox-img ' . esc_attr( $box_align ) . '">';
+                            echo '<img src="' . esc_url( $image_url ) . '" class="bw-iconbox-image" alt="">';                 // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
+                            echo '</div>';
+                        }
+                    }
+                }
+						// elseif ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>';  else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], $thumbnail, $settings ) . '" class="bw-iconbox-image"></div>';
 						// Title
 						if ( $enable_title ) echo '<' . $title_tag . ' class="bw-it-is-title ' . esc_attr( $title_align ) . '">' . esc_html($title) . '</' . $title_tag . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						// Subtitle
@@ -2105,7 +2165,7 @@ class IconBox extends \Elementor\Widget_Base {
 					echo '</div>';
 					break;
 		}
-	
+
 	}
 }
 
