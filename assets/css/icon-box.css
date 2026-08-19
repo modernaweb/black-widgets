@@ -15,6 +15,13 @@
     -moz-transition: all 0.3s ease;
     -ms-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.bw-iconbox *,
+.bw-iconbox *::before,
+.bw-iconbox *::after {
+    box-sizing: border-box;
 }
 
 .bw-iconbox:hover {
@@ -40,8 +47,8 @@
 .bw-iconbox h4,
 .bw-iconbox h5,
 .bw-iconbox h6 {
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
+    margin: 0;
+    padding: 0;
 }
 
 .bw-iconbox p {
@@ -49,15 +56,71 @@
     font-size: 14px;
 }
 
+/* Icon / image wrappers */
+.bw-iconbox .bw-iconbox-icon,
+.bw-iconbox .bw-iconbox-img {
+    display: inline-block;
+    line-height: 0;
+    max-width: 100%;
+    vertical-align: top;
+    transition: color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+}
+
+/* Position 1/2: full-width icon row so L/C/R text-align can place the icon */
+.bw-iconbox.bw-position-1 .bw-iconbox-icon,
+.bw-iconbox.bw-position-2 .bw-iconbox-icon,
+.bw-iconbox.bw-position-1 .bw-iconbox-img,
+.bw-iconbox.bw-position-2 .bw-iconbox-img {
+    display: block;
+    width: 100%;
+}
+
 .bw-iconbox .bw-iconbox-icon i {
     font-size: 46px;
+    line-height: 1;
+    display: inline-block;
+    transition: color 0.3s ease, background 0.3s ease;
+}
+
+/* Elementor / FA SVG icons - inline-block so text-align L/C/R works (block broke alignment) */
+.bw-iconbox .bw-iconbox-icon svg {
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    vertical-align: top;
+    fill: currentColor;
+    color: inherit;
+    max-width: 100%;
+    transition: fill 0.3s ease, stroke 0.3s ease, color 0.3s ease, background 0.3s ease;
+}
+
+.bw-iconbox .bw-iconbox-icon svg path,
+.bw-iconbox .bw-iconbox-icon svg circle,
+.bw-iconbox .bw-iconbox-icon svg rect,
+.bw-iconbox .bw-iconbox-icon svg polygon {
+    transition: fill 0.3s ease, stroke 0.3s ease;
+}
+
+/* Custom SVG code / uploaded markup inside .bw-iconbox-img */
+.bw-iconbox .bw-iconbox-img svg {
+    width: 64px;
+    height: auto;
+    max-width: 100%;
+    display: block;
+    color: #000;
+}
+
+.bw-iconbox .bw-iconbox-img img {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 .bw-iconbox .bw-btn {
     font-size: 14px;
     margin: 12px 0;
     padding-left: 0;
-    display: block;
+    display: inline-block;
     transition: all 0.3s ease;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
@@ -81,27 +144,91 @@
     text-align: right;
 }
 
-.bw-iconbox img,
-.bw-iconbox svg,
-.bw-iconbox .bw-iconbox-icon i {
+/* Horizontal icon alignment for stacked layouts (Position 1 / 2)
+   Wrapper is block + full width; text-align places inline icons.
+   Block-level img/svg use margin auto. */
+.bw-iconbox.bw-position-1 .bw-iconbox-icon.left,
+.bw-iconbox.bw-position-1 .bw-iconbox-img.left,
+.bw-iconbox.bw-position-2 .bw-iconbox-icon.left,
+.bw-iconbox.bw-position-2 .bw-iconbox-img.left {
+    text-align: left;
+}
+
+.bw-iconbox.bw-position-1 .bw-iconbox-icon.center,
+.bw-iconbox.bw-position-1 .bw-iconbox-img.center,
+.bw-iconbox.bw-position-2 .bw-iconbox-icon.center,
+.bw-iconbox.bw-position-2 .bw-iconbox-img.center {
+    text-align: center;
+}
+
+.bw-iconbox.bw-position-1 .bw-iconbox-icon.right,
+.bw-iconbox.bw-position-1 .bw-iconbox-img.right,
+.bw-iconbox.bw-position-2 .bw-iconbox-icon.right,
+.bw-iconbox.bw-position-2 .bw-iconbox-img.right {
+    text-align: right;
+}
+
+.bw-iconbox.bw-position-1 .bw-iconbox-icon.left i,
+.bw-iconbox.bw-position-1 .bw-iconbox-icon.left svg,
+.bw-iconbox.bw-position-1 .bw-iconbox-img.left img,
+.bw-iconbox.bw-position-1 .bw-iconbox-img.left svg,
+.bw-iconbox.bw-position-2 .bw-iconbox-icon.left i,
+.bw-iconbox.bw-position-2 .bw-iconbox-icon.left svg,
+.bw-iconbox.bw-position-2 .bw-iconbox-img.left img,
+.bw-iconbox.bw-position-2 .bw-iconbox-img.left svg {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.bw-iconbox.bw-position-1 .bw-iconbox-icon.center i,
+.bw-iconbox.bw-position-1 .bw-iconbox-icon.center svg,
+.bw-iconbox.bw-position-1 .bw-iconbox-img.center img,
+.bw-iconbox.bw-position-1 .bw-iconbox-img.center svg,
+.bw-iconbox.bw-position-2 .bw-iconbox-icon.center i,
+.bw-iconbox.bw-position-2 .bw-iconbox-icon.center svg,
+.bw-iconbox.bw-position-2 .bw-iconbox-img.center img,
+.bw-iconbox.bw-position-2 .bw-iconbox-img.center svg {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bw-iconbox.bw-position-1 .bw-iconbox-icon.right i,
+.bw-iconbox.bw-position-1 .bw-iconbox-icon.right svg,
+.bw-iconbox.bw-position-1 .bw-iconbox-img.right img,
+.bw-iconbox.bw-position-1 .bw-iconbox-img.right svg,
+.bw-iconbox.bw-position-2 .bw-iconbox-icon.right i,
+.bw-iconbox.bw-position-2 .bw-iconbox-icon.right svg,
+.bw-iconbox.bw-position-2 .bw-iconbox-img.right img,
+.bw-iconbox.bw-position-2 .bw-iconbox-img.right svg {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+/* When Icon Position is unset on Position 2, keep media centered (legacy look).
+   Position 1 inherits Box Alignment text-align instead. */
+.bw-iconbox.bw-position-2 .bw-iconbox-icon:not(.left):not(.center):not(.right) i,
+.bw-iconbox.bw-position-2 .bw-iconbox-icon:not(.left):not(.center):not(.right) svg,
+.bw-iconbox.bw-position-2 .bw-iconbox-img:not(.left):not(.center):not(.right) img,
+.bw-iconbox.bw-position-2 .bw-iconbox-img:not(.left):not(.center):not(.right) svg {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bw-iconbox .bw-iconbox-icon,
+.bw-iconbox .bw-iconbox-img,
+.bw-iconbox .bw-iconbox-icon i,
+.bw-iconbox .bw-iconbox-icon svg,
+.bw-iconbox .bw-iconbox-img img,
+.bw-iconbox .bw-iconbox-img svg {
     margin-bottom: 20px;
-
 }
-
-
-.bw-iconbox svg {
-    width: 100%;
-    height: 100%;
-    fill: none;
-    stroke: black;
-}
-
 
 
 /* Position 1 */
 
-.bw-position-1 i {
-    margin: 0;
+.bw-position-1 .bw-iconbox-icon i,
+.bw-position-1 .bw-iconbox-icon svg {
+    margin-bottom: 20px;
 }
 
 
@@ -128,14 +255,24 @@
     -o-transform: scale(1.1, 1.1);
 }
 
-.bw-iconbox.bw-position-2 .bw-iconbox-icon {
+.bw-iconbox.bw-position-2 .bw-iconbox-icon,
+.bw-iconbox.bw-position-2 .bw-iconbox-img {
     padding: 24px 0;
     width: 100%;
     height: auto;
+    /* Do not force center - Icon Position (left/center/right) owns this */
 }
 
-.bw-iconbox.bw-position-2 i {
-    margin: 0;
+.bw-iconbox.bw-position-2 .bw-iconbox-icon.center i,
+.bw-iconbox.bw-position-2 .bw-iconbox-icon.center svg,
+.bw-iconbox.bw-position-2 .bw-iconbox-img.center img,
+.bw-iconbox.bw-position-2 .bw-iconbox-img.center svg,
+.bw-iconbox.bw-position-2 .bw-iconbox-icon:not(.left):not(.right) i,
+.bw-iconbox.bw-position-2 .bw-iconbox-icon:not(.left):not(.right) svg,
+.bw-iconbox.bw-position-2 .bw-iconbox-img:not(.left):not(.right) img,
+.bw-iconbox.bw-position-2 .bw-iconbox-img:not(.left):not(.right) svg {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .bw-iconbox.bw-position-2 .bw-it-is-title {
@@ -161,11 +298,13 @@
 }
 
 
-/* Position 3 & Position 4 */
+/* Position 3 & Position 4 - flex (was float; more reliable alignment) */
 
 .bw-iconbox.bw-position-3 {
     padding: 22px 14px;
-    display: table;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
     width: 100%;
     border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -174,23 +313,33 @@
     -o-border-radius: 4px;
 }
 
-.bw-iconbox.bw-position-3 .bw-image-wrap,
-.bw-iconbox.bw-position-3 .bw-content-wrap {
-    float: left;
-}
-
 .bw-iconbox.bw-position-3 .bw-image-wrap {
+    flex: 0 0 20%;
+    max-width: 20%;
     width: 20%;
 }
 
 .bw-iconbox.bw-position-3 .bw-content-wrap {
+    flex: 1 1 80%;
+    max-width: 80%;
     width: 80%;
     padding-left: 18px;
+}
+
+.bw-iconbox.bw-position-3 .bw-iconbox-icon,
+.bw-iconbox.bw-position-3 .bw-iconbox-img,
+.bw-iconbox.bw-position-3 .bw-iconbox-icon i,
+.bw-iconbox.bw-position-3 .bw-iconbox-icon svg,
+.bw-iconbox.bw-position-3 .bw-iconbox-img img,
+.bw-iconbox.bw-position-3 .bw-iconbox-img svg {
+    margin-bottom: 0;
 }
 
 .bw-iconbox.bw-position-4 {
     padding: 22px 12px;
     display: flex;
+    flex-direction: row;
+    align-items: center;
     width: 100%;
     border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -199,23 +348,58 @@
     -o-border-radius: 4px;
 }
 
-.bw-iconbox.bw-position-4 .bw-image-wrap,
-.bw-iconbox.bw-position-4 .bw-content-wrap {
-    float: left;
-}
-
 .bw-iconbox.bw-position-4 .bw-image-wrap {
     display: flex;
-    width: 25%;
+    flex: 0 0 auto;
+    max-width: 25%;
+    width: auto;
+    min-width: 0;
     align-items: center;
     justify-content: center;
     padding-right: 14px;
 }
 
 .bw-iconbox.bw-position-4 .bw-content-wrap {
-    width: 75%;
+    flex: 1 1 auto;
+    max-width: none;
+    width: auto;
+    min-width: 0;
     padding-left: 14px;
     border-left: 2px solid #D2D2D2;
+}
+
+.bw-iconbox.bw-position-3 .bw-content-wrap,
+.bw-iconbox.bw-position-4 .bw-content-wrap {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.bw-iconbox.bw-position-3 .bw-image-wrap:empty,
+.bw-iconbox.bw-position-4 .bw-image-wrap:empty {
+    display: none;
+}
+
+.bw-iconbox.bw-position-3 .bw-image-wrap,
+.bw-iconbox.bw-position-4 .bw-image-wrap {
+    flex-shrink: 0;
+}
+
+.bw-iconbox.bw-position-3 .bw-iconbox-img svg,
+.bw-iconbox.bw-position-4 .bw-iconbox-img svg,
+.bw-iconbox.bw-position-3 .bw-iconbox-img img,
+.bw-iconbox.bw-position-4 .bw-iconbox-img img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.bw-iconbox .bw-it-is-title,
+.bw-iconbox .bw-it-is-subtitle,
+.bw-iconbox .bw-it-is-paragraph {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .bw-iconbox.bw-position-4 .bw-content-wrap .bw-it-is-title,
@@ -241,7 +425,7 @@
 
 .bw-iconbox.bw-position-4 .bw-content-wrap a,
 .bw-iconbox.bw-position-3 .bw-content-wrap a {
-    padding: 0 0 0 0;
+    padding: 0;
     position: relative;
     margin: 0;
     font-weight: 600;
@@ -255,7 +439,7 @@
     content: '';
     width: 0;
     height: 2px;
-    background: #000;
+    background: currentColor;
     top: 50%;
     left: 0;
     transform: translateY(-50%);
@@ -302,18 +486,63 @@
 .bw-iconbox.bw-position-5 .bw-wrapper,
 .bw-iconbox.bw-position-6 .bw-wrapper {
     display: flex;
-    margin-bottom: 22px;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-bottom: 0;
+    width: 100%;
+    min-width: 0;
+    gap: 12px;
 }
 
 .bw-iconbox.bw-position-5 .bw-wrapper .bw-iconbox-icon,
-.bw-iconbox.bw-position-6 .bw-wrapper .bw-iconbox-icon {
-    margin: 0 12px 0 0;
+.bw-iconbox.bw-position-6 .bw-wrapper .bw-iconbox-icon,
+.bw-iconbox.bw-position-5 .bw-wrapper .bw-iconbox-img,
+.bw-iconbox.bw-position-6 .bw-wrapper .bw-iconbox-img {
+    margin: 0;
+    flex: 0 0 auto;
 }
 
 .bw-iconbox.bw-position-5 .bw-wrapper .bw-iconbox-icon i,
-.bw-iconbox.bw-position-6 .bw-wrapper .bw-iconbox-icon i {
+.bw-iconbox.bw-position-6 .bw-wrapper .bw-iconbox-icon i,
+.bw-iconbox.bw-position-5 .bw-wrapper .bw-iconbox-icon svg,
+.bw-iconbox.bw-position-6 .bw-wrapper .bw-iconbox-icon svg,
+.bw-iconbox.bw-position-5 .bw-wrapper .bw-iconbox-img img,
+.bw-iconbox.bw-position-6 .bw-wrapper .bw-iconbox-img img,
+.bw-iconbox.bw-position-5 .bw-wrapper .bw-iconbox-img svg,
+.bw-iconbox.bw-position-6 .bw-wrapper .bw-iconbox-img svg {
     font-size: 44px;
     margin-bottom: 0;
+}
+
+.bw-iconbox.bw-position-5 .bw-typography-wrapper,
+.bw-iconbox.bw-position-6 .bw-typography-wrapper {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+/* Vertical icon alignment for side-by-side layouts (Position 3 / 4 / 5 / 6)
+   Icon Position left/center/right maps to top/middle/bottom of the row. */
+.bw-iconbox.bw-position-3.bw-icon-align-left,
+.bw-iconbox.bw-position-4.bw-icon-align-left,
+.bw-iconbox.bw-position-5.bw-icon-align-left .bw-wrapper,
+.bw-iconbox.bw-position-6.bw-icon-align-left .bw-wrapper {
+    align-items: flex-start;
+}
+
+.bw-iconbox.bw-position-3.bw-icon-align-center,
+.bw-iconbox.bw-position-4.bw-icon-align-center,
+.bw-iconbox.bw-position-5.bw-icon-align-center .bw-wrapper,
+.bw-iconbox.bw-position-6.bw-icon-align-center .bw-wrapper {
+    align-items: center;
+}
+
+.bw-iconbox.bw-position-3.bw-icon-align-right,
+.bw-iconbox.bw-position-4.bw-icon-align-right,
+.bw-iconbox.bw-position-5.bw-icon-align-right .bw-wrapper,
+.bw-iconbox.bw-position-6.bw-icon-align-right .bw-wrapper {
+    align-items: flex-end;
 }
 
 .bw-iconbox.bw-position-5 .bw-wrapper .bw-it-is-title,
@@ -331,7 +560,9 @@
 }
 
 .bw-iconbox.bw-iconbox-svg-animate .bw-iconbox-icon path,
-.bw-iconbox.bw-iconbox-svg-animate .bw-iconbox-icon {
+.bw-iconbox.bw-iconbox-svg-animate .bw-iconbox-icon,
+.bw-iconbox.bw-iconbox-svg-animate .bw-iconbox-img path,
+.bw-iconbox.bw-iconbox-svg-animate .bw-iconbox-img {
     transition: all .38s ease;
     -webkit-transition: all .38s ease;
     -moz-transition: all .38s ease;
@@ -339,13 +570,13 @@
     -o-transition: all .38s ease;
 }
 
-.bw-iconbox.bw-iconbox-svg-animate .bw-iconbox-icon path {
+.bw-iconbox.bw-iconbox-svg-animate .bw-iconbox-img path {
     stroke-dasharray: 1;
     stroke-dashoffset: 1;
-    /* opacity: 0; */
 }
 
-.bw-iconbox.bw-iconbox-svg-animate .bw-iconbox-icon {
+.bw-iconbox.bw-iconbox-svg-animate .bw-iconbox-icon,
+.bw-iconbox.bw-iconbox-svg-animate .bw-iconbox-img {
     background-image: none !important;
 }
 
@@ -357,10 +588,8 @@
 
 .bw-iconbox.bw-iconbox-svg-animate.run .bw-iconbox-img path {
     opacity: 1;
-    /* beginning of L */
     stroke-dasharray: 2000;
     stroke-dashoffset: 2000;
-    /* animation: bw-animated 3s linear forwards 1s; */
     animation: bwxanimate 6s cubic-bezier(.65, 0, .35, 1) forwards;
 }
 
@@ -368,23 +597,23 @@
 /* right positioning */
 .bw-box-right.bw-position-3,
 .bw-box-right.bw-position-4 {
-    direction: rtl;
+    flex-direction: row-reverse;
     text-align: right;
 }
 
-.bw-box-right.bw-position-3 .bw-image-wrap,
-.bw-box-right.bw-position-4 .bw-image-wrap {
-    float: right;
-}
-
-.bw-box-right.bw-position-3 .bw-content-wrap,
-.bw-box-right.bw-position-4 .bw-content-wrap {
-    float: left;
+.bw-box-right.bw-position-3 .bw-content-wrap {
     padding-left: 0;
     padding-right: 18px;
 }
 
+.bw-box-right.bw-position-4 .bw-image-wrap {
+    padding-right: 0;
+    padding-left: 14px;
+}
+
 .bw-box-right.bw-position-4 .bw-content-wrap {
+    padding-left: 0;
+    padding-right: 14px;
     border-left: 0;
     border-right: 2px solid #D2D2D2;
 }
@@ -406,23 +635,75 @@
     flex-direction: row-reverse;
 }
 
-.bw-box-right.bw-position-5{
-    border-left: 0px;
+.bw-box-right.bw-position-5 {
+    border-left: 0;
     border-right: 7px solid #000;
 }
 
 .bw-box-right.bw-position-5 .bw-wrapper .bw-iconbox-icon,
-.bw-box-right.bw-position-6 .bw-wrapper .bw-iconbox-icon {
-    margin: 0 0 0 12px;
+.bw-box-right.bw-position-6 .bw-wrapper .bw-iconbox-icon,
+.bw-box-right.bw-position-5 .bw-wrapper .bw-iconbox-img,
+.bw-box-right.bw-position-6 .bw-wrapper .bw-iconbox-img {
+    margin: 0;
 }
 
-.bw-box-right.bw-position-5 .bw-wrapper .bw-typography-wrapper,
-.bw-box-right.bw-position-6 .bw-wrapper .bw-typography-wrapper {
-    float: left;
+.bw-box-center.bw-position-3 .bw-image-wrap,
+.bw-box-center.bw-position-4 .bw-image-wrap {
+    justify-content: center;
 }
 
-.bw-position-5 .bw-wrapper .bw-iconbox-img,
-.bw-position-6 .bw-wrapper .bw-iconbox-img {
-    margin: 0 12px;
+/* Center alignment helpers for stacked icon layouts (Box Alignment = center).
+   Explicit Icon Position (.left|.right) keeps higher-specificity overrides above. */
+.bw-box-center .bw-iconbox-icon:not(.left):not(.right),
+.bw-box-center .bw-iconbox-img:not(.left):not(.right) {
+    text-align: center;
 }
 
+.bw-box-center .bw-iconbox-icon:not(.left):not(.right) i,
+.bw-box-center .bw-iconbox-icon:not(.left):not(.right) svg,
+.bw-box-center .bw-iconbox-img:not(.left):not(.right) img,
+.bw-box-center .bw-iconbox-img:not(.left):not(.right) svg {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 767px) {
+    /* Beat Elementor wrapper specificity so Position 3/4 always stack on small screens. */
+    .elementor-widget-b_icon_box .bw-iconbox.bw-position-3,
+    .elementor-widget-b_icon_box .bw-iconbox.bw-position-4,
+    .elementor-widget-b_icon_box .bw-box-right.bw-position-3,
+    .elementor-widget-b_icon_box .bw-box-right.bw-position-4,
+    .bw-iconbox.bw-position-3,
+    .bw-iconbox.bw-position-4,
+    .bw-box-right.bw-position-3,
+    .bw-box-right.bw-position-4 {
+        flex-direction: column !important;
+        text-align: center;
+    }
+
+    .elementor-widget-b_icon_box .bw-iconbox.bw-position-3 .bw-image-wrap,
+    .elementor-widget-b_icon_box .bw-iconbox.bw-position-4 .bw-image-wrap,
+    .elementor-widget-b_icon_box .bw-iconbox.bw-position-3 .bw-content-wrap,
+    .elementor-widget-b_icon_box .bw-iconbox.bw-position-4 .bw-content-wrap,
+    .bw-iconbox.bw-position-3 .bw-image-wrap,
+    .bw-iconbox.bw-position-4 .bw-image-wrap,
+    .bw-iconbox.bw-position-3 .bw-content-wrap,
+    .bw-iconbox.bw-position-4 .bw-content-wrap {
+        flex: 1 1 auto;
+        max-width: 100%;
+        width: 100%;
+        padding: 0;
+        border: 0 !important;
+    }
+
+    .bw-iconbox.bw-position-3 .bw-image-wrap,
+    .bw-iconbox.bw-position-4 .bw-image-wrap {
+        margin-bottom: 14px;
+        justify-content: center;
+    }
+
+    .bw-iconbox.bw-position-2:hover {
+        transform: scale(1.04, 1.04);
+        -webkit-transform: scale(1.04, 1.04);
+    }
+}

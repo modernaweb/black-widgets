@@ -40,18 +40,11 @@ class ImageMarquee extends \Elementor\Widget_Base {
             BLACK_WIDGETS_VERSION
         );
 
-        $deps = [ 'jquery' ];
-
-        // Add GSAP dependencies if enabled.
-        if ( $this->is_gsap_enabled() ) {
-            $deps[] = 'GSAP';
-            $deps[] = 'GSAP-ScrollTrigger';
-        }
-
+        // GSAP is added conditionally in get_script_depends() when Move on Scroll is on.
         wp_register_script(
             'black-widgets-image-marquee',
             BLACK_WIDGETS_PLUGIN_URL . 'assets/js/image-marquee.js',
-            $deps,
+            [ 'jquery' ],
             BLACK_WIDGETS_VERSION,
             true
         );
@@ -132,7 +125,24 @@ class ImageMarquee extends \Elementor\Widget_Base {
      * @return array List of script handles.
      */
     public function get_script_depends() {
-        return [ 'black-widgets-image-marquee' ];
+        $deps = [ 'black-widgets-image-marquee' ];
+
+        // Avoid reading instance settings during early Elementor enqueue.
+        if ( $this->is_gsap_enabled() ) {
+            $deps[] = 'GSAP';
+            $deps[] = 'GSAP-ScrollTrigger';
+        }
+
+        return $deps;
+    }
+
+    /**
+     * Raw settings safe when Elementor data is not initialized yet.
+     *
+     * @return array
+     */
+    protected function get_early_settings(): array {
+        return black_widgets_elementor_raw_settings( $this );
     }
 
     /**
@@ -159,25 +169,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
      * @return bool True if GSAP is enabled, false otherwise.
      */
     public function is_gsap_enabled() {
-        // Get plugin options from the database, default to empty array for safety
-        $options = get_option( 'plugin_options', [] );
-
-        // Validate that options is an array to avoid warnings
-        if ( ! is_array( $options ) ) {
-            return false;
-        }
-
-        // Sanitize and fetch the specific options safely
-        $gsap_options = isset( $options['gsap_options'] ) ? sanitize_text_field( $options['gsap_options'] ) : '';
-        $bw_gsap_cdn1 = isset( $options['bw_gsap_cdn1'] ) ? esc_url_raw( $options['bw_gsap_cdn1'] ) : '';
-        $bw_gsap_cdn2 = isset( $options['bw_gsap_cdn2'] ) ? esc_url_raw( $options['bw_gsap_cdn2'] ) : '';
-
-        // Check if GSAP is enabled only if all necessary options are set and not empty
-        if ( ! empty( $gsap_options ) && ! empty( $bw_gsap_cdn1 ) && ! empty( $bw_gsap_cdn2 ) ) {
-            return true;
-        }
-
-        return false;
+        return \Modernaweb\BlackWidgets\Plugin_Options::is_gsap_ready();
     }
 
     /**
@@ -260,8 +252,8 @@ class ImageMarquee extends \Elementor\Widget_Base {
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'left',
                 'options' => [
-                    'left' => esc_html__( 'Left To Right (Up To Down)', 'black-widgets' ),
-                    'right' => esc_html__( 'Right To Left (Down To Up)', 'black-widgets' ),
+                    'left' => esc_html__( 'Left To Right / Up', 'black-widgets' ),
+                    'right' => esc_html__( 'Right To Left / Down', 'black-widgets' ),
                 ],
             ]
         );
@@ -269,7 +261,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_speed',
             [
-                'label' => esc_html__( 'Duration (Speed)', 'black-widgets' ),
+                'label' => esc_html__( 'Duration (s)', 'black-widgets' ),
                 'type' => Controls_Manager::NUMBER,
                 'default' => 20,
                 'min' => 1,
@@ -282,11 +274,10 @@ class ImageMarquee extends \Elementor\Widget_Base {
             [
                 'label' => esc_html__( 'GAP', 'black-widgets' ),
                 'type' => \Elementor\Controls_Manager::NUMBER,
-                'default' => 0,
+                'default' => 40,
+                'description' => esc_html__( 'Space between images.', 'black-widgets' ),
                 'selectors' => [
-                    '{{WRAPPER}} .bw-image-marquee-track,
-                     {{WRAPPER}} .bw-image-marquee-group,
-                     {{WRAPPER}} .bw-image-marquee-wrapper.vertical .bw-image-marquee-group' => 'gap: {{VALUE}}px;',
+                    '{{WRAPPER}} .bw-image-marquee-wrapper' => '--bw-marquee-gap: {{VALUE}}px;',
                 ],
             ]
         );
@@ -311,7 +302,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
             ]
         );
 
-        if ( $this->is_gsap_enabled() ) {
+        if ( \Modernaweb\BlackWidgets\Plugin_Options::is_gsap_toggle_on() ) {
 
             $this->add_control(
                 'widget_mos',
@@ -683,19 +674,21 @@ class ImageMarquee extends \Elementor\Widget_Base {
     protected function render() {
         $settings        = $this->get_settings_for_display();
         $images          = $settings['images'] ?? [];
-        $speed           = $settings['widget_speed'] ?? '50';
+        $speed           = $settings['widget_speed'] ?? '20';
         $direction       = $settings['widget_direction'] ?? 'left';
         $marquee_type    = $settings['widget_type'] ?? 'horizontal';
+        $gap             = isset( $settings['widget_gap'] ) ? (int) $settings['widget_gap'] : 40;
         $pause_on_hover  = ($settings['widget_pause_on_hover'] ?? '') === 'yes' ? 'true' : 'false';
         $use_gsap_attr   = 'false';
         $gsap_start      = 'top bottom';
         $gsap_end        = 'bottom top';
-        $speedScroll        = 2;
+        // Align with widget_gsap_speed control default (1).
+        $speedScroll     = 1;
 
         if ( $this->is_gsap_enabled() ) {
             $use_gsap_scroll = $settings['widget_mos'] ?? '';
             $use_gsap_attr   = $use_gsap_scroll === 'yes' ? 'true' : 'false';
-            $speedScroll      = sanitize_text_field( $settings['widget_gsap_speed'] ?? $speedScroll );
+            $speedScroll     = sanitize_text_field( $settings['widget_gsap_speed'] ?? $speedScroll );
         }
 
         if ( empty( $images ) ) return;
@@ -706,27 +699,27 @@ class ImageMarquee extends \Elementor\Widget_Base {
              data-speed="<?php echo esc_attr( $speed ); ?>"
              data-direction="<?php echo esc_attr( $direction ); ?>"
              data-type="<?php echo esc_attr( $marquee_type ); ?>"
+             data-gap="<?php echo esc_attr( (string) $gap ); ?>"
              data-gsap-scroll="<?php echo esc_attr( $use_gsap_attr ); ?>"
              data-pause-hover="<?php echo esc_attr( $pause_on_hover ); ?>"
              data-gsap-start="<?php echo esc_attr( $gsap_start ); ?>"
              data-gsap-end="<?php echo esc_attr( $gsap_end ); ?>"
              data-speed-scroll="<?php echo esc_attr( $speedScroll ); ?>"
+             style="--bw-marquee-gap: <?php echo esc_attr( (string) $gap ); ?>px;"
         >
             <div class="bw-image-marquee-track">
                 <?php if ( count( $images ) >= 1 && ! empty( $images[0]['image']['url'] ) ): ?>
-                    <?php for ( $i = 0; $i < 2; $i++ ): ?>
-                        <div class="bw-image-marquee-group">
-                            <?php foreach ( $images as $item ):
-                                $img_id = $item['image']['id'] ?? '';
-                                if ( $img_id ) :
-                                    ?>
-                                    <div class="bw-image-marquee-item">
-                                        <?php echo wp_get_attachment_image( $img_id, 'full', false, [ 'loading' => 'lazy', 'alt' => ''  ] ); ?>
-                                    </div>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        </div>
-                    <?php endfor; ?>
+                    <div class="bw-image-marquee-group">
+                        <?php foreach ( $images as $item ):
+                            $img_id = $item['image']['id'] ?? '';
+                            if ( $img_id ) :
+                                ?>
+                                <div class="bw-image-marquee-item">
+                                    <?php echo wp_get_attachment_image( $img_id, 'full', false, [ 'loading' => 'lazy', 'alt' => ''  ] ); ?>
+                                </div>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </div>
                 <?php endif; ?>
             </div>
         </div>

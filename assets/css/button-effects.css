@@ -1,0 +1,159 @@
+/* Black Button - effect types (Marquee / Vertical Swap / Arrow Slide / Perspective Flip) */
+
+.bw-ab {
+	display: block;
+	line-height: 0;
+}
+
+.bw-button-box .bw-ab__btn.bw-btn {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	font-family: inherit;
+	font-size: 14.5px;
+	font-weight: 600;
+	letter-spacing: 0.2px;
+	line-height: 1.2;
+	color: #17171a;
+	background-color: #f4f3f0;
+	border: 1px solid #e3e1db;
+	padding: 13px 26px;
+	border-radius: 999px;
+	cursor: pointer;
+	max-width: 100%;
+	overflow: hidden;
+	isolation: isolate;
+	text-decoration: none;
+	vertical-align: middle;
+	-webkit-tap-highlight-color: transparent;
+	white-space: normal;
+	overflow-wrap: break-word;
+	word-break: break-word;
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.bw-button-box .bw-ab__btn.bw-btn:hover {
+		color: #ffffff;
+		background-color: #171717;
+		border-color: #171717;
+	}
+}
+
+.bw-ab__txt {
+	position: relative;
+	z-index: 2;
+	pointer-events: none;
+	display: inline-block;
+	min-width: 0;
+	overflow-wrap: break-word;
+	word-break: break-word;
+}
+
+.bw-ab__svg {
+	display: block;
+	width: 1em;
+	height: 1em;
+}
+
+.bw-ab:dir(rtl) .bw-ab__arrow svg,
+:is([dir="rtl"], .rtl) .bw-ab__arrow svg {
+	transform: scaleX(-1);
+}
+
+/* ---- Arrow Slide ---- */
+.bw-ab__arrow-track {
+	position: relative;
+	width: 18px;
+	height: 14px;
+	overflow: hidden;
+	display: inline-block;
+	flex-shrink: 0;
+	z-index: 2;
+}
+
+.bw-ab__arrow {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: currentColor;
+}
+
+/* ---- Perspective Flip ---- */
+.bw-ab__btn--split {
+	overflow: hidden;
+	perspective: 640px;
+}
+
+.bw-ab__btn--split .bw-ab__txt {
+	display: inline-block;
+	transform-style: preserve-3d;
+}
+
+.bw-ab__btn--split .bw-ab__char {
+	display: inline-block;
+	transform-origin: 50% 50%;
+	transform-style: preserve-3d;
+	backface-visibility: hidden;
+}
+
+/* ---- Effect Marquee ---- */
+.bw-ab__btn--marquee {
+	overflow: hidden;
+	justify-content: flex-start;
+}
+
+.bw-ab__marquee-mask {
+	display: block;
+	overflow: hidden;
+	width: auto;
+	max-width: 100%;
+	z-index: 2;
+	line-height: 1.2;
+}
+
+.bw-ab__marquee-track {
+	display: flex;
+	flex-wrap: nowrap;
+	gap: 2em;
+	width: max-content;
+}
+
+.bw-ab__marquee-item {
+	flex: 0 0 auto;
+	white-space: nowrap;
+}
+
+/* ---- Vertical Swap ---- */
+.bw-ab__btn--swap {
+	overflow: hidden;
+}
+
+.bw-ab__swap-inner {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	height: 1.2em;
+	overflow: hidden;
+	z-index: 2;
+}
+
+.bw-ab__swap-face {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	white-space: nowrap;
+}
+
+.bw-ab__swap-top {
+	position: relative;
+}
+
+.bw-ab__swap-bottom {
+	position: absolute;
+	inset: 0;
+}

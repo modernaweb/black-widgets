@@ -109,8 +109,9 @@
 }
 
 .bw-flipbox .bw-flip-card .bw-back .bw-button {
+    background: linear-gradient(135deg, #333, #555);
     text-decoration: none;
-    display: block;
+    display: inline-block;
     transition: all .6s ease-in-out;
     -webkit-transition: all .6s ease-in-out;
     -moz-transition: all .6s ease-in-out;
@@ -119,6 +120,7 @@
 }
 
 .bw-flipbox .bw-flip-card .bw-back .bw-button:hover {
+    background: linear-gradient(135deg, #444, #666);
 }
 
 .bw-flipbox .bw-flip-card:nth-child(even):hover .bw-back {
@@ -138,8 +140,13 @@
     font: inherit;
     border: none;
     position: relative;
+    z-index: 2;
     letter-spacing: 2px;
     text-transform: uppercase;
+    line-height: 1.4;
+    white-space: nowrap;
+    max-width: 100%;
+    box-sizing: border-box;
     transition: 300ms ease;
     -webkit-transition: 300ms ease;
     -moz-transition: 300ms ease;
@@ -339,11 +346,54 @@
 
 /* Default Typography For FlipBox*/
 
+.bw-flipbox .bw-flip-card .title-box,
+.bw-flipbox .bw-flip-card .description {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.bw-flipbox .bw-flip-card .bw-flip-icon {
+    display: inline-block;
+    line-height: 0;
+    margin: 0 0 30px;
+    vertical-align: top;
+}
+
+.bw-flip-card .bw-back .bw-flip-icon i,
+.bw-flip-card .bw-front .bw-flip-icon i,
 .bw-flip-card .bw-back i,
 .bw-flip-card .bw-front i {
+    display: inline-block;
     font-size: 42px;
+    line-height: 1;
     color: #fff;
-    margin: 0 auto 30px;
+    margin: 0 0 30px;
+    vertical-align: top;
+}
+
+.bw-flip-card .bw-back .bw-flip-icon svg,
+.bw-flip-card .bw-front .bw-flip-icon svg,
+.bw-flip-card .bw-back svg,
+.bw-flip-card .bw-front svg {
+    display: inline-block;
+    width: 42px;
+    height: 42px;
+    max-width: 42px;
+    color: #fff;
+    fill: currentColor;
+    margin: 0 0 30px;
+    vertical-align: top;
+    overflow: visible;
+}
+
+.bw-flip-card .bw-back .bw-flip-icon i,
+.bw-flip-card .bw-front .bw-flip-icon i,
+.bw-flip-card .bw-back .bw-flip-icon svg,
+.bw-flip-card .bw-front .bw-flip-icon svg {
+    margin: 0;
 }
 
 .bw-flip-card .bw-back h4,
@@ -352,7 +402,8 @@
     letter-spacing: -1px;
     font-weight: 700;
     text-transform: uppercase;
-    margin: 0 auto 30px;
+    line-height: 1.2;
+    margin: 0 0 30px;
     color: #fff;
 }
 
@@ -360,7 +411,8 @@
 .bw-flip-card .bw-front p {
     font-size: 15px;
     color: #fff;
-    margin: 0 auto 30px;
+    line-height: 1.6;
+    margin: 0 0 30px;
 }
 
 

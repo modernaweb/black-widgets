@@ -1,35 +1,29 @@
-jQuery(document).ready(function($) {
+jQuery(function ($) {
 	'use strict';
 
+	var $toggle = $('#bw_gsap_options');
+	if (!$toggle.length) {
+		return;
+	}
+
 	/**
-	 * All of the code for your admin-facing JavaScript source
-	 * should reside in this file.
-	 *
-	 * Note: It has been assumed you will write jQuery code here, so the
-	 * $ function reference has been prepared for usage within the scope
-	 * of this function.
-	 *
-	 * This enables you to define handlers, for when the DOM is ready:
-	 *
-	 * $(function() {
-	 *
-	 * });
-	 *
-	 * When the window is loaded:
-	 *
-	 * $( window ).load(function() {
-	 *
-	 * });
-	 *
-	 * ...and/or other possibilities.
-	 *
-	 * Ideally, it is not considered best practise to attach more than a
-	 * single DOM-ready or window-load handler for a particular page.
-	 * Although scripts in the WordPress core, Plugins and Themes may be
-	 * practising this, we should strive to set a better example in our own work.
+	 * Show/enable CDN + GSAP-dependent settings only when JS → CDN is checked.
+	 * Disabled fields are omitted from POST - PHP validate_options preserves prior values.
 	 */
+	function syncGsapChildren() {
+		var on = $toggle.is(':checked');
+		var $rows = $('tr.gsap-cdn, tr.gsap-dependent');
 
-     $('.bw-checked').parents().eq(3).addClass('bw-available');
-     $('.bw-available').find('.gsap-cdn').removeClass('gsap-cdn');
+		$rows.toggle(on);
+		$rows.find('input, select, textarea').prop('disabled', !on);
 
+		if (on) {
+			$rows.addClass('bw-gsap-child-visible');
+		} else {
+			$rows.removeClass('bw-gsap-child-visible');
+		}
+	}
+
+	$toggle.on('change', syncGsapChildren);
+	syncGsapChildren();
 });

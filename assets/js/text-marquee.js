@@ -1,177 +1,344 @@
-function marquee() {
-    // Loop through all marquee wrappers on the page
-    document.querySelectorAll('.bw-text-marquee-wrapper').forEach(function (wrapper) {
-        if (!wrapper) return;
+(function ($) {
+    'use strict';
 
-        // Find the main inner element: multi-item or single-item marquee
-        const inner = wrapper.querySelector('.bw-marquee-inner') || wrapper.querySelector('.bw-marquee-inner-single');
-        if (!inner) return;
+    function prefersReducedMotion() {
+        return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    }
 
-        // Retrieve settings from data attributes
-        const settings = wrapper.dataset;
-        const direction = settings.direction || 'left';
-        const speed = parseFloat(settings.speed) || 50;
-        const scrollControlled = settings.scrollControlled === "yes";
-        const startCondition = settings.gsapStart || "top bottom";
-        const endCondition = settings.gsapEnd || "bottom top";
-        const gap = parseFloat(settings.gap) || 8;
-        const speedScroll = parseFloat(settings.speedScroll) || 2;
+    function isRtlContext() {
+        if (typeof elementorFrontend !== 'undefined' && elementorFrontend.config && typeof elementorFrontend.config.is_rtl !== 'undefined') {
+            return !!elementorFrontend.config.is_rtl;
+        }
+        return document.documentElement.getAttribute('dir') === 'rtl' || document.body.classList.contains('rtl');
+    }
 
-        // Template element for cloning (only exists for multi-item marquee)
-        const template = wrapper.querySelector('.bw-marquee-template');
+    function destroyBwTextMarquee(wrapper) {
+        const api = wrapper._bwTextMarquee;
+        if (!api) {
+            return;
+        }
 
-        if (inner.classList.contains('bw-marquee-inner')) {
-            // Multi-item marquee mode (can be scroll controlled or continuous CSS animation)
+        if (api.tween) {
+            if (api.tween.scrollTrigger) {
+                api.tween.scrollTrigger.kill();
+            }
+            api.tween.kill();
+        }
 
-            if (!template) return;
+        if (api.onEnter) {
+            wrapper.removeEventListener('mouseenter', api.onEnter);
+        }
+        if (api.onLeave) {
+            wrapper.removeEventListener('mouseleave', api.onLeave);
+        }
 
-            if (scrollControlled) {
-                // Disable CSS animation when scroll-controlled
-                inner.style.animation = 'none';
+        if (api.styleEl && api.styleEl.parentNode) {
+            api.styleEl.parentNode.removeChild(api.styleEl);
+        }
 
-                // Ensure GSAP and ScrollTrigger are loaded before initializing animation
-                if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-                    gsap.registerPlugin(ScrollTrigger);
+        if (api.visibilityObserver) {
+            try {
+                api.visibilityObserver.disconnect();
+            } catch (e) {
+                // ignore
+            }
+        }
 
-                    // Calculate how many clones are needed to fill twice the viewport width
+        if (api.inner && api.originalInnerHtml != null) {
+            api.inner.innerHTML = api.originalInnerHtml;
+            api.inner.style.animation = '';
+            api.inner.style.removeProperty('--bw-marquee-shift');
+            api.inner.classList.remove('bw-marquee-initialized');
+            if (typeof gsap !== 'undefined') {
+                gsap.set(api.inner, { clearProps: 'transform,x,y' });
+            }
+        }
 
-                    const containerHeight = wrapper.offsetHeight;
-                    const scrollDistance = window.innerHeight;
+        wrapper.removeAttribute('data-bw-initialized');
+        delete wrapper._bwTextMarquee;
+    }
 
-                    const singleWidth = template.offsetWidth;
-                    const minWidth = window.innerWidth * 2;
-                    const repeatCount = Math.ceil(minWidth / singleWidth);
+    /**
+     * Build two identical sequences. Trailing gap is on items (CSS), not between
+     * halves - so pixel shift === firstSeq width and the loop never jumps.
+     */
+    function buildSeamlessSequences(inner, template, minWidth) {
+        const seq = document.createElement('div');
+        seq.className = 'bw-marquee-seq';
+        seq.appendChild(template.cloneNode(true));
 
-                    for (let i = 1; i < repeatCount; i++) {
-                        const clone = template.cloneNode(true);
-                        clone.style.marginLeft = `${gap || 8}px`;
-                        inner.appendChild(clone);
-                    }
+        inner.innerHTML = '';
+        inner.appendChild(seq);
 
-                    // Clone the template element to fill the marquee
-                    for (let i = 1; i < repeatCount; i++) {
-                        const clone = template.cloneNode(true);
-                        clone.style.marginLeft = `${gap || 8}px`;
-                        inner.appendChild(clone);
-                    }
+        // Fill first sequence until it covers the viewport (or more).
+        let guard = 0;
+        while (seq.scrollWidth < minWidth && guard < 40) {
+            seq.appendChild(template.cloneNode(true));
+            guard += 1;
+        }
 
-                    // const totalWidth = inner.offsetWidth;
+        // Always at least one full cycle worth of content.
+        if (seq.childElementCount < 1) {
+            seq.appendChild(template.cloneNode(true));
+        }
 
-                    // Determine start and end positions based on direction
-                    // const startOffset = direction === 'right' ? 0 : -totalWidth;
-                    // const endOffset = direction === 'right' ? -totalWidth : 0;
+        const seqClone = seq.cloneNode(true);
+        seqClone.setAttribute('aria-hidden', 'true');
+        inner.appendChild(seqClone);
 
-                    const movementDistance = window.innerWidth / speedScroll ;
+        return seq.offsetWidth || seq.scrollWidth || 1;
+    }
 
-                    gsap.fromTo(inner,
-                        { x: direction === 'right' ? 0 : -movementDistance },
-                        {
-                            x: direction === 'right' ? -movementDistance : 0,
-                            ease: "none",
-                            scrollTrigger: {
-                                trigger: wrapper,
-                                start: startCondition,
-                                end: endCondition,
-                                scrub: 1.5,
-                                invalidateOnRefresh: true
-                            }
-                        }
-                    );
+    function initBwTextMarquee($scope) {
+        const $wrappers = $scope.find('.bw-text-marquee-wrapper');
 
-                    // Refresh ScrollTrigger to recalculate all trigger positions
-                    ScrollTrigger.refresh();
-                }
+        $wrappers.each(function () {
+            const wrapper = this;
+            const inner = wrapper.querySelector('.bw-marquee-inner') || wrapper.querySelector('.bw-marquee-inner-single');
+            if (!inner) {
                 return;
             }
 
-            // Continuous CSS animation mode (not scroll controlled)
+            destroyBwTextMarquee(wrapper);
 
-            // Create a temporary clone to measure width of a single template item
-            const tempClone = template.cloneNode(true);
-            Object.assign(tempClone.style, {
-                visibility: 'hidden',
-                position: 'absolute',
-                whiteSpace: 'nowrap',
-            });
-            document.body.appendChild(tempClone);
-            const singleWidth = tempClone.offsetWidth;
-            document.body.removeChild(tempClone);
+            const originalInnerHtml = inner.innerHTML;
+            const settings = wrapper.dataset;
+            let direction = settings.direction || 'left';
+            const speed = parseFloat(settings.speed);
+            const resolvedSpeed = Number.isFinite(speed) && speed > 0 ? speed : 20;
+            const scrollControlled = settings.scrollControlled === 'yes';
+            const startCondition = settings.gsapStart || 'top bottom';
+            const endCondition = settings.gsapEnd || 'bottom top';
+            const speedScroll = parseFloat(settings.speedScroll);
+            const resolvedSpeedScroll = Number.isFinite(speedScroll) && speedScroll > 0 ? speedScroll : 2;
+            const gap = parseFloat(settings.gap);
+            const resolvedGap = Number.isFinite(gap) && gap >= 0 ? gap : 0;
+            const pauseOnHover = wrapper.classList.contains('pause-on-hover');
 
-            // Calculate how many clones are needed to fill twice the viewport width
-            const repeatCount = Math.ceil(window.innerWidth * 3 / singleWidth);
+            wrapper.style.setProperty('--bw-marquee-gap', resolvedGap + 'px');
 
-
-            for (let i = 1; i < repeatCount; i++) {
-                const clone = template.cloneNode(true);
-                clone.style.marginLeft = `${gap || 8}px`;
-                inner.appendChild(clone);
+            if (isRtlContext()) {
+                direction = direction === 'right' ? 'left' : 'right';
             }
 
-            // Clone the template element to fill the marquee container
-            for (let i = 1; i < repeatCount; i++) {
-                const clone = template.cloneNode(true);
-                clone.style.marginLeft = `${gap || 8}px`;
-                inner.appendChild(clone);
-            }
+            const api = {
+                inner: inner,
+                originalInnerHtml: originalInnerHtml,
+                tween: null,
+                styleEl: null,
+                visibilityObserver: null,
+                offscreenPaused: false,
+                hoverPaused: false,
+                onEnter: null,
+                onLeave: null,
+            };
 
-            const totalWidth = inner.offsetWidth;
-            const duration = totalWidth / speed;
-            const animationName = direction === 'right' ? 'bw-marquee-left' : 'bw-marquee-right' ;
-
-            // Apply CSS animation for continuous marquee scrolling
-            inner.style.animation = `${animationName} ${duration}s linear infinite`;
-        }
-        else if (inner.classList.contains('bw-marquee-inner-single')) {
-            // Single-item marquee mode with dynamic CSS keyframe animation
-
-            const wrapperWidth = wrapper.offsetWidth;
-
-            // Clone the inner element temporarily to measure text width
-            const temp = inner.cloneNode(true);
-            Object.assign(temp.style, {
-                position: "absolute",
-                visibility: "hidden",
-                whiteSpace: "nowrap"
-            });
-            document.body.appendChild(temp);
-            const textWidth = temp.offsetWidth;
-            document.body.removeChild(temp);
-
-            // Calculate start and end positions based on direction
-            const start = direction === "right" ? wrapperWidth : -textWidth;
-            const end = direction === "right" ? -textWidth : wrapperWidth;
-            const distance = Math.abs(end - start);
-            const duration = distance / speed;
-
-            // Generate a unique animation name to avoid conflicts
-            const keyframesName = `bw-marquee-${direction}-${Date.now()}`;
-            const style = document.createElement("style");
-            style.innerHTML = `
-                @keyframes ${keyframesName} {
-                    0% {
-                        transform: translateX(${start}px);
-                    }
-                    100% {
-                        transform: translateX(${end}px);
-                    }
+            function syncCssPlayState() {
+                if (!api.inner || api.tween) {
+                    return;
                 }
-            `;
-            document.head.appendChild(style);
+                const paused = api.offscreenPaused || api.hoverPaused;
+                api.inner.style.animationPlayState = paused ? 'paused' : 'running';
+            }
 
-            // Apply the dynamically created CSS animation to the inner element
-            inner.style.animation = `${keyframesName} ${duration}s linear infinite`;
-        }
+            function syncGsapPlayState() {
+                if (!api.tween) {
+                    return;
+                }
+                if (api.hoverPaused || api.offscreenPaused) {
+                    api.tween.pause();
+                } else {
+                    api.tween.resume();
+                }
+            }
+
+            function attachPauseOnHover() {
+                if (!pauseOnHover) {
+                    return;
+                }
+                api.onEnter = function () {
+                    api.hoverPaused = true;
+                    if (api.tween) {
+                        syncGsapPlayState();
+                    } else {
+                        syncCssPlayState();
+                    }
+                };
+                api.onLeave = function () {
+                    api.hoverPaused = false;
+                    if (api.tween) {
+                        syncGsapPlayState();
+                    } else {
+                        syncCssPlayState();
+                    }
+                };
+                wrapper.addEventListener('mouseenter', api.onEnter);
+                wrapper.addEventListener('mouseleave', api.onLeave);
+            }
+
+            function attachVisibilityPause() {
+                if (typeof IntersectionObserver === 'undefined') {
+                    return;
+                }
+                api.visibilityObserver = new IntersectionObserver(
+                    function (entries) {
+                        entries.forEach(function (entry) {
+                            api.offscreenPaused = !entry.isIntersecting;
+                            if (api.tween && api.tween.scrollTrigger) {
+                                if (entry.isIntersecting) {
+                                    api.tween.scrollTrigger.enable();
+                                } else {
+                                    api.tween.scrollTrigger.disable(false);
+                                }
+                                return;
+                            }
+                            if (api.tween) {
+                                syncGsapPlayState();
+                                return;
+                            }
+                            syncCssPlayState();
+                        });
+                    },
+                    { root: null, rootMargin: '50px 0px', threshold: 0 }
+                );
+                api.visibilityObserver.observe(wrapper);
+            }
+
+            function applyPixelLoop(shift) {
+                const keyframesName =
+                    'bw-tm-' + direction + '-' + Date.now() + '-' + Math.floor(Math.random() * 10000);
+                // Control "left" = Left To Right → content drifts right (-shift → 0).
+                const fromX = direction === 'left' ? -shift : 0;
+                const toX = direction === 'left' ? 0 : -shift;
+                const duration = Math.max(0.1, shift / resolvedSpeed);
+
+                const style = document.createElement('style');
+                style.setAttribute('data-bw-text-marquee', '1');
+                style.textContent =
+                    '@keyframes ' +
+                    keyframesName +
+                    '{' +
+                    '0%{transform:translate3d(' +
+                    fromX +
+                    'px,0,0);}' +
+                    '100%{transform:translate3d(' +
+                    toX +
+                    'px,0,0);}' +
+                    '}';
+                document.head.appendChild(style);
+                api.styleEl = style;
+                inner.style.setProperty('--bw-marquee-shift', shift + 'px');
+                inner.style.animation = keyframesName + ' ' + duration + 's linear infinite';
+            }
+
+            wrapper.setAttribute('data-bw-initialized', '1');
+            inner.classList.add('bw-marquee-initialized');
+
+            if (prefersReducedMotion()) {
+                inner.style.animation = 'none';
+                inner.style.transform = 'none';
+                wrapper._bwTextMarquee = api;
+                return;
+            }
+
+            if (inner.classList.contains('bw-marquee-inner')) {
+                const template = inner.querySelector('.bw-marquee-template') || inner.querySelector('.bw-text-marquee-text');
+                if (!template) {
+                    destroyBwTextMarquee(wrapper);
+                    return;
+                }
+
+                const minWidth = Math.max(wrapper.offsetWidth || 0, window.innerWidth || 0);
+
+                if (scrollControlled) {
+                    inner.style.animation = 'none';
+                    const shift = buildSeamlessSequences(inner, template, minWidth);
+
+                    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                        gsap.registerPlugin(ScrollTrigger);
+                        const fromX = direction === 'left' ? -shift : 0;
+                        const toX = direction === 'left' ? 0 : -shift;
+                        const travel = Math.max(shift / resolvedSpeedScroll, 1);
+
+                        api.tween = gsap.fromTo(
+                            inner,
+                            { x: fromX },
+                            {
+                                x: toX,
+                                ease: 'none',
+                                scrollTrigger: {
+                                    trigger: wrapper,
+                                    start: startCondition,
+                                    end: function () {
+                                        return '+=' + travel;
+                                    },
+                                    scrub: 1.5,
+                                    invalidateOnRefresh: true,
+                                },
+                            }
+                        );
+
+                        if (api.tween.scrollTrigger) {
+                            api.tween.scrollTrigger.refresh();
+                        }
+                    }
+
+                    attachPauseOnHover();
+                    attachVisibilityPause();
+                    wrapper._bwTextMarquee = api;
+                    return;
+                }
+
+                const shift = buildSeamlessSequences(inner, template, minWidth * 1.25);
+                applyPixelLoop(shift);
+            } else if (inner.classList.contains('bw-marquee-inner-single')) {
+                const wrapperWidth = wrapper.offsetWidth || window.innerWidth;
+                const temp = inner.cloneNode(true);
+                Object.assign(temp.style, {
+                    position: 'absolute',
+                    visibility: 'hidden',
+                    whiteSpace: 'nowrap',
+                    left: '-9999px',
+                    top: '0',
+                });
+                document.body.appendChild(temp);
+                const textWidth = temp.offsetWidth || 1;
+                document.body.removeChild(temp);
+
+                const start = direction === 'right' ? wrapperWidth : -textWidth;
+                const end = direction === 'right' ? -textWidth : wrapperWidth;
+                const distance = Math.abs(end - start) || 1;
+                const duration = distance / resolvedSpeed;
+                const keyframesName =
+                    'bw-marquee-' + direction + '-' + Date.now() + '-' + Math.floor(Math.random() * 10000);
+                const style = document.createElement('style');
+                style.setAttribute('data-bw-text-marquee', '1');
+                style.textContent =
+                    '@keyframes ' +
+                    keyframesName +
+                    '{' +
+                    '0%{transform:translate3d(' +
+                    start +
+                    'px,0,0);}' +
+                    '100%{transform:translate3d(' +
+                    end +
+                    'px,0,0);}' +
+                    '}';
+                document.head.appendChild(style);
+                api.styleEl = style;
+                inner.style.animation = keyframesName + ' ' + duration + 's linear infinite';
+            }
+
+            attachPauseOnHover();
+            attachVisibilityPause();
+            wrapper._bwTextMarquee = api;
+        });
+    }
+
+    $(window).on('elementor/frontend/init', function () {
+        elementorFrontend.hooks.addAction(
+            'frontend/element_ready/b_text_marquee.default',
+            initBwTextMarquee
+        );
     });
-}
-
-// Run the marquee function immediately on page load
-(function () {
-    marquee();
-})();
-
-// Re-run the marquee initialization when Elementor frontend is ready for the specific widget
-jQuery(window).on('elementor/frontend/init', function () {
-    elementorFrontend.hooks.addAction('frontend/element_ready/b_text_marquee.default', function () {
-        marquee();
-    });
-});
+})(jQuery);

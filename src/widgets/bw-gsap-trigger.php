@@ -14,6 +14,7 @@ use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Text_Shadow;
 use Elementor\Group_Control_Image_Size;
+use enshrined\svgSanitize\Sanitizer;
 
 /**
  * Elementor title Widget.
@@ -89,6 +90,56 @@ class GSAPTrigger extends \Elementor\Widget_Base {
 
     public function get_style_depends() {
         return [ 'black-widgets-gsap-trigger' ];
+    }
+
+    public function get_script_depends() {
+        if ( ! $this->is_gsap_enabled() ) {
+            return [];
+        }
+
+        return [ 'GSAP', 'GSAP-ScrollTrigger' ];
+    }
+
+    /**
+     * Whether GSAP is enabled in plugin options with both CDN URLs set.
+     *
+     * @return bool
+     */
+    public function is_gsap_enabled() {
+        return \Modernaweb\BlackWidgets\Plugin_Options::is_gsap_ready();
+    }
+
+    /**
+     * Scope selectors when widget switch is on, or admin force-flag is enabled.
+     * Default remains legacy (global) so existing pages do not change.
+     *
+     * @param array $settings Widget settings.
+     * @return bool
+     */
+    protected function should_scope_selectors( $settings ) {
+        $admin_force = \Modernaweb\BlackWidgets\Plugin_Options::is_gsap_trigger_scoped();
+        $widget_on   = is_array( $settings ) && isset( $settings['scope_selectors'] ) && $settings['scope_selectors'] === 'yes';
+
+        return $admin_force || $widget_on;
+    }
+
+    /**
+     * Build a CSS selector for GSAP from/to targets.
+     *
+     * @param string $data_id Widget element id (without #).
+     * @param string $class   Class name without leading dot.
+     * @param bool   $scoped  Whether to prefix with #data_id.
+     * @return string
+     */
+    protected function build_class_selector( $data_id, $class, $scoped ) {
+        $class = ltrim( trim( (string) $class ), '.' );
+        if ( $class === '' ) {
+            return $scoped ? ( '#' . $data_id ) : '';
+        }
+        if ( $scoped ) {
+            return '#' . $data_id . ' .' . $class;
+        }
+        return '.' . $class;
     }
 
     protected function is_dynamic_content(): bool {
@@ -196,6 +247,19 @@ ONLINE
             ]
         );
 
+        $this->add_control(
+            'scope_selectors',
+            [
+                'label' => esc_html__( 'Limit animation to this widget', 'black-widgets' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Yes', 'black-widgets' ),
+                'label_off' => esc_html__( 'No', 'black-widgets' ),
+                'return_value' => 'yes',
+                'default' => '',
+                'description' => esc_html__( 'Off: use global class selectors (same as before). On: limit targets to this widget.', 'black-widgets' ),
+            ]
+        );
+
 
         $this->add_control(
             'image',
@@ -216,8 +280,9 @@ ONLINE
         $this->add_group_control(
             Group_Control_Image_Size::get_type(),
             [
-                'name' => 'thumbnail', // // Usage: `{name}_size` and `{name}_custom_dimension`, in this case `thumbnail_size` and `thumbnail_custom_dimension`.
-                'include' => [ 'thumbnail', 'medium', 'large', 'full' ],
+                'name' => 'thumbnail', // Usage: `{name}_size` → `thumbnail_size`.
+                'exclude' => [ 'custom' ],
+                'include' => [],
                 'default' => 'full',
                 'condition'  => [
                     'widget_type' => [
@@ -923,18 +988,15 @@ transformStyle: "preserve-3d",
         // Variables
         $type 	        				= isset($settings['widget_type']) 									? $settings['widget_type'] 									: '';
         $message        				= isset($settings['widget_text']) 									? $settings['widget_text'] 									: '';
-        $options 						= get_option('plugin_options') 										? get_option('plugin_options') 								: '';
-        $gsap_options  					= isset($options['gsap_options']) 									? $options['gsap_options'] 									: '';
+        $gsap_ready                     = \Modernaweb\BlackWidgets\Plugin_Options::is_gsap_ready();
         // Content - HTML
         $html_code						= isset($settings['widget_html_content'])							? $settings['widget_html_content']							: '';
         $shared_class					= isset($settings['widget_html_class'])								? $settings['widget_html_class']							: '';
-        $html_trigger					= isset($settings['widget_html_js_gsap_timeline_scroll_trigger'])	? $settings['widget_html_js_gsap_timeline_scroll_trigger']	: '';
-        $html_js_from					= isset($settings['widget_html_js_tl_from'])						? $settings['widget_html_js_tl_from']						: '';
-        $html_js_to						= isset($settings['widget_html_js_tl_to'])							? $settings['widget_html_js_tl_to']							: '';
+        $html_trigger					= isset($settings['widget_html_js_gsap_timeline_scroll_trigger'])	? $this->sanitize_gsap_js_fragment( $settings['widget_html_js_gsap_timeline_scroll_trigger'] )	: '';
+        $html_js_from					= isset($settings['widget_html_js_tl_from'])						? $this->sanitize_gsap_js_fragment( $settings['widget_html_js_tl_from'] )						: '';
+        $html_js_to						= isset($settings['widget_html_js_tl_to'])							? $this->sanitize_gsap_js_fragment( $settings['widget_html_js_tl_to'] )							: '';
         // Content - Image
         $img_class						= isset($settings['image_trigger_class'])							? $settings['image_trigger_class']							: '';
-        $thumbnail						= isset($settings['thumbnail'])							? $settings['thumbnail']							: 'full';
-
         $image_trigger_class			= isset($settings['image_trigger_class']) 							? $settings['image_trigger_class'] 							: '';
         $image_start_point				= isset($settings['image_start_point']) 							? $settings['image_start_point'] 							: '';
         $image_end_point				= isset($settings['image_end_point']) 								? $settings['image_end_point'] 								: '';
@@ -977,30 +1039,53 @@ transformStyle: "preserve-3d",
 
 
         $data_id		= 'bw_' . uniqid();
-        $script_id		= '#' . $data_id;
+        $scoped         = $this->should_scope_selectors( $settings );
+        $html_target_sel = $this->build_class_selector( $data_id, $shared_class, $scoped );
+        $img_trigger_sel = $this->build_class_selector( $data_id, $image_trigger_class, $scoped );
+        $img_target_sel  = $this->build_class_selector( $data_id, $img_class, $scoped );
 
 
         // Render
         switch ($type) {
             case 'html':
-                echo '<div class="bw-gsap-code-box" id="' . esc_attr( $script_id ) . '">';
-                echo wp_kses_post( $html_code );
+                echo '<div class="bw-gsap-code-box" id="' . esc_attr( $data_id ) . '">';
+                if ( stripos( $html_code, '<svg' ) !== false ) {
+                    $parts = preg_split( '/(<svg[\s\S]*?<\/svg>)/i', $html_code, -1, PREG_SPLIT_DELIM_CAPTURE );
+
+                    $sanitizer = new Sanitizer();
+                    $sanitizer->removeRemoteReferences( true );
+
+                    $output = '';
+                    foreach ( $parts as $part ) {
+                        if ( stripos( $part, '<svg' ) === 0 ) {
+                            $clean = $sanitizer->sanitize( $part );
+                            $output .= $clean !== false ? $clean : '';
+                        } else {
+                            $output .= wp_kses_post( $part );
+                        }
+                    }
+
+                    echo $output;
+                } else {
+                    echo wp_kses_post( $html_code );
+                }
                 echo '</div>';
 
-                if ( isset($gsap_options) && !empty($gsap_options) ) {
+                if ( $gsap_ready ) {
                     // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
                     echo '<script>
                              jQuery(window).ready(function($) {
+                                 if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
                                  gsap.registerPlugin(ScrollTrigger);
                                  const tl = gsap.timeline({
                                      scrollTrigger: {
                                          ' . $html_trigger . '
                                      }
                                  });
-                                 tl.from(".' . $shared_class . '", {
+                                 tl.from("' . esc_js( $html_target_sel ) . '", {
                                      ' . $html_js_from . '
                                  });
-                                 tl.to(".' . $shared_class . '", {
+                                 tl.to("' . esc_js( $html_target_sel ) . '", {
                                      ' . $html_js_to . '
                                  });
                              });
@@ -1010,68 +1095,90 @@ transformStyle: "preserve-3d",
                 break;
 
             case 'image':
-                echo '<div class="bw-gsap-img" id="' . esc_attr( $script_id ) . '"><div class="' . esc_attr( $image_trigger_class ) . '">';
-                echo '<img src="' . esc_url( Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], $thumbnail, $settings ) ) . '" class="bw-img-trigger-x">'; // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
+                echo '<div class="bw-gsap-img" id="' . esc_attr( $data_id ) . '"><div class="' . esc_attr( $image_trigger_class ) . '">';
+                // Second arg is Image Size group name (`thumbnail`), not a size slug.
+                echo '<img src="' . esc_url( Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail', $settings ) ) . '" class="bw-img-trigger-x">'; // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
                 echo '</div></div>';
-                if ( isset($gsap_options) && !empty($gsap_options) ) {
-                    echo '<script>';
-                    echo esc_js( '
+                if ( $gsap_ready ) {
+                    // Build executable JS (legacy wrapped the whole script in esc_js(), which never ran).
+                    // Values are escaped individually; structure matches the previous intended script.
+                    // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
+                    echo '<script>
 						jQuery(window).ready(function($) {
+							if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
 							gsap.registerPlugin(ScrollTrigger);
 							const tl = gsap.timeline({
 								scrollTrigger: {
-								trigger:		".'. $image_trigger_class .'",
-								start:			"'. $image_start_point .'",
-								end:			"'. $image_end_point .'",
-								toggleActions:	"'. $image_toggle_actions .'",
-								scrub: 			"'. $image_scrub .'",
+								trigger:		"' . esc_js( $img_trigger_sel ) . '",
+								start:			"' . esc_js( $image_start_point ) . '",
+								end:			"' . esc_js( $image_end_point ) . '",
+								toggleActions:	"' . esc_js( $image_toggle_actions ) . '",
+								scrub: 			"' . esc_js( $image_scrub ) . '",
 								markers: 		false,
 							}});
-							tl.from(".'. $img_class .'", {
-								opacity:				'. $element_opacity_from .',
-								duration:				'. $element_duration_from .',
-								rotateX:				'. $element_rotationx_from .',
-								rotateY:				'. $element_rotationy_from .',
-								scaleX:					'. $element_scalex_from .',
-								scaleY:					'. $element_scaley_from .',
-								scaleZ:					'. $element_scalez_from .',
-								skewX:					'. $element_skewx_from .',
-								skewY:					'. $element_skewy_from .',
-								x:						'. $element_movex_from .',
-								y:						'. $element_movey_from .',
-								z:						'. $element_movez_from .',
-								autoAlpha:				'. $element_autoalpha_from .',
-								transformPerspective:	'. $element_perspective_from .',
-								transformStyle:			"'. $element_transformstyle_from .'",
-							})
-							tl.to(".'. esc_attr( $img_class ) .'", {
-								opacity:				'. $element_opacity_to .',
-								duration:				'. $element_duration_to .',
-								rotateX:				'. $element_rotationx_to .',
-								rotateY:				'. $element_rotationy_to .',
-								scaleX:					'. $element_scalex_to .',
-								scaleY:					'. $element_scaley_to .',
-								scaleZ:					'. $element_scalez_to .',
-								skewX:					'. $element_skewx_to .',
-								skewY:					'. $element_skewy_to .',
-								x:						'. $element_movex_to .',
-								y:						'. $element_movey_to .',
-								z:						'. $element_movez_to .',
-								autoAlpha:				'. $element_autoalpha_to .',
-								transformPerspective:	'. $element_perspective_to .',
-								transformStyle:			"'. $element_transformstyle_to .'",
-							})
-						});' );
-                    echo '</script>';
+							tl.from("' . esc_js( $img_target_sel ) . '", {
+								opacity:				' . esc_js( $element_opacity_from ) . ',
+								duration:				' . esc_js( $element_duration_from ) . ',
+								rotateX:				' . esc_js( $element_rotationx_from ) . ',
+								rotateY:				' . esc_js( $element_rotationy_from ) . ',
+								scaleX:					' . esc_js( $element_scalex_from ) . ',
+								scaleY:					' . esc_js( $element_scaley_from ) . ',
+								scaleZ:					' . esc_js( $element_scalez_from ) . ',
+								skewX:					' . esc_js( $element_skewx_from ) . ',
+								skewY:					' . esc_js( $element_skewy_from ) . ',
+								x:						' . esc_js( $element_movex_from ) . ',
+								y:						' . esc_js( $element_movey_from ) . ',
+								z:						' . esc_js( $element_movez_from ) . ',
+								autoAlpha:				' . esc_js( $element_autoalpha_from ) . ',
+								transformPerspective:	' . esc_js( $element_perspective_from ) . ',
+								transformStyle:			"' . esc_js( $element_transformstyle_from ) . '",
+							});
+							tl.to("' . esc_js( $img_target_sel ) . '", {
+								opacity:				' . esc_js( $element_opacity_to ) . ',
+								duration:				' . esc_js( $element_duration_to ) . ',
+								rotateX:				' . esc_js( $element_rotationx_to ) . ',
+								rotateY:				' . esc_js( $element_rotationy_to ) . ',
+								scaleX:					' . esc_js( $element_scalex_to ) . ',
+								scaleY:					' . esc_js( $element_scaley_to ) . ',
+								scaleZ:					' . esc_js( $element_scalez_to ) . ',
+								skewX:					' . esc_js( $element_skewx_to ) . ',
+								skewY:					' . esc_js( $element_skewy_to ) . ',
+								x:						' . esc_js( $element_movex_to ) . ',
+								y:						' . esc_js( $element_movey_to ) . ',
+								z:						' . esc_js( $element_movez_to ) . ',
+								autoAlpha:				' . esc_js( $element_autoalpha_to ) . ',
+								transformPerspective:	' . esc_js( $element_perspective_to ) . ',
+								transformStyle:			"' . esc_js( $element_transformstyle_to ) . '",
+							});
+						});
+					</script>';
+                    // phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
                 }
                 break;
 
             default:
-                echo 'There is not content available now! SOON!!!!';
+                // Supported types are html and image only - render nothing for unknown values.
                 break;
         }
 
 
+    }
+
+    /**
+     * Harden free-form GSAP object-literal fragments against script-tag breakout.
+     * These fields are intentionally executable JS for trusted editors (legacy BC);
+     * we only strip sequences that can escape the enclosing <script> element.
+     *
+     * @param mixed $code Raw editor input.
+     * @return string
+     */
+    private function sanitize_gsap_js_fragment( $code ) {
+        $code = (string) $code;
+        $code = str_replace( "\0", '', $code );
+        // Remove any HTML script tags / closers that would break out of our wrapper.
+        $code = preg_replace( '/<\/?script\b[^>]*>/i', '', $code );
+        $code = str_ireplace( [ '</script', '<script' ], '', $code );
+        return $code;
     }
 
 }

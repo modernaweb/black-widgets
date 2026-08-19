@@ -1,0 +1,169 @@
+/**
+ * Black Widgets - RTL overlays only.
+ * Loaded when is_rtl() is true. Does not change LTR CSS files.
+ */
+
+/* ---------- List ---------- */
+.rtl .bw-list .bw-list-item .bw-icon-section,
+[dir="rtl"] .bw-list .bw-list-item .bw-icon-section {
+    margin-right: 0;
+    margin-left: 7px;
+}
+
+/* ---------- Abstract Button ---------- */
+.rtl .bw-button-box.abstract.a-1 .bw-btn span,
+[dir="rtl"] .bw-button-box.abstract.a-1 .bw-btn span,
+.rtl .bw-button-box.abstract.a-1 .bw-btn:hover span,
+[dir="rtl"] .bw-button-box.abstract.a-1 .bw-btn:hover span {
+    margin-left: 0;
+    margin-right: 42px;
+}
+
+.rtl .bw-button-box.abstract.a-1 .bw-btn span svg,
+[dir="rtl"] .bw-button-box.abstract.a-1 .bw-btn span svg {
+    transform: scaleX(-1);
+}
+
+/* ---------- Icon Box (default / left only - skip .bw-box-right which already mirrors) ---------- */
+.rtl .bw-iconbox.bw-position-3:not(.bw-box-right) .bw-content-wrap,
+[dir="rtl"] .bw-iconbox.bw-position-3:not(.bw-box-right) .bw-content-wrap {
+    padding-left: 0;
+    padding-right: 18px;
+}
+
+.rtl .bw-iconbox.bw-position-4:not(.bw-box-right) .bw-image-wrap,
+[dir="rtl"] .bw-iconbox.bw-position-4:not(.bw-box-right) .bw-image-wrap {
+    padding-right: 0;
+    padding-left: 14px;
+}
+
+.rtl .bw-iconbox.bw-position-4:not(.bw-box-right) .bw-content-wrap,
+[dir="rtl"] .bw-iconbox.bw-position-4:not(.bw-box-right) .bw-content-wrap {
+    padding-left: 0;
+    padding-right: 14px;
+    border-left: 0;
+    border-right: 2px solid #D2D2D2;
+}
+
+.rtl .bw-iconbox.bw-position-3:not(.bw-box-right) .bw-content-wrap a:before,
+.rtl .bw-iconbox.bw-position-4:not(.bw-box-right) .bw-content-wrap a:before,
+[dir="rtl"] .bw-iconbox.bw-position-3:not(.bw-box-right) .bw-content-wrap a:before,
+[dir="rtl"] .bw-iconbox.bw-position-4:not(.bw-box-right) .bw-content-wrap a:before {
+    left: auto;
+    right: 0;
+}
+
+.rtl .bw-iconbox.bw-position-3:not(.bw-box-right) .bw-content-wrap a:hover,
+.rtl .bw-iconbox.bw-position-4:not(.bw-box-right) .bw-content-wrap a:hover,
+[dir="rtl"] .bw-iconbox.bw-position-3:not(.bw-box-right) .bw-content-wrap a:hover,
+[dir="rtl"] .bw-iconbox.bw-position-4:not(.bw-box-right) .bw-content-wrap a:hover {
+    padding-left: 0;
+    padding-right: 18px;
+}
+
+.rtl .bw-iconbox.bw-position-5:not(.bw-box-right),
+[dir="rtl"] .bw-iconbox.bw-position-5:not(.bw-box-right) {
+    border-left: 0;
+    border-right: 7px solid #000;
+    padding: 22px 12px 22px 28px;
+}
+
+/* ---------- CTA ---------- */
+.rtl .bw-cta .bw-cta-button a i,
+[dir="rtl"] .bw-cta .bw-cta-button a i,
+.rtl .bw-cta .bw-cta-button a:hover i,
+[dir="rtl"] .bw-cta .bw-cta-button a:hover i {
+    right: auto;
+    left: 14px;
+}
+
+.rtl .bw-cta .bw-cta-button a:hover,
+[dir="rtl"] .bw-cta .bw-cta-button a:hover {
+    padding-right: 28px;
+    padding-left: 36px;
+}
+
+@media (max-width: 780px) {
+    .rtl .bw-cta .bw-cta-button a:hover,
+    [dir="rtl"] .bw-cta .bw-cta-button a:hover {
+        padding-right: 16px;
+        padding-left: 28px;
+    }
+}
+
+/* ---------- Magic Link ---------- */
+.rtl .bw-magic-link .bw-magic-heart span,
+[dir="rtl"] .bw-magic-link .bw-magic-heart span,
+.rtl .bw-magic-link .bw-magic-heart:hover span,
+[dir="rtl"] .bw-magic-link .bw-magic-heart:hover span {
+    margin-left: 0;
+    margin-right: 42px;
+}
+
+.rtl .bw-magic-link .bw-magic-heart span svg,
+[dir="rtl"] .bw-magic-link .bw-magic-heart span svg {
+    transform: scaleX(-1);
+}
+
+.rtl .bw-magic-link .bw-magic-arrow span,
+[dir="rtl"] .bw-magic-link .bw-magic-arrow span {
+    margin-left: 0;
+    margin-right: 3px;
+}
+
+.rtl .bw-magic-link .bw-magic-arrow:hover span,
+[dir="rtl"] .bw-magic-link .bw-magic-arrow:hover span {
+    padding-left: 0;
+    padding-right: 7px;
+}
+
+.rtl .bw-magic-link .bw-magic-arrow span svg,
+[dir="rtl"] .bw-magic-link .bw-magic-arrow span svg {
+    transform: scaleX(-1);
+}
+
+.rtl .bw-magic-link .bw-magic-wheel,
+[dir="rtl"] .bw-magic-link .bw-magic-wheel {
+    padding-left: 0;
+    padding-right: 2.5em;
+}
+
+.rtl .bw-magic-link .bw-magic-wheel svg,
+[dir="rtl"] .bw-magic-link .bw-magic-wheel svg {
+    left: auto;
+    right: 0;
+    transform: scaleX(-1);
+}
+
+.rtl .bw-magic-link .bw-magic-minimal:hover,
+[dir="rtl"] .bw-magic-link .bw-magic-minimal:hover {
+    padding-left: 0;
+    padding-right: 14px;
+}
+
+.rtl .bw-magic-link .bw-magic-minimal:after,
+[dir="rtl"] .bw-magic-link .bw-magic-minimal:after {
+    left: auto;
+    right: 0;
+}
+
+/* ---------- Nav (icon spacing for style7/8) ---------- */
+.rtl .bw-nav.style7 ul li i,
+.rtl .bw-nav.style7 ul li img,
+.rtl .bw-nav.style7 ul li svg,
+[dir="rtl"] .bw-nav.style7 ul li i,
+[dir="rtl"] .bw-nav.style7 ul li img,
+[dir="rtl"] .bw-nav.style7 ul li svg {
+    padding-right: 0;
+    padding-left: 7px;
+}
+
+.rtl .bw-nav.style8 ul li i,
+.rtl .bw-nav.style8 ul li img,
+.rtl .bw-nav.style8 ul li svg,
+[dir="rtl"] .bw-nav.style8 ul li i,
+[dir="rtl"] .bw-nav.style8 ul li img,
+[dir="rtl"] .bw-nav.style8 ul li svg {
+    padding-left: 0;
+    padding-right: 7px;
+}

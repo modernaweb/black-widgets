@@ -135,7 +135,7 @@ class CallToAction extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::TEXT,
 				'default' => esc_html__( 'Let\'s get started today, Ever thought about joining us?', 'black-widgets' ),
 				'placeholder' => esc_html__( 'Type your title here', 'black-widgets' ),
-				'description' => esc_html__( 'You can use all other HTML tags into the title field e.g. code, mark, abbr, blockquote and  ...', 'black-widgets' ),
+				'description' => esc_html__( 'Inline HTML allowed: br, strong, b, em, i, u, span, mark, small, sub, sup.', 'black-widgets' ),
 			]
 		);
 
@@ -170,7 +170,7 @@ class CallToAction extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::TEXT,
 				'default' => esc_html__( 'Create a High Quality UI/UX Design from San Francisco.', 'black-widgets' ),
 				'placeholder' => esc_html__( 'Type your subtitle here', 'black-widgets' ),
-				'description' => esc_html__( 'You can use all other HTML tags into the subtitle field e.g. code, mark, abbr, blockquote and  ...', 'black-widgets' ),
+				'description' => esc_html__( 'Inline HTML allowed: br, strong, b, em, i, u, span, mark, small, sub, sup.', 'black-widgets' ),
 			]
 		);
 
@@ -252,6 +252,32 @@ class CallToAction extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Background', 'black-widgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-cta',
+			]
+		);
+
+		$this->add_responsive_control(
+			'widget_cta_alignment',
+			[
+				'label'     => esc_html__( 'Content Alignment', 'black-widgets' ),
+				'type'      => \Elementor\Controls_Manager::CHOOSE,
+				'options'   => [
+					'left'   => [
+						'title' => esc_html__( 'Left', 'black-widgets' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'black-widgets' ),
+						'icon'  => 'eicon-text-align-center',
+					],
+					'right'  => [
+						'title' => esc_html__( 'Right', 'black-widgets' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+				],
+				'toggle'    => true,
+				'selectors' => [
+					'{{WRAPPER}} .bw-cta-content' => 'text-align: {{VALUE}};',
+				],
 			]
 		);
 
@@ -448,9 +474,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Normal Color', 'black-widgets' ),
 				'type' => Controls_Manager::COLOR,
-                'global' => [
-                    'default' => Global_Colors::COLOR_PRIMARY,
-                ],
+				'default' => '#fff',
 				'selectors' => [
 					'{{WRAPPER}} .bw-cta .bw-cta-title' => 'color: {{VALUE}}',
 				],
@@ -471,9 +495,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Hover Color', 'black-widgets' ),
 				'type' => Controls_Manager::COLOR,
-                'global' => [
-                    'default' => Global_Colors::COLOR_PRIMARY,
-                ],
 				'selectors' => [
 					'{{WRAPPER}} .bw-cta:hover .bw-cta-title' => 'color: {{VALUE}}',
 				],
@@ -610,9 +631,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Normal Color', 'black-widgets' ),
 				'type' => Controls_Manager::COLOR,
-                'global' => [
-                    'default' => Global_Colors::COLOR_PRIMARY,
-                ],
+				'default' => '#fff',
 				'selectors' => [
 					'{{WRAPPER}} .bw-cta .bw-cta-subtitle' => 'color: {{VALUE}}',
 				],
@@ -633,9 +652,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Hover Color', 'black-widgets' ),
 				'type' => Controls_Manager::COLOR,
-                'global' => [
-                    'default' => Global_Colors::COLOR_PRIMARY,
-                ],
 				'selectors' => [
 					'{{WRAPPER}} .bw-cta:hover .bw-cta-subtitle' => 'color: {{VALUE}}',
 				],
@@ -772,9 +788,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Normal Color', 'black-widgets' ),
 				'type' => Controls_Manager::COLOR,
-                'global' => [
-                    'default' => Global_Colors::COLOR_PRIMARY,
-                ],
+				'default' => '#000',
 				'selectors' => [
 					'{{WRAPPER}} .bw-cta .bw-cta-btn' => 'color: {{VALUE}}',
 				],
@@ -806,9 +820,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Hover Color', 'black-widgets' ),
 				'type' => Controls_Manager::COLOR,
-                'global' => [
-                    'default' => Global_Colors::COLOR_PRIMARY,
-                ],
 				'selectors' => [
 					'{{WRAPPER}} .bw-cta .bw-cta-btn:hover' => 'color: {{VALUE}}',
 				],
@@ -939,6 +950,19 @@ class CallToAction extends \Elementor\Widget_Base {
 		// Variables
 		// $type 	        		= isset($settings['widget_type']) 								? $settings['widget_type'] 						: ''; // Widget Type
 		$allowed_tags 			= ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'];
+		$allowed_inline_html = [
+			'br'     => [],
+			'strong' => [],
+			'b'      => [],
+			'em'     => [],
+			'i'      => [],
+			'u'      => [],
+			'span'   => [ 'class' => true ],
+			'mark'   => [],
+			'small'  => [],
+			'sub'    => [],
+			'sup'    => [],
+		];
 		// Title
 		$title 					= isset($settings['widget_title'])					? $settings['widget_title']						: '';
 		$title_tag 				= isset($settings['widget_html_tag_title'])			? $settings['widget_html_tag_title']			: ''; // HTML Tag
@@ -954,20 +978,23 @@ class CallToAction extends \Elementor\Widget_Base {
 		// Button
 		$link					= isset($settings['widget_link_url']['url'])		? $settings['widget_link_url']['url']			: ''; // Link URL
 		$link_text 	        	= isset($settings['widget_link_text'])				? $settings['widget_link_text'] 				: ''; // Link Text
-		$link_target         	= $settings['widget_link_url']['is_external']		? 'target="_blank"' 							: '';
-		$link_nofollow       	= $settings['widget_link_url']['nofollow']			? ' rel="nofollow"'								: '';
+		$link_target         	= ! empty( $settings['widget_link_url']['is_external'] ) ? 'target="_blank"' : '';
+		$link_nofollow       	= ! empty( $settings['widget_link_url']['nofollow'] ) ? ' rel="nofollow"' : '';
 		$icon_arrow				= '<i class="demo-icon eicon-arrow-right"></i>';
+
+		$safe_title    = wp_kses( $title, $allowed_inline_html );
+		$safe_subtitle = wp_kses( $subtitle, $allowed_inline_html );
 
 		// Render
 		echo '<div class="bw-cta">';
 			echo '<div class="bw-cta-content">';
-				echo '<' . $title_tag . ' class="bw-cta-title">' . esc_html($title) . '</' . $title_tag . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
-				echo '<' . $subtitle_tag . ' class="bw-cta-subtitle">' . esc_html($subtitle) . '</' . $subtitle_tag . '>';// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
- 
+				echo '<' . $title_tag . ' class="bw-cta-title">' . $safe_title . '</' . $title_tag . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_kses()'d inline HTML
+				echo '<' . $subtitle_tag . ' class="bw-cta-subtitle">' . $safe_subtitle . '</' . $subtitle_tag . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_kses()'d inline HTML
+
 			echo '</div>';
 			echo '<div class="bw-cta-button">';
-				echo '<a href="' . esc_url( $link ) . '"' . $link_target . $link_nofollow . ' class="bw-cta-btn">' . esc_html($link_text) . ' ' . $icon_arrow . '</a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
- 
+				echo '<a href="' . esc_url( $link ) . '"' . $link_target . $link_nofollow . ' class="bw-cta-btn">' . esc_html($link_text) . ' ' . $icon_arrow . '</a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
 			echo '</div>';
         echo '</div>';
 

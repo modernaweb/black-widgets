@@ -41,7 +41,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
         wp_register_script(
             'black-widgets-gsap-interactive-links',
             BLACK_WIDGETS_PLUGIN_URL . 'assets/js/interactive-links.js',
-            [ 'jquery', 'GSAP', 'GSAP-ScrollTrigger' ], // Script dependencies
+            [ 'jquery', 'GSAP' ], // ScrollTrigger not used by this widget
             BLACK_WIDGETS_VERSION, // Version for cache busting
             true
         );
@@ -249,7 +249,9 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             [
                 'label' => 'Image',
                 'type' => \Elementor\Controls_Manager::MEDIA,
-                'default' => ['url' => BLACK_WIDGETS_PLUGIN_URL . 'assets/admin/img/dsgn-in-black-widgets.jpg'],
+                'default' => [
+                    'url' => BLACK_WIDGETS_PLUGIN_URL . 'assets/admin/img/dsgn-in-black-widgets.jpg',
+                ],
             ]
         );
 
@@ -1006,11 +1008,12 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
         );
 
         // Background control for the image container
+        // Use global .bw-il-uid-{{ID}} - hover layer is portaled to <body>.
         $this->add_group_control(
             \Elementor\Group_Control_Background::get_type(),
             [
                 'name' => 'container_bg',
-                'selector' => '{{WRAPPER}} .bw-il-hover-wrapper',
+                'selector' => '.bw-il-uid-{{ID}}',
             ]
         );
 
@@ -1019,7 +1022,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             \Elementor\Group_Control_Border::get_type(),
             [
                 'name' => 'container_border',
-                'selector' => '{{WRAPPER}} ..bw-il-hover-wrapper',
+                'selector' => '.bw-il-uid-{{ID}}',
             ]
         );
 
@@ -1028,7 +1031,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             \Elementor\Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'container_shadow',
-                'selector' => '{{WRAPPER}} .bw-il-hover-wrapper',
+                'selector' => '.bw-il-uid-{{ID}}',
             ]
         );
 
@@ -1039,7 +1042,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
                 'label' => __( 'Padding', 'black-widgets' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'selectors' => [
-                    '{{WRAPPER}} .bw-il-hover-wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '.bw-il-uid-{{ID}}' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1051,7 +1054,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
                 'label' => __( 'Margin', 'black-widgets' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'selectors' => [
-                    '{{WRAPPER}} .bw-il-hover-wrapper' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '.bw-il-uid-{{ID}}' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1082,33 +1085,53 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
+        // Global .bw-il-uid-{{ID}} - hover layer is portaled to <body> for clean follow.
         $this->add_responsive_control(
             'hover_image_width',
             [
                 'label' => __('Image Width', 'black-widgets'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
-                'size_units' => ['px', '%', 'em', 'rem', 'vw'],
+                'size_units' => ['px', 'em', 'rem', 'vw'],
                 'range' => [
                     'px' => [
-                        'min' => 10,
-                        'max' => 1000,
+                        'min' => 80,
+                        'max' => 520,
                     ],
-                    '%' => [
-                        'min' => 1,
-                        'max' => 100,
+                    'vw' => [
+                        'min' => 10,
+                        'max' => 60,
                     ],
                 ],
                 'default' => [
-                    'unit' => '%',
-                    'size' => 100,
+                    'unit' => 'px',
+                    'size' => 280,
                 ],
+                'description' => __( 'Try 240px to 320px for the hover image size.', 'black-widgets' ),
                 'selectors' => [
-                    '{{WRAPPER}} .bw-il-hover-wrapper' => 'width: {{SIZE}}{{UNIT}};',
+                    '.bw-il-uid-{{ID}}' => 'width: {{SIZE}}{{UNIT}}; max-width: min(420px, {{SIZE}}{{UNIT}}, 42vw);',
                 ],
             ]
         );
 
-        // Opacity control for normal state
+        $this->add_responsive_control(
+            'hover_image_height',
+            [
+                'label' => __('Image Height', 'black-widgets'),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => ['px', 'em', 'rem'],
+                'range' => [
+                    'px' => [
+                        'min' => 80,
+                        'max' => 720,
+                    ],
+                ],
+                'description' => __( 'Leave empty to auto-scale height and show the full image at its own aspect ratio.', 'black-widgets' ),
+                'selectors' => [
+                    '.bw-il-uid-{{ID}}' => 'height: {{SIZE}}{{UNIT}}; aspect-ratio: auto;',
+                ],
+            ]
+        );
+
         $this->add_control(
             'hover_image_opacity',
             [
@@ -1116,66 +1139,69 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'range' => [ 'px' => [ 'min' => 0, 'max' => 1, 'step' => 0.01 ] ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-il-hover-image' => 'opacity: {{SIZE}};',
+                    '.bw-il-uid-{{ID}} .bw-il-hover-image' => 'opacity: {{SIZE}};',
                 ],
             ]
         );
 
-        // Border control for normal state
         $this->add_group_control(
             \Elementor\Group_Control_Border::get_type(),
             [
                 'name' => 'hover_image_border',
-                'selector' => '{{WRAPPER}} .bw-il-hover-image',
+                'selector' => '.bw-il-uid-{{ID}} .bw-il-hover-image',
             ]
         );
 
-        // Box shadow control for normal state
         $this->add_group_control(
             \Elementor\Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'hover_image_shadow',
-                'selector' => '{{WRAPPER}} .bw-il-hover-image',
+                'selector' => '.bw-il-uid-{{ID}} .bw-il-hover-image',
             ]
         );
 
-        // Border radius control for the hover image
         $this->add_responsive_control(
             'hover_image_border_radius',
             [
                 'label' => __( 'Border Radius', 'black-widgets' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'default' => [
+                    'top' => 14,
+                    'right' => 14,
+                    'bottom' => 14,
+                    'left' => 14,
+                    'unit' => 'px',
+                    'isLinked' => true,
+                ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-il-hover-image' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '.bw-il-uid-{{ID}}' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '.bw-il-uid-{{ID}} .bw-il-hover-image' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
 
-        // Margin control for the hover image
         $this->add_responsive_control(
             'hover_image_margin',
             [
                 'label' => __( 'Margin', 'black-widgets' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'selectors' => [
-                    '{{WRAPPER}} .bw-il-hover-image' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '.bw-il-uid-{{ID}} .bw-il-hover-image' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
 
-        // Padding control for the hover image
         $this->add_responsive_control(
             'hover_image_padding',
             [
                 'label' => __( 'Padding', 'black-widgets' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'selectors' => [
-                    '{{WRAPPER}} .bw-il-hover-image' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '.bw-il-uid-{{ID}} .bw-il-hover-image' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
 
-        // End the section for hover image styling
         $this->end_controls_section();
     }
 
@@ -1235,7 +1261,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             'label' => __( 'Max Rotation X', 'black-widgets' ),
             'type' => \Elementor\Controls_Manager::SLIDER,
             'range' => [ 'px' => [ 'min' => -90, 'max' => 90 ] ],
-            'default' => [ 'size' => 15 ],
+            'default' => [ 'size' => 8 ],
         ]);
 
         // Max Rotation Y control for hover state
@@ -1243,7 +1269,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             'label' => __( 'Max Rotation Y', 'black-widgets' ),
             'type' => \Elementor\Controls_Manager::SLIDER,
             'range' => [ 'px' => [ 'min' => -90, 'max' => 90 ] ],
-            'default' => [ 'size' => 15 ],
+            'default' => [ 'size' => 8 ],
         ]);
 
         // Rotation Z strength control for hover state
@@ -1251,7 +1277,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             'label' => __( 'Rotation Z Strength', 'black-widgets' ),
             'type' => \Elementor\Controls_Manager::SLIDER,
             'range' => [ 'px' => [ 'min' => -5, 'max' => 5, 'step' => 0.1 ] ],
-            'default' => [ 'size' => 0.5 ],
+            'default' => [ 'size' => 0.12 ],
         ]);
 
         // Max Translate X control for hover state
@@ -1259,7 +1285,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             'label' => __( 'Max Translate X', 'black-widgets' ),
             'type' => \Elementor\Controls_Manager::SLIDER,
             'range' => [ 'px' => [ 'min' => -300, 'max' => 300 ] ],
-            'default' => [ 'size' => 40 ],
+            'default' => [ 'size' => 14 ],
         ]);
 
         // Max Translate Y control for hover state
@@ -1267,7 +1293,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             'label' => __( 'Max Translate Y', 'black-widgets' ),
             'type' => \Elementor\Controls_Manager::SLIDER,
             'range' => [ 'px' => [ 'min' => -300, 'max' => 300 ] ],
-            'default' => [ 'size' => 40 ],
+            'default' => [ 'size' => 14 ],
         ]);
 
         // Brightness on hover control
@@ -1275,7 +1301,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             'label' => __( 'Brightness on Hover', 'black-widgets' ),
             'type' => \Elementor\Controls_Manager::SLIDER,
             'range' => [ 'px' => [ 'min' => 0.5, 'max' => 3, 'step' => 0.1 ] ],
-            'default' => [ 'size' => 1.5 ],
+            'default' => [ 'size' => 1.12 ],
         ]);
 
         // Image fade-in duration control for hover state
@@ -1283,7 +1309,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             'label' => __( 'Image Fade-In Duration', 'black-widgets' ),
             'type' => \Elementor\Controls_Manager::SLIDER,
             'range' => [ 'px' => [ 'min' => 0, 'max' => 2, 'step' => 0.1 ] ],
-            'default' => [ 'size' => 0.4 ],
+            'default' => [ 'size' => 0.35 ],
         ]);
 
         // Image fade-out duration control for hover state
@@ -1291,7 +1317,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             'label' => __( 'Image Fade-Out Duration', 'black-widgets' ),
             'type' => \Elementor\Controls_Manager::SLIDER,
             'range' => [ 'px' => [ 'min' => 0, 'max' => 2, 'step' => 0.1 ] ],
-            'default' => [ 'size' => 0.4 ],
+            'default' => [ 'size' => 0.25 ],
         ]);
 
         // Main animation duration control for hover state
@@ -1299,7 +1325,21 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             'label' => __( 'Main Animation Duration', 'black-widgets' ),
             'type' => \Elementor\Controls_Manager::SLIDER,
             'range' => [ 'px' => [ 'min' => 0.1, 'max' => 2, 'step' => 0.1 ] ],
-            'default' => [ 'size' => 0.3 ],
+            'default' => [ 'size' => 0.28 ],
+        ]);
+
+        $this->add_control('gsap_ease', [
+            'label'   => __( 'Ease', 'black-widgets' ),
+            'type'    => \Elementor\Controls_Manager::SELECT,
+            'default' => 'power2.out',
+            'options' => [
+                'power2.out'  => 'power2.out',
+                'power2.in'   => 'power2.in',
+                'power3.out'  => 'power3.out',
+                'power3.inOut'=> 'power3.inOut',
+                'none'        => 'none',
+                'sine.out'    => 'sine.out',
+            ],
         ]);
 
         // End the hover state tab
@@ -1336,20 +1376,21 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
 
         // Build the GSAP settings array with sanitized and validated data
         $gsap_data = [
-            'maxRotX' => $safe_number('gsap_max_rotation_x', 0),
-            'maxRotY' => $safe_number('gsap_max_rotation_y', 0),
-            'maxTransX' => $safe_number('gsap_max_translate_x', 0),
-            'maxTransY' => $safe_number('gsap_max_translate_y', 0),
-            'brightnessStrength' => $safe_number('gsap_brightness_strength', 1),
-            'duration' => $safe_number('gsap_animation_duration', 0.3),
-            'ease' => $safe_string('gsap_ease', 'power3.out'),
-            'fadeIn' => $safe_number('gsap_fadein_duration', 0.4),
-            'fadeOut' => $safe_number('gsap_fadeout_duration', 0.4),
-            'rotZStrength' => $safe_number('gsap_rotation_z_strength', 0.5),
+            'maxRotX' => $safe_number('gsap_max_rotation_x', 8),
+            'maxRotY' => $safe_number('gsap_max_rotation_y', 8),
+            'maxTransX' => $safe_number('gsap_max_translate_x', 14),
+            'maxTransY' => $safe_number('gsap_max_translate_y', 14),
+            'brightnessNormal' => $safe_number('gsap_brightness_normal', 1),
+            'brightnessStrength' => $safe_number('gsap_brightness_strength', 1.12),
+            'duration' => $safe_number('gsap_animation_duration', 0.28),
+            'ease' => $safe_string('gsap_ease', 'power2.out'),
+            'fadeIn' => $safe_number('gsap_fadein_duration', 0.35),
+            'fadeOut' => $safe_number('gsap_fadeout_duration', 0.25),
+            'rotZStrength' => $safe_number('gsap_rotation_z_strength', 0.12),
         ];
 
         // Encode the GSAP settings as JSON and escape for safe HTML output
-        $encoded_data = esc_attr( wp_json_encode( $gsap_data ) );
+        $encoded_data = wp_json_encode( $gsap_data );
         ?>
 
         <!-- Main container with encoded GSAP settings in a data attribute -->
@@ -1367,7 +1408,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
                     ?>
                     <!-- Each menu item with data-image for hover preview -->
                     <li data-image="<?php echo esc_url( $img ); ?>">
-                        <a href="<?php echo esc_url( $url ); ?>"<?php echo esc_attr( $target . $nofollow ); ?>>
+                        <a href="<?php echo esc_url( $url ); ?>"<?php echo $target . $nofollow; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
                             <<?php echo esc_attr( $tag ); ?> class="bw-il-title"><?php echo esc_html( $title ); ?></<?php echo esc_attr( $tag ); ?>>
                         </a>
                         <?php if ( $description ) : ?>
@@ -1377,10 +1418,10 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
                 <?php endforeach; ?>
             </ul>
 
-            <!-- Container for the hover image effect -->
-            <div class="bw-il-image-container">
-                <div class="bw-il-hover-wrapper">
-                    <img class="bw-il-hover-image" src="" alt="Hover Preview" /> <?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
+            <!-- Decorative mouse-follow preview; does not receive pointer events. -->
+            <div class="bw-il-image-container" aria-hidden="true">
+                <div class="bw-il-hover-wrapper bw-il-uid-<?php echo esc_attr( $this->get_id() ); ?>">
+                    <img class="bw-il-hover-image" src="" alt="" /> <?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
                 </div>
             </div>
         </div>

@@ -55,7 +55,7 @@ class TextAnimate extends \Elementor\Widget_Base {
      * @return string Elementor icon class.
      */
     public function get_icon() {
-        return 'eicon-animation-text';
+        return 'eicon-text';
     }
 
     /**
@@ -146,7 +146,7 @@ class TextAnimate extends \Elementor\Widget_Base {
             [
                 'label' => esc_html__( 'Animation', 'black-widgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
-                'default' => 'ftop',
+                'default' => 'fbottom',
                 'options' => [
                     'ftop'   =>  esc_html__( 'From Top', 'black-widgets' ),
                     'fbottom'   =>  esc_html__( 'From Bottom', 'black-widgets' ),
@@ -160,7 +160,7 @@ class TextAnimate extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_delay',
             [
-                'label' => esc_html__( 'Delay (ms)', 'black-widgets' ),
+                'label' => esc_html__( 'Duration (ms)', 'black-widgets' ),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'min' => 0,
                 'max' => 5000,
@@ -176,7 +176,7 @@ class TextAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Select tag
+        // Select tag - wraps the full sentence once (not each word/letter).
         $this->add_control(
             'widget_html_tag_title',
             [
@@ -194,7 +194,7 @@ class TextAnimate extends \Elementor\Widget_Base {
                     'p' => esc_html__( 'p', 'black-widgets' ),
                     'span' => esc_html__( 'span', 'black-widgets' ),
                 ],
-                'description' => esc_html__( 'Choose an HTML tag, it can help you to SEO and beautifully of the UI design with follow the structure of your website.', 'black-widgets' ),
+                'description' => esc_html__( 'Semantic tag for the whole text. Words/letters are wrapped in span for animation.', 'black-widgets' ),
             ]
         );
 
@@ -385,116 +385,84 @@ class TextAnimate extends \Elementor\Widget_Base {
         $settings  = $this->get_settings_for_display();
 
         $text      = isset( $settings['widget_text'] ) ? $settings['widget_text'] : '';
-        $split     = isset( $settings['widget_split'] ) ? esc_attr( $settings['widget_split'] ) : 'none';
-        $animation = isset( $settings['widget_animation'] ) ? esc_attr( $settings['widget_animation'] ) : 'ftop';
-        $delay     = isset( $settings['widget_delay'] ) ? esc_attr( $settings['widget_delay'] ) : '500';
-        $allowed_tags 	= ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'];
-        $title_tag 		= isset($settings['widget_html_tag_title']) ? $settings['widget_html_tag_title'] : '';
-        if (!in_array($title_tag, $allowed_tags)) {
+        $split     = isset( $settings['widget_split'] ) ? $settings['widget_split'] : 'none';
+        $animation = isset( $settings['widget_animation'] ) ? $settings['widget_animation'] : 'ftop';
+        $delay     = isset( $settings['widget_delay'] ) ? $settings['widget_delay'] : '500';
+        $allowed_tags = [ 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span' ];
+        $title_tag    = isset( $settings['widget_html_tag_title'] ) ? $settings['widget_html_tag_title'] : 'span';
+        if ( ! in_array( $title_tag, $allowed_tags, true ) ) {
             $title_tag = 'span';
         }
 
-        $text = $this->get_modified_text( $text, $split, $title_tag );
+        $text_html = $this->get_modified_text( $text, $split, $title_tag );
 
         echo '<div class="bw-text-animate" data-split="' . esc_attr( $split ) . '" data-animation="' . esc_attr( $animation ) . '" data-delay="' . esc_attr( $delay ) . '">';
-        echo wp_kses_post( $text );
+        // Built from escaped pieces in get_modified_text(); allow only our wrapper + spans.
+        echo wp_kses(
+            $text_html,
+            [
+                $title_tag => [ 'class' => true ],
+                'span'     => [ 'class' => true ],
+            ]
+        );
         echo '</div>';
     }
 
     /**
-     * Modify input text based on splitting type.
+     * Build accessible markup: one semantic outer tag, spans for animated pieces, real spaces.
      *
-     * @param string $text  The original text.
-     * @param string $split Split method: 'none', 'letter', or 'word'.
-     * @param string $title_tag Tag for Text.
-     * @return string Modified HTML with spans for animation.
+     * @param string $text      The original text.
+     * @param string $split     Split method: 'none', 'letter', or 'word'.
+     * @param string $title_tag Semantic wrapper tag for the full sentence.
+     * @return string
      */
-    private function get_modified_text( $text, $split = 'none', $title_tag ='span' ) {
-        if ( empty( $text ) ) {
+    private function get_modified_text( $text, $split = 'none', $title_tag = 'span' ) {
+        // Plain text field - strip any accidental markup; avoid DOMDocument (<p> injection).
+        $text = html_entity_decode( (string) $text, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+        $text = wp_strip_all_tags( $text );
+        $text = preg_replace( "/\r\n|\r|\n/", ' ', $text );
+        $text = trim( preg_replace( '/[ \t]+/u', ' ', $text ) );
+
+        if ( $text === '' ) {
             return '';
         }
 
         if ( $split === 'none' ) {
-            return '<'. $title_tag .' class="bw-text-animate-content">' . force_balance_tags( $text ) . '</' . $title_tag . '>';
+            return '<' . $title_tag . ' class="bw-text-animate-content">' . esc_html( $text ) . '</' . $title_tag . '>';
         }
 
-        if ( $split === 'letter' || $split === 'word' ) {
-            libxml_use_internal_errors( true );
-            $doc = new \DOMDocument();
-            $doc->loadHTML( '<?xml encoding="utf-8" ?>' . $text, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD );
+        if ( $split === 'word' ) {
+            $parts = preg_split( '/(\s+)/u', $text, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY );
+            $inner = '';
 
-            if ( $split === 'letter' ) {
-                $this->wrap_letters_in_spans( $doc, $title_tag);
-            } else {
-                $this->wrap_words_in_spans( $doc, $title_tag );
-            }
-
-            $html = $doc->saveHTML();
-            $html = preg_replace( '/^<!DOCTYPE.+?>/', '', $html );
-            $html = str_replace( [ '<html>', '</html>', '<body>', '</body>' ], '', $html );
-
-            return $html;
-        }
-
-        return $text;
-    }
-
-    /**
-     * Wrap each word of text nodes in <span> elements.
-     *
-     * @param \DOMNode $node The DOM node to process.
-     */
-    private function wrap_words_in_spans( \DOMNode $node, $title_tag ) {
-        foreach ( iterator_to_array( $node->childNodes ) as $child ) {
-            if ( $child->nodeType === XML_TEXT_NODE ) {
-                $words = preg_split( '/(\s+)/u', $child->nodeValue, -1, PREG_SPLIT_DELIM_CAPTURE );
-                $fragment = $node->ownerDocument->createDocumentFragment();
-
-                foreach ( $words as $word ) {
-                    if ( trim( $word ) === '' ) {
-                        $fragment->appendChild( $node->ownerDocument->createTextNode( $word ) );
-                    } else {
-                        $span = $node->ownerDocument->createElement( $title_tag );
-                        $span->setAttribute( 'class', 'bw-text-animate-content' );
-                        $span->appendChild( $node->ownerDocument->createTextNode( $word ) );
-                        $fragment->appendChild( $span );
-                    }
+            foreach ( $parts as $part ) {
+                if ( preg_match( '/^\s+$/u', $part ) ) {
+                    // Keep a real space between word spans (SEO + copy/paste).
+                    $inner .= ' ';
+                    continue;
                 }
-
-                $node->replaceChild( $fragment, $child );
-            } elseif ( $child->hasChildNodes() ) {
-                $this->wrap_words_in_spans( $child, $title_tag );
+                $inner .= '<span class="bw-text-animate-content">' . esc_html( $part ) . '</span>';
             }
+
+            return '<' . $title_tag . '>' . $inner . '</' . $title_tag . '>';
         }
-    }
 
-    /**
-     * Wrap each letter of text nodes in <span> elements.
-     *
-     * @param \DOMNode $node The DOM node to process.
-     */
-    private function wrap_letters_in_spans( \DOMNode $node, $title_tag ) {
-        foreach ( iterator_to_array( $node->childNodes ) as $child ) {
-            if ( $child->nodeType === XML_TEXT_NODE ) {
-                $letters = preg_split( '//u', $child->nodeValue, -1, PREG_SPLIT_NO_EMPTY );
-                $fragment = $node->ownerDocument->createDocumentFragment();
+        if ( $split === 'letter' ) {
+            $letters = preg_split( '//u', $text, -1, PREG_SPLIT_NO_EMPTY );
+            $inner   = '';
 
-                foreach ( $letters as $letter ) {
-                    if ( trim($letter) === '' ) {
-                        $fragment->appendChild( $node->ownerDocument->createTextNode( $letter ) );
-                    } else {
-                        $span = $node->ownerDocument->createElement( $title_tag );
-                        $span->setAttribute( 'class', 'bw-text-animate-content' );
-                        $span->appendChild( $node->ownerDocument->createTextNode( $letter ) );
-                        $fragment->appendChild( $span );
-                    }
+            foreach ( $letters as $letter ) {
+                if ( preg_match( '/^\s$/u', $letter ) ) {
+                    $inner .= ' ';
+                    continue;
                 }
-
-                $node->replaceChild( $fragment, $child );
-            } elseif ( $child->hasChildNodes() ) {
-                $this->wrap_letters_in_spans( $child, $title_tag );
+                $inner .= '<span class="bw-text-animate-content">' . esc_html( $letter ) . '</span>';
             }
+
+            return '<' . $title_tag . '>' . $inner . '</' . $title_tag . '>';
         }
+
+        return '<' . $title_tag . '>' . esc_html( $text ) . '</' . $title_tag . '>';
     }
 
 }

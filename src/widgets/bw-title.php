@@ -987,14 +987,13 @@ class Title extends \Elementor\Widget_Base {
 		// Variables
 		$type 			= isset($settings['widget_type']) 				? $settings['widget_type'] 												: '';
 		$alignment 		= isset($settings['widget_alignment']) 			? $settings['widget_alignment'] 										: '';
-        $alignment_mobile  = $this->get_settings_for_display('widget_alignment_mobile');
-        $alignment_tablet  = $this->get_settings_for_display('widget_alignment_tablet');
+		$alignment_tablet  = isset( $settings['widget_alignment_tablet'] ) ? $settings['widget_alignment_tablet'] : '';
+		$alignment_mobile  = isset( $settings['widget_alignment_mobile'] ) ? $settings['widget_alignment_mobile'] : '';
 
-        //$alignment 		= '';
 		$title 			= isset($settings['widget_title']) 				? $settings['widget_title'] 											: '';
 		$subtitle 		= isset($settings['widget_subtitle']) 			? $settings['widget_subtitle'] 											: '';
 
-		// Added this for XSS — Vulnerable to Cross Site Scripting (XSS)
+		// Added this for XSS - Vulnerable to Cross Site Scripting (XSS)
 		$allowed_tags 			= ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'];
 		$title_tag 				= isset($settings['widget_html_tag_title'])				 ? $settings['widget_html_tag_title']					: '';
 		$subtitle_tag   		= isset($settings['widget_html_tag_subtitle']) 			 ? $settings['widget_html_tag_subtitle']				: '';
@@ -1008,8 +1007,17 @@ class Title extends \Elementor\Widget_Base {
         $title 			        = isset($settings['widget_title'])                       ? $settings['widget_title']					: '';
 		$shape 			= isset($settings['custom_shape']) 				? '<img src="' . esc_url( $settings['custom_shape']['url'] ) . '" class="shape">' 	: ''; // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
 
+		// Alignment classes: desktop + optional tablet/mobile overrides for decorative shapes
+		$box_classes = array_filter( [
+			'bw-title-box',
+			$type,
+			$alignment,
+			$alignment_tablet ? 'tablet-' . $alignment_tablet : '',
+			$alignment_mobile ? 'mobile-' . $alignment_mobile : '',
+		] );
+
         // Render
-		echo '<div class="bw-title-box ' . esc_attr( $type ) . ' ' . esc_html( $alignment ) . ' tablet-' . esc_html( $alignment_tablet ) .' mobile-' . esc_html( $alignment_mobile ) . ' ">';
+		echo '<div class="' . esc_attr( implode( ' ', $box_classes ) ) . '">';
 			echo '<div class="bw-title"><' . $title_tag . ' class="bw-div">' .esc_html($title). '</' . $title_tag . '></div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $shape; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo '<div class="bw-subtitle"><' . $subtitle_tag . ' class="bw-div"> ' .esc_html($subtitle). '</' . $subtitle_tag . '></div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

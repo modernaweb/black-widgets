@@ -1,6 +1,13 @@
+.bw-button-wrapper {
+    display: block;
+    width: 100%;
+}
+
 .bw-button-box {
     display: inline-block;
     position: relative;
+    vertical-align: top;
+    max-width: 100%;
 }
 
 .bw-button-box .bw-btn {
@@ -9,6 +16,8 @@
     -moz-transition: all 0.3s cubic-bezier(1, 0.65, 0, 0.89) !important;
     -ms-transition: all 0.3s cubic-bezier(1, 0.65, 0, 0.89) !important;
     -o-transition: all 0.3s cubic-bezier(1, 0.65, 0, 0.89) !important;
+    box-sizing: border-box;
+    max-width: 100%;
 }
 
 
@@ -46,11 +55,12 @@
 /* Modern > Type1 */
 
 .bw-button-box.modern.m-1 {
-    overflow: hidden;
+    /* Do not clip box-shadow when alignment/center wraps the button. */
+    overflow: visible;
 }
 
 .bw-button-box.modern.m-1 .bw-btn {
-    display: block;
+    display: inline-block;
     position: relative;
     background: #000;
     border: 0;
@@ -61,22 +71,23 @@
     font-weight: 400;
     font-family: inherit;
     font-size: 18px;
+    line-height: 1.4;
     color: #fff;
     letter-spacing: 0.2em;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     text-decoration: unset;
     top: 0;
-    overflow: hidden;
+    white-space: nowrap;
     -o-transition: all 0.2s ease;
     border-radius: 3px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     -ms-border-radius: 3px;
     -o-border-radius: 3px;
-    transition: all 0.2s ease;
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    -ms-transition: all 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, border-radius 0.2s ease;
+    -webkit-transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, border-radius 0.2s ease;
+    -moz-transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, border-radius 0.2s ease;
+    -ms-transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, border-radius 0.2s ease;
 }
 
 .bw-button-box.modern.m-1 .bw-btn:hover {
@@ -143,14 +154,13 @@
 /* Modern > Type2 */
 
 .bw-button-box.modern.m-2 .bw-btn {
-    float: left;
-    /*display: block;
-    */
+    float: none;
+    display: inline-block;
     padding: 24px 44px;
     vertical-align: middle;
     position: relative;
     z-index: 1;
-    line-height: 1;
+    line-height: 1.2;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     -moz-osx-font-smoothing: grayscale;
@@ -163,6 +173,7 @@
     font-size: 18px;
     letter-spacing: 2px;
     font-weight: 700;
+    white-space: nowrap;
     border-radius: 4px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -232,12 +243,13 @@
     border: none;
     box-shadow: none;
     cursor: pointer;
-    line-height: 1.6;
+    line-height: 1.4;
     color: #fff;
     font-size: 14px;
     font-weight: 700;
     text-transform: capitalize;
     letter-spacing: 1px;
+    white-space: nowrap;
     transition-property: all;
     transition-duration: 0.37s;
     overflow: hidden;
@@ -349,10 +361,14 @@
     font-weight: normal;
     letter-spacing: 2px;
     font-size: 18px;
-    line-height: 68px;
+    line-height: 1.2;
     text-transform: uppercase;
     padding: 0 34px;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 68px;
+    white-space: nowrap;
 }
 
 .bw-button-box.modern.m-4 .shape {
@@ -427,9 +443,10 @@
     font-size: 14px;
     font-weight: 900;
     letter-spacing: 0.25em;
-    line-height: 32px;
+    line-height: 1.2;
     text-transform: uppercase;
     vertical-align: middle;
+    white-space: nowrap;
     transition: all 1.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
     -webkit-transition: all 1.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
     -moz-transition: all 1.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
@@ -452,9 +469,10 @@
 .bw-button-box.noise.n-1 {
     font-size: 18px;
     position: relative;
-    width: 200px;
+    min-width: 200px;
+    width: max-content;
+    max-width: 100%;
     height: 60px;
-    /* left: 0; */
     text-align: center;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -462,28 +480,44 @@
     -webkit-user-select: none;
     cursor: pointer;
     background: #fff;
+    --bw-noise-text: #000000;
+    --bw-noise-bg: #ffffff;
+    --bw-noise-hover-text: #ffffff;
+    --bw-noise-hover-bg: #000000;
 }
 
-.bw-button-box.noise.n-1 .bw-btn-n-1 div {
+.bw-button-box.noise.n-1 .bw-btn-n-1 {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.bw-button-box.noise.n-1 .bw-btn-n-1 > div {
     position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     width: 100%;
-    height: 60px;
-    line-height: 40px;
+    height: 100%;
+    line-height: 1.2;
+    white-space: nowrap;
+    padding: 0 24px;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
 }
 
 .bw-button-box.noise.n-1 .bw-btn-n-1 div:nth-child(1) {
-    color: #000000;
-    background-color: #ffffff;
-    padding: 10px;
-    transition: all 0.1s ease;
-    -webkit-transition: all 0.1s ease;
-    -moz-transition: all 0.1s ease;
-    -ms-transition: all 0.1s ease;
-    -o-transition: all 0.1s ease;
+    color: var(--bw-noise-text, #000000);
+    background-color: var(--bw-noise-bg, #ffffff);
+    transition: background-color 0.1s ease, color 0.1s ease;
+    -webkit-transition: background-color 0.1s ease, color 0.1s ease;
+    -moz-transition: background-color 0.1s ease, color 0.1s ease;
+    -ms-transition: background-color 0.1s ease, color 0.1s ease;
+    -o-transition: background-color 0.1s ease, color 0.1s ease;
 }
 
 .bw-button-box.noise.n-1 .bw-btn-n-1 div:nth-child(2) {
@@ -492,13 +526,19 @@
 
 .bw-button-box.noise.n-1 .bw-btn-n-1 div:nth-child(2) div {
     position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     width: 100%;
-    height: 60px;
+    height: 100%;
+    line-height: 1.2;
+    white-space: nowrap;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    padding: 10px;
+    padding: 0 24px;
     border: #000000 hidden 1px;
 }
 
@@ -521,18 +561,13 @@
 }
 
 .bw-button-box.noise.n-1 .bw-btn-n-1:hover div:nth-child(1) {
-    color: #ffffff;
-    background-color: #000000;
-    transition: background-color 0.3s ease 0.2s;
-    -webkit-transition: background-color 0.3s ease 0.2s;
-    -moz-transition: background-color 0.3s ease 0.2s;
-    -ms-transition: background-color 0.3s ease 0.2s;
-    -o-transition: background-color 0.3s ease 0.2s;
-    transition: color 0s ease;
-    -webkit-transition: color 0s ease;
-    -moz-transition: color 0s ease;
-    -ms-transition: color 0s ease;
-    -o-transition: color 0s ease;
+    color: var(--bw-noise-hover-text, #ffffff);
+    background-color: var(--bw-noise-hover-bg, #000000);
+    transition: background-color 0.3s ease 0.2s, color 0s ease;
+    -webkit-transition: background-color 0.3s ease 0.2s, color 0s ease;
+    -moz-transition: background-color 0.3s ease 0.2s, color 0s ease;
+    -ms-transition: background-color 0.3s ease 0.2s, color 0s ease;
+    -o-transition: background-color 0.3s ease 0.2s, color 0s ease;
 }
 
 .bw-button-box.noise.n-1 .bw-btn-n-1:hover div:nth-child(2) div:nth-child(1) {
@@ -766,7 +801,9 @@
 .bw-button-box.noise.n-2 {
     font-size: 18px;
     position: relative;
-    width: 200px;
+    min-width: 200px;
+    width: max-content;
+    max-width: 100%;
     height: 60px;
     text-align: center;
     box-sizing: border-box;
@@ -780,32 +817,45 @@
     margin: 0;
 }
 
-.bw-button-box.noise.n-2 div {
-    line-height: 57px;
+.bw-button-box.noise.n-2 .bw-btn-n-2 {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.bw-button-box.noise.n-2 .bw-btn-n-2 > div {
+    line-height: 1.2;
     position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    width: 200px;
-    height: 60px;
+    width: 100%;
+    height: 100%;
+    white-space: nowrap;
+    padding: 0 24px;
 }
 
-.bw-button-box.noise.n-2 div:nth-child(1) {
+.bw-button-box.noise.n-2 .bw-btn-n-2 > div:nth-child(1) {
     background-color: #ffffff;
     top: 0;
-    left: 0px;
+    left: 0;
 }
 
-.bw-button-box.noise.n-2 div:nth-child(2) {
+.bw-button-box.noise.n-2 .bw-btn-n-2 > div:nth-child(2) {
     color: #000000;
-    left: -100px;
+    left: -50%;
     top: 0;
-    width: 400px;
-    height: 60px;
+    width: 200%;
+    height: 100%;
 }
 
-.bw-button-box.noise.n-2:hover div:nth-child(1) {
+.bw-button-box.noise.n-2:hover .bw-btn-n-2 > div:nth-child(1) {
     animation: b12_3d_glitch_bg 0.3s linear;
     -webkit-animation: b12_3d_glitch_bg 0.3s linear;
     -moz-animation: b12_3d_glitch_bg 0.3s linear;
@@ -814,7 +864,7 @@
     -moz-animation-fill-mode: forwards;
 }
 
-.bw-button-box.noise.n-2:hover div:nth-child(2) {
+.bw-button-box.noise.n-2:hover .bw-btn-n-2 > div:nth-child(2) {
     color: #000000;
     animation: b12_3d_glitch 0.3s linear;
     -webkit-animation: b12_3d_glitch 0.3s linear;
@@ -994,12 +1044,15 @@
 /* Noise > Type3 */
 
 .bw-button-box.noise.n-3 .bw-btn-n-3 {
+    display: inline-block;
     overflow: hidden;
     color: #151515;
     font-size: 22px;
     font-weight: 700;
     letter-spacing: 2px;
     line-height: 2.4;
+    white-space: nowrap;
+    max-width: 100%;
     transition: unset !important;
     -webkit-transition: unset !important;
     -moz-transition: unset !important;
@@ -1541,6 +1594,7 @@
     line-height: 2;
     letter-spacing: 2px;
     font-weight: 800;
+    white-space: nowrap;
     transform: scale(0.95);
     -webkit-transform: scale(0.95);
     -moz-transform: scale(0.95);
@@ -1585,8 +1639,9 @@
     letter-spacing: 1px;
     text-decoration: none;
     font-weight: 900;
-    line-height: 20px;
+    line-height: 1.4;
     text-transform: uppercase;
+    white-space: nowrap;
 }
 
 .bw-button-box.fancy.f-2:hover .bw-btn {
@@ -1730,7 +1785,9 @@
     border: 0;
     font-size: 18px;
     position: relative;
-    width: 200px;
+    min-width: 200px;
+    width: max-content;
+    max-width: 100%;
     height: 50px;
     text-align: center;
     box-sizing: border-box;
@@ -1746,15 +1803,21 @@
 
 .bw-button-box.fancy.f-3 .bw-btn div {
     position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     width: 100%;
-    height: 50px;
-    padding: 10px;
+    height: 100%;
+    padding: 0 20px;
     border: #000000 solid 1px;
     pointer-events: none;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
+    line-height: 1.2;
+    white-space: nowrap;
 }
 
 .bw-button-box.fancy.f-3 .bw-btn div:nth-child(1) {
@@ -1829,7 +1892,9 @@
     border: 0;
     font-size: 18px;
     position: relative;
-    width: 200px;
+    min-width: 200px;
+    width: max-content;
+    max-width: 100%;
     height: 50px;
     text-align: center;
     box-sizing: border-box;
@@ -1853,15 +1918,21 @@
 
 .bw-button-box.fancy.f-4 .bw-btn div {
     position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     width: 100%;
-    height: 50px;
+    height: 100%;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     pointer-events: none;
-    padding: 10px;
+    padding: 0 20px;
     border: #000000 solid 1px;
+    line-height: 1.2;
+    white-space: nowrap;
 }
 
 .bw-button-box.fancy.f-4 .bw-btn div:nth-child(1) {
@@ -1937,13 +2008,15 @@
     text-transform: uppercase;
     padding: 24px 28px;
     min-width: 220px;
-    line-height: 20px;
+    line-height: 1.4;
 }
 
 .bw-button-box.fancy.f-5 .bw-btn {
     color: #000;
     font-size: 16px;
     font-weight: 300;
+    line-height: 1.4;
+    white-space: nowrap;
 }
 
 .bw-button-box.fancy.f-5 .bw-btn:hover {
@@ -1992,7 +2065,7 @@
 
 .bw-button-box.abstract.a-1 .bw-btn {
     margin: auto;
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
     padding: 32px 44px 32px 24px;
@@ -2004,21 +2077,27 @@
     color: #fff;
     letter-spacing: 1px;
     text-align: center;
-    line-height: 0;
+    line-height: 1.2;
     font-weight: 300;
     overflow: hidden;
     cursor: pointer;
-    will-change: transform;
-    transition: all 0.25s ease-out;
-    -webkit-transition: all 0.25s ease-out;
-    -moz-transition: all 0.25s ease-out;
-    -ms-transition: all 0.25s ease-out;
-    -o-transition: all 0.25s ease-out;
+    white-space: nowrap;
+    width: auto;
+    max-width: 100%;
+    box-sizing: border-box;
+    will-change: transform, background-color, color;
+    transition: background-color 0.25s ease-out, color 0.25s ease-out, box-shadow 0.25s ease-out, border-radius 0.25s ease-out;
+    -webkit-transition: background-color 0.25s ease-out, color 0.25s ease-out, box-shadow 0.25s ease-out, border-radius 0.25s ease-out;
+    -moz-transition: background-color 0.25s ease-out, color 0.25s ease-out, box-shadow 0.25s ease-out, border-radius 0.25s ease-out;
+    -ms-transition: background-color 0.25s ease-out, color 0.25s ease-out, box-shadow 0.25s ease-out, border-radius 0.25s ease-out;
+    -o-transition: background-color 0.25s ease-out, color 0.25s ease-out, box-shadow 0.25s ease-out, border-radius 0.25s ease-out;
 }
 
 .bw-button-box.abstract.a-1 .bw-btn:hover {
-    background: #D2D2D2;
-    color: #222;
+    background: #f1f1f1;
+    color: #000;
+    /* Keep footprint stable - do not change padding/width on hover. */
+    padding: 32px 44px 32px 24px;
 }
 
 .bw-button-box.abstract.a-1 .bw-btn span {
@@ -2075,13 +2154,10 @@
     background: #f9f9f9;
     border-radius: 20px;
     padding: 3px;
+    margin-right: 0;
+    margin-left: 42px;
     animation: rippleHover 0.8s linear infinite;
     -webkit-animation: rippleHover 0.8s linear infinite;
-    transition: all 0.3s ease-out;
-    -webkit-transition: all 0.3s ease-out;
-    -moz-transition: all 0.3s ease-out;
-    -ms-transition: all 0.3s ease-out;
-    -o-transition: all 0.3s ease-out;
 }
 
 @-webkit-keyframes rippleHover {
@@ -2115,6 +2191,8 @@
     transition: all 0.2s linear;
     min-width: 220px;
     text-align: center;
+    line-height: 1.4;
+    white-space: nowrap;
 }
 
 .bw-button-box.abstract.a-2 .bw-btn .btx-a1 {
@@ -2137,7 +2215,9 @@
 /* Gradient */
 
 .bw-button-box.gradient .bw-btn {
-    display: block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     width: auto;
     font-size: 14px;
     line-height: 2;
@@ -2151,30 +2231,25 @@
     padding: 12px 34px;
     border-radius: 50px;
     box-shadow: 0 4px 22px -4px rgba(0, 0, 0, 0.17);
-    transition: all .6s ease-in-out;
-    -webkit-transition: all .6s ease-in-out;
-    -moz-transition: all .6s ease-in-out;
-    -ms-transition: all .6s ease-in-out;
-    -o-transition: all .6s ease-in-out;
+    white-space: nowrap;
+    --bw-gradient-color-1: #000;
+    --bw-gradient-color-2: #f9f9f9;
+    background-image: linear-gradient(to right, var(--bw-gradient-color-1), #444, #f7f7f7, var(--bw-gradient-color-2));
+    transition: background-position .6s ease-in-out, box-shadow .6s ease-in-out, color .6s ease-in-out, border-radius .6s ease-in-out;
+    -webkit-transition: background-position .6s ease-in-out, box-shadow .6s ease-in-out, color .6s ease-in-out, border-radius .6s ease-in-out;
+    -moz-transition: background-position .6s ease-in-out, box-shadow .6s ease-in-out, color .6s ease-in-out, border-radius .6s ease-in-out;
+    -ms-transition: background-position .6s ease-in-out, box-shadow .6s ease-in-out, color .6s ease-in-out, border-radius .6s ease-in-out;
+    -o-transition: background-position .6s ease-in-out, box-shadow .6s ease-in-out, color .6s ease-in-out, border-radius .6s ease-in-out;
 }
 
 .bw-button-box.gradient .bw-btn:hover {
     background-position: 100% 0;
     color: #000;
     box-shadow: 0 4px 22px -4px rgba(0, 0, 0, 0.23);
-    transition: all .6s ease-in-out;
-    -webkit-transition: all .6s ease-in-out;
-    -moz-transition: all .6s ease-in-out;
-    -ms-transition: all .6s ease-in-out;
-    -o-transition: all .6s ease-in-out;
 }
 
 .bw-button-box.gradient .bw-btn:focus {
     outline: none;
-}
-
-.bw-button-box.gradient .bw-btn {
-    background-image: linear-gradient(to right, #000, #444, #f7f7f7, #f9f9f9);
 }
 
 
@@ -2182,19 +2257,19 @@
 
 .bw-button-box.simple {
     padding: 0 4px;
-    line-height: 1px;
+    line-height: 1;
 }
 
 .bw-button-box.simple .bw-btn {
     font-size: 14px;
     color: #222;
-    line-height: 10px;
     padding: 3px;
     text-transform: capitalize;
     letter-spacing: 1.3px;
-    line-height: 2;
+    line-height: 1.4;
     font-weight: 500;
-    display: block;
+    display: inline-block;
+    white-space: nowrap;
 }
 
 .bw-button-box.simple .bw-btn:before {
@@ -2265,118 +2340,43 @@
 }
 
 .bw-button-box .bw-custom-btn .bw-custom-icon-shape svg {
-    height: auto;
+    height: 1em;
+    max-height: 100%;
 }
 
 
-/* General Alignment */
+/* General Alignment
+ * Elementor responsive Alignment drives `.bw-button-wrapper { text-align }`.
+ * Keep the button inline-block so left/center/right work on all breakpoints.
+ */
 
 .bw-button-box.left,
 .bw-button-box.right,
 .bw-button-box.center {
-    display: block;
-    width: fit-content;
-}
-
-.bw-button-box.center {
-    margin: auto;
-}
-
-.bw-button-box.right {
-    float: right;
-}
-
-.bw-button-box.left {
-    float: left;
+    display: inline-block;
+    float: none;
+    width: auto;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .bw-button-box.noise.n-1 .bw-btn.bw-btn-n-1,
 .bw-button-box.noise.n-2 .bw-btn.bw-btn-n-2 {
-    width: inherit;
+    width: 100%;
 }
 
 .bw-button-box.simple,
 .bw-button-box.abstract.a-1,
 .bw-button-box.fancy.f-5,
 .bw-button-box.fancy.f-2 {
-    /* display: block; */
-    width: fit-content;
-}
-
-.bw-button-box.simple.center,
-.bw-button-box.abstract.a-1.center,
-.bw-button-box.fancy.f-5.center,
-.bw-button-box.fancy.f-2.center {
-    display: block;
-    float: unset;
-    width: fit-content;
-    margin-right: auto;
-    margin-left: 0;
-    margin: auto;
-}
-
-.bw-button-box.noise.n-1.center,
-.bw-button-box.noise.n-2.center {
-    display: block;
-    float: unset;
-    margin-right: auto;
-    margin-left: 0;
-    margin: auto;
-}
-
-.bw-button-box.simple.right,
-.bw-button-box.abstract.a-1.right,
-.bw-button-box.fancy.f-5.right,
-.bw-button-box.fancy.f-2.right {
-    /* float: right; */
-    display: block;
-    float: unset;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: 0;
-}
-
-.bw-button-box.noise.n-1.right,
-.bw-button-box.noise.n-2.right {
-    /* float: right; */
-    display: block;
-    float: unset;
-    margin-left: auto;
-    margin-right: 0;
-}
-
-.bw-button-box.left {
-    display: block;
-    float: unset;
-    width: fit-content;
-    margin-right: auto;
-    margin-left: 0;
-}
-
-.bw-button-box.right {
-    display: block;
-    float: unset;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: 0;
+    width: auto;
+    max-width: 100%;
 }
 
 .bw-button-box.modern.m-2.left,
 .bw-button-box.modern.m-2.center,
 .bw-button-box.modern.m-2.right {
-    display: flex;
+    display: inline-block;
 }
-
-.bw-button-box.modern.m-2.left {
-    justify-content: flex-start;
-}
-
-.bw-button-box.modern.m-2.center {
-    justify-content: center;
-}
-
-.bw-button-box.modern.m-2.right {
-    justify-content: flex-end;
-}
-
 

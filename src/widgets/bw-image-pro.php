@@ -28,7 +28,7 @@ class ImagePro extends \Elementor\Widget_Base {
         wp_register_style( 'black-widgets-image', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/image.css', [], BLACK_WIDGETS_VERSION );
 
         // Note that since we can't localize the script this early, GSAP related functionallities still remian as inline js
-        wp_register_script( 'black-widgets-image', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/image.js', [ 'jquery', 'GSAP', 'GSAP-ScrollTrigger', 'black-widgets-simple-parallax' ], BLACK_WIDGETS_VERSION, true );
+        wp_register_script( 'black-widgets-image', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/image.js', [ 'jquery', 'black-widgets-simple-parallax' ], BLACK_WIDGETS_VERSION, true );
     }
 
     /**
@@ -92,7 +92,34 @@ class ImagePro extends \Elementor\Widget_Base {
     }
 
     public function get_script_depends() {
-        return [ 'black-widgets-image' ];
+        // simple-parallax must be listed so Extra Image Parallax always has the library.
+        // Avoid reading instance settings during early Elementor enqueue.
+        $deps = [ 'black-widgets-simple-parallax', 'black-widgets-image' ];
+
+        if ( $this->is_gsap_enabled() ) {
+            $deps[] = 'GSAP';
+            $deps[] = 'GSAP-ScrollTrigger';
+        }
+
+        return $deps;
+    }
+
+    /**
+     * Raw settings safe when Elementor data is not initialized yet.
+     *
+     * @return array
+     */
+    protected function get_early_settings(): array {
+        return black_widgets_elementor_raw_settings( $this );
+    }
+
+    /**
+     * Whether GSAP is enabled in plugin options with both CDN URLs set.
+     *
+     * @return bool
+     */
+    public function is_gsap_enabled() {
+        return \Modernaweb\BlackWidgets\Plugin_Options::is_gsap_ready();
     }
 
     protected function is_dynamic_content(): bool {
@@ -172,8 +199,9 @@ class ImagePro extends \Elementor\Widget_Base {
         $this->add_group_control(
             Group_Control_Image_Size::get_type(),
             [
-                'name' => 'thumbnail', // // Usage: `{name}_size` and `{name}_custom_dimension`, in this case `thumbnail_size` and `thumbnail_custom_dimension`.
-                'include' => [ 'thumbnail', 'medium', 'large', 'full' ],
+                'name' => 'thumbnail', // Usage: `{name}_size` and `{name}_custom_dimension` → `thumbnail_size`, `thumbnail_custom_dimension`.
+                'exclude' => [ 'custom' ],
+                'include' => [],
                 'default' => 'full',
             ]
         );
@@ -212,9 +240,8 @@ class ImagePro extends \Elementor\Widget_Base {
             ]
         );
 
-        $options = get_option('plugin_options') ? get_option('plugin_options') : '';
-        $gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
-        if( isset($gsap_options) && !empty($gsap_options) ) {
+        $gsap_on = \Modernaweb\BlackWidgets\Plugin_Options::is_gsap_toggle_on();
+        if ( $gsap_on ) {
 
             // Enable Image Movement Animate
             $this->add_control(
@@ -1556,12 +1583,10 @@ class ImagePro extends \Elementor\Widget_Base {
         // Variables
         $type 	           			= isset($settings['widget_type']) 						? $settings['widget_type'] 							: 'type';
         $alignment 	       			= isset($settings['widget_alignment']) 					? $settings['widget_alignment'] 					: '';
-        $image_URL 	       			= isset( $settings['image']['url']) 					? $settings['image']['url'] 						: '';
-        $thumbnail 	       			= isset( $settings['thumbnail']) 					? $settings['thumbnail'] 						: 'full';
         $image_link 	   			= isset($settings['image_link']) 						? $settings['image_link'] 							: '';
         // $img_url 	   				= isset($settings['image_link_url'])					? $settings['image_link_url']						: '';
-        $target            			= isset($settings['image_link_url']['is_external']) 	? 'target="_blank"' 								: '';
-        $nofollow          			= isset($settings['image_link_url']['nofollow']) 		? ' rel="nofollow"' 								: '';
+        $target            			= !empty($settings['image_link_url']['is_external']) 	? 'target="_blank"' 								: '';
+        $nofollow          			= !empty($settings['image_link_url']['nofollow']) 		? ' rel="nofollow"' 								: '';
         // Paralax
         $parallax					= isset($settings['image_parllax'])						? $settings['image_parllax']						: '';
         // $imagelink					= isset($settings['bw_image_link']['url'])				? $settings['bw_image_link']['url']						: '';
@@ -1601,13 +1626,9 @@ class ImagePro extends \Elementor\Widget_Base {
         $perspective_child_hover	= isset($settings['perspective_child_hover'])			? $settings['perspective_child_hover']				: '0px';
         //ID Settings
         $data_id                	= 'bw_' . uniqid();
-        $script_id              	= '#' . $data_id;
-        $options = get_option('plugin_options') ? get_option('plugin_options') : '';
-        $gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
-        if( isset($gsap_options) && !empty($gsap_options) ) {
-            $image_movement 			= $settings['image_movement'];
-            $image_movement2 			= $settings['image_movement2'];
-        }
+        $gsap_ready                 = \Modernaweb\BlackWidgets\Plugin_Options::is_gsap_ready();
+        $image_movement  = isset( $settings['image_movement'] ) ? $settings['image_movement'] : '';
+        $image_movement2 = isset( $settings['image_movement2'] ) ? $settings['image_movement2'] : '';
         //Transform Normal Styles
         // Normal Move
         $translatex 				= isset( $move_normal_x["size"] ) 						? $move_normal_x["size"] . $move_normal_x["unit"] : '';
@@ -1662,9 +1683,6 @@ class ImagePro extends \Elementor\Widget_Base {
         //Return all of the styles
         echo "<style>" . esc_html( $normal_transform_style ) . " " . esc_html( $hover_transform_style ) . "</style>";
 
-        $options = get_option('plugin_options') ? get_option('plugin_options') : '';
-        $gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
-
         if ( ! in_array( $alignment, [ 'left', 'center', 'right' ] ) ) {
             $alignment = 'center';
         }
@@ -1676,14 +1694,34 @@ class ImagePro extends \Elementor\Widget_Base {
 
         if ( isset($image_link) && $image_link == 'yes') { echo '<a href="' . esc_url( $settings['image_link_url']['url'] ) . '"' . $target . $nofollow . ' class="bw-image-link">'; } // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
-        echo wp_get_attachment_image(
-            $settings['image']['id'],
-            $thumbnail,
-            false,
-            [
-                'class' => esc_attr( "$parallax bw-img-tag bw-cursor-$cursor" )
-            ]
+        // Second arg is the Image Size group control name (reads thumbnail_size), not the size value.
+        $image_html = Group_Control_Image_Size::get_attachment_image_html(
+            $settings,
+            'thumbnail',
+            'image'
         );
+
+        // Apply classes on the <img> itself (bw-parallax must be on IMG for simpleParallax).
+        $img_classes = trim( ( $parallax === 'bw-parallax' ? 'bw-parallax ' : '' ) . 'bw-img-tag bw-cursor-' . $cursor );
+        if ( $image_html ) {
+            if ( preg_match( '/<img\b[^>]*\bclass="/i', $image_html ) ) {
+                $image_html = preg_replace(
+                    '/(<img\b[^>]*\bclass=")/i',
+                    '$1' . esc_attr( $img_classes ) . ' ',
+                    $image_html,
+                    1
+                );
+            } else {
+                $image_html = preg_replace(
+                    '/<img\b/i',
+                    '<img class="' . esc_attr( $img_classes ) . '"',
+                    $image_html,
+                    1
+                );
+            }
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Elementor image HTML + escaped class names.
+            echo $image_html;
+        }
 
         if ( isset($image_link) && $image_link == 'yes'){ echo '</a>'; }
 
@@ -1691,7 +1729,28 @@ class ImagePro extends \Elementor\Widget_Base {
 
         echo '</div>';
 
-        if ( isset($gsap_options) && !empty($gsap_options) ) {
+        // BC with 1.3.9: ensure parallax initializes even if element_ready timing misses.
+        if ( $parallax === 'bw-parallax' ) {
+            echo '<script>
+			jQuery(function () {
+				if (typeof window.bwInitImageParallax === "function") {
+					window.bwInitImageParallax(document);
+					return;
+				}
+				if (typeof simpleParallax === "undefined") return;
+				var nodes = document.querySelectorAll("img.bw-parallax");
+				for (var i = 0; i < nodes.length; i++) {
+					if (nodes[i] && !nodes[i].closest(".simpleParallax")) {
+						new simpleParallax(nodes[i]);
+					}
+				}
+			});
+			</script>';
+        }
+
+        // Emit ScrollTrigger only when at least one movement timeline is enabled.
+        // Avoids empty scrub triggers for plain Image Pro instances.
+        if ( $gsap_ready && ( $image_movement === 'on' || $image_movement2 === 'on' ) ) {
             $trigger_hook = ! empty( $settings['trigger_hook'] ) ?  $settings['trigger_hook']  : '';
             $trigger_hook2 = ! empty( $settings['trigger_hook2'] ) ?  $settings['trigger_hook2']  : '';
             $trigger_hook3 = ! empty( $settings['trigger_hook3'] ) ? $settings['trigger_hook3']  : '';
@@ -1733,14 +1792,15 @@ class ImagePro extends \Elementor\Widget_Base {
             // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
             echo '<script>
                   	jQuery(window).ready(function($) {
+                        if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
                   		gsap.registerPlugin(ScrollTrigger);
                   		ScrollTrigger.config({ limitCallbacks: true });
                   
                   		const tl = gsap.timeline({
                   			scrollTrigger: {
                   				trigger: "#' . esc_js( $data_id ) . '",
-                  				start: "' . $trigger_hook2 . ' ' . $trigger_hook4  . '", 
-                  				end: "' .  $trigger_hook . ' ' . $trigger_hook3  . '",
+                  				start: "' . esc_js( $trigger_hook2 ) . ' ' . esc_js( $trigger_hook4 )  . '", 
+                  				end: "' .  esc_js( $trigger_hook ) . ' ' . esc_js( $trigger_hook3 )  . '",
                   				scrub: true
                   			}
                   		});
@@ -1751,12 +1811,6 @@ class ImagePro extends \Elementor\Widget_Base {
                   </script>';
             // phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
         }
-
-        if ( $parallax == 'bw-parallax') {
-            echo '<script>
-			</script>';
-        }
-
     }
 
 }

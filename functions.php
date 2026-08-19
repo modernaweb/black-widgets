@@ -401,3 +401,88 @@ function black_widgets_options() {
     require_once( BLACK_WIDGETS_PLUGIN_PATH . 'includes/admin/black-widgets-control-panel.php');
 }
 
+/**
+ * Sanitize raw SVG markup for safe front-end output.
+ *
+ * Uses enshrined/svg-sanitize. Do not pass the result through wp_kses_post() - 
+ * WordPress post kses strips <svg> and empties the markup.
+ *
+ * @param string $raw Raw SVG markup.
+ * @return string Clean SVG markup, or empty string on failure.
+ */
+function black_widgets_sanitize_svg_markup( $raw ) {
+	if ( ! is_string( $raw ) || $raw === '' ) {
+		return '';
+	}
+
+	if ( ! class_exists( '\enshrined\svgSanitize\Sanitizer' ) ) {
+		return '';
+	}
+
+	$sanitizer = new \enshrined\svgSanitize\Sanitizer();
+	$sanitizer->removeRemoteReferences( true );
+	$clean     = $sanitizer->sanitize( $raw );
+
+	if ( $clean === false || $clean === null || $clean === '' ) {
+		return '';
+	}
+
+	return $clean;
+}
+
+/**
+ * Sanitize an Elementor repeater item `_id` for safe use in CSS class names.
+ *
+ * Blocks attribute-breakout XSS when `_id` is tampered (e.g. intercepted Elementor save).
+ * Keeps only A-Z, a-z, 0-9, underscore, and hyphen - matching normal Elementor repeater IDs.
+ *
+ * @param mixed $id Raw repeater `_id`.
+ * @return string
+ */
+function black_widgets_sanitize_repeater_id( $id ) {
+	if ( ! is_scalar( $id ) ) {
+		return '';
+	}
+
+	return sanitize_html_class( (string) $id );
+}
+
+/**
+ * Read raw Elementor widget settings without calling get_data()/get_settings_for_display().
+ *
+ * Elementor 3.28+ typed sanitize_settings(array $settings). Widget *type* prototypes
+ * (empty constructor data) leave $data null - get_data() then fatals with null settings.
+ * This helper reflects the private $data property safely for early hooks / register_controls.
+ *
+ * @param object $stack Elementor Controls_Stack / Widget instance.
+ * @return array<string, mixed>
+ */
+function black_widgets_elementor_raw_settings( $stack ) {
+	if ( ! is_object( $stack ) || ! class_exists( '\Elementor\Controls_Stack' ) ) {
+		return [];
+	}
+
+	if ( ! $stack instanceof \Elementor\Controls_Stack ) {
+		return [];
+	}
+
+	try {
+		$ref = new \ReflectionClass( \Elementor\Controls_Stack::class );
+		if ( ! $ref->hasProperty( 'data' ) ) {
+			return [];
+		}
+		$prop = $ref->getProperty( 'data' );
+		$prop->setAccessible( true );
+		$data = $prop->getValue( $stack );
+	} catch ( \Throwable $e ) {
+		return [];
+	}
+
+	if ( ! is_array( $data ) ) {
+		return [];
+	}
+
+	$settings = $data['settings'] ?? [];
+	return is_array( $settings ) ? $settings : [];
+}
+

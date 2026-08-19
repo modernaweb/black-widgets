@@ -3,16 +3,7 @@
  * included in this file.
  */
  
-.toplevel_page_black-widgets img {
-    max-height: 20px !important;
-    z-index: 999 !important;
-    opacity: 1 !important;
-    max-width: 50px;
-}
- 
-#adminmenu .toplevel_page_black-widgets img {
-    padding: 7px 0 0 !important;
-}
+/* Menu icon sizing lives in black-widgets-admin-menu.css (loaded globally). */
 
 body.toplevel_page_black-widgets .bw-box-backend {
     max-width: 800px;
@@ -83,26 +74,52 @@ body.toplevel_page_black-widgets .bw-box-backend .bw-btn:hover {
 }
 
 
- #elementor-panel-category-black_widgets .elementor-element {
-     background: #0C0D0E;
-     /* background: linear-gradient(-45deg, #000 0%, #222 50%, #000 100%); */
-     color: #9DA5AE;
-     transition: all .02s ease !important;
-     border: 0 !important;
- }
- 
- #elementor-panel-category-black_widgets .elementor-element:hover {
-    background: #000 !important;
+/* Category grid + search results (tagged via black-widgets-editor-panel.js / data attrs). */
+#elementor-panel-category-black_widgets .elementor-element,
+#elementor-panel .elementor-element.bw-panel-widget,
+#elementor-panel .elementor-element[data-widget_type^="b_"],
+#elementor-panel .elementor-element[data-widget-type^="b_"],
+#elementor-panel .elementor-element[data-widget^="b_"] {
+	background: #0C0D0E;
+	color: #9DA5AE;
+	transition: all .02s ease !important;
+	border: 0 !important;
 }
 
- #elementor-panel-category-black_widgets .elementor-element .icon, #elementor-panel-category-black_widgets .elementor-element .title {
-     color: #9DA5AE;
-     transition: all .3s ease !important;
- }
- 
- #elementor-panel-category-black_widgets .elementor-element:hover .icon, #elementor-panel-category-black_widgets .elementor-element:hover .title {
-     color: #fff;
- }
+#elementor-panel-category-black_widgets .elementor-element:hover,
+#elementor-panel .elementor-element.bw-panel-widget:hover,
+#elementor-panel .elementor-element[data-widget_type^="b_"]:hover,
+#elementor-panel .elementor-element[data-widget-type^="b_"]:hover,
+#elementor-panel .elementor-element[data-widget^="b_"]:hover {
+	background: #000 !important;
+}
+
+#elementor-panel-category-black_widgets .elementor-element .icon,
+#elementor-panel-category-black_widgets .elementor-element .title,
+#elementor-panel .elementor-element.bw-panel-widget .icon,
+#elementor-panel .elementor-element.bw-panel-widget .title,
+#elementor-panel .elementor-element[data-widget_type^="b_"] .icon,
+#elementor-panel .elementor-element[data-widget_type^="b_"] .title,
+#elementor-panel .elementor-element[data-widget-type^="b_"] .icon,
+#elementor-panel .elementor-element[data-widget-type^="b_"] .title,
+#elementor-panel .elementor-element[data-widget^="b_"] .icon,
+#elementor-panel .elementor-element[data-widget^="b_"] .title {
+	color: #9DA5AE;
+	transition: all .3s ease !important;
+}
+
+#elementor-panel-category-black_widgets .elementor-element:hover .icon,
+#elementor-panel-category-black_widgets .elementor-element:hover .title,
+#elementor-panel .elementor-element.bw-panel-widget:hover .icon,
+#elementor-panel .elementor-element.bw-panel-widget:hover .title,
+#elementor-panel .elementor-element[data-widget_type^="b_"]:hover .icon,
+#elementor-panel .elementor-element[data-widget_type^="b_"]:hover .title,
+#elementor-panel .elementor-element[data-widget-type^="b_"]:hover .icon,
+#elementor-panel .elementor-element[data-widget-type^="b_"]:hover .title,
+#elementor-panel .elementor-element[data-widget^="b_"]:hover .icon,
+#elementor-panel .elementor-element[data-widget^="b_"]:hover .title {
+	color: #fff;
+}
  
  
 /* BLack Widgets Settings */
@@ -244,12 +261,14 @@ body.toplevel_page_black-widgets .bw-box-backend .bw-btn:hover {
     box-shadow: 0 14px 45px -14px #000 !important;
 }
 
-.gsap-cdn {
+tr.gsap-cdn,
+tr.gsap-dependent {
     display: none;
 }
 
-.gsap-cdn.enable {
-    display: block;
+tr.gsap-cdn.bw-gsap-child-visible,
+tr.gsap-dependent.bw-gsap-child-visible {
+    display: table-row;
 }
 
 #bw-wrap .form-table input[type=text] {

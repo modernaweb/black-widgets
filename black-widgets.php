@@ -4,7 +4,9 @@
  * Plugin URI: https://modernaweb.net/black-widgets
  * Description: Build web pages with black widgets.
  * Author: Modernaweb Studio
- * Version: 1.4.0-dev
+ * Version: 1.4.0
+ * Requires at least: 6.0
+ * Requires PHP: 7.4
  * Author URI: https://modernaweb.net/
  * License: GPLv3 or later
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -24,12 +26,11 @@ if (!defined('ABSPATH')) {
 define( 'BLACK_WIDGETS_PLUGIN_BASENAME', plugin_basename(__FILE__));
 define( 'BLACK_WIDGETS_PLUGIN_PATH', trailingslashit(plugin_dir_path(__FILE__)));
 define( 'BLACK_WIDGETS_PLUGIN_URL', trailingslashit(plugins_url('/', __FILE__)));
-define( 'BLACK_WIDGETS_VERSION', '1.3.92' );
-define( 'BLACK_WIDGETS_ASSET_PATH', wp_upload_dir()['basedir'] . '/black-widgets');
-define( 'BLACK_WIDGETS_ASSET_URL', wp_upload_dir()['baseurl'] . '/black-widgets');
+define( 'BLACK_WIDGETS_VERSION', '1.4.0' );
 
 require_once BLACK_WIDGETS_PLUGIN_PATH . 'vendor/autoload.php';
 
+require plugin_dir_path( __FILE__ ) . 'src/class-plugin-options.php';
 require plugin_dir_path( __FILE__ ) . 'src/main.php';
 require plugin_dir_path( __FILE__ ) . 'functions.php';
 
@@ -46,14 +47,24 @@ function black_widgets_activate() {
 
 
 function black_widgets_redirect() {
-    if (get_option('black_widgets_do_activation_redirect', false)) {
-		delete_option('black_widgets_do_activation_redirect');
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-        if(!isset($_GET['activate-multi'])) {
-			wp_redirect("admin.php?page=black-widgets");
-            exit;
-		}
+	if ( ! get_option( 'black_widgets_do_activation_redirect', false ) ) {
+		return;
 	}
+
+	// Only privileged users should be bounced into settings after activate.
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+
+	delete_option( 'black_widgets_do_activation_redirect' );
+
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- WP core activate-multi flag.
+	if ( isset( $_GET['activate-multi'] ) ) {
+		return;
+	}
+
+	wp_safe_redirect( admin_url( 'admin.php?page=black-widgets' ) );
+	exit;
 }
 
 

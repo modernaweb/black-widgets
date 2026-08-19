@@ -7,3 +7,11 @@
     opacity: 0;
     transition: opacity 0.7s ease-out;
 }
+
+@media (prefers-reduced-motion: reduce) {
+    .bw-text-animate-content {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+}

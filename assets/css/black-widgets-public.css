@@ -141,13 +141,28 @@
 }
 
 
-/* Blur Class */
-.bw-blur > .elementor-widget-wrap {
+/* Blur Class - classic columns + Elementor containers + widget-level */
+.bw-blur > .elementor-widget-wrap,
+.bw-blur.e-con,
+.bw-blur > .e-con-inner,
+.bw-blur.elementor-widget,
+.elementor-widget.bw-blur > .elementor-widget-container {
     backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
 }
 
-/* extra margin */
-.no-margin {
+/* Extra margin removal - columns, containers, and widgets */
+.no-margin,
+.no-margin.elementor-widget,
+.no-margin.e-con,
+.elementor-widget.no-margin,
+.elementor-column.no-margin,
+.e-con.no-margin {
+    margin-bottom: 0 !important;
+}
+
+.no-margin.elementor-widget > .elementor-widget-container,
+.elementor-widget.no-margin > .elementor-widget-container {
     margin-bottom: 0 !important;
 }
 

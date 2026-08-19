@@ -205,9 +205,10 @@ class BlockQuote extends \Elementor\Widget_Base {
         $this->add_group_control(
             Group_Control_Image_Size::get_type(),
             [
-                'name' => 'image_widget_size',
-                'include' => [ 'thumbnail', 'medium', 'large', 'full' ],
-                'default' => 'medium',
+                'name' => 'thumbnail', // Usage: `{name}_size` → `thumbnail_size` (BC with 1.3.9).
+                'exclude' => [ 'custom' ],
+                'include' => [],
+                'default' => 'full',
                 'condition' => [
                     'quote_type' => [ 'custom' ],
                 ],
@@ -1035,19 +1036,17 @@ class BlockQuote extends \Elementor\Widget_Base {
                 break;
             default:
 
-                $image_id = $settings['image_widget']['id'] ?? null;
-                $image_size = $settings['image_widget_size'] ?? 'full';
+                $image_html = Group_Control_Image_Size::get_attachment_image_html(
+                    $settings,
+                    'thumbnail',
+                    'image_widget'
+                );
 
-                if ($image_id) {
-                    echo wp_get_attachment_image(
-                        $image_id,
-                        $image_size,
-                        false,
-                        [
-                            'class' => 'bw-img-quote',
-                            'alt' => esc_attr__('Image', 'black-widgets'),
-                            'loading' => 'lazy',
-                        ]
+                if ( $image_html ) {
+                    echo str_replace(
+                        'class="',
+                        'class="bw-img-quote ',
+                        $image_html
                     );
                 }
                 break;

@@ -2,7 +2,6 @@
 
 namespace Modernaweb\BlackWidgets\Widgets;
 
-use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
@@ -212,11 +211,11 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'autoplay_delay',
 			[
-				'label'     => __( 'Autoplay Delay (s)', 'black-widgets' ),
+				'label'     => __( 'Autoplay Delay (ms)', 'black-widgets' ),
 				'type'      => Controls_Manager::NUMBER,
 				'min'       => 1,
 				'step'      => 1,
-				'default'   => 5,
+				'default'   => 6000,
 				'condition' => [
 					'autoplay' => 'yes',
 				],
@@ -362,7 +361,7 @@ class GSAPTab extends Widget_Base {
                         'tab_description' => __( 'This is a short description for sample tab 1.', 'black-widgets' ),
                         'media_type'      => 'image',
                         'tab_image'       => [
-                            'url' => 'https://c.pxhere.com/photos/a1/56/pumpkin_vegetables_autumn_october_basket_savoy_potato_yam-1031553.jpg!d',
+                            'url' => 'https://placehold.co/1024x1024/171717/EEE/png',
                         ],
                         'read_more_text'  => __( 'Read More', 'black-widgets' ),
                         'read_more_link'  => [ 'url' => 'https://example.com' ],
@@ -377,7 +376,7 @@ class GSAPTab extends Widget_Base {
                         'tab_description' => __( 'This is a short description for sample tab 2.', 'black-widgets' ),
                         'media_type'      => 'image',
                         'tab_image'       => [
-                            'url' => 'https://c.pxhere.com/photos/3c/85/jetty_pier_sea_sunset_dusk_dawn_ocean_water-764479.jpg!d',
+                            'url' => 'https://placehold.co/1024x1024/171717/EEE/png',
                         ],
                         'read_more_text'  => __( 'Learn More', 'black-widgets' ),
                         'read_more_link'  => [ 'url' => 'https://example.com' ],
@@ -392,7 +391,7 @@ class GSAPTab extends Widget_Base {
                         'tab_description' => __( 'This is a short description for sample tab 3.', 'black-widgets' ),
                         'media_type'      => 'image',
                         'tab_image'       => [
-                            'url' => 'https://c.pxhere.com/photos/a4/8f/mount_merapi_volcano_indonesia_lava_volcanic_dangerous_volcanism_cloud_covered-1126537.jpg!d',
+                            'url' => 'https://placehold.co/1024x1024/171717/EEE/png',
                         ],
                         'read_more_text'  => __( 'Learn More', 'black-widgets' ),
                         'read_more_link'  => [ 'url' => 'https://example.com' ],
@@ -527,7 +526,7 @@ class GSAPTab extends Widget_Base {
                         'tab_content'    => __( 'This is the description for vertical tab 1.', 'black-widgets' ),
                         'media_type'     => 'image',
                         'tab_image'      => [
-                            'url' => 'https://c.pxhere.com/photos/a1/56/pumpkin_vegetables_autumn_october_basket_savoy_potato_yam-1031553.jpg!d',
+                            'url' => 'https://placehold.co/1024x1024/171717/EEE/png',
                         ],
                         'read_more_text' => __( 'Read More', 'black-widgets' ),
                         'read_more_link' => [ 'url' => 'https://example.com' ],
@@ -541,7 +540,7 @@ class GSAPTab extends Widget_Base {
                         'tab_content'    => __( 'This is the description for vertical tab 2.', 'black-widgets' ),
                         'media_type'     => 'image',
                         'tab_image'      => [
-                            'url' => 'https://c.pxhere.com/photos/3c/85/jetty_pier_sea_sunset_dusk_dawn_ocean_water-764479.jpg!d',
+                            'url' => 'https://placehold.co/1024x1024/171717/EEE/png',
                         ],
                         'read_more_text' => __( 'Learn More', 'black-widgets' ),
                         'read_more_link' => [ 'url' => 'https://example.com' ],
@@ -555,7 +554,7 @@ class GSAPTab extends Widget_Base {
                         'tab_content'    => __( 'This is the description for vertical tab 3.', 'black-widgets' ),
                         'media_type'     => 'image',
                         'tab_image'      => [
-                            'url' => 'https://c.pxhere.com/photos/a4/8f/mount_merapi_volcano_indonesia_lava_volcanic_dangerous_volcanism_cloud_covered-1126537.jpg!d',
+                            'url' => 'https://placehold.co/1024x1024/171717/EEE/png',
                         ],
                         'read_more_text'  => __( 'Learn More', 'black-widgets' ),
                         'read_more_link'  => [ 'url' => 'https://example.com' ],
@@ -2185,29 +2184,38 @@ class GSAPTab extends Widget_Base {
 	private function render_default_tab( $settings ) {
 		$tabs           = $settings['tabs_default'];
 		$is_autoplay    = $settings['autoplay'] === 'yes';
-		$autoplay_delay = is_numeric( $settings['autoplay_delay'] ) ? (int) $settings['autoplay_delay'] : 5;
+		$autoplay_delay = is_numeric( $settings['autoplay_delay'] ) ? (int) $settings['autoplay_delay'] : 6000;
+		$widget_id      = $this->get_id();
 		?>
 
         <div class="black-tab black-tab--default <?php echo $is_autoplay ? 'black-tab--autoplay' : ''; ?>"
-			<?php if ( $is_autoplay ): ?> data-delay="<?php echo esc_attr( $autoplay_delay * 1000 ); ?>"<?php endif; ?>>
+			<?php if ( $is_autoplay ): ?> data-delay="<?php echo esc_attr( $autoplay_delay ); ?>"<?php endif; ?>>
             <div class="black-tab__inner">
                 <div class="black-tab__left">
                     <div class="black-tab__content">
 						<?php echo wp_kses_post( $settings['content'] ); ?>
                     </div>
 
-                    <div class="black-tab__tabs">
-						<?php foreach ( $tabs
-
-						as $index => $tab ): ?>
-                        <div class="black-tab__tab" data-tab-index="<?php echo esc_attr( $index ); ?>">
+                    <div class="black-tab__tabs" role="tablist" aria-orientation="vertical">
+						<?php foreach ( $tabs as $index => $tab ):
+							$tab_id    = 'bw-tab-' . $widget_id . '-' . $index;
+							$panel_id  = 'bw-tabpanel-' . $widget_id . '-' . $index;
+							$is_active = $index === 0;
+							?>
+                        <div class="black-tab__tab<?php echo $is_active ? ' black-tab__tab--active' : ''; ?>"
+                             role="tab"
+                             id="<?php echo esc_attr( $tab_id ); ?>"
+                             aria-controls="<?php echo esc_attr( $panel_id ); ?>"
+                             aria-selected="<?php echo $is_active ? 'true' : 'false'; ?>"
+                             tabindex="<?php echo $is_active ? '0' : '-1'; ?>"
+                             data-tab-index="<?php echo esc_attr( $index ); ?>">
                             <div class="black-tab__tab-header">
                                 <<?php echo esc_html( $tab['tab_title_tag'] ?: 'h3' ); ?>
-                                class="black-tab__tab-title<?php echo $index === 0 ? ' black-tab__tab-title--active' : ''; ?>
+                                class="black-tab__tab-title<?php echo $is_active ? ' black-tab__tab-title--active' : ''; ?>
                                 ">
                                     <?php echo esc_html( $tab['tab_title'] ); ?>
                                 </<?php echo esc_html( $tab['tab_title_tag'] ?: 'h3' ); ?>>
-                                <p class="black-tab__tab-description" <?php echo $index === 0 ? '' : 'style="height: 0; opacity: 0;"'; ?>>
+                                <p class="black-tab__tab-description" <?php echo $is_active ? '' : 'style="height: 0; opacity: 0;"'; ?>>
                                     <?php echo esc_html( $tab['tab_description'] ); ?>
                                 </p>
                             </div>
@@ -2219,9 +2227,18 @@ class GSAPTab extends Widget_Base {
                     </div>
                 </div>
                 <div class="black-tab__right">
-                    <?php foreach ( $tabs as $index => $tab ): ?>
-                        <div class="black-tab__media" data-tab-index="<?php echo esc_attr( $index ); ?>"
-                            <?php echo $index === 0 ? '' : 'style="translate: none; rotate: none; scale: none; opacity: 0; transform: translate(0px, 0px); height: 0;"'; ?>>
+                    <?php foreach ( $tabs as $index => $tab ):
+						$tab_id    = 'bw-tab-' . $widget_id . '-' . $index;
+						$panel_id  = 'bw-tabpanel-' . $widget_id . '-' . $index;
+						$is_active = $index === 0;
+						?>
+                        <div class="black-tab__media"
+                             role="tabpanel"
+                             id="<?php echo esc_attr( $panel_id ); ?>"
+                             aria-labelledby="<?php echo esc_attr( $tab_id ); ?>"
+                             data-tab-index="<?php echo esc_attr( $index ); ?>"
+                             <?php echo $is_active ? '' : 'hidden'; ?>
+                            <?php echo $is_active ? '' : 'style="translate: none; rotate: none; scale: none; opacity: 0; transform: translate(0px, 0px); height: 0;"'; ?>>
                             <?php if ( $tab['media_type'] === 'image' && ! empty( $tab['tab_image']['url'] ) ): ?>
                                 <img src="<?php echo esc_url( $tab['tab_image']['url'] ); ?>" alt="<?php echo esc_attr( $tab['tab_title'] ); ?>" class="black-tab__image"/> <?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
                             <?php elseif ( $tab['media_type'] === 'video' && ! empty( $tab['tab_video']['url'] ) ): ?>
@@ -2251,14 +2268,25 @@ class GSAPTab extends Widget_Base {
 
 	private function render_vertical_tab( $settings ) {
 		$is_autoplay    = $settings['autoplay'] === 'yes';
-		$autoplay_delay = is_numeric( $settings['autoplay_delay'] ) ? (int) $settings['autoplay_delay'] : 5;
+		$autoplay_delay = is_numeric( $settings['autoplay_delay'] ) ? (int) $settings['autoplay_delay'] : 6000;
+		$widget_id      = $this->get_id();
 		?>
         <div class="black-tab black-tab--vertical <?php echo $is_autoplay ? 'black-tab--autoplay' : ''; ?>"
-             <?php if ( $is_autoplay ): ?> data-delay="<?php echo esc_attr( $autoplay_delay * 1000 ); ?>"<?php endif; ?>>
+             <?php if ( $is_autoplay ): ?> data-delay="<?php echo esc_attr( $autoplay_delay ); ?>"<?php endif; ?>>
             <div class="black-tab__tabs-wrapper">
-                <div class="black-tab__tabs">
-					<?php foreach ( $settings['tabs_vertical'] as $index => $tab ) : ?>
-                        <div class="black-tab__tab" data-tab-index="<?php echo esc_attr( $index ); ?>">
+                <div class="black-tab__tabs" role="tablist" aria-orientation="horizontal">
+					<?php foreach ( $settings['tabs_vertical'] as $index => $tab ) :
+						$tab_id    = 'bw-tab-' . $widget_id . '-' . $index;
+						$panel_id  = 'bw-tabpanel-' . $widget_id . '-' . $index;
+						$is_active = $index === 0;
+						?>
+                        <div class="black-tab__tab<?php echo $is_active ? ' black-tab__tab--active' : ''; ?>"
+                             role="tab"
+                             id="<?php echo esc_attr( $tab_id ); ?>"
+                             aria-controls="<?php echo esc_attr( $panel_id ); ?>"
+                             aria-selected="<?php echo $is_active ? 'true' : 'false'; ?>"
+                             tabindex="<?php echo $is_active ? '0' : '-1'; ?>"
+                             data-tab-index="<?php echo esc_attr( $index ); ?>">
 							<?php echo esc_html( $tab['tab_title'] ); ?>
                         </div>
 					<?php endforeach; ?>
@@ -2267,8 +2295,11 @@ class GSAPTab extends Widget_Base {
 
             <div class="black-tab__content-area">
 				<?php foreach ( $settings['tabs_vertical'] as $index => $tab ) :
+					$tab_id     = 'bw-tab-' . $widget_id . '-' . $index;
+					$panel_id   = 'bw-tabpanel-' . $widget_id . '-' . $index;
+					$is_active  = $index === 0;
 					$media_type = $tab['media_type'];
-					$media_url = '';
+					$media_url  = '';
 
 					if ( $media_type === 'image' && ! empty( $tab['tab_image']['url'] ) ) {
 						$media_url = esc_url( $tab['tab_image']['url'] );
@@ -2277,7 +2308,12 @@ class GSAPTab extends Widget_Base {
 					}
 
 					?>
-                    <div class="black-tab__panel" data-tab-panel="<?php echo esc_attr( $index ); ?>">
+                    <div class="black-tab__panel<?php echo $is_active ? ' black-tab__panel--active' : ''; ?>"
+                         role="tabpanel"
+                         id="<?php echo esc_attr( $panel_id ); ?>"
+                         aria-labelledby="<?php echo esc_attr( $tab_id ); ?>"
+                         data-tab-panel="<?php echo esc_attr( $index ); ?>"
+                         <?php echo $is_active ? '' : 'hidden'; ?>>
                         <div class="black-tab__text-content">
 							<?php if ( ! empty( $tab['tab_content'] ) ) : ?>
                                 <div class="black-tab__description">
@@ -2307,7 +2343,7 @@ class GSAPTab extends Widget_Base {
                                     </a>
 								<?php endif; ?>
 								<?php if ( $media_type === 'image' ) : ?>
-                                    <img src="<?php echo esc_url( $media_url ); ?>" alt="<?php echo esc_html($tab['tab_title'])?>"/> <?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
+                                    <img src="<?php echo esc_url( $media_url ); ?>" alt="<?php echo esc_attr( $tab['tab_title'] ); ?>"/> <?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 								<?php elseif ( $media_type === 'video' ) : ?>
                                     <video src="<?php echo esc_url( $media_url ); ?>" muted autoplay loop></video>
 								<?php endif; ?>

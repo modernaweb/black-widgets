@@ -228,22 +228,35 @@ class Sentence extends \Elementor\Widget_Base {
 			]
         );
 
-		// Z-Index
 		$repeater->add_control(
-			'sentence_z_index',
+			'advanced_item_styles',
 			[
-				'label' => esc_html__( 'z-index', 'black-widgets' ),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'number' ],
-				'range' => [
-					'number' => [
-						'min' => -2000,
-						'max' => 2000,
-						'step' => 10,
-					],
-				],
+				'label' => esc_html__( 'Advanced styles per item', 'black-widgets' ),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'label_on' => esc_html__( 'On', 'black-widgets' ),
+				'label_off' => esc_html__( 'Off', 'black-widgets' ),
+				'return_value' => 'yes',
+				'default' => '',
+				'render_type' => 'ui',
+				'separator' => 'before',
+				'description' => esc_html__( 'Turn on only when you need to edit per-item styles. Frontend styles still apply when this is off.', 'black-widgets' ),
+			]
+		);
+
+		// Lightweight basics (always available)
+		$repeater->add_control(
+			'sentence_title_solid_color_normal',
+			[
+				'label' => esc_html__( 'Title Color', 'black-widgets' ),
+				'type' => Controls_Manager::COLOR,
+				'render_type' => 'ui',
 				'selectors' => [
-					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}' => 'z-index: {{SIZE}};',
+					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a' => 'color: {{VALUE}}',
+				],
+				'condition'  => [
+					'sentence_type' => [
+						'bw-t-1',
+					],
 				],
 			]
 		);
@@ -266,6 +279,7 @@ class Sentence extends \Elementor\Widget_Base {
 						'step' => 5,
 					],
 				],
+				'render_type' => 'ui',
 				'selectors' => [
 					'{{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}} img' => 'width: {{SIZE}}{{UNIT}};',
 				],
@@ -277,16 +291,46 @@ class Sentence extends \Elementor\Widget_Base {
 			]
 		);
 
-		$repeater->start_controls_tabs('inner_tab'); // Start Tabs
+		// Heavy per-item styles - opt-in to keep Elementor responsive
+		$repeater->add_control(
+			'sentence_z_index',
+			[
+				'label' => esc_html__( 'z-index', 'black-widgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'number' ],
+				'range' => [
+					'number' => [
+						'min' => -2000,
+						'max' => 2000,
+						'step' => 10,
+					],
+				],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}' => 'z-index: {{SIZE}};',
+				],
+				'condition' => [
+					'advanced_item_styles' => 'yes',
+				],
+			]
+		);
+
+		$repeater->start_controls_tabs('inner_tab', [
+			'condition' => [
+				'advanced_item_styles' => 'yes',
+			],
+		]);
 
 		$repeater->start_controls_tab(
 			'normal_style',
 			[
 				'label' => esc_html__( 'Normal', 'black-widgets' ),
+				'condition' => [
+					'advanced_item_styles' => 'yes',
+				],
 			]
 		);
 
-		// Background Color
 		$repeater->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -294,6 +338,14 @@ class Sentence extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Title Background', 'black-widgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}',
+				'fields_options' => [
+					'background' => [
+						'render_type' => 'ui',
+					],
+				],
+				'condition' => [
+					'advanced_item_styles' => 'yes',
+				],
 			]
 		);
 
@@ -301,27 +353,12 @@ class Sentence extends \Elementor\Widget_Base {
 			'bg_hr',
 			[
 				'type' => \Elementor\Controls_Manager::DIVIDER,
-			]
-		);
-
-		// Color
-		$repeater->add_control(
-			'sentence_title_solid_color_normal',
-			[
-				'label' => esc_html__( 'Title Color', 'black-widgets' ),
-				'type' => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a' => 'color: {{VALUE}}',
-				],
-				'condition'  => [
-					'sentence_type' => [
-						'bw-t-1',
-					],
+				'condition' => [
+					'advanced_item_styles' => 'yes',
 				],
 			]
 		);
 
-		// Typography
 		$repeater->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -329,22 +366,20 @@ class Sentence extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Typography', 'black-widgets' ),
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a',
 				'condition'  => [
+					'advanced_item_styles' => 'yes',
 					'sentence_type' => [
 						'bw-t-1',
 					],
 				],
 			]
 		);
-
-		// Text Stroke
-		// Text Gradient/Image/Video
-		// Text Shadow
 
 		$repeater->add_control(
 			'stroke1',
 			[
 				'type' => \Elementor\Controls_Manager::DIVIDER,
 				'condition'  => [
+					'advanced_item_styles' => 'yes',
 					'sentence_type' => [
 						'bw-t-1',
 					],
@@ -352,7 +387,6 @@ class Sentence extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Enable Title Section
 		$repeater->add_control(
 			'widget_stroke_title_enable',
 			[
@@ -361,8 +395,9 @@ class Sentence extends \Elementor\Widget_Base {
 				'label_on' 		=> esc_html__( 'Yes', 'black-widgets' ),
 				'label_off' 	=> esc_html__( 'No !', 'black-widgets' ),
 				'return_value' 	=> 'stroke_enable',
-				// 'default' 		=> 'false',
+				'render_type' => 'ui',
 				'condition'  => [
+					'advanced_item_styles' => 'yes',
 					'sentence_type' => [
 						'bw-t-1',
 					],
@@ -375,10 +410,12 @@ class Sentence extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Text Stroke Color', 'black-widgets' ),
 				'type' => Controls_Manager::COLOR,
+				'render_type' => 'ui',
 				'selectors' => [
 					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a' => '-webkit-text-stroke-color: {{VALUE}}',
 				],
 				'condition'  => [
+					'advanced_item_styles' => 'yes',
 					'widget_stroke_title_enable' => [
 						'stroke_enable',
 					],
@@ -399,10 +436,12 @@ class Sentence extends \Elementor\Widget_Base {
 						'step' => 1,
 					],
 				],
+				'render_type' => 'ui',
 				'selectors' => [
 					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a' => '-webkit-text-stroke-width: {{SIZE}}{{UNIT}} !important;',
 				],
 				'condition'  => [
+					'advanced_item_styles' => 'yes',
 					'widget_stroke_title_enable' => [
 						'stroke_enable',
 					],
@@ -415,6 +454,7 @@ class Sentence extends \Elementor\Widget_Base {
 			[
 				'type' => \Elementor\Controls_Manager::DIVIDER,
 				'condition'  => [
+					'advanced_item_styles' => 'yes',
 					'sentence_type' => [
 						'bw-t-1',
 					],
@@ -430,8 +470,8 @@ class Sentence extends \Elementor\Widget_Base {
 				'label_on' 		=> esc_html__( 'Yes', 'black-widgets' ),
 				'label_off' 	=> esc_html__( 'No !', 'black-widgets' ),
 				'return_value' 	=> 'gradient_enable',
-				// 'default' 		=> 'false',
 				'condition'  => [
+					'advanced_item_styles' => 'yes',
 					'sentence_type' => [
 						'bw-t-1',
 					],
@@ -439,7 +479,6 @@ class Sentence extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$repeater->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -447,7 +486,13 @@ class Sentence extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Title Background', 'black-widgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a',
+				'fields_options' => [
+					'background' => [
+						'render_type' => 'ui',
+					],
+				],
 				'condition'  => [
+					'advanced_item_styles' => 'yes',
 					'gradient_color_title_enable' => [
 						'gradient_enable',
 					],
@@ -460,68 +505,80 @@ class Sentence extends \Elementor\Widget_Base {
 			[
 				'type' => \Elementor\Controls_Manager::DIVIDER,
 				'condition'  => [
-					'sentence_type' => [
-						'bw-t-1',
-					],
+					'advanced_item_styles' => 'yes',
 				],
 			]
 		);
 
-		// Margin
 		$repeater->add_responsive_control(
 			'widget_box_margin_normal',
 			[
 				'label' => esc_html__( 'Margin', 'black-widgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
+				'render_type' => 'ui',
 				'selectors' => [
 					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition' => [
+					'advanced_item_styles' => 'yes',
 				],
 			]
 		);
 
-		// Padding
 		$repeater->add_responsive_control(
 			'widget_box_padding_normal',
 			[
 				'label' => esc_html__( 'Padding', 'black-widgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
+				'render_type' => 'ui',
 				'selectors' => [
 					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition' => [
+					'advanced_item_styles' => 'yes',
 				],
 			]
 		);
 
-		// Border
 		$repeater->add_group_control(
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_box_border_normal',
 				'label' => esc_html__( 'Border', 'black-widgets' ),
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}',
-			]
-		);
-
-		$repeater->add_control(
-			'widget_box_border_radius_normal', //param_name
-			[
-				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
-				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', '%' ],
-				'selectors' => [
-					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				'condition' => [
+					'advanced_item_styles' => 'yes',
 				],
 			]
 		);
 
-		// Box shadow
+		$repeater->add_control(
+			'widget_box_border_radius_normal',
+			[
+				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition' => [
+					'advanced_item_styles' => 'yes',
+				],
+			]
+		);
+
 		$repeater->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_box_box_shadow_normal',
 				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}',
+				'condition' => [
+					'advanced_item_styles' => 'yes',
+				],
 			]
 		);
 
@@ -530,6 +587,7 @@ class Sentence extends \Elementor\Widget_Base {
 			[
 				'type' => \Elementor\Controls_Manager::DIVIDER,
 				'condition'  => [
+					'advanced_item_styles' => 'yes',
 					'sentence_type' => [
 						'bw-t-2',
 					],
@@ -548,6 +606,7 @@ class Sentence extends \Elementor\Widget_Base {
 					'absolut' 	=> esc_html__( 'Absolut', 'black-widgets' ),
 				],
 				'condition'  => [
+					'advanced_item_styles' => 'yes',
 					'sentence_type' => [
 						'bw-t-2',
 					],
@@ -555,7 +614,6 @@ class Sentence extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Alignment
 		$repeater->add_responsive_control(
 			'sentence_image_horizontal_position_normal',
 			[
@@ -572,7 +630,9 @@ class Sentence extends \Elementor\Widget_Base {
 					],
 				],
 				'toggle'    => true,
+				'render_type' => 'ui',
 				'condition'  => [
+					'advanced_item_styles' => 'yes',
 					'sentence_image_position_normal' => [
 						'absolut',
 					],
@@ -580,7 +640,6 @@ class Sentence extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Left
 		$repeater->add_control(
 			'sentence_image_position_left_normal',
 			[
@@ -599,10 +658,12 @@ class Sentence extends \Elementor\Widget_Base {
 						'step' => 5,
 					],
 				],
+				'render_type' => 'ui',
 				'selectors' => [
 					'{{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}' => 'left: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
+					'advanced_item_styles' => 'yes',
 					'sentence_image_horizontal_position_normal' => [
 						'left',
 					],
@@ -610,7 +671,6 @@ class Sentence extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Right
 		$repeater->add_control(
 			'sentence_image_position_right_normal',
 			[
@@ -629,10 +689,12 @@ class Sentence extends \Elementor\Widget_Base {
 						'step' => 5,
 					],
 				],
+				'render_type' => 'ui',
 				'selectors' => [
 					'{{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}' => 'right: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
+					'advanced_item_styles' => 'yes',
 					'sentence_image_horizontal_position_normal' => [
 						'right',
 					],
@@ -640,7 +702,6 @@ class Sentence extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Alignment
 		$repeater->add_responsive_control(
 			'sentence_image_vertical_position_normal',
 			[
@@ -657,7 +718,9 @@ class Sentence extends \Elementor\Widget_Base {
 					],
 				],
 				'toggle'    => true,
+				'render_type' => 'ui',
 				'condition'  => [
+					'advanced_item_styles' => 'yes',
 					'sentence_image_position_normal' => [
 						'absolut',
 					],
@@ -665,7 +728,6 @@ class Sentence extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Top
 		$repeater->add_control(
 			'sentence_image_position_top_normal',
 			[
@@ -684,10 +746,12 @@ class Sentence extends \Elementor\Widget_Base {
 						'step' => 5,
 					],
 				],
+				'render_type' => 'ui',
 				'selectors' => [
 					'{{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}' => 'top: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
+					'advanced_item_styles' => 'yes',
 					'sentence_image_vertical_position_normal' => [
 						'top',
 					],
@@ -695,7 +759,6 @@ class Sentence extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Bottom
 		$repeater->add_control(
 			'sentence_image_position_bottom_normal',
 			[
@@ -714,10 +777,12 @@ class Sentence extends \Elementor\Widget_Base {
 						'step' => 5,
 					],
 				],
+				'render_type' => 'ui',
 				'selectors' => [
 					'{{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}' => 'bottom: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
+					'advanced_item_styles' => 'yes',
 					'sentence_image_vertical_position_normal' => [
 						'bottom',
 					],
@@ -730,10 +795,12 @@ class Sentence extends \Elementor\Widget_Base {
 			'hover_style',
 			[
 				'label' => esc_html__( 'Hover', 'black-widgets' ),
+				'condition' => [
+					'advanced_item_styles' => 'yes',
+				],
 			]
 		);
 
-		// Background Color
 		$repeater->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -741,6 +808,14 @@ class Sentence extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Title Background', 'black-widgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}:hover, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}:hover',
+				'fields_options' => [
+					'background' => [
+						'render_type' => 'ui',
+					],
+				],
+				'condition' => [
+					'advanced_item_styles' => 'yes',
+				],
 			]
 		);
 
@@ -748,19 +823,23 @@ class Sentence extends \Elementor\Widget_Base {
 			'bg_hr_hover',
 			[
 				'type' => \Elementor\Controls_Manager::DIVIDER,
+				'condition' => [
+					'advanced_item_styles' => 'yes',
+				],
 			]
 		);
 
-		// Color
 		$repeater->add_control(
 			'sentence_title_solid_color_hover',
 			[
 				'label' => esc_html__( 'Title Color', 'black-widgets' ),
 				'type' => Controls_Manager::COLOR,
+				'render_type' => 'ui',
 				'selectors' => [
 					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}:hover, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a:hover' => 'color: {{VALUE}}',
 				],
 				'condition'  => [
+					'advanced_item_styles' => 'yes',
 					'sentence_type' => [
 						'bw-t-1',
 					],
@@ -768,7 +847,6 @@ class Sentence extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Typography
 		$repeater->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -776,6 +854,7 @@ class Sentence extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Typography', 'black-widgets' ),
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}:hover, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a:hover',
 				'condition'  => [
+					'advanced_item_styles' => 'yes',
 					'sentence_type' => [
 						'bw-t-1',
 					],
@@ -788,6 +867,7 @@ class Sentence extends \Elementor\Widget_Base {
 			[
 				'type' => \Elementor\Controls_Manager::DIVIDER,
 				'condition'  => [
+					'advanced_item_styles' => 'yes',
 					'sentence_type' => [
 						'bw-t-1',
 					],
@@ -795,66 +875,89 @@ class Sentence extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$repeater->add_responsive_control(
 			'widget_box_margin_hover',
 			[
 				'label' => esc_html__( 'Margin', 'black-widgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
+				'render_type' => 'ui',
 				'selectors' => [
 					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}:hover, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}:hover' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition' => [
+					'advanced_item_styles' => 'yes',
 				],
 			]
 		);
 
-		// Padding
 		$repeater->add_responsive_control(
 			'widget_box_padding_hover',
 			[
 				'label' => esc_html__( 'Padding', 'black-widgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
+				'render_type' => 'ui',
 				'selectors' => [
 					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}:hover, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}:hover' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition' => [
+					'advanced_item_styles' => 'yes',
 				],
 			]
 		);
 
-		// Border
 		$repeater->add_group_control(
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_box_border_hover',
 				'label' => esc_html__( 'Border', 'black-widgets' ),
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}:hover, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}:hover',
-			]
-		);
-
-		$repeater->add_control(
-			'widget_box_border_radius_hover', //param_name
-			[
-				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
-				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', '%' ],
-				'selectors' => [
-					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}:hover, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				'condition' => [
+					'advanced_item_styles' => 'yes',
 				],
 			]
 		);
 
-		// Box shadow
+		$repeater->add_control(
+			'widget_box_border_radius_hover',
+			[
+				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}:hover, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition' => [
+					'advanced_item_styles' => 'yes',
+				],
+			]
+		);
+
 		$repeater->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_box_box_shadow_hover',
 				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}:hover, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}:hover',
+				'condition' => [
+					'advanced_item_styles' => 'yes',
+				],
 			]
 		);
 
 		$repeater->end_controls_tab();
 		$repeater->end_controls_tabs(); // End Tabs
+
+		$this->add_control(
+			'sentence_perf_note',
+			[
+				'type' => \Elementor\Controls_Manager::RAW_HTML,
+				'raw' => esc_html__( 'Tip: leave Advanced styles per item Off unless you need it. Use General Settings for shared typography and color.', 'black-widgets' ),
+				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+			]
+		);
 
 		$this->add_control(
 			'sentence',
@@ -902,6 +1005,7 @@ class Sentence extends \Elementor\Widget_Base {
                 'global' => [
                     'default' => Global_Colors::COLOR_PRIMARY,
                 ],
+				'render_type' => 'ui',
 				'selectors' => [
 					'{{WRAPPER}} .bw-sentence .bw-t-1' => 'color: {{VALUE}}',
 				],
@@ -985,6 +1089,8 @@ class Sentence extends \Elementor\Widget_Base {
 				echo '<'. $title_tag .' class="bw-sentence-items bw-'. esc_attr( $justify ) .'">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					foreach (  $settings['sentence'] as $item ) {
 
+						$repeater_id = black_widgets_sanitize_repeater_id( $item['_id'] ?? '' );
+
 						// inner settings for each item
 						if(isset($item['widget_link_url'])) {
 							$link			= isset($item['widget_link_url']['url'])			? $item['widget_link_url']['url']		: '';
@@ -996,19 +1102,23 @@ class Sentence extends \Elementor\Widget_Base {
 						$gradient_txt		= ($gradient == 'gradient_enable')				? 'bw-gradient'							: '';
 
 						if( $item['sentence_type'] == 'bw-t-1' ) {
-							echo '<span class="elementor-repeater-item-' . esc_attr( $item['_id'] ) . ' '. esc_attr( $item['sentence_type'] ) .' '.$gradient_txt.'">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-								if(isset($item['widget_link_url'])) { echo '<a href="' . esc_url( $item['widget_link_url']['url'] ) . '"' . $target . $nofollow . ' class="bw-item-link' . $type . '">'; } // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-									// echo $item['sentence_title'];
+							echo '<span class="elementor-repeater-item-' . esc_attr( $repeater_id ) . ' ' . esc_attr( $item['sentence_type'] ) . ' ' . esc_attr( $gradient_txt ) . '">';
+								if(isset($item['widget_link_url'])) { echo '<a href="' . esc_url( $item['widget_link_url']['url'] ) . '"' . $target . $nofollow . ' class="bw-item-link' . esc_attr( $type ) . '">'; } // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 									echo esc_html($item['sentence_title']);
 								if(isset($item['widget_link_url'])) { echo '</a>'; }
 							echo '</span>';
 						}
 
 						if( $item['sentence_type'] == 'bw-t-2' ) {
-							$position = isset($item['sentence_image_position'])			? $item['sentence_image_position']		: '';
-							echo '<span class="elementor-repeater-item-' . esc_attr( $item['_id'] ) . ' '. esc_attr( $item['sentence_type'] ).' bw-sentence-'. esc_attr( $position ) .'">';
-								// echo '<img src="' . Group_Control_Image_Size::get_attachment_image_src( $item['sentence_image']['id'], 'full', $settings ) . '">';
-								if(isset($item['widget_link_url'])) { echo '<a href="' . esc_url( $item['widget_link_url']['url'] ) . '"' . $target . $nofollow . ' class="bw-item-link' . $type . '">'; } // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							$position = '';
+							if ( ! empty( $item['sentence_image_position_normal'] ) ) {
+								$position = $item['sentence_image_position_normal'];
+							} elseif ( ! empty( $item['sentence_image_position'] ) ) {
+								// Legacy key fallback for older saved content.
+								$position = $item['sentence_image_position'];
+							}
+							echo '<span class="elementor-repeater-item-' . esc_attr( $repeater_id ) . ' ' . esc_attr( $item['sentence_type'] ) . ' bw-sentence-' . esc_attr( $position ) . '">';
+								if(isset($item['widget_link_url'])) { echo '<a href="' . esc_url( $item['widget_link_url']['url'] ) . '"' . $target . $nofollow . ' class="bw-item-link' . esc_attr( $type ) . '">'; } // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 									echo '<img src="' . esc_url( $item['sentence_image']['url'] ) . '">'; // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
                             if(isset($item['widget_link_url'])) { echo '</a>'; }
 							echo '</span>';

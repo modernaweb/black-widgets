@@ -1,11 +1,11 @@
 <?php
-namespace Modernaweb\Blackwidgets;
+namespace Modernaweb\BlackWidgets;
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-use Modernaweb\Blackwidgets\widgets\{
+use Modernaweb\BlackWidgets\Widgets\{
     GSAPInteractiveLinks,
     Title,
     Button,
@@ -23,10 +23,11 @@ use Modernaweb\Blackwidgets\widgets\{
     CallToAction,
     BlockQuote,
     Typography,
+    ScrollText,
     Box,
     FlatNav,
     Sentence,
-    RevealedText,
+    ScrollHeat,
     TextMarquee,
     ImageMarquee,
     ImageCarousel,
@@ -34,15 +35,17 @@ use Modernaweb\Blackwidgets\widgets\{
     GSAPTrigger,
     GSAPHorizontalScrolling,
     GSAPTab};
+use enshrined\svgSanitize\Sanitizer;
 
 final class Main {
 
-    const MINIMUM_ELEMENTOR_VERSION = '2.0.0';
-    const MINIMUM_PHP_VERSION = '7.0';
+    const MINIMUM_ELEMENTOR_VERSION = '3.5.0';
+    const MINIMUM_PHP_VERSION = '7.4';
 
     public function __construct() {
         add_action( 'plugins_loaded', [ $this, 'init' ] );
         add_filter( 'upload_mimes', [ $this, 'add_file_types_to_uploads' ] );
+        add_filter( 'wp_handle_upload_prefilter', [ $this, 'sanitize_uploaded_svg' ] );
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_public_scripts' ] );
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_public_styles' ] );
         add_action( 'plugins_loaded', [ $this, 'load_textdomain' ] );
@@ -56,11 +59,77 @@ final class Main {
     }
 
     public function load_textdomain() {
-        load_plugin_textdomain(
-            'black-widgets',
-            false,
-            dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
-        );
+        // WP 4.6+ auto-loads the canonical `black-widgets` domain for this plugin slug.
+        // Legacy `blackwidgets` language packs (pre-1.4.0) still need an explicit MO load.
+        $locale = function_exists( 'determine_locale' ) ? determine_locale() : get_locale();
+        $legacy_candidates = [
+            WP_LANG_DIR . '/plugins/blackwidgets-' . $locale . '.mo',
+            BLACK_WIDGETS_PLUGIN_PATH . 'languages/blackwidgets-' . $locale . '.mo',
+        ];
+
+        $legacy_loaded = false;
+        foreach ( $legacy_candidates as $mofile ) {
+            if ( is_readable( $mofile ) ) {
+                load_textdomain( 'blackwidgets', $mofile );
+                $legacy_loaded = true;
+                break;
+            }
+        }
+
+        // Without a legacy MO there is nothing to fall back to, so skip the per-string filters.
+        if ( ! $legacy_loaded ) {
+            return;
+        }
+
+        add_filter( 'gettext', [ $this, 'textdomain_compat_fallback' ], 10, 3 );
+        add_filter( 'ngettext', [ $this, 'textdomain_compat_fallback_n' ], 10, 5 );
+    }
+
+    /**
+     * Fall back to legacy `blackwidgets` translations when a `black-widgets` string is untranslated.
+     *
+     * @param string $translation Translated text.
+     * @param string $text        Original text.
+     * @param string $domain      Text domain.
+     * @return string
+     */
+    public function textdomain_compat_fallback( $translation, $text, $domain ) {
+        if ( 'black-widgets' !== $domain || $translation !== $text ) {
+            return $translation;
+        }
+
+        remove_filter( 'gettext', [ $this, 'textdomain_compat_fallback' ], 10 );
+        $fallback = translate( $text, 'blackwidgets' ); // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralDomain
+        add_filter( 'gettext', [ $this, 'textdomain_compat_fallback' ], 10, 3 );
+
+        return ( $fallback !== $text ) ? $fallback : $translation;
+    }
+
+    /**
+     * Plural form fallback for the legacy text domain.
+     *
+     * @param string $translation Translated text.
+     * @param string $single      Singular form.
+     * @param string $plural      Plural form.
+     * @param int    $number      Number.
+     * @param string $domain      Text domain.
+     * @return string
+     */
+    public function textdomain_compat_fallback_n( $translation, $single, $plural, $number, $domain ) {
+        if ( 'black-widgets' !== $domain ) {
+            return $translation;
+        }
+
+        $expected = ( 1 === (int) $number ) ? $single : $plural;
+        if ( $translation !== $expected ) {
+            return $translation;
+        }
+
+        remove_filter( 'ngettext', [ $this, 'textdomain_compat_fallback_n' ], 10 );
+        $fallback = _n( $single, $plural, $number, 'blackwidgets' ); // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralDomain,WordPress.WP.I18n.NonSingularStringLiteralSingular,WordPress.WP.I18n.NonSingularStringLiteralPlural
+        add_filter( 'ngettext', [ $this, 'textdomain_compat_fallback_n' ], 10, 5 );
+
+        return $fallback;
     }
 
     public function init() {
@@ -92,36 +161,123 @@ final class Main {
             wp_enqueue_style( 'black-widgets-admin', BLACK_WIDGETS_PLUGIN_URL . 'assets/admin/css/black-widgets-admin.css', array(), BLACK_WIDGETS_VERSION, 'all' );
         });
 
-        add_action('elementor/editor/before_enqueue_scripts', function() {
-            wp_enqueue_script('black-widgets-public', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/bw-public.js', array(), BLACK_WIDGETS_VERSION, 'true' );
+        add_action( 'elementor/editor/after_enqueue_scripts', function() {
+            wp_enqueue_script(
+                'black-widgets-editor-panel',
+                BLACK_WIDGETS_PLUGIN_URL . 'assets/admin/js/black-widgets-editor-panel.js',
+                [ 'jquery' ],
+                BLACK_WIDGETS_VERSION,
+                true
+            );
+        } );
 
+        add_action('elementor/editor/before_enqueue_scripts', function() {
+            // Ensure handles exist for the editor chrome; do not force-load on every page.
+            // Widget get_script_depends() loads bw-public/anime only when needed (preview/front).
+            if ( ! wp_script_is( 'black-widgets-anime', 'registered' ) ) {
+                wp_register_script( 'black-widgets-anime', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/libraries/anime.js', [ 'jquery' ], BLACK_WIDGETS_VERSION, true );
+            }
+            if ( ! wp_script_is( 'bw-public', 'registered' ) ) {
+                wp_register_script( 'bw-public', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/bw-public.js', [ 'jquery', 'black-widgets-anime' ], BLACK_WIDGETS_VERSION, true );
+            }
         });
 
         add_action( 'elementor/preview/enqueue_scripts', function() {
-            $options = get_option('plugin_options') ? get_option('plugin_options') : '';
-            $bw_gsap_cdn1  = isset($options['bw_gsap_cdn1']) ? $options['bw_gsap_cdn1'] : '';
-            $bw_gsap_cdn2  = isset($options['bw_gsap_cdn2']) ? $options['bw_gsap_cdn2'] : '';
-            $bw_gsap_cdn3  = isset($options['bw_gsap_cdn3']) ? $options['bw_gsap_cdn3'] : '';
+            // Only load GSAP into preview when the master toggle is on (same as front).
+            Plugin_Options::register_gsap_scripts();
+
+            if ( ! wp_script_is( 'black-widgets-anime', 'registered' ) ) {
+                wp_register_script( 'black-widgets-anime', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/libraries/anime.js', [ 'jquery' ], BLACK_WIDGETS_VERSION, true );
+            }
+            if ( ! wp_script_is( 'bw-public', 'registered' ) ) {
+                wp_register_script( 'bw-public', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/bw-public.js', [ 'jquery', 'black-widgets-anime' ], BLACK_WIDGETS_VERSION, true );
+            }
+            if ( ! wp_script_is( 'black-widgets-swiper', 'registered' ) ) {
+                wp_register_script( 'black-widgets-swiper', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/libraries/swiper-bundle.min.js', [], BLACK_WIDGETS_VERSION, true );
+                wp_register_style( 'black-widgets-swiper', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/libraries/swiper-bundle.min.css', [], BLACK_WIDGETS_VERSION );
+            }
+
+            // Widget get_script_depends() only covers widgets that were already on the
+            // canvas when the preview document was rendered. Dragging a fresh Scroll
+            // Text / Image Carousel in afterwards would otherwise leave the page
+            // without its init script until the editor is reloaded.
+            $this->enqueue_preview_widget_assets();
 
             $deps = [ 'black-widgets-tilt', 'black-widgets-simple-parallax', 'black-widgets-anime' ];
-
-            if( isset($bw_gsap_cdn1) && !empty($bw_gsap_cdn1) ) {
-                wp_register_script( 'GSAP', $bw_gsap_cdn1, array(), BLACK_WIDGETS_VERSION, 'true' );
-                array_push( $deps, 'GSAP' );
+            if ( wp_script_is( 'GSAP', 'registered' ) ) {
+                $deps[] = 'GSAP';
             }
-
-            if( isset($bw_gsap_cdn2) && !empty($bw_gsap_cdn2) ) {
-                wp_register_script( 'GSAP-ScrollTrigger', $bw_gsap_cdn2, array(), BLACK_WIDGETS_VERSION, 'true' );
-                array_push( $deps, 'GSAP-ScrollTrigger' );
+            if ( wp_script_is( 'GSAP-ScrollTrigger', 'registered' ) ) {
+                $deps[] = 'GSAP-ScrollTrigger';
             }
-
-            if( isset($bw_gsap_cdn3) && !empty($bw_gsap_cdn3) ) {
-                wp_register_script( 'TimelineMax', $bw_gsap_cdn3, array(), BLACK_WIDGETS_VERSION, 'true' );
-                array_push( $deps, 'TimelineMax' );
+            if ( wp_script_is( 'GSAP-SplitText', 'registered' ) ) {
+                $deps[] = 'GSAP-SplitText';
+            }
+            if ( wp_script_is( 'black-widgets-typography', 'registered' ) ) {
+                $deps[] = 'black-widgets-typography';
+            }
+            if ( wp_script_is( 'black-widgets-swiper', 'registered' ) ) {
+                $deps[] = 'black-widgets-swiper';
             }
 
             wp_enqueue_script( 'black-widgets-preview', BLACK_WIDGETS_PLUGIN_URL . 'assets/admin/js/black-widgets-preview.js', $deps, BLACK_WIDGETS_VERSION, true );
         } );
+    }
+
+    /**
+     * Register + enqueue the init assets of widgets whose animations must keep
+     * working when the widget is added to an already-open editor preview.
+     *
+     * Handles are registered defensively here because widget constructors (the
+     * usual registration point) may not have run yet inside the preview.
+     */
+    private function enqueue_preview_widget_assets() {
+        if ( ! wp_style_is( 'black-widgets-typography', 'registered' ) ) {
+            wp_register_style( 'black-widgets-typography', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/typography.css', [], BLACK_WIDGETS_VERSION );
+        }
+
+        if ( Plugin_Options::is_gsap_ready() && ! wp_script_is( 'black-widgets-typography', 'registered' ) ) {
+            $typo_deps = [ 'jquery', 'GSAP', 'GSAP-ScrollTrigger' ];
+            if ( Plugin_Options::is_gsap_split_ready() && wp_script_is( 'GSAP-SplitText', 'registered' ) ) {
+                $typo_deps[] = 'GSAP-SplitText';
+            }
+            wp_register_script( 'black-widgets-typography', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/typography.js', $typo_deps, BLACK_WIDGETS_VERSION, true );
+        }
+
+        // Always enqueue SplitText in the preview when the CDN option is on —
+        // Mask Rise / Clip Wipe need it even if typography.js was registered earlier.
+        if ( Plugin_Options::is_gsap_split_ready() && wp_script_is( 'GSAP-SplitText', 'registered' ) ) {
+            wp_enqueue_script( 'GSAP-SplitText' );
+        }
+
+        if ( ! wp_style_is( 'black-widgets-image-carousel', 'registered' ) ) {
+            wp_register_style( 'black-widgets-image-carousel', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/image-carousel.css', [ 'black-widgets-swiper' ], BLACK_WIDGETS_VERSION );
+        }
+
+        if ( ! wp_script_is( 'black-widgets-image-carousel', 'registered' ) ) {
+            wp_register_script( 'black-widgets-image-carousel', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/image-carousel.js', [ 'jquery', 'black-widgets-swiper' ], BLACK_WIDGETS_VERSION, true );
+        }
+
+        foreach ( [ 'black-widgets-typography', 'black-widgets-image-carousel' ] as $handle ) {
+            if ( wp_style_is( $handle, 'registered' ) ) {
+                wp_enqueue_style( $handle );
+            }
+            if ( wp_script_is( $handle, 'registered' ) ) {
+                wp_enqueue_script( $handle );
+            }
+        }
+
+        // Reliable signal for typography.js: preview iframe has no usable scroll,
+        // and elementorFrontend.isEditMode() is not always true on first paint.
+        if ( wp_script_is( 'black-widgets-typography', 'registered' ) ) {
+            wp_localize_script(
+                'black-widgets-typography',
+                'bwTypographyEnv',
+                [
+                    'isEditor' => true,
+                ]
+            );
+        }
     }
 
     public function add_file_types_to_uploads($file_types){
@@ -129,6 +285,29 @@ final class Main {
         $new_filetypes['svg'] = 'image/svg+xml';
         $file_types = array_merge($file_types, $new_filetypes );
         return $file_types;
+    }
+
+    public function sanitize_uploaded_svg( $file ) {
+        if ( $file['type'] !== 'image/svg+xml' && pathinfo( $file['name'], PATHINFO_EXTENSION ) !== 'svg' ) {
+            return $file;
+        }
+
+        if ( ! class_exists( 'enshrined\svgSanitize\Sanitizer' ) ) {
+            $file['error'] = 'SVG Sanitizer library is not loaded.';
+            return $file;
+        }
+
+        $dirty_svg = file_get_contents( $file['tmp_name'] );
+        $sanitizer = new Sanitizer();
+        $clean_svg = $sanitizer->sanitize( $dirty_svg );
+
+        if ( $clean_svg === false || empty( $clean_svg ) ) {
+            $file['error'] = 'Invalid or potentially unsafe SVG file.';
+            return $file;
+        }
+
+        file_put_contents( $file['tmp_name'], $clean_svg );
+        return $file;
     }
 
     public function admin_notice_missing_main_plugin() {
@@ -177,9 +356,6 @@ final class Main {
     }
 
     public function init_widgets() {
-        $options = get_option('plugin_options') ? get_option('plugin_options') : '';
-        $gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
-
         // Include Widget files
         require_once( __DIR__ . '/widgets/bw-title.php' );
         require_once( __DIR__ . '/widgets/bw-button.php' );
@@ -200,7 +376,6 @@ final class Main {
         require_once( __DIR__ . '/widgets/bw-box.php' );
         require_once( __DIR__ . '/widgets/bw-nav.php' );
         require_once( __DIR__ . '/widgets/bw-sentence.php' );
-        require_once( __DIR__ . '/widgets/bw-revealed-text.php' );
         require_once( __DIR__ . '/widgets/bw-text-marquee.php' );
         require_once( __DIR__ . '/widgets/bw-image-marquee.php' );
         require_once( __DIR__ . '/widgets/bw-text-animate.php' );
@@ -226,63 +401,67 @@ final class Main {
         \Elementor\Plugin::instance()->widgets_manager->register( new Box() );
         \Elementor\Plugin::instance()->widgets_manager->register( new FlatNav() );
         \Elementor\Plugin::instance()->widgets_manager->register( new Sentence() );
-        \Elementor\Plugin::instance()->widgets_manager->register( new RevealedText() );
         \Elementor\Plugin::instance()->widgets_manager->register( new TextMarquee() );
         \Elementor\Plugin::instance()->widgets_manager->register( new ImageMarquee() );
         \Elementor\Plugin::instance()->widgets_manager->register( new ImageCarousel() );
         \Elementor\Plugin::instance()->widgets_manager->register( new TextAnimate() );
 
-        if( isset($gsap_options) && !empty($gsap_options) ) {
+        // GSAP-powered widgets - only when JS → CDN master toggle is on (matches 1.3.9 pattern).
+        if ( Plugin_Options::is_gsap_toggle_on() ) {
             require_once( __DIR__ . '/widgets/bw-gsap-trigger.php' );
             require_once( __DIR__ . '/widgets/bw-gsap-horizontal-scrolling.php' );
             require_once( __DIR__ . '/widgets/bw-gsap-tab.php' );
             require_once( __DIR__ . '/widgets/bw-gsap-interactive-links.php' );
+            require_once( __DIR__ . '/widgets/bw-scroll-heat.php' );
 
             \Elementor\Plugin::instance()->widgets_manager->register( new GSAPTrigger() );
             \Elementor\Plugin::instance()->widgets_manager->register( new GSAPHorizontalScrolling() );
             \Elementor\Plugin::instance()->widgets_manager->register( new GSAPTab() );
             \Elementor\Plugin::instance()->widgets_manager->register( new GSAPInteractiveLinks() );
+            \Elementor\Plugin::instance()->widgets_manager->register( new ScrollHeat() );
+
+            if ( Plugin_Options::is_scroll_text_enabled() ) {
+                require_once( __DIR__ . '/widgets/bw-scroll-text.php' );
+                \Elementor\Plugin::instance()->widgets_manager->register( new ScrollText() );
+            }
         }
     }
 
+    /**
+     * @deprecated 1.4.0 Use Plugin_Options::is_scroll_text_enabled().
+     * @param array|string|null $options Unused; kept for BC of any external callers.
+     * @return bool
+     */
+    public function is_scroll_text_enabled( $options = null ) {
+        return Plugin_Options::is_scroll_text_enabled();
+    }
+
     public function enqueue_public_scripts() {
-        wp_enqueue_script('bw-public', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/bw-public.js', [ 'jquery', 'black-widgets-anime' ], BLACK_WIDGETS_VERSION, 'true' );
+        // Register only - enqueue via widget get_script_depends() so pages without
+        // Fade / Title Animate / Text Animate do not pay for anime.js + bw-public.js.
+        wp_register_script( 'black-widgets-anime', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/libraries/anime.js', [ 'jquery' ], BLACK_WIDGETS_VERSION, true );
+        wp_register_script( 'bw-public', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/bw-public.js', [ 'jquery', 'black-widgets-anime' ], BLACK_WIDGETS_VERSION, true );
 
-        // Load options
-        $options = get_option('plugin_options') ? get_option('plugin_options') : '';
-        $gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
-        $bw_gsap_cdn1  = isset($options['bw_gsap_cdn1']) ? $options['bw_gsap_cdn1'] : '';
-        $bw_gsap_cdn2  = isset($options['bw_gsap_cdn2']) ? $options['bw_gsap_cdn2'] : '';
-        $bw_gsap_cdn3  = isset($options['bw_gsap_cdn3']) ? $options['bw_gsap_cdn3'] : '';
-        $bw_gsap_cdn4  = isset($options['bw_gsap_cdn4']) ? $options['bw_gsap_cdn4'] : '';
-
-        if( isset($gsap_options) && !empty($gsap_options) ) {
-            if( isset($bw_gsap_cdn1) && !empty($bw_gsap_cdn1) ) {
-                wp_register_script( 'GSAP', $bw_gsap_cdn1, array(), BLACK_WIDGETS_VERSION, 'true' );
-            }
-
-            if( isset($bw_gsap_cdn2) && !empty($bw_gsap_cdn2) ) {
-                wp_register_script( 'GSAP-ScrollTrigger', $bw_gsap_cdn2, array(), BLACK_WIDGETS_VERSION, 'true' );
-            }
-
-            if( isset($bw_gsap_cdn3) && !empty($bw_gsap_cdn3) ) {
-                wp_register_script( 'TimelineMax', $bw_gsap_cdn3, array(), BLACK_WIDGETS_VERSION, 'true' );
-            }
-
-            if( isset($bw_gsap_cdn4) && !empty($bw_gsap_cdn4) ) {
-                wp_register_script( 'TweenLite', $bw_gsap_cdn4, array(), BLACK_WIDGETS_VERSION, 'true' );
-            }
-        }
+        Plugin_Options::register_gsap_scripts();
 
         wp_register_script( 'black-widgets-simple-parallax', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/libraries/simple-parallax.js', [ 'jquery' ], BLACK_WIDGETS_VERSION, true );
         wp_register_script( 'black-widgets-tilt', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/libraries/tilt.js', [ 'jquery' ], BLACK_WIDGETS_VERSION, true );
-        wp_register_script( 'black-widgets-anime', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/libraries/anime.js', [ 'jquery' ], BLACK_WIDGETS_VERSION, true );
-        wp_register_script( 'swiper', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/libraries/swiper-bundle.min.js', [], BLACK_WIDGETS_VERSION, true );
-        wp_register_style( 'swiper', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/libraries/swiper-bundle.min.css', [], BLACK_WIDGETS_VERSION );
+        wp_register_script( 'black-widgets-swiper', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/libraries/swiper-bundle.min.js', [], BLACK_WIDGETS_VERSION, true );
+        wp_register_style( 'black-widgets-swiper', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/libraries/swiper-bundle.min.css', [], BLACK_WIDGETS_VERSION );
     }
 
     public function enqueue_public_styles() {
         wp_enqueue_style( 'black-widgets-public', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/black-widgets-public.css', array(), BLACK_WIDGETS_VERSION );
+
+        // Additive RTL overlays only - never replaces LTR stylesheets.
+        if ( is_rtl() ) {
+            wp_enqueue_style(
+                'black-widgets-rtl',
+                BLACK_WIDGETS_PLUGIN_URL . 'assets/css/bw-rtl.css',
+                array( 'black-widgets-public' ),
+                BLACK_WIDGETS_VERSION
+            );
+        }
     }
 
     public function add_elementor_widget_categories( $elements_manager ) {
@@ -297,20 +476,26 @@ final class Main {
     }
 
     public function register_widget_scripts() {
+        // Editor/tab scripts: register GSAP handles only when master toggle is on.
+        Plugin_Options::register_gsap_scripts();
 
-        if ( ! wp_script_is( 'GSAP', 'registered' ) ) {
-            $options = get_option('plugin_options') ? get_option('plugin_options') : '';
-            $bw_gsap_cdn1  = $options['bw_gsap_cdn1'] ?? '';
-            if (empty($bw_gsap_cdn1 ) ) {
-                return;
-            }
-            wp_register_script( 'GSAP', $bw_gsap_cdn1, [], BLACK_WIDGETS_VERSION, 'true' );
+        // Shared scroll helpers used by Fade / Title Animate script deps.
+        if ( ! wp_script_is( 'black-widgets-anime', 'registered' ) ) {
+            wp_register_script( 'black-widgets-anime', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/libraries/anime.js', [ 'jquery' ], BLACK_WIDGETS_VERSION, true );
+        }
+        if ( ! wp_script_is( 'bw-public', 'registered' ) ) {
+            wp_register_script( 'bw-public', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/bw-public.js', [ 'jquery', 'black-widgets-anime' ], BLACK_WIDGETS_VERSION, true );
+        }
+
+        $tab_deps = [ 'jquery' ];
+        if ( wp_script_is( 'GSAP', 'registered' ) ) {
+            $tab_deps[] = 'GSAP';
         }
 
         wp_register_script(
             'black-widgets-gsap-tab',
             BLACK_WIDGETS_PLUGIN_URL . 'assets/js/gsap-tab.js',
-            ['jquery', 'GSAP'],
+            $tab_deps,
             BLACK_WIDGETS_VERSION,
             true
         );

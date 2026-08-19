@@ -27,7 +27,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
     public function __construct( $data = [], $args = null ) {
         parent::__construct( $data, $args );
         wp_register_style( 'black-widgets-title-animate', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/title-animate.css', [], BLACK_WIDGETS_VERSION );
-        wp_register_script( 'black-widgets-title-animate', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/title-animate.js', [ 'jquery', 'black-widgets-anime' ], BLACK_WIDGETS_VERSION, true );
+        wp_register_script( 'black-widgets-title-animate', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/title-animate.js', [ 'jquery', 'black-widgets-anime', 'bw-public' ], BLACK_WIDGETS_VERSION, true );
     }
 
     /**
@@ -278,11 +278,11 @@ class TitleAnimate extends \Elementor\Widget_Base {
         );
 
         $this->add_control(
-            'widget_svg_text',
+            'widget_svg_before_text',
             [
-                'label' => esc_html__( 'Text', 'black-widgets' ),
+                'label' => esc_html__( 'Before Text', 'black-widgets' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => esc_html__( 'Hello', 'black-widgets' ),
+                'default' => esc_html__( 'Before', 'black-widgets' ),
                 'placeholder' => esc_html__( 'Type your title here', 'black-widgets' ),
                 'condition'  => [
                     'widget_type' => [
@@ -297,7 +297,22 @@ class TitleAnimate extends \Elementor\Widget_Base {
             [
                 'label' => esc_html__( 'Animation Text', 'black-widgets' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => esc_html__( 'World', 'black-widgets' ),
+                'default' => esc_html__( 'Content', 'black-widgets' ),
+                'placeholder' => esc_html__( 'Type your title here', 'black-widgets' ),
+                'condition'  => [
+                    'widget_type' => [
+                        'svg',
+                    ],
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'widget_svg_after_text',
+            [
+                'label' => esc_html__( 'After Text', 'black-widgets' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => esc_html__( '', 'black-widgets' ),
                 'placeholder' => esc_html__( 'Type your title here', 'black-widgets' ),
                 'condition'  => [
                     'widget_type' => [
@@ -315,7 +330,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
                 'min' => 100,
                 'max' => 10000,
                 'step' => 100,
-                'default' => 2000,
+                'default' => 4000,
                 'condition' => [
                     'widget_type' => 'svg',
                 ],
@@ -330,7 +345,8 @@ class TitleAnimate extends \Elementor\Widget_Base {
                 'min' => 100,
                 'max' => 10000,
                 'step' => 100,
-                'default' => 1000,
+                'default' => 2000,
+                'description' => esc_html__( 'When looping, used as hold time before the stroke resets.', 'black-widgets' ),
                 'condition' => [
                     'widget_type' => 'svg',
                 ],
@@ -345,7 +361,56 @@ class TitleAnimate extends \Elementor\Widget_Base {
                 'label_on' => esc_html__( 'True', 'black-widgets' ),
                 'label_off' => esc_html__( 'False', 'black-widgets' ),
                 'return_value' => 'yes',
-                'default' => 'yes',
+                'default' => '',
+                'condition' => [
+                    'widget_type' => 'svg',
+                    'widget_anim_controls!' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'widget_anim_controls',
+            [
+                'label' => esc_html__( 'Custom Playback', 'black-widgets' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'On', 'black-widgets' ),
+                'label_off' => esc_html__( 'Off', 'black-widgets' ),
+                'return_value' => 'yes',
+                'default' => '',
+                'description' => esc_html__( 'Off keeps the default playback. On lets you set play once, loop, and speed.', 'black-widgets' ),
+            ]
+        );
+
+        $this->add_control(
+            'widget_anim_repeat',
+            [
+                'label' => esc_html__( 'Play Mode', 'black-widgets' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'once',
+                'options' => [
+                    'once'     => esc_html__( 'Play Once', 'black-widgets' ),
+                    'infinite' => esc_html__( 'Infinite Loop', 'black-widgets' ),
+                ],
+                'condition' => [
+                    'widget_anim_controls' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'widget_anim_speed',
+            [
+                'label' => esc_html__( 'Animation Speed', 'black-widgets' ),
+                'type' => \Elementor\Controls_Manager::NUMBER,
+                'min' => 0.25,
+                'max' => 3,
+                'step' => 0.05,
+                'default' => 1,
+                'description' => esc_html__( '1 = normal. Higher is faster, lower is slower.', 'black-widgets' ),
+                'condition' => [
+                    'widget_anim_controls' => 'yes',
+                ],
             ]
         );
 
@@ -1809,8 +1874,14 @@ class TitleAnimate extends \Elementor\Widget_Base {
             return '';
         }
 
-        if ( strpos( $color_value, 'var(' ) === 0 ) {
-            return Utils::get_global_color( $color_value );
+        if ( strpos( $color_value, 'var(' ) !== 0 ) {
+            return $color_value;
+        }
+
+        // Prefer a real Elementor API if it exists; otherwise keep the CSS variable (valid in gradients).
+        if ( class_exists( '\Elementor\Utils' )
+            && method_exists( '\Elementor\Utils', 'get_global_color' ) ) {
+            return \Elementor\Utils::get_global_color( $color_value );
         }
 
         return $color_value;
@@ -1864,11 +1935,35 @@ class TitleAnimate extends \Elementor\Widget_Base {
         $title_color2 = isset( $settings['style_main_title_color2'] ) ? esc_attr( $this->resolve_elementor_color($settings['style_main_title_color2']) ) : 'blue';
 
         $svg = isset( $settings['widget_svg'] ) ? esc_attr( $settings['widget_svg'] ) : 'line1';
-        $svg_text = isset( $settings['widget_svg_text'] ) ? esc_html( $settings['widget_svg_text'] ) : '';
+        $svg_before_text = isset( $settings['widget_svg_before_text'] ) ? esc_html( $settings['widget_svg_before_text'] ) : '';
+        $svg_after_text = isset( $settings['widget_svg_after_text'] ) ? esc_html( $settings['widget_svg_after_text'] ) : '';
         $svg_anim_text = isset( $settings['widget_svg_animation_text'] ) ? esc_html( $settings['widget_svg_animation_text'] ) : '';
-        $svg_duration = isset( $settings['widget_svg_duration'] ) ? esc_attr( $settings['widget_svg_duration'] ) : '2000';
-        $svg_delay = isset( $settings['widget_svg_delay'] ) ? esc_attr( $settings['widget_svg_delay'] ) : '1000';
-        $svg_loop = isset( $settings['widget_svg_loop'] ) ? esc_attr( $settings['widget_svg_loop'] ) : 'yes';
+        $svg_duration = isset( $settings['widget_svg_duration'] ) ? esc_attr( $settings['widget_svg_duration'] ) : '4000';
+        $svg_delay = isset( $settings['widget_svg_delay'] ) ? esc_attr( $settings['widget_svg_delay'] ) : '2000';
+
+        // Custom Playback is opt-in. SVG loop defaults OFF; other types keep legacy loop ON.
+        $anim_controls = isset( $settings['widget_anim_controls'] ) ? $settings['widget_anim_controls'] : '';
+        $widget_type_for_loop = isset( $settings['widget_type'] ) ? $settings['widget_type'] : '';
+        if ( $anim_controls === 'yes' ) {
+            $anim_repeat = isset( $settings['widget_anim_repeat'] ) ? $settings['widget_anim_repeat'] : 'once';
+            $loop = ( $anim_repeat === 'infinite' ) ? 'yes' : 'no';
+            $anim_speed = isset( $settings['widget_anim_speed'] ) ? floatval( $settings['widget_anim_speed'] ) : 1;
+            if ( is_array( $settings['widget_anim_speed'] ?? null ) && isset( $settings['widget_anim_speed']['size'] ) ) {
+                $anim_speed = floatval( $settings['widget_anim_speed']['size'] );
+            }
+            if ( $anim_speed <= 0 ) {
+                $anim_speed = 1;
+            }
+            $anim_speed = max( 0.25, min( 3, $anim_speed ) );
+        } elseif ( $widget_type_for_loop === 'svg' ) {
+            $loop = ( ( $settings['widget_svg_loop'] ?? '' ) === 'yes' ) ? 'yes' : 'no';
+            $anim_speed = 1;
+        } else {
+            // Legacy non-SVG: loop on when Custom Playback is off.
+            $loop = 'yes';
+            $anim_speed = 1;
+        }
+        $anim_speed_attr = esc_attr( (string) $anim_speed );
 
         $min_x  = $settings['svg_viewbox_min_x'];
         $min_y  = $settings['svg_viewbox_min_y'];
@@ -1878,28 +1973,31 @@ class TitleAnimate extends \Elementor\Widget_Base {
         if ( empty($min_x) && empty($vb_w) ) {
             switch ( $svg ) {
                 case 'line1':
-                    $min_x = 0; $min_y = 0; $vb_w = 316.08; $vb_h = 47.57;
+                    $min_x = 0; $min_y = 0; $vb_w = 220; $vb_h = 30;
                     break;
                 case 'line2':
-                    $min_x = 0; $min_y = 0; $vb_w = 328;    $vb_h = 37;
+                    $min_x = 0; $min_y = 0; $vb_w = 106; $vb_h = 40;
                     break;
                 case 'line3':
-                    $min_x = 0; $min_y = 0; $vb_w = 376;    $vb_h = 42;
+                    $min_x = 0; $min_y = 0; $vb_w = 160; $vb_h = 50;
                     break;
                 case 'line4':
-                    $min_x = 0; $min_y = 0; $vb_w = 577;    $vb_h = 86;
+                    $min_x = 0; $min_y = 0; $vb_w = 230; $vb_h = 50;
                     break;
                 case 'line5':
-                    $min_x = 0; $min_y = 0; $vb_w = 476;    $vb_h = 41;
+                    $min_x = 0; $min_y = 0; $vb_w = 230; $vb_h = 50;
                     break;
                 case 'circle1':
-                    $min_x = 0; $min_y = 0; $vb_w = 429;    $vb_h = 110;
+                    $min_x = -3; $min_y = 0; $vb_w = 86; $vb_h = 100;
                     break;
                 case 'circle2':
-                    $min_x = 0; $min_y = 0; $vb_w = 340;    $vb_h = 85;
+                    $min_x = -4; $min_y = 0; $vb_w = 90; $vb_h = 100;
+                    break;
+                case 'circle3': 
+                    $min_x = -2; $min_y = 0; $vb_w = 106; $vb_h = 120;
                     break;
                 default:
-                    $min_x = 0; $min_y = 0; $vb_w = 430;    $vb_h = 121;
+                    $min_x = 0; $min_y = 0; $vb_w = 0; $vb_h = 0;
                     break;
             }
         }
@@ -1918,55 +2016,88 @@ class TitleAnimate extends \Elementor\Widget_Base {
             $HTML = 'h1';
         }
         ?>
-        <style>
-            .bw-title-animate .bw-svg-wrapper svg{
-            <?php echo $inline_transform;?> <?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-            }
-        </style>
         <?php
         echo '<div class="bw-title-animate ' . esc_attr( $alignment ) . '">';
         switch ($type) {
             case 'svg':
                 ?>
-            <div class="bw-title-anime bw-svg bw-svg-<?php echo $svg; ?> <?php echo $data_id; ?>" data-duration="<?php echo $svg_duration; ?>" data-delay="<?php echo $svg_delay; ?>" data-loop="<?php echo $svg_loop; ?>"> <?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+            <div class="bw-title-anime bw-svg bw-svg-<?php echo $svg; ?> <?php echo $data_id; ?>" data-duration="<?php echo $svg_duration; ?>" data-delay="<?php echo $svg_delay; ?>" data-loop="<?php echo $loop; ?>" data-speed="<?php echo $anim_speed_attr; ?>"> <?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                 <<?php echo $HTML; ?> class="bw-text-wrapper"> <?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-                <span class="bw-svg-text"><?php echo $svg_text; ?></span> <?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                <span class="bw-svg-text"><?php echo $svg_before_text; ?></span> <?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                 <span class="bw-svg-wrapper bw-animate-text">
                     <span class="bw-svg-content"><?php echo $svg_anim_text; ?></span> <?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                     <?php if ( $svg == 'line1' ): ?>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="<?php echo esc_attr($viewBox); ?>" preserveAspectRatio="none">
-                              <path d="M1.68,49.56c4.26-5.75,8.53-11.49,12.87-17.18,2.18-2.83,4.33-5.7,6.67-8.41s4.73-5.38,7.32-7.86a30.55,30.55,0,0,1,4.17-3.43,10.87,10.87,0,0,1,5.08-1.95A7.25,7.25,0,0,1,43,12.46a8.61,8.61,0,0,1,2.13,5,40,40,0,0,1-.38,10.77,92.21,92.21,0,0,1-2.22,10.54h0v0a3.09,3.09,0,0,0,0,2.12,2,2,0,0,0,1.71,1,12.09,12.09,0,0,0,4.59-.78,59.62,59.62,0,0,0,8.74-4c5.66-3,11.12-6.46,16.54-9.92s10.81-7,16.36-10.32A89.89,89.89,0,0,1,99,12.38a28.74,28.74,0,0,1,4.61-1.67,8.5,8.5,0,0,1,5,0A14.48,14.48,0,0,1,110.74,12l2,1.36,4,2.75A43.44,43.44,0,0,0,125,20.7a15.79,15.79,0,0,0,9.18,1,36.58,36.58,0,0,0,4.54-1.42c1.51-.55,3-1.13,4.49-1.73C155.19,13.78,166.87,8.31,179,3.91c1.53-.54,3.07-1.05,4.65-1.45A14.82,14.82,0,0,1,186.11,2a3.41,3.41,0,0,1,1.34.12,5.53,5.53,0,0,1,1.2.5,11.12,11.12,0,0,1,3.47,3.56,43.51,43.51,0,0,1,2.41,4.24c1.48,2.87,2.85,5.78,4.55,8.49a22,22,0,0,0,6.36,7,14.59,14.59,0,0,0,9,2.28,28.43,28.43,0,0,0,9.2-2.35,135.24,135.24,0,0,1,18.21-6.53c6.19-1.81,12.46-3.35,18.75-4.74s12.61-2.65,19-3.78q19-3.4,38.22-5.76-19.15,2.53-38.15,6.13C267,13.56,254.35,16.21,242,19.83a135.5,135.5,0,0,0-18.11,6.57,29.17,29.17,0,0,1-9.42,2.43,15.28,15.28,0,0,1-9.42-2.36,22.73,22.73,0,0,1-6.61-7.16c-1.73-2.75-3.13-5.67-4.6-8.52a42.15,42.15,0,0,0-2.38-4.15,10.34,10.34,0,0,0-3.21-3.3,5.47,5.47,0,0,0-1-.43,2.79,2.79,0,0,0-1.05-.08,13.35,13.35,0,0,0-2.29.43c-1.54.4-3.06.91-4.57,1.44-12.07,4.43-23.74,9.93-35.69,14.78-1.5.6-3,1.19-4.52,1.75a34.25,34.25,0,0,1-4.67,1.46,16.73,16.73,0,0,1-9.74-1.1,43.86,43.86,0,0,1-8.5-4.75l-4-2.77-2-1.36a13.84,13.84,0,0,0-2-1.2,7.61,7.61,0,0,0-4.48.05,28.09,28.09,0,0,0-4.47,1.61,86.24,86.24,0,0,0-8.49,4.5c-5.53,3.27-10.92,6.8-16.37,10.24s-10.92,6.85-16.62,9.9a61.24,61.24,0,0,1-8.86,4,12.63,12.63,0,0,1-4.87.8,3.63,3.63,0,0,1-1.27-.37,2.24,2.24,0,0,1-1-1,3.67,3.67,0,0,1,0-2.61v0a92.94,92.94,0,0,0,2.24-10.45,39.3,39.3,0,0,0,.41-10.6,8.06,8.06,0,0,0-2-4.7,6.66,6.66,0,0,0-4.75-1.61A10.5,10.5,0,0,0,33,13.07a30.75,30.75,0,0,0-4.16,3.32c-2.61,2.43-5,5.09-7.42,7.73s-4.52,5.54-6.72,8.35C10.29,38.13,6,43.84,1.68,49.56Z" fill="none"/>
-                            </svg>
+                        <svg 
+                        style="<?php echo $inline_transform; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" 
+                        viewBox="<?php echo esc_attr($viewBox); ?>" 
+                        preserveAspectRatio="none" 
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 15C30 12 50 18 80 14C110 10 130 18 160 14C190 10 208 16 220 14"/>
+                        </svg>
                     <?php elseif ( $svg == 'line2' ): ?>
-                        <svg viewBox="<?php echo esc_attr($viewBox); ?>" preserveAspectRatio="none">
-                                <path d="M44.3525 5.74382C30.486 11.7513 8.14436 26.7042 0.86674 34.8649C-0.776934 36.7272 -0.114052 36.4263 3.12274 33.7202C15.7479 23.4491 37.538 10.9036 50.7058 6.31447C59.9361 3.12042 72.2493 2.2982 77.9333 4.48503C83.2911 6.51822 85.1576 8.86903 91.626 21.757C100.098 38.593 102.585 38.3238 138.204 18.1588C148.465 12.3848 153.571 10.007 157.414 9.33379L162.641 8.45445L167.226 16.1633C169.684 20.4481 172.864 24.8276 174.242 25.9367C179.627 30.1901 189.518 28.7175 205.626 21.4665C215.456 16.8688 230.85 10.9372 233.62 10.5249C234.807 10.3482 237.391 12.0866 240.478 15.1655C249.398 24.1499 256.993 24.2324 288.92 15.9405C296.616 13.9859 309.159 11.3097 316.859 10.0622C330.494 7.93112 330.593 7.91644 322.266 8.34739C317.558 8.64387 301.549 11.1283 286.702 13.9454C253.363 20.2232 253.264 20.2379 243.403 12.4047C236.64 7.04215 236.2 6.80434 231.764 7.5659C229.306 8.03296 219.23 11.6563 209.509 15.631C189.489 23.7679 182.06 25.4805 177.534 22.9191C175.873 21.9531 173.237 18.5038 170.922 14.501C168.963 10.8497 166.154 6.92051 164.874 5.79667C160.739 2.46931 160.457 2.61239 120.08 24.0924C109.858 29.4561 103.151 31.2634 100.538 29.3272C99.6287 28.6537 96.5587 23.6513 93.7264 18.209C87.5483 6.59213 85.4693 4.17189 78.8068 1.52414C74.2844 -0.330126 72.6577 -0.391242 63.3307 0.79516C54.8792 1.75012 51.2931 2.78956 44.3525 5.74382Z" fill="none"/>
-                            </svg>
+                        <svg 
+                        style="<?php echo $inline_transform; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" 
+ viewBox="<?php echo esc_attr($viewBox); ?>" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 20C8 7.99999 16 32 24 20C32 7.99999 40 32 48 20C56 7.99999 64 32 72 20C80 7.99999 88 32 96 20C100 14 104 18 106 20"/>
+                        </svg>
                     <?php elseif ( $svg == 'line3' ): ?>
-                        <svg viewBox="<?php echo esc_attr($viewBox); ?>" preserveAspectRatio="none">
-                                <path d="M196.719 0.493638C120.619 3.89364 67.5187 11.1936 20.2187 24.8936C13.4187 26.8936 -0.581313 32.7936 0.0186868 33.3936C0.218687 33.5936 3.41869 32.6936 7.21869 31.2936C12.3187 29.4936 14.5187 29.1936 15.4187 29.9936C17.2187 31.4936 27.2187 30.5936 62.7187 25.8936C147.219 14.5936 199.419 10.2936 253.219 10.3936C293.319 10.3936 304.819 11.1936 334.719 16.0936L348.219 18.2936L261.219 18.8936C161.619 19.5936 100.619 21.5936 97.9187 24.2936C97.6187 24.5936 97.8187 25.2936 98.4187 25.8936C99.2187 26.6936 108.619 26.5936 131.319 25.6936C182.319 23.6936 255.819 24.0936 253.519 26.2936C252.819 27.0936 194.219 29.7936 178.919 29.7936C159.019 29.7936 155.519 30.2936 155.919 33.1936C156.419 36.3936 161.219 36.6936 191.219 35.5936C216.819 34.6936 233.119 34.8936 234.519 36.1936C234.819 36.5936 234.519 37.3936 233.919 37.9936C233.219 38.6936 232.719 39.7936 232.719 40.4936C232.719 41.9936 241.819 42.0936 252.219 40.7936C257.819 40.0936 257.519 40.0936 248.019 39.8936C239.019 39.7936 237.819 39.5936 237.919 37.9936C237.919 37.0936 237.719 35.5936 237.319 34.6936C236.719 33.2936 238.119 32.9936 248.019 32.4936C259.819 31.9936 266.719 30.0936 266.719 27.3936C266.719 25.3936 264.219 24.6936 248.219 22.7936L234.219 21.1936L290.419 21.5936C334.319 21.9936 347.319 21.7936 349.619 20.7936C351.319 20.0936 352.719 19.1936 352.719 18.6936C352.719 15.7936 312.019 10.3936 275.919 8.69362C226.719 6.29362 134.119 12.5936 53.8187 23.8936C42.1187 25.4936 31.7187 26.6936 30.8187 26.5936C26.7187 25.6936 86.4187 14.8936 109.219 12.2936C165.319 6.09363 235.419 3.19363 294.219 4.79363C314.019 5.29363 331.819 5.99363 333.819 6.29363C338.819 6.99363 374.819 6.99363 375.519 6.39363C375.819 6.09363 375.819 5.49362 375.519 5.19362C374.419 4.09362 347.219 1.89363 322.719 0.893632C301.219 -0.106368 214.419 -0.306362 196.719 0.493638ZM28.4187 27.3936C28.1187 27.6936 27.2187 27.7936 26.5187 27.4936C25.7187 27.1936 26.0187 26.8936 27.1187 26.8936C28.2187 26.7936 28.8187 27.0936 28.4187 27.3936Z" fill="none"/>
-                            </svg>
+                        <svg 
+                        style="<?php echo $inline_transform; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" 
+                        viewBox="<?php echo esc_attr($viewBox); ?>" 
+                        preserveAspectRatio="none" 
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 14C20.0002 6.00002 10.0002 4.00002 6.0002 10C2.0002 16 8.0002 24 20.0002 22C60.0002 14 100 14 140 22C152 24 158 16 154 10C150 4.00002 140 6.00002 140 14"/>
+                        </svg>
                     <?php elseif ( $svg == 'line4' ): ?>
-                        <svg viewBox="<?php echo esc_attr($viewBox); ?>" preserveAspectRatio="none">
-                                <path d="M550.58 16.4571C490.697 13.836 453.14 13.1266 418.308 14.1332L395.382 14.8709L393.85 12.3838C389.906 6.304 363.522 0.211729 339.493 0.0201282C303.504 -0.31136 257.492 3.46081 208.781 10.6522C169.988 16.4454 168.342 16.7631 132.506 24.9019C95.3324 33.2927 84.2183 36.3677 63.976 43.6471C30.53 55.5775 9.81603 67.936 2.50882 80.0943C-1.21126 86.3169 -0.661214 87.6871 3.27861 82.1937C13.4928 68.3503 50.4868 54.4045 133.586 33.1749C198.247 16.6103 285.851 3.63699 336.418 3.19582C355.158 2.99276 374.159 5.83803 383.032 10.1585C386.662 11.8758 389.475 13.7022 389.309 14.2873C389.153 14.7729 381.686 15.8437 372.641 16.6359C331.003 19.9952 287.68 27.5924 240.518 39.7888C198.637 50.6681 180.877 59.1329 173.426 71.6776C169.728 77.7014 172.161 82.9065 179.633 85.3585C190.031 88.6433 262.293 76.9605 307.048 64.6942C342.456 54.9976 371.972 42.2219 385.097 31.1216C388.879 27.9249 392.297 24.3853 392.818 23.337C393.25 22.1782 394.046 21.3622 394.543 21.4182C395.04 21.4742 403.632 21.134 413.561 20.5419C437.35 19.2975 494.797 18.5246 564.933 18.5774C584.457 18.5633 578.02 17.6368 550.58 16.4571ZM385.275 23.2923C384.973 25.9753 364.989 37.2086 347.784 44.327C337.132 48.6616 313.83 56.3008 299.623 60.0336C279.406 65.3032 237.816 73.5988 218.806 76.1868C198.472 78.9273 180.714 79.3417 180.96 77.1555C181.027 76.5593 184.366 73.7153 188.324 70.7397C197.335 64.0062 216.661 56.8248 249.66 47.9638C296.978 35.2818 333.011 28.0708 369.096 23.9852C386.216 22.09 385.409 22.0998 385.275 23.2923Z" fill="none"/>
-                            </svg>
+                        <svg 
+                        style="<?php echo $inline_transform; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" 
+                        viewBox="<?php echo esc_attr($viewBox); ?>" 
+                        preserveAspectRatio="none" 
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 36C30 34 38 22 46 22C54 22 54 34 60 34C80 34 88 22 96 22C104 22 104 34 112 34C132 34 140 22 148 22C156 22 156 34 162 34C182 34 196 34 230 32"/>
+                        </svg>
                     <?php elseif ( $svg == 'line5' ): ?>
-                        <svg viewBox="<?php echo esc_attr($viewBox); ?>" preserveAspectRatio="none">
-                                <path d="M233.754 0.77944C183.758 2.04294 158.133 4.20898 120.322 9.62399C76.24 16.122 19.9726 29.2985 4.92012 36.5185C0.619413 38.6845 -1.17264 39.948 0.798522 39.226C5.09923 37.9625 57.0662 27.674 86.6336 22.259C108.675 18.288 115.484 18.1075 100.252 22.0785C86.4543 25.6885 89.3214 29.479 105.807 29.479C110.646 29.479 137.346 27.1325 165.121 24.064C230.17 17.205 260.991 15.039 295.576 15.039C333.924 15.039 379.799 19.01 379.799 22.259C379.799 25.3275 367.076 26.0495 290.2 27.674C216.73 29.118 176.052 32.006 172.289 35.616C170.497 37.6015 175.873 40.309 181.787 40.4895C191.105 40.8505 386.966 41.2115 385.533 40.8505C377.827 39.0455 318.872 35.977 272.281 34.894L214.042 33.6305L283.929 33.45C353.815 33.089 371.914 31.8255 382.128 26.591C386.608 24.064 386.966 23.342 384.995 21.176C381.053 17.3855 367.434 15.4 330.34 13.234C283.929 10.5265 234.291 12.8729 142.722 22.4394C123.369 24.4249 105.628 25.869 103.299 25.508C95.5932 24.2445 142.005 15.039 194.33 7.45796C220.314 3.66746 316.721 4.56996 378.903 9.26296C407.574 11.429 437.858 13.5949 446.459 14.3169C475.131 16.3024 487.316 10.707 462.945 6.55546C433.557 1.68196 311.346 -1.56706 233.754 0.77944ZM406.32 5.47251C403.453 5.83351 399.152 5.83351 396.464 5.47251C393.597 5.11151 395.926 4.75046 401.302 4.75046C406.678 4.75046 409.008 5.11151 406.32 5.47251ZM436.783 7.27751C434.095 7.63851 429.257 7.63851 426.031 7.27751C422.806 6.91651 424.956 6.55546 430.869 6.55546C436.783 6.55546 439.471 6.91651 436.783 7.27751Z" fill="none"/>
-                            </svg>
+                        <svg 
+                        style="<?php echo $inline_transform; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" 
+                        viewBox="<?php echo esc_attr($viewBox); ?>" 
+                        preserveAspectRatio="none" 
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 22C90 18 162 20 230 22C180 24 100 30 10 36C90 36 165 36 230 36"/>
+                        </svg>
                     <?php elseif ( $svg == 'circle1' ): ?>
-                        <svg viewBox="<?php echo esc_attr($viewBox); ?>" preserveAspectRatio="none">
-                                <path d="M380.812 28.0931C359.653 22.1123 317.24 12.9757 292.128 9.02035C232.442 -0.425813 166.268 -2.57113 110.617 3.14367C70.8259 7.17855 41.7303 12.0434 25.4633 17.4102C13.8601 21.1758 4.82592 26.5986 3.45224 30.571C3.0101 31.9579 3.06112 31.976 4.40027 30.3362C8.20608 25.6847 19.0067 22.5487 47.8617 17.7127C56.0872 16.2916 69.1985 14.0917 76.9428 12.7282C103.701 8.11884 140.303 4.15044 164.098 3.29126C193.074 2.27286 228.797 3.13918 253.104 5.49307C286.853 8.8028 302.673 11.2266 335.449 18.1938C369.078 25.35 372.639 26.3305 392.2 33.2302C408.988 39.2006 409.378 39.3965 414.413 42.6744C424.248 49.0889 427.122 52.4558 427.661 58.3093C428.356 64.8475 426.655 68.1314 420.458 72.39C415.497 75.7729 400.487 82.4446 391.962 85.0172C350.648 97.4323 300.628 104.292 225.552 107.845C184.916 109.749 150.294 109.503 97.1795 106.741C54.5602 104.566 31.3408 100.311 14.2711 91.6094C5.18604 86.9485 2.24286 83.6141 1.51119 77.1773C1.09463 73.5405 1.21552 72.7257 2.62197 68.8222C4.02841 64.9187 4.45546 64.2128 7.43238 61.3825C15.856 53.3406 30.0726 45.3572 47.3575 38.9226C61.2365 33.7931 85.2075 27.3345 101.232 24.3979C110.526 22.7277 127.509 20.6465 138.516 19.8142C148.56 19.0972 185.159 17.5302 206.516 16.8901C215.349 16.6575 222.608 16.3223 222.524 16.2353C222.098 15.3404 151.43 17.2013 132.148 18.6361C103.2 20.694 69.0606 28.0544 44.4239 37.479C21.9131 46.1155 4.4344 58.2002 1.12835 67.3759C-1.56045 74.9982 0.668028 83.5115 6.62171 87.9166C19.4217 97.4445 43.0079 103.717 76.0352 106.313C99.9928 108.199 153.247 110.096 180.625 109.996C222.163 109.9 285.859 106.302 316.047 102.398C348.97 98.0939 364.207 95.106 387.858 88.4189C400.883 84.7014 409.985 80.8469 419.924 74.8308C426.493 70.8188 429.5 65.8263 428.932 59.7337C428.274 52.2936 424.985 48.3215 413.995 41.439C409.141 38.4546 407.257 37.6129 396.138 33.4866C389.267 30.986 382.379 28.5362 380.812 28.0931Z" fill="none"/>
-                            </svg>
+                        <svg 
+                        style="<?php echo $inline_transform; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" 
+                        viewBox="<?php echo esc_attr($viewBox); ?>" 
+                        preserveAspectRatio="none" 
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                            <path d="M40 12C20 9.99997 0 28 0 50C0 72 18 90 40 90C62 90 80 72 80 50C80 30 64 15 45 12C28 8.99997 10 22 6 42" />
+                        </svg>
                     <?php elseif ( $svg == 'circle2' ): ?>
-                        <svg viewBox="<?php echo esc_attr($viewBox); ?>" preserveAspectRatio="none">
-                                <path d="M243.818 0.800003C217.118 1.9 194.918 3.5 175.818 5.8C153.718 8.3 154.318 8.20001 79.2179 22.6C58.7179 26.6 41.3179 31.6 31.8179 36.3C29.1179 37.6 27.7179 38.4 28.8179 38.1C29.9179 37.7 36.4179 35.4 43.3179 33.1C54.6179 29.2 85.3179 22.2 87.6179 23C88.2179 23.2 81.0179 25 71.7179 27.2C22.3179 38.4 -3.18206 52.2 0.31794 65.7C1.91794 72 14.0179 77.4 32.5179 80.1C55.9179 83.5 68.9179 84.2 114.818 84.1C209.718 84 281.918 76.6 315.318 63.5C327.818 58.6 337.618 50.1 338.918 42.8C340.418 34.8 333.318 28.7 314.718 22.4C297.118 16.4 277.618 13.1 247.418 10.7C230.518 9.4 181.718 9.4 165.818 10.7C148.818 12.0333 141.985 12.3333 145.318 11.6C162.918 7.80001 210.818 3.6 262.318 1.3C285.418 0.300003 288.618 0 276.818 0C268.618 0 253.718 0.400003 243.818 0.800003ZM236.318 11.7C277.418 13.9 308.418 19.7 326.418 28.8C339.518 35.3 340.818 43.6 330.218 53.2C322.218 60.4 309.018 65.1 279.818 71.2C222.918 83.1 64.1179 86.8 25.3179 77.2C21.0179 76.1 20.7179 75.9 23.8179 76.3C70.2179 81.7 185.218 77.2 243.818 67.7C288.118 60.5 314.318 49.7 314.318 38.6C314.318 34.3 307.218 27.6 299.718 24.8C292.218 21.9 276.718 18.3 263.818 16.3C225.618 10.5 176.718 11 126.418 17.7C118.418 18.8 111.118 19.6 110.318 19.6C106.218 19.3 123.018 16.6 140.318 14.7C176.618 10.8 202.418 10 236.318 11.7ZM234.318 14.7C253.518 16 268.118 18.1 283.218 21.8C301.418 26.1 309.318 30.1 311.818 36.1C312.918 38.8 312.918 39.6 311.518 42C303.718 55.3 257.118 67.1 191.818 72.2C151.418 75.3 140.918 75.8 96.7179 76.4C40.4179 77.1 19.3179 75.7 9.01794 70.6C0.91794 66.5 6.41794 60.3 28.1179 49C54.1179 35.4 78.9179 26.8 103.718 22.7C150.118 15 196.818 12.1 234.318 14.7ZM108.018 20.3C107.718 20.6 106.818 20.7 106.118 20.4C105.318 20.1 105.618 19.8 106.718 19.8C107.818 19.7 108.418 20 108.018 20.3ZM92.0179 22.3C91.7179 22.6 90.8179 22.7 90.1179 22.4C89.3179 22.1 89.6179 21.8 90.7179 21.8C91.8179 21.7 92.4179 22 92.0179 22.3ZM63.3179 31.4C42.2179 39.3 16.1179 52.6 8.31794 59.5C4.01794 63.2 3.21794 64.4 3.61794 66.6C4.11794 69 4.01794 69.1 2.71794 67.2C-2.98206 59.4 9.71794 48.1 34.3179 39.3C43.6179 36 61.3179 30.8 63.3179 30.9C64.1846 30.9 64.1846 31.0667 63.3179 31.4Z" fill="none"/>
-                            </svg>
+                        <svg 
+                        style="<?php echo $inline_transform; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" 
+                        viewBox="<?php echo esc_attr($viewBox); ?>" 
+                        preserveAspectRatio="none" 
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                            <path d="M41 10C63 8.00003 81 24 83 48C85 66 73 86 53 92C33 98 9 90 0.99997 70C-7.00003 50 3 24 23 14C37 8.00003 51 8.00003 59 18C71 32 67 60 49 76C31 92 7 84 5 62" />
+                        </svg>
                     <?php else: ?>
-                        <svg viewBox="<?php echo esc_attr($viewBox); ?>" preserveAspectRatio="none">
-                                <path d="M164.917 1.30621C122.49 4.10807 69.9245 12.2468 48.1776 19.3182C24.6964 26.9232 6.95202 38.6643 1.48196 50.0052C-3.05419 59.745 2.94955 69.885 17.7588 77.4901C33.5019 85.7622 58.0504 92.2999 91.1377 97.37C104.613 99.3713 112.484 101.373 120.222 104.575C146.372 115.649 172.255 119.918 218.95 120.852C262.978 121.786 294.998 118.317 324.483 109.778C330.62 108.044 337.291 107.777 364.774 108.311C389.323 108.711 392.792 108.711 378.383 107.91C367.709 107.377 353.968 106.843 347.697 106.71L336.357 106.576L351.299 99.2379C359.571 95.3687 368.51 90.4319 371.178 88.4306C374.78 85.6288 379.717 83.8943 391.057 81.6261C399.329 80.0251 408.802 77.4901 412.137 76.0225C420.009 72.5535 428.681 64.6816 429.748 59.8785C434.418 38.7978 373.713 15.3155 286.993 4.50837C250.303 -0.0279778 203.608 -1.22881 164.917 1.30621ZM226.288 3.44093C153.71 5.44226 97.9419 13.3142 52.1801 27.8572C21.361 37.7304 16.1578 44.0012 27.765 56.6763C30.8335 60.0119 36.3036 64.2813 39.7724 66.0158C46.8435 69.6182 65.6551 74.8217 79.9307 77.3567C86.6015 78.4241 89.2698 79.4914 90.3371 81.6261C91.1376 83.0938 94.2062 86.8297 97.0079 89.8984L102.211 95.502L83.9332 92.2999C45.3759 85.6288 19.0929 76.6896 8.68647 66.6829C1.61541 59.8784 0.548044 56.1426 4.15028 49.3381C9.35351 39.0646 31.7674 25.8558 54.8484 19.3182C75.528 13.4476 119.422 6.90993 157.579 3.97465C165.717 3.44096 187.331 2.90721 205.609 2.90721C224.02 3.04063 233.226 3.17408 226.288 3.44093ZM257.374 4.77515C255.64 5.04199 252.705 5.04199 250.703 4.77515C248.569 4.5083 250.036 4.24143 253.639 4.24143C257.241 4.24143 258.975 4.5083 257.374 4.77515ZM271.383 6.10936C270.049 6.37621 267.647 6.37621 266.046 6.10936C264.312 5.84252 265.379 5.57564 268.314 5.57564C271.25 5.44222 272.584 5.7091 271.383 6.10936ZM273.651 9.5783C282.857 11.3128 282.723 11.4462 262.177 10.7791C217.483 9.44491 171.054 17.7171 130.896 34.128C100.877 46.4028 87.5354 57.0765 87.5354 69.0844C87.5354 72.9537 87.2686 73.0871 83.2661 72.2866C69.6576 69.7516 48.4445 63.7477 42.1739 60.5456C33.7687 56.4095 24.8298 48.404 24.8298 45.0685C24.8298 39.4648 41.5068 32.3935 74.8609 23.8545C103.946 16.2495 137.566 11.046 180.927 7.31019C195.336 6.1094 264.579 7.7104 273.651 9.5783ZM306.071 10.5124C348.497 17.7171 378.116 25.8559 401.864 37.1967C418.408 44.9352 426.413 51.7396 426.413 57.7436C426.413 60.0118 425.479 63.2139 424.411 64.9484C421.876 68.4174 412.537 74.1546 406.133 76.0225C397.328 78.6909 378.383 82.1599 378.383 81.226C378.383 80.6923 379.317 78.424 380.384 76.4226C387.722 62.2799 376.115 43.0672 352.1 29.5916C342.094 23.9879 312.075 14.2481 294.331 10.6457C273.784 6.64309 274.452 6.77651 278.587 6.64309C280.455 6.64309 292.863 8.3776 306.071 10.5124ZM300.334 19.1848C327.151 23.054 334.222 24.9218 348.097 32.26C366.108 41.4661 379.717 56.9432 379.717 67.8838C379.583 73.4875 374.914 82.4266 371.445 83.0937C352.1 87.3632 258.442 89.3647 208.277 86.6962C179.459 85.0952 135.832 80.6921 107.148 76.4226C94.4731 74.4213 92.4718 73.8876 91.271 71.0858C89.2698 66.6828 94.3397 56.6762 101.411 51.6062C108.615 46.2693 130.896 35.5957 144.237 31.1927C193.201 15.0487 244.833 11.046 300.334 19.1848ZM133.564 84.5615C183.328 90.0318 237.495 92.0331 291.662 90.5655C332.888 89.3647 357.97 87.8971 367.709 85.8957L371.045 85.2286L367.709 88.0304C363.307 91.7663 349.165 98.8376 337.557 102.974L328.085 106.309L273.518 105.108C174.123 102.974 121.69 99.7716 112.751 95.2353C106.481 92.0331 98.4756 85.4954 96.7412 82.2932C95.407 79.8916 95.6738 79.7582 99.1426 80.4253C101.144 80.959 116.754 82.827 133.564 84.5615ZM184.929 105.242C200.672 105.909 237.629 106.843 266.98 107.377C300.468 107.91 318.879 108.711 316.344 109.511C306.605 112.18 278.988 115.916 257.908 117.25C221.085 119.651 182.394 116.716 151.842 109.245C128.628 103.507 126.893 102.44 142.903 103.241C150.241 103.641 169.186 104.441 184.929 105.242Z" fill="none"/>
-                            </svg>
+                        <svg 
+                        style="<?php echo $inline_transform; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" 
+                        viewBox="<?php echo esc_attr($viewBox); ?>" 
+                        preserveAspectRatio="none" 
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                            <path d="M45.9999 8C81.9999 8 100 30 98 60C96 90 73.9999 108 45.9999 108C17.9999 108 -0.0001 88 1.9999 60C3.9999 36 19.9999 20 40.9999 20C57.9999 20 69.9999 32 69.9999 50C69.9999 68 57.9999 76 45.9999 76M29.9999 68L45.9999 78L49.9999 62" />
+                        </svg>
                     <?php endif; ?>
                     </span>
+                    <span class="bw-svg-text"><?php echo $svg_after_text; ?></span> <?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                 </<?php echo esc_html( $HTML ); ?>>
                 </div>
                 <?php
@@ -1980,7 +2111,10 @@ class TitleAnimate extends \Elementor\Widget_Base {
                 </style>
             <div class="bw-title-anime bw-rotator <?php echo esc_attr($data_id); ?>"
                  data-duration="<?php echo esc_attr($rotator_duration); ?>"
-                 data-delay="<?php echo esc_attr($rotator_delay); ?>">
+                 data-delay="<?php echo esc_attr($rotator_delay); ?>"
+                 data-loop="<?php echo $loop; ?>"
+                 data-speed="<?php echo $anim_speed_attr; ?>"
+                >
 
                 <<?php echo esc_html( $HTML ); ?> class="bw-text-wrapper">
                 <span class="bw-rotator-text"><?php echo esc_html($rotator_text); ?></span>
@@ -2007,7 +2141,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
                 break;
             case 'simple':
                 ?>
-            <div class="bw-title-anime bw-simple-wrap <?php echo esc_attr($data_id); ?>">
+                <div class="bw-title-anime bw-simple-wrap <?php echo esc_attr($data_id); ?>" data-loop="<?php echo $loop; ?>" data-speed="<?php echo $anim_speed_attr; ?>">
                 <<?php echo esc_html( $HTML ); ?> class="bw-heading-animate">
                 <span class="bw-before"><?php echo esc_html($before_text); ?></span>
                 <span class="bw-simple <?php echo esc_attr($data_id); ?> bw-animate-text">
@@ -2020,7 +2154,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
                 break;
             case 'classic':
                 ?>
-                <<?php echo esc_html( $HTML ); ?> class="bw-title-anime bw-classic bw-heading-animate <?php echo esc_attr($data_id); ?>">
+                    <<?php echo esc_html( $HTML ); ?> class="bw-title-anime bw-classic bw-heading-animate <?php echo esc_attr($data_id); ?>" data-loop="<?php echo $loop; ?>" data-speed="<?php echo $anim_speed_attr; ?>">
                 <span class="bw-text-wrapper">
             <span class="bw-line bw-line1"></span>
             <span class="bw-letters bw-before"><?php echo esc_html($before_text); ?></span>
@@ -2033,7 +2167,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
                 break;
             case 'liner':
                 ?>
-                <<?php echo esc_html( $HTML ); ?> class="bw-liner bw-heading-animate <?php echo esc_attr($data_id); ?>">
+                <<?php echo esc_html( $HTML ); ?> class="bw-liner bw-heading-animate <?php echo esc_attr($data_id); ?>" data-loop="<?php echo $loop; ?>" data-speed="<?php echo $anim_speed_attr; ?>">
                 <span class="bw-text-wrapper">
             <span class="bw-letters bw-animate-text"><?php echo esc_html($liner); ?></span>
             <span class="bw-line"></span>
@@ -2043,7 +2177,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
                 break;
             case 'effective':
                 ?>
-                <<?php echo esc_html( $HTML ); ?> class="bw-effective bw-heading-animate <?php echo esc_attr($data_id); ?>">
+                    <<?php echo esc_html( $HTML ); ?> class="bw-effective bw-heading-animate <?php echo esc_attr($data_id); ?>" data-loop="<?php echo $loop; ?>" data-speed="<?php echo $anim_speed_attr; ?>">
                 <span class="bw-letters bw-letters-1 bw-animate-text"><?php echo esc_html($la); ?></span>
                 <span class="bw-letters bw-letters-2 bw-animate-text"><?php echo esc_html($lb); ?></span>
                 <span class="bw-letters bw-letters-3 bw-animate-text"><?php echo esc_html($lc); ?></span>
@@ -2052,7 +2186,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
                 break;
             case 'typing':
                 ?>
-                <<?php echo esc_html( $HTML ); ?> class="bw-typing bw-heading-animate <?php echo esc_attr($data_id); ?>">
+                <<?php echo esc_html( $HTML ); ?> class="bw-typing bw-heading-animate <?php echo esc_attr($data_id); ?>" data-loop="<?php echo $loop; ?>" data-speed="<?php echo $anim_speed_attr; ?>">
                 <span class="bw-text-wrapper">
             <span class="bw-line bw-line1"></span>
             <span class="bw-letters bw-animate-text"><?php echo esc_html($typetext); ?></span>
@@ -2062,7 +2196,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
                 break;
             case 'fft': // Fade From Top
                 ?>
-                <<?php echo esc_html( $HTML ); ?> class="bw-fft bw-heading-animate <?php echo esc_attr($data_id); ?>">
+                <<?php echo esc_html( $HTML ); ?> class="bw-fft bw-heading-animate <?php echo esc_attr($data_id); ?>" data-loop="<?php echo $loop; ?>" data-speed="<?php echo $anim_speed_attr; ?>">
                 <span class="bw-text-wrapper">
             <span class="bw-before"><?php echo esc_html($before_text); ?></span>
             <span class="bw-letters bw-animate-text"><?php echo esc_html($fft); ?></span>
@@ -2073,7 +2207,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
                 break;
             case 'ffb': // Fade From Bottom
                 ?>
-                <<?php echo esc_html( $HTML ); ?> class="bw-ffb bw-heading-animate <?php echo esc_attr($data_id); ?>">
+                <<?php echo esc_html( $HTML ); ?> class="bw-ffb bw-heading-animate <?php echo esc_attr($data_id); ?>" data-loop="<?php echo $loop; ?>" data-speed="<?php echo $anim_speed_attr; ?>">
                 <span class="bw-text-wrapper">
             <span class="bw-before"><?php echo esc_html($before_text); ?></span>
             <span class="bw-letters bw-animate-text"><?php echo esc_html($ffb); ?></span>
@@ -2091,7 +2225,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
                 break;
             case 'ffl': // Fade From Left
                 ?>
-                <<?php echo esc_html( $HTML ); ?> class="bw-ffl bw-heading-animate <?php echo esc_attr($data_id); ?>">
+                <<?php echo esc_html( $HTML ); ?> class="bw-ffl bw-heading-animate <?php echo esc_attr($data_id); ?>" data-loop="<?php echo $loop; ?>" data-speed="<?php echo $anim_speed_attr; ?>">
                 <span class="bw-text-wrapper">
             <span class="bw-before"><?php echo esc_html($before_text); ?></span>
             <span class="bw-letters bw-animate-text"><?php echo esc_html($ffl); ?></span>
@@ -2102,7 +2236,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
                 break;
             case 'ffr': // Fade From Right
                 ?>
-                <<?php echo esc_html( $HTML ); ?> class="bw-ffr bw-heading-animate <?php echo esc_attr($data_id); ?>">
+                <<?php echo esc_html( $HTML ); ?> class="bw-ffr bw-heading-animate <?php echo esc_attr($data_id); ?>" data-loop="<?php echo $loop; ?>" data-speed="<?php echo $anim_speed_attr; ?>">
                 <span class="bw-text-wrapper">
             <span class="bw-before"><?php echo esc_html($before_text); ?></span>
             <span class="bw-letters bw-animate-text"><?php echo esc_html($ffr); ?></span>
@@ -2113,7 +2247,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
                 break;
             case 'fade_in':
                 ?>
-                <<?php echo esc_html( $HTML ); ?> class="bw-fin bw-heading-animate <?php echo esc_attr($data_id); ?>">
+                <<?php echo esc_html( $HTML ); ?> class="bw-fin bw-heading-animate <?php echo esc_attr($data_id); ?>" data-loop="<?php echo $loop; ?>" data-speed="<?php echo $anim_speed_attr; ?>">
                 <span class="bw-word bw-animate-text"><?php echo esc_html($fadein1); ?></span>
                 <span class="bw-word bw-animate-text"><?php echo esc_html($fadein2); ?></span>
                 </<?php echo esc_html( $HTML ); ?>>
@@ -2121,7 +2255,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
                 break;
             case 'fade_out':
                 ?>
-                <<?php echo esc_html( $HTML ); ?> class="bw-fout bw-heading-animate <?php echo esc_attr($data_id); ?>">
+                <<?php echo esc_html( $HTML ); ?> class="bw-fout bw-heading-animate <?php echo esc_attr($data_id); ?>" data-loop="<?php echo $loop; ?>" data-speed="<?php echo $anim_speed_attr; ?>">
                 <span class="bw-word bw-animate-text"><?php echo esc_html($fadeout1); ?></span>
                 <span class="bw-word bw-animate-text"><?php echo esc_html($fadeout2); ?></span>
                 </<?php echo esc_html( $HTML ); ?>>
@@ -2129,7 +2263,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
                 break;
             case 'glitch_one':
                 ?>
-                <<?php echo esc_html( $HTML ); ?> class="bw-glitch bw-heading-animate">
+                    <<?php echo esc_html( $HTML ); ?> class="bw-glitch bw-heading-animate <?php echo $loop === 'yes' ? '' : 'bw-no-loop' ?>" style="--bw-anim-speed: <?php echo $anim_speed_attr; ?>">
                 <span class="bw-glitch bw-animate-text" data-text="<?php echo esc_attr($glitch); ?>">
             <?php echo esc_html($glitch); ?>
             </span>
@@ -2139,7 +2273,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
             case 'glitch_two':
                 ?>
                 <div class="bw-glitch-wrapper">
-                <<?php echo esc_html( $HTML ); ?> class="bw-glitch bw-animate-text" data-text="<?php echo esc_attr($glitch); ?>">
+                <<?php echo esc_html( $HTML ); ?> class="bw-glitch bw-animate-text <?php echo $loop === 'yes' ? '' : 'bw-no-loop' ?>" style="--bw-anim-speed: <?php echo $anim_speed_attr; ?>" data-text="<?php echo esc_attr($glitch); ?>">
                 <?php echo esc_html($glitch); ?>
                 </<?php echo esc_html( $HTML ); ?>>
                 </div>
@@ -2148,7 +2282,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
             default: // Glitch Two is default
                 ?>
                 <div class="bw-glitch-wrapper">
-                <<?php echo esc_html( $HTML ); ?> class="bw-glitch bw-heading-animate bw-animate-text" data-text="<?php echo esc_attr($glitch); ?>">
+                <<?php echo esc_html( $HTML ); ?> class="bw-glitch bw-heading-animate bw-animate-text <?php echo $loop === 'yes' ? '' : 'bw-no-loop' ?>" style="--bw-anim-speed: <?php echo $anim_speed_attr; ?>" data-text="<?php echo esc_attr($glitch); ?>">
                 <?php echo esc_html($glitch); ?>
                 </<?php echo esc_html( $HTML ); ?>>
                 </div>

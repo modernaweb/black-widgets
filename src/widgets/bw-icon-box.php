@@ -14,7 +14,6 @@ use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Text_Shadow;
 use Elementor\Group_Control_Image_Size;
-use enshrined\svgSanitize\Sanitizer;
 
 /**
  * Elementor title Widget.
@@ -454,9 +453,10 @@ class IconBox extends \Elementor\Widget_Base {
 		$this->add_group_control(
 			Group_Control_Image_Size::get_type(),
 			[
-				'name' => 'thumbnail', // // Usage: `{name}_size` and `{name}_custom_dimension`, in this case `thumbnail_size` and `thumbnail_custom_dimension`.
-                'include' => [ 'thumbnail', 'medium', 'large', 'full' ],
-                'default' => 'full',
+				'name' => 'thumbnail', // Usage: `{name}_size` → `thumbnail_size`.
+				'exclude' => [ 'custom' ],
+				'include' => [],
+				'default' => 'full',
 				'condition'  => [
 					'widget_icon_image_enable' => [
 						'icon_image_enable',
@@ -520,6 +520,10 @@ class IconBox extends \Elementor\Widget_Base {
 					],
 				],
 				'toggle'    => true,
+				'default'   => 'left',
+				'selectors' => [
+					'{{WRAPPER}} .bw-iconbox' => 'text-align: {{VALUE}};',
+				],
 				'condition'  => [
 					'widget_position' => [
 						'position-1',
@@ -546,6 +550,9 @@ class IconBox extends \Elementor\Widget_Base {
 					],
 				],
 				'toggle'    => true,
+				'default'   => 'left',
+				// No selectors: Elementor must re-render so .bw-box-left|.bw-box-right
+				// classes update (Pos 3/4 padding/border mirror + Pos 5/6 flex reverse).
 				'condition'  => [
 					'widget_position' => [
 						'position-3',
@@ -825,7 +832,6 @@ class IconBox extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox .bw-it-is-title' => 'color: {{VALUE}}',
-					'{{WRAPPER}} .bw-iconbox svg' => 'stroke: {{VALUE}}',
 				],
 			]
 		);
@@ -915,6 +921,9 @@ class IconBox extends \Elementor\Widget_Base {
 					],
 				],
 				'toggle'    => true,
+				'selectors' => [
+					'{{WRAPPER}} .bw-iconbox .bw-it-is-title' => 'text-align: {{VALUE}};',
+				],
 			]
 		);
 
@@ -1100,6 +1109,9 @@ class IconBox extends \Elementor\Widget_Base {
 					],
 				],
 				'toggle'    => true,
+				'selectors' => [
+					'{{WRAPPER}} .bw-iconbox .bw-it-is-subtitle' => 'text-align: {{VALUE}};',
+				],
 			]
 		);
 
@@ -1285,6 +1297,9 @@ class IconBox extends \Elementor\Widget_Base {
 					],
 				],
 				'toggle'    => true,
+				'selectors' => [
+					'{{WRAPPER}} .bw-iconbox .bw-it-is-paragraph' => 'text-align: {{VALUE}};',
+				],
 			]
 		);
 
@@ -1470,6 +1485,9 @@ class IconBox extends \Elementor\Widget_Base {
 					],
 				],
 				'toggle'    => true,
+				'selectors' => [
+					'{{WRAPPER}} .bw-iconbox .bw-btn' => 'text-align: {{VALUE}};',
+				],
 			]
 		);
 
@@ -1545,6 +1563,7 @@ class IconBox extends \Elementor\Widget_Base {
 				'condition'  => [
 					'widget_icon_image_type' => [
 						'enable_icon',
+						'enable_code',
 					],
 				],
 			]
@@ -1565,7 +1584,9 @@ class IconBox extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Normal Color', 'black-widgets' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon i' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon i' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-img' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1577,7 +1598,10 @@ class IconBox extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'SVG(fill) Normal Color', 'black-widgets' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg' => 'fill: {{VALUE}}',
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg' => 'fill: {{VALUE}}; color: {{VALUE}};',
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg path, {{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg circle, {{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg rect, {{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg polygon' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-img svg' => 'fill: {{VALUE}}; color: {{VALUE}};',
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-img svg path, {{WRAPPER}} .bw-iconbox .bw-iconbox-img svg circle, {{WRAPPER}} .bw-iconbox .bw-iconbox-img svg rect, {{WRAPPER}} .bw-iconbox .bw-iconbox-img svg polygon' => 'fill: {{VALUE}};',
 				],
 			]
 		);
@@ -1589,7 +1613,10 @@ class IconBox extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'SVG(stroke) Normal Color', 'black-widgets' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg' => 'stroke: {{VALUE}}',
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg' => 'stroke: {{VALUE}};',
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg path, {{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg circle, {{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg rect, {{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg polygon, {{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg line, {{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg polyline' => 'stroke: {{VALUE}};',
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-img svg' => 'stroke: {{VALUE}}; color: {{VALUE}};',
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-img svg path, {{WRAPPER}} .bw-iconbox .bw-iconbox-img svg circle, {{WRAPPER}} .bw-iconbox .bw-iconbox-img svg rect, {{WRAPPER}} .bw-iconbox .bw-iconbox-img svg polygon, {{WRAPPER}} .bw-iconbox .bw-iconbox-img svg line, {{WRAPPER}} .bw-iconbox .bw-iconbox-img svg polyline' => 'stroke: {{VALUE}};',
 				],
 			]
 		);
@@ -1600,8 +1627,8 @@ class IconBox extends \Elementor\Widget_Base {
 			[
 				'name' => 'content_icon_normal_background',
 				'label' => esc_html__( 'Background', 'black-widgets' ),
-				'types' => [ 'classic', 'gradient', 'video' ],
-				'selector' => '{{WRAPPER}} .bw-iconbox .bw-iconbox-icon i, {{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg',
+				'types' => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .bw-iconbox .bw-iconbox-icon, {{WRAPPER}} .bw-iconbox .bw-iconbox-img',
 			]
 		);
 
@@ -1613,14 +1640,16 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
+		// Color - hover the box (not only the icon node)
 		$this->add_control(
 			'widget_icon_box_icon_hover_color',
 			[
 				'label' => esc_html__( 'Hover Color', 'black-widgets' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon:hover i' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .bw-iconbox:hover .bw-iconbox-icon' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bw-iconbox:hover .bw-iconbox-icon i' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bw-iconbox:hover .bw-iconbox-img' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1631,7 +1660,10 @@ class IconBox extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'SVG(fill) Hover Color', 'black-widgets' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon:hover svg' => 'fill: {{VALUE}}',
+					'{{WRAPPER}} .bw-iconbox:hover .bw-iconbox-icon svg' => 'fill: {{VALUE}}; color: {{VALUE}};',
+					'{{WRAPPER}} .bw-iconbox:hover .bw-iconbox-icon svg path, {{WRAPPER}} .bw-iconbox:hover .bw-iconbox-icon svg circle, {{WRAPPER}} .bw-iconbox:hover .bw-iconbox-icon svg rect, {{WRAPPER}} .bw-iconbox:hover .bw-iconbox-icon svg polygon' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .bw-iconbox:hover .bw-iconbox-img svg' => 'fill: {{VALUE}}; color: {{VALUE}};',
+					'{{WRAPPER}} .bw-iconbox:hover .bw-iconbox-img svg path, {{WRAPPER}} .bw-iconbox:hover .bw-iconbox-img svg circle, {{WRAPPER}} .bw-iconbox:hover .bw-iconbox-img svg rect, {{WRAPPER}} .bw-iconbox:hover .bw-iconbox-img svg polygon' => 'fill: {{VALUE}};',
 				],
 			]
 		);
@@ -1642,7 +1674,10 @@ class IconBox extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'SVG(stroke) Hover Color', 'black-widgets' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon:hover svg' => 'stroke: {{VALUE}}',
+					'{{WRAPPER}} .bw-iconbox:hover .bw-iconbox-icon svg' => 'stroke: {{VALUE}};',
+					'{{WRAPPER}} .bw-iconbox:hover .bw-iconbox-icon svg path, {{WRAPPER}} .bw-iconbox:hover .bw-iconbox-icon svg circle, {{WRAPPER}} .bw-iconbox:hover .bw-iconbox-icon svg rect, {{WRAPPER}} .bw-iconbox:hover .bw-iconbox-icon svg polygon, {{WRAPPER}} .bw-iconbox:hover .bw-iconbox-icon svg line, {{WRAPPER}} .bw-iconbox:hover .bw-iconbox-icon svg polyline' => 'stroke: {{VALUE}};',
+					'{{WRAPPER}} .bw-iconbox:hover .bw-iconbox-img svg' => 'stroke: {{VALUE}}; color: {{VALUE}};',
+					'{{WRAPPER}} .bw-iconbox:hover .bw-iconbox-img svg path, {{WRAPPER}} .bw-iconbox:hover .bw-iconbox-img svg circle, {{WRAPPER}} .bw-iconbox:hover .bw-iconbox-img svg rect, {{WRAPPER}} .bw-iconbox:hover .bw-iconbox-img svg polygon, {{WRAPPER}} .bw-iconbox:hover .bw-iconbox-img svg line, {{WRAPPER}} .bw-iconbox:hover .bw-iconbox-img svg polyline' => 'stroke: {{VALUE}};',
 				],
 			]
 		);
@@ -1653,8 +1688,8 @@ class IconBox extends \Elementor\Widget_Base {
 			[
 				'name' => 'content_icon_hover_background',
 				'label' => esc_html__( 'Hover Background', 'black-widgets' ),
-				'types' => [ 'classic', 'gradient', 'video' ],
-				'selector' => '{{WRAPPER}} .bw-iconbox .bw-iconbox-icon:hover i, {{WRAPPER}} .bw-iconbox .bw-iconbox-icon:hover svg',
+				'types' => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .bw-iconbox:hover .bw-iconbox-icon, {{WRAPPER}} .bw-iconbox:hover .bw-iconbox-img',
 			]
 		);
 
@@ -1678,11 +1713,13 @@ class IconBox extends \Elementor\Widget_Base {
 					'px' => [
 						'min' => 0,
 						'max' => 200,
-						'step' => 5,
+						'step' => 1,
 					],
 				],
 				'selectors' => [
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon' => 'font-size: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon i' => 'font-size: {{SIZE}}{{UNIT}} !important;',
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg' => 'width: {{SIZE}}{{UNIT}} !important; height: {{SIZE}}{{UNIT}} !important;',
 				],
 			]
 		);
@@ -1690,23 +1727,25 @@ class IconBox extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'content_svg_icon_size',
 			[
-				'label' => esc_html__( 'SVG Width', 'black-widgets' ),
+				'label' => esc_html__( 'SVG Size', 'black-widgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
 					'px' => [
 						'min' => 0,
-						'max' => 200,
-						'step' => 5,
+						'max' => 400,
+						'step' => 1,
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg' => 'width: {{SIZE}}{{UNIT}} !important; height: auto !important;',
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg' => 'width: {{SIZE}}{{UNIT}} !important; height: {{SIZE}}{{UNIT}} !important;',
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-img svg' => 'width: {{SIZE}}{{UNIT}} !important; height: auto !important; max-width: 100%;',
 				],
 			]
 		);
 
-		// Alignment
+		// Alignment — no selectors: re-render updates .left|.center|.right (Pos 1/2
+		// horizontal) and .bw-icon-align-* (Pos 3–6 vertical via align-items).
 		$this->add_responsive_control(
 			'the_icon_alignment',
 			[
@@ -1738,7 +1777,7 @@ class IconBox extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon i, {{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon, {{WRAPPER}} .bw-iconbox .bw-iconbox-img' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1751,7 +1790,7 @@ class IconBox extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon i, {{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon, {{WRAPPER}} .bw-iconbox .bw-iconbox-img' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1762,7 +1801,7 @@ class IconBox extends \Elementor\Widget_Base {
 			[
 				'name' => 'content_icon__border',
 				'label' => esc_html__( 'Border', 'black-widgets' ),
-				'selector' => '{{WRAPPER}} .bw-iconbox .bw-iconbox-icon i',
+				'selector' => '{{WRAPPER}} .bw-iconbox .bw-iconbox-icon, {{WRAPPER}} .bw-iconbox .bw-iconbox-img',
 			]
 		);
 
@@ -1774,7 +1813,7 @@ class IconBox extends \Elementor\Widget_Base {
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon i, {{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon, {{WRAPPER}} .bw-iconbox .bw-iconbox-img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1785,7 +1824,7 @@ class IconBox extends \Elementor\Widget_Base {
 			[
 				'name' => 'content_icon__box_shadow',
 				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
-				'selector' => '{{WRAPPER}} .bw-iconbox .bw-iconbox-icon i, {{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg',
+				'selector' => '{{WRAPPER}} .bw-iconbox .bw-iconbox-icon, {{WRAPPER}} .bw-iconbox .bw-iconbox-img',
 			]
 		);
 
@@ -1841,7 +1880,7 @@ class IconBox extends \Elementor\Widget_Base {
 				'name' => 'content_image_hover_background',
 				'label' => esc_html__( 'Hover Background', 'black-widgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
-				'selector' => '{{WRAPPER}} .bw-iconbox .bw-iconbox-img:hover img',
+				'selector' => '{{WRAPPER}} .bw-iconbox:hover .bw-iconbox-img img',
 			]
 		);
 
@@ -1980,7 +2019,7 @@ class IconBox extends \Elementor\Widget_Base {
 		// Variables
 		$settings   			= $this->get_settings_for_display();
 		// Title
-		$enable_title			= 'title_enable' === $settings['widget_title_enable']			? $settings['widget_title_enable'] 				: '';
+		$enable_title			= isset( $settings['widget_title_enable'] ) && 'title_enable' === $settings['widget_title_enable'] ? 'title_enable' : '';
 		$allowed_tags 			= ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'];
 		$title_tag 				= isset($settings['widget_html_tag_title']) 					? $settings['widget_html_tag_title']			: ''; // HTML Tag
 		// Validate the HTML tag
@@ -1989,7 +2028,7 @@ class IconBox extends \Elementor\Widget_Base {
 		}
 		$title 					= isset($settings['widget_title']) 								? $settings['widget_title']						: '';
 		// Subtitle
-		$enable_subtitle		= 'subtitle_enable' === $settings['widget_subtitle_enable']		? $settings['widget_subtitle_enable'] 			: '';
+		$enable_subtitle		= isset( $settings['widget_subtitle_enable'] ) && 'subtitle_enable' === $settings['widget_subtitle_enable'] ? 'subtitle_enable' : '';
 		$subtitle_tag			= isset($settings['widget_html_tag_subtitle']) 					? $settings['widget_html_tag_subtitle']			: ''; // HTML Tag
 		// Validate the HTML tag
 		if (!in_array($subtitle_tag, $allowed_tags)) {
@@ -1997,37 +2036,37 @@ class IconBox extends \Elementor\Widget_Base {
 		}
 		$subtitle				= isset($settings['widget_subtitle'])							? $settings['widget_subtitle']					: '';
 		// Paragraph
-		$enable_paragraph		= 'paragraph_enable' === $settings['widget_paragraph_enable']	? $settings['widget_paragraph_enable'] 			: '';
+		$enable_paragraph		= isset( $settings['widget_paragraph_enable'] ) && 'paragraph_enable' === $settings['widget_paragraph_enable'] ? 'paragraph_enable' : '';
 		$paragraph				= isset($settings['widget_paragraph'])							? $settings['widget_paragraph']					: '';
 		// Image Or Icon
-		$enable_icon_image		= 'icon_image_enable' === $settings['widget_icon_image_enable']	? $settings['widget_icon_image_enable'] 		: '';
+		$enable_icon_image		= isset( $settings['widget_icon_image_enable'] ) && 'icon_image_enable' === $settings['widget_icon_image_enable'] ? 'icon_image_enable' : '';
 		$icon_image				= isset($settings['widget_icon_image_type'])					? $settings['widget_icon_image_type']			: '';
 		$iconset				= isset($settings['widget_icon'])								? $settings['widget_icon']						: ''; // Icon
 		$svgcode				= isset($settings['widget_code'])								? $settings['widget_code']						: ''; // Icon
-        $thumbnail				= isset($settings['thumbnail'])								? $settings['thumbnail']						: 'full';
+        $thumbnail = 'thumbnail';
 		// Link
-		$enable_link			= 'link_enable' === $settings['widget_link_enable']				? $settings['widget_link_enable'] 				: '';
+		$enable_link			= isset( $settings['widget_link_enable'] ) && 'link_enable' === $settings['widget_link_enable'] ? 'link_enable' : '';
 		$link					= isset($settings['widget_link_url']['url'])					? $settings['widget_link_url']['url']			: ''; // Link URL
 		$link_text 	        	= isset($settings['widget_link_text'])							? $settings['widget_link_text'] 				: ''; // Link Text
 		$link_target         	= isset($settings['widget_link_url']['is_external'])			? 'target="_blank"' 							: '';
 		$link_nofollow       	= isset($settings['widget_link_url']['nofollow'] )				? ' rel="nofollow"'								: '';
 		// Position Options
 		$position				= isset( $settings['widget_position'] )							? $settings['widget_position']					: '';
-		// Alignment
-		$box_align				= isset($settings['box_text_alignment'])						? $settings['box_text_alignment']				: '';
-		$box_b_align			= isset($settings['box_b_text_alignment'])						? $settings['box_b_text_alignment']				: '';
-		$title_align			= isset($settings['content_title_text_alignment'])				? $settings['content_title_text_alignment']		: '';
-		$subtitle_align			= isset($settings['content_subtitle_text_alignment'])			? $settings['content_subtitle_text_alignment']	: '';
-		$paragraph_align		= isset($settings['content_paragraph_text_alignment'])			? $settings['content_paragraph_text_alignment']	: '';
-		$link_align				= isset($settings['content_link_text_alignment'])				? $settings['content_link_text_alignment']		: '';
+		// Alignment (responsive choose controls must stay strings for class names)
+		$box_align				= isset($settings['box_text_alignment']) && is_string( $settings['box_text_alignment'] ) ? $settings['box_text_alignment'] : 'left';
+		$box_b_align			= isset($settings['box_b_text_alignment']) && is_string( $settings['box_b_text_alignment'] ) ? $settings['box_b_text_alignment'] : 'left';
+		$title_align			= isset($settings['content_title_text_alignment']) && is_string( $settings['content_title_text_alignment'] ) ? $settings['content_title_text_alignment'] : '';
+		$subtitle_align			= isset($settings['content_subtitle_text_alignment']) && is_string( $settings['content_subtitle_text_alignment'] ) ? $settings['content_subtitle_text_alignment'] : '';
+		$paragraph_align		= isset($settings['content_paragraph_text_alignment']) && is_string( $settings['content_paragraph_text_alignment'] ) ? $settings['content_paragraph_text_alignment'] : '';
+		$link_align				= isset($settings['content_link_text_alignment']) && is_string( $settings['content_link_text_alignment'] ) ? $settings['content_link_text_alignment'] : '';
 		// Icon Position:
-		$icon_position			= isset($settings['the_icon_alignment'])						? $settings['the_icon_alignment']				: '';
-		$svg_animate			= 'bw-iconbox-svg-animate' === $settings['widget_svg_animate']	? $settings['widget_svg_animate'] 				: '';
+		$icon_position			= isset($settings['the_icon_alignment']) && is_string( $settings['the_icon_alignment'] ) ? $settings['the_icon_alignment'] : '';
+		$icon_align_class		= $icon_position ? 'bw-icon-align-' . $icon_position : '';
+		$svg_animate			= isset( $settings['widget_svg_animate'] ) && 'bw-iconbox-svg-animate' === $settings['widget_svg_animate'] ? 'bw-iconbox-svg-animate' : '';
 		$data_id				= 'bw_' . uniqid();
 		$animate_id				= '#' . $data_id;
 
-        $sanitizer = new Sanitizer();
-        $svgcode = $sanitizer->sanitize( $svgcode );
+        $svgcode = black_widgets_sanitize_svg_markup( $svgcode );
 
 		// Render
 		switch ($position) {
@@ -2044,11 +2083,11 @@ class IconBox extends \Elementor\Widget_Base {
                         \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] );
                         echo '</div>';
                     } elseif ( $icon_image == 'enable_code' ) {
-                        echo '<div class="bw-iconbox-img xcv--mw ' . esc_attr( $box_align ) . '">' . wp_kses_post( $svgcode ) . '</div>';
+                        echo '<div class="bw-iconbox-img xcv--mw ' . esc_attr( $icon_position ) . '">' . $svgcode . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- sanitized SVG
                     } else {
                         $image_url = Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], $thumbnail, $settings );
                         if ( $image_url ) {
-                            echo '<div class="bw-iconbox-img ' . esc_attr( $box_align ) . '">';
+                            echo '<div class="bw-iconbox-img ' . esc_attr( $icon_position ) . '">';
                             echo '<img src="' . esc_url( $image_url ) . '" class="bw-iconbox-image">';  // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
                             echo '</div>';
                         }
@@ -2063,26 +2102,25 @@ class IconBox extends \Elementor\Widget_Base {
 
 				case 'position-3':
 				case 'position-4':
-					echo '<div id="' . $data_id . '" class="bw-iconbox bw-box-'. esc_attr( $box_b_align ) .' bw-' . esc_attr( $position ) . ' ' . $svg_animate . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						echo '<div class="bw-image-wrap">';
-							// Image
+					echo '<div id="' . $data_id . '" class="bw-iconbox bw-box-'. esc_attr( $box_b_align ) .' bw-' . esc_attr( $position ) . ' ' . esc_attr( $icon_align_class ) . ' ' . $svg_animate . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             if ( $enable_icon_image ) {
+						echo '<div class="bw-image-wrap">';
                 if ( $icon_image == 'enable_icon' ) {
                     echo '<div class="bw-iconbox-icon ' . esc_attr( $icon_position ) . '">';
                     \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] );
                     echo '</div>';
                 } elseif ( $icon_image == 'enable_code' ) {
-                    echo '<div class="bw-iconbox-img xcv--mw">' . wp_kses_post( $svgcode ) . '</div>';
+                    echo '<div class="bw-iconbox-img xcv--mw ' . esc_attr( $icon_position ) . '">' . $svgcode . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- sanitized SVG
                 } else {
                     $image_url = Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], $thumbnail, $settings );
                     if ( $image_url ) {
-                        echo '<div class="bw-iconbox-img ' . esc_attr( $box_align ) . '">';
+                        echo '<div class="bw-iconbox-img ' . esc_attr( $icon_position ) . '">';
                         echo '<img src="' . esc_url( $image_url ) . '" class="bw-iconbox-image" alt="">';             // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
                         echo '</div>';
                     }
                 }
-            }
 						echo '</div>';
+            }
 						echo '<div class="bw-content-wrap">';
 							// Title
 							if ( $enable_title ) echo '<' . $title_tag . ' class="bw-it-is-title ' . esc_attr( $title_align ) . '">' . esc_html($title) . '</' . $title_tag . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -2098,7 +2136,7 @@ class IconBox extends \Elementor\Widget_Base {
 
 			case 'position-5':
 			case 'position-6':
-				echo '<div id="' . $data_id . '" class="bw-iconbox bw-box-'. esc_attr( $box_b_align ) .' bw-' . esc_attr( $position ) . ' ' . $svg_animate . '">';// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo '<div id="' . $data_id . '" class="bw-iconbox bw-box-'. esc_attr( $box_b_align ) .' bw-' . esc_attr( $position ) . ' ' . esc_attr( $icon_align_class ) . ' ' . $svg_animate . '">';// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					echo '<div class="bw-wrapper">';
 					// Image
             if ( $enable_icon_image ) {
@@ -2107,11 +2145,11 @@ class IconBox extends \Elementor\Widget_Base {
                     \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] );
                     echo '</div>';
                 } elseif ( $icon_image == 'enable_code' ) {
-                    echo '<div class="bw-iconbox-img xcv--mw">' . wp_kses_post( $svgcode ) . '</div>';
+                    echo '<div class="bw-iconbox-img xcv--mw ' . esc_attr( $icon_position ) . '">' . $svgcode . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- sanitized SVG
                 } else {
                     $image_url = Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], $thumbnail, $settings );
                     if ( $image_url ) {
-                        echo '<div class="bw-iconbox-img ' . esc_attr( $box_align ) . '">';
+                        echo '<div class="bw-iconbox-img ' . esc_attr( $icon_position ) . '">';
                         echo '<img src="' . esc_url( $image_url ) . '" class="bw-iconbox-image" alt="">';  // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
                         echo '</div>';
                     }
@@ -2143,11 +2181,11 @@ class IconBox extends \Elementor\Widget_Base {
                         \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] );
                         echo '</div>';
                     } elseif ( $icon_image === 'enable_code' ) {
-                        echo '<div class="bw-iconbox-img xcv--mw">' . wp_kses_post( $svgcode ) . '</div>';
+                        echo '<div class="bw-iconbox-img xcv--mw ' . esc_attr( $icon_position ) . '">' . $svgcode . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- sanitized SVG
                     } else {
                         $image_url = Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], $thumbnail, $settings );
                         if ( $image_url ) {
-                            echo '<div class="bw-iconbox-img ' . esc_attr( $box_align ) . '">';
+                            echo '<div class="bw-iconbox-img ' . esc_attr( $icon_position ) . '">';
                             echo '<img src="' . esc_url( $image_url ) . '" class="bw-iconbox-image" alt="">';                 // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
                             echo '</div>';
                         }

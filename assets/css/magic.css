@@ -2,18 +2,7 @@
     display: block;
     width: 100%;
     position: relative;
-}
-
-.bw-magic-link.left {
-    text-align: left;
-}
-
-.bw-magic-link.center {
-    text-align: center;
-}
-
-.bw-magic-link.right {
-    text-align: right;
+    /* Alignment comes from Elementor text-align on this wrapper */
 }
 
 .bw-magic-link a {
@@ -22,12 +11,13 @@
     line-height: 2;
     display: inline-block;
     text-transform: capitalize;
+    vertical-align: middle;
 }
 
 .bw-magic-link a.bw-magic-pullttb,
 .bw-magic-link a.bw-magic-pullbtt,
 .bw-magic-link a.bw-magic-pullltr,
-.bw-magic-link .bw-magic-pullrtl a {
+.bw-magic-link a.bw-magic-pullrtl {
     color: #000;
 }
 
@@ -104,27 +94,6 @@
     width: fit-content;
 }
 
-.bw-magic-link.left a.bw-magic-pullttb,
-.bw-magic-link.left a.bw-magic-pullbtt,
-.bw-magic-link.left a.bw-magic-pullltr,
-.bw-magic-link.left a.bw-magic-pullrtl {
-    margin-right: auto;
-}
-
-.bw-magic-link.center a.bw-magic-pullttb,
-.bw-magic-link.center a.bw-magic-pullbtt,
-.bw-magic-link.center a.bw-magic-pullltr,
-.bw-magic-link.center a.bw-magic-pullrtl {
-    margin: auto;
-}
-
-.bw-magic-link.right a.bw-magic-pullttb,
-.bw-magic-link.right a.bw-magic-pullbtt,
-.bw-magic-link.right a.bw-magic-pullltr,
-.bw-magic-link.right a.bw-magic-pullrtl {
-    margin-left: auto;
-}
-
 .bw-magic-link a.bw-magic-pullltr:before,
 .bw-magic-link a.bw-magic-pullrtl:before,
 .bw-magic-link a.bw-magic-pullttb:before,
@@ -146,13 +115,11 @@
 /* Heart Beat */
 
 .bw-magic-link .bw-magic-heart {
-    margin: auto;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     border: none;
     color: #000;
     letter-spacing: 0px;
-    text-align: center;
     line-height: 2.4;
     font-weight: 700;
     cursor: pointer;
@@ -162,18 +129,6 @@
     -moz-transition: all 0.25s ease-out;
     -ms-transition: all 0.25s ease-out;
     -o-transition: all 0.25s ease-out;
-}
-
-.bw-magic-link.left .bw-magic-heart {
-    justify-content: flex-start;
-}
-
-.bw-magic-link.center .bw-magic-heart {
-    justify-content: center;
-}
-
-.bw-magic-link.right .bw-magic-heart {
-    justify-content: flex-end;
 }
 
 .bw-magic-link .bw-magic-heart span {
@@ -259,7 +214,6 @@
 .bw-magic-link .bw-magic-liner {
     display: inline-block;
     padding: 0 14px;
-    margin-left: -14px;
     font-size: 14px;
     font-weight: 800;
     text-transform: uppercase;
@@ -341,9 +295,9 @@
 /* Arrow */
 
 .bw-magic-link .bw-magic-arrow {
-    display: flex;
+    display: inline-flex;
     width: fit-content;
-    text-align: left;
+    align-items: center;
     font-size: 15px;
     text-transform: uppercase;
     letter-spacing: 0.02em;
@@ -353,18 +307,6 @@
     -moz-transition: all 0.47s cubic-bezier(1, 0.45, 0.56, 0.7);
     -ms-transition: all 0.47s cubic-bezier(1, 0.45, 0.56, 0.7);
     -o-transition: all 0.47s cubic-bezier(1, 0.45, 0.56, 0.7);
-}
-
-.bw-magic-link.left .bw-magic-arrow {
-    margin-right: auto;
-}
-
-.bw-magic-link.center .bw-magic-arrow {
-    margin: auto;
-}
-
-.bw-magic-link.right .bw-magic-arrow {
-    margin-left: auto;
 }
 
 .bw-magic-link .bw-magic-arrow span {
@@ -417,18 +359,6 @@
     -o-transition: text-decoration-color 0.2s ease !important;
 }
 
-.bw-magic-link.left .bw-magic-simple {
-    margin-right: auto;
-}
-
-.bw-magic-link.center .bw-magic-simple {
-    margin: auto;
-}
-
-.bw-magic-link.right .bw-magic-simple {
-    margin-left: auto;
-}
-
 .bw-magic-link .bw-magic-simple:hover {
     color: #000;
     text-decoration-color: #000 !important;
@@ -442,18 +372,6 @@
     width: fit-content;
     color: #000;
     transition: all ease 0.3s;
-}
-
-.bw-magic-link.left .bw-magic-minimal {
-    margin-right: auto
-}
-
-.bw-magic-link.center .bw-magic-minimal {
-    margin: auto;
-}
-
-.bw-magic-link.right .bw-magic-minimal {
-    margin-left: auto;
 }
 
 .bw-magic-link .bw-magic-minimal:hover {
@@ -556,11 +474,12 @@
 .bw-magic-link .bw-magic-wheel {
     position: relative;
     display: inline-block;
-    width: 25.6em;
+    width: auto;
+    max-width: 100%;
     height: 6.3em;
+    padding-left: 2.5em;
     overflow: hidden;
     vertical-align: middle;
-    text-align: left;
     text-decoration: none;
     line-height: 3em;
     font-size: 1rem;
@@ -591,7 +510,7 @@
     z-index: 1;
     position: absolute;
     top: 10px;
-    left: -30px;
+    left: 0;
     width: auto;
     height: auto;
 }
@@ -654,4 +573,105 @@
 
 .bw-magic-link .bw-magic-wheel:hover svg g circle {
     stroke-dashoffset: 200;
+}
+
+/* -------------------------------------------------------------------------- */
+/* SplitText hover types (GSAP + SplitText CDN)                               */
+/* -------------------------------------------------------------------------- */
+
+.bw-magic-link.bw-magic-stx {
+	perspective: 800px;
+}
+
+.bw-magic-link .bw-ml__link {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	text-decoration: none;
+	vertical-align: middle;
+	line-height: 1.2;
+	overflow: hidden;
+}
+
+.bw-magic-link .bw-ml__link.bw-ml--has-icon {
+	gap: 0.45em;
+}
+
+.bw-magic-link .bw-ml__icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	line-height: 1;
+	font-size: 0.95em;
+	color: currentColor;
+	transition: color 0.25s ease, transform 0.25s ease;
+	-webkit-transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.bw-magic-link .bw-ml__icon i,
+.bw-magic-link .bw-ml__icon svg {
+	display: block;
+	width: 1em;
+	height: 1em;
+	font-size: 1em;
+}
+
+.bw-magic-link .bw-ml__icon svg {
+	fill: currentColor;
+}
+
+.bw-magic-link .bw-ml__mask,
+.bw-magic-link .bw-ml__swap {
+	display: inline-block;
+	position: relative;
+	overflow: hidden;
+	vertical-align: top;
+	min-width: 0;
+}
+
+.bw-magic-link .bw-ml__swap {
+	display: inline-grid;
+}
+
+.bw-magic-link .bw-ml__swap-line {
+	grid-area: 1 / 1;
+	display: block;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.bw-magic-link .bw-ml__text {
+	display: inline-block;
+	will-change: transform;
+}
+
+.bw-magic-link .bw-ml__char {
+	display: inline-block;
+	will-change: transform, opacity, filter;
+	backface-visibility: hidden;
+}
+
+.bw-magic-link .bw-ml__sr {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+.bw-magic-link .bw-ml__link.is-nav-pending {
+	pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.bw-magic-link.bw-magic-stx .bw-ml__char {
+		transform: none !important;
+		filter: none !important;
+		opacity: 1 !important;
+	}
 }

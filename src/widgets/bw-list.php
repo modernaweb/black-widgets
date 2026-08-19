@@ -134,6 +134,7 @@ class ListItems extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::TEXT,
 				'default' => esc_html__( 'List Title' , 'black-widgets' ),
 				'label_block' => true,
+				'description' => esc_html__( 'Inline HTML allowed: br, strong, b, em, i, u, span, mark, small, sub, sup.', 'black-widgets' ),
 			]
 		);
 
@@ -283,6 +284,115 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'list_alignment',
+			[
+				'label'     => esc_html__( 'Alignment', 'black-widgets' ),
+				'type'      => \Elementor\Controls_Manager::CHOOSE,
+				'options'   => [
+					'left'   => [
+						'title' => esc_html__( 'Left', 'black-widgets' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'black-widgets' ),
+						'icon'  => 'eicon-text-align-center',
+					],
+					'right'  => [
+						'title' => esc_html__( 'Right', 'black-widgets' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+				],
+				'default'   => 'left',
+				'toggle'    => true,
+				'selectors_dictionary' => [
+					'left'   => 'flex-start',
+					'center' => 'center',
+					'right'  => 'flex-end',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bw-list .bw-list-content' => 'justify-content: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'list_items_gap',
+			[
+				'label' => esc_html__( 'Items Gap', 'black-widgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+						'step' => 1,
+					],
+					'em' => [
+						'min' => 0,
+						'max' => 10,
+						'step' => 0.1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bw-list' => 'display: flex; flex-direction: column; gap: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'list_divider',
+			[
+				'label' => esc_html__( 'Divider', 'black-widgets' ),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'label_on' => esc_html__( 'On', 'black-widgets' ),
+				'label_off' => esc_html__( 'Off', 'black-widgets' ),
+				'return_value' => 'yes',
+				'default' => '',
+			]
+		);
+
+		$this->add_control(
+			'list_divider_color',
+			[
+				'label' => esc_html__( 'Divider Color', 'black-widgets' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#e5e5e5',
+				'condition' => [
+					'list_divider' => 'yes',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bw-list .bw-list-item:not(:last-child)' => 'border-bottom-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'list_divider_weight',
+			[
+				'label' => esc_html__( 'Divider Weight', 'black-widgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 1,
+						'max' => 20,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 1,
+				],
+				'condition' => [
+					'list_divider' => 'yes',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bw-list .bw-list-item:not(:last-child)' => 'border-bottom-style: solid; border-bottom-width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
 		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
@@ -384,7 +494,8 @@ class ListItems extends \Elementor\Widget_Base {
                     'default' => Global_Colors::COLOR_PRIMARY,
                 ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-list .bw-list-item i' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .bw-list .bw-list-item .bw-icon-section i' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .bw-list .bw-list-item .bw-icon-section svg' => 'fill: {{VALUE}}',
 				],
 			]
         );
@@ -403,7 +514,8 @@ class ListItems extends \Elementor\Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .bw-list .bw-list-item i' => 'font-size: {{SIZE}}{{UNIT}} !important;',
+					'{{WRAPPER}} .bw-list .bw-list-item .bw-icon-section i' => 'font-size: {{SIZE}}{{UNIT}} !important;',
+					'{{WRAPPER}} .bw-list .bw-list-item .bw-icon-section svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -415,7 +527,7 @@ class ListItems extends \Elementor\Widget_Base {
 				'name' => 'icon_background',
 				'label' => esc_html__( 'Background', 'black-widgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
-				'selector' => '{{WRAPPER}} .bw-list .bw-list-item i',
+				'selector' => '{{WRAPPER}} .bw-list .bw-list-item .bw-icon-section',
 			]
 		);
 
@@ -427,7 +539,7 @@ class ListItems extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-list .bw-list-item i' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-list .bw-list-item .bw-icon-section' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -440,7 +552,7 @@ class ListItems extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-list .bw-list-item i' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-list .bw-list-item .bw-icon-section' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -451,7 +563,7 @@ class ListItems extends \Elementor\Widget_Base {
 			[
 				'name' => 'icon_border',
 				'label' => esc_html__( 'Border', 'black-widgets' ),
-				'selector' => '{{WRAPPER}} .bw-list .bw-list-item i',
+				'selector' => '{{WRAPPER}} .bw-list .bw-list-item .bw-icon-section',
 			]
 		);
 
@@ -463,7 +575,7 @@ class ListItems extends \Elementor\Widget_Base {
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-list .bw-list-item i' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-list .bw-list-item .bw-icon-section' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -474,7 +586,7 @@ class ListItems extends \Elementor\Widget_Base {
 			[
 				'name' => 'icon_box_shadow',
 				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
-				'selector' => '{{WRAPPER}} .bw-list .bw-list-item i',
+				'selector' => '{{WRAPPER}} .bw-list .bw-list-item .bw-icon-section',
 			]
 		);
 
@@ -498,7 +610,8 @@ class ListItems extends \Elementor\Widget_Base {
                     'default' => Global_Colors::COLOR_PRIMARY,
                 ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-list .bw-list-item:hover i' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .bw-list .bw-list-item:hover .bw-icon-section i' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .bw-list .bw-list-item:hover .bw-icon-section svg' => 'fill: {{VALUE}}',
 				],
 			]
         );
@@ -517,7 +630,8 @@ class ListItems extends \Elementor\Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .bw-list .bw-list-item:hover i' => 'font-size: {{SIZE}}{{UNIT}} !important;',
+					'{{WRAPPER}} .bw-list .bw-list-item:hover .bw-icon-section i' => 'font-size: {{SIZE}}{{UNIT}} !important;',
+					'{{WRAPPER}} .bw-list .bw-list-item:hover .bw-icon-section svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -529,7 +643,7 @@ class ListItems extends \Elementor\Widget_Base {
 				'name' => 'icon_hover_background',
 				'label' => esc_html__( 'Background', 'black-widgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
-				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover i',
+				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover .bw-icon-section',
 			]
 		);
 
@@ -541,7 +655,7 @@ class ListItems extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-list .bw-list-item:hover i' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-list .bw-list-item:hover .bw-icon-section' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -554,7 +668,7 @@ class ListItems extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-list .bw-list-item:hover i' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-list .bw-list-item:hover .bw-icon-section' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -565,7 +679,7 @@ class ListItems extends \Elementor\Widget_Base {
 			[
 				'name' => 'icon_hover_border',
 				'label' => esc_html__( 'Border', 'black-widgets' ),
-				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover i',
+				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover .bw-icon-section',
 			]
 		);
 
@@ -577,7 +691,7 @@ class ListItems extends \Elementor\Widget_Base {
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-list .bw-list-item:hover i' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-list .bw-list-item:hover .bw-icon-section' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -588,7 +702,7 @@ class ListItems extends \Elementor\Widget_Base {
 			[
 				'name' => 'icon_hover_box_shadow',
 				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
-				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover i',
+				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover .bw-icon-section',
 			]
 		);
 
@@ -625,7 +739,7 @@ class ListItems extends \Elementor\Widget_Base {
                 'global' => [
                     'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
                 ],
-				'selector' => '{{WRAPPER}} .bw-list .bw-list-item span',
+				'selector' => '{{WRAPPER}} .bw-list .bw-list-item .bw-list-content > span:not(.bw-icon-section)',
 			]
 		);
 
@@ -639,7 +753,7 @@ class ListItems extends \Elementor\Widget_Base {
                     'default' => Global_Colors::COLOR_PRIMARY,
                 ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-list .bw-list-item span' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .bw-list .bw-list-item .bw-list-content > span:not(.bw-icon-section)' => 'color: {{VALUE}}',
 				],
 			]
         );
@@ -651,7 +765,7 @@ class ListItems extends \Elementor\Widget_Base {
 				'name' => 'text_background',
 				'label' => esc_html__( 'Background', 'black-widgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
-				'selector' => '{{WRAPPER}} .bw-list .bw-list-item span',
+				'selector' => '{{WRAPPER}} .bw-list .bw-list-item .bw-list-content > span:not(.bw-icon-section)',
 			]
 		);
 
@@ -663,7 +777,7 @@ class ListItems extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-list .bw-list-item span' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-list .bw-list-item .bw-list-content > span:not(.bw-icon-section)' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -676,7 +790,7 @@ class ListItems extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-list .bw-list-item span' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-list .bw-list-item .bw-list-content > span:not(.bw-icon-section)' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -687,7 +801,7 @@ class ListItems extends \Elementor\Widget_Base {
 			[
 				'name' => 'text_border',
 				'label' => esc_html__( 'Border', 'black-widgets' ),
-				'selector' => '{{WRAPPER}} .bw-list .bw-list-item span',
+				'selector' => '{{WRAPPER}} .bw-list .bw-list-item .bw-list-content > span:not(.bw-icon-section)',
 			]
 		);
 
@@ -699,7 +813,7 @@ class ListItems extends \Elementor\Widget_Base {
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-list .bw-list-item span' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-list .bw-list-item .bw-list-content > span:not(.bw-icon-section)' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -710,7 +824,7 @@ class ListItems extends \Elementor\Widget_Base {
 			[
 				'name' => 'text_box_shadow',
 				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
-				'selector' => '{{WRAPPER}} .bw-list .bw-list-item span',
+				'selector' => '{{WRAPPER}} .bw-list .bw-list-item .bw-list-content > span:not(.bw-icon-section)',
 			]
 		);
 
@@ -733,7 +847,7 @@ class ListItems extends \Elementor\Widget_Base {
                 'global' => [
                     'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
                 ],
-				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover span',
+				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover .bw-list-content > span:not(.bw-icon-section)',
 			]
 		);
 
@@ -747,7 +861,7 @@ class ListItems extends \Elementor\Widget_Base {
                     'default' => Global_Colors::COLOR_PRIMARY,
                 ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-list .bw-list-item:hover span' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .bw-list .bw-list-item:hover .bw-list-content > span:not(.bw-icon-section)' => 'color: {{VALUE}}',
 				],
 			]
         );
@@ -759,7 +873,7 @@ class ListItems extends \Elementor\Widget_Base {
 				'name' => 'text_hover_background',
 				'label' => esc_html__( 'Background', 'black-widgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
-				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover span',
+				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover .bw-list-content > span:not(.bw-icon-section)',
 			]
 		);
 
@@ -771,7 +885,7 @@ class ListItems extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-list .bw-list-item:hover span' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-list .bw-list-item:hover .bw-list-content > span:not(.bw-icon-section)' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -784,7 +898,7 @@ class ListItems extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-list .bw-list-item:hover span' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-list .bw-list-item:hover .bw-list-content > span:not(.bw-icon-section)' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -795,7 +909,7 @@ class ListItems extends \Elementor\Widget_Base {
 			[
 				'name' => 'text_hover_border',
 				'label' => esc_html__( 'Border', 'black-widgets' ),
-				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover span',
+				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover .bw-list-content > span:not(.bw-icon-section)',
 			]
 		);
 
@@ -807,7 +921,7 @@ class ListItems extends \Elementor\Widget_Base {
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-list .bw-list-item:hover span' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-list .bw-list-item:hover .bw-list-content > span:not(.bw-icon-section)' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -818,7 +932,7 @@ class ListItems extends \Elementor\Widget_Base {
 			[
 				'name' => 'text_hover_box_shadow',
 				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
-				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover span',
+				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover .bw-list-content > span:not(.bw-icon-section)',
 			]
 		);
 
@@ -842,9 +956,19 @@ class ListItems extends \Elementor\Widget_Base {
 	protected function render() {
 
 		$settings   	= $this->get_settings_for_display();
-
-		// Variables
-        $type 	        = isset($settings['widget_type'])				? $settings['widget_type'] 				: '';
+		$allowed_inline_html = [
+			'br'     => [],
+			'strong' => [],
+			'b'      => [],
+			'em'     => [],
+			'i'      => [],
+			'u'      => [],
+			'span'   => [ 'class' => true ],
+			'mark'   => [],
+			'small'  => [],
+			'sub'    => [],
+			'sup'    => [],
+		];
 
 		// Render
         if ( $settings['list'] ) {
@@ -852,18 +976,20 @@ class ListItems extends \Elementor\Widget_Base {
 			foreach (  $settings['list'] as $item ) {
 
 					$link			= isset($item['link_list']['url'])			? $item['link_list']['url']				: '';
-					$target			= $item['link_list']['is_external']			? 'target="_blank"' 					: '';
-					$nofollow		= $item['link_list']['nofollow'] 			? ' rel="nofollow"'						: '';
+					$target			= ! empty( $item['link_list']['is_external'] )	? 'target="_blank"' 					: '';
+					$nofollow		= ! empty( $item['link_list']['nofollow'] ) 		? ' rel="nofollow"'						: '';
+					$repeater_id	= black_widgets_sanitize_repeater_id( $item['_id'] ?? '' );
+					$safe_title		= wp_kses( (string) ( $item['list_title'] ?? '' ), $allowed_inline_html );
 
 					if( $link ) {
 						echo '<div class="bw-list-item">';
-							echo '<a href="' . esc_url( $item['link_list']['url'] ) . '"' . $target . $nofollow . ' class="bw-list-item-link' . esc_attr( $type ) . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							echo '<a href="' . esc_url( $item['link_list']['url'] ) . '"' . $target . $nofollow . ' class="bw-list-item-link">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 								echo '<div class="bw-list-content">';
 									echo '<span class="bw-icon-section">';
 										\Elementor\Icons_Manager::render_icon( $item['icon_widget'], [ 'aria-hidden' => 'true' ] );
 									echo '</span>';
-									echo '<span class="elementor-repeater-item-' . esc_attr( $item['_id'] ) . '">';
-										echo esc_html( $item['list_title'] );
+									echo '<span class="elementor-repeater-item-' . esc_attr( $repeater_id ) . '">';
+										echo $safe_title; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_kses()'d
 									echo '</span>';
 								echo '</div>';
 							echo '</a>';
@@ -874,8 +1000,8 @@ class ListItems extends \Elementor\Widget_Base {
 								echo '<span class="bw-icon-section">';
 									\Elementor\Icons_Manager::render_icon( $item['icon_widget'], [ 'aria-hidden' => 'true' ] );
 								echo '</span>';
-								echo '<span class="elementor-repeater-item-' . esc_attr( $item['_id'] ) . '">';
-									echo esc_html( $item['list_title'] );
+								echo '<span class="elementor-repeater-item-' . esc_attr( $repeater_id ) . '">';
+									echo $safe_title; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_kses()'d
 								echo '</span>';
 							echo '</div>';
 						echo '</div>';

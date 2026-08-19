@@ -24,7 +24,7 @@ class GSAPHorizontalScrolling extends \Elementor\Widget_Base {
         parent::__construct( $data, $args );
         wp_register_style( 'black-widgets-gsap-horizontal-scrolling', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/gsap-horizontal-scrolling.css', [], BLACK_WIDGETS_VERSION );
 
-        wp_register_script( 'black-widgets-gsap-horizontal-scrolling', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/gsap-horizontal-scrolling.js', [ 'jquery', 'GSAP', 'GSAP-ScrollTrigger', 'TimelineMax' ], BLACK_WIDGETS_VERSION, true );
+        wp_register_script( 'black-widgets-gsap-horizontal-scrolling', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/gsap-horizontal-scrolling.js', [ 'jquery', 'GSAP', 'GSAP-ScrollTrigger' ], BLACK_WIDGETS_VERSION, true );
     }
 
 	/**
@@ -145,7 +145,8 @@ class GSAPHorizontalScrolling extends \Elementor\Widget_Base {
 
 		$repeater = new \Elementor\Repeater();
 
-		$elementor_tpl = \Elementor\Plugin::instance()->templates_manager->get_source( 'local' )->get_items();
+        $source = \Elementor\Plugin::instance()->templates_manager->get_source( 'local' );
+        $elementor_tpl = $source ? $source->get_items() : [];
 		$elementor_tpl_opts = [ '0' => esc_html__( 'Elementor template is not defined yet.', 'black-widgets' ) ];
 
 		if ( ! empty( $elementor_tpl ) ) {
@@ -259,9 +260,6 @@ class GSAPHorizontalScrolling extends \Elementor\Widget_Base {
 		// $ctsection		= isset( $settings['custom_template']) ? $settings['custom_template'] : '';
         // $returnx        =  \Elementor\Plugin::instance()->frontend->get_builder_content_for_display( $ctsection );
         // echo  \Elementor\Plugin::instance()->frontend->get_builder_content_for_display( $settings['custom_template'] );
-
-		$options = get_option('plugin_options') ? get_option('plugin_options') : '';
-        $gsap_options  = isset($options['gsap_options']) ? $options['gsap_options'] : '';
 
 		$data_id                	= 'bw_' . uniqid();
 		$script_id              	= '#' . $data_id;

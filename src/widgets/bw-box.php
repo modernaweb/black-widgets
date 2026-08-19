@@ -27,6 +27,7 @@ class Box extends \Elementor\Widget_Base {
     public function __construct( $data = [], $args = null ) {
         parent::__construct( $data, $args );
         wp_register_style( 'black-widgets-box', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/box.css', [], BLACK_WIDGETS_VERSION );
+        wp_register_script( 'black-widgets-box', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/box.js', [], BLACK_WIDGETS_VERSION, true );
     }
 
     /**
@@ -86,6 +87,10 @@ class Box extends \Elementor\Widget_Base {
     }
 
     public function get_style_depends() {
+        return [ 'black-widgets-box' ];
+    }
+
+    public function get_script_depends() {
         return [ 'black-widgets-box' ];
     }
 
@@ -204,8 +209,9 @@ class Box extends \Elementor\Widget_Base {
         $this->add_group_control(
             Group_Control_Image_Size::get_type(),
             [
-                'name' => 'image_widget_size',
-                'include' => [ 'thumbnail', 'medium', 'large', 'full' ],
+                'name' => 'thumbnail', // Usage: `{name}_size` → `thumbnail_size` (keep name for BC with 1.3.9).
+                'exclude' => [ 'custom' ],
+                'include' => [],
                 'default' => 'full',
             ]
         );
@@ -321,10 +327,9 @@ class Box extends \Elementor\Widget_Base {
                 ],
                 'default'   => 'center',
                 'toggle'    => true,
-                'condition'  => [
-                    'widget_type' => [
-                        'bw-style-1',
-                    ],
+                'selectors' => [
+                    '{{WRAPPER}} .bw-hover-box .bw-content-box' => 'text-align: {{VALUE}};',
+                    '{{WRAPPER}} .bw-hover-box.bw-style-2 .bw-title-box' => 'text-align: {{VALUE}};',
                 ],
             ]
         );
@@ -1623,7 +1628,7 @@ class Box extends \Elementor\Widget_Base {
                 'name' => 'overlay_bg_color',
                 'label' => esc_html__( 'Background', 'black-widgets' ),
                 'types' => [ 'classic', 'gradient', ],
-                'selector' => '{{WRAPPER}} .bw-hover-box.bw-style-2 a:after',
+                'selector' => '{{WRAPPER}} .bw-hover-box.bw-style-2 .bw-box-overlay, {{WRAPPER}} .bw-hover-box.bw-style-2 a:after',
             ]
         );
 
@@ -1634,7 +1639,7 @@ class Box extends \Elementor\Widget_Base {
                 'name' => 'overlay_bg_hover_color',
                 'label' => esc_html__( 'Background Hover', 'black-widgets' ),
                 'types' => [ 'classic', 'gradient', ],
-                'selector' => '{{WRAPPER}} .bw-hover-box.bw-style-2 a:hover:after',
+                'selector' => '{{WRAPPER}} .bw-hover-box.bw-style-2:hover .bw-box-overlay, {{WRAPPER}} .bw-hover-box.bw-style-2.is-hovered .bw-box-overlay, {{WRAPPER}} .bw-hover-box.bw-style-2 a:hover:after',
             ]
         );
 
@@ -1758,7 +1763,15 @@ class Box extends \Elementor\Widget_Base {
         // Variables
         $type 			= isset($settings['widget_type']) 									? $settings['widget_type']													: '';
         $allowed_tags 	= ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'];
-        $alignment 		= isset($settings['widget_alignment']) 								? $settings['widget_alignment']												: '';
+        $alignment_desktop = isset($settings['widget_alignment']) 							? $settings['widget_alignment']												: 'center';
+        $alignment_tablet  = isset($settings['widget_alignment_tablet']) 					? $settings['widget_alignment_tablet']										: '';
+        $alignment_mobile  = isset($settings['widget_alignment_mobile']) 					? $settings['widget_alignment_mobile']										: '';
+        $alignment_classes = array_filter( [
+            $alignment_desktop ? 'bw-' . sanitize_html_class( $alignment_desktop ) : '',
+            $alignment_tablet ? 'tablet-bw-' . sanitize_html_class( $alignment_tablet ) : '',
+            $alignment_mobile ? 'mobile-bw-' . sanitize_html_class( $alignment_mobile ) : '',
+        ] );
+        $alignment_class = implode( ' ', $alignment_classes );
         $title 			= isset($settings['widget_title']) 									? $settings['widget_title']													: '';
         $subtitle 		= isset($settings['widget_subtitle']) 								? $settings['widget_subtitle']												: '';
         $title_tag 		= isset($settings['widget_html_tag_title']) 						? $settings['widget_html_tag_title']										: '';
@@ -1771,82 +1784,76 @@ class Box extends \Elementor\Widget_Base {
         }
         $image_URL		= isset( $settings['image']['url']) 								? $settings['image']['url']													: '';
         $box_link		= isset($settings['box_link']) 										? $settings['box_link']														: '';
-        // $img_url		= isset($settings['image_link_url'])								? $settings['image_link_url']												: '';
-        $target			= isset($settings['image_link_url']['is_external']) 				? 'target="_blank"'															: '';
-        $nofollow		= isset($settings['image_link_url']['nofollow']) 					? ' rel="nofollow"'															: '';
+        $box_link_url	= isset($settings['box_link_url']['url']) 							? $settings['box_link_url']['url']											: '';
+        $has_box_link	= ( $box_link === 'yes' && ! empty( $box_link_url ) );
+        // Escape attribute values only - never esc_attr() a full attribute string.
+        $link_attrs = '';
+        if ( $has_box_link && ! empty( $settings['box_link_url']['is_external'] ) ) {
+            $link_attrs .= ' target="' . esc_attr( '_blank' ) . '"';
+        }
+        if ( $has_box_link && ! empty( $settings['box_link_url']['nofollow'] ) ) {
+            $link_attrs .= ' rel="' . esc_attr( 'nofollow' ) . '"';
+        }
 
         $cursor = esc_attr( $cursor );
+        $hover_animation = isset( $settings['hover_animation'] ) ? $settings['hover_animation'] : '';
 
-        // Render
-        if ( $type == 'bw-style-1' ) {
-            echo '<div class="bw-hover-box bw-cursor-' . esc_attr( $cursor ) . ' ' . esc_attr( $type ) . '" id="' . esc_attr( $data_id ) . '">';
+        $render_image = function() use ( $settings, $cursor, $hover_animation ) {
+            $image_html = Group_Control_Image_Size::get_attachment_image_html(
+                $settings,
+                'thumbnail',
+                'image'
+            );
 
-            if ( isset( $box_link ) && $box_link == 'yes' ) {
-                echo '<a href="' . esc_url( $settings['box_link_url']['url'] ) . '"' . esc_attr( $target . $nofollow ) . ' class="bw-image-link">';
-            }
-
-            echo '<div class="bw-featured-image bw-hover-1 bw-' . esc_attr( $alignment ) . '">';
-            $image_id = $settings['image']['id'] ?? null;
-            $image_widget_size = $settings['image_widget_size'] ?? 'full';
-
-            if ( $image_id ) {
-                echo wp_get_attachment_image(
-                    $image_id,
-                    $image_widget_size,
-                    false,
-                    [
-                        'class' => 'bw-img-tag bw-cursor-' . esc_attr( $cursor ) . ' ' . esc_attr( $settings['hover_animation'] ),
-                        'alt'   => esc_attr__( 'Image', 'black-widgets' ),
-                        'loading' => 'lazy',
-                    ]
+            if ( $image_html ) {
+                echo str_replace( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                    'class="',
+                    'class="' . esc_attr( 'bw-img-tag bw-cursor-' . $cursor . ' ' . $hover_animation ) . ' ',
+                    $image_html
                 );
             }
+        };
+
+        $render_link = function() use ( $has_box_link, $settings, $link_attrs, $title ) {
+            if ( ! $has_box_link ) {
+                return;
+            }
+            echo '<a href="' . esc_url( $settings['box_link_url']['url'] ) . '"' . $link_attrs . ' class="bw-box-link" aria-label="' . esc_attr( wp_strip_all_tags( $title ) ) . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo '<span class="screen-reader-text">' . esc_html( wp_strip_all_tags( $title ) ) . '</span>';
+            echo '</a>';
+        };
+
+        // Render - keep markup identical with/without link so hover/overlay styles stay consistent.
+        if ( $type == 'bw-style-1' ) {
+            echo '<div class="bw-hover-box bw-cursor-' . esc_attr( $cursor ) . ' ' . esc_attr( $type ) . ' ' . esc_attr( $alignment_class ) . '" id="' . esc_attr( $data_id ) . '">';
+
+            echo '<div class="bw-featured-image bw-hover-1">';
+            $render_image();
             echo '</div>';
 
-            echo '<div class="bw-content-box bw-' . esc_attr( $alignment ) . '">';
+            echo '<div class="bw-content-box">';
             printf( '<%1$s class="bw-title">%2$s</%1$s>', tag_escape( $title_tag ), esc_html( $title ) );
             printf( '<%1$s class="bw-description">%2$s</%1$s>', tag_escape( $subtitle_tag ), esc_html( $subtitle ) );
             echo '</div>';
 
-            if ( isset( $box_link ) && $box_link == 'yes' ) {
-                echo '</a>';
-            }
-
+            $render_link();
             echo '</div>';
         } else if ( $type == 'bw-style-2' ) {
-            echo '<div class="bw-hover-box bw-cursor-' . esc_attr( $cursor ) . ' ' . esc_attr( $type ) . '" id="' . esc_attr( $data_id ) . '">';
+            echo '<div class="bw-hover-box bw-cursor-' . esc_attr( $cursor ) . ' ' . esc_attr( $type ) . ' ' . esc_attr( $alignment_class ) . '" id="' . esc_attr( $data_id ) . '">';
 
-            if ( isset( $box_link ) && $box_link == 'yes' ) {
-                echo '<a href="' . esc_url( $settings['box_link_url']['url'] ) . '" ' . esc_attr( $target . $nofollow ) . ' class="bw-hero">';
-            }
-
-            $image_id = $settings['image']['id'] ?? null;
-            $image_size = $settings['image_widget_size'] ?? 'full';
-
-            if ( $image_id ) {
-                echo wp_get_attachment_image(
-                    $image_id,
-                    $image_size,
-                    false,
-                    [
-                        'class'   => 'bw-img-tag bw-cursor-' . esc_attr( $cursor ) . ' ' . esc_attr( $settings['hover_animation'] ),
-                        'alt'     => esc_attr__( 'Image', 'black-widgets' ),
-                        'loading' => 'lazy',
-                    ]
-                );
-            }
-
-            echo '<div class="bw-title-box">';
-            echo '<span class="bw-typography">';
-            printf( '<%1$s class="bw-title">%2$s</%1$s>', tag_escape( $title_tag ), esc_html( $title ) );
-            printf( '<%1$s class="bw-description">%2$s</%1$s>', tag_escape( $subtitle_tag ), esc_html( $subtitle ) );
-            echo '</span>';
+            echo '<div class="bw-hero">';
+            $render_image();
+            echo '<span class="bw-box-overlay" aria-hidden="true"></span>';
             echo '</div>';
 
-            if ( isset( $box_link ) && $box_link == 'yes' ) {
-                echo '</a>';
-            }
+            echo '<div class="bw-title-box">';
+            echo '<div class="bw-typography">';
+            printf( '<%1$s class="bw-title">%2$s</%1$s>', tag_escape( $title_tag ), esc_html( $title ) );
+            printf( '<%1$s class="bw-description">%2$s</%1$s>', tag_escape( $subtitle_tag ), esc_html( $subtitle ) );
+            echo '</div>';
+            echo '</div>';
 
+            $render_link();
             echo '</div>';
         } else {
             echo '';

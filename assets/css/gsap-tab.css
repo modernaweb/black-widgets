@@ -46,6 +46,7 @@
     color: #555;
 }
 
+
 .black-tab--default .black-tab__tab-title.black-tab__tab-title--active {
     color: #000;
 }
@@ -168,6 +169,7 @@
     transition: background-color 0.3s;
     flex: 1;
     text-align: center;
+    color: #ccc;
 }
 
 .black-tab--vertical .black-tab__tab:hover,

@@ -381,10 +381,10 @@ class FlipIx extends \Elementor\Widget_Base {
                 'type' => \Elementor\Controls_Manager::URL,
                 'placeholder' => esc_html__( 'https://your-link.com', 'black-widgets' ),
                 'show_external' => true,
-                'show_nofollow' => false,
                 'default' => [
                     'url' => '',
-                    'is_external' => true,
+                    'is_external' => false,
+                    'nofollow' => false,
                 ],
             ]
         );
@@ -462,7 +462,12 @@ class FlipIx extends \Elementor\Widget_Base {
                         'icon'  => 'eicon-text-align-right',
                     ],
                 ],
+                'default'   => 'center',
                 'toggle'    => true,
+                'selectors' => [
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front,
+					 {{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back' => 'text-align: {{VALUE}};',
+                ],
             ]
         );
 
@@ -522,7 +527,8 @@ class FlipIx extends \Elementor\Widget_Base {
                     'default' => Global_Colors::COLOR_PRIMARY,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box svg' => 'fill: {{VALUE}}',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box svg' => 'fill: {{VALUE}}; color: {{VALUE}}',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box i' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -534,7 +540,7 @@ class FlipIx extends \Elementor\Widget_Base {
                 'name' => 'icon_front_bg',
                 'label' => esc_html__( 'Back Background', 'black-widgets' ),
                 'types' => [ 'classic', 'gradient' ],
-                'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box svg',
+                'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box svg, {{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box i',
             ]
         );
 
@@ -548,16 +554,21 @@ class FlipIx extends \Elementor\Widget_Base {
                     'px' => [
                         'min' => 0,
                         'max' => 200,
-                        'step' => 3,
+                        'step' => 1,
                     ],
                     '%' => [
                         'min' => 0,
                         'max' => 100,
-                        'step' => 2,
+                        'step' => 1,
                     ],
                 ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 42,
+                ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box svg' => 'width: {{SIZE}}{{UNIT}} !important;',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box svg' => 'width: {{SIZE}}{{UNIT}} !important; height: {{SIZE}}{{UNIT}} !important;',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box i' => 'font-size: {{SIZE}}{{UNIT}} !important;',
                 ],
             ]
         );
@@ -577,7 +588,8 @@ class FlipIx extends \Elementor\Widget_Base {
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box svg,
+					 {{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box i' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -590,7 +602,8 @@ class FlipIx extends \Elementor\Widget_Base {
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box svg' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box svg,
+					 {{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box i' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -608,7 +621,7 @@ class FlipIx extends \Elementor\Widget_Base {
             [
                 'name' => 'style_main_icon_border',
                 'label' => esc_html__( 'Border', 'black-widgets' ),
-                'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box svg',
+                'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box svg, {{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box i',
             ]
         );
 
@@ -620,7 +633,8 @@ class FlipIx extends \Elementor\Widget_Base {
                 'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', 'em', '%' ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box svg' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box svg,
+					 {{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box i' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -631,7 +645,7 @@ class FlipIx extends \Elementor\Widget_Base {
             [
                 'name' => 'style_main_icon_box_shadow',
                 'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
-                'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box svg',
+                'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box svg, {{WRAPPER}} .bw-flipbox .bw-flip-card .bw-front .title-box i',
             ]
         );
 
@@ -942,7 +956,8 @@ class FlipIx extends \Elementor\Widget_Base {
                     'default' => Global_Colors::COLOR_PRIMARY,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description svg' => 'fill: {{VALUE}}',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description svg' => 'fill: {{VALUE}}; color: {{VALUE}}',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description i' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -954,7 +969,7 @@ class FlipIx extends \Elementor\Widget_Base {
                 'name' => 'icon_back_bg',
                 'label' => esc_html__( 'Back Background', 'black-widgets' ),
                 'types' => [ 'classic', 'gradient' ],
-                'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description svg',
+                'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description svg, {{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description i',
             ]
         );
 
@@ -968,16 +983,21 @@ class FlipIx extends \Elementor\Widget_Base {
                     'px' => [
                         'min' => 0,
                         'max' => 200,
-                        'step' => 3,
+                        'step' => 1,
                     ],
                     '%' => [
                         'min' => 0,
                         'max' => 100,
-                        'step' => 2,
+                        'step' => 1,
                     ],
                 ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 42,
+                ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description svg' => 'width: {{SIZE}}{{UNIT}} !important;',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description svg' => 'width: {{SIZE}}{{UNIT}} !important; height: {{SIZE}}{{UNIT}} !important;',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description i' => 'font-size: {{SIZE}}{{UNIT}} !important;',
                 ],
             ]
         );
@@ -997,7 +1017,8 @@ class FlipIx extends \Elementor\Widget_Base {
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description svg,
+					 {{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description i' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1010,7 +1031,8 @@ class FlipIx extends \Elementor\Widget_Base {
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description svg' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description svg,
+					 {{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description i' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1028,7 +1050,7 @@ class FlipIx extends \Elementor\Widget_Base {
             [
                 'name' => 'style_main_back_icon_border',
                 'label' => esc_html__( 'Border', 'black-widgets' ),
-                'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description svg',
+                'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description svg, {{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description i',
             ]
         );
 
@@ -1040,7 +1062,8 @@ class FlipIx extends \Elementor\Widget_Base {
                 'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', 'em', '%' ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description svg' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description svg,
+					 {{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description i' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1051,7 +1074,7 @@ class FlipIx extends \Elementor\Widget_Base {
             [
                 'name' => 'style_main_back_icon_box_shadow',
                 'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
-                'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description svg',
+                'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description svg, {{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description i',
             ]
         );
 
@@ -1078,7 +1101,7 @@ class FlipIx extends \Elementor\Widget_Base {
                     'default' => Global_Colors::COLOR_PRIMARY,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description h4' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description h4' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -1092,7 +1115,7 @@ class FlipIx extends \Elementor\Widget_Base {
                 'global' => [
                     'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
                 ],
-                'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description h4',
+                'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description h4',
             ]
         );
 
@@ -1102,7 +1125,7 @@ class FlipIx extends \Elementor\Widget_Base {
             [
                 'name' => 'style_main_back_title_text_shadow',
                 'label' => esc_html__( 'Text Shadow', 'black-widgets' ),
-                'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description h4',
+                'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description h4',
             ]
         );
 
@@ -1120,7 +1143,7 @@ class FlipIx extends \Elementor\Widget_Base {
                 'name' => 'style_main_back_title_background',
                 'label' => esc_html__( 'Background', 'black-widgets' ),
                 'types' => [ 'classic', 'gradient', 'video' ],
-                'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description h4',
+                'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description h4',
             ]
         );
 
@@ -1139,7 +1162,7 @@ class FlipIx extends \Elementor\Widget_Base {
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description h4' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description h4' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1152,7 +1175,7 @@ class FlipIx extends \Elementor\Widget_Base {
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description h4' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description h4' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1170,7 +1193,7 @@ class FlipIx extends \Elementor\Widget_Base {
             [
                 'name' => 'style_main_back_title_border',
                 'label' => esc_html__( 'Border', 'black-widgets' ),
-                'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description h4',
+                'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description h4',
             ]
         );
 
@@ -1182,7 +1205,7 @@ class FlipIx extends \Elementor\Widget_Base {
                 'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', 'em', '%' ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description h4' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description h4' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1193,7 +1216,7 @@ class FlipIx extends \Elementor\Widget_Base {
             [
                 'name' => 'style_main_back_title_box_shadow',
                 'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
-                'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description h4',
+                'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description h4',
             ]
         );
 
@@ -1220,7 +1243,7 @@ class FlipIx extends \Elementor\Widget_Base {
                     'default' => Global_Colors::COLOR_PRIMARY,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description p' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description p' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -1234,7 +1257,7 @@ class FlipIx extends \Elementor\Widget_Base {
                 'global' => [
                     'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
                 ],
-                'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description p',
+                'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description p',
             ]
         );
 
@@ -1244,7 +1267,7 @@ class FlipIx extends \Elementor\Widget_Base {
             [
                 'name' => 'style_main_back_paragraph_text_shadow',
                 'label' => esc_html__( 'Text Shadow', 'black-widgets' ),
-                'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description p',
+                'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description p',
             ]
         );
 
@@ -1262,7 +1285,7 @@ class FlipIx extends \Elementor\Widget_Base {
                 'name' => 'style_main_back_paragraph_background',
                 'label' => esc_html__( 'Background', 'black-widgets' ),
                 'types' => [ 'classic', 'gradient', 'video' ],
-                'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description p',
+                'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description p',
             ]
         );
 
@@ -1281,7 +1304,7 @@ class FlipIx extends \Elementor\Widget_Base {
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description p' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description p' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1294,7 +1317,7 @@ class FlipIx extends \Elementor\Widget_Base {
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description p' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description p' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1312,7 +1335,7 @@ class FlipIx extends \Elementor\Widget_Base {
             [
                 'name' => 'style_main_back_paragraph_border',
                 'label' => esc_html__( 'Border', 'black-widgets' ),
-                'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description p',
+                'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description p',
             ]
         );
 
@@ -1324,7 +1347,7 @@ class FlipIx extends \Elementor\Widget_Base {
                 'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', 'em', '%' ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description p' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description p' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1335,7 +1358,7 @@ class FlipIx extends \Elementor\Widget_Base {
             [
                 'name' => 'style_main_back_paragraph_box_shadow',
                 'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
-                'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description p',
+                'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description p',
             ]
         );
 
@@ -1362,7 +1385,7 @@ class FlipIx extends \Elementor\Widget_Base {
                     'default' => Global_Colors::COLOR_PRIMARY,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description .bw-button' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description .bw-button' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -1376,7 +1399,7 @@ class FlipIx extends \Elementor\Widget_Base {
                 'global' => [
                     'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
                 ],
-                'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description .bw-button',
+                'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description .bw-button',
             ]
         );
 
@@ -1386,7 +1409,7 @@ class FlipIx extends \Elementor\Widget_Base {
             [
                 'name' => 'style_main_back_button_text_shadow',
                 'label' => esc_html__( 'Text Shadow', 'black-widgets' ),
-                'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description .bw-button',
+                'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description .bw-button',
             ]
         );
 
@@ -1404,7 +1427,7 @@ class FlipIx extends \Elementor\Widget_Base {
                 'name' => 'style_main_back_button_background',
                 'label' => esc_html__( 'Background', 'black-widgets' ),
                 'types' => [ 'classic', 'gradient', 'video' ],
-                'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description .bw-button',
+                'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description .bw-button',
                 'fields_options' => [
                     'background' => [
                         'default' => 'gradient',
@@ -1439,7 +1462,7 @@ class FlipIx extends \Elementor\Widget_Base {
                 'name' => 'style_main_back_button_hover_background',
                 'label' => esc_html__( 'Background Hover', 'black-widgets' ),
                 'types' => [ 'classic', 'gradient', 'video' ],
-                'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description .bw-button:hover',
+                'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description .bw-button:hover',
                 'fields_options' => [
                     'background' => [
                         'default' => 'gradient',
@@ -1475,7 +1498,7 @@ class FlipIx extends \Elementor\Widget_Base {
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description .bw-button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description .bw-button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1488,7 +1511,7 @@ class FlipIx extends \Elementor\Widget_Base {
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description .bw-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description .bw-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1506,7 +1529,7 @@ class FlipIx extends \Elementor\Widget_Base {
             [
                 'name' => 'style_main_back_button_border',
                 'label' => esc_html__( 'Border', 'black-widgets' ),
-                'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description .bw-button',
+                'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description .bw-button',
             ]
         );
 
@@ -1518,7 +1541,7 @@ class FlipIx extends \Elementor\Widget_Base {
                 'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', 'em', '%' ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description .bw-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description .bw-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1529,7 +1552,7 @@ class FlipIx extends \Elementor\Widget_Base {
             [
                 'name' => 'style_main_back_button_box_shadow',
                 'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
-                'selector' => '{{WRAPPER}} .bw-flipbox.fbtt .bw-flip-card .bw-back .description .bw-button',
+                'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description .bw-button',
             ]
         );
 
@@ -1558,39 +1581,65 @@ class FlipIx extends \Elementor\Widget_Base {
         $backdesc		= isset($settings['widget_back_description'])	? $settings['widget_back_description']		: '';
         $enable3d		= isset($settings['widget_3d'])					? $settings['widget_3d']					: '';
         $iconset		= isset($settings['widget_face_icon'])			? $settings['widget_face_icon']				: '';
+        $back_icon		= isset($settings['widget_back_icon'])			? $settings['widget_back_icon']				: '';
         $text			= isset($settings['btn_txt']) 					? $settings['btn_txt'] 						: '';
-        $target			= $settings['btn_link']['is_external'] 			? 'target="_blank"' 						: '';
-        $nofollow		= $settings['btn_link']['nofollow'] 			? ' rel="nofollow"'							: '';
+        $btn_link		= isset( $settings['btn_link'] ) && is_array( $settings['btn_link'] ) ? $settings['btn_link'] : [];
+        $btn_url		= ! empty( $btn_link['url'] ) ? $btn_link['url'] : '';
+        $link_attrs		= '';
+        if ( ! empty( $btn_link['is_external'] ) ) {
+            $link_attrs .= ' target="' . esc_attr( '_blank' ) . '"';
+        }
+        if ( ! empty( $btn_link['nofollow'] ) ) {
+            $link_attrs .= ' rel="' . esc_attr( 'nofollow' ) . '"';
+        }
+        $has_front_icon = ! empty( $iconset['value'] );
+        $has_back_icon  = ! empty( $back_icon['value'] );
         ?>
-        <div class="bw-flipbox <?php echo esc_attr( $type ) . ' ' . esc_attr( $enable3d ); ?> ">
+        <div class="bw-flipbox <?php echo esc_attr( $type ) . ' ' . esc_attr( $enable3d ); ?>">
             <div class="bw-flip-card">
-                <div class="bw-front" id="bwflipbox">
+                <div class="bw-front">
                     <div class="title-box">
-                        <?php \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); ?>
-                        <h4><?php echo esc_html( $title ); ?></h4>
-                        <p><?php
-                            if( strlen($description)<= 159 ) {
-                                echo esc_html( $description );
-                            } else {
-                                $finish=substr( $description, 0, 159 ) . '...';
-                                echo esc_html( $finish );
-                            }
-                            ?></p>
+                        <?php if ( $has_front_icon ) : ?>
+                            <span class="bw-flip-icon"><?php \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); ?></span>
+                        <?php endif; ?>
+                        <?php if ( $title !== '' ) : ?>
+                            <h4><?php echo esc_html( $title ); ?></h4>
+                        <?php endif; ?>
+                        <?php if ( $description !== '' ) : ?>
+                            <p><?php
+                                if ( strlen( $description ) <= 159 ) {
+                                    echo esc_html( $description );
+                                } else {
+                                    echo esc_html( substr( $description, 0, 159 ) . '...' );
+                                }
+                                ?></p>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="bw-back">
                     <div class="description">
-                        <?php \Elementor\Icons_Manager::render_icon( $settings['widget_back_icon'], [ 'aria-hidden' => 'true' ] ); ?>
-                        <h4><?php echo esc_html( $backtitle ); ?></h4>
-                        <p><?php
-                            if( strlen($backdesc)<= 300 ) {
-                                echo esc_html( $backdesc );
-                            } else {
-                                $finish=substr( $backdesc, 0, 300 ) . '...';
-                                echo esc_html( $finish );
-                            }
-                            ?></p>
-                        <a class="bw-button" href="<?php echo esc_url( $settings['btn_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?>><?php echo esc_html( $text ); ?></a> <?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                        <?php if ( $has_back_icon ) : ?>
+                            <span class="bw-flip-icon"><?php \Elementor\Icons_Manager::render_icon( $back_icon, [ 'aria-hidden' => 'true' ] ); ?></span>
+                        <?php endif; ?>
+                        <?php if ( $backtitle !== '' ) : ?>
+                            <h4><?php echo esc_html( $backtitle ); ?></h4>
+                        <?php endif; ?>
+                        <?php if ( $backdesc !== '' ) : ?>
+                            <p><?php
+                                if ( strlen( $backdesc ) <= 300 ) {
+                                    echo esc_html( $backdesc );
+                                } else {
+                                    echo esc_html( substr( $backdesc, 0, 300 ) . '...' );
+                                }
+                                ?></p>
+                        <?php endif; ?>
+                        <?php if ( $text !== '' ) : ?>
+                            <?php if ( $btn_url !== '' ) : ?>
+                                <a class="bw-button" href="<?php echo esc_url( $btn_url ); ?>"<?php echo $link_attrs; ?>><?php echo esc_html( $text ); ?></a><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                            <?php else : ?>
+                                <span class="bw-button"><?php echo esc_html( $text ); ?></span>
+                            <?php endif; ?>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

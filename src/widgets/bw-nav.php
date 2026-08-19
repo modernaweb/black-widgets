@@ -255,6 +255,77 @@ class FlatNav extends \Elementor\Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'nav_list_style_enable',
+			[
+				'label' => esc_html__( 'Control List Style', 'black-widgets' ),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'label_on' => esc_html__( 'On', 'black-widgets' ),
+				'label_off' => esc_html__( 'Off', 'black-widgets' ),
+				'return_value' => 'yes',
+				'default' => '',
+				'description' => esc_html__( 'Off keeps theme list markers. On lets you style or hide them.', 'black-widgets' ),
+			]
+		);
+
+		$this->add_control(
+			'nav_list_style_type',
+			[
+				'label' => esc_html__( 'List Style', 'black-widgets' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'none',
+				'options' => [
+					'none'    => esc_html__( 'None (no bullets)', 'black-widgets' ),
+					'disc'    => esc_html__( 'Disc', 'black-widgets' ),
+					'circle'  => esc_html__( 'Circle', 'black-widgets' ),
+					'square'  => esc_html__( 'Square', 'black-widgets' ),
+					'decimal' => esc_html__( 'Decimal', 'black-widgets' ),
+				],
+				'condition' => [
+					'nav_list_style_enable' => 'yes',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bw-nav.bw-list-style-control ul,
+					 {{WRAPPER}} .bw-nav.bw-list-style-control ol,
+					 {{WRAPPER}} .bw-nav.bw-list-style-control .bw-menu-box,
+					 {{WRAPPER}} .bw-nav.bw-list-style-control li' => 'list-style: {{VALUE}}; list-style-type: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'nav_list_indent',
+			[
+				'label' => esc_html__( 'List Indent', 'black-widgets' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 80,
+						'step' => 1,
+					],
+					'em' => [
+						'min' => 0,
+						'max' => 5,
+						'step' => 0.1,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 0,
+				],
+				'condition' => [
+					'nav_list_style_enable' => 'yes',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bw-nav.bw-list-style-control ul,
+					 {{WRAPPER}} .bw-nav.bw-list-style-control ol,
+					 {{WRAPPER}} .bw-nav.bw-list-style-control .bw-menu-box' => 'padding-inline-start: {{SIZE}}{{UNIT}}; margin-inline-start: 0;',
+				],
+			]
+		);
+
 
 		$this->add_control(
 			'custom_icon_before_nav',
@@ -691,6 +762,8 @@ class FlatNav extends \Elementor\Widget_Base {
 		// $type 	        = isset($settings['widget_type']) 				? $settings['widget_type'] : '';
 		$alignment          = isset($settings['widget_alignment'])      ? $settings['widget_alignment']         : '';
         $custom_nav_styles	= isset($settings['custom_nav_styles'])		? $settings['custom_nav_styles']		: '';
+		$list_style_enable  = isset($settings['nav_list_style_enable']) ? $settings['nav_list_style_enable']   : '';
+		$list_style_class   = ( $list_style_enable === 'yes' ) ? 'bw-list-style-control' : '';
 
         $befor_nav          = isset($settings['custom_icon_before_nav']) ? $settings['custom_icon_before_nav']['value'] : '';
 
@@ -745,7 +818,7 @@ class FlatNav extends \Elementor\Widget_Base {
 			// Render
 
 
-			echo '<div class="bw-nav ' . esc_attr( $custom_nav_styles ) . ' ' . esc_attr( $alignment ) . '">';
+			echo '<div class="bw-nav ' . esc_attr( $custom_nav_styles ) . ' ' . esc_attr( $alignment ) . ' ' . esc_attr( $list_style_class ) . '">';
 				echo wp_kses_post( $menu_html );
 			echo '</div>';
 

@@ -29,6 +29,33 @@
     color: #000;
 }
 
+.bw-title-animate .bw-before {
+    margin-right: 0.35em;
+}
+
+.bw-title-animate .bw-after {
+    margin-left: 0.35em;
+}
+
+.bw-title-animate .bw-svg-text,
+.bw-title-animate .bw-rotator-text {
+    margin-right: 0.35em;
+}
+
+.bw-title-animate .bw-svg-wrapper + .bw-svg-text {
+    margin-right: 0;
+    margin-left: 0.35em;
+}
+
+.bw-title-animate .bw-typing .bw-text-wrapper,
+.bw-title-animate .bw-typing .bw-letters,
+.bw-title-animate .bw-typing .bw-letter,
+.bw-title-animate .bw-rotator .bw-text-wrapper,
+.bw-title-animate .bw-rotator-item,
+.bw-title-animate .bw-rotator-item .bw-letter {
+    white-space: nowrap;
+}
+
 
 /* Simple - Sunny mornings */
 
@@ -183,16 +210,24 @@
 
 
 /* Glitch */
-
 .bw-glitch {
     width: fit-content;
     margin: 0 auto;
     display: -webkit-inline-box !important;
 }
 
+.bw-glitch.bw-no-loop::before,
+.bw-glitch.bw-no-loop::after,
+.bw-no-loop > .bw-glitch::before,
+.bw-no-loop > .bw-glitch::after {
+    -webkit-animation-iteration-count: 1 !important;
+    animation-iteration-count: 1 !important;
+    -webkit-animation-fill-mode: forwards !important;
+    animation-fill-mode: forwards !important;
+}
+
 
 /* Glitch One */
-
 .bw-animate-text.bw-glitch {
     display: block;
 }
@@ -219,8 +254,8 @@
 .bw-glitch::after {
     -webkit-animation-name: glitch-animation;
     animation-name: glitch-animation;
-    -webkit-animation-duration: 4s;
-    animation-duration: 4s;
+    -webkit-animation-duration: calc(4s / var(--bw-anim-speed, 1));
+    animation-duration: calc(4s / var(--bw-anim-speed, 1));
     left: 4px;
     text-shadow: -1px 0 #ffa800;
     background: #f5efe0;
@@ -229,8 +264,8 @@
 .bw-glitch::before {
     -webkit-animation-name: glitch-animation-2;
     animation-name: glitch-animation-2;
-    -webkit-animation-duration: 6s;
-    animation-duration: 6s;
+    -webkit-animation-duration: calc(6s / var(--bw-anim-speed, 1));
+    animation-duration: calc(6s / var(--bw-anim-speed, 1));
     left: -4px;
     text-shadow: 1px 0 #00d8ff;
     background: #f5efe0;
@@ -519,7 +554,7 @@
     left: 3px;
     text-shadow: -2px 0 red;
     animation-name: glitch-animation-1;
-    animation-duration: 2s;
+    animation-duration: calc(2s / var(--bw-anim-speed, 1));
     animation-timing-function: linear;
     animation-delay: 0s;
     animation-iteration-count: infinite;
@@ -530,7 +565,7 @@
     left: -3px;
     text-shadow: -2px 0 blue;
     animation-name: glitch-animation-2;
-    animation-duration: 2s;
+    animation-duration: calc(2s / var(--bw-anim-speed, 1));
     animation-timing-function: linear;
     animation-delay: 0s;
     animation-iteration-count: infinite;
@@ -752,7 +787,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 10;
+    z-index: -1;
     fill: none;
     stroke: black;
     stroke-width: 5px;
@@ -760,3 +795,22 @@
     stroke-dashoffset: 1000;
 }
 
+.bw-title-animate .bw-svg-line1 svg {
+    bottom: -40%;
+}
+
+.bw-title-animate .bw-svg-line2 svg {
+    bottom: -40%;
+}
+
+.bw-title-animate .bw-svg-line3 svg {
+    bottom: -50%;
+}
+
+.bw-title-animate .bw-svg-line4 svg {
+    bottom: -25%;
+}
+
+.bw-title-animate .bw-svg-line5 svg {
+    bottom: -30%;
+}

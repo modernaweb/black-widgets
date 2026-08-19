@@ -86,6 +86,11 @@ class Fade extends \Elementor\Widget_Base {
         return [ 'black-widgets-fade' ];
     }
 
+    public function get_script_depends() {
+        // Scroll grow / accent-line animations live in bw-public (pulls anime.js).
+        return [ 'bw-public' ];
+    }
+
     protected function is_dynamic_content(): bool {
         return false;
     }
@@ -159,9 +164,10 @@ class Fade extends \Elementor\Widget_Base {
 		$this->add_group_control(
 			Group_Control_Image_Size::get_type(),
 			[
-				'name' => 'full_size',
-                'include' => [ 'thumbnail', 'medium', 'large', 'full' ],
-                'default' => 'full',
+				'name' => 'thumbnail', // Usage: `{name}_size` → `thumbnail_size`.
+				'exclude' => [ 'custom' ],
+				'include' => [],
+				'default' => 'full',
 				'condition'  => [
 					'widget_type' => [
 						'bw-t-1',
@@ -1259,7 +1265,6 @@ class Fade extends \Elementor\Widget_Base {
 		$img_grow					= isset($settings['img_grow']) 							? $settings['img_grow']								: '';
         $image_URL 	       			= isset( $settings['image']['url']) 					?  $settings['image']['url'] 						: '';
         $image_link 	   			= isset($settings['image_link']) 						? $settings['image_link'] 							: '';
-        $image_size 	   			= isset($settings['full_size']) 						? $settings['full_size'] 							: 'full';
 		$target            			= isset($settings['image_link_url']['is_external']) 	? 'target="_blank"' 								: '';
         $nofollow          			= isset($settings['image_link_url']['nofollow']) 		? ' rel="nofollow"' 								: '';
 		// Transform Option
@@ -1359,7 +1364,7 @@ class Fade extends \Elementor\Widget_Base {
 					echo '<div class="bw-img ' . esc_attr( $settings['hover_animation'] ) . '">';
 						if ( $image_link == 'yes') { echo '<a href="' . esc_url( $settings['image_link_url']['url'] ) . '"' . $target . $nofollow . ' class="bw-image-link">'; } // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						echo '<div class="bw-image-grow-cover ' . esc_attr( $img_grow ) . '"></div>';
-                              $image_url = Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], $image_size, $settings );
+                              $image_url = Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail', $settings );
                               if ( $image_url ) {
                                   echo '<img src="' . esc_url( $image_url ) . '" class="' . esc_attr( $img_grow ) . '">'; // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
                               }

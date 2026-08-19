@@ -1,0 +1,58 @@
+/**
+ * Black Scroll Heat (Type 1)
+ */
+
+.mws-ew-hw {
+	--mws-ew-hw-dim: #d7d8d4;
+	--mws-ew-hw-lit: #16171b;
+	--mws-ew-hw-scrub: 0.35;
+	--mws-ew-hw-stagger: 0.06;
+
+	position: relative;
+	width: 100%;
+	box-sizing: border-box;
+	color: var(--mws-ew-hw-lit);
+}
+
+.mws-ew-hw *,
+.mws-ew-hw *::before,
+.mws-ew-hw *::after {
+	box-sizing: border-box;
+}
+
+.mws-ew-hw__text {
+	margin: 0;
+	max-width: 760px;
+	font-weight: 700;
+	font-size: clamp(28px, 4.6vw, 46px);
+	line-height: 1.28;
+	letter-spacing: -0.015em;
+	color: inherit;
+	overflow-wrap: break-word;
+	word-break: break-word;
+	hyphens: auto;
+}
+
+.mws-ew-hw__word {
+	color: var(--mws-ew-hw-dim);
+	will-change: color;
+}
+
+.mws-ew-hw.is-ready .mws-ew-hw__word {
+	/* SplitText spans inherit dim until scrub lights them. */
+	color: var(--mws-ew-hw-dim);
+}
+
+.mws-ew-hw.is-reduced .mws-ew-hw__word,
+.mws-ew-hw.is-reduced .mws-ew-hw__text {
+	color: var(--mws-ew-hw-lit);
+	will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.mws-ew-hw__word {
+		color: var(--mws-ew-hw-lit) !important;
+		transition: none !important;
+		will-change: auto;
+	}
+}

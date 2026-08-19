@@ -50,6 +50,21 @@
     margin: 0;
 }
 
+/* Opt-in list style control (default off keeps theme bullets untouched) */
+.bw-nav.bw-list-style-control ul,
+.bw-nav.bw-list-style-control ol,
+.bw-nav.bw-list-style-control .bw-menu-box {
+    list-style: none;
+    list-style-type: none;
+    padding-inline-start: 0;
+    margin-inline-start: 0;
+}
+
+.bw-nav.bw-list-style-control li {
+    list-style: none;
+    list-style-type: none;
+}
+
 .bw-nav a {
     display: block
 }

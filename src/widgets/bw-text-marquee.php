@@ -37,19 +37,11 @@ class TextMarquee extends \Elementor\Widget_Base {
             BLACK_WIDGETS_VERSION
         );
 
-        $deps = [ 'jquery' ];
-
-        // Add GSAP dependencies if enabled.
-        if ( $this->is_gsap_enabled() ) {
-            array_push( $deps, 'GSAP' );
-            array_push( $deps, 'GSAP-ScrollTrigger' );
-        }
-
-        // Register widget script.
+        // GSAP is added conditionally in get_script_depends() when Move on Scroll is on.
         wp_register_script(
             'black-widgets-text-marquee',
             BLACK_WIDGETS_PLUGIN_URL . 'assets/js/text-marquee.js',
-            $deps,
+            [ 'jquery' ],
             BLACK_WIDGETS_VERSION,
             true
         );
@@ -130,7 +122,24 @@ class TextMarquee extends \Elementor\Widget_Base {
      * @return array List of script handles.
      */
     public function get_script_depends() {
-        return [ 'black-widgets-text-marquee' ];
+        $deps = [ 'black-widgets-text-marquee' ];
+
+        // Avoid reading instance settings during early Elementor enqueue.
+        if ( $this->is_gsap_enabled() ) {
+            $deps[] = 'GSAP';
+            $deps[] = 'GSAP-ScrollTrigger';
+        }
+
+        return $deps;
+    }
+
+    /**
+     * Raw settings safe when Elementor data is not initialized yet.
+     *
+     * @return array
+     */
+    protected function get_early_settings(): array {
+        return black_widgets_elementor_raw_settings( $this );
     }
 
     /**
@@ -157,25 +166,7 @@ class TextMarquee extends \Elementor\Widget_Base {
      * @return bool True if GSAP is enabled, false otherwise.
      */
     public function is_gsap_enabled() {
-        // Get plugin options from the database, default to empty array for safety
-        $options = get_option( 'plugin_options', [] );
-
-        // Validate that options is an array to avoid warnings
-        if ( ! is_array( $options ) ) {
-            return false;
-        }
-
-        // Sanitize and fetch the specific options safely
-        $gsap_options = isset( $options['gsap_options'] ) ? sanitize_text_field( $options['gsap_options'] ) : '';
-        $bw_gsap_cdn1 = isset( $options['bw_gsap_cdn1'] ) ? esc_url_raw( $options['bw_gsap_cdn1'] ) : '';
-        $bw_gsap_cdn2 = isset( $options['bw_gsap_cdn2'] ) ? esc_url_raw( $options['bw_gsap_cdn2'] ) : '';
-
-        // Check if GSAP is enabled only if all necessary options are set and not empty
-        if ( ! empty( $gsap_options ) && ! empty( $bw_gsap_cdn1 ) && ! empty( $bw_gsap_cdn2 ) ) {
-            return true;
-        }
-
-        return false;
+        return \Modernaweb\BlackWidgets\Plugin_Options::is_gsap_ready();
     }
 
     /**
@@ -265,8 +256,9 @@ class TextMarquee extends \Elementor\Widget_Base {
                 'label' => esc_html__( 'GAP (px)', 'black-widgets' ),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'default' => 0,
+                'description' => esc_html__( 'Space between repeating text units.', 'black-widgets' ),
                 'selectors' => [
-                    '{{WRAPPER}} .bw-text-marquee-content' => 'gap: {{VALUE}}px;',
+                    '{{WRAPPER}} .bw-text-marquee-wrapper' => '--bw-marquee-gap: {{VALUE}}px;',
                 ],
             ]
         );
@@ -291,7 +283,7 @@ class TextMarquee extends \Elementor\Widget_Base {
             ]
         );
 
-        if ( $this->is_gsap_enabled() ) {
+        if ( \Modernaweb\BlackWidgets\Plugin_Options::is_gsap_toggle_on() ) {
 
             $this->add_control(
                 'widget_mos',
@@ -430,10 +422,8 @@ class TextMarquee extends \Elementor\Widget_Base {
                     'em' => [ 'min' => 0, 'max' => 100 ],
                     'vw' => [ 'min' => 0, 'max' => 100 ],
                 ],
-                'default' => [
-                    'unit' => 'px',
-                    'size' => 21,
-                ],
+                // Empty / auto by default - fixed height clips large typography.
+                'description' => esc_html__( 'Leave empty for auto height. A fixed value can clip text.', 'black-widgets' ),
                 'selectors' => [
                     '{{WRAPPER}} .bw-text-marquee-wrapper' => 'height: {{SIZE}}{{UNIT}};',
                 ],
@@ -564,7 +554,10 @@ class TextMarquee extends \Elementor\Widget_Base {
 
         // Sanitize settings with defaults
         $direction       = sanitize_text_field( $settings['widget_direction'] ?? '' );
-        $speed           = (int) ( $settings['widget_speed'] ?? 0 );
+        $speed           = (int) ( $settings['widget_speed'] ?? 20 );
+        if ( $speed <= 0 ) {
+            $speed = 20;
+        }
         $pause           = ( $settings['widget_pause_on_hover'] ?? '' ) === 'yes' ? 'pause-on-hover' : '';
         $mode            = sanitize_text_field( $settings['widget_type'] ?? 'type1' );
         $gap             = (int) ( $settings['widget_gap'] ?? 0 );
@@ -591,9 +584,6 @@ class TextMarquee extends \Elementor\Widget_Base {
             'br'     => [],
         ];
 
-        // Prepare style attribute only if needed
-        $content_style = ( $mode === 'type2' && $scrollControlled ) ? 'top:50%;' : '';
-
         ?>
         <div class="bw-text-marquee-wrapper <?php echo esc_attr( $pause ); ?>"
              data-direction="<?php echo esc_attr( $direction ); ?>"
@@ -603,12 +593,9 @@ class TextMarquee extends \Elementor\Widget_Base {
              data-gsap-start="<?php echo esc_attr( $gsap_start ); ?>"
              data-gsap-end="<?php echo esc_attr( $gsap_end ); ?>"
              data-speed-scroll="<?php echo esc_attr( $speedScroll ); ?>"
+             style="--bw-marquee-gap: <?php echo esc_attr( (string) $gap ); ?>px;"
         >
-            <div class="bw-text-marquee-content <?php echo esc_attr( $inner_class ); ?>"
-                <?php if ( $content_style ) : ?>
-                    style="<?php echo esc_attr( $content_style ); ?>"
-                <?php endif; ?>
-            >
+            <div class="bw-text-marquee-content <?php echo esc_attr( $inner_class ); ?>">
                 <div class="bw-text-marquee-text<?php echo ( $mode === 'type2' ) ? ' bw-marquee-template' : ''; ?>">
                     <?php echo wp_kses( $settings['widget_text'] ?? '', $allowed_tags ); ?>
                 </div>

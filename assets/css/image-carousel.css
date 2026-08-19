@@ -1,144 +1,761 @@
+/* Black Image Carousel - shared base */
+
+/* Wraps the Swiper root (.bw-swiper) plus, when Arrows/Pagination Position is
+   set to "Outside", the nav/pagination elements rendered as its siblings.
+   Swiper's own bundled CSS forces "overflow: hidden" on .swiper, so anything
+   meant to be visible below the slider must live outside that element - this
+   wrapper is the shared ancestor both placements inherit spacing/color
+   CSS variables from. */
+.bw-swiper-outer {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-width: 100%;
+	min-height: var(--bw-swiper-height, 450px);
+	--bw-swiper-bullet-gap: 8px;
+	--bw-swiper-speed: 750ms;
+}
+
 .bw-swiper {
-    --swiper-navigation-size: 20px;
-    --swiper-theme-color: #fff;
+	--bw-swiper-nav-inset: 16px;
+	-webkit-user-select: none;
+	user-select: none;
+	-webkit-touch-callout: none;
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	min-height: var(--bw-swiper-height, 450px);
+	/* Prefer horizontal swipe; keep vertical page scroll until a drag starts. */
+	touch-action: pan-y;
+	/* Avoid browser scroll-anchoring jumps when loop clones mount/unmount. */
+	overflow-anchor: none;
 }
 
-.bw-swiper-type3 {
-    --swiper-pagination-bullet-inactive-color: #fff;
-    --swiper-pagination-bullet-inactive-opacity: 1;
-    --swiper-navigation-color: #000;
+/* Before Swiper boots (Elementor preview race), keep slides visible in a row. */
+.bw-swiper:not(.swiper-initialized) > .bw-swiper-wrapper,
+.bw-swiper:not(.swiper-initialized) > .swiper-wrapper {
+	display: flex;
+	width: 100%;
 }
 
-.bw-swiper-type4 {
-    height: 500px;
-    --swiper-pagination-color: #fff;
+.bw-swiper:not(.swiper-initialized) > .bw-swiper-wrapper > .bw-swiper-slide,
+.bw-swiper:not(.swiper-initialized) > .swiper-wrapper > .swiper-slide {
+	flex-shrink: 0;
+	width: 100%;
+	max-width: 100%;
+}
+
+.bw-swiper .bw-swiper-wrapper,
+.bw-swiper .swiper-wrapper {
+	/* Soft ease-out — less “snap”, better for centered Editorial / Peek Focus. */
+	transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+	/* Keep swipes on the GPU; avoid layout thrash while dragging. */
+	will-change: transform;
+}
+
+.bw-swiper.bw-is-dragging,
+.bw-swiper.bw-is-dragging * {
+	-webkit-user-select: none !important;
+	user-select: none !important;
+}
+
+.bw-swiper.bw-is-dragging {
+	touch-action: none;
+}
+
+/* Linked slides use display:contents anchors - disable hit-testing mid-drag so
+   focus/click cannot scroll the page or navigate after a swipe. */
+.bw-swiper.bw-is-dragging .bw-swiper-slide-link,
+.bw-swiper.bw-is-dragging a {
+	pointer-events: none !important;
+}
+
+.bw-swiper .has-template {
+	-webkit-user-select: text;
+	user-select: text;
+}
+
+.bw-swiper.bw-is-dragging .has-template,
+.bw-swiper.bw-is-dragging .has-template * {
+	-webkit-user-select: none !important;
+	user-select: none !important;
 }
 
 .bw-swiper-slide {
-    width: fit-content;
-    height: 450px;
-    overflow: hidden;
-}
-
-.bw-swiper-type1 .bw-swiper-slide {
-    width: 50%;
-}
-
-.bw-swiper-type4 .bw-swiper-slide {
-    width: 25%;
+	height: var(--bw-swiper-height, 450px);
+	overflow: hidden;
+	position: relative;
+	/* Avoid browser scroll-anchoring jumps when loop clones mount/unmount. */
+	overflow-anchor: none;
 }
 
 .bw-swiper-mask {
-    width: 100%;
-    height: 100%;
-    position: relative;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	overflow: hidden;
+	box-sizing: border-box;
 }
 
-.bw-swiper-type1 .bw-swiper-mask {
-    height: 90%;
+.bw-swiper-slide.has-image img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	max-width: 100%;
+	object-fit: contain;
+	object-position: center;
+	-webkit-user-drag: none;
+	user-select: none;
+	pointer-events: none;
+}
+
+.bw-swiper-slide.has-template .bw-swiper-mask {
+	height: auto;
+	min-height: 100%;
+}
+
+/* Wraps mask + caption when a per-slide Link is set. "display: contents" keeps
+   it out of the box tree so it never breaks Type 1's flex column layout or the
+   overlay positioning used by the other types; focus is still shown below. */
+.bw-swiper-slide-link {
+	display: contents;
+	color: inherit;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.bw-swiper-slide-link:focus-visible .bw-swiper-mask {
+	outline: 2px solid currentColor;
+	outline-offset: -2px;
 }
 
 .bw-swiper-caption {
-    margin-top: 2%;
-    font-size: 1.2em;
-    font-weight: bolder;
+	margin: 0;
+	font-size: 0.95em;
+	font-weight: 500;
+	line-height: 1.35;
+	letter-spacing: 0.01em;
+	color: inherit;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
 }
 
-.bw-swiper-slide img {
-    width: calc(100% + 100px);
-    max-width: unset;
-    object-fit: contain;
-    left: -50px;
-    height: 100%;
-}
-
-.bw-swiper-type1 .has-image img,
-.bw-swiper-type4 .has-image img {
-    position: absolute;
-}
-
-.bw-swiper-type2 .bw-swiper-slide img {
-    max-width: 100%;
-}
-
-.bw-swiper-type3 .bw-swiper-slide img {
-    width: 100%;
-}
+/* Navigation - minimal */
 
 .bw-swiper-button-prev,
 .bw-swiper-button-next {
-    background: white;
-    padding: 20px;
-    border-radius: 50%;
-    transition: border 0.5s ease-out;
+	width: 40px;
+	height: 40px;
+	margin-top: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 6px;
+	border: 0;
+	background: #fff;
+	border-radius: 50%;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+	color: #111;
+	font: inherit;
+	cursor: pointer;
+	appearance: none;
+	-webkit-appearance: none;
+	transition: opacity 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Buttons always render their own icon now (default or custom) - never the
+   Swiper icon-font ::after, regardless of type. */
+.bw-swiper-button-prev::after,
+.bw-swiper-button-next::after {
+	content: none;
+	display: none;
 }
 
 .bw-swiper-button-prev {
-    left: 30px;
+	left: var(--bw-swiper-nav-inset);
 }
 
 .bw-swiper-button-next {
-    right: 30px;
+	right: var(--bw-swiper-nav-inset);
 }
 
 .bw-swiper-button-prev:hover,
 .bw-swiper-button-next:hover {
-    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
-.bw-swiper-button-prev:hover::after,
-.bw-swiper-button-next:hover::after {
-    text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+.bw-swiper-button-prev:focus-visible,
+.bw-swiper-button-next:focus-visible,
+.bw-swiper-pagination .swiper-pagination-bullet:focus-visible {
+	outline: 2px solid currentColor;
+	outline-offset: 2px;
 }
 
-.bw-swiper-type3 .bw-swiper-pagination {
-    bottom: 30px !important;
-    left: unset !important;
-    width: unset !important;
-    right: 20px;
+.bw-swiper-button-prev .bw-swiper-arrow-icon,
+.bw-swiper-button-next .bw-swiper-arrow-icon {
+	display: block;
+	width: 60%;
+	height: 60%;
+	margin: 0 auto;
+	pointer-events: none;
+	-webkit-user-drag: none;
+	color: inherit;
 }
 
+/* Custom uploaded arrow SVG, rendered as a CSS mask so it still respects the
+   Arrows Icon Color control (a plain <img> can't be recolored this way). */
+.bw-swiper-arrow-icon--mask {
+	background-color: currentColor;
+	-webkit-mask-image: var(--bw-mask-url);
+	mask-image: var(--bw-mask-url);
+	-webkit-mask-size: contain;
+	mask-size: contain;
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-position: center;
+	mask-position: center;
+}
+
+/* Navigation Arrows: "Outside" position - rendered as siblings of .bw-swiper
+   (never as its descendants) so Swiper's own overflow:hidden on the slider
+   root can't clip them. Laid out as a small centered row below the slider. */
+.bw-swiper-outer--nav-outside > .bw-swiper-nav-outside {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+	margin-top: 14px;
+}
+
+.bw-swiper-outer--nav-outside > .bw-swiper-nav-outside .bw-swiper-button-prev,
+.bw-swiper-outer--nav-outside > .bw-swiper-nav-outside .bw-swiper-button-next {
+	position: static;
+	top: auto;
+	left: auto;
+	right: auto;
+	margin-top: 0;
+	transform: none;
+}
+
+/* Pagination shared - unscoped by design (no ".bw-swiper" ancestor requirement)
+   so the exact same look applies whether the pagination element renders
+   inside the slider (default) or outside it. */
+
+.bw-swiper-pagination {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--bw-swiper-bullet-gap);
+	bottom: 12px;
+}
+
+/* Pagination: "Outside" position override - back into normal document flow,
+   below the slider, instead of Swiper's default absolute overlay. */
+.bw-swiper-outer--pagination-outside > .bw-swiper-pagination {
+	position: static;
+	margin-top: 14px;
+	bottom: auto;
+	left: auto;
+	right: auto;
+	width: auto;
+}
+
+.bw-swiper-pagination .swiper-pagination-bullet {
+	opacity: 0.35;
+	background: var(--bw-swiper-bullet-inactive, #111);
+	margin: 0 !important;
+	padding: 0;
+	border: 0;
+	appearance: none;
+	-webkit-appearance: none;
+	cursor: pointer;
+	transition: opacity 0.25s ease, transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.bw-swiper-pagination .swiper-pagination-bullet-active {
+	opacity: 1;
+	background: var(--bw-swiper-bullet-active, #111);
+}
+
+.bw-swiper-pagination .swiper-pagination-bullet svg {
+	display: block;
+	width: 100%;
+	height: 100%;
+	stroke: var(--bw-swiper-bullet-inactive, #111);
+	fill: var(--bw-swiper-bullet-inactive, #111);
+}
+
+.bw-swiper-pagination .swiper-pagination-bullet-active svg {
+	stroke: var(--bw-swiper-bullet-active, #111);
+	fill: var(--bw-swiper-bullet-active, #111);
+}
+
+/* Custom dot icon: rendered as a CSS mask (not <img>) so the bullet color
+   variables recolor it for both inactive/active states. */
+.bw-swiper-pagination .bw-swiper-pagination-bullet--icon {
+	background: transparent;
+}
+
+.bw-swiper-pagination .bw-swiper-pagination-bullet-icon {
+	display: block;
+	width: 100%;
+	height: 100%;
+	background-color: var(--bw-swiper-bullet-inactive, #111);
+	-webkit-mask-image: var(--bw-dot-icon-url);
+	mask-image: var(--bw-dot-icon-url);
+	-webkit-mask-size: contain;
+	mask-size: contain;
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-position: center;
+	mask-position: center;
+}
+
+.bw-swiper-pagination .swiper-pagination-bullet-active .bw-swiper-pagination-bullet-icon {
+	background-color: var(--bw-swiper-bullet-active, #111);
+}
+
+/* Pagination Style: Fraction */
+
+.bw-swiper-outer .bw-swiper-pagination.swiper-pagination-fraction,
+.swiper-pagination-fraction {
+	color: var(--bw-swiper-fraction-color, var(--bw-swiper-bullet-active, #111));
+	font-size: 0.85em;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	white-space: nowrap;
+}
+
+.bw-swiper-outer .bw-swiper-pagination .swiper-pagination-current {
+	color: var(--bw-swiper-fraction-current, inherit);
+}
+
+.bw-swiper-outer .bw-swiper-pagination .swiper-pagination-total {
+	color: var(--bw-swiper-fraction-total, inherit);
+}
+
+.bw-swiper-outer .bw-swiper-pagination.swiper-pagination-fraction .swiper-pagination-current {
+	margin-inline-end: var(--bw-swiper-fraction-gap, 0.35em);
+}
+
+.bw-swiper-outer .bw-swiper-pagination.swiper-pagination-fraction .swiper-pagination-total {
+	margin-inline-start: var(--bw-swiper-fraction-gap, 0.35em);
+}
+
+/* Pagination Style: Progress Bar — minimal hairline default
+   NOTE: Swiper only sizes `.swiper-horizontal > .swiper-pagination-progressbar`
+   (direct child). Outside placement never matches that, so we size it ourselves.
+   PHP also adds `.bw-swiper-pagination--progressbar` so styles work before init. */
+
+.bw-swiper-outer .bw-swiper-pagination.bw-swiper-pagination--progressbar,
+.bw-swiper-outer .bw-swiper-pagination.swiper-pagination-progressbar,
+.bw-swiper-pagination.bw-swiper-pagination--progressbar,
+.bw-swiper-pagination.swiper-pagination-progressbar {
+	display: block !important;
+	visibility: visible !important;
+	flex: none !important;
+	align-items: stretch;
+	justify-content: flex-start;
+	gap: 0 !important;
+	width: var(--bw-swiper-progress-width, 72px) !important;
+	max-width: 100%;
+	height: var(--bw-swiper-progress-height, 1px) !important;
+	min-height: 1px;
+	background: var(--bw-swiper-progress-track, rgba(17, 17, 17, 0.12));
+	opacity: 1 !important;
+	border-radius: var(--bw-swiper-progress-radius, 0px);
+	overflow: hidden;
+	box-sizing: border-box;
+	z-index: 20;
+	pointer-events: none;
+}
+
+/* Inside slider: short hairline, inset from edges — not a full-bleed bar. */
+.bw-swiper > .bw-swiper-pagination.bw-swiper-pagination--progressbar,
+.bw-swiper > .bw-swiper-pagination.swiper-pagination-progressbar {
+	position: absolute !important;
+	left: 50% !important;
+	right: auto !important;
+	top: auto !important;
+	bottom: 14px !important;
+	width: var(--bw-swiper-progress-width, 72px) !important;
+	margin: 0;
+	transform: translateX(-50%);
+}
+
+.bw-swiper-outer .bw-swiper-pagination.bw-swiper-pagination--progressbar .swiper-pagination-progressbar-fill,
+.bw-swiper-outer .bw-swiper-pagination.swiper-pagination-progressbar .swiper-pagination-progressbar-fill,
+.bw-swiper-pagination.bw-swiper-pagination--progressbar .swiper-pagination-progressbar-fill,
+.swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
+	display: block !important;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--bw-swiper-progress-fill, rgba(17, 17, 17, 0.65));
+	border-radius: inherit;
+	transform-origin: left center;
+	transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Outside placement: centered short rule under the slider. */
+.bw-swiper-outer--pagination-outside > .bw-swiper-pagination.bw-swiper-pagination--progressbar,
+.bw-swiper-outer--pagination-outside > .bw-swiper-pagination.swiper-pagination-progressbar {
+	position: relative !important;
+	inset: auto !important;
+	top: auto !important;
+	bottom: auto !important;
+	left: auto !important;
+	right: auto !important;
+	transform: none;
+	margin-top: 18px;
+	margin-inline: auto;
+	width: var(--bw-swiper-progress-width, 72px) !important;
+	pointer-events: none;
+}
+
+/* Never let Swiper's lock class hide a progress bar we intentionally showed. */
+.bw-swiper-outer .bw-swiper-pagination.bw-swiper-pagination--progressbar.swiper-pagination-lock,
+.bw-swiper-outer .bw-swiper-pagination.swiper-pagination-progressbar.swiper-pagination-lock {
+	display: block !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Type 1 - Classic Caption                                                   */
+/* -------------------------------------------------------------------------- */
+
+.bw-swiper-type1 .bw-swiper-slide.has-image {
+	display: flex;
+	flex-direction: column;
+	height: auto;
+	min-height: var(--bw-swiper-height, 450px);
+}
+
+.bw-swiper-type1 .bw-swiper-slide.has-image .bw-swiper-mask {
+	flex: 1 1 auto;
+	height: var(--bw-swiper-height, 450px);
+	min-height: 0;
+}
+
+.bw-swiper-type1 .bw-swiper-slide.has-image img {
+	object-fit: contain;
+}
+
+.bw-swiper-type1 .bw-swiper-caption {
+	flex: 0 0 auto;
+	margin-top: 0.5em;
+	padding: 0 2px 4px;
+}
+
+.bw-swiper-type1 .bw-swiper-pagination {
+	bottom: 8px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Type 2 - Clean Cover                                                       */
+/* -------------------------------------------------------------------------- */
+
+.bw-swiper-type2 .bw-swiper-slide.has-image img {
+	object-fit: cover;
+}
+
+/* Subtle "Ken Burns" zoom on the active slide only. Restarts each time a
+   slide becomes active because the animation only matches while
+   .swiper-slide-active is present. */
+@keyframes bw-carousel-kenburns {
+	from {
+		transform: scale(1);
+	}
+	to {
+		transform: scale(1.08);
+	}
+}
+
+.bw-swiper-type2 .swiper-slide-active.has-image img {
+	animation: bw-carousel-kenburns 6s ease-out forwards;
+}
+
+.bw-swiper-type2 .bw-swiper-caption {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 16px 20px;
+	background: rgba(0, 0, 0, 0.45);
+	color: #fff;
+}
+
+.bw-swiper-type2 .bw-swiper-button-prev,
+.bw-swiper-type2 .bw-swiper-button-next {
+	width: 36px;
+	height: 36px;
+	background: rgba(255, 255, 255, 0.92);
+	box-shadow: none;
+}
+
+.bw-swiper-type2 .bw-swiper-pagination .swiper-pagination-bullet {
+	width: 8px;
+	height: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.bw-swiper-type2 .swiper-slide-active.has-image img {
+		animation: none;
+	}
+}
+
+/* -------------------------------------------------------------------------- */
+/* Type 3 - Editorial                                                         */
+/* -------------------------------------------------------------------------- */
+
+.bw-swiper-type3 .bw-swiper-slide.has-image img {
+	object-fit: cover;
+}
+
+.bw-swiper-type3 .bw-swiper-caption {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 20px 24px;
+	background: rgba(0, 0, 0, 0.55);
+	color: #fff;
+	font-size: 1.4em;
+	font-weight: 700;
+	letter-spacing: 0.01em;
+}
+
+.bw-swiper-type3 .bw-swiper-button-prev,
+.bw-swiper-type3 .bw-swiper-button-next {
+	background: transparent;
+	box-shadow: none;
+	width: 44px;
+	height: 44px;
+}
+
+.bw-swiper-type3 .bw-swiper-pagination:not(.swiper-pagination-progressbar):not(.bw-swiper-pagination--progressbar) {
+	bottom: 24px !important;
+	left: auto !important;
+	right: 20px;
+	width: auto !important;
+	justify-content: flex-end;
+}
+
+.bw-swiper-type3 .bw-swiper-pagination.swiper-pagination-progressbar,
+.bw-swiper-type3 .bw-swiper-pagination.bw-swiper-pagination--progressbar {
+	width: var(--bw-swiper-progress-width, 72px) !important;
+	left: 50% !important;
+	right: auto !important;
+	bottom: 14px !important;
+	top: auto !important;
+	transform: translateX(-50%);
+}
+
+.bw-swiper-outer--pagination-outside.bw-swiper-type3 > .bw-swiper-pagination.swiper-pagination-progressbar,
+.bw-swiper-outer--pagination-outside.bw-swiper-type3 > .bw-swiper-pagination.bw-swiper-pagination--progressbar {
+	width: var(--bw-swiper-progress-width, 72px) !important;
+	right: auto;
+	left: auto;
+	transform: none;
+	margin-inline: auto;
+	position: relative !important;
+}
+
+/* Ring-style dot (only shown if Pagination Style is manually set to Dots). */
 .bw-swiper-type3 .bw-swiper-pagination .swiper-pagination-bullet {
-    position: relative;
-}
-
-.bw-swiper-type4 .bw-swiper-pagination .swiper-pagination-bullet {
-    transition: all 0.3s ease-out;
+	position: relative;
+	background: transparent;
+	opacity: 1;
 }
 
 .bw-swiper-type3 .bw-swiper-pagination .swiper-pagination-bullet svg {
-    transform: translate3d(-8px, -8px, 0);
-    stroke-dasharray: 38;
-    stroke-dashoffset: 38;
-    transition: all 0.5s linear;
+	transform: translate3d(-8px, -8px, 0);
+	stroke-dasharray: 38;
+	stroke-dashoffset: 38;
+	fill: transparent;
+	stroke: var(--bw-swiper-bullet-inactive, #111);
+	stroke-width: 1.25;
+	transition: stroke-dashoffset 0.45s linear, stroke 0.25s ease;
 }
 
 .bw-swiper-type3 .bw-swiper-pagination .swiper-pagination-bullet-active svg {
-    stroke-dashoffset: 0;
-    stroke: #fff;
+	stroke-dashoffset: 0;
+	stroke: var(--bw-swiper-bullet-active, #111);
+	fill: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.bw-swiper-type3 .bw-swiper-pagination .swiper-pagination-bullet svg {
+		transition: none;
+		stroke-dashoffset: 0;
+	}
+}
+
+/* -------------------------------------------------------------------------- */
+/* Type 4 - Peek Focus                                                        */
+/* -------------------------------------------------------------------------- */
+
+.bw-swiper-type4 .bw-swiper-slide {
+	transition:
+		opacity var(--bw-swiper-speed, 750ms) cubic-bezier(0.22, 1, 0.36, 1),
+		transform var(--bw-swiper-speed, 750ms) cubic-bezier(0.22, 1, 0.36, 1);
+	transform: scale(0.92);
+	opacity: 0.45;
+	will-change: transform, opacity;
+}
+
+.bw-swiper-type4 .bw-swiper-slide-active,
+.bw-swiper-type4 .swiper-slide-active {
+	transform: scale(1);
+	opacity: 1;
+}
+
+/* Center Slide Emphasis - only engaged by JS when there is a genuine single
+   centered slide (rounded slidesPerView is odd); otherwise the neutral
+   scale(1) rule above applies, so an even slide count never half-enlarges
+   two "middle" slides. */
+.bw-swiper-type4.bw-swiper-center-single .swiper-slide-active {
+	transform: scale(var(--bw-peek-center-scale, 1.1));
+}
+
+/* Progress-driven Peek Focus: JS sets inline transform/opacity every frame
+   (including while dragging). Disable class CSS so it cannot snap mid-drag. */
+.bw-swiper-type4.bw-swiper-peek-progress .bw-swiper-slide,
+.bw-swiper-type4.bw-swiper-peek-progress .bw-swiper-slide-active,
+.bw-swiper-type4.bw-swiper-peek-progress .swiper-slide-active,
+.bw-swiper-type4.bw-swiper-peek-progress.bw-swiper-center-single .swiper-slide-active,
+.bw-swiper-type4.bw-swiper-peek-progress.bw-is-dragging .bw-swiper-slide {
+	transition: none !important;
+	/* Inline styles from JS win; keep a safe fallback before first paint. */
+	transform: scale(0.92);
+	opacity: 0.45;
+}
+
+/* Give scaled-up center slide room so neighbors are not clipped to "half slides". */
+.bw-swiper-type4.bw-swiper-center-single {
+	padding-block: 0;
+	padding-inline: 4%;
+	box-sizing: border-box;
+}
+
+.bw-swiper-type4 .bw-swiper-slide.has-image img {
+	object-fit: cover;
+}
+
+.bw-swiper-type4 .bw-swiper-caption {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 14px 18px;
+	background: rgba(0, 0, 0, 0.45);
+	color: #fff;
+	font-size: 0.9em;
+}
+
+.bw-swiper-type4 .bw-swiper-pagination .swiper-pagination-bullet {
+	width: 8px;
+	height: 8px;
+	background: transparent;
+	border: 1px solid var(--bw-swiper-bullet-inactive, #111);
+	opacity: 0.5;
 }
 
 .bw-swiper-type4 .bw-swiper-pagination .swiper-pagination-bullet-active {
-    border: 0.5px solid #000;
-    transform: scale(1.8);
+	border-color: var(--bw-swiper-bullet-border, var(--bw-swiper-bullet-active, #111));
+	background: var(--bw-swiper-bullet-active, #111);
+	opacity: 1;
+	transform: scale(1.65);
 }
+
+.bw-swiper-type4 .bw-swiper-pagination.swiper-pagination-progressbar,
+.bw-swiper-type4 .bw-swiper-pagination.bw-swiper-pagination--progressbar {
+	bottom: 14px !important;
+	left: 50% !important;
+	right: auto !important;
+	top: auto !important;
+	width: var(--bw-swiper-progress-width, 72px) !important;
+	transform: translateX(-50%);
+}
+
+.bw-swiper-outer--pagination-outside.bw-swiper-type4 > .bw-swiper-pagination.swiper-pagination-progressbar,
+.bw-swiper-outer--pagination-outside.bw-swiper-type4 > .bw-swiper-pagination.bw-swiper-pagination--progressbar {
+	bottom: auto !important;
+	left: auto !important;
+	right: auto !important;
+	top: auto !important;
+	width: var(--bw-swiper-progress-width, 72px) !important;
+	transform: none;
+	margin-inline: auto;
+	position: relative !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.bw-swiper-type4 .bw-swiper-slide {
+		transition: none;
+		transform: none;
+		opacity: 1;
+	}
+}
+
+/* -------------------------------------------------------------------------- */
+/* Mobile                                                                     */
+/* -------------------------------------------------------------------------- */
 
 @media (max-width: 767px) {
-    .bw-swiper-type1 .bw-swiper-slide {
-        width: 80%;
-    }
+	.bw-swiper {
+		--bw-swiper-nav-inset: 8px;
+	}
 
-    .bw-swiper-type4 .bw-swiper-slide {
-        width: 65%;
-    }
+	.bw-swiper-button-prev,
+	.bw-swiper-button-next {
+		width: 32px;
+		height: 32px;
+	}
+
+	.bw-swiper-type3 .bw-swiper-pagination {
+		bottom: 12px !important;
+		right: 12px;
+	}
+
+	.bw-swiper-type1 .bw-swiper-slide.has-image {
+		min-height: min(var(--bw-swiper-height, 450px), 70vh);
+	}
+
+	.bw-swiper-type1 .bw-swiper-slide.has-image .bw-swiper-mask {
+		height: min(var(--bw-swiper-height, 450px), 56vh);
+	}
+
+	.bw-swiper-type2 .bw-swiper-slide,
+	.bw-swiper-type3 .bw-swiper-slide,
+	.bw-swiper-type4 .bw-swiper-slide {
+		height: min(var(--bw-swiper-height, 450px), 62vh);
+	}
+
+	.bw-swiper-type3 .bw-swiper-caption {
+		font-size: 1.15em;
+		padding: 16px 18px;
+	}
 }
 
-@media (min-width: 768px) and (max-width: 991.98px) {
-    .bw-swiper-type1 .bw-swiper-slide {
-        width: 60%;
-    }
+/* Few items (1-2): keep full-bleed slide, no awkward half-empty track */
+.bw-swiper.bw-swiper--few .bw-swiper-slide {
+	max-width: 100%;
+}
 
-    .bw-swiper-type4 .bw-swiper-slide {
-        width: 35%;
-    }
+/* Single unique slide: no Peek Focus dim/scale (nothing to peek) */
+.bw-swiper.bw-swiper--few[data-slide-count="1"].bw-swiper-type4 .bw-swiper-slide {
+	transform: none;
+	opacity: 1;
+}
+
+.bw-swiper.bw-swiper--few[data-slide-count="1"].bw-swiper-type4 .bw-swiper-slide-active,
+.bw-swiper.bw-swiper--few[data-slide-count="1"].bw-swiper-type4 .swiper-slide-active {
+	transform: none;
+	opacity: 1;
 }

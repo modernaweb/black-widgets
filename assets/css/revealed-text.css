@@ -1,9 +1,0 @@
-.bw-revealed-text span {
-    display: inline-block;
-    transition: opacity 0.5s ease, transform 0.5s ease, filter 0.5s ease;
-}
-
-.bw-gradient-text p span {
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}

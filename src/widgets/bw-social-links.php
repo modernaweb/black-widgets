@@ -260,7 +260,7 @@ class SocialLinks extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_alignment',
 			[
-				'label'     => esc_html__( 'Text Alignment', 'black-widgets' ),
+				'label'     => esc_html__( 'Alignment', 'black-widgets' ),
 				'type'      => \Elementor\Controls_Manager::CHOOSE,
 				'options'   => [
 					'left'   => [
@@ -276,7 +276,16 @@ class SocialLinks extends \Elementor\Widget_Base {
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
+				'default'   => 'left',
 				'toggle'    => true,
+				'selectors_dictionary' => [
+					'left'   => 'flex-start',
+					'center' => 'center',
+					'right'  => 'flex-end',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bw-social-box' => 'justify-content: {{VALUE}};',
+				],
 			]
 		);
 
@@ -955,6 +964,7 @@ class SocialLinks extends \Elementor\Widget_Base {
                 ],
 				'selectors' => [
 					'{{WRAPPER}} .bw-social-links .bw-social i' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .bw-social-links .bw-social svg' => 'fill: {{VALUE}}',
 				],
 			]
 		);
@@ -979,6 +989,7 @@ class SocialLinks extends \Elementor\Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-social-links .bw-social i' => 'font-size: {{SIZE}}{{UNIT}} !important;',
+					'{{WRAPPER}} .bw-social-links .bw-social svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1002,6 +1013,7 @@ class SocialLinks extends \Elementor\Widget_Base {
                 ],
 				'selectors' => [
 					'{{WRAPPER}} .bw-social-links .bw-social:hover i' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .bw-social-links .bw-social:hover svg' => 'fill: {{VALUE}}',
 				],
 			]
 		);
@@ -1026,6 +1038,7 @@ class SocialLinks extends \Elementor\Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-social-links .bw-social:hover i' => 'font-size: {{SIZE}}{{UNIT}} !important;',
+					'{{WRAPPER}} .bw-social-links .bw-social:hover svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1054,7 +1067,7 @@ class SocialLinks extends \Elementor\Widget_Base {
 		// Variables
         $type 	        = isset($settings['widget_type']) ? $settings['widget_type'] : '';
         $follow			= isset($settings['widget_follow']) ? $settings['widget_follow'] : '';
-		$alignment 		= isset($settings['widget_box_alignment']) ? esc_attr( $settings['widget_box_alignment'] ) : 'left';
+		$alignment 		= ! empty( $settings['widget_box_alignment'] ) ? esc_attr( $settings['widget_box_alignment'] ) : 'left';
 
 		// Render
 		echo '<div class="bw-social-links ' . esc_attr( $type ) . '">';
@@ -1073,7 +1086,7 @@ class SocialLinks extends \Elementor\Widget_Base {
 						echo '<span class="bw-follow-text">' . esc_html( $follow ) . '</span>';
 					echo '</a>';
 				} else {
-					echo '<a href="' . $item['website_link']['url'] . '"' . $target . $nofollow . ' class="bw-social">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					echo '<a href="' . esc_url( $item['website_link']['url'] ) . '"' . $target . $nofollow . ' class="bw-social">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						echo esc_html( $item['social_name'] );
 					echo '</a>';
 				}

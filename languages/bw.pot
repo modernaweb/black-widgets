@@ -1,7 +1,8 @@
-#, fuzzy
+﻿#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Black Widgets\n"
+"Project-Id-Version: Black Widgets 1.4.0\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-06-08 14:16+0330\n"
 "PO-Revision-Date: 2025-06-08 14:18+0330\n"
 "Last-Translator: \n"
@@ -10,6 +11,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Domain: black-widgets\n"
 "X-Generator: Poedit 3.6\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
@@ -96,7 +98,7 @@ msgstr ""
 #: src/widgets/bw-image-marquee.php:218 src/widgets/bw-image-pro.php:117
 #: src/widgets/bw-list.php:110 src/widgets/bw-loop.php:102
 #: src/widgets/bw-magic-link.php:110 src/widgets/bw-nav.php:144
-#: src/widgets/bw-revealed-text.php:58 src/widgets/bw-sentence.php:110
+#: src/widgets/bw-sentence.php:110
 #: src/widgets/bw-social-links.php:111 src/widgets/bw-text-animate.php:106
 #: src/widgets/bw-text-marquee.php:202 src/widgets/bw-title-animate.php:116
 #: src/widgets/bw-title-animate.php:376 src/widgets/bw-title.php:111
@@ -262,7 +264,7 @@ msgstr ""
 #: src/widgets/bw-image-carousel.php:206 src/widgets/bw-image-marquee.php:369
 #: src/widgets/bw-interactive-links.php:314 src/widgets/bw-list.php:200
 #: src/widgets/bw-loop.php:181 src/widgets/bw-magic-link.php:187
-#: src/widgets/bw-nav.php:281 src/widgets/bw-revealed-text.php:184
+#: src/widgets/bw-nav.php:281
 #: src/widgets/bw-social-links.php:235 src/widgets/bw-text-animate.php:185
 #: src/widgets/bw-text-marquee.php:362 src/widgets/bw-title-animate.php:603
 #: src/widgets/bw-title.php:333 src/widgets/bw-typography.php:1022
@@ -299,7 +301,7 @@ msgstr ""
 #: src/widgets/bw-magic-link.php:206 src/widgets/bw-magic-link.php:324
 #: src/widgets/bw-magic-link.php:465 src/widgets/bw-magic-link.php:604
 #: src/widgets/bw-nav.php:291 src/widgets/bw-nav.php:481
-#: src/widgets/bw-revealed-text.php:193 src/widgets/bw-social-links.php:254
+#: src/widgets/bw-social-links.php:254
 #: src/widgets/bw-social-links.php:368 src/widgets/bw-text-animate.php:194
 #: src/widgets/bw-text-marquee.php:371 src/widgets/bw-title-animate.php:639
 #: src/widgets/bw-title-animate.php:782 src/widgets/bw-title-animate.php:931
@@ -358,7 +360,7 @@ msgstr ""
 #: src/widgets/bw-list.php:797 src/widgets/bw-loop.php:202
 #: src/widgets/bw-magic-link.php:284 src/widgets/bw-magic-link.php:375
 #: src/widgets/bw-magic-link.php:516 src/widgets/bw-magic-link.php:655
-#: src/widgets/bw-nav.php:302 src/widgets/bw-revealed-text.php:241
+#: src/widgets/bw-nav.php:302
 #: src/widgets/bw-sentence.php:501 src/widgets/bw-sentence.php:829
 #: src/widgets/bw-social-links.php:328 src/widgets/bw-social-links.php:419
 #: src/widgets/bw-text-animate.php:242 src/widgets/bw-text-marquee.php:466
@@ -401,7 +403,7 @@ msgstr ""
 #: src/widgets/bw-list.php:820 src/widgets/bw-loop.php:212
 #: src/widgets/bw-magic-link.php:294 src/widgets/bw-magic-link.php:385
 #: src/widgets/bw-magic-link.php:539 src/widgets/bw-magic-link.php:678
-#: src/widgets/bw-nav.php:312 src/widgets/bw-revealed-text.php:250
+#: src/widgets/bw-nav.php:312
 #: src/widgets/bw-sentence.php:523 src/widgets/bw-sentence.php:851
 #: src/widgets/bw-social-links.php:338 src/widgets/bw-social-links.php:429
 #: src/widgets/bw-text-animate.php:263 src/widgets/bw-text-marquee.php:475
@@ -447,7 +449,7 @@ msgstr ""
 #: src/widgets/bw-list.php:806 src/widgets/bw-loop.php:220
 #: src/widgets/bw-magic-link.php:302 src/widgets/bw-magic-link.php:393
 #: src/widgets/bw-magic-link.php:525 src/widgets/bw-magic-link.php:664
-#: src/widgets/bw-nav.php:320 src/widgets/bw-revealed-text.php:372
+#: src/widgets/bw-nav.php:320
 #: src/widgets/bw-sentence.php:509 src/widgets/bw-sentence.php:837
 #: src/widgets/bw-social-links.php:346 src/widgets/bw-social-links.php:437
 #: src/widgets/bw-text-animate.php:250 src/widgets/bw-title-animate.php:686
@@ -499,7 +501,7 @@ msgstr ""
 #: src/widgets/bw-list.php:770 src/widgets/bw-loop.php:233
 #: src/widgets/bw-magic-link.php:250 src/widgets/bw-magic-link.php:341
 #: src/widgets/bw-magic-link.php:482 src/widgets/bw-magic-link.php:621
-#: src/widgets/bw-nav.php:333 src/widgets/bw-revealed-text.php:209
+#: src/widgets/bw-nav.php:333
 #: src/widgets/bw-sentence.php:474 src/widgets/bw-sentence.php:802
 #: src/widgets/bw-social-links.php:294 src/widgets/bw-social-links.php:385
 #: src/widgets/bw-text-animate.php:210 src/widgets/bw-text-marquee.php:434
@@ -550,7 +552,7 @@ msgstr ""
 #: src/widgets/bw-list.php:783 src/widgets/bw-loop.php:246
 #: src/widgets/bw-magic-link.php:263 src/widgets/bw-magic-link.php:354
 #: src/widgets/bw-magic-link.php:495 src/widgets/bw-magic-link.php:634
-#: src/widgets/bw-nav.php:346 src/widgets/bw-revealed-text.php:221
+#: src/widgets/bw-nav.php:346
 #: src/widgets/bw-sentence.php:487 src/widgets/bw-sentence.php:815
 #: src/widgets/bw-social-links.php:307 src/widgets/bw-social-links.php:398
 #: src/widgets/bw-text-animate.php:222 src/widgets/bw-text-marquee.php:446
@@ -600,7 +602,6 @@ msgstr ""
 #: src/widgets/bw-list.php:732 src/widgets/bw-loop.php:289
 #: src/widgets/bw-magic-link.php:435 src/widgets/bw-magic-link.php:574
 #: src/widgets/bw-nav.php:394 src/widgets/bw-nav.php:426
-#: src/widgets/bw-revealed-text.php:262 src/widgets/bw-revealed-text.php:285
 #: src/widgets/bw-sentence.php:329 src/widgets/bw-sentence.php:776
 #: src/widgets/bw-sentence.php:916 src/widgets/bw-text-animate.php:275
 #: src/widgets/bw-text-animate.php:298 src/widgets/bw-text-marquee.php:493
@@ -625,7 +626,7 @@ msgstr ""
 #: src/widgets/bw-icon-box.php:1251 src/widgets/bw-icon-box.php:1436
 #: src/widgets/bw-icon.php:337 src/widgets/bw-loop.php:300
 #: src/widgets/bw-loop.php:352 src/widgets/bw-magic-link.php:448
-#: src/widgets/bw-magic-link.php:587 src/widgets/bw-revealed-text.php:297
+#: src/widgets/bw-magic-link.php:587
 #: src/widgets/bw-text-animate.php:310 src/widgets/bw-text-marquee.php:528
 #: src/widgets/bw-title-animate.php:765 src/widgets/bw-title-animate.php:914
 #: src/widgets/bw-title-animate.php:1095 src/widgets/bw-title-animate.php:1242
@@ -750,7 +751,7 @@ msgstr ""
 #: src/widgets/bw-icon-box.php:1271 src/widgets/bw-icon-box.php:1456
 #: src/widgets/bw-icon.php:161 src/widgets/bw-image-pro.php:151
 #: src/widgets/bw-magic-link.php:216 src/widgets/bw-nav.php:237
-#: src/widgets/bw-revealed-text.php:154 src/widgets/bw-social-links.php:263
+#: src/widgets/bw-social-links.php:263
 #: src/widgets/bw-title-animate.php:649 src/widgets/bw-title.php:245
 #: src/widgets/bw-typography.php:339 src/widgets/bw-typography.php:455
 #: src/widgets/bw-typography.php:606
@@ -766,7 +767,7 @@ msgstr ""
 #: src/widgets/bw-icon-box.php:1717 src/widgets/bw-icon.php:165
 #: src/widgets/bw-image-pro.php:155 src/widgets/bw-interactive-links.php:964
 #: src/widgets/bw-magic-link.php:220 src/widgets/bw-nav.php:241
-#: src/widgets/bw-revealed-text.php:158 src/widgets/bw-sentence.php:566
+#: src/widgets/bw-sentence.php:566
 #: src/widgets/bw-social-links.php:267 src/widgets/bw-title-animate.php:653
 #: src/widgets/bw-title.php:249 src/widgets/bw-typography.php:343
 #: src/widgets/bw-typography.php:610
@@ -782,7 +783,7 @@ msgstr ""
 #: src/widgets/bw-icon-box.php:1725 src/widgets/bw-icon.php:173
 #: src/widgets/bw-image-pro.php:163 src/widgets/bw-interactive-links.php:972
 #: src/widgets/bw-magic-link.php:228 src/widgets/bw-nav.php:249
-#: src/widgets/bw-revealed-text.php:166 src/widgets/bw-sentence.php:570
+#: src/widgets/bw-sentence.php:570
 #: src/widgets/bw-social-links.php:275 src/widgets/bw-title-animate.php:661
 #: src/widgets/bw-title.php:257 src/widgets/bw-typography.php:459
 #: src/widgets/bw-typography.php:618
@@ -897,7 +898,7 @@ msgstr ""
 #: src/widgets/bw-box.php:160 src/widgets/bw-fade.php:182
 #: src/widgets/bw-gsap-tab.php:205 src/widgets/bw-icon.php:285
 #: src/widgets/bw-image-marquee.php:300 src/widgets/bw-image-pro.php:189
-#: src/widgets/bw-revealed-text.php:467 src/widgets/bw-text-marquee.php:280
+#: src/widgets/bw-text-marquee.php:280
 msgid "No"
 msgstr ""
 
@@ -907,8 +908,8 @@ msgstr ""
 #: src/widgets/bw-icon-box.php:291 src/widgets/bw-icon-box.php:321
 #: src/widgets/bw-icon-box.php:370 src/widgets/bw-icon-box.php:477
 #: src/widgets/bw-icon.php:286 src/widgets/bw-image-marquee.php:299
-#: src/widgets/bw-image-pro.php:190 src/widgets/bw-revealed-text.php:404
-#: src/widgets/bw-revealed-text.php:466 src/widgets/bw-sentence.php:204
+#: src/widgets/bw-image-pro.php:190
+#: src/widgets/bw-sentence.php:204
 #: src/widgets/bw-sentence.php:361 src/widgets/bw-sentence.php:430
 #: src/widgets/bw-text-marquee.php:279 src/widgets/bw-typography.php:916
 #: src/widgets/bw-typography.php:1382 src/widgets/bw-typography.php:1444
@@ -1065,14 +1066,13 @@ msgstr ""
 #: src/widgets/bw-icon-box.php:1721 src/widgets/bw-icon.php:169
 #: src/widgets/bw-image-pro.php:159 src/widgets/bw-interactive-links.php:968
 #: src/widgets/bw-magic-link.php:224 src/widgets/bw-nav.php:245
-#: src/widgets/bw-revealed-text.php:118 src/widgets/bw-revealed-text.php:162
 #: src/widgets/bw-social-links.php:271 src/widgets/bw-title-animate.php:657
 #: src/widgets/bw-title.php:253 src/widgets/bw-typography.php:614
 msgid "Center"
 msgstr ""
 
 #: src/widgets/bw-box.php:548 src/widgets/bw-interactive-links.php:765
-#: src/widgets/bw-revealed-text.php:270 src/widgets/bw-sentence.php:311
+#: src/widgets/bw-sentence.php:311
 #: src/widgets/bw-sentence.php:758 src/widgets/bw-sentence.php:900
 #: src/widgets/bw-title.php:450 src/widgets/bw-typography.php:1229
 #: src/widgets/bw-typography.php:1490
@@ -1226,7 +1226,7 @@ msgstr ""
 #: src/widgets/bw-box.php:829 src/widgets/bw-box.php:1252
 #: src/widgets/bw-fade.php:686 src/widgets/bw-fade.php:1119
 #: src/widgets/bw-image-pro.php:994 src/widgets/bw-image-pro.php:1417
-#: src/widgets/bw-revealed-text.php:104 src/widgets/bw-typography.php:1983
+#: src/widgets/bw-typography.php:1983
 msgid "Rotate"
 msgstr ""
 
@@ -2062,7 +2062,7 @@ msgstr ""
 msgid "Title Active Color"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:689 src/widgets/bw-revealed-text.php:330
+#: src/widgets/bw-gsap-tab.php:689
 #: src/widgets/bw-title.php:531 src/widgets/bw-typography.php:1289
 #: src/widgets/bw-typography.php:1553
 msgid "Title Margin"
@@ -2540,7 +2540,7 @@ msgstr ""
 #: src/widgets/bw-icon-box.php:176 src/widgets/bw-icon-box.php:234
 #: src/widgets/bw-icon-box.php:292 src/widgets/bw-icon-box.php:322
 #: src/widgets/bw-icon-box.php:371 src/widgets/bw-icon-box.php:478
-#: src/widgets/bw-revealed-text.php:405 src/widgets/bw-sentence.php:205
+#: src/widgets/bw-sentence.php:205
 #: src/widgets/bw-sentence.php:362 src/widgets/bw-sentence.php:431
 #: src/widgets/bw-typography.php:917 src/widgets/bw-typography.php:1383
 #: src/widgets/bw-typography.php:1445 src/widgets/bw-typography.php:1648
@@ -2924,7 +2924,7 @@ msgid "Links & Titles"
 msgstr ""
 
 #: src/widgets/bw-interactive-links.php:804
-#: src/widgets/bw-revealed-text.php:342 src/widgets/bw-title.php:544
+#: src/widgets/bw-title.php:544
 #: src/widgets/bw-typography.php:1301 src/widgets/bw-typography.php:1566
 msgid "Title Padding"
 msgstr ""
@@ -3209,78 +3209,60 @@ msgstr ""
 msgid "Link SVG Color"
 msgstr ""
 
-#: src/widgets/bw-revealed-text.php:31
-msgid "Black Revealed Text"
-msgstr ""
 
-#: src/widgets/bw-revealed-text.php:66 src/widgets/bw-sentence.php:160
+#: src/widgets/bw-sentence.php:160
 #: src/widgets/bw-text-animate.php:114 src/widgets/bw-title-animate.php:243
 #: src/widgets/bw-title-animate.php:280
 msgid "Text"
 msgstr ""
 
-#: src/widgets/bw-revealed-text.php:69
-msgid "Black Widget Revealed Text"
-msgstr ""
-
-#: src/widgets/bw-revealed-text.php:70 src/widgets/bw-text-animate.php:118
+#: src/widgets/bw-text-animate.php:118
 #: src/widgets/bw-text-marquee.php:214
 msgid "Type your text here"
 msgstr ""
 
-#: src/widgets/bw-revealed-text.php:84
 msgid "Animation Mode"
 msgstr ""
 
-#: src/widgets/bw-revealed-text.php:88
 msgid "Word by Word"
 msgstr ""
 
-#: src/widgets/bw-revealed-text.php:89
 msgid "Letter by Letter"
 msgstr ""
 
-#: src/widgets/bw-revealed-text.php:97
 msgid "Animation Effect"
 msgstr ""
 
-#: src/widgets/bw-revealed-text.php:101
 msgid "Fade (only opacity)"
 msgstr ""
 
-#: src/widgets/bw-revealed-text.php:102
 msgid "Zoom In"
 msgstr ""
 
-#: src/widgets/bw-revealed-text.php:103
 msgid "Unblur"
 msgstr ""
 
-#: src/widgets/bw-revealed-text.php:113
 msgid "Scroll Start Align"
 msgstr ""
 
-#: src/widgets/bw-revealed-text.php:117 src/widgets/bw-sentence.php:651
+#: src/widgets/bw-sentence.php:651
 #: src/widgets/bw-typography.php:347
 msgid "Top"
 msgstr ""
 
-#: src/widgets/bw-revealed-text.php:119 src/widgets/bw-sentence.php:655
+#: src/widgets/bw-sentence.php:655
 #: src/widgets/bw-typography.php:463
 msgid "Bottom"
 msgstr ""
 
-#: src/widgets/bw-revealed-text.php:127
 msgid "Start Animation at Scroll (%)"
 msgstr ""
 
-#: src/widgets/bw-revealed-text.php:140
 msgid ""
 "Reveal starts when the element reaches this percentage of viewport height "
 "from the top."
 msgstr ""
 
-#: src/widgets/bw-revealed-text.php:313 src/widgets/bw-revealed-text.php:478
 #: src/widgets/bw-sentence.php:294 src/widgets/bw-sentence.php:447
 #: src/widgets/bw-sentence.php:741 src/widgets/bw-title.php:514
 #: src/widgets/bw-typography.php:1272 src/widgets/bw-typography.php:1457
@@ -3288,33 +3270,33 @@ msgstr ""
 msgid "Title Background"
 msgstr ""
 
-#: src/widgets/bw-revealed-text.php:363 src/widgets/bw-title.php:565
+#: src/widgets/bw-title.php:565
 #: src/widgets/bw-typography.php:996 src/widgets/bw-typography.php:1322
 #: src/widgets/bw-typography.php:1587 src/widgets/bw-typography.php:2194
 msgid "Title Border"
 msgstr ""
 
-#: src/widgets/bw-revealed-text.php:386 src/widgets/bw-title.php:588
+#: src/widgets/bw-title.php:588
 #: src/widgets/bw-typography.php:1345 src/widgets/bw-typography.php:1610
 msgid "Title Box Shadow"
 msgstr ""
 
-#: src/widgets/bw-revealed-text.php:402 src/widgets/bw-sentence.php:359
+#: src/widgets/bw-sentence.php:359
 #: src/widgets/bw-typography.php:1380 src/widgets/bw-typography.php:1645
 msgid "Text Stroke"
 msgstr ""
 
-#: src/widgets/bw-revealed-text.php:414 src/widgets/bw-sentence.php:376
+#: src/widgets/bw-sentence.php:376
 #: src/widgets/bw-typography.php:1392 src/widgets/bw-typography.php:1677
 msgid "Text Stroke Color"
 msgstr ""
 
-#: src/widgets/bw-revealed-text.php:433 src/widgets/bw-sentence.php:392
+#: src/widgets/bw-sentence.php:392
 #: src/widgets/bw-typography.php:1411 src/widgets/bw-typography.php:1696
 msgid "Text Stroke Size"
 msgstr ""
 
-#: src/widgets/bw-revealed-text.php:464 src/widgets/bw-sentence.php:428
+#: src/widgets/bw-sentence.php:428
 #: src/widgets/bw-typography.php:1442
 msgid "Text Gradient/Image"
 msgstr ""
