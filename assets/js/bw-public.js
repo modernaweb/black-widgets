@@ -1,8 +1,8 @@
 (function ($) {
   'use strict';
 
-  // Bind once - the previous nested jQuery(window).scroll → $window.on('scroll')
-  // pattern registered a new throttled handler on every scroll event.
+  // Bind the scroll handler once; a nested bind would add a new throttled
+  // handler on every scroll event.
   if (window.bwPublicScrollInit) {
     return;
   }
@@ -158,8 +158,9 @@
       targets.accentTexts.length;
 
     if (!pending) {
+      // Idle, but stay bound: Fade / Title Animate widgets can still arrive from
+      // the Elementor editor, a popup, or lazy-loaded content.
       hasPendingTargets = false;
-      $window.off('scroll.bwPublic');
       return;
     }
 
@@ -175,16 +176,30 @@
     // Adjust any necessary elements on window resize
   }
 
-  $window.on('scroll.bwPublic', function () {
-    if (!hasPendingTargets) {
-      return;
-    }
+  function throttledScan() {
     if (!throttleTimeout) {
       throttleTimeout = setTimeout(function () {
         throttleTimeout = null;
         onScroll();
       }, 100);
     }
+  }
+
+  /**
+   * Re-arm after new markup appears. onScroll() clears hasPendingTargets once
+   * everything on the page is animated, which turns the scroll handler into a
+   * no-op; without this a widget added later would never animate.
+   */
+  function rescan() {
+    hasPendingTargets = true;
+    throttledScan();
+  }
+
+  $window.on('scroll.bwPublic', function () {
+    if (!hasPendingTargets) {
+      return;
+    }
+    throttledScan();
   });
 
   $window.on('resize.bwPublic', function () {
@@ -192,6 +207,24 @@
     debounceTimeout = setTimeout(onResize, 100);
   });
 
-  // First pass for elements already in view (no scroll required).
+  // Allow other Black Widgets scripts / custom code to re-arm the scan.
+  window.bwPublicRescan = rescan;
+
+  $window.on('elementor/frontend/init', function () {
+    if (typeof elementorFrontend === 'undefined' || !elementorFrontend.hooks) {
+      return;
+    }
+
+    // Widgets whose markup feeds collectTargets(). Editor re-renders replace the
+    // node, so the fresh copy has no .visible class and animates again.
+    ['b_fade', 'b_TitleAnimate'].forEach(function (widget) {
+      elementorFrontend.hooks.addAction('frontend/element_ready/' + widget + '.default', rescan);
+    });
+  });
+
+  // First pass for elements already in view (no scroll required), plus a safety
+  // net for markup that arrives without element_ready - loop grids, popups, or a
+  // theme that loads Elementor's frontend bundle after this file.
   onScroll();
+  $window.on('load', rescan);
 })(jQuery);

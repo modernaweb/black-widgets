@@ -46,7 +46,7 @@ class TextAnimate extends \Elementor\Widget_Base {
      * @return string Widget title.
      */
     public function get_title() {
-        return __( 'Black Text Animate', 'black-widgets' );
+        return __( 'Black Text Animate', 'blackwidgets' );
     }
 
     /**
@@ -103,7 +103,7 @@ class TextAnimate extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'content_section',
             [
-                'label' => esc_html__( 'Content', 'black-widgets' ),
+                'label' => esc_html__( 'Content', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -111,11 +111,11 @@ class TextAnimate extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_text',
             [
-                'label' => esc_html__( 'Text', 'black-widgets' ),
+                'label' => esc_html__( 'Text', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'rows' => 10,
-                'default' => esc_html__( 'Black Widget Text Animate', 'black-widgets' ),
-                'placeholder' => esc_html__( 'Type your text here', 'black-widgets' ),
+                'default' => esc_html__( 'Black Widget Text Animate', 'blackwidgets' ),
+                'placeholder' => esc_html__( 'Type your text here', 'blackwidgets' ),
             ]
         );
 
@@ -130,13 +130,13 @@ class TextAnimate extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_split',
             [
-                'label' => esc_html__( 'Split by', 'black-widgets' ),
+                'label' => esc_html__( 'Split by', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'none',
                 'options' => [
-                    'none'   =>  esc_html__( 'None', 'black-widgets' ),
-                    'letter'   =>  esc_html__( 'Letter', 'black-widgets' ),
-                    'word'   =>  esc_html__( 'Word', 'black-widgets' ),
+                    'none'   =>  esc_html__( 'None', 'blackwidgets' ),
+                    'letter'   =>  esc_html__( 'Letter', 'blackwidgets' ),
+                    'word'   =>  esc_html__( 'Word', 'blackwidgets' ),
                 ]
             ]
         );
@@ -144,15 +144,15 @@ class TextAnimate extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_animation',
             [
-                'label' => esc_html__( 'Animation', 'black-widgets' ),
+                'label' => esc_html__( 'Animation', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'fbottom',
                 'options' => [
-                    'ftop'   =>  esc_html__( 'From Top', 'black-widgets' ),
-                    'fbottom'   =>  esc_html__( 'From Bottom', 'black-widgets' ),
-                    'fleft'   =>  esc_html__( 'From Left', 'black-widgets' ),
-                    'fright'   =>  esc_html__( 'From Right', 'black-widgets' ),
-                    'fin'   =>  esc_html__( 'Fade In', 'black-widgets' ),
+                    'ftop'   =>  esc_html__( 'From Top', 'blackwidgets' ),
+                    'fbottom'   =>  esc_html__( 'From Bottom', 'blackwidgets' ),
+                    'fleft'   =>  esc_html__( 'From Left', 'blackwidgets' ),
+                    'fright'   =>  esc_html__( 'From Right', 'blackwidgets' ),
+                    'fin'   =>  esc_html__( 'Fade In', 'blackwidgets' ),
                 ]
             ]
         );
@@ -160,7 +160,7 @@ class TextAnimate extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_delay',
             [
-                'label' => esc_html__( 'Duration (ms)', 'black-widgets' ),
+                'label' => esc_html__( 'Duration (ms)', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'min' => 0,
                 'max' => 5000,
@@ -180,21 +180,21 @@ class TextAnimate extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_html_tag_title',
             [
-                'label' => esc_html__( 'HTML Tag', 'black-widgets' ),
+                'label' => esc_html__( 'HTML Tag', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'span',
                 'options' => [
-                    'div' => esc_html__( 'div', 'black-widgets' ),
-                    'h1' => esc_html__( 'H1', 'black-widgets' ),
-                    'h2' => esc_html__( 'H2', 'black-widgets' ),
-                    'h3' => esc_html__( 'H3', 'black-widgets' ),
-                    'h4' => esc_html__( 'H4', 'black-widgets' ),
-                    'h5' => esc_html__( 'H5', 'black-widgets' ),
-                    'h6' => esc_html__( 'H6', 'black-widgets' ),
-                    'p' => esc_html__( 'p', 'black-widgets' ),
-                    'span' => esc_html__( 'span', 'black-widgets' ),
+                    'div' => esc_html__( 'div', 'blackwidgets' ),
+                    'h1' => esc_html__( 'H1', 'blackwidgets' ),
+                    'h2' => esc_html__( 'H2', 'blackwidgets' ),
+                    'h3' => esc_html__( 'H3', 'blackwidgets' ),
+                    'h4' => esc_html__( 'H4', 'blackwidgets' ),
+                    'h5' => esc_html__( 'H5', 'blackwidgets' ),
+                    'h6' => esc_html__( 'H6', 'blackwidgets' ),
+                    'p' => esc_html__( 'p', 'blackwidgets' ),
+                    'span' => esc_html__( 'span', 'blackwidgets' ),
                 ],
-                'description' => esc_html__( 'Semantic tag for the whole text. Words/letters are wrapped in span for animation.', 'black-widgets' ),
+                'description' => esc_html__( 'Semantic tag for the whole text. Words/letters are wrapped in span for animation.', 'blackwidgets' ),
             ]
         );
 
@@ -202,19 +202,19 @@ class TextAnimate extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_alignment',
             [
-                'label'     => esc_html__( 'Text Alignment', 'black-widgets' ),
+                'label'     => esc_html__( 'Text Alignment', 'blackwidgets' ),
                 'type'      => \Elementor\Controls_Manager::CHOOSE,
                 'options'   => [
                     'left'   => [
-                        'title' => esc_html__( 'Left', 'black-widgets' ),
+                        'title' => esc_html__( 'Left', 'blackwidgets' ),
                         'icon'  => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => esc_html__( 'Center', 'black-widgets' ),
+                        'title' => esc_html__( 'Center', 'blackwidgets' ),
                         'icon'  => 'eicon-text-align-center',
                     ],
                     'right'  => [
-                        'title' => esc_html__( 'Right', 'black-widgets' ),
+                        'title' => esc_html__( 'Right', 'blackwidgets' ),
                         'icon'  => 'eicon-text-align-right',
                     ],
                 ],
@@ -233,7 +233,7 @@ class TextAnimate extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'style_section',
             [
-                'label' => esc_html__( 'Box Style', 'black-widgets' ),
+                'label' => esc_html__( 'Box Style', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
@@ -242,7 +242,7 @@ class TextAnimate extends \Elementor\Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'widget_box_background',
-                'label' => esc_html__( 'Background', 'black-widgets' ),
+                'label' => esc_html__( 'Background', 'blackwidgets' ),
                 'types' => [ 'classic', 'gradient', 'video' ],
                 'selector' => '{{WRAPPER}} .bw-text-animate',
             ]
@@ -258,7 +258,7 @@ class TextAnimate extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_margin',
             [
-                'label' => esc_html__( 'Margin', 'black-widgets' ),
+                'label' => esc_html__( 'Margin', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -270,7 +270,7 @@ class TextAnimate extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_padding',
             [
-                'label' => esc_html__( 'Padding', 'black-widgets' ),
+                'label' => esc_html__( 'Padding', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -290,7 +290,7 @@ class TextAnimate extends \Elementor\Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'widget_border',
-                'label' => esc_html__( 'Border', 'black-widgets' ),
+                'label' => esc_html__( 'Border', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-text-animate',
             ]
         );
@@ -298,7 +298,7 @@ class TextAnimate extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_border_radius',
             [
-                'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+                'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
                 'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', 'em', '%' ],
                 'selectors' => [
@@ -311,7 +311,7 @@ class TextAnimate extends \Elementor\Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'widget_box_shadow',
-                'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+                'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-text-animate',
             ]
         );
@@ -323,7 +323,7 @@ class TextAnimate extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'typography_section',
             [
-                'label' => esc_html__( 'Typography', 'black-widgets' ),
+                'label' => esc_html__( 'Typography', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
@@ -331,7 +331,7 @@ class TextAnimate extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_text_color',
             [
-                'label' => esc_html__( 'Color', 'black-widgets' ),
+                'label' => esc_html__( 'Color', 'blackwidgets' ),
                 'type' => Controls_Manager::COLOR,
                 'global' => [
                     'default' => Global_Colors::COLOR_PRIMARY,
@@ -355,7 +355,7 @@ class TextAnimate extends \Elementor\Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name' => 'widget_typography',
-                'label' => esc_html__( 'Typography', 'black-widgets' ),
+                'label' => esc_html__( 'Typography', 'blackwidgets' ),
                 'global' => [
                     'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
                 ],
@@ -367,7 +367,7 @@ class TextAnimate extends \Elementor\Widget_Base {
             Group_Control_Text_Shadow::get_type(),
             [
                 'name' => 'widget_text_shadow',
-                'label' => esc_html__( 'Text Shadow', 'black-widgets' ),
+                'label' => esc_html__( 'Text Shadow', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-text-animate, {{WRAPPER}} .bw-text-animate div, {{WRAPPER}} .bw-text-animate p, {{WRAPPER}} .bw-text-animate span, {{WRAPPER}} .bw-text-animate h1, {{WRAPPER}} .bw-text-animate h2, {{WRAPPER}} .bw-text-animate h3, {{WRAPPER}} .bw-text-animate h4, {{WRAPPER}} .bw-text-animate h5, {{WRAPPER}} .bw-text-animate h6',
             ]
         );

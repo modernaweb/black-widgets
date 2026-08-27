@@ -34,7 +34,7 @@
   }
 
   /**
-   * Whole-animation start delay (ms → seconds). Not stagger.
+   * Whole-animation start delay (ms to seconds). Not stagger.
    * Reads from the animate root; ignored for scrub timelines.
    */
   function getAnimDelaySec(el) {
@@ -156,7 +156,7 @@
 
     const root = $scope && $scope[0] ? $scope[0] : document;
 
-    // Legacy e-1…e-8 splitter - skip SplitText types (e-9…e-12) and static/none.
+    // Legacy e-1 to e-8 splitter - skip SplitText types (e-9 to e-12) and static/none.
     // Pre-splitting into .char spans breaks line-based FX (Mask Rise / Clip Wipe)
     // inside Elementor flex/overflow wrappers.
     const elements = root.querySelectorAll(
@@ -697,8 +697,8 @@
 
   /**
    * In Elementor editor the preview iframe is often height:100% of the page
-   * content, so IntersectionObserver(root:null) thinks EVERY widget is in view
-   * and plays all FX at once. Visibility must be computed against the PARENT
+   * content, so IntersectionObserver(root:null) thinks every widget is in view
+   * and plays all FX at once. Visibility must be computed against the parent
    * viewport through the iframe's frameElement (and parent scroll listeners).
    */
   function resolveTweenTrigger(targets) {
@@ -743,11 +743,11 @@
         }
       }
     } catch (e) {
-      // cross-origin parent — fall through
+      // cross-origin parent, fall through
     }
 
     var vh = window.innerHeight || document.documentElement.clientHeight || 0;
-    // Guard: expanded iframe (vh ≈ full document) would mark everything visible.
+    // Guard: expanded iframe (vh close to full document) would mark everything visible.
     var sh = Math.max(
       document.documentElement ? document.documentElement.scrollHeight : 0,
       document.body ? document.body.scrollHeight : 0
@@ -853,7 +853,7 @@
       cb();
     };
 
-    // No trigger → do not auto-play (avoids firing every FX on load).
+    // No trigger: do not auto-play.
     if (!el) {
       return;
     }
@@ -872,7 +872,7 @@
     setTimeout(check, 50);
     setTimeout(check, 250);
     setTimeout(check, 800);
-    // Do NOT auto-run after a timeout — that made every widget animate together.
+    // Do not auto-run on timeout; each widget must trigger on its own.
   }
 
   function markEditorShell() {
@@ -967,7 +967,7 @@
   /**
    * Unstick titles/wraps that never received FX so CSS pre-hide cannot leave
    * content invisible forever (GSAP missing, SplitText fail, etc.).
-   * Safe for titles that already have [data-bw-fx] — selector skips them.
+   * The selector skips titles that already have [data-bw-fx].
    */
   function revealPendingTypography(root) {
     var scope = root && root.querySelectorAll ? root : document;
@@ -1005,8 +1005,8 @@
   }
 
   /**
-   * Only unstick titles that never received FX. Do not force end-state on
-   * paused tweens waiting for scroll — that revealed every widget at once.
+   * Only unstick titles that never received FX. Do not force the end state on
+   * paused tweens that are waiting for scroll.
    */
   function revealTypographyInEditor(root) {
     if (!isElementorEditMode()) {
@@ -1018,7 +1018,7 @@
   }
 
   /**
-   * Frontend last resort after deps wait — never leave CSS-hidden text stuck.
+   * Frontend fallback after the deps wait, so CSS-hidden text cannot stay stuck.
    */
   function revealTypographyOnFrontend(root) {
     if (isElementorEditMode()) {
@@ -1030,7 +1030,7 @@
   }
 
   /**
-   * @deprecated kept as name used below — delegates to editor gsap patch + reveal.
+   * @deprecated Delegates to revealTypographyInEditor(). Kept for the call site below.
    */
   function playTypographyFxInEditor(root) {
     revealTypographyInEditor(root);
@@ -1040,7 +1040,7 @@
     return typeof SplitText !== 'undefined';
   }
 
-  // Once we know we're in the Elementor canvas, stay there — early boot can
+  // Once we know we're in the Elementor canvas, stay there. Early boot can
   // miss environmentMode / body classes and wrongly attach ScrollTrigger.
   var editModeSticky = false;
 
@@ -1122,7 +1122,7 @@
             return true;
           }
         } catch (e) {
-          // cross-origin — ignore
+          // cross-origin, ignore
         }
       }
     } catch (e) {
@@ -1132,9 +1132,8 @@
   }
 
   /**
-   * Wait until GSAP (+ SplitText when needed) is available. First canvas paint
-   * often runs before CDN SplitText finishes — that left Clip Wipe as a hairline
-   * until a control change forced a re-init.
+   * Wait until GSAP (+ SplitText when needed) is available. The first canvas
+   * paint often runs before CDN SplitText has finished loading.
    */
   function whenTypographyDepsReady(root, cb) {
     var tries = 0;
@@ -1179,7 +1178,7 @@
 
   /**
    * Non-scrub viewport enter options. Supports data-bw-replay for re-play on
-   * every re-entry (scroll back to top → down again).
+   * every re-entry (scroll back to top, then down again).
    * In the Elementor editor ScrollTrigger is stripped by withEditorGsap; the
    * trigger element is still used for IntersectionObserver playback.
    */
@@ -1212,14 +1211,14 @@
 
   /**
    * Merge tween "to" vars with an optional ScrollTrigger config.
-   * Editor: no ST → tween plays on create. Scrub types jump to the end frame.
+   * Editor: without ScrollTrigger the tween plays on create. Scrub types jump to the end frame.
    */
   function withST(toVars, st, scrubLike) {
     var vars = Object.assign({}, toVars);
     if (st) {
       vars.scrollTrigger = st;
     } else if (isElementorEditMode() && scrubLike) {
-      // Scrub can't run without scroll — show finished look in the canvas.
+      // Scrub can't run without scroll, so show the finished look in the canvas.
       vars.duration = 0.01;
     }
     // Whole-animation delay after enter (not scrub, not stagger).
@@ -1234,7 +1233,7 @@
 
   /**
    * Editor playback is owned by withEditorGsap + IntersectionObserver.
-   * Do not restart here — that caused the visible flash → jump.
+   * Do not restart here.
    */
   function playTweenInEditor() {
     return;
@@ -1445,7 +1444,7 @@
     // Flatten legacy single .word wrapper so SplitText sees clean text / <br>.
     var word = title.querySelector(':scope > .word');
     if (word && title.childElementCount === 1) {
-      // Keep <br> (hard line breaks from the textarea) — textContent would collapse them.
+      // Keep <br> (hard line breaks from the textarea); textContent would collapse them.
       title.innerHTML = word.innerHTML;
     }
   }
@@ -1897,7 +1896,7 @@
     whenTypographyDepsReady(root, function () {
       var gsapOk = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
       if (!gsapOk) {
-        // CSS hides pending FX — reveal immediately if GSAP never arrived.
+        // CSS hides pending FX, so reveal immediately if GSAP never arrived.
         revealPendingTypography(root);
         return;
       }

@@ -50,7 +50,7 @@ class ScrollText extends \Elementor\Widget_Base {
     }
 
     public function get_title() {
-        return __( 'Black Scroll Text', 'black-widgets' );
+        return __( 'Black Scroll Text', 'blackwidgets' );
     }
 
     public function get_icon() {
@@ -94,22 +94,22 @@ class ScrollText extends \Elementor\Widget_Base {
      */
     protected function get_scroll_anim_options() {
         $options = [
-            'none'          => esc_html__( 'None', 'black-widgets' ),
-            'bw-scroll-e-1' => esc_html__( 'Animate 1', 'black-widgets' ),
-            'bw-scroll-e-2' => esc_html__( 'Animate 2', 'black-widgets' ),
-            'bw-scroll-e-3' => esc_html__( 'Animate 3', 'black-widgets' ),
-            'bw-scroll-e-4' => esc_html__( 'Animate 4', 'black-widgets' ),
-            'bw-scroll-e-5' => esc_html__( 'Animate 5', 'black-widgets' ),
-            'bw-scroll-e-6' => esc_html__( 'Animate 6', 'black-widgets' ),
-            'bw-scroll-e-7' => esc_html__( 'Animate 7', 'black-widgets' ),
-            'bw-scroll-e-8' => esc_html__( 'Animate 8', 'black-widgets' ),
+            'none'          => esc_html__( 'None', 'blackwidgets' ),
+            'bw-scroll-e-1' => esc_html__( 'Animate 1', 'blackwidgets' ),
+            'bw-scroll-e-2' => esc_html__( 'Animate 2', 'blackwidgets' ),
+            'bw-scroll-e-3' => esc_html__( 'Animate 3', 'blackwidgets' ),
+            'bw-scroll-e-4' => esc_html__( 'Animate 4', 'blackwidgets' ),
+            'bw-scroll-e-5' => esc_html__( 'Animate 5', 'blackwidgets' ),
+            'bw-scroll-e-6' => esc_html__( 'Animate 6', 'blackwidgets' ),
+            'bw-scroll-e-7' => esc_html__( 'Animate 7', 'blackwidgets' ),
+            'bw-scroll-e-8' => esc_html__( 'Animate 8', 'blackwidgets' ),
         ];
 
         if ( \Modernaweb\BlackWidgets\Plugin_Options::is_gsap_split_ready() ) {
-            $options['bw-scroll-e-9']  = esc_html__( 'Mask Rise (SplitText)', 'black-widgets' );
-            $options['bw-scroll-e-10'] = esc_html__( 'Word Cascade Blur', 'black-widgets' );
-            $options['bw-scroll-e-11'] = esc_html__( 'Char Wave 3D', 'black-widgets' );
-            $options['bw-scroll-e-12'] = esc_html__( 'Clip Wipe', 'black-widgets' );
+            $options['bw-scroll-e-9']  = esc_html__( 'Mask Rise (SplitText)', 'blackwidgets' );
+            $options['bw-scroll-e-10'] = esc_html__( 'Word Cascade Blur', 'blackwidgets' );
+            $options['bw-scroll-e-11'] = esc_html__( 'Char Wave 3D', 'blackwidgets' );
+            $options['bw-scroll-e-12'] = esc_html__( 'Clip Wipe', 'blackwidgets' );
         }
 
         return $options;
@@ -145,7 +145,7 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'content_section',
             [
-                'label' => esc_html__( 'Content', 'black-widgets' ),
+                'label' => esc_html__( 'Content', 'blackwidgets' ),
                 'tab'   => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -155,20 +155,20 @@ class ScrollText extends \Elementor\Widget_Base {
             [
                 'type'       => Controls_Manager::ALERT,
                 'alert_type' => 'info',
-                'heading'    => esc_html__( 'Scroll Text', 'black-widgets' ),
-                'content'    => esc_html__( 'Dedicated On Scroll + Movement widget extracted from Typography. Existing Typography “On Scroll” instances keep working.', 'black-widgets' ),
+                'heading'    => esc_html__( 'Scroll Text', 'blackwidgets' ),
+                'content'    => esc_html__( 'Dedicated On Scroll + Movement widget extracted from Typography. Existing Typography “On Scroll” instances keep working.', 'blackwidgets' ),
             ]
         );
 
         $this->add_control(
             'widget_title',
             [
-                'label'       => esc_html__( 'Title', 'black-widgets' ),
+                'label'       => esc_html__( 'Title', 'blackwidgets' ),
                 'type'        => Controls_Manager::TEXTAREA,
                 'rows'        => 4,
-                'default'     => esc_html__( 'Black Scroll Text', 'black-widgets' ),
-                'placeholder' => esc_html__( 'Type your title here (HTML + line breaks allowed)', 'black-widgets' ),
-                'description' => esc_html__( 'Allowed inline tags: strong, b, i, em, u, br, hr, span, mark, small, sub, sup.', 'black-widgets' ),
+                'default'     => esc_html__( 'Black Scroll Text', 'blackwidgets' ),
+                'placeholder' => esc_html__( 'Type your title here (HTML + line breaks allowed)', 'blackwidgets' ),
+                'description' => esc_html__( 'Allowed inline tags: strong, b, i, em, u, br, hr, span, mark, small, sub, sup.', 'blackwidgets' ),
                 'label_block' => true,
             ]
         );
@@ -176,30 +176,30 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_html_tag_title',
             [
-                'label'   => esc_html__( 'HTML Tag', 'black-widgets' ),
+                'label'   => esc_html__( 'HTML Tag', 'blackwidgets' ),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'h2',
                 'options' => [
-                    'div'  => esc_html__( 'div', 'black-widgets' ),
-                    'h1'   => esc_html__( 'H1', 'black-widgets' ),
-                    'h2'   => esc_html__( 'H2', 'black-widgets' ),
-                    'h3'   => esc_html__( 'H3', 'black-widgets' ),
-                    'h4'   => esc_html__( 'H4', 'black-widgets' ),
-                    'h5'   => esc_html__( 'H5', 'black-widgets' ),
-                    'h6'   => esc_html__( 'H6', 'black-widgets' ),
-                    'p'    => esc_html__( 'p', 'black-widgets' ),
-                    'span' => esc_html__( 'span', 'black-widgets' ),
+                    'div'  => esc_html__( 'div', 'blackwidgets' ),
+                    'h1'   => esc_html__( 'H1', 'blackwidgets' ),
+                    'h2'   => esc_html__( 'H2', 'blackwidgets' ),
+                    'h3'   => esc_html__( 'H3', 'blackwidgets' ),
+                    'h4'   => esc_html__( 'H4', 'blackwidgets' ),
+                    'h5'   => esc_html__( 'H5', 'blackwidgets' ),
+                    'h6'   => esc_html__( 'H6', 'blackwidgets' ),
+                    'p'    => esc_html__( 'p', 'blackwidgets' ),
+                    'span' => esc_html__( 'span', 'blackwidgets' ),
                 ],
-                'description' => esc_html__( 'Wrapper tag for SEO and document structure.', 'black-widgets' ),
+                'description' => esc_html__( 'Wrapper tag for SEO and document structure.', 'blackwidgets' ),
             ]
         );
 
         $this->add_control(
             'scroll_text_link',
             [
-                'label'       => esc_html__( 'Link', 'black-widgets' ),
+                'label'       => esc_html__( 'Link', 'blackwidgets' ),
                 'type'        => Controls_Manager::URL,
-                'placeholder' => esc_html__( 'https://your-link.com', 'black-widgets' ),
+                'placeholder' => esc_html__( 'https://your-link.com', 'blackwidgets' ),
                 'options'     => [ 'url', 'is_external', 'nofollow' ],
                 'default'     => [
                     'url'         => '',
@@ -213,7 +213,7 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_type_4',
             [
-                'label'   => esc_html__( 'Animate On Scroll', 'black-widgets' ),
+                'label'   => esc_html__( 'Animate On Scroll', 'blackwidgets' ),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'none',
                 'options' => $this->get_scroll_anim_options(),
@@ -223,14 +223,14 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_control(
             'animate_split_unit',
             [
-                'label'       => esc_html__( 'Animate By', 'black-widgets' ),
+                'label'       => esc_html__( 'Animate By', 'blackwidgets' ),
                 'type'        => Controls_Manager::SELECT,
                 'default'     => 'chars',
                 'options'     => [
-                    'chars' => esc_html__( 'Characters', 'black-widgets' ),
-                    'words' => esc_html__( 'Words', 'black-widgets' ),
+                    'chars' => esc_html__( 'Characters', 'blackwidgets' ),
+                    'words' => esc_html__( 'Words', 'blackwidgets' ),
                 ],
-                'description' => esc_html__( 'Split and stagger the same animation by character or by word.', 'black-widgets' ),
+                'description' => esc_html__( 'Split and stagger the same animation by character or by word.', 'blackwidgets' ),
                 'condition'   => [
                     'widget_type_4!' => [ 'none', 'bw-scroll-e-10', 'bw-scroll-e-12' ],
                 ],
@@ -240,13 +240,13 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_control(
             'animate_start_delay',
             [
-                'label'       => esc_html__( 'Animation Delay', 'black-widgets' ),
+                'label'       => esc_html__( 'Animation Delay', 'blackwidgets' ),
                 'type'        => Controls_Manager::NUMBER,
                 'default'     => 100,
                 'min'         => 0,
                 'max'         => 5000,
                 'step'        => 50,
-                'description' => esc_html__( 'Wait (ms) after the text enters the viewport before the whole animation starts — not per character/word. 100 is subtle; try 300 for a clearer pause. Ignored while Scrub is on.', 'black-widgets' ),
+                'description' => esc_html__( 'Wait (ms) after the text enters the viewport before the whole animation starts — not per character/word. 100 is subtle; try 300 for a clearer pause. Ignored while Scrub is on.', 'blackwidgets' ),
                 'condition'   => [
                     'widget_type_4!' => 'none',
                     'title_scrub!'   => 'scrub_mode',
@@ -257,10 +257,10 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_control(
             'title_scrub',
             [
-                'label'        => esc_html__( 'Scrub on scrolling up and down', 'black-widgets' ),
+                'label'        => esc_html__( 'Scrub on scrolling up and down', 'blackwidgets' ),
                 'type'         => Controls_Manager::SWITCHER,
-                'label_on'     => esc_html__( 'Enable', 'black-widgets' ),
-                'label_off'    => esc_html__( 'Disable', 'black-widgets' ),
+                'label_on'     => esc_html__( 'Enable', 'blackwidgets' ),
+                'label_off'    => esc_html__( 'Disable', 'blackwidgets' ),
                 'return_value' => 'scrub_mode',
                 'default'      => 'off',
                 'condition'    => [
@@ -272,13 +272,13 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_control(
             'title_replay',
             [
-                'label'        => esc_html__( 'Replay when entering view again', 'black-widgets' ),
+                'label'        => esc_html__( 'Replay when entering view again', 'blackwidgets' ),
                 'type'         => Controls_Manager::SWITCHER,
-                'label_on'     => esc_html__( 'Enable', 'black-widgets' ),
-                'label_off'    => esc_html__( 'Disable', 'black-widgets' ),
+                'label_on'     => esc_html__( 'Enable', 'blackwidgets' ),
+                'label_off'    => esc_html__( 'Disable', 'blackwidgets' ),
                 'return_value' => 'yes',
                 'default'      => '',
-                'description'  => esc_html__( 'Play the animation again each time the text re-enters the viewport (for example after scrolling back to the top). Separate from Scrub.', 'black-widgets' ),
+                'description'  => esc_html__( 'Play the animation again each time the text re-enters the viewport (for example after scrolling back to the top). Separate from Scrub.', 'blackwidgets' ),
                 'condition'    => [
                     'widget_type_4!' => 'none',
                     'title_scrub!'   => 'scrub_mode',
@@ -291,7 +291,7 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'movement_section',
             [
-                'label' => esc_html__( 'Text Movement', 'black-widgets' ),
+                'label' => esc_html__( 'Text Movement', 'blackwidgets' ),
                 'tab'   => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -299,10 +299,10 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_control(
             'text_movement2',
             [
-                'label'        => esc_html__( 'Text Movement Animate → From', 'black-widgets' ),
+                'label'        => esc_html__( 'Text Movement Animate → From', 'blackwidgets' ),
                 'type'         => Controls_Manager::SWITCHER,
-                'label_on'     => esc_html__( 'Enable', 'black-widgets' ),
-                'label_off'    => esc_html__( 'Disable', 'black-widgets' ),
+                'label_on'     => esc_html__( 'Enable', 'blackwidgets' ),
+                'label_off'    => esc_html__( 'Disable', 'blackwidgets' ),
                 'return_value' => 'on',
                 'default'      => 'off',
             ]
@@ -311,7 +311,7 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_control(
             'duration2',
             [
-                'label'       => esc_html__( 'Duration', 'black-widgets' ),
+                'label'       => esc_html__( 'Duration', 'blackwidgets' ),
                 'type'        => Controls_Manager::TEXT,
                 'placeholder' => '0.4',
                 'default'     => '0.4',
@@ -322,7 +322,7 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_control(
             'vertical_movement2',
             [
-                'label'     => esc_html__( 'Vertical Movement', 'black-widgets' ),
+                'label'     => esc_html__( 'Vertical Movement', 'blackwidgets' ),
                 'type'      => Controls_Manager::TEXT,
                 'condition' => [ 'text_movement2' => 'on' ],
             ]
@@ -331,7 +331,7 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_control(
             'horizontal_movement2',
             [
-                'label'     => esc_html__( 'Horizontal Movement', 'black-widgets' ),
+                'label'     => esc_html__( 'Horizontal Movement', 'blackwidgets' ),
                 'type'      => Controls_Manager::TEXT,
                 'condition' => [ 'text_movement2' => 'on' ],
             ]
@@ -340,7 +340,7 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_control(
             'opacity2',
             [
-                'label'     => esc_html__( 'Opacity at End', 'black-widgets' ),
+                'label'     => esc_html__( 'Opacity at End', 'blackwidgets' ),
                 'type'      => Controls_Manager::TEXT,
                 'condition' => [ 'text_movement2' => 'on' ],
             ]
@@ -349,7 +349,7 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_control(
             'rotation2',
             [
-                'label'     => esc_html__( 'Rotation at End', 'black-widgets' ),
+                'label'     => esc_html__( 'Rotation at End', 'blackwidgets' ),
                 'type'      => Controls_Manager::TEXT,
                 'condition' => [ 'text_movement2' => 'on' ],
             ]
@@ -358,10 +358,10 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_control(
             'text_movement',
             [
-                'label'        => esc_html__( 'Text Movement Animate → To', 'black-widgets' ),
+                'label'        => esc_html__( 'Text Movement Animate → To', 'blackwidgets' ),
                 'type'         => Controls_Manager::SWITCHER,
-                'label_on'     => esc_html__( 'Enable', 'black-widgets' ),
-                'label_off'    => esc_html__( 'Disable', 'black-widgets' ),
+                'label_on'     => esc_html__( 'Enable', 'blackwidgets' ),
+                'label_off'    => esc_html__( 'Disable', 'blackwidgets' ),
                 'return_value' => 'on',
                 'default'      => 'off',
                 'separator'    => 'before',
@@ -371,7 +371,7 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_control(
             'duration',
             [
-                'label'       => esc_html__( 'Duration', 'black-widgets' ),
+                'label'       => esc_html__( 'Duration', 'blackwidgets' ),
                 'type'        => Controls_Manager::TEXT,
                 'placeholder' => '0.4',
                 'default'     => '0.4',
@@ -382,7 +382,7 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_control(
             'vertical_movement',
             [
-                'label'     => esc_html__( 'Vertical Movement', 'black-widgets' ),
+                'label'     => esc_html__( 'Vertical Movement', 'blackwidgets' ),
                 'type'      => Controls_Manager::TEXT,
                 'condition' => [ 'text_movement' => 'on' ],
             ]
@@ -391,7 +391,7 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_control(
             'horizontal_movement',
             [
-                'label'     => esc_html__( 'Horizontal Movement', 'black-widgets' ),
+                'label'     => esc_html__( 'Horizontal Movement', 'blackwidgets' ),
                 'type'      => Controls_Manager::TEXT,
                 'condition' => [ 'text_movement' => 'on' ],
             ]
@@ -400,7 +400,7 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_control(
             'opacity',
             [
-                'label'     => esc_html__( 'Opacity at End', 'black-widgets' ),
+                'label'     => esc_html__( 'Opacity at End', 'blackwidgets' ),
                 'type'      => Controls_Manager::TEXT,
                 'condition' => [ 'text_movement' => 'on' ],
             ]
@@ -409,7 +409,7 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_control(
             'rotation',
             [
-                'label'     => esc_html__( 'Rotation at End', 'black-widgets' ),
+                'label'     => esc_html__( 'Rotation at End', 'blackwidgets' ),
                 'type'      => Controls_Manager::TEXT,
                 'condition' => [ 'text_movement' => 'on' ],
             ]
@@ -417,11 +417,11 @@ class ScrollText extends \Elementor\Widget_Base {
 
         $this->end_controls_section();
 
-        // —— Box Style ——
+        // Box Style
         $this->start_controls_section(
             'box_style_section',
             [
-                'label' => esc_html__( 'Box Style', 'black-widgets' ),
+                'label' => esc_html__( 'Box Style', 'blackwidgets' ),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -430,14 +430,14 @@ class ScrollText extends \Elementor\Widget_Base {
 
         $this->start_controls_tab(
             'scroll_box_normal',
-            [ 'label' => esc_html__( 'Normal', 'black-widgets' ) ]
+            [ 'label' => esc_html__( 'Normal', 'blackwidgets' ) ]
         );
 
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
                 'name'     => 'scroll_box_background',
-                'label'    => esc_html__( 'Background', 'black-widgets' ),
+                'label'    => esc_html__( 'Background', 'blackwidgets' ),
                 'types'    => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .bw-scroll-text-box',
             ]
@@ -446,7 +446,7 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'scroll_box_margin',
             [
-                'label'      => esc_html__( 'Margin', 'black-widgets' ),
+                'label'      => esc_html__( 'Margin', 'blackwidgets' ),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em', 'rem' ],
                 'selectors'  => [
@@ -458,7 +458,7 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'scroll_box_padding',
             [
-                'label'      => esc_html__( 'Padding', 'black-widgets' ),
+                'label'      => esc_html__( 'Padding', 'blackwidgets' ),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em', 'rem' ],
                 'selectors'  => [
@@ -471,7 +471,7 @@ class ScrollText extends \Elementor\Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name'     => 'scroll_box_border',
-                'label'    => esc_html__( 'Border', 'black-widgets' ),
+                'label'    => esc_html__( 'Border', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-scroll-text-box',
             ]
         );
@@ -479,7 +479,7 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'scroll_box_border_radius',
             [
-                'label'      => esc_html__( 'Border Radius', 'black-widgets' ),
+                'label'      => esc_html__( 'Border Radius', 'blackwidgets' ),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors'  => [
@@ -492,7 +492,7 @@ class ScrollText extends \Elementor\Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name'     => 'scroll_box_box_shadow',
-                'label'    => esc_html__( 'Box Shadow', 'black-widgets' ),
+                'label'    => esc_html__( 'Box Shadow', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-scroll-text-box',
             ]
         );
@@ -501,14 +501,14 @@ class ScrollText extends \Elementor\Widget_Base {
 
         $this->start_controls_tab(
             'scroll_box_hover',
-            [ 'label' => esc_html__( 'Hover', 'black-widgets' ) ]
+            [ 'label' => esc_html__( 'Hover', 'blackwidgets' ) ]
         );
 
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
                 'name'     => 'scroll_box_background_hover',
-                'label'    => esc_html__( 'Background', 'black-widgets' ),
+                'label'    => esc_html__( 'Background', 'blackwidgets' ),
                 'types'    => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .bw-scroll-text-box:hover',
             ]
@@ -517,7 +517,7 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_control(
             'scroll_box_border_color_hover',
             [
-                'label'     => esc_html__( 'Border Color', 'black-widgets' ),
+                'label'     => esc_html__( 'Border Color', 'blackwidgets' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bw-scroll-text-box:hover' => 'border-color: {{VALUE}};',
@@ -529,7 +529,7 @@ class ScrollText extends \Elementor\Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name'     => 'scroll_box_box_shadow_hover',
-                'label'    => esc_html__( 'Box Shadow', 'black-widgets' ),
+                'label'    => esc_html__( 'Box Shadow', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-scroll-text-box:hover',
             ]
         );
@@ -537,7 +537,7 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_control(
             'scroll_box_transition',
             [
-                'label'      => esc_html__( 'Transition Duration (ms)', 'black-widgets' ),
+                'label'      => esc_html__( 'Transition Duration (ms)', 'blackwidgets' ),
                 'type'       => Controls_Manager::SLIDER,
                 'size_units' => [ 'ms' ],
                 'range'      => [
@@ -560,11 +560,11 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->end_controls_tabs();
         $this->end_controls_section();
 
-        // —— Text Style ——
+        // Text Style
         $this->start_controls_section(
             'style_section',
             [
-                'label' => esc_html__( 'Text Style', 'black-widgets' ),
+                'label' => esc_html__( 'Text Style', 'blackwidgets' ),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -573,14 +573,14 @@ class ScrollText extends \Elementor\Widget_Base {
 
         $this->start_controls_tab(
             'scroll_text_normal',
-            [ 'label' => esc_html__( 'Normal', 'black-widgets' ) ]
+            [ 'label' => esc_html__( 'Normal', 'blackwidgets' ) ]
         );
 
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'scroll_text_typography',
-                'label'    => esc_html__( 'Typography', 'black-widgets' ),
+                'label'    => esc_html__( 'Typography', 'blackwidgets' ),
                 'global'   => [
                     'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
                 ],
@@ -591,7 +591,7 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_control(
             'scroll_text_color',
             [
-                'label'     => esc_html__( 'Color', 'black-widgets' ),
+                'label'     => esc_html__( 'Color', 'blackwidgets' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bw-typograpgy-animate' => 'color: {{VALUE}};',
@@ -608,7 +608,7 @@ class ScrollText extends \Elementor\Widget_Base {
             Group_Control_Text_Shadow::get_type(),
             [
                 'name'     => 'scroll_text_shadow',
-                'label'    => esc_html__( 'Text Shadow', 'black-widgets' ),
+                'label'    => esc_html__( 'Text Shadow', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-animate .bw-char, {{WRAPPER}} .bw-typograpgy-animate .bw-word, {{WRAPPER}} .bw-typograpgy-animate .char',
             ]
         );
@@ -617,7 +617,7 @@ class ScrollText extends \Elementor\Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name'     => 'scroll_text_background',
-                'label'    => esc_html__( 'Text Background', 'black-widgets' ),
+                'label'    => esc_html__( 'Text Background', 'blackwidgets' ),
                 'types'    => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .bw-typograpgy-animate',
             ]
@@ -626,7 +626,7 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'scroll_text_margin',
             [
-                'label'      => esc_html__( 'Margin', 'black-widgets' ),
+                'label'      => esc_html__( 'Margin', 'blackwidgets' ),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em', 'rem' ],
                 'selectors'  => [
@@ -638,7 +638,7 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'scroll_text_padding',
             [
-                'label'      => esc_html__( 'Padding', 'black-widgets' ),
+                'label'      => esc_html__( 'Padding', 'blackwidgets' ),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em', 'rem' ],
                 'selectors'  => [
@@ -651,7 +651,7 @@ class ScrollText extends \Elementor\Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name'     => 'scroll_text_border',
-                'label'    => esc_html__( 'Border', 'black-widgets' ),
+                'label'    => esc_html__( 'Border', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-typograpgy-animate',
             ]
         );
@@ -659,7 +659,7 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'scroll_text_border_radius',
             [
-                'label'      => esc_html__( 'Border Radius', 'black-widgets' ),
+                'label'      => esc_html__( 'Border Radius', 'blackwidgets' ),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors'  => [
@@ -672,7 +672,7 @@ class ScrollText extends \Elementor\Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name'     => 'scroll_text_box_shadow',
-                'label'    => esc_html__( 'Box Shadow', 'black-widgets' ),
+                'label'    => esc_html__( 'Box Shadow', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-typograpgy-animate',
             ]
         );
@@ -681,13 +681,13 @@ class ScrollText extends \Elementor\Widget_Base {
 
         $this->start_controls_tab(
             'scroll_text_hover',
-            [ 'label' => esc_html__( 'Hover', 'black-widgets' ) ]
+            [ 'label' => esc_html__( 'Hover', 'blackwidgets' ) ]
         );
 
         $this->add_control(
             'scroll_text_color_hover',
             [
-                'label'     => esc_html__( 'Color', 'black-widgets' ),
+                'label'     => esc_html__( 'Color', 'blackwidgets' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bw-scroll-text-box:hover .bw-typograpgy-animate' => 'color: {{VALUE}};',
@@ -704,7 +704,7 @@ class ScrollText extends \Elementor\Widget_Base {
             Group_Control_Text_Shadow::get_type(),
             [
                 'name'     => 'scroll_text_shadow_hover',
-                'label'    => esc_html__( 'Text Shadow', 'black-widgets' ),
+                'label'    => esc_html__( 'Text Shadow', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-scroll-text-box:hover .bw-typograpgy-animate, {{WRAPPER}} .bw-scroll-text-box:hover .bw-typograpgy-animate .bw-char, {{WRAPPER}} .bw-scroll-text-box:hover .bw-typograpgy-animate .char',
             ]
         );
@@ -713,7 +713,7 @@ class ScrollText extends \Elementor\Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name'     => 'scroll_text_background_hover',
-                'label'    => esc_html__( 'Text Background', 'black-widgets' ),
+                'label'    => esc_html__( 'Text Background', 'blackwidgets' ),
                 'types'    => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .bw-scroll-text-box:hover .bw-typograpgy-animate',
             ]
@@ -722,7 +722,7 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_control(
             'scroll_text_border_color_hover',
             [
-                'label'     => esc_html__( 'Border Color', 'black-widgets' ),
+                'label'     => esc_html__( 'Border Color', 'blackwidgets' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bw-scroll-text-box:hover .bw-typograpgy-animate' => 'border-color: {{VALUE}};',
@@ -734,7 +734,7 @@ class ScrollText extends \Elementor\Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name'     => 'scroll_text_box_shadow_hover',
-                'label'    => esc_html__( 'Box Shadow', 'black-widgets' ),
+                'label'    => esc_html__( 'Box Shadow', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-scroll-text-box:hover .bw-typograpgy-animate',
             ]
         );
@@ -742,7 +742,7 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_control(
             'scroll_text_transition',
             [
-                'label'      => esc_html__( 'Transition Duration (ms)', 'black-widgets' ),
+                'label'      => esc_html__( 'Transition Duration (ms)', 'blackwidgets' ),
                 'type'       => Controls_Manager::SLIDER,
                 'size_units' => [ 'ms' ],
                 'range'      => [
@@ -767,19 +767,19 @@ class ScrollText extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'scroll_text_align',
             [
-                'label'     => esc_html__( 'Alignment', 'black-widgets' ),
+                'label'     => esc_html__( 'Alignment', 'blackwidgets' ),
                 'type'      => Controls_Manager::CHOOSE,
                 'options'   => [
                     'left'   => [
-                        'title' => esc_html__( 'Left', 'black-widgets' ),
+                        'title' => esc_html__( 'Left', 'blackwidgets' ),
                         'icon'  => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => esc_html__( 'Center', 'black-widgets' ),
+                        'title' => esc_html__( 'Center', 'blackwidgets' ),
                         'icon'  => 'eicon-text-align-center',
                     ],
                     'right'  => [
-                        'title' => esc_html__( 'Right', 'black-widgets' ),
+                        'title' => esc_html__( 'Right', 'blackwidgets' ),
                         'icon'  => 'eicon-text-align-right',
                     ],
                 ],
@@ -943,7 +943,7 @@ class ScrollText extends \Elementor\Widget_Base {
             echo '</span>';
             echo '</' . esc_attr( $title_tag ) . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         } else {
-            // Static text: semantic tag + content only (no FX wrappers) — better for SEO/crawl.
+            // Static text: semantic tag + content only, no FX wrappers.
             echo '<' . esc_attr( $title_tag ) . ' class="bw-typograpgy-animate bw-scroll-text-static" data-bw-no-animate id="scrub' . esc_attr( $data_id ) . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo $title_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- sanitized via wp_kses above
             echo '</' . esc_attr( $title_tag ) . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

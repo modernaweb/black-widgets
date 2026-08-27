@@ -575,9 +575,7 @@
     stroke-dashoffset: 200;
 }
 
-/* -------------------------------------------------------------------------- */
-/* SplitText hover types (GSAP + SplitText CDN)                               */
-/* -------------------------------------------------------------------------- */
+/* SplitText hover types (GSAP + SplitText CDN) */
 
 .bw-magic-link.bw-magic-stx {
 	perspective: 800px;

@@ -54,7 +54,7 @@ class Dropcap extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Black Drop Cap', 'black-widgets' );
+		return __( 'Black Drop Cap', 'blackwidgets' );
 	}
 
 	/**
@@ -108,7 +108,7 @@ class Dropcap extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => esc_html__( 'Content', 'black-widgets' ),
+				'label' => esc_html__( 'Content', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -118,11 +118,11 @@ class Dropcap extends \Elementor\Widget_Base {
 			[
 				'type' => \Elementor\Controls_Manager::ALERT,
 				'alert_type' => 'info',     /* info, success, warning, danger */
-				'heading' => esc_html__( 'Feel free to edit. Check this widget\'s demo.', 'black-widgets' ),
+				'heading' => esc_html__( 'Feel free to edit. Check this widget\'s demo.', 'blackwidgets' ),
 				'content' => sprintf(
 					'%s <a href="https://modernaweb.net/black-widgets/all-widgets/black-dropcap/" target="_blank">%s</a>',
-					esc_html__( 'Check ', 'black-widgets' ),
-					esc_html__( 'Demo', 'black-widgets' )
+					esc_html__( 'Check ', 'blackwidgets' ),
+					esc_html__( 'Demo', 'blackwidgets' )
 				),
 			]
 		);
@@ -130,10 +130,10 @@ class Dropcap extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_dropcap',
 			[
-				'label' => esc_html__( 'Description (limit character 159)', 'black-widgets' ),
+				'label' => esc_html__( 'Description (limit character 159)', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXTAREA,
 				'rows' => 14,
-				'default' => esc_html__( 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old, Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old, Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.', 'black-widgets' ),
+				'default' => esc_html__( 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old, Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old, Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.', 'blackwidgets' ),
 			]
 		);
 
@@ -146,7 +146,7 @@ class Dropcap extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section',
 			[
-				'label' => esc_html__( 'Box Style', 'black-widgets' ),
+				'label' => esc_html__( 'Box Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -156,7 +156,7 @@ class Dropcap extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_1_normal',
 			[
-				'label' => esc_html__( 'Normal', 'black-widgets' ),
+				'label' => esc_html__( 'Normal', 'blackwidgets' ),
 			]
 		);
 
@@ -165,7 +165,7 @@ class Dropcap extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_box_background',
-				'label' => esc_html__( 'Background', 'black-widgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-dropcap-wrap',
 			]
@@ -182,7 +182,7 @@ class Dropcap extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
-				'label' => esc_html__( 'Margin', 'black-widgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -195,7 +195,7 @@ class Dropcap extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
-				'label' => esc_html__( 'Padding', 'black-widgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -216,7 +216,7 @@ class Dropcap extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_box_border',
-				'label' => esc_html__( 'Border', 'black-widgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-dropcap-wrap',
 			]
 		);
@@ -226,7 +226,7 @@ class Dropcap extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_box_box_shadow',
-				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-dropcap-wrap',
 			]
 		);
@@ -234,7 +234,7 @@ class Dropcap extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_box_border_radius', //param_name
 			[
-				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -247,7 +247,7 @@ class Dropcap extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_1_hover',
 			[
-				'label' => esc_html__( 'Hover', 'black-widgets' ),
+				'label' => esc_html__( 'Hover', 'blackwidgets' ),
 			]
 		);
 
@@ -256,7 +256,7 @@ class Dropcap extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_hover_box_background',
-				'label' => esc_html__( 'Background', 'black-widgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', ],
 				'selector' => '{{WRAPPER}} .bw-dropcap-wrap:hover',
 			]
@@ -273,7 +273,7 @@ class Dropcap extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_hover_box_margin',
 			[
-				'label' => esc_html__( 'Margin', 'black-widgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -286,7 +286,7 @@ class Dropcap extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_hover_box_padding',
 			[
-				'label' => esc_html__( 'Padding', 'black-widgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -307,7 +307,7 @@ class Dropcap extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_hover_box_border',
-				'label' => esc_html__( 'Border', 'black-widgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-dropcap-wrap:hover',
 			]
 		);
@@ -317,7 +317,7 @@ class Dropcap extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_hover_box_box_shadow',
-				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-dropcap-wrap:hover',
 			]
 		);
@@ -325,7 +325,7 @@ class Dropcap extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_hover_box_border_radius', //param_name
 			[
-				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -345,7 +345,7 @@ class Dropcap extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section_back_first_letter_paragraph_typo',
 			[
-				'label' => esc_html__( 'Back Dropcap Typography', 'black-widgets' ),
+				'label' => esc_html__( 'Back Dropcap Typography', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -354,7 +354,7 @@ class Dropcap extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_back_first_letter_paragraph_color',
 			[
-				'label' => esc_html__( 'Color', 'black-widgets' ),
+				'label' => esc_html__( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
                 'global' => [
                     'default' => Global_Colors::COLOR_PRIMARY,
@@ -370,7 +370,7 @@ class Dropcap extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'style_main_back_first_letter_paragraph_typography1',
-				'label' => esc_html__( 'Typography', 'black-widgets' ),
+				'label' => esc_html__( 'Typography', 'blackwidgets' ),
                 'global' => [
                     'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
                 ],
@@ -383,7 +383,7 @@ class Dropcap extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'style_main_back_first_letter_paragraph_text_shadow',
-				'label' => esc_html__( 'Text Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-dropcap-wrap .bw-dropcap::first-letter',
 			]
 		);
@@ -400,7 +400,7 @@ class Dropcap extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'style_main_back_first_letter_paragraph_background',
-				'label' => esc_html__( 'Background', 'black-widgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-dropcap-wrap .bw-dropcap::first-letter',
 			]
@@ -417,7 +417,7 @@ class Dropcap extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_back_first_letter_paragraph_margin',
 			[
-				'label' => esc_html__( 'Margin', 'black-widgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -430,7 +430,7 @@ class Dropcap extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_back_first_letter_paragraph_padding',
 			[
-				'label' => esc_html__( 'Padding', 'black-widgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -451,7 +451,7 @@ class Dropcap extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'style_main_back_first_letter_paragraph_border',
-				'label' => esc_html__( 'Border', 'black-widgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-dropcap-wrap .bw-dropcap::first-letter',
 			]
 		);
@@ -460,7 +460,7 @@ class Dropcap extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_back_first_letter_paragraph_border_radius', //param_name
 			[
-				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -474,7 +474,7 @@ class Dropcap extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'style_main_back_first_letter_paragraph_box_shadow',
-				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-dropcap-wrap .bw-dropcap::first-letter',
 			]
 		);
@@ -487,7 +487,7 @@ class Dropcap extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section_back_paragraph_typo',
 			[
-				'label' => esc_html__( 'Back Paragraph Typography', 'black-widgets' ),
+				'label' => esc_html__( 'Back Paragraph Typography', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -496,7 +496,7 @@ class Dropcap extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_back_paragraph_color',
 			[
-				'label' => esc_html__( 'Color', 'black-widgets' ),
+				'label' => esc_html__( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
                 'global' => [
                     'default' => Global_Colors::COLOR_PRIMARY,
@@ -512,7 +512,7 @@ class Dropcap extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'style_main_back_paragraph_typography1',
-				'label' => esc_html__( 'Typography', 'black-widgets' ),
+				'label' => esc_html__( 'Typography', 'blackwidgets' ),
                 'global' => [
                     'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
                 ],
@@ -525,7 +525,7 @@ class Dropcap extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'style_main_back_paragraph_text_shadow',
-				'label' => esc_html__( 'Text Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-dropcap-wrap .bw-dropcap',
 			]
 		);
@@ -542,7 +542,7 @@ class Dropcap extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'style_main_back_paragraph_background',
-				'label' => esc_html__( 'Background', 'black-widgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-dropcap-wrap .bw-dropcap',
 			]
@@ -559,7 +559,7 @@ class Dropcap extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_back_paragraph_margin',
 			[
-				'label' => esc_html__( 'Margin', 'black-widgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -572,7 +572,7 @@ class Dropcap extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_back_paragraph_padding',
 			[
-				'label' => esc_html__( 'Padding', 'black-widgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -593,7 +593,7 @@ class Dropcap extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'style_main_back_paragraph_border',
-				'label' => esc_html__( 'Border', 'black-widgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-dropcap-wrap .bw-dropcap',
 			]
 		);
@@ -602,7 +602,7 @@ class Dropcap extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_back_paragraph_border_radius', //param_name
 			[
-				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -616,7 +616,7 @@ class Dropcap extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'style_main_back_paragraph_box_shadow',
-				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-dropcap-wrap .bw-dropcap',
 			]
 		);

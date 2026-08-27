@@ -54,7 +54,7 @@ class MagicLink extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Black Magic Link', 'black-widgets' );
+		return __( 'Black Magic Link', 'blackwidgets' );
 	}
 
 	/**
@@ -178,18 +178,18 @@ class MagicLink extends \Elementor\Widget_Base {
      */
     private function get_split_type_labels() {
         return [
-            'stx_rise'    => esc_html__( 'Split · Char Rise', 'black-widgets' ),
-            'stx_fade'    => esc_html__( 'Split · Char Fade', 'black-widgets' ),
-            'stx_wave'    => esc_html__( 'Split · Wave', 'black-widgets' ),
-            'stx_flip'    => esc_html__( 'Split · Perspective Flip', 'black-widgets' ),
-            'stx_swap'    => esc_html__( 'Split · Vertical Swap', 'black-widgets' ),
-            'stx_blur'    => esc_html__( 'Split · Blur Reveal', 'black-widgets' ),
-            'stx_elastic' => esc_html__( 'Split · Elastic Pop', 'black-widgets' ),
+            'stx_rise'    => esc_html__( 'Split · Char Rise', 'blackwidgets' ),
+            'stx_fade'    => esc_html__( 'Split · Char Fade', 'blackwidgets' ),
+            'stx_wave'    => esc_html__( 'Split · Wave', 'blackwidgets' ),
+            'stx_flip'    => esc_html__( 'Split · Perspective Flip', 'blackwidgets' ),
+            'stx_swap'    => esc_html__( 'Split · Vertical Swap', 'blackwidgets' ),
+            'stx_blur'    => esc_html__( 'Split · Blur Reveal', 'blackwidgets' ),
+            'stx_elastic' => esc_html__( 'Split · Elastic Pop', 'blackwidgets' ),
         ];
     }
 
     /**
-     * Map type → data-effect key for JS.
+     * Map type to the data-effect key used by JS.
      *
      * @param string $type Type key.
      * @return string
@@ -226,7 +226,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => esc_html__( 'Content', 'black-widgets' ),
+				'label' => esc_html__( 'Content', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -236,29 +236,29 @@ class MagicLink extends \Elementor\Widget_Base {
 			[
 				'type' => \Elementor\Controls_Manager::ALERT,
 				'alert_type' => 'info',     /* info, success, warning, danger */
-				'heading' => esc_html__( 'Feel free to edit. Check this widget\'s demo.', 'black-widgets' ),
+				'heading' => esc_html__( 'Feel free to edit. Check this widget\'s demo.', 'blackwidgets' ),
 				'content' => sprintf(
 					'%s <a href="https://modernaweb.net/black-widgets/all-widgets/black-magic-link/" target="_blank">%s</a>',
-					esc_html__( 'Check ', 'black-widgets' ),
-					esc_html__( 'Demo', 'black-widgets' )
+					esc_html__( 'Check ', 'blackwidgets' ),
+					esc_html__( 'Demo', 'blackwidgets' )
 				),
 			]
 		);
 
 		// Select type of the title
 		$type_options = [
-			'minimal' 	=> esc_html__( 'Minimal', 'black-widgets' ),
-			'liner' 	=> esc_html__( 'Liner', 'black-widgets' ),
-			'modern' 	=> esc_html__( 'Modern', 'black-widgets' ),
-			'simple' 	=> esc_html__( 'Simple', 'black-widgets' ),
-			'heart' 	=> esc_html__( 'Heart Beat', 'black-widgets' ),
-			'pullltr' 	=> esc_html__( 'Pull Left To Right', 'black-widgets' ),
-			'pullrtl' 	=> esc_html__( 'Pull Right To Left', 'black-widgets' ),
-			'pullttb' 	=> esc_html__( 'Pull Top To Bottom', 'black-widgets' ),
-			'pullbtt' 	=> esc_html__( 'Pull Bottom To Top', 'black-widgets' ),
-			'arrow' 	=> esc_html__( 'Arrow', 'black-widgets' ),
-			'anchor' 	=> esc_html__( 'Anchor', 'black-widgets' ),
-			'wheel' 	=> esc_html__( 'Wheel', 'black-widgets' ),
+			'minimal' 	=> esc_html__( 'Minimal', 'blackwidgets' ),
+			'liner' 	=> esc_html__( 'Liner', 'blackwidgets' ),
+			'modern' 	=> esc_html__( 'Modern', 'blackwidgets' ),
+			'simple' 	=> esc_html__( 'Simple', 'blackwidgets' ),
+			'heart' 	=> esc_html__( 'Heart Beat', 'blackwidgets' ),
+			'pullltr' 	=> esc_html__( 'Pull Left To Right', 'blackwidgets' ),
+			'pullrtl' 	=> esc_html__( 'Pull Right To Left', 'blackwidgets' ),
+			'pullttb' 	=> esc_html__( 'Pull Top To Bottom', 'blackwidgets' ),
+			'pullbtt' 	=> esc_html__( 'Pull Bottom To Top', 'blackwidgets' ),
+			'arrow' 	=> esc_html__( 'Arrow', 'blackwidgets' ),
+			'anchor' 	=> esc_html__( 'Anchor', 'blackwidgets' ),
+			'wheel' 	=> esc_html__( 'Wheel', 'blackwidgets' ),
 		];
 
 		$split_labels = $this->get_split_type_labels();
@@ -277,21 +277,21 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_type',
 			[
-				'label' => esc_html__( 'Select Type', 'black-widgets' ),
+				'label' => esc_html__( 'Select Type', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'minimal',
 				'options' => $type_options,
-				'description' => esc_html__( 'CSS types work without CDN. Split types need GSAP and SplitText in Settings.', 'black-widgets' ),
+				'description' => esc_html__( 'CSS types work without CDN. Split types need GSAP and SplitText in Settings.', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'widget_hover_text',
 			[
-				'label' => esc_html__( 'Hover Text', 'black-widgets' ),
+				'label' => esc_html__( 'Hover Text', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
 				'default' => '',
-				'placeholder' => esc_html__( 'Same as link text if empty', 'black-widgets' ),
+				'placeholder' => esc_html__( 'Same as link text if empty', 'blackwidgets' ),
 				'condition' => [
 					'widget_type' => 'stx_swap',
 				],
@@ -303,7 +303,7 @@ class MagicLink extends \Elementor\Widget_Base {
 			[
 				'type' => \Elementor\Controls_Manager::RAW_HTML,
 				'raw' => '<div class="elementor-panel-alert elementor-panel-alert-info">'
-					. esc_html__( 'Split types need GSAP CDN + SplitText CDN enabled in Black Widgets → Settings.', 'black-widgets' )
+					. esc_html__( 'Split types need GSAP CDN + SplitText CDN enabled in Black Widgets → Settings.', 'blackwidgets' )
 					. '</div>',
 				'condition' => [
 					'widget_type' => array_keys( $split_labels ),
@@ -314,19 +314,19 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_text',
 			[
-				'label' => esc_html__( 'Button Text', 'black-widgets' ),
+				'label' => esc_html__( 'Button Text', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => esc_html__( 'Let\'s started', 'black-widgets' ),
-				'placeholder' => esc_html__( 'Type your title here', 'black-widgets' ),
+				'default' => esc_html__( 'Let\'s started', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'Type your title here', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'website_link',
 			[
-				'label' => esc_html__( 'Link', 'black-widgets' ),
+				'label' => esc_html__( 'Link', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::URL,
-				'placeholder' => esc_html__( 'https://your-link.com', 'black-widgets' ),
+				'placeholder' => esc_html__( 'https://your-link.com', 'blackwidgets' ),
 				'show_external' => true,
 				'default' => [
 					'url' => '',
@@ -341,7 +341,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_control(
 			'stx_icon_heading',
 			[
-				'label' => esc_html__( 'Split Icon', 'black-widgets' ),
+				'label' => esc_html__( 'Split Icon', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::HEADING,
 				'separator' => 'before',
 				'condition' => [
@@ -353,10 +353,10 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_control(
 			'stx_show_icon',
 			[
-				'label' => esc_html__( 'Show Icon', 'black-widgets' ),
+				'label' => esc_html__( 'Show Icon', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SWITCHER,
-				'label_on' => esc_html__( 'Yes', 'black-widgets' ),
-				'label_off' => esc_html__( 'No', 'black-widgets' ),
+				'label_on' => esc_html__( 'Yes', 'blackwidgets' ),
+				'label_off' => esc_html__( 'No', 'blackwidgets' ),
 				'return_value' => 'yes',
 				'default' => '',
 				'condition' => [
@@ -368,7 +368,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_control(
 			'stx_icon',
 			[
-				'label' => esc_html__( 'Icon', 'black-widgets' ),
+				'label' => esc_html__( 'Icon', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::ICONS,
 				'fa4compatibility' => 'icon',
 				'default' => [
@@ -385,15 +385,15 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_control(
 			'stx_icon_position',
 			[
-				'label' => esc_html__( 'Icon Position', 'black-widgets' ),
+				'label' => esc_html__( 'Icon Position', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::CHOOSE,
 				'options' => [
 					'before' => [
-						'title' => esc_html__( 'Before', 'black-widgets' ),
+						'title' => esc_html__( 'Before', 'blackwidgets' ),
 						'icon' => 'eicon-h-align-left',
 					],
 					'after' => [
-						'title' => esc_html__( 'After', 'black-widgets' ),
+						'title' => esc_html__( 'After', 'blackwidgets' ),
 						'icon' => 'eicon-h-align-right',
 					],
 				],
@@ -414,7 +414,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section',
 			[
-				'label' => esc_html__( 'Box Style', 'black-widgets' ),
+				'label' => esc_html__( 'Box Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -424,7 +424,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_1_normal',
 			[
-				'label' => esc_html__( 'Normal', 'black-widgets' ),
+				'label' => esc_html__( 'Normal', 'blackwidgets' ),
 			]
 		);
 
@@ -433,7 +433,7 @@ class MagicLink extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_box_background',
-				'label' => esc_html__( 'Background', 'black-widgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-magic-link',
 			]
@@ -443,19 +443,19 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_alignment',
 			[
-				'label'     => esc_html__( 'Text Alignment', 'black-widgets' ),
+				'label'     => esc_html__( 'Text Alignment', 'blackwidgets' ),
 				'type'      => \Elementor\Controls_Manager::CHOOSE,
 				'options'   => [
 					'left'   => [
-						'title' => esc_html__( 'Left', 'black-widgets' ),
+						'title' => esc_html__( 'Left', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => esc_html__( 'Center', 'black-widgets' ),
+						'title' => esc_html__( 'Center', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [
-						'title' => esc_html__( 'Right', 'black-widgets' ),
+						'title' => esc_html__( 'Right', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -478,7 +478,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
-				'label' => esc_html__( 'Margin', 'black-widgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -491,7 +491,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
-				'label' => esc_html__( 'Padding', 'black-widgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -512,7 +512,7 @@ class MagicLink extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_box_border',
-				'label' => esc_html__( 'Border', 'black-widgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-magic-link',
 			]
 		);
@@ -522,7 +522,7 @@ class MagicLink extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_box_box_shadow',
-				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-magic-link',
 			]
 		);
@@ -530,7 +530,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_box_border_radius', //param_name
 			[
-				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -543,7 +543,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_1_hover',
 			[
-				'label' => esc_html__( 'Hover', 'black-widgets' ),
+				'label' => esc_html__( 'Hover', 'blackwidgets' ),
 			]
 		);
 
@@ -552,7 +552,7 @@ class MagicLink extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_hover_box_background',
-				'label' => esc_html__( 'Background', 'black-widgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', ],
 				'selector' => '{{WRAPPER}} .bw-magic-link:hover',
 			]
@@ -569,7 +569,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_hover_box_margin',
 			[
-				'label' => esc_html__( 'Margin', 'black-widgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -582,7 +582,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_hover_box_padding',
 			[
-				'label' => esc_html__( 'Padding', 'black-widgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -603,7 +603,7 @@ class MagicLink extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_hover_box_border',
-				'label' => esc_html__( 'Border', 'black-widgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-magic-link:hover',
 			]
 		);
@@ -613,7 +613,7 @@ class MagicLink extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_hover_box_box_shadow',
-				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-magic-link:hover',
 			]
 		);
@@ -621,7 +621,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_hover_box_border_radius', //param_name
 			[
-				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -641,7 +641,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section_back_link_typo',
 			[
-				'label' => esc_html__( 'Text Typography', 'black-widgets' ),
+				'label' => esc_html__( 'Text Typography', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -650,7 +650,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_back_link_color',
 			[
-				'label' => esc_html__( 'Color', 'black-widgets' ),
+				'label' => esc_html__( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bw-magic-link a' => 'color: {{VALUE}}',
@@ -663,7 +663,7 @@ class MagicLink extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'style_main_back_link_typography1',
-				'label' => esc_html__( 'Typography', 'black-widgets' ),
+				'label' => esc_html__( 'Typography', 'blackwidgets' ),
                 'global' => [
                     'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
                 ],
@@ -676,7 +676,7 @@ class MagicLink extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'style_main_back_link_text_shadow',
-				'label' => esc_html__( 'Text Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-magic-link a',
 			]
 		);
@@ -693,7 +693,7 @@ class MagicLink extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'style_main_back_link_background',
-				'label' => esc_html__( 'Background', 'black-widgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-magic-link a',
 			]
@@ -710,7 +710,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_back_link_margin',
 			[
-				'label' => esc_html__( 'Margin', 'black-widgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -723,7 +723,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_back_link_padding',
 			[
-				'label' => esc_html__( 'Padding', 'black-widgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -744,7 +744,7 @@ class MagicLink extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'style_main_back_link_border',
-				'label' => esc_html__( 'Border', 'black-widgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-magic-link a',
 			]
 		);
@@ -753,7 +753,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_back_link_border_radius', //param_name
 			[
-				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -767,7 +767,7 @@ class MagicLink extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'style_main_back_link_box_shadow',
-				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-magic-link a',
 			]
 		);
@@ -780,7 +780,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section_back_link_hover_typo',
 			[
-				'label' => esc_html__( 'Hover Text Typography', 'black-widgets' ),
+				'label' => esc_html__( 'Hover Text Typography', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -789,7 +789,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_back_link_hover_color',
 			[
-				'label' => esc_html__( 'Color', 'black-widgets' ),
+				'label' => esc_html__( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bw-magic-link a:hover,{{WRAPPER}} .bw-magic-link .bw-magic-wheel:hover span' => 'color: {{VALUE}}',
@@ -802,7 +802,7 @@ class MagicLink extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'style_main_back_link_hover_typography1',
-				'label' => esc_html__( 'Typography', 'black-widgets' ),
+				'label' => esc_html__( 'Typography', 'blackwidgets' ),
                 'global' => [
                     'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
                 ],
@@ -815,7 +815,7 @@ class MagicLink extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'style_main_back_link_hover_text_shadow',
-				'label' => esc_html__( 'Text Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-magic-link a:hover',
 			]
 		);
@@ -832,7 +832,7 @@ class MagicLink extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'style_main_back_link_hover_background',
-				'label' => esc_html__( 'Background', 'black-widgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-magic-link a:hover',
 			]
@@ -849,7 +849,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_back_link_hover_margin',
 			[
-				'label' => esc_html__( 'Margin', 'black-widgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -862,7 +862,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'style_main_back_link_hover_padding',
 			[
-				'label' => esc_html__( 'Padding', 'black-widgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -883,7 +883,7 @@ class MagicLink extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'style_main_back_link_hover_border',
-				'label' => esc_html__( 'Border', 'black-widgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-magic-link a:hover',
 			]
 		);
@@ -892,7 +892,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_main_back_link_hover_border_radius', //param_name
 			[
-				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -906,7 +906,7 @@ class MagicLink extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'style_main_back_link_hover_box_shadow',
-				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-magic-link a:hover',
 			]
 		);
@@ -919,7 +919,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section_other',
 			[
-				'label' => esc_html__( 'Other Styles', 'black-widgets' ),
+				'label' => esc_html__( 'Other Styles', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -928,7 +928,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_control(
 			'top_and_bottom_line_normal_height',
 			[
-				'label' => esc_html__( 'Normal Height', 'black-widgets' ),
+				'label' => esc_html__( 'Normal Height', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px'],
 				'range' => [
@@ -958,7 +958,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_control(
 			'top_and_bottom_line_hover_height',
 			[
-				'label' => esc_html__( 'Hover Height', 'black-widgets' ),
+				'label' => esc_html__( 'Hover Height', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ '%'],
 				'range' => [
@@ -988,7 +988,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_control(
 			'top_and_bottom_line_normal_width',
 			[
-				'label' => esc_html__( 'Normal Width', 'black-widgets' ),
+				'label' => esc_html__( 'Normal Width', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px'],
 				'range' => [
@@ -1018,7 +1018,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_control(
 			'top_and_bottom_line_hover_width',
 			[
-				'label' => esc_html__( 'Hover Width', 'black-widgets' ),
+				'label' => esc_html__( 'Hover Width', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ '%'],
 				'range' => [
@@ -1048,7 +1048,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_control(
 			'liner_line_height',
 			[
-				'label' => esc_html__( 'Liner Height', 'black-widgets' ),
+				'label' => esc_html__( 'Liner Height', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px'],
 				'range' => [
@@ -1077,7 +1077,7 @@ class MagicLink extends \Elementor\Widget_Base {
             'bg_section_label',
             [
                 'type' => \Elementor\Controls_Manager::HEADING,
-                'label' => esc_html__( 'Line Color', 'black-widgets' ),
+                'label' => esc_html__( 'Line Color', 'blackwidgets' ),
                 'separator' => 'before',
                 'condition' 	=> [
                     'widget_type' 	=> [
@@ -1099,7 +1099,7 @@ class MagicLink extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'line_bg',
-				'label' => esc_html__( 'Bg Color/Line Color', 'black-widgets' ),
+				'label' => esc_html__( 'Bg Color/Line Color', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-magic-link a.bw-magic-modern:before, {{WRAPPER}} .bw-magic-link a.bw-magic-minimal:after, {{WRAPPER}} .bw-magic-link a.bw-magic-liner:before, {{WRAPPER}} .bw-magic-link a.bw-magic-pullttb:before, {{WRAPPER}} .bw-magic-link a.bw-magic-pullbtt:before, {{WRAPPER}} .bw-magic-link a.bw-magic-pullltr:before, {{WRAPPER}} .bw-magic-link a.bw-magic-pullrtl:before, {{WRAPPER}} .bw-magic-link .bw-magic-heart span',
 				'condition' 	=> [
@@ -1122,7 +1122,7 @@ class MagicLink extends \Elementor\Widget_Base {
             'line_color_modern',
             [
                 // Distinct from the line_bg group control above, which fills the :before layer.
-                'label' => esc_html__( 'Underline Color', 'black-widgets' ),
+                'label' => esc_html__( 'Underline Color', 'blackwidgets' ),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bw-magic-link .bw-magic-modern' => 'border-bottom-color: {{VALUE}};',
@@ -1141,7 +1141,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_control(
 			'svg_heart_color',
 			[
-				'label' => esc_html__( 'Color', 'black-widgets' ),
+				'label' => esc_html__( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bw-magic-link .bw-magic-heart span svg' => 'fill: {{VALUE}}',
@@ -1158,7 +1158,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_control(
 			'svg_wheel_color',
 			[
-				'label' => esc_html__( 'Color', 'black-widgets' ),
+				'label' => esc_html__( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bw-magic-link .bw-magic-wheel svg g line, {{WRAPPER}} .bw-magic-link .bw-magic-wheel svg g polyline, {{WRAPPER}} .bw-magic-link .bw-magic-wheel svg g circle' => 'stroke: {{VALUE}} !important',
@@ -1174,7 +1174,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_control(
 			'magic_link_bg_opacity',
 			[
-				'label' => esc_html__( 'Opacity', 'black-widgets' ),
+				'label' => esc_html__( 'Opacity', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -1197,7 +1197,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section_stx_icon',
 			[
-				'label' => esc_html__( 'Split Icon', 'black-widgets' ),
+				'label' => esc_html__( 'Split Icon', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'widget_type' => array_keys( $this->get_split_type_labels() ),
@@ -1209,7 +1209,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'stx_icon_size',
 			[
-				'label' => esc_html__( 'Size', 'black-widgets' ),
+				'label' => esc_html__( 'Size', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', 'em' ],
 				'range' => [
@@ -1238,7 +1238,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'stx_icon_gap',
 			[
-				'label' => esc_html__( 'Gap', 'black-widgets' ),
+				'label' => esc_html__( 'Gap', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', 'em' ],
 				'range' => [
@@ -1268,14 +1268,14 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'stx_icon_style_normal',
 			[
-				'label' => esc_html__( 'Normal', 'black-widgets' ),
+				'label' => esc_html__( 'Normal', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'stx_icon_color',
 			[
-				'label' => esc_html__( 'Color', 'black-widgets' ),
+				'label' => esc_html__( 'Color', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bw-magic-link .bw-ml__icon' => 'color: {{VALUE}};',
@@ -1287,7 +1287,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'stx_icon_margin',
 			[
-				'label' => esc_html__( 'Margin', 'black-widgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -1301,14 +1301,14 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'stx_icon_style_hover',
 			[
-				'label' => esc_html__( 'Hover', 'black-widgets' ),
+				'label' => esc_html__( 'Hover', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'stx_icon_hover_color',
 			[
-				'label' => esc_html__( 'Color', 'black-widgets' ),
+				'label' => esc_html__( 'Color', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bw-magic-link .bw-ml__link:hover .bw-ml__icon' => 'color: {{VALUE}};',
@@ -1320,7 +1320,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		$this->add_control(
 			'stx_icon_hover_rotate',
 			[
-				'label' => esc_html__( 'Rotate', 'black-widgets' ),
+				'label' => esc_html__( 'Rotate', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'deg' ],
 				'range' => [

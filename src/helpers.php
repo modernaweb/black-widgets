@@ -383,7 +383,7 @@ function Black_Widgets_elementor_icons( $tabs = array() ) {
 
 	$tabs['black_widgets_elementor_icons'] = array(
 		'name'          => 'black_widgets_elementor_icons',
-		'label'         => esc_html__( 'Elementor Icons', 'black-widgets' ),
+		'label'         => esc_html__( 'Elementor Icons', 'blackwidgets' ),
 		'labelIcon'     => 'demo-icon eicon-elementor-square',
 		'prefix'        => 'eicon-',
 		'displayPrefix' => 'eicon',
@@ -472,7 +472,11 @@ function black_widgets_elementor_raw_settings( $stack ) {
 			return [];
 		}
 		$prop = $ref->getProperty( 'data' );
-		$prop->setAccessible( true );
+		// No-op since PHP 8.1 (all properties are implicitly accessible) and
+		// deprecated in 8.5, so only call it where it is still required.
+		if ( PHP_VERSION_ID < 80100 ) {
+			$prop->setAccessible( true );
+		}
 		$data = $prop->getValue( $stack );
 	} catch ( \Throwable $e ) {
 		return [];
@@ -486,3 +490,69 @@ function black_widgets_elementor_raw_settings( $stack ) {
 	return is_array( $settings ) ? $settings : [];
 }
 
+/**
+ * Drop Elementor's pre-generated CSS files.
+ *
+ * Several stored controls changed their `selector` in 1.4.0 (List, Icon Box hover,
+ * Flip Box), so existing pages keep rendering their old rules until each post CSS
+ * file is rebuilt.
+ *
+ * Defined here rather than on the Admin class because WP-CLI updates and cron
+ * auto-updates never reach `is_admin()`, so that class is not loaded there.
+ *
+ * @return bool Whether the cache was cleared.
+ */
+function black_widgets_clear_elementor_css_cache() {
+	if ( ! did_action( 'elementor/loaded' ) || ! class_exists( '\Elementor\Plugin' ) ) {
+		return false;
+	}
+
+	if ( ! isset( \Elementor\Plugin::$instance->files_manager ) ) {
+		return false;
+	}
+
+	\Elementor\Plugin::$instance->files_manager->clear_cache();
+
+	return true;
+}
+
+/**
+ * Clear Elementor's CSS files right after Black Widgets itself is updated, so a
+ * WP-CLI or background auto-update does not leave the site on stale post CSS
+ * until an administrator happens to open wp-admin.
+ *
+ * The stored DB version is deliberately not touched here: during this hook the
+ * pre-update code is still the one in memory, so BLACK_WIDGETS_VERSION is the old
+ * value and writing it would skip the real migration in Admin.
+ *
+ * @param mixed $upgrader   Upgrader instance (unused).
+ * @param array $hook_extra Update context.
+ * @return void
+ */
+function black_widgets_clear_css_cache_after_update( $upgrader = null, $hook_extra = array() ) {
+	if ( ! is_array( $hook_extra ) ) {
+		return;
+	}
+
+	$type   = isset( $hook_extra['type'] ) ? $hook_extra['type'] : '';
+	$action = isset( $hook_extra['action'] ) ? $hook_extra['action'] : '';
+
+	if ( 'plugin' !== $type || 'update' !== $action ) {
+		return;
+	}
+
+	// Bulk updates report 'plugins', single updates report 'plugin'.
+	if ( isset( $hook_extra['plugins'] ) && is_array( $hook_extra['plugins'] ) ) {
+		$plugins = $hook_extra['plugins'];
+	} elseif ( isset( $hook_extra['plugin'] ) ) {
+		$plugins = array( $hook_extra['plugin'] );
+	} else {
+		return;
+	}
+
+	if ( ! in_array( BLACK_WIDGETS_PLUGIN_BASENAME, $plugins, true ) ) {
+		return;
+	}
+
+	black_widgets_clear_elementor_css_cache();
+}

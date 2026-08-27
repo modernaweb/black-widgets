@@ -102,7 +102,21 @@ If you found an issue or have a new suggestion, contact us: [ **modernawebdesign
 ## Upgrade Notice
 
 = 1.4.0 =
+This is a large refactor. Your pages and settings are kept, but read the **Breaking changes** list in the changelog before updating a live site — a few widgets render slightly differently and some global JavaScript libraries are no longer loaded on every page.
+
 After updating, if GSAP animations stop, set the GSAP, ScrollTrigger, and (when needed) SplitText CDN fields to GSAP 3.15 (jsDelivr examples are shown in Settings). TweenMax is deprecated and not required. The Elementor Dark Mode setting has been removed.
+
+## Third-Party Libraries
+
+Every bundled library is GPL-compatible. The files the plugin enqueues are production (minified) builds, and the matching human-readable source for each one ships in `assets/js/libraries/source/` and `assets/css/libraries/source/` — see the README in that folder for the full table and notes. Nothing in those folders is enqueued at runtime.
+
+- Anime.js 3.1.0 (MIT) — [animejs.com](https://animejs.com/) · [source](https://github.com/juliangarnier/anime/releases/tag/v3.1.0)
+- simpleParallax 5.2.0 (MIT) — [simpleparallax.com](https://simpleparallax.com/) · [source](https://github.com/geosigno/simpleParallax.js)
+- Swiper 11.1.14 (MIT) — [swiperjs.com](https://swiperjs.com/) · [source](https://github.com/nolimits4web/swiper/releases/tag/v11.1.14)
+- Tilt.js 1.2.1 (MIT) — [gijsroge.github.io/tilt.js](https://gijsroge.github.io/tilt.js/) · [source](https://github.com/gijsroge/tilt.js). The bundled build adds a `[data-tilt]` auto-init on top of upstream.
+- SVG Sanitizer (GPLv2 or later) — [github.com/darylldoyle/svg-sanitizer](https://github.com/darylldoyle/svg-sanitizer), shipped as readable PHP in `vendor/`.
+
+GSAP is **not** bundled. It is loaded from a CDN URL that you supply in Settings, so no GSAP code ships with this plugin.
 
 ## Installation
 
@@ -123,7 +137,7 @@ After updating, if GSAP animations stop, set the GSAP, ScrollTrigger, and (when 
 
 ## Changelog
 
-= 1.4.0 — 2025-05-XX =
+= 1.4.0 — 2026-09 =
 - Refactored: Plugin Structure
 - Improved: All Settings
 - Compatibility: WordPress v6.8
@@ -139,12 +153,29 @@ After updating, if GSAP animations stop, set the GSAP, ScrollTrigger, and (when 
 - Added: New widget: Black Scroll Text (optional; Settings toggle, default ON)
 - Improved: Black Horizontal scroll distance now scales with section width/panel count (replaces fixed +=2700 from 1.3.9)
 - Improved: GSAP loads per widget via CDN (GSAP 3.15 + ScrollTrigger + SplitText); TweenMax deprecated and not enqueued
+- Improved: A CDN URL stored as `http://` on a known CDN host is upgraded to `https://` instead of being refused (1.3.9 saved this field without validation)
+- Improved: Elementor's CSS cache is now rebuilt after WP-CLI and automatic updates, not only when an administrator opens wp-admin
+
+**Breaking changes** — please read before updating a live site:
+
+- Breaking: Alignment is now applied when rendering Black Button and Black Typography. 1.3.9 saved the value but threw it away while rendering, so a widget where you had picked an alignment can shift position. If a layout moves after updating, check the Alignment control on that widget.
+- Breaking: The Black Icon Box alignment controls now default to `left` and write a real `text-align` rule. An Icon Box that never had an alignment set used to inherit the theme (often centered) and is now explicitly left aligned.
+- Breaking: Black Typography now outputs standards-compliant `data-bw-*` attributes instead of the invalid `bw-data-*` ones it produced in 1.3.9. Update any custom CSS or JS that targeted the old attribute names.
+- Breaking: Black Box and Black Flip Box markup changed — the link class moved from `.bw-image-link` to `.bw-box-link`, and the duplicated `id="bwflipbox"` was removed. Update custom CSS or JS that relied on them.
+- Breaking: The three global scripts from 1.3.9 (`bw-jquery-plugins.js`, `bw-gsap-css-script.js`, `ele-bw-jquery-plugins.js`) are no longer loaded, which removes roughly 170 KB of JavaScript from every page. No widget used them, but they also exposed the `ScrollMagic`, `Vivus` and `jQuery.fn.waypoint` globals and the `[data-parallax="scroll"]` auto-init site-wide. Those are now gone — if your theme or custom code used any of them, enqueue them yourself.
+- Breaking: Tilt.js (and with it the `[data-tilt]` auto-init) is no longer loaded on every page. It still ships and still auto-initialises `[data-tilt]`, but only loads on pages that use the Black Button widget. Add Black Button to the page, or enqueue Tilt.js yourself, if you relied on `[data-tilt]` elsewhere.
+- Breaking: `anime.js` and `bw-public.js` are no longer loaded on every page. `anime.js` now loads only with Black Fade, Black Title Animate and Black Text Animate, and `bw-public.js` only with Black Fade and Black Title Animate.
+- Breaking: The third CDN field is SplitText, not TimelineMax. Your previous TimelineMax URL is archived in `plugin_options` under `bw_gsap_cdn3_legacy_timelinemax` and the field is handed back empty, so paste a SplitText URL if you use Perspective Flip or split-text effects.
+
+- Fixed: Black Horizontal and GSAP Interactive Links no longer lose their script when the GSAP CDN fields are empty or refused
+- Fixed: Scroll animations for Black Fade and Black Title Animate now re-arm for widgets added in the Elementor editor, inside popups, or in lazy-loaded content
 - Fixed: Cross-site scripting (XSS) vulnerability for the Black List widget; Thanks to Patchstack team
 - Fixed: Hardened Elementor repeater `_id` output (List + Sentence) against attribute-breakout XSS
 - Fixed: Cross-site scripting (XSS) vulnerability for uploading SVG and image as code by adding SVG sanitizer; Thanks to Patchstack team
 - Fixed: SVG-as-code output no longer emptied by post KSES after sanitizing
-- Changed: Text domain is now `black-widgets` (legacy `blackwidgets` translations still load as fallback)
+- Kept: Text domain `blackwidgets` (unchanged from 1.3.9 so existing translations keep working)
 - Removed: Elementor Dark Mode Setting (legacy `bw_dark_style` option is cleaned on upgrade / Settings save)
+
 = 1.3.9 — 2024-12-21 =
 - Compatibility: WordPress v6.7
 - Compatibility: Elementor v3.26

@@ -7,7 +7,7 @@ jQuery(function ($) {
 	}
 
 	/**
-	 * Show/enable CDN + GSAP-dependent settings only when JS → CDN is checked.
+	 * Show CDN + GSAP-dependent settings only when the JS CDN box is checked.
 	 * Disabled fields are omitted from POST - PHP validate_options preserves prior values.
 	 */
 	function syncGsapChildren() {

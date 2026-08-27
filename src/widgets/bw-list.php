@@ -53,7 +53,7 @@ class ListItems extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Black List', 'black-widgets' );
+		return __( 'Black List', 'blackwidgets' );
 	}
 
 	/**
@@ -107,7 +107,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => esc_html__( 'Content', 'black-widgets' ),
+				'label' => esc_html__( 'Content', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -117,11 +117,11 @@ class ListItems extends \Elementor\Widget_Base {
 			[
 				'type' => \Elementor\Controls_Manager::ALERT,
 				'alert_type' => 'info',     /* info, success, warning, danger */
-				'heading' => esc_html__( 'Feel free to edit. Check this widget\'s demo.', 'black-widgets' ),
+				'heading' => esc_html__( 'Feel free to edit. Check this widget\'s demo.', 'blackwidgets' ),
 				'content' => sprintf(
 					'%s <a href="https://modernaweb.net/black-widgets/all-widgets/black-list/" target="_blank">%s</a>',
-					esc_html__( 'Check ', 'black-widgets' ),
-					esc_html__( 'Demo', 'black-widgets' )
+					esc_html__( 'Check ', 'blackwidgets' ),
+					esc_html__( 'Demo', 'blackwidgets' )
 				),
 			]
 		);
@@ -130,18 +130,18 @@ class ListItems extends \Elementor\Widget_Base {
 
 		$repeater->add_control(
 			'list_title', [
-				'label' => esc_html__( 'Title', 'black-widgets' ),
+				'label' => esc_html__( 'Title', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => esc_html__( 'List Title' , 'black-widgets' ),
+				'default' => esc_html__( 'List Title' , 'blackwidgets' ),
 				'label_block' => true,
-				'description' => esc_html__( 'Inline HTML allowed: br, strong, b, em, i, u, span, mark, small, sub, sup.', 'black-widgets' ),
+				'description' => esc_html__( 'Inline HTML allowed: br, strong, b, em, i, u, span, mark, small, sub, sup.', 'blackwidgets' ),
 			]
 		);
 
 		$repeater->add_control(
 			'icon_widget',
 			[
-				'label' => esc_html__( 'Icon', 'black-widgets' ),
+				'label' => esc_html__( 'Icon', 'blackwidgets' ),
 				'type' => Controls_Manager::ICONS,
 				'default' => [
 					'value' => 'eicon eicon-check',
@@ -153,9 +153,9 @@ class ListItems extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'link_list',
 			[
-				'label' => esc_html__( 'Link', 'black-widgets' ),
+				'label' => esc_html__( 'Link', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::URL,
-				'placeholder' => esc_html__( 'https://your-link.com', 'black-widgets' ),
+				'placeholder' => esc_html__( 'https://your-link.com', 'blackwidgets' ),
 				'show_external' => true,
 			]
 		);
@@ -163,24 +163,24 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_control(
 			'list',
 			[
-				'label' => esc_html__( 'Repeater List', 'black-widgets' ),
+				'label' => esc_html__( 'Repeater List', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::REPEATER,
 				'fields' => $repeater->get_controls(),
 				'default' => [
 					[
-						'list_title' 	=> esc_html__( 'Item content #1', 'black-widgets' ),
+						'list_title' 	=> esc_html__( 'Item content #1', 'blackwidgets' ),
 						'icon_widget' 	=> [
                             'value' => 'eicon eicon-check',
                         ],
 					],
 					[
-                        'list_title' 	=> esc_html__( 'Item content #2', 'black-widgets' ),
+                        'list_title' 	=> esc_html__( 'Item content #2', 'blackwidgets' ),
 						'icon_widget' 	=> [
                             'value' => 'eicon eicon-check',
                         ],
 					],
 					[
-                        'list_title' 	=> esc_html__( 'Item content #3', 'black-widgets' ),
+                        'list_title' 	=> esc_html__( 'Item content #3', 'blackwidgets' ),
 						'icon_widget' 	=> [
                             'value' => 'eicon eicon-check',
                         ],
@@ -198,7 +198,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section',
 			[
-				'label' => esc_html__( 'Box Style', 'black-widgets' ),
+				'label' => esc_html__( 'Box Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -208,7 +208,7 @@ class ListItems extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_box_background',
-				'label' => esc_html__( 'Background', 'black-widgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-list',
 			]
@@ -219,7 +219,7 @@ class ListItems extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_box_border',
-				'label' => esc_html__( 'Border', 'black-widgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-list',
 			]
 		);
@@ -229,7 +229,7 @@ class ListItems extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_box_box_shadow',
-				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-list',
 			]
 		);
@@ -237,7 +237,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_box_border_radius', //param_name
 			[
-				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -250,7 +250,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
-				'label' => esc_html__( 'Margin', 'black-widgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -263,7 +263,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
-				'label' => esc_html__( 'Padding', 'black-widgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -279,7 +279,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section_list_items',
 			[
-				'label' => esc_html__( 'List Items', 'black-widgets' ),
+				'label' => esc_html__( 'List Items', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -287,19 +287,19 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'list_alignment',
 			[
-				'label'     => esc_html__( 'Alignment', 'black-widgets' ),
+				'label'     => esc_html__( 'Alignment', 'blackwidgets' ),
 				'type'      => \Elementor\Controls_Manager::CHOOSE,
 				'options'   => [
 					'left'   => [
-						'title' => esc_html__( 'Left', 'black-widgets' ),
+						'title' => esc_html__( 'Left', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => esc_html__( 'Center', 'black-widgets' ),
+						'title' => esc_html__( 'Center', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [
-						'title' => esc_html__( 'Right', 'black-widgets' ),
+						'title' => esc_html__( 'Right', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -319,7 +319,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'list_items_gap',
 			[
-				'label' => esc_html__( 'Items Gap', 'black-widgets' ),
+				'label' => esc_html__( 'Items Gap', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', 'em' ],
 				'range' => [
@@ -343,10 +343,10 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_control(
 			'list_divider',
 			[
-				'label' => esc_html__( 'Divider', 'black-widgets' ),
+				'label' => esc_html__( 'Divider', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SWITCHER,
-				'label_on' => esc_html__( 'On', 'black-widgets' ),
-				'label_off' => esc_html__( 'Off', 'black-widgets' ),
+				'label_on' => esc_html__( 'On', 'blackwidgets' ),
+				'label_off' => esc_html__( 'Off', 'blackwidgets' ),
 				'return_value' => 'yes',
 				'default' => '',
 			]
@@ -355,7 +355,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_control(
 			'list_divider_color',
 			[
-				'label' => esc_html__( 'Divider Color', 'black-widgets' ),
+				'label' => esc_html__( 'Divider Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#e5e5e5',
 				'condition' => [
@@ -370,7 +370,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_control(
 			'list_divider_weight',
 			[
-				'label' => esc_html__( 'Divider Weight', 'black-widgets' ),
+				'label' => esc_html__( 'Divider Weight', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -398,7 +398,7 @@ class ListItems extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'list_items_background',
-				'label' => esc_html__( 'Background', 'black-widgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-list .bw-list-item',
 			]
@@ -408,7 +408,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'list_items_margin',
 			[
-				'label' => esc_html__( 'Margin', 'black-widgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -421,7 +421,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'list_items_padding',
 			[
-				'label' => esc_html__( 'Padding', 'black-widgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -435,7 +435,7 @@ class ListItems extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'list_items_border',
-				'label' => esc_html__( 'Border', 'black-widgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-list .bw-list-item',
 			]
 		);
@@ -444,7 +444,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_control(
 			'list_items_border_radius', //param_name
 			[
-				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -458,7 +458,7 @@ class ListItems extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'list_items_box_shadow',
-				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-list .bw-list-item',
 			]
 		);
@@ -470,7 +470,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section_icon',
 			[
-				'label' => esc_html__( 'Icon Settings', 'black-widgets' ),
+				'label' => esc_html__( 'Icon Settings', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -480,7 +480,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_1_normal',
 			[
-				'label' => esc_html__( 'Normal', 'black-widgets' ),
+				'label' => esc_html__( 'Normal', 'blackwidgets' ),
 			]
 		);
 
@@ -488,7 +488,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_control(
 			'icon_color',
 			[
-				'label' => esc_html__( 'Color', 'black-widgets' ),
+				'label' => esc_html__( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
                 'global' => [
                     'default' => Global_Colors::COLOR_PRIMARY,
@@ -503,7 +503,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_control(
 			'icon_size',
 			[
-				'label' => esc_html__( 'Icon Size', 'black-widgets' ),
+				'label' => esc_html__( 'Icon Size', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -525,7 +525,7 @@ class ListItems extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'icon_background',
-				'label' => esc_html__( 'Background', 'black-widgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-list .bw-list-item .bw-icon-section',
 			]
@@ -535,7 +535,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'icon_margin',
 			[
-				'label' => esc_html__( 'Margin', 'black-widgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -548,7 +548,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'icon_padding',
 			[
-				'label' => esc_html__( 'Padding', 'black-widgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -562,7 +562,7 @@ class ListItems extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'icon_border',
-				'label' => esc_html__( 'Border', 'black-widgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-list .bw-list-item .bw-icon-section',
 			]
 		);
@@ -571,7 +571,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_control(
 			'icon_border_radius', //param_name
 			[
-				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -585,7 +585,7 @@ class ListItems extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'icon_box_shadow',
-				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-list .bw-list-item .bw-icon-section',
 			]
 		);
@@ -595,7 +595,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_2_hover',
 			[
-				'label' => esc_html__( 'Hover', 'black-widgets' ),
+				'label' => esc_html__( 'Hover', 'blackwidgets' ),
 			]
 		);
 
@@ -604,7 +604,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_control(
 			'icon_hover_color',
 			[
-				'label' => esc_html__( 'Color', 'black-widgets' ),
+				'label' => esc_html__( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
                 'global' => [
                     'default' => Global_Colors::COLOR_PRIMARY,
@@ -619,7 +619,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_control(
 			'icon_hover_size',
 			[
-				'label' => esc_html__( 'Icon Size', 'black-widgets' ),
+				'label' => esc_html__( 'Icon Size', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -641,7 +641,7 @@ class ListItems extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'icon_hover_background',
-				'label' => esc_html__( 'Background', 'black-widgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover .bw-icon-section',
 			]
@@ -651,7 +651,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'icon_hover_margin',
 			[
-				'label' => esc_html__( 'Margin', 'black-widgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -664,7 +664,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'icon_hover_padding',
 			[
-				'label' => esc_html__( 'Padding', 'black-widgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -678,7 +678,7 @@ class ListItems extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'icon_hover_border',
-				'label' => esc_html__( 'Border', 'black-widgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover .bw-icon-section',
 			]
 		);
@@ -687,7 +687,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_control(
 			'icon_hover_border_radius', //param_name
 			[
-				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -701,7 +701,7 @@ class ListItems extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'icon_hover_box_shadow',
-				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover .bw-icon-section',
 			]
 		);
@@ -716,7 +716,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section_text',
 			[
-				'label' => esc_html__( 'Text Settings', 'black-widgets' ),
+				'label' => esc_html__( 'Text Settings', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -726,7 +726,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_3_normal',
 			[
-				'label' => esc_html__( 'Normal', 'black-widgets' ),
+				'label' => esc_html__( 'Normal', 'blackwidgets' ),
 			]
 		);
 
@@ -735,7 +735,7 @@ class ListItems extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'text_typography',
-				'label' => esc_html__( 'Typography', 'black-widgets' ),
+				'label' => esc_html__( 'Typography', 'blackwidgets' ),
                 'global' => [
                     'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
                 ],
@@ -747,7 +747,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_control(
 			'text_color',
 			[
-				'label' => esc_html__( 'Color', 'black-widgets' ),
+				'label' => esc_html__( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
                 'global' => [
                     'default' => Global_Colors::COLOR_PRIMARY,
@@ -763,7 +763,7 @@ class ListItems extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'text_background',
-				'label' => esc_html__( 'Background', 'black-widgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-list .bw-list-item .bw-list-content > span:not(.bw-icon-section)',
 			]
@@ -773,7 +773,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'text_margin',
 			[
-				'label' => esc_html__( 'Margin', 'black-widgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -786,7 +786,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'text_padding',
 			[
-				'label' => esc_html__( 'Padding', 'black-widgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -800,7 +800,7 @@ class ListItems extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'text_border',
-				'label' => esc_html__( 'Border', 'black-widgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-list .bw-list-item .bw-list-content > span:not(.bw-icon-section)',
 			]
 		);
@@ -809,7 +809,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_control(
 			'text_border_radius', //param_name
 			[
-				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -823,7 +823,7 @@ class ListItems extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'text_box_shadow',
-				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-list .bw-list-item .bw-list-content > span:not(.bw-icon-section)',
 			]
 		);
@@ -833,7 +833,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_4_hover',
 			[
-				'label' => esc_html__( 'Hover', 'black-widgets' ),
+				'label' => esc_html__( 'Hover', 'blackwidgets' ),
 			]
 		);
 
@@ -843,7 +843,7 @@ class ListItems extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'text_hover_typography',
-				'label' => esc_html__( 'Typography', 'black-widgets' ),
+				'label' => esc_html__( 'Typography', 'blackwidgets' ),
                 'global' => [
                     'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
                 ],
@@ -855,7 +855,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_control(
 			'text_hover_color',
 			[
-				'label' => esc_html__( 'Color', 'black-widgets' ),
+				'label' => esc_html__( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
                 'global' => [
                     'default' => Global_Colors::COLOR_PRIMARY,
@@ -871,7 +871,7 @@ class ListItems extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'text_hover_background',
-				'label' => esc_html__( 'Background', 'black-widgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover .bw-list-content > span:not(.bw-icon-section)',
 			]
@@ -881,7 +881,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'text_hover_margin',
 			[
-				'label' => esc_html__( 'Margin', 'black-widgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -894,7 +894,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'text_hover_padding',
 			[
-				'label' => esc_html__( 'Padding', 'black-widgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -908,7 +908,7 @@ class ListItems extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'text_hover_border',
-				'label' => esc_html__( 'Border', 'black-widgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover .bw-list-content > span:not(.bw-icon-section)',
 			]
 		);
@@ -917,7 +917,7 @@ class ListItems extends \Elementor\Widget_Base {
 		$this->add_control(
 			'text_hover_border_radius', //param_name
 			[
-				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -931,7 +931,7 @@ class ListItems extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'text_hover_box_shadow',
-				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-list .bw-list-item:hover .bw-list-content > span:not(.bw-icon-section)',
 			]
 		);
@@ -1014,4 +1014,5 @@ class ListItems extends \Elementor\Widget_Base {
 
 }
 
+class_alias('Modernaweb\BlackWidgets\Widgets\ListItems', 'Black_Widgets\BLACK_WIDGETS_List');
 class_alias('Modernaweb\BlackWidgets\Widgets\ListItems', 'Black_Widgets\BLACK_WIDGETS_ListItems');

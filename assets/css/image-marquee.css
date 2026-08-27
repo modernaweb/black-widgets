@@ -1,4 +1,4 @@
-/* ==== Wrapper ==== */
+/* Wrapper */
 .bw-image-marquee-wrapper {
     --bw-marquee-gap: 40px;
     --bw-marquee-shift: 0px;
@@ -13,7 +13,7 @@
     direction: ltr;
 }
 
-/* ==== Track ==== */
+/* Track */
 .bw-image-marquee-track {
     display: flex;
     flex-wrap: nowrap;
@@ -26,7 +26,7 @@
     will-change: transform;
 }
 
-/* ==== Group / sequence ==== */
+/* Group / sequence */
 .bw-image-marquee-group {
     display: flex;
     flex-wrap: nowrap;
@@ -51,7 +51,7 @@
     transition: filter 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* ==== Vertical Mode ==== */
+/* Vertical Mode */
 .bw-image-marquee-wrapper.vertical {
     width: 100%;
     height: 400px;
@@ -80,10 +80,10 @@
     height: auto;
 }
 
-/* ==== Pixel-perfect loop (shift set by JS) ====
+/* Pixel-perfect loop (shift set by JS)
  * Class names follow Elementor control values:
- * "left"  = Left To Right  → content drifts right (legacy)
- * "right" = Right To Left → content drifts left
+ * "left"  = Left To Right: content drifts right (legacy)
+ * "right" = Right To Left: content drifts left
  */
 @keyframes bw-im-scroll-left {
     from { transform: translate3d(calc(-1 * var(--bw-marquee-shift)), 0, 0); }

@@ -73,7 +73,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
      * @return string Widget title.
      */
     public function get_title() {
-        return __( 'Black Image Marquee', 'black-widgets' );
+        return __( 'Black Image Marquee', 'blackwidgets' );
     }
 
     /**
@@ -207,19 +207,19 @@ class ImageMarquee extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'content_section',
             [
-                'label' => esc_html__( 'Content', 'black-widgets' ),
+                'label' => esc_html__( 'Content', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
         $repeater = new Repeater();
 
         $repeater->add_control('image', [
-            'label' => esc_html__( 'Images', 'black-widgets' ),
+            'label' => esc_html__( 'Images', 'blackwidgets' ),
             'type' => Controls_Manager::MEDIA,
         ]);
 
         $this->add_control('images', [
-            'label' => esc_html__('Marquee Images', 'black-widgets'),
+            'label' => esc_html__('Marquee Images', 'blackwidgets'),
             'type' => Controls_Manager::REPEATER,
             'fields' => $repeater->get_controls(),
             'default' => [],
@@ -235,12 +235,12 @@ class ImageMarquee extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_type',
             [
-                'label' => esc_html__( 'Type', 'black-widgets' ),
+                'label' => esc_html__( 'Type', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'horizontal',
                 'options' => [
-                    'horizontal'   =>  esc_html__( 'Type 1', 'black-widgets' ),
-                    'vertical'   =>  esc_html__( 'Type 2', 'black-widgets' ),
+                    'horizontal'   =>  esc_html__( 'Type 1', 'blackwidgets' ),
+                    'vertical'   =>  esc_html__( 'Type 2', 'blackwidgets' ),
                 ]
             ]
         );
@@ -248,12 +248,12 @@ class ImageMarquee extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_direction',
             [
-                'label' => esc_html__( 'Direction', 'black-widgets' ),
+                'label' => esc_html__( 'Direction', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'left',
                 'options' => [
-                    'left' => esc_html__( 'Left To Right / Up', 'black-widgets' ),
-                    'right' => esc_html__( 'Right To Left / Down', 'black-widgets' ),
+                    'left' => esc_html__( 'Left To Right / Up', 'blackwidgets' ),
+                    'right' => esc_html__( 'Right To Left / Down', 'blackwidgets' ),
                 ],
             ]
         );
@@ -261,7 +261,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_speed',
             [
-                'label' => esc_html__( 'Duration (s)', 'black-widgets' ),
+                'label' => esc_html__( 'Duration (s)', 'blackwidgets' ),
                 'type' => Controls_Manager::NUMBER,
                 'default' => 20,
                 'min' => 1,
@@ -272,10 +272,10 @@ class ImageMarquee extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_gap',
             [
-                'label' => esc_html__( 'GAP', 'black-widgets' ),
+                'label' => esc_html__( 'GAP', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'default' => 40,
-                'description' => esc_html__( 'Space between images.', 'black-widgets' ),
+                'description' => esc_html__( 'Space between images.', 'blackwidgets' ),
                 'selectors' => [
                     '{{WRAPPER}} .bw-image-marquee-wrapper' => '--bw-marquee-gap: {{VALUE}}px;',
                 ],
@@ -285,10 +285,10 @@ class ImageMarquee extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_pause_on_hover',
             [
-                'label' => esc_html__('Pause on Hover', 'black-widgets'),
+                'label' => esc_html__('Pause on Hover', 'blackwidgets'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => esc_html__('Yes', 'black-widgets'),
-                'label_off' => esc_html__('No', 'black-widgets'),
+                'label_on' => esc_html__('Yes', 'blackwidgets'),
+                'label_off' => esc_html__('No', 'blackwidgets'),
                 'return_value' => 'yes',
                 'default' => 'yes',
             ]
@@ -307,10 +307,10 @@ class ImageMarquee extends \Elementor\Widget_Base {
             $this->add_control(
                 'widget_mos',
                 [
-                    'label' => esc_html__( 'Move on Scroll', 'black-widgets' ),
+                    'label' => esc_html__( 'Move on Scroll', 'blackwidgets' ),
                     'type' => \Elementor\Controls_Manager::SWITCHER,
-                    'label_on' => esc_html__( 'On', 'black-widgets' ),
-                    'label_off' => esc_html__( 'Off', 'black-widgets' ),
+                    'label_on' => esc_html__( 'On', 'blackwidgets' ),
+                    'label_off' => esc_html__( 'Off', 'blackwidgets' ),
                     'return_value' => 'yes',
                     'default' => '',
                 ]
@@ -319,7 +319,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
             $this->add_control(
                 'widget_gsap_speed',
                 [
-                    'label' => esc_html__( 'Speed Scroll', 'black-widgets' ),
+                    'label' => esc_html__( 'Speed Scroll', 'blackwidgets' ),
                     'type' => \Elementor\Controls_Manager::NUMBER,
                     'default' => 1,
                     'condition' => [
@@ -331,7 +331,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
 //            $this->add_control(
 //                'widget_gsap_start',
 //                [
-//                    'label' => esc_html__( 'GSAP start condition', 'black-widgets' ),
+//                    'label' => esc_html__( 'GSAP start condition', 'blackwidgets' ),
 //                    'type' => \Elementor\Controls_Manager::TEXT,
 //                    'default' => 'top center',
 //                    'condition' => [
@@ -343,7 +343,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
 //            $this->add_control(
 //                'widget_gsap_end',
 //                [
-//                    'label' => __('GSAP End Condition', 'black-widgets'),
+//                    'label' => __('GSAP End Condition', 'blackwidgets'),
 //                    'type' => \Elementor\Controls_Manager::TEXT,
 //                    'default' => 'bottom center',
 //                    'condition' => [
@@ -369,7 +369,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'style_section',
             [
-                'label' => esc_html__( 'Box Style', 'black-widgets' ),
+                'label' => esc_html__( 'Box Style', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
@@ -378,7 +378,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'widget_box_background',
-                'label' => esc_html__( 'Background', 'black-widgets' ),
+                'label' => esc_html__( 'Background', 'blackwidgets' ),
                 'types' => [ 'classic', 'gradient', 'video' ],
                 'selector' => '{{WRAPPER}} .bw-image-marquee-wrapper',
             ]
@@ -394,7 +394,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_box_width',
             [
-                'label' => esc_html__( 'Width', 'black-widgets' ),
+                'label' => esc_html__( 'Width', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'px', '%', 'em', 'vw' ],
                 'range' => [
@@ -417,7 +417,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_box_height',
             [
-                'label' => esc_html__( 'Height', 'black-widgets' ),
+                'label' => esc_html__( 'Height', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'px', 'em', 'vw' ],
                 'range' => [
@@ -439,7 +439,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_box_margin',
             [
-                'label' => esc_html__( 'Margin', 'black-widgets' ),
+                'label' => esc_html__( 'Margin', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -451,7 +451,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_box_padding',
             [
-                'label' => esc_html__( 'Padding', 'black-widgets' ),
+                'label' => esc_html__( 'Padding', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -471,7 +471,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'widget_box_border',
-                'label' => esc_html__( 'Border', 'black-widgets' ),
+                'label' => esc_html__( 'Border', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-image-marquee-wrapper',
             ]
         );
@@ -479,7 +479,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_box_border_radius',
             [
-                'label' => __('Border Radius', 'black-widgets'),
+                'label' => __('Border Radius', 'blackwidgets'),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors' => [
@@ -492,7 +492,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'widget_box_box_shadow',
-                'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+                'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-image-marquee-wrapper',
             ]
         );
@@ -513,7 +513,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'style_image_section',
             [
-                'label' => esc_html__( 'Image Style', 'black-widgets' ),
+                'label' => esc_html__( 'Image Style', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
@@ -522,7 +522,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'widget_image_background',
-                'label' => esc_html__( 'Background', 'black-widgets' ),
+                'label' => esc_html__( 'Background', 'blackwidgets' ),
                 'types' => [ 'classic', 'gradient', 'video' ],
                 'selector' => '{{WRAPPER}} .bw-image-marquee-item img',
             ]
@@ -538,7 +538,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_image_width',
             [
-                'label' => esc_html__( 'Width', 'black-widgets' ),
+                'label' => esc_html__( 'Width', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'px', '%', 'em', 'vw' ],
                 'range' => [
@@ -561,7 +561,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_image_height',
             [
-                'label' => esc_html__( 'Height', 'black-widgets' ),
+                'label' => esc_html__( 'Height', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'px', 'em', 'vw' ],
                 'range' => [
@@ -583,7 +583,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_image_margin',
             [
-                'label' => esc_html__( 'Margin', 'black-widgets' ),
+                'label' => esc_html__( 'Margin', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -595,7 +595,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_image_padding',
             [
-                'label' => esc_html__( 'Padding', 'black-widgets' ),
+                'label' => esc_html__( 'Padding', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -615,7 +615,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'widget_image_border',
-                'label' => esc_html__( 'Border', 'black-widgets' ),
+                'label' => esc_html__( 'Border', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-image-marquee-item img',
             ]
         );
@@ -623,7 +623,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_image_border_radius',
             [
-                'label' => __('Border Radius', 'black-widgets'),
+                'label' => __('Border Radius', 'blackwidgets'),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors' => [
@@ -636,7 +636,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
             \Elementor\Group_Control_Css_Filter::get_type(),
             [
                 'name' => 'widget_image_css_filters',
-                'label' => __('Css Filters', 'black-widgets'),
+                'label' => __('Css Filters', 'blackwidgets'),
                 'selector' => '{{WRAPPER}} .bw-image-marquee-item img',
             ]
         );
@@ -645,7 +645,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
             \Elementor\Group_Control_Css_Filter::get_type(),
             [
                 'name' => 'widget_image_hover_css_filters',
-                'label' => __('Css Filters Hover', 'black-widgets'),
+                'label' => __('Css Filters Hover', 'blackwidgets'),
                 'selector' => '{{WRAPPER}} .bw-image-marquee-item img:hover',
             ]
         );
@@ -654,7 +654,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'widget_image_box_shadow',
-                'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+                'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-image-marquee-item img',
             ]
         );

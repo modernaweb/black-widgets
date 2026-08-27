@@ -50,7 +50,7 @@ final class Plugin_Options {
 	}
 
 	/**
-	 * Master “JS → CDN” checkbox (gsap_options).
+	 * Master JS CDN checkbox (gsap_options).
 	 */
 	public static function is_gsap_toggle_on() {
 		return ! empty( self::get( 'gsap_options' ) );
@@ -77,6 +77,32 @@ final class Plugin_Options {
 	}
 
 	/**
+	 * Whether a host matches an allowlist entry, exactly or as a subdomain.
+	 *
+	 * @param mixed    $host          Host from wp_parse_url() (null when unparseable).
+	 * @param string[] $allowed_hosts Allowlist entries.
+	 * @return bool
+	 */
+	private static function host_matches_allowlist( $host, array $allowed_hosts ) {
+		$host = strtolower( (string) $host );
+		if ( '' === $host ) {
+			return false;
+		}
+
+		foreach ( $allowed_hosts as $allowed ) {
+			$allowed = strtolower( (string) $allowed );
+			if ( '' === $allowed ) {
+				continue;
+			}
+			if ( $host === $allowed || substr( $host, -( strlen( $allowed ) + 1 ) ) === '.' . $allowed ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * Sanitize a GSAP CDN URL: HTTPS + allowlisted host.
 	 *
 	 * @param string $url Raw URL.
@@ -86,6 +112,20 @@ final class Plugin_Options {
 		$url = trim( (string) $url );
 		if ( '' === $url ) {
 			return '';
+		}
+
+		$allowed_hosts = self::allowed_cdn_hosts();
+
+		/*
+		 * 1.3.9 saved this field unsanitized, so upgrades can arrive with http://.
+		 * Dropping those URLs would silently kill the animations, and every
+		 * allowlisted CDN serves the same file over HTTPS - a browser on an HTTPS
+		 * site would block the http:// request as mixed content anyway. Only hosts
+		 * we actually recognise are upgraded; anything else still falls through to
+		 * the https-only check below.
+		 */
+		if ( 0 === stripos( $url, 'http://' ) && self::host_matches_allowlist( wp_parse_url( $url, PHP_URL_HOST ), $allowed_hosts ) ) {
+			$url = 'https://' . substr( $url, strlen( 'http://' ) );
 		}
 
 		$url = esc_url_raw( $url, [ 'https' ] );
@@ -98,25 +138,12 @@ final class Plugin_Options {
 			return '';
 		}
 
-		$host = strtolower( $host );
-		$allowed_hosts = self::allowed_cdn_hosts();
-
 		// Empty allowlist (via filter) = https-only mode.
 		if ( empty( $allowed_hosts ) ) {
 			return $url;
 		}
 
-		foreach ( $allowed_hosts as $allowed ) {
-			$allowed = strtolower( (string) $allowed );
-			if ( '' === $allowed ) {
-				continue;
-			}
-			if ( $host === $allowed || substr( $host, -( strlen( $allowed ) + 1 ) ) === '.' . $allowed ) {
-				return $url;
-			}
-		}
-
-		return '';
+		return self::host_matches_allowlist( $host, $allowed_hosts ) ? $url : '';
 	}
 
 	/**

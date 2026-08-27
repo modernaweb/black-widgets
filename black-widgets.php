@@ -10,7 +10,7 @@
  * Author URI: https://modernaweb.net/
  * License: GPLv3 or later
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
- * Text Domain: black-widgets
+ * Text Domain: blackwidgets
  * Domain Path: /languages
  * Black Widgets is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -32,7 +32,7 @@ require_once BLACK_WIDGETS_PLUGIN_PATH . 'vendor/autoload.php';
 
 require plugin_dir_path( __FILE__ ) . 'src/class-plugin-options.php';
 require plugin_dir_path( __FILE__ ) . 'src/main.php';
-require plugin_dir_path( __FILE__ ) . 'functions.php';
+require plugin_dir_path( __FILE__ ) . 'src/helpers.php';
 
 new \Modernaweb\BlackWidgets\Main();
 
@@ -51,12 +51,11 @@ function black_widgets_redirect() {
 		return;
 	}
 
-	// Only privileged users should be bounced into settings after activate.
+	delete_option( 'black_widgets_do_activation_redirect' );
+
 	if ( ! current_user_can( 'manage_options' ) ) {
 		return;
 	}
-
-	delete_option( 'black_widgets_do_activation_redirect' );
 
 	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- WP core activate-multi flag.
 	if ( isset( $_GET['activate-multi'] ) ) {

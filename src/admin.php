@@ -10,7 +10,7 @@ class Admin {
 
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'addPluginAdminMenu' ), 9);
-		add_action( 'admin_init', array( $this, 'sampleoptions_init_fn' ));
+		add_action( 'admin_init', array( $this, 'register_plugin_settings' ));
 		add_action( 'admin_init', array( $this, 'maybe_upgrade_plugin_db_version' ) );
 		add_action( 'admin_init', array( $this, 'maybe_archive_rejected_cdn_urls' ) );
 		add_action( 'admin_init', array( $this, 'handle_dismiss_cdn_notice' ) );
@@ -85,8 +85,8 @@ class Admin {
 
 
 	public function addPluginAdminMenu() {
-		$page_title = __( 'Black Widgets', 'black-widgets' );
-		$menu_title = __( 'Black Widgets', 'black-widgets' );
+		$page_title = __( 'Black Widgets', 'blackwidgets' );
+		$menu_title = __( 'Black Widgets', 'blackwidgets' );
 		$capability = 'manage_options';
 		$menu_slug  = 'black-widgets';
 		$function   = 'black_widgets_options';
@@ -104,16 +104,16 @@ class Admin {
 
 		add_submenu_page(
 			$menu_slug,
-			__( 'Dashboard', 'black-widgets' ),
-			__( 'Dashboard', 'black-widgets' ),
+			__( 'Dashboard', 'blackwidgets' ),
+			__( 'Dashboard', 'blackwidgets' ),
 			$capability,
 			$menu_slug
 		);
 
 		add_submenu_page(
 			$menu_slug,
-			__( 'Settings', 'black-widgets' ),
-			__( 'Settings', 'black-widgets' ),
+			__( 'Settings', 'blackwidgets' ),
+			__( 'Settings', 'blackwidgets' ),
 			$capability,
 			'black-widgets-settings',
 			array($this, 'black_widgets_settings')
@@ -136,7 +136,7 @@ class Admin {
             if ( array_key_exists( $flag, $input ) ) {
                 $clean[ $flag ] = ! empty( $input[ $flag ] ) ? 1 : 0;
             } elseif ( $clean['gsap_options'] ) {
-                // Toggle on but key missing (shouldn't happen) → treat as unchecked.
+                // Toggle on but key missing: treat as unchecked.
                 $clean[ $flag ] = 0;
             } else {
                 $clean[ $flag ] = ! empty( $prev[ $flag ] ) ? 1 : 0;
@@ -206,7 +206,7 @@ class Admin {
     }
 
 
-	function sampleoptions_init_fn(){
+	function register_plugin_settings(){
 		register_setting(
 			'plugin_options',
 			'plugin_options',
@@ -221,7 +221,7 @@ class Admin {
 
 		add_settings_section(
 			'black_widgets_settings_setting',
-			__( 'General Settings', 'black-widgets' ),
+			__( 'General Settings', 'blackwidgets' ),
 			array( $this, 'section_text_fn' ),
 			'black_widgets_settings_general_settings'
 		);
@@ -229,7 +229,7 @@ class Admin {
 
         add_settings_field(
             'bw_gsap_options',
-            __( 'JS → CDN', 'black-widgets' ),
+            __( 'JS → CDN', 'blackwidgets' ),
             array( $this, 'bw_setting_chb2_gsap_fn' ),
             'black_widgets_settings_general_settings',
             'black_widgets_settings_setting',
@@ -244,7 +244,7 @@ class Admin {
 
         add_settings_field(
             'bw_option_gsap_cdn1',
-            __( 'GSAP CDN', 'black-widgets' ),
+            __( 'GSAP CDN', 'blackwidgets' ),
             array( $this, 'bw_setting_gsap_cdn1_fn' ),
             'black_widgets_settings_general_settings',
             'black_widgets_settings_setting',
@@ -256,7 +256,7 @@ class Admin {
 
         add_settings_field(
             'bw_option_gsap_cdn2',
-            __( 'ScrollTrigger CDN', 'black-widgets' ),
+            __( 'ScrollTrigger CDN', 'blackwidgets' ),
             array( $this, 'bw_setting_gsap_cdn2_fn' ),
             'black_widgets_settings_general_settings',
             'black_widgets_settings_setting',
@@ -268,7 +268,7 @@ class Admin {
 
         add_settings_field(
             'bw_option_gsap_cdn3',
-            __( 'SplitText CDN', 'black-widgets' ),
+            __( 'SplitText CDN', 'blackwidgets' ),
             array( $this, 'bw_setting_gsap_cdn3_fn' ),
             'black_widgets_settings_general_settings',
             'black_widgets_settings_setting',
@@ -280,7 +280,7 @@ class Admin {
 
         add_settings_field(
             'bw_option_gsap_cdn4',
-            __( 'TweenMax CDN (Deprecated)', 'black-widgets' ),
+            __( 'TweenMax CDN (Deprecated)', 'blackwidgets' ),
             array( $this, 'bw_setting_gsap_cdn4_fn' ),
             'black_widgets_settings_general_settings',
             'black_widgets_settings_setting',
@@ -292,7 +292,7 @@ class Admin {
 
         add_settings_field(
             'bw_enable_scroll_text',
-            __( 'Enable Black Scroll Text', 'black-widgets' ),
+            __( 'Enable Black Scroll Text', 'blackwidgets' ),
             array( $this, 'bw_setting_enable_scroll_text_fn' ),
             'black_widgets_settings_general_settings',
             'black_widgets_settings_setting',
@@ -304,7 +304,7 @@ class Admin {
 
         add_settings_field(
             'bw_gsap_trigger_scope',
-            __( 'Scope GSAP Trigger selectors', 'black-widgets' ),
+            __( 'Scope GSAP Trigger selectors', 'blackwidgets' ),
             array( $this, 'bw_setting_gsap_trigger_scope_fn' ),
             'black_widgets_settings_general_settings',
             'black_widgets_settings_setting',
@@ -318,7 +318,7 @@ class Admin {
 
 
 	function  section_text_fn() {
-		echo '<p>' . esc_html__( 'Turn on JS → CDN to unlock the fields below. Add GSAP and ScrollTrigger URLs for scroll animations. Add SplitText only if you need character or word effects. TweenMax is optional and unused.', 'black-widgets' ) . '</p>';
+		echo '<p>' . esc_html__( 'Turn on JS → CDN to unlock the fields below. Add GSAP and ScrollTrigger URLs for scroll animations. Add SplitText only if you need character or word effects. TweenMax is optional and unused.', 'blackwidgets' ) . '</p>';
 	}
 
 
@@ -333,7 +333,7 @@ class Admin {
         $checked       = Plugin_Options::is_gsap_toggle_on() ? ' checked="checked" ' : '';
         $checked_class = Plugin_Options::is_gsap_toggle_on() ? 'class="bw-checked"' : '';
         echo '<input ' . $checked . ' id="bw_gsap_options" name="plugin_options[gsap_options]" type="checkbox" ' . $checked_class . ' />'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-        echo '<p>' . esc_html__( 'Shows GSAP widgets in Elementor and unlocks movement options. Add at least the GSAP CDN URL below. Some widgets also need ScrollTrigger or SplitText.', 'black-widgets' ) . '</p>';
+        echo '<p>' . esc_html__( 'Shows GSAP widgets in Elementor and unlocks movement options. Add at least the GSAP CDN URL below. Some widgets also need ScrollTrigger or SplitText.', 'blackwidgets' ) . '</p>';
     }
 
 
@@ -342,7 +342,7 @@ class Admin {
         $example = 'https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js';
         $disabled = $this->gsap_child_disabled_attr();
         echo "<input id='bw_option_gsap_cdn1' name='plugin_options[bw_gsap_cdn1]' type='text' class='regular-text' value='" . esc_url( $cdn1 ) . "' placeholder='" . esc_attr( $example ) . "'{$disabled} />";
-        echo '<p class="description">' . esc_html__( 'URL for the GSAP core file. Example:', 'black-widgets' ) . '</p>';
+        echo '<p class="description">' . esc_html__( 'URL for the GSAP core file. Example:', 'blackwidgets' ) . '</p>';
         echo '<p class="description"><code>' . esc_html( $example ) . '</code></p>';
     }
 
@@ -352,7 +352,7 @@ class Admin {
         $example  = 'https://cdn.jsdelivr.net/npm/gsap@3.15/dist/ScrollTrigger.min.js';
         $disabled = $this->gsap_child_disabled_attr();
         echo "<input id='bw_option_gsap_cdn2' name='plugin_options[bw_gsap_cdn2]' type='text' class='regular-text' value='" . esc_url( $cdn2 ) . "' placeholder='" . esc_attr( $example ) . "'{$disabled} />";
-        echo '<p class="description">' . esc_html__( 'URL for ScrollTrigger. Example:', 'black-widgets' ) . '</p>';
+        echo '<p class="description">' . esc_html__( 'URL for ScrollTrigger. Example:', 'blackwidgets' ) . '</p>';
         echo '<p class="description"><code>' . esc_html( $example ) . '</code></p>';
     }
 
@@ -362,7 +362,7 @@ class Admin {
         $example  = 'https://cdn.jsdelivr.net/npm/gsap@3.15/dist/SplitText.min.js';
         $disabled = $this->gsap_child_disabled_attr();
         echo "<input id='bw_option_gsap_cdn3' name='plugin_options[bw_gsap_cdn3]' type='text' class='regular-text' value='" . esc_url( $cdn3 ) . "' placeholder='" . esc_attr( $example ) . "'{$disabled} />";
-        echo '<p class="description">' . esc_html__( 'Optional. Needed for Perspective Flip on buttons and for text effects that split characters or words. Example:', 'black-widgets' ) . '</p>';
+        echo '<p class="description">' . esc_html__( 'Optional. Needed for Perspective Flip on buttons and for text effects that split characters or words. Example:', 'blackwidgets' ) . '</p>';
         echo '<p class="description"><code>' . esc_html( $example ) . '</code></p>';
     }
 
@@ -371,7 +371,7 @@ class Admin {
         $cdn4     = Plugin_Options::cdn( 4 );
         $disabled = $this->gsap_child_disabled_attr();
         echo "<input id='bw_option_gsap_cdn4' name='plugin_options[bw_gsap_cdn4]' type='text' class='regular-text' value='" . esc_url( $cdn4 ) . "'{$disabled} />";
-        echo '<p class="description">' . esc_html__( 'Deprecated. Leave empty. Black Widgets does not load this file.', 'black-widgets' ) . '</p>';
+        echo '<p class="description">' . esc_html__( 'Deprecated. Leave empty. Black Widgets does not load this file.', 'blackwidgets' ) . '</p>';
     }
 
     function bw_setting_enable_scroll_text_fn() {
@@ -379,14 +379,14 @@ class Admin {
         $checked  = $enabled ? ' checked="checked" ' : '';
         $disabled = $this->gsap_child_disabled_attr();
         echo "<input {$checked} id='bw_enable_scroll_text' name='plugin_options[bw_enable_scroll_text]' type='checkbox'{$disabled} />";
-        echo '<p class="description">' . esc_html__( 'Show the Black Scroll Text widget in Elementor. Typography On Scroll still works if this is off.', 'black-widgets' ) . '</p>';
+        echo '<p class="description">' . esc_html__( 'Show the Black Scroll Text widget in Elementor. Typography On Scroll still works if this is off.', 'blackwidgets' ) . '</p>';
     }
 
     function bw_setting_gsap_trigger_scope_fn() {
         $checked  = Plugin_Options::is_gsap_trigger_scoped() ? ' checked="checked" ' : '';
         $disabled = $this->gsap_child_disabled_attr();
         echo "<input {$checked} id='bw_gsap_trigger_scope' name='plugin_options[bw_gsap_trigger_scope]' type='checkbox'{$disabled} />";
-        echo '<p class="description">' . esc_html__( 'Limit Trigger selectors to the current widget. Off uses the same global selectors as before. You can also set this per widget.', 'black-widgets' ) . '</p>';
+        echo '<p class="description">' . esc_html__( 'Limit Trigger selectors to the current widget. Off uses the same global selectors as before. You can also set this per widget.', 'blackwidgets' ) . '</p>';
     }
 
 
@@ -395,16 +395,16 @@ class Admin {
 	}
 
 	/**
-	 * Compare stored DB version with the plugin version and flag the one-time CDN notice.
+	 * One-time upgrade routine: data migrations, the CDN notice flag, and the
+	 * Elementor CSS rebuild.
+	 *
+	 * Deliberately not gated on current_user_can(). This is a data migration, not
+	 * a user action: a WP-CLI upgrade or a background auto-update must not leave
+	 * the site rendering stale Elementor CSS just because no administrator has
+	 * opened wp-admin yet. The stored version guard makes it run at most once, and
+	 * the notices it queues keep their own capability checks at render time.
 	 */
 	public function maybe_upgrade_plugin_db_version() {
-		if ( ! current_user_can( 'manage_options' ) ) {
-			return;
-		}
-
-		// Soft-remove legacy Dark Mode flag (UI removed in 1.4.0) without waiting for Settings save.
-		$this->maybe_strip_legacy_dark_mode_option();
-
 		$stored  = get_option( 'bw_plugin_db_version', '0' );
 		$current = BLACK_WIDGETS_VERSION;
 
@@ -412,8 +412,16 @@ class Admin {
 			return;
 		}
 
+		// Drop the bw_dark_style flag on upgrade instead of waiting for a Settings save.
+		$this->maybe_strip_legacy_dark_mode_option();
+
 		// Upgrading from before 1.4.0: queue the CDN migration notice once.
 		if ( version_compare( (string) $stored, '1.4.0', '<' ) ) {
+			// 1.3.9's activation-redirect flag was autoloaded, so an install where the
+			// redirect never fired carries it on every request. Cleaned up here rather
+			// than on admin_init, where the check itself would cost a query forever.
+			delete_option( 'my_plugin_do_activation_redirect' );
+
 			if ( ! get_option( 'bw_cdn_notice_dismissed' ) ) {
 				update_option( 'bw_show_cdn_migration_notice', '1', false );
 			}
@@ -421,30 +429,26 @@ class Admin {
 			$this->migrate_legacy_timelinemax_cdn();
 		}
 
-		$this->clear_elementor_css_cache();
+		// Hold the stored version back when Elementor is not available (updated while
+		// it was inactive): every step above is idempotent, so retrying is safe and
+		// far better than permanently skipping the CSS rebuild.
+		if ( ! $this->clear_elementor_css_cache() ) {
+			return;
+		}
 
-		update_option( 'bw_plugin_db_version', $current, false );
+		// Autoloaded so the version_compare guard above costs no query per request.
+		update_option( 'bw_plugin_db_version', $current, true );
 	}
 
 	/**
 	 * Drop Elementor's pre-generated CSS files after a plugin upgrade.
 	 *
-	 * Several stored controls changed their `selector` in 1.4.0 (List, Icon Box hover,
-	 * Flip Box), so pages keep their old rules until each post CSS file is rebuilt.
 	 * Runs on admin_init, which is after Elementor builds files_manager on init.
 	 *
-	 * @return void
+	 * @return bool Whether the cache was cleared.
 	 */
 	protected function clear_elementor_css_cache() {
-		if ( ! did_action( 'elementor/loaded' ) || ! class_exists( '\Elementor\Plugin' ) ) {
-			return;
-		}
-
-		if ( ! isset( \Elementor\Plugin::$instance->files_manager ) ) {
-			return;
-		}
-
-		\Elementor\Plugin::$instance->files_manager->clear_cache();
+		return black_widgets_clear_elementor_css_cache();
 	}
 
 	/**
@@ -481,7 +485,7 @@ class Admin {
 	}
 
 	/**
-	 * Permanently dismiss the CDN 3 (TimelineMax → SplitText) notice.
+	 * Permanently dismiss the CDN 3 notice.
 	 */
 	public function handle_dismiss_cdn3_timelinemax_notice() {
 		if ( ! isset( $_GET['bw_dismiss_cdn3_timelinemax_notice'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -522,14 +526,14 @@ class Admin {
 		?>
 		<div class="notice notice-warning bw-cdn3-timelinemax-notice">
 			<p>
-				<strong><?php esc_html_e( 'Black Widgets: SplitText CDN (was TimelineMax)', 'black-widgets' ); ?></strong>
+				<strong><?php esc_html_e( 'Black Widgets: SplitText CDN (was TimelineMax)', 'blackwidgets' ); ?></strong>
 			</p>
 			<p>
-				<?php esc_html_e( 'In 1.4.0 the third CDN field is SplitText, not TimelineMax. Your old TimelineMax URL was saved for reference and removed from this field so the wrong file is not loaded.', 'black-widgets' ); ?>
+				<?php esc_html_e( 'In 1.4.0 the third CDN field is SplitText, not TimelineMax. Your old TimelineMax URL was saved for reference and removed from this field so the wrong file is not loaded.', 'blackwidgets' ); ?>
 			</p>
 			<?php if ( '' !== $archived ) : ?>
 				<p>
-					<?php esc_html_e( 'Saved copy (plugin_options key):', 'black-widgets' ); ?>
+					<?php esc_html_e( 'Saved copy (plugin_options key):', 'blackwidgets' ); ?>
 				</p>
 				<ul>
 					<li>
@@ -539,14 +543,14 @@ class Admin {
 				</ul>
 			<?php endif; ?>
 			<p>
-				<?php esc_html_e( 'If you use Perspective Flip or split-text effects, paste a SplitText CDN URL. If not, leave the field empty.', 'black-widgets' ); ?>
+				<?php esc_html_e( 'If you use Perspective Flip or split-text effects, paste a SplitText CDN URL. If not, leave the field empty.', 'blackwidgets' ); ?>
 			</p>
 			<p>
 				<a class="button button-primary" href="<?php echo esc_url( $settings_url ); ?>">
-					<?php esc_html_e( 'View Settings', 'black-widgets' ); ?>
+					<?php esc_html_e( 'View Settings', 'blackwidgets' ); ?>
 				</a>
 				<a class="button" href="<?php echo esc_url( $dismiss_url ); ?>">
-					<?php esc_html_e( 'Dismiss', 'black-widgets' ); ?>
+					<?php esc_html_e( 'Dismiss', 'blackwidgets' ); ?>
 				</a>
 			</p>
 		</div>
@@ -610,24 +614,24 @@ class Admin {
 		?>
 		<div class="notice notice-info bw-cdn-migration-notice">
 			<p>
-				<strong><?php esc_html_e( 'Black Widgets 1.4.0', 'black-widgets' ); ?></strong>
+				<strong><?php esc_html_e( 'Black Widgets 1.4.0', 'blackwidgets' ); ?></strong>
 			</p>
 			<p>
-				<?php esc_html_e( 'GSAP animations work with GSAP 3.15 (core, ScrollTrigger, and SplitText when needed). TweenMax is no longer used.', 'black-widgets' ); ?>
+				<?php esc_html_e( 'GSAP animations work with GSAP 3.15 (core, ScrollTrigger, and SplitText when needed). TweenMax is no longer used.', 'blackwidgets' ); ?>
 			</p>
 			<p>
-				<?php esc_html_e( 'If animations stop after updating:', 'black-widgets' ); ?>
+				<?php esc_html_e( 'If animations stop after updating:', 'blackwidgets' ); ?>
 			</p>
 			<ol>
-				<li><?php esc_html_e( 'Open Settings and set GSAP and ScrollTrigger to the 3.15 examples shown there. Saved URLs are not changed for you.', 'black-widgets' ); ?></li>
-				<li><?php esc_html_e( 'Clear your site cache and Elementor CSS/JS cache.', 'black-widgets' ); ?></li>
+				<li><?php esc_html_e( 'Open Settings and set GSAP and ScrollTrigger to the 3.15 examples shown there. Saved URLs are not changed for you.', 'blackwidgets' ); ?></li>
+				<li><?php esc_html_e( 'Clear your site cache and Elementor CSS/JS cache.', 'blackwidgets' ); ?></li>
 			</ol>
 			<p>
 				<a class="button button-primary" href="<?php echo esc_url( $settings_url ); ?>">
-					<?php esc_html_e( 'View Settings', 'black-widgets' ); ?>
+					<?php esc_html_e( 'View Settings', 'blackwidgets' ); ?>
 				</a>
 				<a class="button" href="<?php echo esc_url( $dismiss_url ); ?>">
-					<?php esc_html_e( 'Dismiss', 'black-widgets' ); ?>
+					<?php esc_html_e( 'Dismiss', 'blackwidgets' ); ?>
 				</a>
 			</p>
 		</div>
@@ -676,10 +680,10 @@ class Admin {
 	 */
 	protected function cdn_field_labels() {
 		return array(
-			'bw_gsap_cdn1' => __( 'GSAP CDN', 'black-widgets' ),
-			'bw_gsap_cdn2' => __( 'ScrollTrigger CDN', 'black-widgets' ),
-			'bw_gsap_cdn3' => __( 'SplitText CDN', 'black-widgets' ),
-			'bw_gsap_cdn4' => __( 'TweenMax CDN (Deprecated)', 'black-widgets' ),
+			'bw_gsap_cdn1' => __( 'GSAP CDN', 'blackwidgets' ),
+			'bw_gsap_cdn2' => __( 'ScrollTrigger CDN', 'blackwidgets' ),
+			'bw_gsap_cdn3' => __( 'SplitText CDN', 'blackwidgets' ),
+			'bw_gsap_cdn4' => __( 'TweenMax CDN (Deprecated)', 'blackwidgets' ),
 		);
 	}
 
@@ -747,10 +751,10 @@ class Admin {
 		?>
 		<div class="notice notice-warning bw-cdn-allowlist-notice">
 			<p>
-				<strong><?php esc_html_e( 'Black Widgets: some CDN URLs were not loaded', 'black-widgets' ); ?></strong>
+				<strong><?php esc_html_e( 'Black Widgets: some CDN URLs were not loaded', 'blackwidgets' ); ?></strong>
 			</p>
 			<p>
-				<?php esc_html_e( 'These URLs are still saved, but they were skipped (must be HTTPS on an allowed host). The Settings fields look empty for that reason.', 'black-widgets' ); ?>
+				<?php esc_html_e( 'These URLs are still saved, but they were skipped (must be HTTPS on an allowed host). The Settings fields look empty for that reason.', 'blackwidgets' ); ?>
 			</p>
 			<ul>
 				<?php foreach ( $rejected as $field => $url ) : ?>
@@ -761,14 +765,14 @@ class Admin {
 				<?php endforeach; ?>
 			</ul>
 			<p>
-				<?php esc_html_e( 'Paste an HTTPS URL from an allowed CDN (see the examples under each field), or ask a developer to allow your own host.', 'black-widgets' ); ?>
+				<?php esc_html_e( 'Paste an HTTPS URL from an allowed CDN (see the examples under each field), or ask a developer to allow your own host.', 'blackwidgets' ); ?>
 			</p>
 			<p>
 				<a class="button button-primary" href="<?php echo esc_url( $settings_url ); ?>">
-					<?php esc_html_e( 'View Settings', 'black-widgets' ); ?>
+					<?php esc_html_e( 'View Settings', 'blackwidgets' ); ?>
 				</a>
 				<a class="button" href="<?php echo esc_url( $dismiss_url ); ?>">
-					<?php esc_html_e( 'Dismiss', 'black-widgets' ); ?>
+					<?php esc_html_e( 'Dismiss', 'blackwidgets' ); ?>
 				</a>
 			</p>
 		</div>

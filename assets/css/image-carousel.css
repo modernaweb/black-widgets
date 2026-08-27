@@ -47,7 +47,7 @@
 
 .bw-swiper .bw-swiper-wrapper,
 .bw-swiper .swiper-wrapper {
-	/* Soft ease-out — less “snap”, better for centered Editorial / Peek Focus. */
+	/* Soft ease-out, less snap. Better for centered Editorial / Peek Focus. */
 	transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 	/* Keep swipes on the GPU; avoid layout thrash while dragging. */
 	will-change: transform;
@@ -346,8 +346,8 @@
 	margin-inline-start: var(--bw-swiper-fraction-gap, 0.35em);
 }
 
-/* Pagination Style: Progress Bar — minimal hairline default
-   NOTE: Swiper only sizes `.swiper-horizontal > .swiper-pagination-progressbar`
+/* Pagination Style: Progress Bar - minimal hairline default.
+   Swiper only sizes `.swiper-horizontal > .swiper-pagination-progressbar`
    (direct child). Outside placement never matches that, so we size it ourselves.
    PHP also adds `.bw-swiper-pagination--progressbar` so styles work before init. */
 
@@ -374,7 +374,7 @@
 	pointer-events: none;
 }
 
-/* Inside slider: short hairline, inset from edges — not a full-bleed bar. */
+/* Inside slider: short hairline, inset from edges, not a full-bleed bar. */
 .bw-swiper > .bw-swiper-pagination.bw-swiper-pagination--progressbar,
 .bw-swiper > .bw-swiper-pagination.swiper-pagination-progressbar {
 	position: absolute !important;
@@ -425,9 +425,7 @@
 	display: block !important;
 }
 
-/* -------------------------------------------------------------------------- */
-/* Type 1 - Classic Caption                                                   */
-/* -------------------------------------------------------------------------- */
+/* Type 1 - Classic Caption */
 
 .bw-swiper-type1 .bw-swiper-slide.has-image {
 	display: flex;
@@ -456,9 +454,7 @@
 	bottom: 8px;
 }
 
-/* -------------------------------------------------------------------------- */
-/* Type 2 - Clean Cover                                                       */
-/* -------------------------------------------------------------------------- */
+/* Type 2 - Clean Cover */
 
 .bw-swiper-type2 .bw-swiper-slide.has-image img {
 	object-fit: cover;
@@ -509,9 +505,7 @@
 	}
 }
 
-/* -------------------------------------------------------------------------- */
-/* Type 3 - Editorial                                                         */
-/* -------------------------------------------------------------------------- */
+/* Type 3 - Editorial */
 
 .bw-swiper-type3 .bw-swiper-slide.has-image img {
 	object-fit: cover;
@@ -596,9 +590,7 @@
 	}
 }
 
-/* -------------------------------------------------------------------------- */
-/* Type 4 - Peek Focus                                                        */
-/* -------------------------------------------------------------------------- */
+/* Type 4 - Peek Focus */
 
 .bw-swiper-type4 .bw-swiper-slide {
 	transition:
@@ -703,9 +695,7 @@
 	}
 }
 
-/* -------------------------------------------------------------------------- */
-/* Mobile                                                                     */
-/* -------------------------------------------------------------------------- */
+/* Mobile */
 
 @media (max-width: 767px) {
 	.bw-swiper {

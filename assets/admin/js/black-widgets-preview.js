@@ -122,7 +122,7 @@ jQuery(document).ready(function() {
         }
     }
 
-    // Match the node itself OR descendants — Elementor often injects the widget
+    // Match the node itself or its descendants. Elementor often injects the widget
     // root (or the animate element) as the added node; .find() alone misses that.
     function matchesIn(node, selector) {
         var $node = jQuery(node);

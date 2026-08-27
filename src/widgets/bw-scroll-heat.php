@@ -38,7 +38,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Black Scroll Heat', 'black-widgets' );
+		return esc_html__( 'Black Scroll Heat', 'blackwidgets' );
 	}
 
 	public function get_icon() {
@@ -179,7 +179,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_type',
 			[
-				'label' => esc_html__( 'Type', 'black-widgets' ),
+				'label' => esc_html__( 'Type', 'blackwidgets' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -187,12 +187,12 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_type',
 			[
-				'label'   => esc_html__( 'Select Type', 'black-widgets' ),
+				'label'   => esc_html__( 'Select Type', 'blackwidgets' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'scroll_heat',
 				'options' => [
-					'scroll_heat'    => esc_html__( 'Scroll Heat', 'black-widgets' ),
-					'animated_text'  => esc_html__( 'Animated Text', 'black-widgets' ),
+					'scroll_heat'    => esc_html__( 'Scroll Heat', 'blackwidgets' ),
+					'animated_text'  => esc_html__( 'Animated Text', 'blackwidgets' ),
 				],
 			]
 		);
@@ -202,7 +202,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 			[
 				'type' => Controls_Manager::RAW_HTML,
 				'raw'  => '<div class="elementor-panel-alert elementor-panel-alert-info">'
-					. esc_html__( 'Needs GSAP, ScrollTrigger, and SplitText URLs in Black Widgets → Settings.', 'black-widgets' )
+					. esc_html__( 'Needs GSAP, ScrollTrigger, and SplitText URLs in Black Widgets → Settings.', 'blackwidgets' )
 					. '</div>',
 			]
 		);
@@ -220,7 +220,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_content',
 			[
-				'label' => esc_html__( 'Content', 'black-widgets' ),
+				'label' => esc_html__( 'Content', 'blackwidgets' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -228,12 +228,12 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_control(
 			'text',
 			[
-				'label'       => esc_html__( 'Text', 'black-widgets' ),
+				'label'       => esc_html__( 'Text', 'blackwidgets' ),
 				'type'        => Controls_Manager::TEXTAREA,
 				'rows'        => 4,
-				'default'     => esc_html__( 'Type your text here. Words change color as you scroll.', 'black-widgets' ),
-				'placeholder' => esc_html__( 'Enter text…', 'black-widgets' ),
-				'description' => esc_html__( 'Allowed HTML: <br>, <strong>, <b>, <hr>. No attributes.', 'black-widgets' ),
+				'default'     => esc_html__( 'Type your text here. Words change color as you scroll.', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'Enter text…', 'blackwidgets' ),
+				'description' => esc_html__( 'Allowed HTML: <br>, <strong>, <b>, <hr>. No attributes.', 'blackwidgets' ),
 				'label_block' => true,
 				'dynamic'     => [ 'active' => true ],
 			]
@@ -242,7 +242,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_control(
 			'html_tag',
 			[
-				'label'   => esc_html__( 'HTML Tag', 'black-widgets' ),
+				'label'   => esc_html__( 'HTML Tag', 'blackwidgets' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'p',
 				'options' => [
@@ -262,23 +262,23 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'align',
 			[
-				'label'     => esc_html__( 'Alignment', 'black-widgets' ),
+				'label'     => esc_html__( 'Alignment', 'blackwidgets' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [
 					'left'    => [
-						'title' => esc_html__( 'Left', 'black-widgets' ),
+						'title' => esc_html__( 'Left', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center'  => [
-						'title' => esc_html__( 'Center', 'black-widgets' ),
+						'title' => esc_html__( 'Center', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'   => [
-						'title' => esc_html__( 'Right', 'black-widgets' ),
+						'title' => esc_html__( 'Right', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 					'justify' => [
-						'title' => esc_html__( 'Justify', 'black-widgets' ),
+						'title' => esc_html__( 'Justify', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
@@ -298,7 +298,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_heat_animation',
 			[
-				'label'     => esc_html__( 'Animation', 'black-widgets' ),
+				'label'     => esc_html__( 'Animation', 'blackwidgets' ),
 				'tab'       => Controls_Manager::TAB_CONTENT,
 				'condition' => [ 'widget_type' => 'scroll_heat' ],
 			]
@@ -307,16 +307,16 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_control(
 			'heat_scroll_start',
 			[
-				'label'   => esc_html__( 'Scroll Start', 'black-widgets' ),
+				'label'   => esc_html__( 'Scroll Start', 'blackwidgets' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'top 78%',
 				'options' => [
-					'top 90%' => esc_html__( 'Early (Top 90%)', 'black-widgets' ),
-					'top 85%' => esc_html__( 'Top 85%', 'black-widgets' ),
-					'top 78%' => esc_html__( 'Default (Top 78%)', 'black-widgets' ),
-					'top 70%' => esc_html__( 'Top 70%', 'black-widgets' ),
-					'top 60%' => esc_html__( 'Top 60%', 'black-widgets' ),
-					'top 50%' => esc_html__( 'Center (Top 50%)', 'black-widgets' ),
+					'top 90%' => esc_html__( 'Early (Top 90%)', 'blackwidgets' ),
+					'top 85%' => esc_html__( 'Top 85%', 'blackwidgets' ),
+					'top 78%' => esc_html__( 'Default (Top 78%)', 'blackwidgets' ),
+					'top 70%' => esc_html__( 'Top 70%', 'blackwidgets' ),
+					'top 60%' => esc_html__( 'Top 60%', 'blackwidgets' ),
+					'top 50%' => esc_html__( 'Center (Top 50%)', 'blackwidgets' ),
 				],
 			]
 		);
@@ -324,16 +324,16 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_control(
 			'heat_scroll_end',
 			[
-				'label'   => esc_html__( 'Scroll End', 'black-widgets' ),
+				'label'   => esc_html__( 'Scroll End', 'blackwidgets' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'bottom 32%',
 				'options' => [
-					'bottom 20%' => esc_html__( 'Early (Bottom 20%)', 'black-widgets' ),
-					'bottom 32%' => esc_html__( 'Default (Bottom 32%)', 'black-widgets' ),
-					'bottom 40%' => esc_html__( 'Bottom 40%', 'black-widgets' ),
-					'bottom 50%' => esc_html__( 'Center (Bottom 50%)', 'black-widgets' ),
-					'bottom 60%' => esc_html__( 'Late (Bottom 60%)', 'black-widgets' ),
-					'bottom top' => esc_html__( 'Until Fully Out', 'black-widgets' ),
+					'bottom 20%' => esc_html__( 'Early (Bottom 20%)', 'blackwidgets' ),
+					'bottom 32%' => esc_html__( 'Default (Bottom 32%)', 'blackwidgets' ),
+					'bottom 40%' => esc_html__( 'Bottom 40%', 'blackwidgets' ),
+					'bottom 50%' => esc_html__( 'Center (Bottom 50%)', 'blackwidgets' ),
+					'bottom 60%' => esc_html__( 'Late (Bottom 60%)', 'blackwidgets' ),
+					'bottom top' => esc_html__( 'Until Fully Out', 'blackwidgets' ),
 				],
 			]
 		);
@@ -341,7 +341,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'heat_scrub_amount',
 			[
-				'label'       => esc_html__( 'Scrub Smoothness', 'black-widgets' ),
+				'label'       => esc_html__( 'Scrub Smoothness', 'blackwidgets' ),
 				'type'        => Controls_Manager::SLIDER,
 				'range'       => [
 					'px' => [
@@ -354,14 +354,14 @@ class ScrollHeat extends \Elementor\Widget_Base {
 				'selectors'   => [
 					'{{WRAPPER}} .mws-ew-hw' => '--mws-ew-hw-scrub: {{SIZE}};',
 				],
-				'description' => esc_html__( 'Higher values feel softer. 0 follows the scroll exactly.', 'black-widgets' ),
+				'description' => esc_html__( 'Higher values feel softer. 0 follows the scroll exactly.', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'heat_stagger',
 			[
-				'label'       => esc_html__( 'Word Stagger', 'black-widgets' ),
+				'label'       => esc_html__( 'Word Stagger', 'blackwidgets' ),
 				'type'        => Controls_Manager::SLIDER,
 				'range'       => [
 					'px' => [
@@ -374,7 +374,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 				'selectors'   => [
 					'{{WRAPPER}} .mws-ew-hw' => '--mws-ew-hw-stagger: {{SIZE}};',
 				],
-				'description' => esc_html__( 'Delay between each word.', 'black-widgets' ),
+				'description' => esc_html__( 'Delay between each word.', 'blackwidgets' ),
 			]
 		);
 
@@ -385,7 +385,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_at_animation',
 			[
-				'label'     => esc_html__( 'Animation', 'black-widgets' ),
+				'label'     => esc_html__( 'Animation', 'blackwidgets' ),
 				'tab'       => Controls_Manager::TAB_CONTENT,
 				'condition' => [ 'widget_type' => 'animated_text' ],
 			]
@@ -394,18 +394,18 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_control(
 			'anim_type',
 			[
-				'label'   => esc_html__( 'Animation Type', 'black-widgets' ),
+				'label'   => esc_html__( 'Animation Type', 'blackwidgets' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'from-bottom',
 				'options' => [
-					'from-bottom' => esc_html__( 'From Bottom', 'black-widgets' ),
-					'from-top'    => esc_html__( 'From Top', 'black-widgets' ),
-					'from-left'   => esc_html__( 'From Left', 'black-widgets' ),
-					'from-right'  => esc_html__( 'From Right', 'black-widgets' ),
-					'fade'        => esc_html__( 'Fade In', 'black-widgets' ),
-					'blur'        => esc_html__( 'Blur Focus', 'black-widgets' ),
-					'flip3d'      => esc_html__( '3D Flip', 'black-widgets' ),
-					'mask'        => esc_html__( 'Mask Reveal + Gradient', 'black-widgets' ),
+					'from-bottom' => esc_html__( 'From Bottom', 'blackwidgets' ),
+					'from-top'    => esc_html__( 'From Top', 'blackwidgets' ),
+					'from-left'   => esc_html__( 'From Left', 'blackwidgets' ),
+					'from-right'  => esc_html__( 'From Right', 'blackwidgets' ),
+					'fade'        => esc_html__( 'Fade In', 'blackwidgets' ),
+					'blur'        => esc_html__( 'Blur Focus', 'blackwidgets' ),
+					'flip3d'      => esc_html__( '3D Flip', 'blackwidgets' ),
+					'mask'        => esc_html__( 'Mask Reveal + Gradient', 'blackwidgets' ),
 				],
 			]
 		);
@@ -413,30 +413,30 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_control(
 			'split_type',
 			[
-				'label'       => esc_html__( 'Split Type', 'black-widgets' ),
+				'label'       => esc_html__( 'Split Type', 'blackwidgets' ),
 				'type'        => Controls_Manager::SELECT,
 				'default'     => 'auto',
 				'options'     => [
-					'auto'  => esc_html__( 'Auto (Recommended)', 'black-widgets' ),
-					'chars' => esc_html__( 'Characters', 'black-widgets' ),
-					'words' => esc_html__( 'Words', 'black-widgets' ),
-					'lines' => esc_html__( 'Lines', 'black-widgets' ),
+					'auto'  => esc_html__( 'Auto (Recommended)', 'blackwidgets' ),
+					'chars' => esc_html__( 'Characters', 'blackwidgets' ),
+					'words' => esc_html__( 'Words', 'blackwidgets' ),
+					'lines' => esc_html__( 'Lines', 'blackwidgets' ),
 				],
-				'description' => esc_html__( 'Auto picks the best split for the selected animation.', 'black-widgets' ),
+				'description' => esc_html__( 'Auto picks the best split for the selected animation.', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'trigger_mode',
 			[
-				'label'       => esc_html__( 'Trigger', 'black-widgets' ),
+				'label'       => esc_html__( 'Trigger', 'blackwidgets' ),
 				'type'        => Controls_Manager::SELECT,
 				'default'     => 'scroll',
 				'separator'   => 'before',
 				'options'     => [
-					'scroll' => esc_html__( 'On Scroll', 'black-widgets' ),
-					'inview' => esc_html__( 'When In View (Footer / Page End)', 'black-widgets' ),
-					'load'   => esc_html__( 'On Page Load', 'black-widgets' ),
+					'scroll' => esc_html__( 'On Scroll', 'blackwidgets' ),
+					'inview' => esc_html__( 'When In View (Footer / Page End)', 'blackwidgets' ),
+					'load'   => esc_html__( 'On Page Load', 'blackwidgets' ),
 				],
 			]
 		);
@@ -444,14 +444,14 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_control(
 			'scroll_mode',
 			[
-				'label'     => esc_html__( 'Scroll Behavior', 'black-widgets' ),
+				'label'     => esc_html__( 'Scroll Behavior', 'blackwidgets' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'once',
 				'options'   => [
-					'once'    => esc_html__( 'Play Once (No Repeat)', 'black-widgets' ),
-					'repeat'  => esc_html__( 'Replay Every Time In View', 'black-widgets' ),
-					'reverse' => esc_html__( 'Play & Reverse On Leave', 'black-widgets' ),
-					'scrub'   => esc_html__( 'Scrub With Scroll', 'black-widgets' ),
+					'once'    => esc_html__( 'Play Once (No Repeat)', 'blackwidgets' ),
+					'repeat'  => esc_html__( 'Replay Every Time In View', 'blackwidgets' ),
+					'reverse' => esc_html__( 'Play & Reverse On Leave', 'blackwidgets' ),
+					'scrub'   => esc_html__( 'Scrub With Scroll', 'blackwidgets' ),
 				],
 				'condition' => [
 					'trigger_mode' => [ 'scroll', 'inview' ],
@@ -462,10 +462,10 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_control(
 			'replay_on_back',
 			[
-				'label'        => esc_html__( 'Replay When Scrolling Back', 'black-widgets' ),
+				'label'        => esc_html__( 'Replay When Scrolling Back', 'blackwidgets' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Yes', 'black-widgets' ),
-				'label_off'    => esc_html__( 'No', 'black-widgets' ),
+				'label_on'     => esc_html__( 'Yes', 'blackwidgets' ),
+				'label_off'    => esc_html__( 'No', 'blackwidgets' ),
 				'return_value' => 'yes',
 				'default'      => '',
 				'condition'    => [
@@ -478,17 +478,17 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_control(
 			'at_scroll_start',
 			[
-				'label'     => esc_html__( 'Scroll Start', 'black-widgets' ),
+				'label'     => esc_html__( 'Scroll Start', 'blackwidgets' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'top 75%',
 				'options'   => [
-					'top bottom' => esc_html__( 'When Visible (Footer Safe)', 'black-widgets' ),
-					'top 90%'    => esc_html__( 'Early (Top 90%)', 'black-widgets' ),
-					'top 80%'    => esc_html__( 'Top 80%', 'black-widgets' ),
-					'top 75%'    => esc_html__( 'Default (Top 75%)', 'black-widgets' ),
-					'top 60%'    => esc_html__( 'Top 60%', 'black-widgets' ),
-					'top 50%'    => esc_html__( 'Center (Top 50%)', 'black-widgets' ),
-					'top 40%'    => esc_html__( 'Late (Top 40%)', 'black-widgets' ),
+					'top bottom' => esc_html__( 'When Visible (Footer Safe)', 'blackwidgets' ),
+					'top 90%'    => esc_html__( 'Early (Top 90%)', 'blackwidgets' ),
+					'top 80%'    => esc_html__( 'Top 80%', 'blackwidgets' ),
+					'top 75%'    => esc_html__( 'Default (Top 75%)', 'blackwidgets' ),
+					'top 60%'    => esc_html__( 'Top 60%', 'blackwidgets' ),
+					'top 50%'    => esc_html__( 'Center (Top 50%)', 'blackwidgets' ),
+					'top 40%'    => esc_html__( 'Late (Top 40%)', 'blackwidgets' ),
 				],
 				'condition' => [
 					'trigger_mode' => 'scroll',
@@ -499,7 +499,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'at_scrub_amount',
 			[
-				'label'       => esc_html__( 'Scrub Smoothness', 'black-widgets' ),
+				'label'       => esc_html__( 'Scrub Smoothness', 'blackwidgets' ),
 				'type'        => Controls_Manager::SLIDER,
 				'render_type' => 'template',
 				'range'       => [
@@ -523,7 +523,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'at_duration',
 			[
-				'label'       => esc_html__( 'Duration (s)', 'black-widgets' ),
+				'label'       => esc_html__( 'Duration (s)', 'blackwidgets' ),
 				'type'        => Controls_Manager::SLIDER,
 				'separator'   => 'before',
 				'render_type' => 'template',
@@ -547,7 +547,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'at_stagger',
 			[
-				'label'       => esc_html__( 'Stagger', 'black-widgets' ),
+				'label'       => esc_html__( 'Stagger', 'blackwidgets' ),
 				'type'        => Controls_Manager::SLIDER,
 				'render_type' => 'template',
 				'range'       => [
@@ -567,7 +567,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'at_delay',
 			[
-				'label'       => esc_html__( 'Delay (s)', 'black-widgets' ),
+				'label'       => esc_html__( 'Delay (s)', 'blackwidgets' ),
 				'type'        => Controls_Manager::SLIDER,
 				'render_type' => 'template',
 				'range'       => [
@@ -590,20 +590,20 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_control(
 			'ease',
 			[
-				'label'     => esc_html__( 'Easing', 'black-widgets' ),
+				'label'     => esc_html__( 'Easing', 'blackwidgets' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'auto',
 				'options'   => [
-					'auto'          => esc_html__( 'Auto (Per Animation)', 'black-widgets' ),
-					'none'          => esc_html__( 'Linear', 'black-widgets' ),
-					'power1.out'    => esc_html__( 'Soft', 'black-widgets' ),
-					'power2.out'    => esc_html__( 'Smooth', 'black-widgets' ),
-					'power3.out'    => esc_html__( 'Snappy', 'black-widgets' ),
-					'power4.out'    => esc_html__( 'Sharp', 'black-widgets' ),
-					'expo.out'      => esc_html__( 'Dramatic', 'black-widgets' ),
-					'sine.out'      => esc_html__( 'Gentle', 'black-widgets' ),
-					'back.out(1.7)' => esc_html__( 'Overshoot', 'black-widgets' ),
-					'circ.out'      => esc_html__( 'Circular', 'black-widgets' ),
+					'auto'          => esc_html__( 'Auto (Per Animation)', 'blackwidgets' ),
+					'none'          => esc_html__( 'Linear', 'blackwidgets' ),
+					'power1.out'    => esc_html__( 'Soft', 'blackwidgets' ),
+					'power2.out'    => esc_html__( 'Smooth', 'blackwidgets' ),
+					'power3.out'    => esc_html__( 'Snappy', 'blackwidgets' ),
+					'power4.out'    => esc_html__( 'Sharp', 'blackwidgets' ),
+					'expo.out'      => esc_html__( 'Dramatic', 'blackwidgets' ),
+					'sine.out'      => esc_html__( 'Gentle', 'blackwidgets' ),
+					'back.out(1.7)' => esc_html__( 'Overshoot', 'blackwidgets' ),
+					'circ.out'      => esc_html__( 'Circular', 'blackwidgets' ),
 				],
 				'condition' => [
 					'scroll_mode!' => 'scrub',
@@ -618,7 +618,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_heat_style',
 			[
-				'label'     => esc_html__( 'Text', 'black-widgets' ),
+				'label'     => esc_html__( 'Text', 'blackwidgets' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 'widget_type' => 'scroll_heat' ],
 			]
@@ -635,33 +635,33 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_control(
 			'dim_color',
 			[
-				'label'       => esc_html__( 'Dim Color', 'black-widgets' ),
+				'label'       => esc_html__( 'Dim Color', 'blackwidgets' ),
 				'type'        => Controls_Manager::COLOR,
 				'default'     => '#D7D8D4',
 				'selectors'   => [
 					'{{WRAPPER}} .mws-ew-hw' => '--mws-ew-hw-dim: {{VALUE}};',
 				],
-				'description' => esc_html__( 'Word color before scroll highlights them.', 'black-widgets' ),
+				'description' => esc_html__( 'Word color before scroll highlights them.', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'lit_color',
 			[
-				'label'       => esc_html__( 'Lit Color', 'black-widgets' ),
+				'label'       => esc_html__( 'Lit Color', 'blackwidgets' ),
 				'type'        => Controls_Manager::COLOR,
 				'default'     => '#16171B',
 				'selectors'   => [
 					'{{WRAPPER}} .mws-ew-hw' => '--mws-ew-hw-lit: {{VALUE}};',
 				],
-				'description' => esc_html__( 'Word color after scroll highlights them.', 'black-widgets' ),
+				'description' => esc_html__( 'Word color after scroll highlights them.', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'heat_max_width',
 			[
-				'label'      => esc_html__( 'Max Width', 'black-widgets' ),
+				'label'      => esc_html__( 'Max Width', 'blackwidgets' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'vw' ],
 				'range'      => [
@@ -691,7 +691,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'heat_padding',
 			[
-				'label'      => esc_html__( 'Padding', 'black-widgets' ),
+				'label'      => esc_html__( 'Padding', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'default'    => [
@@ -723,7 +723,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_at_style',
 			[
-				'label'     => esc_html__( 'Text', 'black-widgets' ),
+				'label'     => esc_html__( 'Text', 'blackwidgets' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 'widget_type' => 'animated_text' ],
 			]
@@ -740,7 +740,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_control(
 			'text_color',
 			[
-				'label'     => esc_html__( 'Color', 'black-widgets' ),
+				'label'     => esc_html__( 'Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#1B1B18',
 				'selectors' => [
@@ -755,10 +755,10 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_control(
 			'enable_gradient',
 			[
-				'label'        => esc_html__( 'Gradient Text', 'black-widgets' ),
+				'label'        => esc_html__( 'Gradient Text', 'blackwidgets' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Yes', 'black-widgets' ),
-				'label_off'    => esc_html__( 'No', 'black-widgets' ),
+				'label_on'     => esc_html__( 'Yes', 'blackwidgets' ),
+				'label_off'    => esc_html__( 'No', 'blackwidgets' ),
 				'return_value' => 'yes',
 				'default'      => '',
 				'separator'    => 'before',
@@ -768,7 +768,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_control(
 			'gradient_from',
 			[
-				'label'     => esc_html__( 'Gradient From', 'black-widgets' ),
+				'label'     => esc_html__( 'Gradient From', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#1B1B18',
 				'selectors' => [
@@ -781,7 +781,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_control(
 			'gradient_mid',
 			[
-				'label'     => esc_html__( 'Gradient Accent', 'black-widgets' ),
+				'label'     => esc_html__( 'Gradient Accent', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#4A5CFF',
 				'selectors' => [
@@ -794,7 +794,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_control(
 			'gradient_to',
 			[
-				'label'     => esc_html__( 'Gradient To', 'black-widgets' ),
+				'label'     => esc_html__( 'Gradient To', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#1B1B18',
 				'selectors' => [
@@ -807,7 +807,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'at_max_width',
 			[
-				'label'      => esc_html__( 'Max Width', 'black-widgets' ),
+				'label'      => esc_html__( 'Max Width', 'blackwidgets' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'vw' ],
 				'range'      => [
@@ -833,7 +833,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'at_padding',
 			[
-				'label'      => esc_html__( 'Padding', 'black-widgets' ),
+				'label'      => esc_html__( 'Padding', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [

@@ -3,14 +3,14 @@
  * Loaded when is_rtl() is true. Does not change LTR CSS files.
  */
 
-/* ---------- List ---------- */
+/* List */
 .rtl .bw-list .bw-list-item .bw-icon-section,
 [dir="rtl"] .bw-list .bw-list-item .bw-icon-section {
     margin-right: 0;
     margin-left: 7px;
 }
 
-/* ---------- Abstract Button ---------- */
+/* Abstract Button */
 .rtl .bw-button-box.abstract.a-1 .bw-btn span,
 [dir="rtl"] .bw-button-box.abstract.a-1 .bw-btn span,
 .rtl .bw-button-box.abstract.a-1 .bw-btn:hover span,
@@ -24,7 +24,7 @@
     transform: scaleX(-1);
 }
 
-/* ---------- Icon Box (default / left only - skip .bw-box-right which already mirrors) ---------- */
+/* Icon Box - default/left only, .bw-box-right already mirrors */
 .rtl .bw-iconbox.bw-position-3:not(.bw-box-right) .bw-content-wrap,
 [dir="rtl"] .bw-iconbox.bw-position-3:not(.bw-box-right) .bw-content-wrap {
     padding-left: 0;
@@ -68,7 +68,7 @@
     padding: 22px 12px 22px 28px;
 }
 
-/* ---------- CTA ---------- */
+/* CTA */
 .rtl .bw-cta .bw-cta-button a i,
 [dir="rtl"] .bw-cta .bw-cta-button a i,
 .rtl .bw-cta .bw-cta-button a:hover i,
@@ -91,7 +91,7 @@
     }
 }
 
-/* ---------- Magic Link ---------- */
+/* Magic Link */
 .rtl .bw-magic-link .bw-magic-heart span,
 [dir="rtl"] .bw-magic-link .bw-magic-heart span,
 .rtl .bw-magic-link .bw-magic-heart:hover span,
@@ -147,7 +147,7 @@
     right: 0;
 }
 
-/* ---------- Nav (icon spacing for style7/8) ---------- */
+/* Nav - icon spacing for style7/8 */
 .rtl .bw-nav.style7 ul li i,
 .rtl .bw-nav.style7 ul li img,
 .rtl .bw-nav.style7 ul li svg,

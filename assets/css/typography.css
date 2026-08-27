@@ -44,8 +44,8 @@
 
 /*
  * Hide pending scroll FX until typography.js attaches [data-bw-fx].
- * Without this, frontend paints visible text → GSAP sets opacity:0 → delay → animate
- * (flash then hide). Editor used to have this; frontend needs the same.
+ * Without this the frontend paints visible text, then GSAP sets opacity:0,
+ * waits for the delay and animates (flash then hide).
  */
 .bw-typograpgy-animate[data-bw-splitting]:not([data-bw-fx]):not([data-bw-no-animate]) {
     visibility: hidden;

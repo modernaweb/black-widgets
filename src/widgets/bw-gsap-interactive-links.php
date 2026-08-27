@@ -26,10 +26,8 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      * @param mixed $args Optional. Additional arguments. Default null.
      */
     public function __construct( $data = [], $args = null ) {
-        // Call parent Elementor widget constructor
         parent::__construct( $data, $args );
 
-        // Register custom widget stylesheet
         wp_register_style(
             'black-widgets-gsap-interactive-links',
             BLACK_WIDGETS_PLUGIN_URL . 'assets/css/interactive-links.css',
@@ -37,11 +35,33 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             BLACK_WIDGETS_VERSION // Version for cache busting
         );
 
-        // Register custom widget script with GSAP dependency
+        $this->register_interactive_links_script();
+    }
+
+    /**
+     * Re-register the widget script with current GSAP deps (deregister first so deps update).
+     *
+     * Listing the GSAP handle unconditionally would make WordPress drop this script
+     * whenever the CDN URL is missing or refused, so the JS guard never runs.
+     *
+     * @since 1.4.0
+     */
+    private function register_interactive_links_script() {
+        $deps = [ 'jquery' ]; // ScrollTrigger not used by this widget.
+
+        if ( \Modernaweb\BlackWidgets\Plugin_Options::has_gsap_core() ) {
+            \Modernaweb\BlackWidgets\Plugin_Options::register_gsap_scripts();
+
+            if ( wp_script_is( 'GSAP', 'registered' ) ) {
+                $deps[] = 'GSAP';
+            }
+        }
+
+        wp_deregister_script( 'black-widgets-gsap-interactive-links' );
         wp_register_script(
             'black-widgets-gsap-interactive-links',
             BLACK_WIDGETS_PLUGIN_URL . 'assets/js/interactive-links.js',
-            [ 'jquery', 'GSAP' ], // ScrollTrigger not used by this widget
+            $deps,
             BLACK_WIDGETS_VERSION, // Version for cache busting
             true
         );
@@ -72,7 +92,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      * @return string Widget title.
      */
     public function get_title() {
-        return __( 'Black Interactive Links', 'black-widgets' );
+        return __( 'Black Interactive Links', 'blackwidgets' );
     }
 
     /**
@@ -120,6 +140,8 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      * @since 1.4.0
      */
     public function get_script_depends() {
+        $this->register_interactive_links_script();
+
         return [ 'black-widgets-gsap-interactive-links' ];
     }
 
@@ -160,7 +182,6 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      * @return void
      */
     private function register_settings_controls() {
-        // Start controls section for content
         $this->start_controls_section(
             'content_section',
             [
@@ -169,23 +190,20 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Control for widget type selection
         $this->add_control(
             'widget_type',
             [
-                'label' => esc_html__( 'Select Type', 'black-widgets' ),
+                'label' => esc_html__( 'Select Type', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'options' => [
-                    'default' => esc_html__( 'default', 'black-widgets' ),
+                    'default' => esc_html__( 'default', 'blackwidgets' ),
                 ],
                 'default' => 'default',
             ]
         );
 
-        // Initialize repeater for creating multiple items
         $repeater = new \Elementor\Repeater();
 
-        // Control for title of each item
         $repeater->add_control(
             'title',
             [
@@ -195,7 +213,6 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Control for tag type selection for the title
         $repeater->add_control(
             'tag_type',
             [
@@ -216,7 +233,6 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Control for short description of each item
         $repeater->add_control(
             'short_description',
             [
@@ -227,7 +243,6 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Control for adding a link to each item
         $repeater->add_control(
             'link',
             [
@@ -243,7 +258,6 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Control for adding an image to each item
         $repeater->add_control(
             'image',
             [
@@ -255,7 +269,6 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Control to list the items (repeater field)
         $this->add_control(
             'menu_items',
             [
@@ -273,7 +286,6 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // End controls section
         $this->end_controls_section();
     }
 
@@ -309,43 +321,38 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      * @return void
      */
     private function register_style_box_controls() {
-        // Start controls section for widget box styling
         $this->start_controls_section(
             'style_section',
             [
-                'label' => esc_html__( 'Box Style', 'black-widgets' ),
+                'label' => esc_html__( 'Box Style', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
 
-        // Start tab for normal state of the widget box
         $this->start_controls_tabs('widget_box_style_tabs');
 
-        // Normal state tab: for regular widget box styling
         $this->start_controls_tab(
             'widget_box_style_normal',
             [
-                'label' => esc_html__( 'Normal', 'black-widgets' ),
+                'label' => esc_html__( 'Normal', 'blackwidgets' ),
             ]
         );
 
-        // Control for background styling (classic, gradient, or video background)
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
                 'name' => 'widget_box_background',
-                'label' => esc_html__( 'Background', 'black-widgets' ),
+                'label' => esc_html__( 'Background', 'blackwidgets' ),
                 'types' => [ 'classic', 'gradient', 'video' ],
                 'selector' => '{{WRAPPER}} .bw-interactive-link-box',
             ]
         );
 
-        // Control for border styling (width, color, radius, etc.)
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
                 'name' => 'widget_box_border',
-                'label' => esc_html__( 'Border', 'black-widgets' ),
+                'label' => esc_html__( 'Border', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-interactive-link-box',
             ]
         );
@@ -353,7 +360,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_box_border_radius',
             [
-                'label' => __('Border Radius', 'black-widgets'),
+                'label' => __('Border Radius', 'blackwidgets'),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors' => [
@@ -362,11 +369,10 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Control for padding (responsive, accepts px, %, em units)
         $this->add_responsive_control(
             'widget_box_padding',
             [
-                'label' => esc_html__( 'Padding', 'black-widgets' ),
+                'label' => esc_html__( 'Padding', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -375,11 +381,10 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Control for margin (responsive, accepts px, %, em units)
         $this->add_responsive_control(
             'widget_box_margin',
             [
-                'label' => esc_html__( 'Margin', 'black-widgets' ),
+                'label' => esc_html__( 'Margin', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -388,44 +393,39 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Control for box shadow (includes spread, blur, and color settings)
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'widget_box_shadow',
-                'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+                'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-interactive-link-box',
             ]
         );
 
-        // End normal state tab
         $this->end_controls_tab();
 
-        // Start hover state tab: for widget box hover effects
         $this->start_controls_tab(
             'widget_box_style_hover',
             [
-                'label' => esc_html__( 'Hover', 'black-widgets' ),
+                'label' => esc_html__( 'Hover', 'blackwidgets' ),
             ]
         );
 
-        // Control for hover background styling (classic, gradient)
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
                 'name' => 'widget_box_hover_background',
-                'label' => esc_html__( 'Hover Background', 'black-widgets' ),
+                'label' => esc_html__( 'Hover Background', 'blackwidgets' ),
                 'types' => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .bw-interactive-link-box:hover',
             ]
         );
 
-        // Control for hover border styling
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
                 'name' => 'widget_box_hover_border',
-                'label' => esc_html__( 'Hover Border', 'black-widgets' ),
+                'label' => esc_html__( 'Hover Border', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-interactive-link-box:hover',
             ]
         );
@@ -433,7 +433,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_box_hover_border_radius',
             [
-                'label' => __('Border Radius', 'black-widgets'),
+                'label' => __('Border Radius', 'blackwidgets'),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors' => [
@@ -442,11 +442,10 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Control for hover padding (responsive, accepts px, %, em units)
         $this->add_responsive_control(
             'widget_box_hover_padding',
             [
-                'label' => esc_html__( 'Padding', 'black-widgets' ),
+                'label' => esc_html__( 'Padding', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -455,11 +454,10 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Control for hover margin (responsive, accepts px, %, em units)
         $this->add_responsive_control(
             'widget_box_hover_margin',
             [
-                'label' => esc_html__( 'Margin', 'black-widgets' ),
+                'label' => esc_html__( 'Margin', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -468,23 +466,19 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Control for hover box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'widget_box_hover_shadow',
-                'label' => esc_html__( 'Hover Box Shadow', 'black-widgets' ),
+                'label' => esc_html__( 'Hover Box Shadow', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-interactive-link-box:hover',
             ]
         );
 
-        // End hover state tab
         $this->end_controls_tab();
 
-        // End control tabs
         $this->end_controls_tabs();
 
-        // End controls section
         $this->end_controls_section();
     }
 
@@ -500,16 +494,14 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      * @return void
      */
     private function register_style_li_controls() {
-        // Start controls section for list item styling
         $this->start_controls_section(
             'style_li',
             [
-                'label' => __( 'List Items', 'black-widgets' ),
+                'label' => __( 'List Items', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
 
-        // Typography control for list items
         $this->add_group_control(
             \Elementor\Group_Control_Typography::get_type(),
             [
@@ -518,11 +510,10 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Control for setting the gap between items in the list
         $this->add_control(
             'li_gap',
             [
-                'label' => __( 'Items Gap', 'black-widgets' ),
+                'label' => __( 'Items Gap', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'selectors' => [
                     '{{WRAPPER}} .bw-il-menu li' => 'margin-bottom: {{SIZE}}{{UNIT}};',
@@ -530,22 +521,19 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Start tabs for normal and hover styles
         $this->start_controls_tabs( 'tabs_li_style' );
 
-        // Normal state controls for list items
         $this->start_controls_tab(
             'tab_li_normal',
             [
-                'label' => __( 'Normal', 'black-widgets' ),
+                'label' => __( 'Normal', 'blackwidgets' ),
             ]
         );
 
-        // Control for setting the text color of list items
         $this->add_control(
             'li_text_color',
             [
-                'label' => __( 'Text Color', 'black-widgets' ),
+                'label' => __( 'Text Color', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bw-il-menu li' => 'color: {{VALUE}};',
@@ -553,7 +541,6 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Control for setting the background of list items
         $this->add_group_control(
             \Elementor\Group_Control_Background::get_type(),
             [
@@ -562,12 +549,11 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Control for border styling (width, color, radius, etc.)
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
                 'name' => 'li_border',
-                'label' => esc_html__( 'Border', 'black-widgets' ),
+                'label' => esc_html__( 'Border', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-il-menu li',
             ]
         );
@@ -575,7 +561,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
         $this->add_control(
             'li_border_radius',
             [
-                'label' => __('Border Radius', 'black-widgets'),
+                'label' => __('Border Radius', 'blackwidgets'),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors' => [
@@ -584,11 +570,10 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Control for padding (responsive, accepts px, %, em units)
         $this->add_responsive_control(
             'li_padding',
             [
-                'label' => esc_html__( 'Padding', 'black-widgets' ),
+                'label' => esc_html__( 'Padding', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -597,11 +582,10 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Control for margin (responsive, accepts px, %, em units)
         $this->add_responsive_control(
             'li_margin',
             [
-                'label' => esc_html__( 'Margin', 'black-widgets' ),
+                'label' => esc_html__( 'Margin', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -610,31 +594,28 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Control for box shadow (includes spread, blur, and color settings)
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'li_box_shadow',
-                'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+                'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-il-menu li',
             ]
         );
 
         $this->end_controls_tab();
 
-        // Hover state controls for list items
         $this->start_controls_tab(
             'tab_li_hover',
             [
-                'label' => __( 'Hover', 'black-widgets' ),
+                'label' => __( 'Hover', 'blackwidgets' ),
             ]
         );
 
-        // Control for setting the hover text color of list items
         $this->add_control(
             'li_hover_color',
             [
-                'label' => __( 'Hover Text Color', 'black-widgets' ),
+                'label' => __( 'Hover Text Color', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bw-il-menu li:hover' => 'color: {{VALUE}};',
@@ -642,11 +623,10 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Control for setting the hover background color of list items
         $this->add_control(
             'li_hover_bg',
             [
-                'label' => __( 'Hover Background', 'black-widgets' ),
+                'label' => __( 'Hover Background', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bw-il-menu li:hover' => 'background-color: {{VALUE}};',
@@ -654,12 +634,11 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Control for border styling (width, color, radius, etc.)
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
                 'name' => 'li_hover_border',
-                'label' => esc_html__( 'Border', 'black-widgets' ),
+                'label' => esc_html__( 'Border', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-il-menu li:hover',
             ]
         );
@@ -667,7 +646,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
         $this->add_control(
             'li_hover_border_radius',
             [
-                'label' => __('Border Radius', 'black-widgets'),
+                'label' => __('Border Radius', 'blackwidgets'),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors' => [
@@ -676,11 +655,10 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Control for padding (responsive, accepts px, %, em units)
         $this->add_responsive_control(
             'li_hover_padding',
             [
-                'label' => esc_html__( 'Padding', 'black-widgets' ),
+                'label' => esc_html__( 'Padding', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -689,11 +667,10 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Control for margin (responsive, accepts px, %, em units)
         $this->add_responsive_control(
             'li_hover_margin',
             [
-                'label' => esc_html__( 'Margin', 'black-widgets' ),
+                'label' => esc_html__( 'Margin', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -702,12 +679,11 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Control for box shadow (includes spread, blur, and color settings)
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'li_hover_box_shadow',
-                'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+                'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-il-menu li:hover',
             ]
         );
@@ -716,7 +692,6 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
 
         $this->end_controls_tabs();
 
-        // End controls section for list item styling
         $this->end_controls_section();
     }
 
@@ -731,16 +706,14 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      * @return void
      */
     private function register_style_links_titles_controls() {
-        // Start controls section for links and titles styling
         $this->start_controls_section(
             'style_links_titles',
             [
-                'label' => __( 'Links & Titles', 'black-widgets' ),
+                'label' => __( 'Links & Titles', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
 
-        // Typography control for titles and links
         $this->add_group_control(
             \Elementor\Group_Control_Typography::get_type(),
             [
@@ -749,22 +722,19 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Start tabs for normal and hover styles
         $this->start_controls_tabs( 'tabs_title_style' );
 
-        // Normal state controls for title and link
         $this->start_controls_tab(
             'tab_title_normal',
             [
-                'label' => __( 'Normal', 'black-widgets' ),
+                'label' => __( 'Normal', 'blackwidgets' ),
             ]
         );
 
-        // Control for setting the color of the title and link in normal state
         $this->add_control(
             'title_color',
             [
-                'label' => __( 'Title Color', 'black-widgets' ),
+                'label' => __( 'Title Color', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bw-il-title' => 'color: {{VALUE}};',
@@ -775,19 +745,17 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
 
         $this->end_controls_tab();
 
-        // Hover state controls for title and link
         $this->start_controls_tab(
             'tab_title_hover',
             [
-                'label' => __( 'Hover', 'black-widgets' ),
+                'label' => __( 'Hover', 'blackwidgets' ),
             ]
         );
 
-        // Control for setting the hover color of the title
         $this->add_control(
             'title_hover_color',
             [
-                'label' => __( 'Title Hover Color', 'black-widgets' ),
+                'label' => __( 'Title Hover Color', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bw-il-menu li:hover .bw-il-title' => 'color: {{VALUE}};',
@@ -799,11 +767,10 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
 
         $this->end_controls_tabs();
 
-        // Control for setting padding around titles
         $this->add_responsive_control(
             'title_padding',
             [
-                'label' => __( 'Title Padding', 'black-widgets' ),
+                'label' => __( 'Title Padding', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'selectors' => [
                     '{{WRAPPER}} .bw-il-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -811,7 +778,6 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // End controls section for links and titles styling
         $this->end_controls_section();
     }
 
@@ -828,16 +794,14 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      */
     private function register_style_description_controls() {
 
-        // Start controls section for description text styling
         $this->start_controls_section(
             'style_description',
             [
-                'label' => __( 'Description', 'black-widgets' ),
+                'label' => __( 'Description', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
 
-        // Typography control for description text
         $this->add_group_control(
             \Elementor\Group_Control_Typography::get_type(),
             [
@@ -846,22 +810,19 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Start tabs for normal and hover styles
         $this->start_controls_tabs( 'tabs_description_style' );
 
-        // Normal state controls for description text
         $this->start_controls_tab(
             'tab_description_normal',
             [
-                'label' => __( 'Normal', 'black-widgets' ),
+                'label' => __( 'Normal', 'blackwidgets' ),
             ]
         );
 
-        // Control for setting the color of the description text in normal state
         $this->add_control(
             'description_color',
             [
-                'label' => __( 'Text Color', 'black-widgets' ),
+                'label' => __( 'Text Color', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bw-il-description' => 'color: {{VALUE}};',
@@ -869,7 +830,6 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background control for description text in normal state
         $this->add_group_control(
             \Elementor\Group_Control_Background::get_type(),
             [
@@ -878,7 +838,6 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Text shadow control for description text in normal state
         $this->add_group_control(
             \Elementor\Group_Control_Text_Shadow::get_type(),
             [
@@ -889,19 +848,17 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
 
         $this->end_controls_tab();
 
-        // Hover state controls for description text
         $this->start_controls_tab(
             'tab_description_hover',
             [
-                'label' => __( 'Hover', 'black-widgets' ),
+                'label' => __( 'Hover', 'blackwidgets' ),
             ]
         );
 
-        // Control for setting the hover color of the description text
         $this->add_control(
             'description_hover_color',
             [
-                'label' => __( 'Hover Color', 'black-widgets' ),
+                'label' => __( 'Hover Color', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bw-il-menu li:hover .bw-il-description' => 'color: {{VALUE}};',
@@ -909,7 +866,6 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background control for description text in hover state
         $this->add_group_control(
             \Elementor\Group_Control_Background::get_type(),
             [
@@ -918,7 +874,6 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Text shadow control for description text in hover state
         $this->add_group_control(
             \Elementor\Group_Control_Text_Shadow::get_type(),
             [
@@ -931,11 +886,10 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
 
         $this->end_controls_tabs();
 
-        // Padding control for description text
         $this->add_responsive_control(
             'description_padding',
             [
-                'label' => __( 'Padding', 'black-widgets' ),
+                'label' => __( 'Padding', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'selectors' => [
                     '{{WRAPPER}} .bw-il-description' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -943,11 +897,10 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin control for description text
         $this->add_responsive_control(
             'description_margin',
             [
-                'label' => __( 'Margin', 'black-widgets' ),
+                'label' => __( 'Margin', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'selectors' => [
                     '{{WRAPPER}} .bw-il-description' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -955,23 +908,22 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Text alignment control for description text
         $this->add_responsive_control(
             'description_text_align',
             [
-                'label' => __( 'Text Align', 'black-widgets' ),
+                'label' => __( 'Text Align', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => __( 'Left', 'black-widgets' ),
+                        'title' => __( 'Left', 'blackwidgets' ),
                         'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => __( 'Center', 'black-widgets' ),
+                        'title' => __( 'Center', 'blackwidgets' ),
                         'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
-                        'title' => __( 'Right', 'black-widgets' ),
+                        'title' => __( 'Right', 'blackwidgets' ),
                         'icon' => 'eicon-text-align-right',
                     ],
                 ],
@@ -982,7 +934,6 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // End controls section for description text styling
         $this->end_controls_section();
     }
 
@@ -998,16 +949,14 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      */
     private function register_style_image_container_controls() {
 
-        // Start controls section for image container styling
         $this->start_controls_section(
             'style_container_section',
             [
-                'label' => __( 'Hover Image Container', 'black-widgets' ),
+                'label' => __( 'Hover Image Container', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
 
-        // Background control for the image container
         // Use global .bw-il-uid-{{ID}} - hover layer is portaled to <body>.
         $this->add_group_control(
             \Elementor\Group_Control_Background::get_type(),
@@ -1017,7 +966,6 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border control for the image container
         $this->add_group_control(
             \Elementor\Group_Control_Border::get_type(),
             [
@@ -1026,7 +974,6 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow control for the image container
         $this->add_group_control(
             \Elementor\Group_Control_Box_Shadow::get_type(),
             [
@@ -1035,11 +982,10 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding control for the image container
         $this->add_responsive_control(
             'container_padding',
             [
-                'label' => __( 'Padding', 'black-widgets' ),
+                'label' => __( 'Padding', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'selectors' => [
                     '.bw-il-uid-{{ID}}' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -1047,11 +993,10 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin control for the image container
         $this->add_responsive_control(
             'container_margin',
             [
-                'label' => __( 'Margin', 'black-widgets' ),
+                'label' => __( 'Margin', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'selectors' => [
                     '.bw-il-uid-{{ID}}' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -1059,7 +1004,6 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        // End controls section for image container styling
         $this->end_controls_section();
     }
 
@@ -1076,11 +1020,10 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      */
     private function register_style_hover_image_controls() {
 
-        // Start the section for hover image styling
         $this->start_controls_section(
             'style_hover_image_section',
             [
-                'label' => __( 'Hover Image', 'black-widgets' ),
+                'label' => __( 'Hover Image', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1089,7 +1032,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'hover_image_width',
             [
-                'label' => __('Image Width', 'black-widgets'),
+                'label' => __('Image Width', 'blackwidgets'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem', 'vw'],
                 'range' => [
@@ -1106,7 +1049,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
                     'unit' => 'px',
                     'size' => 280,
                 ],
-                'description' => __( 'Try 240px to 320px for the hover image size.', 'black-widgets' ),
+                'description' => __( 'Try 240px to 320px for the hover image size.', 'blackwidgets' ),
                 'selectors' => [
                     '.bw-il-uid-{{ID}}' => 'width: {{SIZE}}{{UNIT}}; max-width: min(420px, {{SIZE}}{{UNIT}}, 42vw);',
                 ],
@@ -1116,7 +1059,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'hover_image_height',
             [
-                'label' => __('Image Height', 'black-widgets'),
+                'label' => __('Image Height', 'blackwidgets'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [
@@ -1125,7 +1068,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
                         'max' => 720,
                     ],
                 ],
-                'description' => __( 'Leave empty to auto-scale height and show the full image at its own aspect ratio.', 'black-widgets' ),
+                'description' => __( 'Leave empty to auto-scale height and show the full image at its own aspect ratio.', 'blackwidgets' ),
                 'selectors' => [
                     '.bw-il-uid-{{ID}}' => 'height: {{SIZE}}{{UNIT}}; aspect-ratio: auto;',
                 ],
@@ -1135,7 +1078,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
         $this->add_control(
             'hover_image_opacity',
             [
-                'label' => __( 'Opacity', 'black-widgets' ),
+                'label' => __( 'Opacity', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'range' => [ 'px' => [ 'min' => 0, 'max' => 1, 'step' => 0.01 ] ],
                 'selectors' => [
@@ -1163,7 +1106,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'hover_image_border_radius',
             [
-                'label' => __( 'Border Radius', 'black-widgets' ),
+                'label' => __( 'Border Radius', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'default' => [
                     'top' => 14,
@@ -1183,7 +1126,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'hover_image_margin',
             [
-                'label' => __( 'Margin', 'black-widgets' ),
+                'label' => __( 'Margin', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'selectors' => [
                     '.bw-il-uid-{{ID}} .bw-il-hover-image' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -1194,7 +1137,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'hover_image_padding',
             [
-                'label' => __( 'Padding', 'black-widgets' ),
+                'label' => __( 'Padding', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'selectors' => [
                     '.bw-il-uid-{{ID}} .bw-il-hover-image' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -1217,119 +1160,104 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      */
     private function register_style_gsap_controls() {
 
-        // Start the section for GSAP hover effects styling
         $this->start_controls_section(
             'style_gsap_effects',
             [
-                'label' => __( 'GSAP Hover Effects', 'black-widgets' ),
+                'label' => __( 'GSAP Hover Effects', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
 
-        // Start the tabs for normal and hover states
         $this->start_controls_tabs('gsap_hover_tabs');
 
-        // Normal state tab
         $this->start_controls_tab(
             'gsap_tab_normal',
             [
-                'label' => esc_html__( 'Normal', 'black-widgets' ),
+                'label' => esc_html__( 'Normal', 'blackwidgets' ),
             ]
         );
 
-        // Brightness control for normal state
         $this->add_control('gsap_brightness_normal', [
-            'label' => __( 'Brightness', 'black-widgets' ),
+            'label' => __( 'Brightness', 'blackwidgets' ),
             'type' => \Elementor\Controls_Manager::SLIDER,
             'range' => [ 'px' => [ 'min' => 0.5, 'max' => 3, 'step' => 0.1 ] ],
             'default' => [ 'size' => 1 ],
         ]);
 
-        // End the normal state tab
         $this->end_controls_tab();
 
-        // Hover state tab
         $this->start_controls_tab(
             'gsap_tab_hover',
             [
-                'label' => esc_html__( 'Hover', 'black-widgets' ),
+                'label' => esc_html__( 'Hover', 'blackwidgets' ),
             ]
         );
 
-        // Max Rotation X control for hover state
         $this->add_control('gsap_max_rotation_x', [
-            'label' => __( 'Max Rotation X', 'black-widgets' ),
+            'label' => __( 'Max Rotation X', 'blackwidgets' ),
             'type' => \Elementor\Controls_Manager::SLIDER,
             'range' => [ 'px' => [ 'min' => -90, 'max' => 90 ] ],
             'default' => [ 'size' => 8 ],
         ]);
 
-        // Max Rotation Y control for hover state
         $this->add_control('gsap_max_rotation_y', [
-            'label' => __( 'Max Rotation Y', 'black-widgets' ),
+            'label' => __( 'Max Rotation Y', 'blackwidgets' ),
             'type' => \Elementor\Controls_Manager::SLIDER,
             'range' => [ 'px' => [ 'min' => -90, 'max' => 90 ] ],
             'default' => [ 'size' => 8 ],
         ]);
 
-        // Rotation Z strength control for hover state
         $this->add_control('gsap_rotation_z_strength', [
-            'label' => __( 'Rotation Z Strength', 'black-widgets' ),
+            'label' => __( 'Rotation Z Strength', 'blackwidgets' ),
             'type' => \Elementor\Controls_Manager::SLIDER,
             'range' => [ 'px' => [ 'min' => -5, 'max' => 5, 'step' => 0.1 ] ],
             'default' => [ 'size' => 0.12 ],
         ]);
 
-        // Max Translate X control for hover state
         $this->add_control('gsap_max_translate_x', [
-            'label' => __( 'Max Translate X', 'black-widgets' ),
+            'label' => __( 'Max Translate X', 'blackwidgets' ),
             'type' => \Elementor\Controls_Manager::SLIDER,
             'range' => [ 'px' => [ 'min' => -300, 'max' => 300 ] ],
             'default' => [ 'size' => 14 ],
         ]);
 
-        // Max Translate Y control for hover state
         $this->add_control('gsap_max_translate_y', [
-            'label' => __( 'Max Translate Y', 'black-widgets' ),
+            'label' => __( 'Max Translate Y', 'blackwidgets' ),
             'type' => \Elementor\Controls_Manager::SLIDER,
             'range' => [ 'px' => [ 'min' => -300, 'max' => 300 ] ],
             'default' => [ 'size' => 14 ],
         ]);
 
-        // Brightness on hover control
         $this->add_control('gsap_brightness_strength', [
-            'label' => __( 'Brightness on Hover', 'black-widgets' ),
+            'label' => __( 'Brightness on Hover', 'blackwidgets' ),
             'type' => \Elementor\Controls_Manager::SLIDER,
             'range' => [ 'px' => [ 'min' => 0.5, 'max' => 3, 'step' => 0.1 ] ],
             'default' => [ 'size' => 1.12 ],
         ]);
 
-        // Image fade-in duration control for hover state
         $this->add_control('gsap_fadein_duration', [
-            'label' => __( 'Image Fade-In Duration', 'black-widgets' ),
+            'label' => __( 'Image Fade-In Duration', 'blackwidgets' ),
             'type' => \Elementor\Controls_Manager::SLIDER,
             'range' => [ 'px' => [ 'min' => 0, 'max' => 2, 'step' => 0.1 ] ],
             'default' => [ 'size' => 0.35 ],
         ]);
 
-        // Image fade-out duration control for hover state
         $this->add_control('gsap_fadeout_duration', [
-            'label' => __( 'Image Fade-Out Duration', 'black-widgets' ),
+            'label' => __( 'Image Fade-Out Duration', 'blackwidgets' ),
             'type' => \Elementor\Controls_Manager::SLIDER,
             'range' => [ 'px' => [ 'min' => 0, 'max' => 2, 'step' => 0.1 ] ],
             'default' => [ 'size' => 0.25 ],
         ]);
 
-        // Main animation duration control for hover state
         $this->add_control('gsap_animation_duration', [
-            'label' => __( 'Main Animation Duration', 'black-widgets' ),
+            'label' => __( 'Main Animation Duration', 'blackwidgets' ),
             'type' => \Elementor\Controls_Manager::SLIDER,
             'range' => [ 'px' => [ 'min' => 0.1, 'max' => 2, 'step' => 0.1 ] ],
             'default' => [ 'size' => 0.28 ],
         ]);
 
         $this->add_control('gsap_ease', [
-            'label'   => __( 'Ease', 'black-widgets' ),
+            'label'   => __( 'Ease', 'blackwidgets' ),
             'type'    => \Elementor\Controls_Manager::SELECT,
             'default' => 'power2.out',
             'options' => [
@@ -1342,13 +1270,10 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ],
         ]);
 
-        // End the hover state tab
         $this->end_controls_tab();
 
-        // End the tabs section
         $this->end_controls_tabs();
 
-        // End the GSAP hover effects section
         $this->end_controls_section();
     }
 
@@ -1361,20 +1286,16 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      * @access protected
      */
     protected function render() {
-        // Get the settings from the Elementor widget panel
         $settings = $this->get_settings_for_display();
 
-        // Helper function to safely retrieve numeric values from settings
         $safe_number = function($key, $default = 0) use ($settings) {
             return isset($settings[$key]['size']) ? floatval($settings[$key]['size']) : $default;
         };
 
-        // Helper function to safely retrieve string values from settings
         $safe_string = function($key, $default = '') use ($settings) {
             return isset($settings[$key]) ? sanitize_text_field($settings[$key]) : $default;
         };
 
-        // Build the GSAP settings array with sanitized and validated data
         $gsap_data = [
             'maxRotX' => $safe_number('gsap_max_rotation_x', 8),
             'maxRotY' => $safe_number('gsap_max_rotation_y', 8),
@@ -1389,15 +1310,18 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             'rotZStrength' => $safe_number('gsap_rotation_z_strength', 0.12),
         ];
 
-        // Encode the GSAP settings as JSON and escape for safe HTML output
         $encoded_data = wp_json_encode( $gsap_data );
+
+        $menu_items = ! empty( $settings['menu_items'] ) && is_array( $settings['menu_items'] ) ? $settings['menu_items'] : [];
         ?>
 
         <!-- Main container with encoded GSAP settings in a data attribute -->
         <div class="bw-interactive-link-box" data-gsap-settings="<?php echo esc_attr( $encoded_data ); ?>">
             <ul class="bw-il-menu">
-                <?php foreach ( $settings['menu_items'] as $item ) :
-                    // Sanitize individual item fields
+                <?php foreach ( $menu_items as $item ) :
+                    if ( ! is_array( $item ) ) {
+                        continue;
+                    }
                     $tag = tag_escape( $item['tag_type'] ?? 'h3' );
                     $title = esc_html( sanitize_text_field( $item['title'] ?? '' ) );
                     $description = esc_html( sanitize_text_field( $item['short_description'] ?? '' ) );

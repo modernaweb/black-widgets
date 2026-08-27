@@ -48,88 +48,18 @@ final class Main {
         add_filter( 'wp_handle_upload_prefilter', [ $this, 'sanitize_uploaded_svg' ] );
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_public_scripts' ] );
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_public_styles' ] );
-        add_action( 'plugins_loaded', [ $this, 'load_textdomain' ] );
         add_action('elementor/frontend/after_register_scripts', [ $this, 'register_widget_scripts' ] );
         add_action('elementor/frontend/after_register_styles', [ $this, 'register_widget_styles']);
+
+        // Registered outside is_admin() on purpose: WP-CLI and cron auto-updates
+        // never load the Admin class, and that is exactly when nobody is around to
+        // trigger the Elementor CSS rebuild from wp-admin.
+        add_action( 'upgrader_process_complete', 'black_widgets_clear_css_cache_after_update', 10, 2 );
 
         if ( is_admin() ) {
             require_once( __DIR__ . '/admin.php' );
             new Admin();
         }
-    }
-
-    public function load_textdomain() {
-        // WP 4.6+ auto-loads the canonical `black-widgets` domain for this plugin slug.
-        // Legacy `blackwidgets` language packs (pre-1.4.0) still need an explicit MO load.
-        $locale = function_exists( 'determine_locale' ) ? determine_locale() : get_locale();
-        $legacy_candidates = [
-            WP_LANG_DIR . '/plugins/blackwidgets-' . $locale . '.mo',
-            BLACK_WIDGETS_PLUGIN_PATH . 'languages/blackwidgets-' . $locale . '.mo',
-        ];
-
-        $legacy_loaded = false;
-        foreach ( $legacy_candidates as $mofile ) {
-            if ( is_readable( $mofile ) ) {
-                load_textdomain( 'blackwidgets', $mofile );
-                $legacy_loaded = true;
-                break;
-            }
-        }
-
-        // Without a legacy MO there is nothing to fall back to, so skip the per-string filters.
-        if ( ! $legacy_loaded ) {
-            return;
-        }
-
-        add_filter( 'gettext', [ $this, 'textdomain_compat_fallback' ], 10, 3 );
-        add_filter( 'ngettext', [ $this, 'textdomain_compat_fallback_n' ], 10, 5 );
-    }
-
-    /**
-     * Fall back to legacy `blackwidgets` translations when a `black-widgets` string is untranslated.
-     *
-     * @param string $translation Translated text.
-     * @param string $text        Original text.
-     * @param string $domain      Text domain.
-     * @return string
-     */
-    public function textdomain_compat_fallback( $translation, $text, $domain ) {
-        if ( 'black-widgets' !== $domain || $translation !== $text ) {
-            return $translation;
-        }
-
-        remove_filter( 'gettext', [ $this, 'textdomain_compat_fallback' ], 10 );
-        $fallback = translate( $text, 'blackwidgets' ); // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralDomain
-        add_filter( 'gettext', [ $this, 'textdomain_compat_fallback' ], 10, 3 );
-
-        return ( $fallback !== $text ) ? $fallback : $translation;
-    }
-
-    /**
-     * Plural form fallback for the legacy text domain.
-     *
-     * @param string $translation Translated text.
-     * @param string $single      Singular form.
-     * @param string $plural      Plural form.
-     * @param int    $number      Number.
-     * @param string $domain      Text domain.
-     * @return string
-     */
-    public function textdomain_compat_fallback_n( $translation, $single, $plural, $number, $domain ) {
-        if ( 'black-widgets' !== $domain ) {
-            return $translation;
-        }
-
-        $expected = ( 1 === (int) $number ) ? $single : $plural;
-        if ( $translation !== $expected ) {
-            return $translation;
-        }
-
-        remove_filter( 'ngettext', [ $this, 'textdomain_compat_fallback_n' ], 10 );
-        $fallback = _n( $single, $plural, $number, 'blackwidgets' ); // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralDomain,WordPress.WP.I18n.NonSingularStringLiteralSingular,WordPress.WP.I18n.NonSingularStringLiteralPlural
-        add_filter( 'ngettext', [ $this, 'textdomain_compat_fallback_n' ], 10, 5 );
-
-        return $fallback;
     }
 
     public function init() {
@@ -244,7 +174,7 @@ final class Main {
             wp_register_script( 'black-widgets-typography', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/typography.js', $typo_deps, BLACK_WIDGETS_VERSION, true );
         }
 
-        // Always enqueue SplitText in the preview when the CDN option is on —
+        // Always enqueue SplitText in the preview when the CDN option is on.
         // Mask Rise / Clip Wipe need it even if typography.js was registered earlier.
         if ( Plugin_Options::is_gsap_split_ready() && wp_script_is( 'GSAP-SplitText', 'registered' ) ) {
             wp_enqueue_script( 'GSAP-SplitText' );
@@ -316,9 +246,9 @@ final class Main {
 
         $message = sprintf(
         /* translators: 1: Plugin name 2: Elementor */
-            esc_html__( '"%1$s" requires "%2$s" to be installed and activated.', 'black-widgets' ),
-            '<strong>' . esc_html__( 'Black widgets is Elementor extension', 'black-widgets' ) . '</strong>',
-            '<strong>' . esc_html__( 'Elementor Plugin', 'black-widgets' ) . '</strong>'
+            esc_html__( '"%1$s" requires "%2$s" to be installed and activated.', 'blackwidgets' ),
+            '<strong>' . esc_html__( 'Black widgets is Elementor extension', 'blackwidgets' ) . '</strong>',
+            '<strong>' . esc_html__( 'Elementor Plugin', 'blackwidgets' ) . '</strong>'
         );
 
         printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -330,9 +260,9 @@ final class Main {
 
         $message = sprintf(
         /* translators: 1: Plugin name 2: Elementor 3: Required Elementor version */
-            esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'black-widgets' ),
-            '<strong>' . esc_html__( 'This is Elementor extension', 'black-widgets' ) . '</strong>',
-            '<strong>' . esc_html__( 'Elementor', 'black-widgets' ) . '</strong>',
+            esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'blackwidgets' ),
+            '<strong>' . esc_html__( 'Black Widgets', 'blackwidgets' ) . '</strong>',
+            '<strong>' . esc_html__( 'Elementor', 'blackwidgets' ) . '</strong>',
             self::MINIMUM_ELEMENTOR_VERSION
         );
 
@@ -346,9 +276,9 @@ final class Main {
 
         $message = sprintf(
         /* translators: 1: Plugin name 2: PHP 3: Required PHP version */
-            esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'black-widgets' ),
-            '<strong>' . esc_html__( 'Elementor Test Extension', 'black-widgets' ) . '</strong>',
-            '<strong>' . esc_html__( 'PHP', 'black-widgets' ) . '</strong>',
+            esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'blackwidgets' ),
+            '<strong>' . esc_html__( 'Black Widgets', 'blackwidgets' ) . '</strong>',
+            '<strong>' . esc_html__( 'PHP', 'blackwidgets' ) . '</strong>',
             self::MINIMUM_PHP_VERSION
         );
 
@@ -406,7 +336,7 @@ final class Main {
         \Elementor\Plugin::instance()->widgets_manager->register( new ImageCarousel() );
         \Elementor\Plugin::instance()->widgets_manager->register( new TextAnimate() );
 
-        // GSAP-powered widgets - only when JS → CDN master toggle is on (matches 1.3.9 pattern).
+        // GSAP-powered widgets - only when the JS CDN master toggle is on.
         if ( Plugin_Options::is_gsap_toggle_on() ) {
             require_once( __DIR__ . '/widgets/bw-gsap-trigger.php' );
             require_once( __DIR__ . '/widgets/bw-gsap-horizontal-scrolling.php' );
@@ -468,7 +398,7 @@ final class Main {
         $elements_manager->add_category(
             'black_widgets',
             [
-                'title' => esc_html__( 'Black widgets', 'black-widgets' ),
+                'title' => esc_html__( 'Black Widgets', 'blackwidgets' ),
                 'icon' => 'fa fa-plug',
             ]
         );

@@ -55,7 +55,7 @@ class Box extends \Elementor\Widget_Base {
      * @return string Widget title.
      */
     public function get_title() {
-        return __( 'Black Box', 'black-widgets' );
+        return __( 'Black Box', 'blackwidgets' );
     }
 
     /**
@@ -113,7 +113,7 @@ class Box extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'content_section',
             [
-                'label' => esc_html__( 'Content', 'black-widgets' ),
+                'label' => esc_html__( 'Content', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -123,11 +123,11 @@ class Box extends \Elementor\Widget_Base {
             [
                 'type' => \Elementor\Controls_Manager::ALERT,
                 'alert_type' => 'info',     /* info, success, warning, danger */
-                'heading' => esc_html__( 'Feel free to edit. Check this widget\'s demo.', 'black-widgets' ),
+                'heading' => esc_html__( 'Feel free to edit. Check this widget\'s demo.', 'blackwidgets' ),
                 'content' => sprintf(
                     '%s <a href="https://modernaweb.net/black-widgets/all-widgets/black-box/" target="_blank">%s</a>',
-                    esc_html__( 'Check ', 'black-widgets' ),
-                    esc_html__( 'Demo', 'black-widgets' )
+                    esc_html__( 'Check ', 'blackwidgets' ),
+                    esc_html__( 'Demo', 'blackwidgets' )
                 ),
             ]
         );
@@ -136,14 +136,14 @@ class Box extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_type',
             [
-                'label' => esc_html__( 'Select Type', 'black-widgets' ),
+                'label' => esc_html__( 'Select Type', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'bw-style-1',
                 'options' => [
-                    'bw-style-1' => esc_html__( 'Type 1', 'black-widgets' ),
-                    'bw-style-2' => esc_html__( 'Type 2', 'black-widgets' ),
+                    'bw-style-1' => esc_html__( 'Type 1', 'blackwidgets' ),
+                    'bw-style-2' => esc_html__( 'Type 2', 'blackwidgets' ),
                 ],
-                'description' => esc_html__( 'We created some skin before, you can use these or no! make a new custom type.', 'black-widgets' ),
+                'description' => esc_html__( 'We created some skin before, you can use these or no! make a new custom type.', 'blackwidgets' ),
             ]
         );
 
@@ -158,12 +158,12 @@ class Box extends \Elementor\Widget_Base {
         $this->add_control(
             'box_link',
             [
-                'label' => esc_html__( 'Box Link', 'black-widgets' ),
+                'label' => esc_html__( 'Box Link', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'no',
                 'options' => [
-                    'no' => esc_html__( 'No', 'black-widgets' ),
-                    'yes' => esc_html__( 'Yes', 'black-widgets' ),
+                    'no' => esc_html__( 'No', 'blackwidgets' ),
+                    'yes' => esc_html__( 'Yes', 'blackwidgets' ),
                 ],
             ]
         );
@@ -171,9 +171,9 @@ class Box extends \Elementor\Widget_Base {
         $this->add_control(
             'box_link_url',
             [
-                'label' => esc_html__( 'Link', 'black-widgets' ),
+                'label' => esc_html__( 'Link', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::URL,
-                'placeholder' => esc_html__( 'https://your-link.com', 'black-widgets' ),
+                'placeholder' => esc_html__( 'https://your-link.com', 'blackwidgets' ),
                 'show_external' => true,
                 'default' => [
                     'url' => '#',
@@ -198,7 +198,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_control(
             'image',
             [
-                'label' => esc_html__( 'Choose Image', 'black-widgets' ),
+                'label' => esc_html__( 'Choose Image', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::MEDIA,
                 'default' => [
                     'url' => \Elementor\Utils::get_placeholder_image_src(),
@@ -227,11 +227,11 @@ class Box extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_title',
             [
-                'label' => esc_html__( 'Title', 'black-widgets' ),
+                'label' => esc_html__( 'Title', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => esc_html__( 'Clean & Solid', 'black-widgets' ),
-                'placeholder' => esc_html__( 'Type your title here', 'black-widgets' ),
-                'description' => esc_html__( 'You can use all other HTML tags into the title field e.g. code, mark, abbr, blockquote and  ...', 'black-widgets' ),
+                'default' => esc_html__( 'Clean & Solid', 'blackwidgets' ),
+                'placeholder' => esc_html__( 'Type your title here', 'blackwidgets' ),
+                'description' => esc_html__( 'You can use all other HTML tags into the title field e.g. code, mark, abbr, blockquote and  ...', 'blackwidgets' ),
             ]
         );
 
@@ -239,21 +239,21 @@ class Box extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_html_tag_title',
             [
-                'label' => esc_html__( 'HTML Tag', 'black-widgets' ),
+                'label' => esc_html__( 'HTML Tag', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'h4',
                 'options' => [
-                    'div' => esc_html__( 'div', 'black-widgets' ),
-                    'h1' => esc_html__( 'H1', 'black-widgets' ),
-                    'h2' => esc_html__( 'H2', 'black-widgets' ),
-                    'h3' => esc_html__( 'H3', 'black-widgets' ),
-                    'h4' => esc_html__( 'H4', 'black-widgets' ),
-                    'h5' => esc_html__( 'H5', 'black-widgets' ),
-                    'h6' => esc_html__( 'H6', 'black-widgets' ),
-                    'p' => esc_html__( 'p', 'black-widgets' ),
-                    'span' => esc_html__( 'span', 'black-widgets' ),
+                    'div' => esc_html__( 'div', 'blackwidgets' ),
+                    'h1' => esc_html__( 'H1', 'blackwidgets' ),
+                    'h2' => esc_html__( 'H2', 'blackwidgets' ),
+                    'h3' => esc_html__( 'H3', 'blackwidgets' ),
+                    'h4' => esc_html__( 'H4', 'blackwidgets' ),
+                    'h5' => esc_html__( 'H5', 'blackwidgets' ),
+                    'h6' => esc_html__( 'H6', 'blackwidgets' ),
+                    'p' => esc_html__( 'p', 'blackwidgets' ),
+                    'span' => esc_html__( 'span', 'blackwidgets' ),
                 ],
-                'description' => esc_html__( 'Choose an HTML tag, it can help you to SEO and beautifully of the UI design with follow the structure of your website.', 'black-widgets' ),
+                'description' => esc_html__( 'Choose an HTML tag, it can help you to SEO and beautifully of the UI design with follow the structure of your website.', 'blackwidgets' ),
             ]
         );
 
@@ -268,11 +268,11 @@ class Box extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_subtitle',
             [
-                'label' => esc_html__( 'Subtitle', 'black-widgets' ),
+                'label' => esc_html__( 'Subtitle', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'placeholder' => esc_html__( 'Type your title here', 'black-widgets' ),
-                'default' => esc_html__( 'Development, Design, and E-Commerce', 'black-widgets' ),
-                'description' => esc_html__( 'You can use all other HTML tags into the title field e.g. code, mark, abbr, blockquote and  ...', 'black-widgets' ),
+                'placeholder' => esc_html__( 'Type your title here', 'blackwidgets' ),
+                'default' => esc_html__( 'Development, Design, and E-Commerce', 'blackwidgets' ),
+                'description' => esc_html__( 'You can use all other HTML tags into the title field e.g. code, mark, abbr, blockquote and  ...', 'blackwidgets' ),
             ]
         );
 
@@ -280,21 +280,21 @@ class Box extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_html_tag_subtitle',
             [
-                'label' => esc_html__( 'HTML Tag', 'black-widgets' ),
+                'label' => esc_html__( 'HTML Tag', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'p',
                 'options' => [
-                    'div' => esc_html__( 'div', 'black-widgets' ),
-                    'h1' => esc_html__( 'H1', 'black-widgets' ),
-                    'h2' => esc_html__( 'H2', 'black-widgets' ),
-                    'h3' => esc_html__( 'H3', 'black-widgets' ),
-                    'h4' => esc_html__( 'H4', 'black-widgets' ),
-                    'h5' => esc_html__( 'H5', 'black-widgets' ),
-                    'h6' => esc_html__( 'H6', 'black-widgets' ),
-                    'p' => esc_html__( 'p', 'black-widgets' ),
-                    'span' => esc_html__( 'span', 'black-widgets' ),
+                    'div' => esc_html__( 'div', 'blackwidgets' ),
+                    'h1' => esc_html__( 'H1', 'blackwidgets' ),
+                    'h2' => esc_html__( 'H2', 'blackwidgets' ),
+                    'h3' => esc_html__( 'H3', 'blackwidgets' ),
+                    'h4' => esc_html__( 'H4', 'blackwidgets' ),
+                    'h5' => esc_html__( 'H5', 'blackwidgets' ),
+                    'h6' => esc_html__( 'H6', 'blackwidgets' ),
+                    'p' => esc_html__( 'p', 'blackwidgets' ),
+                    'span' => esc_html__( 'span', 'blackwidgets' ),
                 ],
-                'description' => esc_html__( 'Choose an HTML tag, it can help you to SEO and beautifully of the UI design with follow the structure of your website.', 'black-widgets' ),
+                'description' => esc_html__( 'Choose an HTML tag, it can help you to SEO and beautifully of the UI design with follow the structure of your website.', 'blackwidgets' ),
             ]
         );
 
@@ -309,19 +309,19 @@ class Box extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_alignment',
             [
-                'label'     => esc_html__( 'Text Alignment', 'black-widgets' ),
+                'label'     => esc_html__( 'Text Alignment', 'blackwidgets' ),
                 'type'      => \Elementor\Controls_Manager::CHOOSE,
                 'options'   => [
                     'left'   => [
-                        'title' => esc_html__( 'Left', 'black-widgets' ),
+                        'title' => esc_html__( 'Left', 'blackwidgets' ),
                         'icon'  => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => esc_html__( 'Center', 'black-widgets' ),
+                        'title' => esc_html__( 'Center', 'blackwidgets' ),
                         'icon'  => 'eicon-text-align-center',
                     ],
                     'right'  => [
-                        'title' => esc_html__( 'Right', 'black-widgets' ),
+                        'title' => esc_html__( 'Right', 'blackwidgets' ),
                         'icon'  => 'eicon-text-align-right',
                     ],
                 ],
@@ -342,7 +342,7 @@ class Box extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'style_section',
             [
-                'label' => esc_html__( 'Box Style', 'black-widgets' ),
+                'label' => esc_html__( 'Box Style', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
@@ -352,7 +352,7 @@ class Box extends \Elementor\Widget_Base {
         $this->start_controls_tab(
             'tab_1_normal',
             [
-                'label' => esc_html__( 'Normal', 'black-widgets' ),
+                'label' => esc_html__( 'Normal', 'blackwidgets' ),
             ]
         );
 
@@ -361,7 +361,7 @@ class Box extends \Elementor\Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'widget_box_background',
-                'label' => esc_html__( 'Background', 'black-widgets' ),
+                'label' => esc_html__( 'Background', 'blackwidgets' ),
                 'types' => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .bw-hover-box',
             ]
@@ -378,7 +378,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_box_margin',
             [
-                'label' => esc_html__( 'Margin', 'black-widgets' ),
+                'label' => esc_html__( 'Margin', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -391,7 +391,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_box_padding',
             [
-                'label' => esc_html__( 'Padding', 'black-widgets' ),
+                'label' => esc_html__( 'Padding', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -412,7 +412,7 @@ class Box extends \Elementor\Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'widget_box_border',
-                'label' => esc_html__( 'Border', 'black-widgets' ),
+                'label' => esc_html__( 'Border', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-hover-box',
             ]
         );
@@ -422,7 +422,7 @@ class Box extends \Elementor\Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'widget_box_box_shadow',
-                'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+                'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-hover-box',
             ]
         );
@@ -430,7 +430,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_box_border_radius',
             [
-                'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+                'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
                 'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', 'em', '%' ],
                 'selectors' => [
@@ -443,7 +443,7 @@ class Box extends \Elementor\Widget_Base {
         $this->start_controls_tab(
             'tab_1_hover',
             [
-                'label' => esc_html__( 'Hover', 'black-widgets' ),
+                'label' => esc_html__( 'Hover', 'blackwidgets' ),
             ]
         );
 
@@ -452,7 +452,7 @@ class Box extends \Elementor\Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'widget_hover_box_background',
-                'label' => esc_html__( 'Background', 'black-widgets' ),
+                'label' => esc_html__( 'Background', 'blackwidgets' ),
                 'types' => [ 'classic', 'gradient', ],
                 'selector' => '{{WRAPPER}} .bw-hover-box:hover',
             ]
@@ -469,7 +469,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_hover_box_margin',
             [
-                'label' => esc_html__( 'Margin', 'black-widgets' ),
+                'label' => esc_html__( 'Margin', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -482,7 +482,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_hover_box_padding',
             [
-                'label' => esc_html__( 'Padding', 'black-widgets' ),
+                'label' => esc_html__( 'Padding', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -503,7 +503,7 @@ class Box extends \Elementor\Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'widget_hover_box_border',
-                'label' => esc_html__( 'Border', 'black-widgets' ),
+                'label' => esc_html__( 'Border', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-hover-box:hover',
             ]
         );
@@ -513,7 +513,7 @@ class Box extends \Elementor\Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'widget_hover_box_box_shadow',
-                'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+                'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-hover-box:hover',
             ]
         );
@@ -521,7 +521,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_hover_box_border_radius',
             [
-                'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+                'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
                 'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', 'em', '%' ],
                 'selectors' => [
@@ -540,7 +540,7 @@ class Box extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'typography_section',
             [
-                'label' => esc_html__( 'Typography', 'black-widgets' ),
+                'label' => esc_html__( 'Typography', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
@@ -550,7 +550,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_control(
             'title_solid_color',
             [
-                'label' => esc_html__( 'Title Color', 'black-widgets' ),
+                'label' => esc_html__( 'Title Color', 'blackwidgets' ),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bw-hover-box .bw-content-box .bw-title' => 'color: {{VALUE}}',
@@ -564,7 +564,7 @@ class Box extends \Elementor\Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name' => 'title_typography',
-                'label' => esc_html__( 'Title Typography', 'black-widgets' ),
+                'label' => esc_html__( 'Title Typography', 'blackwidgets' ),
                 'global' => [
                     'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
                 ],
@@ -576,7 +576,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_control(
             'subtitle_solid_color',
             [
-                'label' => esc_html__( 'Subtitle Color', 'black-widgets' ),
+                'label' => esc_html__( 'Subtitle Color', 'blackwidgets' ),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bw-hover-box .bw-content-box .bw-description' => 'color: {{VALUE}}',
@@ -590,7 +590,7 @@ class Box extends \Elementor\Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name' => 'subtitle_typography',
-                'label' => esc_html__( 'Subtitle Typography', 'black-widgets' ),
+                'label' => esc_html__( 'Subtitle Typography', 'blackwidgets' ),
                 'global' => [
                     'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
                 ],
@@ -610,7 +610,7 @@ class Box extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'transform_section',
             [
-                'label' => esc_html__( '2D & 3D Normal Transform Style', 'black-widgets' ),
+                'label' => esc_html__( '2D & 3D Normal Transform Style', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
@@ -619,10 +619,10 @@ class Box extends \Elementor\Widget_Base {
         $this->add_control(
             'transform_normal_option',
             [
-                'label' 		=> esc_html__( 'Transform Style', 'black-widgets' ),
+                'label' 		=> esc_html__( 'Transform Style', 'blackwidgets' ),
                 'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-                'label_on' 		=> esc_html__( 'Enable', 'black-widgets' ),
-                'label_off' 	=> esc_html__( 'Disable', 'black-widgets' ),
+                'label_on' 		=> esc_html__( 'Enable', 'blackwidgets' ),
+                'label_off' 	=> esc_html__( 'Disable', 'blackwidgets' ),
                 'return_value' 	=> 'normal_transform',
                 'default' 		=> 'off',
             ]
@@ -639,7 +639,7 @@ class Box extends \Elementor\Widget_Base {
         $this->start_controls_tab(
             'transform_tab_move',
             [
-                'label' => esc_html__( 'Move', 'black-widgets' ),
+                'label' => esc_html__( 'Move', 'blackwidgets' ),
             ]
         );
 
@@ -648,7 +648,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'move_normal_x',
             [
-                'label' => esc_html__( 'Move on → X', 'black-widgets' ),
+                'label' => esc_html__( 'Move on → X', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'px' ],
                 'range' => [
@@ -662,14 +662,14 @@ class Box extends \Elementor\Widget_Base {
                     'unit' => 'px',
                     'size' => 0,
                 ],
-                'description' => esc_html__( 'movement on the diagram X - do not leave empty!', 'black-widgets' ),
+                'description' => esc_html__( 'movement on the diagram X - do not leave empty!', 'blackwidgets' ),
             ]
         );
 
         $this->add_responsive_control(
             'move_normal_y',
             [
-                'label' => esc_html__( 'Move on ↑ Y', 'black-widgets' ),
+                'label' => esc_html__( 'Move on ↑ Y', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'px' ],
                 'range' => [
@@ -683,14 +683,14 @@ class Box extends \Elementor\Widget_Base {
                     'unit' => 'px',
                     'size' => 0,
                 ],
-                'description' => esc_html__( 'movement on the diagram Y - do not leave empty!', 'black-widgets' ),
+                'description' => esc_html__( 'movement on the diagram Y - do not leave empty!', 'blackwidgets' ),
             ]
         );
 
         $this->add_responsive_control(
             'move_normal_z',
             [
-                'label' => esc_html__( 'Move on ↙ Z', 'black-widgets' ),
+                'label' => esc_html__( 'Move on ↙ Z', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'px' ],
                 'range' => [
@@ -704,7 +704,7 @@ class Box extends \Elementor\Widget_Base {
                     'unit' => 'px',
                     'size' => 0,
                 ],
-                'description' => esc_html__( 'movement on the diagram Z - do not leave empty!', 'black-widgets' ),
+                'description' => esc_html__( 'movement on the diagram Z - do not leave empty!', 'blackwidgets' ),
             ]
         );
 
@@ -714,7 +714,7 @@ class Box extends \Elementor\Widget_Base {
         $this->start_controls_tab(
             'transform_tab_scale',
             [
-                'label' => esc_html__( 'Scale', 'black-widgets' ),
+                'label' => esc_html__( 'Scale', 'blackwidgets' ),
             ]
         );
 
@@ -723,7 +723,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'scale_normal_x',
             [
-                'label' => esc_html__( 'Scale on → X', 'black-widgets' ),
+                'label' => esc_html__( 'Scale on → X', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'deg' ],
                 'range' => [
@@ -737,14 +737,14 @@ class Box extends \Elementor\Widget_Base {
                     'unit' => 'deg',
                     'size' => 1,
                 ],
-                'description' => esc_html__( 'set 1.1 to scale on left and right - do not set 0', 'black-widgets' ),
+                'description' => esc_html__( 'set 1.1 to scale on left and right - do not set 0', 'blackwidgets' ),
             ]
         );
 
         $this->add_responsive_control(
             'scale_normal_y',
             [
-                'label' => esc_html__( 'Scale on ↑ Y', 'black-widgets' ),
+                'label' => esc_html__( 'Scale on ↑ Y', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'deg' ],
                 'range' => [
@@ -758,14 +758,14 @@ class Box extends \Elementor\Widget_Base {
                     'unit' => 'deg',
                     'size' => 1,
                 ],
-                'description' => esc_html__( 'set 1.1 to scale on top and bottom - do not set 0', 'black-widgets' ),
+                'description' => esc_html__( 'set 1.1 to scale on top and bottom - do not set 0', 'blackwidgets' ),
             ]
         );
 
         $this->add_responsive_control(
             'scale_normal_z',
             [
-                'label' => esc_html__( 'Scale on ↙ Z', 'black-widgets' ),
+                'label' => esc_html__( 'Scale on ↙ Z', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'deg' ],
                 'range' => [
@@ -779,14 +779,14 @@ class Box extends \Elementor\Widget_Base {
                     'unit' => 'deg',
                     'size' => 1,
                 ],
-                'description' => esc_html__( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'black-widgets' ),
+                'description' => esc_html__( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
             ]
         );
 
         $this->add_responsive_control(
             'perspective',
             [
-                'label' => esc_html__( 'Self Perspective ◊', 'black-widgets' ),
+                'label' => esc_html__( 'Self Perspective ◊', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'ps' ],
                 'range' => [
@@ -800,14 +800,14 @@ class Box extends \Elementor\Widget_Base {
                     'unit' => 'px',
                     'size' => 0,
                 ],
-                'description' => esc_html__( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'black-widgets' ),
+                'description' => esc_html__( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
             ]
         );
 
         $this->add_responsive_control(
             'perspective_child',
             [
-                'label' => esc_html__( 'Children Perspective ◊', 'black-widgets' ),
+                'label' => esc_html__( 'Children Perspective ◊', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'ps' ],
                 'range' => [
@@ -821,7 +821,7 @@ class Box extends \Elementor\Widget_Base {
                     'unit' => 'px',
                     'size' => 0,
                 ],
-                'description' => esc_html__( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'black-widgets' ),
+                'description' => esc_html__( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
             ]
         );
 
@@ -831,7 +831,7 @@ class Box extends \Elementor\Widget_Base {
         $this->start_controls_tab(
             'transform_tab_rotate',
             [
-                'label' => esc_html__( 'Rotate', 'black-widgets' ),
+                'label' => esc_html__( 'Rotate', 'blackwidgets' ),
             ]
         );
 
@@ -840,7 +840,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'rotate_normal_x',
             [
-                'label' => esc_html__( 'Rotate on → X', 'black-widgets' ),
+                'label' => esc_html__( 'Rotate on → X', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'deg' ],
                 'range' => [
@@ -860,7 +860,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'rotate_normal_y',
             [
-                'label' => esc_html__( 'Rotate on ↑ Y', 'black-widgets' ),
+                'label' => esc_html__( 'Rotate on ↑ Y', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'deg' ],
                 'range' => [
@@ -880,7 +880,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'rotate_normal_z',
             [
-                'label' => esc_html__( 'Rotate on ↙ Z', 'black-widgets' ),
+                'label' => esc_html__( 'Rotate on ↙ Z', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'deg' ],
                 'range' => [
@@ -903,7 +903,7 @@ class Box extends \Elementor\Widget_Base {
         $this->start_controls_tab(
             'transform_tab_skew',
             [
-                'label' => esc_html__( 'Skew', 'black-widgets' ),
+                'label' => esc_html__( 'Skew', 'blackwidgets' ),
             ]
         );
 
@@ -912,7 +912,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'skew_normal_x',
             [
-                'label' => esc_html__( 'Skew on → X ▱', 'black-widgets' ),
+                'label' => esc_html__( 'Skew on → X ▱', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'deg' ],
                 'range' => [
@@ -932,7 +932,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'skew_normal_y',
             [
-                'label' => esc_html__( 'Skew on ↑ Y ▱', 'black-widgets' ),
+                'label' => esc_html__( 'Skew on ↑ Y ▱', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'deg' ],
                 'range' => [
@@ -963,7 +963,7 @@ class Box extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'image_pro_cursor_animate',
             [
-                'label' => esc_html__( 'Cursor & Hover Animate', 'black-widgets' ),
+                'label' => esc_html__( 'Cursor & Hover Animate', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
@@ -972,55 +972,55 @@ class Box extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_cursor',
             [
-                'label' => esc_html__( 'Select Cursor Style', 'black-widgets' ),
+                'label' => esc_html__( 'Select Cursor Style', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'default',
                 'options' => [
-                    'auto' 			=> esc_html__( 'auto', 'black-widgets' ),
-                    'default' 		=> esc_html__( 'default', 'black-widgets' ),
-                    'none' 			=> esc_html__( 'none', 'black-widgets' ),
-                    'pointer' 		=> esc_html__( 'pointer', 'black-widgets' ),
-                    'not-Allowed' 	=> esc_html__( 'not-Allowed', 'black-widgets' ),
-                    'wait' 			=> esc_html__( 'wait', 'black-widgets' ),
-                    'progress' 		=> esc_html__( 'progress', 'black-widgets' ),
-                    'help' 			=> esc_html__( 'help', 'black-widgets' ),
-                    'context-menu' 	=> esc_html__( 'context-menu', 'black-widgets' ),
-                    'cell' 			=> esc_html__( 'cell', 'black-widgets' ),
-                    'crosshair' 	=> esc_html__( 'crosshair', 'black-widgets' ),
-                    'text' 			=> esc_html__( 'text', 'black-widgets' ),
-                    'wetical-text' 	=> esc_html__( 'wetical-text', 'black-widgets' ),
-                    'grab' 			=> esc_html__( 'grab', 'black-widgets' ),
-                    'grabbing' 		=> esc_html__( 'grabbing', 'black-widgets' ),
-                    'alias' 		=> esc_html__( 'alias', 'black-widgets' ),
-                    'copy' 			=> esc_html__( 'copy', 'black-widgets' ),
-                    'move' 			=> esc_html__( 'move', 'black-widgets' ),
-                    'zoom-in'		=> esc_html__( 'zoom-in', 'black-widgets' ),
-                    'zoom-out' 		=> esc_html__( 'zoom-out', 'black-widgets' ),
-                    'col-resize' 	=> esc_html__( 'col-resize', 'black-widgets' ),
-                    'row-resize' 	=> esc_html__( 'row-resize', 'black-widgets' ),
-                    'nesw-resize' 	=> esc_html__( 'nesw-resize', 'black-widgets' ),
-                    'newse-resize' 	=> esc_html__( 'newse-resize', 'black-widgets' ),
-                    'ew-resize' 	=> esc_html__( 'ew-resize', 'black-widgets' ),
-                    'ns-resize' 	=> esc_html__( 'ns-resize', 'black-widgets' ),
-                    'n-resize' 		=> esc_html__( 'n-resize', 'black-widgets' ),
-                    'w-resize' 		=> esc_html__( 'w-resize', 'black-widgets' ),
-                    's-resize' 		=> esc_html__( 's-resize', 'black-widgets' ),
-                    'e-resize' 		=> esc_html__( 'e-resize', 'black-widgets' ),
-                    'nw-resize' 	=> esc_html__( 'nw-resize', 'black-widgets' ),
-                    'ne-resize' 	=> esc_html__( 'ne-resize', 'black-widgets' ),
-                    'sw-resize' 	=> esc_html__( 'sw-resize', 'black-widgets' ),
-                    'se-resize'		=> esc_html__( 'se-resize', 'black-widgets' ),
+                    'auto' 			=> esc_html__( 'auto', 'blackwidgets' ),
+                    'default' 		=> esc_html__( 'default', 'blackwidgets' ),
+                    'none' 			=> esc_html__( 'none', 'blackwidgets' ),
+                    'pointer' 		=> esc_html__( 'pointer', 'blackwidgets' ),
+                    'not-Allowed' 	=> esc_html__( 'not-Allowed', 'blackwidgets' ),
+                    'wait' 			=> esc_html__( 'wait', 'blackwidgets' ),
+                    'progress' 		=> esc_html__( 'progress', 'blackwidgets' ),
+                    'help' 			=> esc_html__( 'help', 'blackwidgets' ),
+                    'context-menu' 	=> esc_html__( 'context-menu', 'blackwidgets' ),
+                    'cell' 			=> esc_html__( 'cell', 'blackwidgets' ),
+                    'crosshair' 	=> esc_html__( 'crosshair', 'blackwidgets' ),
+                    'text' 			=> esc_html__( 'text', 'blackwidgets' ),
+                    'wetical-text' 	=> esc_html__( 'wetical-text', 'blackwidgets' ),
+                    'grab' 			=> esc_html__( 'grab', 'blackwidgets' ),
+                    'grabbing' 		=> esc_html__( 'grabbing', 'blackwidgets' ),
+                    'alias' 		=> esc_html__( 'alias', 'blackwidgets' ),
+                    'copy' 			=> esc_html__( 'copy', 'blackwidgets' ),
+                    'move' 			=> esc_html__( 'move', 'blackwidgets' ),
+                    'zoom-in'		=> esc_html__( 'zoom-in', 'blackwidgets' ),
+                    'zoom-out' 		=> esc_html__( 'zoom-out', 'blackwidgets' ),
+                    'col-resize' 	=> esc_html__( 'col-resize', 'blackwidgets' ),
+                    'row-resize' 	=> esc_html__( 'row-resize', 'blackwidgets' ),
+                    'nesw-resize' 	=> esc_html__( 'nesw-resize', 'blackwidgets' ),
+                    'newse-resize' 	=> esc_html__( 'newse-resize', 'blackwidgets' ),
+                    'ew-resize' 	=> esc_html__( 'ew-resize', 'blackwidgets' ),
+                    'ns-resize' 	=> esc_html__( 'ns-resize', 'blackwidgets' ),
+                    'n-resize' 		=> esc_html__( 'n-resize', 'blackwidgets' ),
+                    'w-resize' 		=> esc_html__( 'w-resize', 'blackwidgets' ),
+                    's-resize' 		=> esc_html__( 's-resize', 'blackwidgets' ),
+                    'e-resize' 		=> esc_html__( 'e-resize', 'blackwidgets' ),
+                    'nw-resize' 	=> esc_html__( 'nw-resize', 'blackwidgets' ),
+                    'ne-resize' 	=> esc_html__( 'ne-resize', 'blackwidgets' ),
+                    'sw-resize' 	=> esc_html__( 'sw-resize', 'blackwidgets' ),
+                    'se-resize'		=> esc_html__( 'se-resize', 'blackwidgets' ),
                 ],
-                'description' => esc_html__( 'It just work with scroll down and does not work on first section. it works once', 'black-widgets' ),
+                'description' => esc_html__( 'It just work with scroll down and does not work on first section. it works once', 'blackwidgets' ),
             ]
         );
 
         $this->add_control(
             'image_pro_anime',
             [
-                'label' => esc_html__( 'Type Custom Animate', 'black-widgets' ),
+                'label' => esc_html__( 'Type Custom Animate', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => esc_html__( 'all 0.23s ease', 'black-widgets' ),
+                'default' => esc_html__( 'all 0.23s ease', 'blackwidgets' ),
             ]
         );
 
@@ -1033,7 +1033,7 @@ class Box extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'transform_section_hover',
             [
-                'label' => esc_html__( '2D & 3D Hover Transform Style', 'black-widgets' ),
+                'label' => esc_html__( '2D & 3D Hover Transform Style', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1042,10 +1042,10 @@ class Box extends \Elementor\Widget_Base {
         $this->add_control(
             'transform_hover_option',
             [
-                'label' 		=> esc_html__( 'Transform Style', 'black-widgets' ),
+                'label' 		=> esc_html__( 'Transform Style', 'blackwidgets' ),
                 'type' 			=> \Elementor\Controls_Manager::SWITCHER,
-                'label_on' 		=> esc_html__( 'Enable', 'black-widgets' ),
-                'label_off' 	=> esc_html__( 'Disable', 'black-widgets' ),
+                'label_on' 		=> esc_html__( 'Enable', 'blackwidgets' ),
+                'label_off' 	=> esc_html__( 'Disable', 'blackwidgets' ),
                 'return_value' 	=> 'hover_transform',
                 'default' 		=> 'off',
             ]
@@ -1062,7 +1062,7 @@ class Box extends \Elementor\Widget_Base {
         $this->start_controls_tab(
             'transform_tab_move_hover',
             [
-                'label' => esc_html__( 'Move', 'black-widgets' ),
+                'label' => esc_html__( 'Move', 'blackwidgets' ),
             ]
         );
 
@@ -1071,7 +1071,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'move_hover_x',
             [
-                'label' => esc_html__( 'Move on → X', 'black-widgets' ),
+                'label' => esc_html__( 'Move on → X', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'px' ],
                 'range' => [
@@ -1085,14 +1085,14 @@ class Box extends \Elementor\Widget_Base {
                     'unit' => 'px',
                     'size' => 0,
                 ],
-                'description' => esc_html__( 'movement on the diagram X - do not leave empty!', 'black-widgets' ),
+                'description' => esc_html__( 'movement on the diagram X - do not leave empty!', 'blackwidgets' ),
             ]
         );
 
         $this->add_responsive_control(
             'move_hover_y',
             [
-                'label' => esc_html__( 'Move on ↑ Y', 'black-widgets' ),
+                'label' => esc_html__( 'Move on ↑ Y', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'px' ],
                 'range' => [
@@ -1106,14 +1106,14 @@ class Box extends \Elementor\Widget_Base {
                     'unit' => 'px',
                     'size' => 0,
                 ],
-                'description' => esc_html__( 'movement on the diagram Y - do not leave empty!', 'black-widgets' ),
+                'description' => esc_html__( 'movement on the diagram Y - do not leave empty!', 'blackwidgets' ),
             ]
         );
 
         $this->add_responsive_control(
             'move_hover_z',
             [
-                'label' => esc_html__( 'Move on ↙ Z', 'black-widgets' ),
+                'label' => esc_html__( 'Move on ↙ Z', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'px' ],
                 'range' => [
@@ -1127,7 +1127,7 @@ class Box extends \Elementor\Widget_Base {
                     'unit' => 'px',
                     'size' => 0,
                 ],
-                'description' => esc_html__( 'movement on the diagram Z - do not leave empty!', 'black-widgets' ),
+                'description' => esc_html__( 'movement on the diagram Z - do not leave empty!', 'blackwidgets' ),
             ]
         );
 
@@ -1137,7 +1137,7 @@ class Box extends \Elementor\Widget_Base {
         $this->start_controls_tab(
             'transform_tab_scale_hover',
             [
-                'label' => esc_html__( 'Scale', 'black-widgets' ),
+                'label' => esc_html__( 'Scale', 'blackwidgets' ),
             ]
         );
 
@@ -1146,7 +1146,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'scale_hover_x',
             [
-                'label' => esc_html__( 'Scale on → X', 'black-widgets' ),
+                'label' => esc_html__( 'Scale on → X', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'deg' ],
                 'range' => [
@@ -1160,14 +1160,14 @@ class Box extends \Elementor\Widget_Base {
                     'unit' => 'deg',
                     'size' => 1,
                 ],
-                'description' => esc_html__( 'set 1.1 to scale on left and right - do not set 0', 'black-widgets' ),
+                'description' => esc_html__( 'set 1.1 to scale on left and right - do not set 0', 'blackwidgets' ),
             ]
         );
 
         $this->add_responsive_control(
             'scale_hover_y',
             [
-                'label' => esc_html__( 'Scale on ↑ Y', 'black-widgets' ),
+                'label' => esc_html__( 'Scale on ↑ Y', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'deg' ],
                 'range' => [
@@ -1181,14 +1181,14 @@ class Box extends \Elementor\Widget_Base {
                     'unit' => 'deg',
                     'size' => 1,
                 ],
-                'description' => esc_html__( 'set 1.1 to scale on top and bottom - do not set 0', 'black-widgets' ),
+                'description' => esc_html__( 'set 1.1 to scale on top and bottom - do not set 0', 'blackwidgets' ),
             ]
         );
 
         $this->add_responsive_control(
             'scale_hover_z',
             [
-                'label' => esc_html__( 'Scale on ↙ Z', 'black-widgets' ),
+                'label' => esc_html__( 'Scale on ↙ Z', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'deg' ],
                 'range' => [
@@ -1202,14 +1202,14 @@ class Box extends \Elementor\Widget_Base {
                     'unit' => 'deg',
                     'size' => 1,
                 ],
-                'description' => esc_html__( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'black-widgets' ),
+                'description' => esc_html__( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
             ]
         );
 
         $this->add_responsive_control(
             'perspective_hover',
             [
-                'label' => esc_html__( 'Self Perspective ◊', 'black-widgets' ),
+                'label' => esc_html__( 'Self Perspective ◊', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'ps' ],
                 'range' => [
@@ -1223,14 +1223,14 @@ class Box extends \Elementor\Widget_Base {
                     'unit' => 'px',
                     'size' => 0,
                 ],
-                'description' => esc_html__( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'black-widgets' ),
+                'description' => esc_html__( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
             ]
         );
 
         $this->add_responsive_control(
             'perspective_child_hover',
             [
-                'label' => esc_html__( 'Children Perspective ◊', 'black-widgets' ),
+                'label' => esc_html__( 'Children Perspective ◊', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'ps' ],
                 'range' => [
@@ -1244,7 +1244,7 @@ class Box extends \Elementor\Widget_Base {
                     'unit' => 'px',
                     'size' => 0,
                 ],
-                'description' => esc_html__( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'black-widgets' ),
+                'description' => esc_html__( 'If you want to use scale Z or 3D Scale, you should set perspective size', 'blackwidgets' ),
             ]
         );
 
@@ -1254,7 +1254,7 @@ class Box extends \Elementor\Widget_Base {
         $this->start_controls_tab(
             'transform_tab_rotate_hover',
             [
-                'label' => esc_html__( 'Rotate', 'black-widgets' ),
+                'label' => esc_html__( 'Rotate', 'blackwidgets' ),
             ]
         );
 
@@ -1263,7 +1263,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'rotate_hover_x',
             [
-                'label' => esc_html__( 'Rotate on → X', 'black-widgets' ),
+                'label' => esc_html__( 'Rotate on → X', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'deg' ],
                 'range' => [
@@ -1283,7 +1283,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'rotate_hover_y',
             [
-                'label' => esc_html__( 'Rotate on ↑ Y', 'black-widgets' ),
+                'label' => esc_html__( 'Rotate on ↑ Y', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'deg' ],
                 'range' => [
@@ -1303,7 +1303,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'rotate_hover_z',
             [
-                'label' => esc_html__( 'Rotate on ↙ Z', 'black-widgets' ),
+                'label' => esc_html__( 'Rotate on ↙ Z', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'deg' ],
                 'range' => [
@@ -1326,7 +1326,7 @@ class Box extends \Elementor\Widget_Base {
         $this->start_controls_tab(
             'transform_tab_skew_hover',
             [
-                'label' => esc_html__( 'Skew', 'black-widgets' ),
+                'label' => esc_html__( 'Skew', 'blackwidgets' ),
             ]
         );
 
@@ -1335,7 +1335,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'skew_hover_x',
             [
-                'label' => esc_html__( 'Skew on → X ▱', 'black-widgets' ),
+                'label' => esc_html__( 'Skew on → X ▱', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'deg' ],
                 'range' => [
@@ -1355,7 +1355,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'skew_hover_y',
             [
-                'label' => esc_html__( 'Skew on ↑ Y ▱', 'black-widgets' ),
+                'label' => esc_html__( 'Skew on ↑ Y ▱', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'deg' ],
                 'range' => [
@@ -1386,7 +1386,7 @@ class Box extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'image_style_section',
             [
-                'label' => esc_html__( 'Image Style', 'black-widgets' ),
+                'label' => esc_html__( 'Image Style', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1396,7 +1396,7 @@ class Box extends \Elementor\Widget_Base {
         $this->start_controls_tab(
             'img_tab_1_normal',
             [
-                'label' => esc_html__( 'Normal', 'black-widgets' ),
+                'label' => esc_html__( 'Normal', 'blackwidgets' ),
             ]
         );
 
@@ -1405,7 +1405,7 @@ class Box extends \Elementor\Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'image_style_background',
-                'label' => esc_html__( 'Background', 'black-widgets' ),
+                'label' => esc_html__( 'Background', 'blackwidgets' ),
                 'types' => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .bw-hover-box .bw-featured-image',
             ]
@@ -1422,7 +1422,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'image_style_margin',
             [
-                'label' => esc_html__( 'Margin', 'black-widgets' ),
+                'label' => esc_html__( 'Margin', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -1435,7 +1435,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'image_style_padding',
             [
-                'label' => esc_html__( 'Padding', 'black-widgets' ),
+                'label' => esc_html__( 'Padding', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -1456,7 +1456,7 @@ class Box extends \Elementor\Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'image_style_border',
-                'label' => esc_html__( 'Border', 'black-widgets' ),
+                'label' => esc_html__( 'Border', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-hover-box .bw-featured-image',
             ]
         );
@@ -1466,7 +1466,7 @@ class Box extends \Elementor\Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'image_style_box_shadow',
-                'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+                'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-hover-box .bw-featured-image',
             ]
         );
@@ -1474,7 +1474,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_control(
             'image_style_border_radius', //param_name
             [
-                'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+                'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
                 'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', 'em', '%' ],
                 'selectors' => [
@@ -1496,7 +1496,7 @@ class Box extends \Elementor\Widget_Base {
         $this->start_controls_tab(
             'img_tab_1_hover',
             [
-                'label' => esc_html__( 'Hover', 'black-widgets' ),
+                'label' => esc_html__( 'Hover', 'blackwidgets' ),
             ]
         );
 
@@ -1505,7 +1505,7 @@ class Box extends \Elementor\Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'image_style_hover_box_background',
-                'label' => esc_html__( 'Background', 'black-widgets' ),
+                'label' => esc_html__( 'Background', 'blackwidgets' ),
                 'types' => [ 'classic', 'gradient', ],
                 'selector' => '{{WRAPPER}} .bw-hover-box .bw-featured-image:hover',
             ]
@@ -1522,7 +1522,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'image_style_hover_box_margin',
             [
-                'label' => esc_html__( 'Margin', 'black-widgets' ),
+                'label' => esc_html__( 'Margin', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -1535,7 +1535,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'image_style_hover_box_padding',
             [
-                'label' => esc_html__( 'Padding', 'black-widgets' ),
+                'label' => esc_html__( 'Padding', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -1556,7 +1556,7 @@ class Box extends \Elementor\Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'image_style_hover_box_border',
-                'label' => esc_html__( 'Border', 'black-widgets' ),
+                'label' => esc_html__( 'Border', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-hover-box .bw-featured-image:hover',
             ]
         );
@@ -1566,7 +1566,7 @@ class Box extends \Elementor\Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'image_style_hover_box_box_shadow',
-                'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+                'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-hover-box .bw-featured-image:hover',
             ]
         );
@@ -1574,7 +1574,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_control(
             'image_style_hover_box_border_radius', //param_name
             [
-                'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+                'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
                 'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', 'em', '%' ],
                 'selectors' => [
@@ -1595,7 +1595,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_control(
             'hover_animation',
             [
-                'label' => esc_html__( 'Hover Animation', 'black-widgets' ),
+                'label' => esc_html__( 'Hover Animation', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::HOVER_ANIMATION,
                 'prefix_class' => 'elementor-animation-',
             ]
@@ -1611,7 +1611,7 @@ class Box extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'style2_link_section',
             [
-                'label' => esc_html__( 'Overlay Style', 'black-widgets' ),
+                'label' => esc_html__( 'Overlay Style', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
                 'condition'  => [
                     'widget_type' => [
@@ -1626,7 +1626,7 @@ class Box extends \Elementor\Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'overlay_bg_color',
-                'label' => esc_html__( 'Background', 'black-widgets' ),
+                'label' => esc_html__( 'Background', 'blackwidgets' ),
                 'types' => [ 'classic', 'gradient', ],
                 'selector' => '{{WRAPPER}} .bw-hover-box.bw-style-2 .bw-box-overlay, {{WRAPPER}} .bw-hover-box.bw-style-2 a:after',
             ]
@@ -1637,7 +1637,7 @@ class Box extends \Elementor\Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'overlay_bg_hover_color',
-                'label' => esc_html__( 'Background Hover', 'black-widgets' ),
+                'label' => esc_html__( 'Background Hover', 'blackwidgets' ),
                 'types' => [ 'classic', 'gradient', ],
                 'selector' => '{{WRAPPER}} .bw-hover-box.bw-style-2:hover .bw-box-overlay, {{WRAPPER}} .bw-hover-box.bw-style-2.is-hovered .bw-box-overlay, {{WRAPPER}} .bw-hover-box.bw-style-2 a:hover:after',
             ]

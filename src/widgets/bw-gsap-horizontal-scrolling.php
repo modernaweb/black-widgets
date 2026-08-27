@@ -24,7 +24,7 @@ class GSAPHorizontalScrolling extends \Elementor\Widget_Base {
         parent::__construct( $data, $args );
         wp_register_style( 'black-widgets-gsap-horizontal-scrolling', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/gsap-horizontal-scrolling.css', [], BLACK_WIDGETS_VERSION );
 
-        wp_register_script( 'black-widgets-gsap-horizontal-scrolling', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/gsap-horizontal-scrolling.js', [ 'jquery', 'GSAP', 'GSAP-ScrollTrigger' ], BLACK_WIDGETS_VERSION, true );
+        $this->register_horizontal_scrolling_script();
     }
 
 	/**
@@ -52,7 +52,7 @@ class GSAPHorizontalScrolling extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Black Horizontal', 'black-widgets' );
+		return __( 'Black Horizontal', 'blackwidgets' );
 	}
 
 	/**
@@ -88,7 +88,39 @@ class GSAPHorizontalScrolling extends \Elementor\Widget_Base {
     }
 
     public function get_script_depends() {
+        $this->register_horizontal_scrolling_script();
+
         return [ 'black-widgets-gsap-horizontal-scrolling' ];
+    }
+
+    /**
+     * Re-register the widget script with current GSAP deps (deregister first so deps update).
+     *
+     * Listing GSAP handles unconditionally would make WordPress drop this script
+     * whenever the CDN URLs are missing or refused, so the JS guard never runs.
+     */
+    private function register_horizontal_scrolling_script() {
+        $deps = [ 'jquery' ];
+
+        if ( \Modernaweb\BlackWidgets\Plugin_Options::is_gsap_ready() ) {
+            \Modernaweb\BlackWidgets\Plugin_Options::register_gsap_scripts();
+
+            if ( wp_script_is( 'GSAP', 'registered' ) ) {
+                $deps[] = 'GSAP';
+            }
+            if ( wp_script_is( 'GSAP-ScrollTrigger', 'registered' ) ) {
+                $deps[] = 'GSAP-ScrollTrigger';
+            }
+        }
+
+        wp_deregister_script( 'black-widgets-gsap-horizontal-scrolling' );
+        wp_register_script(
+            'black-widgets-gsap-horizontal-scrolling',
+            BLACK_WIDGETS_PLUGIN_URL . 'assets/js/gsap-horizontal-scrolling.js',
+            $deps,
+            BLACK_WIDGETS_VERSION,
+            true
+        );
     }
 
     protected function is_dynamic_content(): bool {
@@ -110,7 +142,7 @@ class GSAPHorizontalScrolling extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => esc_html__( 'Content', 'black-widgets' ),
+				'label' => esc_html__( 'Content', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -120,11 +152,11 @@ class GSAPHorizontalScrolling extends \Elementor\Widget_Base {
 			[
 				'type' => \Elementor\Controls_Manager::ALERT,
 				'alert_type' => 'info',     /* info, success, warning, danger */
-				'heading' => esc_html__( 'Feel free to edit. Check this widget\'s demo.', 'black-widgets' ),
+				'heading' => esc_html__( 'Feel free to edit. Check this widget\'s demo.', 'blackwidgets' ),
 				'content' => sprintf(
 					'%s <a href="https://modernaweb.net/black-widgets/all-widgets/black-horizontal/" target="_blank">%s</a>',
-					esc_html__( 'Check ', 'black-widgets' ),
-					esc_html__( 'Demo', 'black-widgets' )
+					esc_html__( 'Check ', 'blackwidgets' ),
+					esc_html__( 'Demo', 'blackwidgets' )
 				),
 			]
 		);
@@ -133,13 +165,13 @@ class GSAPHorizontalScrolling extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_type',
 			[
-				'label' => esc_html__( 'Select Content', 'black-widgets' ),
+				'label' => esc_html__( 'Select Content', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'style_1',
 				'options' => [
-					'style_1' 				=> esc_html__( 'Style 1', 'black-widgets' ),
+					'style_1' 				=> esc_html__( 'Style 1', 'blackwidgets' ),
 				],
-				'description' => esc_html__( 'Do not forget every template and this section should be full-screen', 'black-widgets' ),
+				'description' => esc_html__( 'Do not forget every template and this section should be full-screen', 'blackwidgets' ),
 			]
 		);
 
@@ -147,10 +179,10 @@ class GSAPHorizontalScrolling extends \Elementor\Widget_Base {
 
         $source = \Elementor\Plugin::instance()->templates_manager->get_source( 'local' );
         $elementor_tpl = $source ? $source->get_items() : [];
-		$elementor_tpl_opts = [ '0' => esc_html__( 'Elementor template is not defined yet.', 'black-widgets' ) ];
+		$elementor_tpl_opts = [ '0' => esc_html__( 'Elementor template is not defined yet.', 'blackwidgets' ) ];
 
 		if ( ! empty( $elementor_tpl ) ) {
-			$elementor_tpl_opts = [ '0' => esc_html__( 'Select elementor template', 'black-widgets' ) ];
+			$elementor_tpl_opts = [ '0' => esc_html__( 'Select elementor template', 'blackwidgets' ) ];
 
 			foreach ( $elementor_tpl as $template ) {
 				$elementor_tpl_opts[ $template['template_id'] ] = $template['title'] . ' (' . $template['type'] . ')';
@@ -159,9 +191,9 @@ class GSAPHorizontalScrolling extends \Elementor\Widget_Base {
 
 		$repeater->add_control(
 			'list_title', [
-				'label' => esc_html__( 'Title', 'black-widgets' ),
+				'label' => esc_html__( 'Title', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => esc_html__( 'List Title' , 'black-widgets' ),
+				'default' => esc_html__( 'List Title' , 'blackwidgets' ),
 				'label_block' => true,
 			]
 		);
@@ -169,7 +201,7 @@ class GSAPHorizontalScrolling extends \Elementor\Widget_Base {
         $repeater->add_control(
             'custom_template',
             [
-                'label'			=> esc_html__( 'Custom Template', 'black-widgets' ),
+                'label'			=> esc_html__( 'Custom Template', 'blackwidgets' ),
                 'type'			=> \Elementor\Controls_Manager::SELECT,
                 'default'		=> '0',
                 'options'		=> $elementor_tpl_opts,
@@ -180,12 +212,12 @@ class GSAPHorizontalScrolling extends \Elementor\Widget_Base {
 		$this->add_control(
 			'list',
 			[
-				'label' => esc_html__( 'Repeater List', 'black-widgets' ),
+				'label' => esc_html__( 'Repeater List', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::REPEATER,
 				'fields' => $repeater->get_controls(),
 				'default' => [
 					[
-						'list_title' => esc_html__( 'Item content #1', 'black-widgets' ),
+						'list_title' => esc_html__( 'Item content #1', 'blackwidgets' ),
 						'custom_template' => [
                             'value' => '170',
                         ],
@@ -203,7 +235,7 @@ class GSAPHorizontalScrolling extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'typo_section',
 			[
-				'label' => esc_html__( 'General Typography Style', 'black-widgets' ),
+				'label' => esc_html__( 'General Typography Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
         );
@@ -212,7 +244,7 @@ class GSAPHorizontalScrolling extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_alert_color',
 			[
-				'label' => esc_html__( 'Color', 'black-widgets' ),
+				'label' => esc_html__( 'Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
                 'global' => [
                     'default' => Global_Colors::COLOR_PRIMARY,
@@ -228,7 +260,7 @@ class GSAPHorizontalScrolling extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'style_alert_typography1',
-				'label' => esc_html__( 'Typography', 'black-widgets' ),
+				'label' => esc_html__( 'Typography', 'blackwidgets' ),
                 'global' => [
                     'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
                 ],

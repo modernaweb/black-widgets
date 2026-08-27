@@ -380,7 +380,7 @@
      * elements) so loop clones never create duplicate DOM ids - this matters
      * most for "Elementor Template" slides, which can contain nested widgets
      * with their own ids. Visibility/focusability of clones is intentionally
-     * left to Swiper's own a11y module (clones DO become the real, focused
+     * left to Swiper's own a11y module (clones do become the real, focused
      * slide as the user scrolls through the loop, so they must stay
      * accessible - they are not purely decorative padding).
      */
@@ -497,7 +497,7 @@
     /**
      * Toggle a class on the root element when there is a genuine single
      * centered slide for the *current* breakpoint (centeredSlides on AND the
-     * rounded effective slidesPerView is odd — or a peek view under 2).
+     * rounded effective slidesPerView is odd, or a peek view under 2).
      * Drives the optional Peek Focus "Center Slide Emphasis" scale-up.
      */
     function updateCenterSingleClass(el, instance) {
@@ -625,7 +625,7 @@
 
     /**
      * Progressbar can fail silently when the pagination el lives outside
-     * `.swiper` (Outside position) — Swiper's size selectors never match and
+     * `.swiper` (Outside position): Swiper's size selectors never match and
      * the lock class can hide it. Force a visible track + fill, then update.
      */
     function ensureProgressbarPagination(instance, pagEl) {
@@ -833,9 +833,8 @@
             }
 
             // Responsive per-view - capped to item count (no conflict with 1-2 items).
-            // Type4 peek is only applied when the user asks for a single-focus view
-            // (slidesPerView <= 1). Forcing peek on top of 2–3-up layouts was clipping
-            // whole slides so 3 items looked like ~2 halves (Editorial/Peek).
+            // Type4 peek only applies to a single-focus view (slidesPerView <= 1).
+            // On 2-3-up layouts it clips whole slides.
             var peekMobile = type === 'type4' && slidesMobile <= 1 ? 1.15 : 0;
             var peekTablet = type === 'type4' && slidesTablet <= 1 ? 1.25 : 0;
             var peekDesktop = type === 'type4' && slidesDesktop <= 1 ? 1.35 : 0;
@@ -902,7 +901,7 @@
                 // Without loop, keep edge slides fully inside the viewport instead of
                 // half-clipping them (common on Editorial / Peek Focus with 3 items).
                 centeredSlidesBounds: !loop && wantCentered,
-                // Fractional slidesPerView (Peek 1.2–1.5) jumps with roundLengths.
+                // Fractional slidesPerView (Peek 1.2-1.5) jumps with roundLengths.
                 roundLengths: type !== 'type4',
                 // Needed for smooth Peek Focus scale/opacity while dragging.
                 watchSlidesProgress: type === 'type4',
@@ -957,8 +956,7 @@
                           : typeOptions.spaceBetween,
                 a11y: {
                     enabled: true,
-                    // Swiper 11: focusing the active slide must not scroll the page
-                    // (loop clones + multiple carousels otherwise cause a visible jump).
+                    // Swiper 11: focusing the active slide must not scroll the page.
                     scrollOnFocus: false,
                     prevSlideMessage: $this.attr('data-prev-label') || 'Previous slide',
                     nextSlideMessage: $this.attr('data-next-label') || 'Next slide',

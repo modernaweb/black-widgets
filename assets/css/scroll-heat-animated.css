@@ -31,7 +31,7 @@
 	hyphens: auto;
 }
 
-/* Hide until JS marks .is-ready — avoids flash before GSAP from-state / delay. */
+/* Hide until JS marks .is-ready; avoids a flash before the GSAP from-state. */
 .mws-ew-at[data-mws-ew-at]:not(.is-ready) .mws-ew-at__title {
 	visibility: hidden;
 }

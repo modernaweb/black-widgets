@@ -36,7 +36,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
     }
 
     public function get_title() {
-        return __( 'Black Image Carousel', 'black-widgets' );
+        return __( 'Black Image Carousel', 'blackwidgets' );
     }
 
     public function get_icon() {
@@ -62,7 +62,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
     protected function register_controls() {
         $source = \Elementor\Plugin::instance()->templates_manager->get_source( 'local' );
         $elementor_tpl = $source ? $source->get_items() : [];
-        $elementor_tpl_opts = [ '0' => esc_html__( 'Select Elementor template', 'black-widgets' ) ];
+        $elementor_tpl_opts = [ '0' => esc_html__( 'Select Elementor template', 'blackwidgets' ) ];
 
         if ( ! empty( $elementor_tpl ) ) {
             foreach ( $elementor_tpl as $template ) {
@@ -73,7 +73,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'content_section',
             [
-                'label' => esc_html__( 'Content', 'black-widgets' ),
+                'label' => esc_html__( 'Content', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -83,12 +83,12 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $repeater->add_control(
             'item_type',
             [
-                'label' => esc_html__( 'Item Type', 'black-widgets' ),
+                'label' => esc_html__( 'Item Type', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'image',
                 'options' => [
-                    'image'    => esc_html__( 'Image', 'black-widgets' ),
-                    'template' => esc_html__( 'Elementor Template', 'black-widgets' ),
+                    'image'    => esc_html__( 'Image', 'blackwidgets' ),
+                    'template' => esc_html__( 'Elementor Template', 'blackwidgets' ),
                 ],
             ]
         );
@@ -96,7 +96,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $repeater->add_control(
             'image',
             [
-                'label' => esc_html__( 'Choose Image', 'black-widgets' ),
+                'label' => esc_html__( 'Choose Image', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::MEDIA,
                 'condition' => [
                     'item_type' => 'image',
@@ -107,11 +107,11 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $repeater->add_control(
             'caption',
             [
-                'label' => esc_html__( 'Caption', 'black-widgets' ),
-                'description' => esc_html__( 'Shown on the slide - position/style depends on the Carousel Type and the Caption style section.', 'black-widgets' ),
+                'label' => esc_html__( 'Caption', 'blackwidgets' ),
+                'description' => esc_html__( 'Shown on the slide - position/style depends on the Carousel Type and the Caption style section.', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => '',
-                'placeholder' => esc_html__( 'Enter caption', 'black-widgets' ),
+                'placeholder' => esc_html__( 'Enter caption', 'blackwidgets' ),
                 'label_block' => true,
                 'condition' => [
                     'item_type' => 'image',
@@ -122,16 +122,16 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $repeater->add_control(
             'link',
             [
-                'label' => esc_html__( 'Link', 'black-widgets' ),
+                'label' => esc_html__( 'Link', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::URL,
-                'placeholder' => esc_html__( 'https://example.com', 'black-widgets' ),
+                'placeholder' => esc_html__( 'https://example.com', 'blackwidgets' ),
                 'show_external' => true,
                 'default' => [
                     'url' => '',
                     'is_external' => false,
                     'nofollow' => false,
                 ],
-                'description' => esc_html__( 'Optional - makes this slide clickable.', 'black-widgets' ),
+                'description' => esc_html__( 'Optional - makes this slide clickable.', 'blackwidgets' ),
                 'condition' => [
                     'item_type' => 'image',
                 ],
@@ -141,10 +141,10 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $repeater->add_control(
             'alt_text',
             [
-                'label' => esc_html__( 'Alt Text (override)', 'black-widgets' ),
+                'label' => esc_html__( 'Alt Text (override)', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => '',
-                'placeholder' => esc_html__( 'Leave empty to use the image\'s own alt text', 'black-widgets' ),
+                'placeholder' => esc_html__( 'Leave empty to use the image\'s own alt text', 'blackwidgets' ),
                 'label_block' => true,
                 'condition' => [
                     'item_type' => 'image',
@@ -155,7 +155,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $repeater->add_control(
             'template_id',
             [
-                'label' => esc_html__( 'Select Template', 'black-widgets' ),
+                'label' => esc_html__( 'Select Template', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'options' => $elementor_tpl_opts,
                 'default' => '0',
@@ -168,7 +168,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'items',
             [
-                'label' => esc_html__( 'Items', 'black-widgets' ),
+                'label' => esc_html__( 'Items', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::REPEATER,
                 'fields' => $repeater->get_controls(),
                 'default' => [
@@ -178,7 +178,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
                             'url' => Utils::get_placeholder_image_src(),
                             'id' => '0',
                         ],
-                        'caption' => esc_html__( 'Caption', 'black-widgets' ),
+                        'caption' => esc_html__( 'Caption', 'blackwidgets' ),
                     ],
                 ],
                 'title_field' => '{{{ item_type }}}',
@@ -195,14 +195,14 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_type',
             [
-                'label' => esc_html__( 'Carousel Type', 'black-widgets' ),
+                'label' => esc_html__( 'Carousel Type', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'type1',
                 'options' => [
-                    'type1' => esc_html__( 'Classic Caption', 'black-widgets' ),
-                    'type2' => esc_html__( 'Clean Cover', 'black-widgets' ),
-                    'type3' => esc_html__( 'Editorial', 'black-widgets' ),
-                    'type4' => esc_html__( 'Peek Focus', 'black-widgets' ),
+                    'type1' => esc_html__( 'Classic Caption', 'blackwidgets' ),
+                    'type2' => esc_html__( 'Clean Cover', 'blackwidgets' ),
+                    'type3' => esc_html__( 'Editorial', 'blackwidgets' ),
+                    'type4' => esc_html__( 'Peek Focus', 'blackwidgets' ),
                 ],
                 'render_type' => 'template',
             ]
@@ -212,13 +212,13 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'peek_center_emphasis',
             [
-                'label' => __( 'Center Slide Emphasis', 'black-widgets' ),
+                'label' => __( 'Center Slide Emphasis', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => __( 'Yes', 'black-widgets' ),
-                'label_off' => __( 'No', 'black-widgets' ),
+                'label_on' => __( 'Yes', 'blackwidgets' ),
+                'label_off' => __( 'No', 'blackwidgets' ),
                 'return_value' => 'yes',
                 'default' => 'yes',
-                'description' => __( 'Scales up the centered slide. Only applies when there is a genuine single center slide (i.e. an odd number of visible slides); has no effect on breakpoints showing an even count.', 'black-widgets' ),
+                'description' => __( 'Scales up the centered slide. Only applies when there is a genuine single center slide (i.e. an odd number of visible slides); has no effect on breakpoints showing an even count.', 'blackwidgets' ),
                 'condition' => [
                     'widget_type' => 'type4',
                 ],
@@ -228,7 +228,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'peek_center_scale',
             [
-                'label' => __( 'Center Slide Scale', 'black-widgets' ),
+                'label' => __( 'Center Slide Scale', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'range' => [ 'px' => [ 'min' => 1, 'max' => 1.3, 'step' => 0.01 ] ],
                 'default' => [ 'unit' => 'px', 'size' => 1.1 ],
@@ -247,7 +247,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'slides_per_view',
             [
-                'label' => __( 'Slides Per View', 'black-widgets' ),
+                'label' => __( 'Slides Per View', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'min' => 1,
                 'max' => 10,
@@ -256,7 +256,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
                 'default' => 3,
                 'tablet_default' => 2,
                 'mobile_default' => 1,
-                'description' => __( 'For Peek Focus try 1.2 to 1.5. For Editorial try about 1.', 'black-widgets' ),
+                'description' => __( 'For Peek Focus try 1.2 to 1.5. For Editorial try about 1.', 'blackwidgets' ),
                 'render_type' => 'template',
             ]
         );
@@ -265,7 +265,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'slides_to_scroll',
             [
-                'label' => __( 'Slides to Scroll', 'black-widgets' ),
+                'label' => __( 'Slides to Scroll', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'default' => 1,
                 'min' => 1,
@@ -275,19 +275,19 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'space_between',
             [
-                'label' => esc_html__( 'Space Between (px)', 'black-widgets' ),
+                'label' => esc_html__( 'Space Between (px)', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'min' => 0,
                 'max' => 80,
                 'step' => 1,
-                'description' => esc_html__( 'Leave empty to use the type default gap.', 'black-widgets' ),
+                'description' => esc_html__( 'Leave empty to use the type default gap.', 'blackwidgets' ),
             ]
         );
 
         $this->add_control(
             'slider_height',
             [
-                'label' => esc_html__( 'Height', 'black-widgets' ),
+                'label' => esc_html__( 'Height', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => [ 'px', '%' ],
                 'range' => [
@@ -311,12 +311,12 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'slider_image_fit',
             [
-                'label' => esc_html__( 'Image Fit', 'black-widgets' ),
+                'label' => esc_html__( 'Image Fit', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'cover',
                 'options' => [
-                    'contain' => esc_html__( 'Contain', 'black-widgets' ),
-                    'cover'  => esc_html__( 'Cover', 'black-widgets' ),
+                    'contain' => esc_html__( 'Contain', 'blackwidgets' ),
+                    'cover'  => esc_html__( 'Cover', 'blackwidgets' ),
                 ],
                 'selectors' => [
                     // Extra ".bw-swiper" ancestor class keeps this more specific than any
@@ -330,10 +330,10 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'autoplay',
             [
-                'label' => __( 'Autoplay', 'black-widgets' ),
+                'label' => __( 'Autoplay', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => __( 'On', 'black-widgets' ),
-                'label_off' => __( 'Off', 'black-widgets' ),
+                'label_on' => __( 'On', 'blackwidgets' ),
+                'label_off' => __( 'Off', 'blackwidgets' ),
                 'return_value' => 'yes',
                 'default' => '',
             ]
@@ -343,7 +343,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'autoplay_speed',
             [
-                'label' => __( 'Autoplay Speed (ms)', 'black-widgets' ),
+                'label' => __( 'Autoplay Speed (ms)', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'default' => 3000,
                 'min' => 100,
@@ -357,27 +357,27 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'transition_speed',
             [
-                'label'       => __( 'Transition Speed (ms)', 'black-widgets' ),
+                'label'       => __( 'Transition Speed (ms)', 'blackwidgets' ),
                 'type'        => \Elementor\Controls_Manager::NUMBER,
                 'default'     => 750,
                 'min'         => 200,
                 'max'         => 2500,
                 'step'        => 50,
-                'description' => __( 'How long each slide change takes. Higher = smoother / softer (recommended 700–1000 for centered layouts like Editorial & Peek Focus).', 'black-widgets' ),
+                'description' => __( 'How long each slide change takes. Higher = smoother / softer (recommended 700–1000 for centered layouts like Editorial & Peek Focus).', 'blackwidgets' ),
             ]
         );
 
-        // Infinite Loop - works even when slides ≤ slidesPerView (JS clones as needed).
+        // Infinite Loop - works even when slides <= slidesPerView (JS clones as needed).
         $this->add_control(
             'loop',
             [
-                'label' => __( 'Infinite Loop', 'black-widgets' ),
+                'label' => __( 'Infinite Loop', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => __( 'Yes', 'black-widgets' ),
-                'label_off' => __( 'No', 'black-widgets' ),
+                'label_on' => __( 'Yes', 'blackwidgets' ),
+                'label_off' => __( 'No', 'blackwidgets' ),
                 'return_value' => 'yes',
                 'default' => 'yes',
-                'description' => __( 'Continues from the first slide after the last (seamless wrap). With few items this wrap can look like it “goes and comes back” — that is expected, not a bounce. Turn off to stop at both ends.', 'black-widgets' ),
+                'description' => __( 'Continues from the first slide after the last (seamless wrap). With few items this wrap can look like it “goes and comes back” — that is expected, not a bounce. Turn off to stop at both ends.', 'blackwidgets' ),
             ]
         );
 
@@ -385,10 +385,10 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'pause_on_hover',
             [
-                'label' => __( 'Pause on Hover', 'black-widgets' ),
+                'label' => __( 'Pause on Hover', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => __( 'Yes', 'black-widgets' ),
-                'label_off' => __( 'No', 'black-widgets' ),
+                'label_on' => __( 'Yes', 'blackwidgets' ),
+                'label_off' => __( 'No', 'blackwidgets' ),
                 'return_value' => 'yes',
                 'default' => 'yes',
                 'condition' => [
@@ -401,10 +401,10 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'pagination_dots',
             [
-                'label' => __( 'Show Pagination', 'black-widgets' ),
+                'label' => __( 'Show Pagination', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => __( 'Show', 'black-widgets' ),
-                'label_off' => __( 'Hide', 'black-widgets' ),
+                'label_on' => __( 'Show', 'blackwidgets' ),
+                'label_off' => __( 'Hide', 'blackwidgets' ),
                 'return_value' => 'yes',
                 'default' => 'yes',
             ]
@@ -413,16 +413,16 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'pagination_type',
             [
-                'label' => __( 'Pagination Style', 'black-widgets' ),
+                'label' => __( 'Pagination Style', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'auto',
                 'options' => [
-                    'auto' => esc_html__( 'Type Default', 'black-widgets' ),
-                    'dots' => esc_html__( 'Dots', 'black-widgets' ),
-                    'fraction' => esc_html__( 'Fraction (1 / 5)', 'black-widgets' ),
-                    'progressbar' => esc_html__( 'Progress Bar', 'black-widgets' ),
+                    'auto' => esc_html__( 'Type Default', 'blackwidgets' ),
+                    'dots' => esc_html__( 'Dots', 'blackwidgets' ),
+                    'fraction' => esc_html__( 'Fraction (1 / 5)', 'blackwidgets' ),
+                    'progressbar' => esc_html__( 'Progress Bar', 'blackwidgets' ),
                 ],
-                'description' => __( 'Type Default: Classic Caption / Clean Cover use Dots, Editorial uses Fraction, Peek Focus uses a Progress Bar.', 'black-widgets' ),
+                'description' => __( 'Type Default: Classic Caption / Clean Cover use Dots, Editorial uses Fraction, Peek Focus uses a Progress Bar.', 'blackwidgets' ),
                 'condition' => [
                     'pagination_dots' => 'yes',
                 ],
@@ -432,12 +432,12 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'pagination_position',
             [
-                'label' => __( 'Pagination Position', 'black-widgets' ),
+                'label' => __( 'Pagination Position', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'inside',
                 'options' => [
-                    'inside' => esc_html__( 'Inside (Overlay on Slider)', 'black-widgets' ),
-                    'outside' => esc_html__( 'Outside (Below Slider)', 'black-widgets' ),
+                    'inside' => esc_html__( 'Inside (Overlay on Slider)', 'blackwidgets' ),
+                    'outside' => esc_html__( 'Outside (Below Slider)', 'blackwidgets' ),
                 ],
                 'condition' => [
                     'pagination_dots' => 'yes',
@@ -448,24 +448,24 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'pagination_align',
             [
-                'label' => __( 'Pagination Alignment', 'black-widgets' ),
+                'label' => __( 'Pagination Alignment', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::CHOOSE,
                 'default' => '',
                 'options' => [
                     'flex-start' => [
-                        'title' => esc_html__( 'Left', 'black-widgets' ),
+                        'title' => esc_html__( 'Left', 'blackwidgets' ),
                         'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => esc_html__( 'Center', 'black-widgets' ),
+                        'title' => esc_html__( 'Center', 'blackwidgets' ),
                         'icon' => 'eicon-text-align-center',
                     ],
                     'flex-end' => [
-                        'title' => esc_html__( 'Right', 'black-widgets' ),
+                        'title' => esc_html__( 'Right', 'blackwidgets' ),
                         'icon' => 'eicon-text-align-right',
                     ],
                 ],
-                'description' => __( 'Leave unset to keep each carousel type\'s own default alignment.', 'black-widgets' ),
+                'description' => __( 'Leave unset to keep each carousel type\'s own default alignment.', 'blackwidgets' ),
                 'selectors' => [
                     '{{WRAPPER}} .bw-swiper-outer .bw-swiper-pagination' => 'justify-content: {{VALUE}};',
                 ],
@@ -479,10 +479,10 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'navigation_arrows',
             [
-                'label' => __( 'Show Navigation Arrows', 'black-widgets' ),
+                'label' => __( 'Show Navigation Arrows', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => __( 'Show', 'black-widgets' ),
-                'label_off' => __( 'Hide', 'black-widgets' ),
+                'label_on' => __( 'Show', 'blackwidgets' ),
+                'label_off' => __( 'Hide', 'blackwidgets' ),
                 'return_value' => 'yes',
                 'default' => 'yes',
             ]
@@ -491,12 +491,12 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'arrows_position',
             [
-                'label' => __( 'Arrows Position', 'black-widgets' ),
+                'label' => __( 'Arrows Position', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'inside',
                 'options' => [
-                    'inside' => esc_html__( 'Inside (Overlay on Slider)', 'black-widgets' ),
-                    'outside' => esc_html__( 'Outside (Below Slider)', 'black-widgets' ),
+                    'inside' => esc_html__( 'Inside (Overlay on Slider)', 'blackwidgets' ),
+                    'outside' => esc_html__( 'Outside (Below Slider)', 'blackwidgets' ),
                 ],
                 'condition' => [
                     'navigation_arrows' => 'yes',
@@ -507,10 +507,10 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'arrow_prev_svg',
             [
-                'label' => esc_html__( 'Previous Arrow Icon (custom SVG)', 'black-widgets' ),
+                'label' => esc_html__( 'Previous Arrow Icon (custom SVG)', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::MEDIA,
                 'media_types' => [ 'svg' ],
-                'description' => esc_html__( 'Optional - overrides the built-in arrow icon. Still respects the Arrows Icon Color setting below.', 'black-widgets' ),
+                'description' => esc_html__( 'Optional - overrides the built-in arrow icon. Still respects the Arrows Icon Color setting below.', 'blackwidgets' ),
                 'condition' => [
                     'navigation_arrows' => 'yes',
                 ],
@@ -520,10 +520,10 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'arrow_next_svg',
             [
-                'label' => esc_html__( 'Next Arrow Icon (custom SVG)', 'black-widgets' ),
+                'label' => esc_html__( 'Next Arrow Icon (custom SVG)', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::MEDIA,
                 'media_types' => [ 'svg' ],
-                'description' => esc_html__( 'Optional - overrides the built-in arrow icon. Still respects the Arrows Icon Color setting below.', 'black-widgets' ),
+                'description' => esc_html__( 'Optional - overrides the built-in arrow icon. Still respects the Arrows Icon Color setting below.', 'blackwidgets' ),
                 'condition' => [
                     'navigation_arrows' => 'yes',
                 ],
@@ -533,10 +533,10 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'custom_dot_svg',
             [
-                'label' => esc_html__( 'Custom Dot Icon (SVG)', 'black-widgets' ),
+                'label' => esc_html__( 'Custom Dot Icon (SVG)', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::MEDIA,
                 'media_types' => [ 'svg' ],
-                'description' => esc_html__( 'Optional - replaces the simple circle bullet with your icon. Still respects the Bullet Color settings below (only applies to the Dots pagination style).', 'black-widgets' ),
+                'description' => esc_html__( 'Optional - replaces the simple circle bullet with your icon. Still respects the Bullet Color settings below (only applies to the Dots pagination style).', 'blackwidgets' ),
                 'condition' => [
                     'pagination_dots' => 'yes',
                     'pagination_type!' => [ 'fraction', 'progressbar' ],
@@ -550,7 +550,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'style_section',
             [
-                'label' => esc_html__( 'Box Style', 'black-widgets' ),
+                'label' => esc_html__( 'Box Style', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
@@ -559,7 +559,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'widget_box_background',
-                'label' => esc_html__( 'Background', 'black-widgets' ),
+                'label' => esc_html__( 'Background', 'blackwidgets' ),
                 'types' => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .bw-swiper',
             ]
@@ -575,7 +575,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_box_margin',
             [
-                'label' => esc_html__( 'Margin', 'black-widgets' ),
+                'label' => esc_html__( 'Margin', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -587,7 +587,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_box_padding',
             [
-                'label' => esc_html__( 'Padding', 'black-widgets' ),
+                'label' => esc_html__( 'Padding', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -607,7 +607,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'widget_box_border',
-                'label' => esc_html__( 'Border', 'black-widgets' ),
+                'label' => esc_html__( 'Border', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-swiper',
             ]
         );
@@ -616,7 +616,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'widget_box_box_shadow',
-                'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+                'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-swiper',
             ]
         );
@@ -626,7 +626,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'style_slide_section',
             [
-                'label' => esc_html__( 'Slide Style', 'black-widgets' ),
+                'label' => esc_html__( 'Slide Style', 'blackwidgets' ),
                 'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
@@ -635,7 +635,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
             'slide_style_info',
             [
                 'type'            => \Elementor\Controls_Manager::RAW_HTML,
-                'raw'             => esc_html__( 'Applies to every image and template slide (the slide content card).', 'black-widgets' ),
+                'raw'             => esc_html__( 'Applies to every image and template slide (the slide content card).', 'blackwidgets' ),
                 'content_classes' => 'elementor-descriptor',
             ]
         );
@@ -644,7 +644,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name'     => 'slide_background',
-                'label'    => esc_html__( 'Background', 'black-widgets' ),
+                'label'    => esc_html__( 'Background', 'blackwidgets' ),
                 'types'    => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .bw-swiper .bw-swiper-mask',
             ]
@@ -653,7 +653,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'slide_padding',
             [
-                'label'      => esc_html__( 'Padding', 'black-widgets' ),
+                'label'      => esc_html__( 'Padding', 'blackwidgets' ),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em', 'rem' ],
                 'selectors'  => [
@@ -666,7 +666,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name'     => 'slide_border',
-                'label'    => esc_html__( 'Border', 'black-widgets' ),
+                'label'    => esc_html__( 'Border', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-swiper .bw-swiper-mask',
             ]
         );
@@ -674,7 +674,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'slide_border_radius',
             [
-                'label'      => esc_html__( 'Border Radius', 'black-widgets' ),
+                'label'      => esc_html__( 'Border Radius', 'blackwidgets' ),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors'  => [
@@ -688,7 +688,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name'     => 'slide_box_shadow',
-                'label'    => esc_html__( 'Box Shadow', 'black-widgets' ),
+                'label'    => esc_html__( 'Box Shadow', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-swiper .bw-swiper-mask',
             ]
         );
@@ -698,7 +698,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'carousel_style_section',
             [
-                'label' => esc_html__( 'Bullet Points and Arrows Style', 'black-widgets' ),
+                'label' => esc_html__( 'Bullet Points and Arrows Style', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
@@ -706,7 +706,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_arrows_background_color',
             [
-                'label' => esc_html__( 'Arrows Background Color', 'black-widgets' ),
+                'label' => esc_html__( 'Arrows Background Color', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
@@ -722,7 +722,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_arrows_color',
             [
-                'label' => esc_html__( 'Arrows Icon Color', 'black-widgets' ),
+                'label' => esc_html__( 'Arrows Icon Color', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'default' => '#111111',
                 'selectors' => [
@@ -735,7 +735,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_arrows_hover_background_color',
             [
-                'label' => esc_html__( 'Arrows Hover Background Color', 'black-widgets' ),
+                'label' => esc_html__( 'Arrows Hover Background Color', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bw-swiper-outer .bw-swiper-button-prev:hover' => 'background-color: {{VALUE}}',
@@ -747,7 +747,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_arrows_hover_color',
             [
-                'label' => esc_html__( 'Arrows Hover Icon Color', 'black-widgets' ),
+                'label' => esc_html__( 'Arrows Hover Icon Color', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bw-swiper-outer .bw-swiper-button-prev:hover' => 'color: {{VALUE}}',
@@ -759,7 +759,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_arrows_size',
             [
-                'label' => esc_html__( 'Arrow Size', 'black-widgets' ),
+                'label' => esc_html__( 'Arrow Size', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => [ 'px' ],
                 'range' => [
@@ -777,7 +777,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_arrows_border_radius',
             [
-                'label' => esc_html__( 'Arrows Border Radius', 'black-widgets' ),
+                'label' => esc_html__( 'Arrows Border Radius', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => [ 'px', '%' ],
                 'range' => [
@@ -803,7 +803,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_arrows_offset',
             [
-                'label' => esc_html__( 'Arrows Edge Offset', 'black-widgets' ),
+                'label' => esc_html__( 'Arrows Edge Offset', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => [ 'px' ],
                 'range' => [
@@ -812,7 +812,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
                         'max' => 60,
                     ],
                 ],
-                'description' => esc_html__( 'Distance from the slider edge. Only applies when Arrows Position is set to Inside.', 'black-widgets' ),
+                'description' => esc_html__( 'Distance from the slider edge. Only applies when Arrows Position is set to Inside.', 'blackwidgets' ),
                 'selectors' => [
                     '{{WRAPPER}} .bw-swiper' => '--bw-swiper-nav-inset: {{SIZE}}{{UNIT}};',
                 ],
@@ -832,7 +832,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_bullets_size',
             [
-                'label' => esc_html__( 'Bullets Size', 'black-widgets' ),
+                'label' => esc_html__( 'Bullets Size', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => [ 'px' ],
                 'range' => [
@@ -850,7 +850,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_bullets_gap',
             [
-                'label' => esc_html__( 'Bullets Gap', 'black-widgets' ),
+                'label' => esc_html__( 'Bullets Gap', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => [ 'px' ],
                 'range' => [
@@ -872,7 +872,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_bullets_border_radius',
             [
-                'label' => esc_html__( 'Bullets Border Radius', 'black-widgets' ),
+                'label' => esc_html__( 'Bullets Border Radius', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => [ 'px', '%' ],
                 'range' => [
@@ -889,7 +889,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
                     'unit' => '%',
                     'size' => 50,
                 ],
-                'description' => esc_html__( 'Set to 0 for square/pill-shaped dots instead of circles.', 'black-widgets' ),
+                'description' => esc_html__( 'Set to 0 for square/pill-shaped dots instead of circles.', 'blackwidgets' ),
                 'selectors' => [
                     '{{WRAPPER}} .bw-swiper-outer' => '--swiper-pagination-bullet-border-radius: {{SIZE}}{{UNIT}};',
                 ],
@@ -899,7 +899,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_inactive_bullets_color',
             [
-                'label' => esc_html__( 'Inactive Bullets Color', 'black-widgets' ),
+                'label' => esc_html__( 'Inactive Bullets Color', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'default' => '#111111',
                 'selectors' => [
@@ -911,7 +911,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_active_bullets_color',
             [
-                'label' => esc_html__( 'Active Bullets Color', 'black-widgets' ),
+                'label' => esc_html__( 'Active Bullets Color', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'default' => '#111111',
                 'selectors' => [
@@ -923,7 +923,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_active_bullets_border_color',
             [
-                'label' => esc_html__( 'Active Bullets Border Color', 'black-widgets' ),
+                'label' => esc_html__( 'Active Bullets Border Color', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'default' => '#111111',
                 'selectors' => [
@@ -982,7 +982,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'fraction_style_heading',
             [
-                'label'      => esc_html__( 'Fraction Style', 'black-widgets' ),
+                'label'      => esc_html__( 'Fraction Style', 'blackwidgets' ),
                 'type'       => \Elementor\Controls_Manager::HEADING,
                 'conditions' => $fraction_style_condition,
             ]
@@ -992,7 +992,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
             \Elementor\Group_Control_Typography::get_type(),
             [
                 'name'       => 'fraction_typography',
-                'label'      => esc_html__( 'Typography', 'black-widgets' ),
+                'label'      => esc_html__( 'Typography', 'blackwidgets' ),
                 'selector'   => '{{WRAPPER}} .bw-swiper-outer .bw-swiper-pagination.swiper-pagination-fraction',
                 'conditions' => $fraction_style_condition,
             ]
@@ -1001,9 +1001,9 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'fraction_color',
             [
-                'label'       => esc_html__( 'Color', 'black-widgets' ),
+                'label'       => esc_html__( 'Color', 'blackwidgets' ),
                 'type'        => \Elementor\Controls_Manager::COLOR,
-                'description' => esc_html__( 'Base color (also used for the “/” separator).', 'black-widgets' ),
+                'description' => esc_html__( 'Base color (also used for the “/” separator).', 'blackwidgets' ),
                 'selectors'   => [
                     '{{WRAPPER}} .bw-swiper-outer' => '--bw-swiper-fraction-color: {{VALUE}};',
                     '{{WRAPPER}} .bw-swiper-outer .bw-swiper-pagination.swiper-pagination-fraction' => 'color: {{VALUE}};',
@@ -1015,7 +1015,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'fraction_current_color',
             [
-                'label'      => esc_html__( 'Current Number Color', 'black-widgets' ),
+                'label'      => esc_html__( 'Current Number Color', 'blackwidgets' ),
                 'type'       => \Elementor\Controls_Manager::COLOR,
                 'selectors'  => [
                     '{{WRAPPER}} .bw-swiper-outer' => '--bw-swiper-fraction-current: {{VALUE}};',
@@ -1028,7 +1028,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'fraction_total_color',
             [
-                'label'      => esc_html__( 'Total Number Color', 'black-widgets' ),
+                'label'      => esc_html__( 'Total Number Color', 'blackwidgets' ),
                 'type'       => \Elementor\Controls_Manager::COLOR,
                 'selectors'  => [
                     '{{WRAPPER}} .bw-swiper-outer' => '--bw-swiper-fraction-total: {{VALUE}};',
@@ -1041,7 +1041,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'fraction_margin',
             [
-                'label'      => esc_html__( 'Margin', 'black-widgets' ),
+                'label'      => esc_html__( 'Margin', 'blackwidgets' ),
                 'type'       => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em', 'rem' ],
                 'selectors'  => [
@@ -1054,7 +1054,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'fraction_padding',
             [
-                'label'      => esc_html__( 'Padding', 'black-widgets' ),
+                'label'      => esc_html__( 'Padding', 'blackwidgets' ),
                 'type'       => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em', 'rem' ],
                 'selectors'  => [
@@ -1067,7 +1067,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'fraction_gap',
             [
-                'label'      => esc_html__( 'Gap Around Separator', 'black-widgets' ),
+                'label'      => esc_html__( 'Gap Around Separator', 'blackwidgets' ),
                 'type'       => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => [ 'px', 'em' ],
                 'range'      => [
@@ -1135,7 +1135,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'progress_style_heading',
             [
-                'label'      => esc_html__( 'Progress Bar Style', 'black-widgets' ),
+                'label'      => esc_html__( 'Progress Bar Style', 'blackwidgets' ),
                 'type'       => \Elementor\Controls_Manager::HEADING,
                 'conditions' => $progress_style_condition,
             ]
@@ -1144,7 +1144,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'progress_track_color',
             [
-                'label'      => esc_html__( 'Track Color', 'black-widgets' ),
+                'label'      => esc_html__( 'Track Color', 'blackwidgets' ),
                 'type'       => \Elementor\Controls_Manager::COLOR,
                 'selectors'  => [
                     '{{WRAPPER}} .bw-swiper-outer' => '--bw-swiper-progress-track: {{VALUE}};',
@@ -1156,7 +1156,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'progress_fill_color',
             [
-                'label'      => esc_html__( 'Fill Color', 'black-widgets' ),
+                'label'      => esc_html__( 'Fill Color', 'blackwidgets' ),
                 'type'       => \Elementor\Controls_Manager::COLOR,
                 'selectors'  => [
                     '{{WRAPPER}} .bw-swiper-outer' => '--bw-swiper-progress-fill: {{VALUE}};',
@@ -1168,7 +1168,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'progress_height',
             [
-                'label'      => esc_html__( 'Height', 'black-widgets' ),
+                'label'      => esc_html__( 'Height', 'blackwidgets' ),
                 'type'       => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => [ 'px' ],
                 'range'      => [
@@ -1191,7 +1191,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'progress_width',
             [
-                'label'      => esc_html__( 'Width', 'black-widgets' ),
+                'label'      => esc_html__( 'Width', 'blackwidgets' ),
                 'type'       => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => [ 'px', '%' ],
                 'range'      => [
@@ -1218,7 +1218,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'progress_border_radius',
             [
-                'label'      => esc_html__( 'Border Radius', 'black-widgets' ),
+                'label'      => esc_html__( 'Border Radius', 'blackwidgets' ),
                 'type'       => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => [ 'px', '%' ],
                 'range'      => [
@@ -1245,7 +1245,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'progress_margin',
             [
-                'label'      => esc_html__( 'Margin', 'black-widgets' ),
+                'label'      => esc_html__( 'Margin', 'blackwidgets' ),
                 'type'       => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em', 'rem' ],
                 'selectors'  => [
@@ -1260,7 +1260,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'style_caption_section',
             [
-                'label' => esc_html__( 'Caption', 'black-widgets' ),
+                'label' => esc_html__( 'Caption', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1276,7 +1276,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'caption_color',
             [
-                'label' => esc_html__( 'Text Color', 'black-widgets' ),
+                'label' => esc_html__( 'Text Color', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bw-swiper .bw-swiper-caption' => 'color: {{VALUE}};',
@@ -1287,9 +1287,9 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_control(
             'caption_background_color',
             [
-                'label' => esc_html__( 'Background Color', 'black-widgets' ),
+                'label' => esc_html__( 'Background Color', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
-                'description' => esc_html__( 'Classic Caption has no backdrop by default; Clean Cover, Editorial and Peek Focus overlay the caption on the image with a flat translucent backdrop by default.', 'black-widgets' ),
+                'description' => esc_html__( 'Classic Caption has no backdrop by default; Clean Cover, Editorial and Peek Focus overlay the caption on the image with a flat translucent backdrop by default.', 'blackwidgets' ),
                 'selectors' => [
                     '{{WRAPPER}} .bw-swiper .bw-swiper-caption' => 'background-color: {{VALUE}};',
                 ],
@@ -1299,7 +1299,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'caption_padding',
             [
-                'label' => esc_html__( 'Padding', 'black-widgets' ),
+                'label' => esc_html__( 'Padding', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -1311,19 +1311,19 @@ class ImageCarousel extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'caption_text_align',
             [
-                'label' => esc_html__( 'Text Align', 'black-widgets' ),
+                'label' => esc_html__( 'Text Align', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => esc_html__( 'Left', 'black-widgets' ),
+                        'title' => esc_html__( 'Left', 'blackwidgets' ),
                         'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => esc_html__( 'Center', 'black-widgets' ),
+                        'title' => esc_html__( 'Center', 'blackwidgets' ),
                         'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
-                        'title' => esc_html__( 'Right', 'black-widgets' ),
+                        'title' => esc_html__( 'Right', 'blackwidgets' ),
                         'icon' => 'eicon-text-align-right',
                     ],
                 ],
@@ -1445,14 +1445,14 @@ class ImageCarousel extends \Elementor\Widget_Base {
         <button
             type="button"
             class="bw-swiper-button-prev swiper-button-prev"
-            aria-label="<?php echo esc_attr__( 'Previous slide', 'black-widgets' ); ?>"
+            aria-label="<?php echo esc_attr__( 'Previous slide', 'blackwidgets' ); ?>"
         >
             <?php $this->render_nav_arrow_icon( 'prev', $prev_icon ); ?>
         </button>
         <button
             type="button"
             class="bw-swiper-button-next swiper-button-next"
-            aria-label="<?php echo esc_attr__( 'Next slide', 'black-widgets' ); ?>"
+            aria-label="<?php echo esc_attr__( 'Next slide', 'blackwidgets' ); ?>"
         >
             <?php $this->render_nav_arrow_icon( 'next', $next_icon ); ?>
         </button>
@@ -1641,8 +1641,8 @@ class ImageCarousel extends \Elementor\Widget_Base {
             id="<?php echo esc_attr( $id ); ?>"
             class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>"
             role="region"
-            aria-roledescription="<?php echo esc_attr__( 'carousel', 'black-widgets' ); ?>"
-            aria-label="<?php echo esc_attr__( 'Image carousel', 'black-widgets' ); ?>"
+            aria-roledescription="<?php echo esc_attr__( 'carousel', 'blackwidgets' ); ?>"
+            aria-label="<?php echo esc_attr__( 'Image carousel', 'blackwidgets' ); ?>"
             data-custom-dot-icon="<?php echo esc_url( $dot_icon ); ?>"
             data-slide-count="<?php echo esc_attr( (string) $slides_count ); ?>"
             data-slides-per-view-desktop="<?php echo esc_attr( $slides_per_view_desktop ); ?>"
@@ -1659,9 +1659,9 @@ class ImageCarousel extends \Elementor\Widget_Base {
             data-pagination-type="<?php echo esc_attr( $resolved_pagination_type ); ?>"
             data-navigation="<?php echo $navigation ? 'true' : 'false'; ?>"
             data-peek-center-emphasis="<?php echo $peek_center_emphasis ? 'true' : 'false'; ?>"
-            data-prev-label="<?php echo esc_attr__( 'Previous slide', 'black-widgets' ); ?>"
-            data-next-label="<?php echo esc_attr__( 'Next slide', 'black-widgets' ); ?>"
-            data-bullet-label="<?php echo esc_attr__( 'Go to slide {{index}}', 'black-widgets' ); ?>"
+            data-prev-label="<?php echo esc_attr__( 'Previous slide', 'blackwidgets' ); ?>"
+            data-next-label="<?php echo esc_attr__( 'Next slide', 'blackwidgets' ); ?>"
+            data-bullet-label="<?php echo esc_attr__( 'Go to slide {{index}}', 'blackwidgets' ); ?>"
             <?php if ( '' !== $space_between ) : ?>
                 data-space-between="<?php echo esc_attr( $space_between ); ?>"
             <?php endif; ?>
@@ -1675,8 +1675,8 @@ class ImageCarousel extends \Elementor\Widget_Base {
                     <div
                         class="bw-swiper-slide swiper-slide <?php echo esc_attr( $slide_class ); ?>"
                         role="group"
-                        aria-roledescription="<?php echo esc_attr__( 'slide', 'black-widgets' ); ?>"
-                        aria-label="<?php echo esc_attr( sprintf( /* translators: 1: slide number 2: total slides */ __( '%1$d of %2$d', 'black-widgets' ), $slide_index + 1, $slides_count ) ); ?>"
+                        aria-roledescription="<?php echo esc_attr__( 'slide', 'blackwidgets' ); ?>"
+                        aria-label="<?php echo esc_attr( sprintf( /* translators: 1: slide number 2: total slides */ __( '%1$d of %2$d', 'blackwidgets' ), $slide_index + 1, $slides_count ) ); ?>"
                     >
                         <?php
                         $image_url = $this->media_url( $item['image'] ?? null );

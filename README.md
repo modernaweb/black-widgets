@@ -143,7 +143,7 @@ After updating to 1.4.0, if GSAP animations stop, set the GSAP, ScrollTrigger, a
 
 ## Changelog
 
-### 1.4.0 — 2025-05-XX 
+### 1.4.0 — 2026-09 
 - Refactored: Plugin Structure
 - Improved: All Settings
 - Compatibility: WordPress v6.8
@@ -163,7 +163,7 @@ After updating to 1.4.0, if GSAP animations stop, set the GSAP, ScrollTrigger, a
 - Fixed: Hardened Elementor repeater `_id` output (List + Sentence) against attribute-breakout XSS
 - Fixed: Cross-site scripting (XSS) vulnerability for uploading SVG and image as code by adding SVG sanitizer; Thanks to Patchstack team
 - Fixed: SVG-as-code output no longer emptied by post KSES after sanitizing
-- Changed: Text domain is now `black-widgets` (legacy `blackwidgets` translations still load as fallback)
+- Kept: Text domain `blackwidgets` (unchanged from 1.3.9 so existing translations keep working)
 - Removed: Elementor Dark Mode Setting (legacy `bw_dark_style` option is cleaned on upgrade / Settings save)
 
 

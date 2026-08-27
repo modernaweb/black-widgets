@@ -62,7 +62,7 @@
 	transform: scaleX(-1);
 }
 
-/* ---- Arrow Slide ---- */
+/* Arrow Slide */
 .bw-ab__arrow-track {
 	position: relative;
 	width: 18px;
@@ -82,7 +82,7 @@
 	color: currentColor;
 }
 
-/* ---- Perspective Flip ---- */
+/* Perspective Flip */
 .bw-ab__btn--split {
 	overflow: hidden;
 	perspective: 640px;
@@ -100,7 +100,7 @@
 	backface-visibility: hidden;
 }
 
-/* ---- Effect Marquee ---- */
+/* Effect Marquee */
 .bw-ab__btn--marquee {
 	overflow: hidden;
 	justify-content: flex-start;
@@ -127,7 +127,7 @@
 	white-space: nowrap;
 }
 
-/* ---- Vertical Swap ---- */
+/* Vertical Swap */
 .bw-ab__btn--swap {
 	overflow: hidden;
 }

@@ -70,7 +70,7 @@ class TextMarquee extends \Elementor\Widget_Base {
      * @return string Translatable widget title.
      */
     public function get_title() {
-        return __( 'Black Text Marquee', 'black-widgets' );
+        return __( 'Black Text Marquee', 'blackwidgets' );
     }
 
     /**
@@ -190,7 +190,7 @@ class TextMarquee extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'content_section',
             [
-                'label' => esc_html__( 'Content', 'black-widgets' ),
+                'label' => esc_html__( 'Content', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -201,8 +201,8 @@ class TextMarquee extends \Elementor\Widget_Base {
                 'label' => 'Text',
                 'type' => Controls_Manager::TEXT,
                 'rows' => 10,
-                'default' => esc_html__( 'Black Widget Text Marquee', 'black-widgets' ),
-                'placeholder' => esc_html__( 'Type your text here', 'black-widgets' ),
+                'default' => esc_html__( 'Black Widget Text Marquee', 'blackwidgets' ),
+                'placeholder' => esc_html__( 'Type your text here', 'blackwidgets' ),
             ]
         );
 
@@ -216,12 +216,12 @@ class TextMarquee extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_type',
             [
-                'label' => esc_html__( 'Type', 'black-widgets' ),
+                'label' => esc_html__( 'Type', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'type1',
                 'options' => [
-                    'type1'   =>  esc_html__( 'Type 1', 'black-widgets' ),
-                    'type2'   =>  esc_html__( 'Type 2', 'black-widgets' ),
+                    'type1'   =>  esc_html__( 'Type 1', 'blackwidgets' ),
+                    'type2'   =>  esc_html__( 'Type 2', 'blackwidgets' ),
                 ]
             ]
         );
@@ -229,12 +229,12 @@ class TextMarquee extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_direction',
             [
-                'label' => esc_html__( 'Direction', 'black-widgets' ),
+                'label' => esc_html__( 'Direction', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'left',
                 'options' => [
-                    'left' => esc_html__( 'Left To Right', 'black-widgets' ),
-                    'right' => esc_html__( 'Right To Left', 'black-widgets' ),
+                    'left' => esc_html__( 'Left To Right', 'blackwidgets' ),
+                    'right' => esc_html__( 'Right To Left', 'blackwidgets' ),
                 ],
             ]
         );
@@ -242,7 +242,7 @@ class TextMarquee extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_speed',
             [
-                'label' => esc_html__( 'Speed', 'black-widgets' ),
+                'label' => esc_html__( 'Speed', 'blackwidgets' ),
                 'type' => Controls_Manager::NUMBER,
                 'default' => 20,
                 'min' => 1,
@@ -253,10 +253,10 @@ class TextMarquee extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_gap',
             [
-                'label' => esc_html__( 'GAP (px)', 'black-widgets' ),
+                'label' => esc_html__( 'GAP (px)', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'default' => 0,
-                'description' => esc_html__( 'Space between repeating text units.', 'black-widgets' ),
+                'description' => esc_html__( 'Space between repeating text units.', 'blackwidgets' ),
                 'selectors' => [
                     '{{WRAPPER}} .bw-text-marquee-wrapper' => '--bw-marquee-gap: {{VALUE}}px;',
                 ],
@@ -266,10 +266,10 @@ class TextMarquee extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_pause_on_hover',
             [
-                'label' => esc_html__('Pause on Hover', 'black-widgets'),
+                'label' => esc_html__('Pause on Hover', 'blackwidgets'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => esc_html__('Yes', 'black-widgets'),
-                'label_off' => esc_html__('No', 'black-widgets'),
+                'label_on' => esc_html__('Yes', 'blackwidgets'),
+                'label_off' => esc_html__('No', 'blackwidgets'),
                 'return_value' => 'yes',
                 'default' => 'yes',
             ]
@@ -288,10 +288,10 @@ class TextMarquee extends \Elementor\Widget_Base {
             $this->add_control(
                 'widget_mos',
                 [
-                    'label' => esc_html__( 'Move on Scroll', 'black-widgets' ),
+                    'label' => esc_html__( 'Move on Scroll', 'blackwidgets' ),
                     'type' => \Elementor\Controls_Manager::SWITCHER,
-                    'label_on' => esc_html__( 'On', 'black-widgets' ),
-                    'label_off' => esc_html__( 'Off', 'black-widgets' ),
+                    'label_on' => esc_html__( 'On', 'blackwidgets' ),
+                    'label_off' => esc_html__( 'Off', 'blackwidgets' ),
                     'return_value' => 'yes',
                     'default' => '',
                     'condition' => [
@@ -303,7 +303,7 @@ class TextMarquee extends \Elementor\Widget_Base {
             $this->add_control(
                 'widget_gsap_speed',
                 [
-                    'label' => esc_html__( 'Speed Scroll', 'black-widgets' ),
+                    'label' => esc_html__( 'Speed Scroll', 'blackwidgets' ),
                     'type' => \Elementor\Controls_Manager::NUMBER,
                     'default' => 2,
                     'condition' => [
@@ -316,7 +316,7 @@ class TextMarquee extends \Elementor\Widget_Base {
 //            $this->add_control(
 //                'widget_gsap_start',
 //                [
-//                    'label' => esc_html__( 'GSAP start condition', 'black-widgets' ),
+//                    'label' => esc_html__( 'GSAP start condition', 'blackwidgets' ),
 //                    'type' => \Elementor\Controls_Manager::TEXT,
 //                    'default' => 'top center',
 //                    'condition' => [
@@ -329,7 +329,7 @@ class TextMarquee extends \Elementor\Widget_Base {
 //            $this->add_control(
 //                'widget_gsap_end',
 //                [
-//                    'label' => __('GSAP End Condition', 'black-widgets'),
+//                    'label' => __('GSAP End Condition', 'blackwidgets'),
 //                    'type' => \Elementor\Controls_Manager::TEXT,
 //                    'default' => 'bottom center',
 //                    'condition' => [
@@ -364,7 +364,7 @@ class TextMarquee extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'style_section',
             [
-                'label' => esc_html__( 'Box Style', 'black-widgets' ),
+                'label' => esc_html__( 'Box Style', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
@@ -373,7 +373,7 @@ class TextMarquee extends \Elementor\Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'widget_box_background',
-                'label' => esc_html__( 'Background', 'black-widgets' ),
+                'label' => esc_html__( 'Background', 'blackwidgets' ),
                 'types' => [ 'classic', 'gradient', 'video' ],
                 'selector' => '{{WRAPPER}} .bw-text-marquee-wrapper',
             ]
@@ -389,7 +389,7 @@ class TextMarquee extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_box_width',
             [
-                'label' => esc_html__( 'Width', 'black-widgets' ),
+                'label' => esc_html__( 'Width', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'px', '%', 'em', 'vw' ],
                 'range' => [
@@ -413,7 +413,7 @@ class TextMarquee extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_box_height',
             [
-                'label' => esc_html__( 'Height', 'black-widgets' ),
+                'label' => esc_html__( 'Height', 'blackwidgets' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'px', '%', 'em', 'vw' ],
                 'range' => [
@@ -423,7 +423,7 @@ class TextMarquee extends \Elementor\Widget_Base {
                     'vw' => [ 'min' => 0, 'max' => 100 ],
                 ],
                 // Empty / auto by default - fixed height clips large typography.
-                'description' => esc_html__( 'Leave empty for auto height. A fixed value can clip text.', 'black-widgets' ),
+                'description' => esc_html__( 'Leave empty for auto height. A fixed value can clip text.', 'blackwidgets' ),
                 'selectors' => [
                     '{{WRAPPER}} .bw-text-marquee-wrapper' => 'height: {{SIZE}}{{UNIT}};',
                 ],
@@ -434,7 +434,7 @@ class TextMarquee extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_box_margin',
             [
-                'label' => esc_html__( 'Margin', 'black-widgets' ),
+                'label' => esc_html__( 'Margin', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -446,7 +446,7 @@ class TextMarquee extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'widget_box_padding',
             [
-                'label' => esc_html__( 'Padding', 'black-widgets' ),
+                'label' => esc_html__( 'Padding', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -466,7 +466,7 @@ class TextMarquee extends \Elementor\Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'widget_box_border',
-                'label' => esc_html__( 'Border', 'black-widgets' ),
+                'label' => esc_html__( 'Border', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-text-marquee-wrapper',
             ]
         );
@@ -475,7 +475,7 @@ class TextMarquee extends \Elementor\Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'widget_box_box_shadow',
-                'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+                'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-text-marquee-wrapper',
             ]
         );
@@ -493,7 +493,7 @@ class TextMarquee extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'typography_section',
             [
-                'label' => esc_html__( 'Typography', 'black-widgets' ),
+                'label' => esc_html__( 'Typography', 'blackwidgets' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
@@ -501,7 +501,7 @@ class TextMarquee extends \Elementor\Widget_Base {
         $this->add_control(
             'widget_typography_text_color',
             [
-                'label' => esc_html__( 'Color', 'black-widgets' ),
+                'label' => esc_html__( 'Color', 'blackwidgets' ),
                 'type' => Controls_Manager::COLOR,
                 'global' => [
                     'default' => Global_Colors::COLOR_PRIMARY,
@@ -516,7 +516,7 @@ class TextMarquee extends \Elementor\Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name' => 'widget_typography_typography',
-                'label' => esc_html__( 'Typography', 'black-widgets' ),
+                'label' => esc_html__( 'Typography', 'blackwidgets' ),
                 'global' => [
                     'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
                 ],
@@ -528,7 +528,7 @@ class TextMarquee extends \Elementor\Widget_Base {
             Group_Control_Text_Shadow::get_type(),
             [
                 'name' => 'widget_typography_text_shadow',
-                'label' => esc_html__( 'Text Shadow', 'black-widgets' ),
+                'label' => esc_html__( 'Text Shadow', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .bw-text-marquee-content',
             ]
         );
@@ -552,7 +552,6 @@ class TextMarquee extends \Elementor\Widget_Base {
     protected function render() {
         $settings = $this->get_settings_for_display();
 
-        // Sanitize settings with defaults
         $direction       = sanitize_text_field( $settings['widget_direction'] ?? '' );
         $speed           = (int) ( $settings['widget_speed'] ?? 20 );
         if ( $speed <= 0 ) {

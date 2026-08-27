@@ -54,7 +54,7 @@ class CallToAction extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Black Call To Action', 'black-widgets' );
+		return __( 'Black Call To Action', 'blackwidgets' );
 	}
 
 	/**
@@ -108,7 +108,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => esc_html__( 'Content', 'black-widgets' ),
+				'label' => esc_html__( 'Content', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -118,11 +118,11 @@ class CallToAction extends \Elementor\Widget_Base {
 			[
 				'type' => \Elementor\Controls_Manager::ALERT,
 				'alert_type' => 'info',     /* info, success, warning, danger */
-				'heading' => esc_html__( 'Feel free to edit. Check this widget\'s demo.', 'black-widgets' ),
+				'heading' => esc_html__( 'Feel free to edit. Check this widget\'s demo.', 'blackwidgets' ),
 				'content' => sprintf(
 					'%s <a href="https://modernaweb.net/black-widgets/all-widgets/black-call-to-action/" target="_blank">%s</a>',
-					esc_html__( 'Check ', 'black-widgets' ),
-					esc_html__( 'Demo', 'black-widgets' )
+					esc_html__( 'Check ', 'blackwidgets' ),
+					esc_html__( 'Demo', 'blackwidgets' )
 				),
 			]
 		);
@@ -131,11 +131,11 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_title',
 			[
-				'label' => esc_html__( 'Title', 'black-widgets' ),
+				'label' => esc_html__( 'Title', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => esc_html__( 'Let\'s get started today, Ever thought about joining us?', 'black-widgets' ),
-				'placeholder' => esc_html__( 'Type your title here', 'black-widgets' ),
-				'description' => esc_html__( 'Inline HTML allowed: br, strong, b, em, i, u, span, mark, small, sub, sup.', 'black-widgets' ),
+				'default' => esc_html__( 'Let\'s get started today, Ever thought about joining us?', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'Type your title here', 'blackwidgets' ),
+				'description' => esc_html__( 'Inline HTML allowed: br, strong, b, em, i, u, span, mark, small, sub, sup.', 'blackwidgets' ),
 			]
 		);
 
@@ -143,21 +143,21 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_html_tag_title',
 			[
-				'label' => esc_html__( 'HTML Tag', 'black-widgets' ),
+				'label' => esc_html__( 'HTML Tag', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'h3',
 				'options' => [
-					'div' => esc_html__( 'div', 'black-widgets' ),
-					'h1' => esc_html__( 'H1', 'black-widgets' ),
-					'h2' => esc_html__( 'H2', 'black-widgets' ),
-					'h3' => esc_html__( 'H3', 'black-widgets' ),
-					'h4' => esc_html__( 'H4', 'black-widgets' ),
-					'h5' => esc_html__( 'H5', 'black-widgets' ),
-					'h6' => esc_html__( 'H6', 'black-widgets' ),
-					'p' => esc_html__( 'p', 'black-widgets' ),
-					'span' => esc_html__( 'span', 'black-widgets' ),
+					'div' => esc_html__( 'div', 'blackwidgets' ),
+					'h1' => esc_html__( 'H1', 'blackwidgets' ),
+					'h2' => esc_html__( 'H2', 'blackwidgets' ),
+					'h3' => esc_html__( 'H3', 'blackwidgets' ),
+					'h4' => esc_html__( 'H4', 'blackwidgets' ),
+					'h5' => esc_html__( 'H5', 'blackwidgets' ),
+					'h6' => esc_html__( 'H6', 'blackwidgets' ),
+					'p' => esc_html__( 'p', 'blackwidgets' ),
+					'span' => esc_html__( 'span', 'blackwidgets' ),
 				],
-				'description' => esc_html__( 'Choose an HTML tag, it can help you to SEO and beautifully of the UI design with follow the structure of your website.', 'black-widgets' ),
+				'description' => esc_html__( 'Choose an HTML tag, it can help you to SEO and beautifully of the UI design with follow the structure of your website.', 'blackwidgets' ),
 				'separator' => 'after',
 			]
 		);
@@ -166,11 +166,11 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_subtitle',
 			[
-				'label' => esc_html__( 'Subtitle', 'black-widgets' ),
+				'label' => esc_html__( 'Subtitle', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => esc_html__( 'Create a High Quality UI/UX Design from San Francisco.', 'black-widgets' ),
-				'placeholder' => esc_html__( 'Type your subtitle here', 'black-widgets' ),
-				'description' => esc_html__( 'Inline HTML allowed: br, strong, b, em, i, u, span, mark, small, sub, sup.', 'black-widgets' ),
+				'default' => esc_html__( 'Create a High Quality UI/UX Design from San Francisco.', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'Type your subtitle here', 'blackwidgets' ),
+				'description' => esc_html__( 'Inline HTML allowed: br, strong, b, em, i, u, span, mark, small, sub, sup.', 'blackwidgets' ),
 			]
 		);
 
@@ -178,21 +178,21 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_html_tag_subtitle',
 			[
-				'label' => esc_html__( 'HTML Tag', 'black-widgets' ),
+				'label' => esc_html__( 'HTML Tag', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'p',
 				'options' => [
-					'div' => esc_html__( 'div', 'black-widgets' ),
-					'h1' => esc_html__( 'H1', 'black-widgets' ),
-					'h2' => esc_html__( 'H2', 'black-widgets' ),
-					'h3' => esc_html__( 'H3', 'black-widgets' ),
-					'h4' => esc_html__( 'H4', 'black-widgets' ),
-					'h5' => esc_html__( 'H5', 'black-widgets' ),
-					'h6' => esc_html__( 'H6', 'black-widgets' ),
-					'p' => esc_html__( 'p', 'black-widgets' ),
-					'span' => esc_html__( 'span', 'black-widgets' ),
+					'div' => esc_html__( 'div', 'blackwidgets' ),
+					'h1' => esc_html__( 'H1', 'blackwidgets' ),
+					'h2' => esc_html__( 'H2', 'blackwidgets' ),
+					'h3' => esc_html__( 'H3', 'blackwidgets' ),
+					'h4' => esc_html__( 'H4', 'blackwidgets' ),
+					'h5' => esc_html__( 'H5', 'blackwidgets' ),
+					'h6' => esc_html__( 'H6', 'blackwidgets' ),
+					'p' => esc_html__( 'p', 'blackwidgets' ),
+					'span' => esc_html__( 'span', 'blackwidgets' ),
 				],
-				'description' => esc_html__( 'Choose an HTML tag, it can help you to SEO and beautifully of the UI design with follow the structure of your website.', 'black-widgets' ),
+				'description' => esc_html__( 'Choose an HTML tag, it can help you to SEO and beautifully of the UI design with follow the structure of your website.', 'blackwidgets' ),
 				'separator' => 'after',
 			]
 		);
@@ -200,19 +200,19 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_link_text',
 			[
-				'label' => esc_html__( 'Button Text', 'black-widgets' ),
+				'label' => esc_html__( 'Button Text', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => esc_html__( 'Find More', 'black-widgets' ),
-				'placeholder' => esc_html__( 'Type your title here', 'black-widgets' ),
+				'default' => esc_html__( 'Find More', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'Type your title here', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'widget_link_url',
 			[
-				'label' => esc_html__( 'Button URL', 'black-widgets' ),
+				'label' => esc_html__( 'Button URL', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::URL,
-				'placeholder' => esc_html__( '#', 'black-widgets' ),
+				'placeholder' => esc_html__( '#', 'blackwidgets' ),
 				'show_external' => true,
 				'default' => [
 					'url' => '',
@@ -230,7 +230,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section',
 			[
-				'label' => esc_html__( 'Box Style', 'black-widgets' ),
+				'label' => esc_html__( 'Box Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -240,7 +240,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_1_normal',
 			[
-				'label' => esc_html__( 'Normal', 'black-widgets' ),
+				'label' => esc_html__( 'Normal', 'blackwidgets' ),
 			]
 		);
 
@@ -249,7 +249,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_box_background',
-				'label' => esc_html__( 'Background', 'black-widgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-cta',
 			]
@@ -258,19 +258,19 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_cta_alignment',
 			[
-				'label'     => esc_html__( 'Content Alignment', 'black-widgets' ),
+				'label'     => esc_html__( 'Content Alignment', 'blackwidgets' ),
 				'type'      => \Elementor\Controls_Manager::CHOOSE,
 				'options'   => [
 					'left'   => [
-						'title' => esc_html__( 'Left', 'black-widgets' ),
+						'title' => esc_html__( 'Left', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => esc_html__( 'Center', 'black-widgets' ),
+						'title' => esc_html__( 'Center', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [
-						'title' => esc_html__( 'Right', 'black-widgets' ),
+						'title' => esc_html__( 'Right', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -292,7 +292,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
-				'label' => esc_html__( 'Margin', 'black-widgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -305,7 +305,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
-				'label' => esc_html__( 'Padding', 'black-widgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -326,7 +326,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_box_border',
-				'label' => esc_html__( 'Border', 'black-widgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-cta',
 			]
 		);
@@ -336,7 +336,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_box_box_shadow',
-				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-cta',
 			]
 		);
@@ -344,7 +344,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_box_border_radius', //param_name
 			[
-				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -357,7 +357,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_1_hover',
 			[
-				'label' => esc_html__( 'Hover', 'black-widgets' ),
+				'label' => esc_html__( 'Hover', 'blackwidgets' ),
 			]
 		);
 
@@ -366,7 +366,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_hover_box_background',
-				'label' => esc_html__( 'Background', 'black-widgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', ],
 				'selector' => '{{WRAPPER}} .bw-cta:hover',
 			]
@@ -383,7 +383,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_hover_box_margin',
 			[
-				'label' => esc_html__( 'Margin', 'black-widgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -396,7 +396,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_hover_box_padding',
 			[
-				'label' => esc_html__( 'Padding', 'black-widgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -417,7 +417,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_hover_box_border',
-				'label' => esc_html__( 'Border', 'black-widgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-cta:hover',
 			]
 		);
@@ -427,7 +427,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_hover_box_box_shadow',
-				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-cta:hover',
 			]
 		);
@@ -435,7 +435,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_hover_box_border_radius', //param_name
 			[
-				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -455,7 +455,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'title_style_section',
 			[
-				'label' => esc_html__( 'Title Styles', 'black-widgets' ),
+				'label' => esc_html__( 'Title Styles', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -464,7 +464,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'title_tab_1',
 			[
-				'label' => esc_html__( 'Normal', 'black-widgets' ),
+				'label' => esc_html__( 'Normal', 'blackwidgets' ),
 			]
 		);
 
@@ -472,7 +472,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_icon_box_title_normal_color',
 			[
-				'label' => esc_html__( 'Normal Color', 'black-widgets' ),
+				'label' => esc_html__( 'Normal Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#fff',
 				'selectors' => [
@@ -485,7 +485,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'title_tab_2',
 			[
-				'label' => esc_html__( 'Hover', 'black-widgets' ),
+				'label' => esc_html__( 'Hover', 'blackwidgets' ),
 			]
 		);
 
@@ -493,7 +493,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_icon_box_title_hover_color',
 			[
-				'label' => esc_html__( 'Hover Color', 'black-widgets' ),
+				'label' => esc_html__( 'Hover Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bw-cta:hover .bw-cta-title' => 'color: {{VALUE}}',
@@ -516,7 +516,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'content_title_typographys',
-				'label' => esc_html__( 'Typography', 'black-widgets' ),
+				'label' => esc_html__( 'Typography', 'blackwidgets' ),
                 'global' => [
                     'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
                 ],
@@ -529,7 +529,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'content_title_text_shadow',
-				'label' => esc_html__( 'Text Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-cta .bw-cta-title',
 			]
 		);
@@ -539,7 +539,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'content_title_background',
-				'label' => esc_html__( 'Background', 'black-widgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-cta .bw-cta-title',
 			]
@@ -549,7 +549,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'content_title__margin',
 			[
-				'label' => esc_html__( 'Margin', 'black-widgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -562,7 +562,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'content_title__padding',
 			[
-				'label' => esc_html__( 'Padding', 'black-widgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -576,7 +576,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'content_title__border',
-				'label' => esc_html__( 'Border', 'black-widgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-cta .bw-cta-title',
 			]
 		);
@@ -585,7 +585,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_control(
 			'content_title__border_radius', //param_name
 			[
-				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -599,7 +599,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'content_title__box_shadow',
-				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-cta .bw-cta-title',
 			]
 		);
@@ -612,7 +612,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'subtitle_style_section',
 			[
-				'label' => esc_html__( 'Subtitle Styles', 'black-widgets' ),
+				'label' => esc_html__( 'Subtitle Styles', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -621,7 +621,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'subtitle_tab_1',
 			[
-				'label' => esc_html__( 'Normal', 'black-widgets' ),
+				'label' => esc_html__( 'Normal', 'blackwidgets' ),
 			]
 		);
 
@@ -629,7 +629,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_icon_box_subtitle_normal_color',
 			[
-				'label' => esc_html__( 'Normal Color', 'black-widgets' ),
+				'label' => esc_html__( 'Normal Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#fff',
 				'selectors' => [
@@ -642,7 +642,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'subtitle_tab_2',
 			[
-				'label' => esc_html__( 'Hover', 'black-widgets' ),
+				'label' => esc_html__( 'Hover', 'blackwidgets' ),
 			]
 		);
 
@@ -650,7 +650,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_icon_box_subtitle_hover_color',
 			[
-				'label' => esc_html__( 'Hover Color', 'black-widgets' ),
+				'label' => esc_html__( 'Hover Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bw-cta:hover .bw-cta-subtitle' => 'color: {{VALUE}}',
@@ -673,7 +673,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'content_subtitle_typographys',
-				'label' => esc_html__( 'Typography', 'black-widgets' ),
+				'label' => esc_html__( 'Typography', 'blackwidgets' ),
                 'global' => [
                     'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
                 ],
@@ -686,7 +686,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'content_subtitle_text_shadow',
-				'label' => esc_html__( 'Text Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-cta .bw-cta-subtitle',
 			]
 		);
@@ -696,7 +696,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'content_subtitle_background',
-				'label' => esc_html__( 'Background', 'black-widgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-cta .bw-cta-subtitle',
 			]
@@ -706,7 +706,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'content_subtitle__margin',
 			[
-				'label' => esc_html__( 'Margin', 'black-widgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -719,7 +719,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'content_subtitle__padding',
 			[
-				'label' => esc_html__( 'Padding', 'black-widgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -733,7 +733,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'content_subtitle__border',
-				'label' => esc_html__( 'Border', 'black-widgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-cta .bw-cta-subtitle',
 			]
 		);
@@ -742,7 +742,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_control(
 			'content_subtitle__border_radius', //param_name
 			[
-				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -756,7 +756,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'content_subtitle__box_shadow',
-				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-cta .bw-cta-subtitle',
 			]
 		);
@@ -769,7 +769,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'link_style_section',
 			[
-				'label' => esc_html__( 'Link Styles', 'black-widgets' ),
+				'label' => esc_html__( 'Link Styles', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -778,7 +778,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'link_tab_1',
 			[
-				'label' => esc_html__( 'Normal', 'black-widgets' ),
+				'label' => esc_html__( 'Normal', 'blackwidgets' ),
 			]
 		);
 
@@ -786,7 +786,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_icon_box_link_normal_color',
 			[
-				'label' => esc_html__( 'Normal Color', 'black-widgets' ),
+				'label' => esc_html__( 'Normal Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#000',
 				'selectors' => [
@@ -800,7 +800,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'content_link_normal_background',
-				'label' => esc_html__( 'Background', 'black-widgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-cta .bw-cta-btn',
 			]
@@ -810,7 +810,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'link_tab_2',
 			[
-				'label' => esc_html__( 'Hover', 'black-widgets' ),
+				'label' => esc_html__( 'Hover', 'blackwidgets' ),
 			]
 		);
 
@@ -818,7 +818,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_icon_box_link_hover_color',
 			[
-				'label' => esc_html__( 'Hover Color', 'black-widgets' ),
+				'label' => esc_html__( 'Hover Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bw-cta .bw-cta-btn:hover' => 'color: {{VALUE}}',
@@ -831,7 +831,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'content_link_hover_background',
-				'label' => esc_html__( 'Background', 'black-widgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .bw-cta .bw-cta-btn:hover',
 			]
@@ -852,7 +852,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'content_link_typographys',
-				'label' => esc_html__( 'Typography', 'black-widgets' ),
+				'label' => esc_html__( 'Typography', 'blackwidgets' ),
                 'global' => [
                     'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
                 ],
@@ -865,7 +865,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'content_link_text_shadow',
-				'label' => esc_html__( 'Text Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-cta .bw-cta-btn',
 			]
 		);
@@ -874,7 +874,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'content_link_margin',
 			[
-				'label' => esc_html__( 'Margin', 'black-widgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -887,7 +887,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'content_link_padding',
 			[
-				'label' => esc_html__( 'Padding', 'black-widgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -901,7 +901,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'content_link_border',
-				'label' => esc_html__( 'Border', 'black-widgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-cta .bw-cta-btn',
 			]
 		);
@@ -910,7 +910,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		$this->add_control(
 			'content_link_border_radius', //param_name
 			[
-				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -924,7 +924,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'content_link_box_shadow',
-				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-cta .bw-cta-btn',
 			]
 		);

@@ -207,7 +207,7 @@
             function applyPixelLoop(shift) {
                 const keyframesName =
                     'bw-tm-' + direction + '-' + Date.now() + '-' + Math.floor(Math.random() * 10000);
-                // Control "left" = Left To Right → content drifts right (-shift → 0).
+                // Control "left" = Left To Right: content drifts right (-shift to 0).
                 const fromX = direction === 'left' ? -shift : 0;
                 const toX = direction === 'left' ? 0 : -shift;
                 const duration = Math.max(0.1, shift / resolvedSpeed);

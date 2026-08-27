@@ -45,7 +45,7 @@ class GSAPTab extends Widget_Base {
 	 * @access public
 	 */
 	public function get_title(): string {
-		return __( 'Black Tab', 'black-widgets' );
+		return __( 'Black Tab', 'blackwidgets' );
 	}
 
 	/**
@@ -123,7 +123,7 @@ class GSAPTab extends Widget_Base {
         $this->start_controls_section(
                 'section_type',
                 [
-                        'label' => __( 'Type', 'black-widgets' ),
+                        'label' => __( 'Type', 'blackwidgets' ),
                         'tab'   => Controls_Manager::TAB_CONTENT,
                 ]
         );
@@ -133,19 +133,19 @@ class GSAPTab extends Widget_Base {
 			[
 				'type' => Controls_Manager::ALERT,
 				'alert_type' => 'info',
-				'heading' => __( 'Feel free to edit.', 'black-widgets' ),
-				'content' => __('We created some skin before, you can use these or no! make a new custom type.', 'black-widgets'),
+				'heading' => __( 'Feel free to edit.', 'blackwidgets' ),
+				'content' => __('We created some skin before, you can use these or no! make a new custom type.', 'blackwidgets'),
 			]
 		);
 
         $this->add_control(
 			'tab_type',
 			[
-				'label'   => __( 'Tab Type', 'black-widgets' ),
+				'label'   => __( 'Tab Type', 'blackwidgets' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => [
-					'default'      => __( 'Vertical Tab', 'black-widgets' ),
-					'vertical_tab' => __( 'Horizontal  Tab', 'black-widgets' ),
+					'default'      => __( 'Vertical Tab', 'blackwidgets' ),
+					'vertical_tab' => __( 'Horizontal  Tab', 'blackwidgets' ),
 				],
 				'default' => 'default',
 			]
@@ -156,7 +156,7 @@ class GSAPTab extends Widget_Base {
 		$this->start_controls_section(
 			'section_content',
 			[
-				'label' => __( 'Content', 'black-widgets' ),
+				'label' => __( 'Content', 'blackwidgets' ),
 				'condition' => [
                     'tab_type' => 'default',
                 ],
@@ -166,9 +166,9 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'content',
 			[
-				'label'   => __( 'Content', 'black-widgets' ),
+				'label'   => __( 'Content', 'blackwidgets' ),
 				'type'    => Controls_Manager::WYSIWYG,
-				'default' => __( 'Enter your content here', 'black-widgets' ),
+				'default' => __( 'Enter your content here', 'blackwidgets' ),
 				'condition' => [
                     'tab_type' => 'default',
                 ],
@@ -180,7 +180,7 @@ class GSAPTab extends Widget_Base {
 		$this->start_controls_section(
 			'section_tabs',
 			[
-				'label' => __( 'Tabs', 'black-widgets' ),
+				'label' => __( 'Tabs', 'blackwidgets' ),
 			]
 		);
 
@@ -192,17 +192,17 @@ class GSAPTab extends Widget_Base {
 		$this->start_controls_section(
 			'section_settings',
 			[
-				'label' => __( 'Settings', 'black-widgets' ),
+				'label' => __( 'Settings', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'autoplay',
 			[
-				'label'        => __( 'Enable Autoplay', 'black-widgets' ),
+				'label'        => __( 'Enable Autoplay', 'blackwidgets' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => __( 'Yes', 'black-widgets' ),
-				'label_off'    => __( 'No', 'black-widgets' ),
+				'label_on'     => __( 'Yes', 'blackwidgets' ),
+				'label_off'    => __( 'No', 'blackwidgets' ),
 				'return_value' => 'yes',
 				'default'      => 'no',
 			]
@@ -211,7 +211,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'autoplay_delay',
 			[
-				'label'     => __( 'Autoplay Delay (ms)', 'black-widgets' ),
+				'label'     => __( 'Autoplay Delay (ms)', 'blackwidgets' ),
 				'type'      => Controls_Manager::NUMBER,
 				'min'       => 1,
 				'step'      => 1,
@@ -238,9 +238,9 @@ class GSAPTab extends Widget_Base {
 		$repeater->add_control(
 			'tab_title',
 			[
-				'label'       => __( 'Tab Title', 'black-widgets' ),
+				'label'       => __( 'Tab Title', 'blackwidgets' ),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => __( 'Tab Title', 'black-widgets' ),
+				'default'     => __( 'Tab Title', 'blackwidgets' ),
 				'label_block' => true,
 			]
 		);
@@ -248,7 +248,7 @@ class GSAPTab extends Widget_Base {
 		$repeater->add_control(
 			'tab_title_tag',
 			[
-				'label'   => __( 'Tab Title HTML Tag', 'black-widgets' ),
+				'label'   => __( 'Tab Title HTML Tag', 'blackwidgets' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => [
 					'h1'   => 'H1',
@@ -268,20 +268,20 @@ class GSAPTab extends Widget_Base {
 		$repeater->add_control(
 			'tab_description',
 			[
-				'label'   => __( 'Short Description', 'black-widgets' ),
+				'label'   => __( 'Short Description', 'blackwidgets' ),
 				'type'    => Controls_Manager::TEXTAREA,
-				'default' => __( 'Tab short description goes here.', 'black-widgets' ),
+				'default' => __( 'Tab short description goes here.', 'blackwidgets' ),
 			]
 		);
 
 		$repeater->add_control(
 			'media_type',
 			[
-				'label'   => __( 'Media Type', 'black-widgets' ),
+				'label'   => __( 'Media Type', 'blackwidgets' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => [
-					'image' => __( 'Image', 'black-widgets' ),
-					'video' => __( 'Video', 'black-widgets' ),
+					'image' => __( 'Image', 'blackwidgets' ),
+					'video' => __( 'Video', 'blackwidgets' ),
 				],
 				'default' => 'image',
 			]
@@ -290,7 +290,7 @@ class GSAPTab extends Widget_Base {
 		$repeater->add_control(
 			'tab_image',
 			[
-				'label'      => __( 'Select Image', 'black-widgets' ),
+				'label'      => __( 'Select Image', 'blackwidgets' ),
 				'type'       => Controls_Manager::MEDIA,
 				'media_type' => 'image',
 				'default'    => [
@@ -305,7 +305,7 @@ class GSAPTab extends Widget_Base {
 		$repeater->add_control(
 			'tab_video',
 			[
-				'label'      => __( 'Select Video', 'black-widgets' ),
+				'label'      => __( 'Select Video', 'blackwidgets' ),
 				'type'       => Controls_Manager::MEDIA,
 				'media_type' => 'video',
 				'default'    => [
@@ -320,18 +320,18 @@ class GSAPTab extends Widget_Base {
 		$repeater->add_control(
 			'read_more_text',
 			[
-				'label'   => __( 'Button Text', 'black-widgets' ),
+				'label'   => __( 'Button Text', 'blackwidgets' ),
 				'type'    => Controls_Manager::TEXT,
-				'default' => __( 'Read More', 'black-widgets' ),
+				'default' => __( 'Read More', 'blackwidgets' ),
 			]
 		);
 
 		$repeater->add_control(
 			'read_more_link',
 			[
-				'label'       => __( 'Button Link', 'black-widgets' ),
+				'label'       => __( 'Button Link', 'blackwidgets' ),
 				'type'        => Controls_Manager::URL,
-				'placeholder' => __( 'https://your-link.com', 'black-widgets' ),
+				'placeholder' => __( 'https://your-link.com', 'blackwidgets' ),
 			]
 		);
 
@@ -339,7 +339,7 @@ class GSAPTab extends Widget_Base {
 		$repeater->add_control(
 			'read_more_icon',
 			[
-				'label'   => __( 'Button Icon', 'black-widgets' ),
+				'label'   => __( 'Button Icon', 'blackwidgets' ),
 				'type'    => Controls_Manager::ICONS,
 				'default' => [
 					'value'   => 'fas fa-arrow-right',
@@ -351,19 +351,19 @@ class GSAPTab extends Widget_Base {
         $this->add_control(
             'tabs_default',
             [
-                'label'       => __( 'Tab Items', 'black-widgets' ),
+                'label'       => __( 'Tab Items', 'blackwidgets' ),
                 'type'        => Controls_Manager::REPEATER,
                 'fields'      => $repeater->get_controls(),
                 'default'     => [
                     [
-                        'tab_title'       => __( 'Sample Tab 1', 'black-widgets' ),
+                        'tab_title'       => __( 'Sample Tab 1', 'blackwidgets' ),
                         'tab_title_tag'   => 'h3',
-                        'tab_description' => __( 'This is a short description for sample tab 1.', 'black-widgets' ),
+                        'tab_description' => __( 'This is a short description for sample tab 1.', 'blackwidgets' ),
                         'media_type'      => 'image',
                         'tab_image'       => [
                             'url' => 'https://placehold.co/1024x1024/171717/EEE/png',
                         ],
-                        'read_more_text'  => __( 'Read More', 'black-widgets' ),
+                        'read_more_text'  => __( 'Read More', 'blackwidgets' ),
                         'read_more_link'  => [ 'url' => 'https://example.com' ],
                         'read_more_icon'  => [
                             'value'   => 'fas fa-arrow-right',
@@ -371,14 +371,14 @@ class GSAPTab extends Widget_Base {
                         ],
                     ],
                     [
-                        'tab_title'       => __( 'Sample Tab 2', 'black-widgets' ),
+                        'tab_title'       => __( 'Sample Tab 2', 'blackwidgets' ),
                         'tab_title_tag'   => 'h3',
-                        'tab_description' => __( 'This is a short description for sample tab 2.', 'black-widgets' ),
+                        'tab_description' => __( 'This is a short description for sample tab 2.', 'blackwidgets' ),
                         'media_type'      => 'image',
                         'tab_image'       => [
                             'url' => 'https://placehold.co/1024x1024/171717/EEE/png',
                         ],
-                        'read_more_text'  => __( 'Learn More', 'black-widgets' ),
+                        'read_more_text'  => __( 'Learn More', 'blackwidgets' ),
                         'read_more_link'  => [ 'url' => 'https://example.com' ],
                         'read_more_icon'  => [
                             'value'   => 'fas fa-info-circle',
@@ -386,14 +386,14 @@ class GSAPTab extends Widget_Base {
                         ],
                     ],
                     [
-                        'tab_title'       => __( 'Sample Tab 3', 'black-widgets' ),
+                        'tab_title'       => __( 'Sample Tab 3', 'blackwidgets' ),
                         'tab_title_tag'   => 'h3',
-                        'tab_description' => __( 'This is a short description for sample tab 3.', 'black-widgets' ),
+                        'tab_description' => __( 'This is a short description for sample tab 3.', 'blackwidgets' ),
                         'media_type'      => 'image',
                         'tab_image'       => [
                             'url' => 'https://placehold.co/1024x1024/171717/EEE/png',
                         ],
-                        'read_more_text'  => __( 'Learn More', 'black-widgets' ),
+                        'read_more_text'  => __( 'Learn More', 'blackwidgets' ),
                         'read_more_link'  => [ 'url' => 'https://example.com' ],
                         'read_more_icon'  => [
                             'value'   => 'fas fa-info-circle',
@@ -424,9 +424,9 @@ class GSAPTab extends Widget_Base {
 		$repeater->add_control(
 			'tab_title',
 			[
-				'label'       => __( 'Tab Title', 'black-widgets' ),
+				'label'       => __( 'Tab Title', 'blackwidgets' ),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => __( 'Tab Title', 'black-widgets' ),
+				'default'     => __( 'Tab Title', 'blackwidgets' ),
 				'label_block' => true,
 			]
 		);
@@ -434,20 +434,20 @@ class GSAPTab extends Widget_Base {
         $repeater->add_control(
 		    'tab_content',
 		    [
-			    'label'   => __( 'Short Description', 'black-widgets' ),
+			    'label'   => __( 'Short Description', 'blackwidgets' ),
 			    'type'    => Controls_Manager::WYSIWYG,
-			    'default' => __( 'Tab description goes here.', 'black-widgets' ),
+			    'default' => __( 'Tab description goes here.', 'blackwidgets' ),
 		    ]
 	    );
 
 		$repeater->add_control(
 			'media_type',
 			[
-				'label'   => __( 'Media Type', 'black-widgets' ),
+				'label'   => __( 'Media Type', 'blackwidgets' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => [
-					'image' => __( 'Image', 'black-widgets' ),
-					'video' => __( 'Video', 'black-widgets' ),
+					'image' => __( 'Image', 'blackwidgets' ),
+					'video' => __( 'Video', 'blackwidgets' ),
 				],
 				'default' => 'image',
 			]
@@ -456,7 +456,7 @@ class GSAPTab extends Widget_Base {
 		$repeater->add_control(
 			'tab_image',
 			[
-				'label'      => __( 'Select Image', 'black-widgets' ),
+				'label'      => __( 'Select Image', 'blackwidgets' ),
 				'type'       => Controls_Manager::MEDIA,
 				'media_type' => 'image',
 				'default'    => [
@@ -471,7 +471,7 @@ class GSAPTab extends Widget_Base {
 		$repeater->add_control(
 			'tab_video',
 			[
-				'label'      => __( 'Select Video', 'black-widgets' ),
+				'label'      => __( 'Select Video', 'blackwidgets' ),
 				'type'       => Controls_Manager::MEDIA,
 				'media_type' => 'video',
 				'default'    => [
@@ -486,18 +486,18 @@ class GSAPTab extends Widget_Base {
 		$repeater->add_control(
 			'read_more_text',
 			[
-				'label'   => __( 'Button Text', 'black-widgets' ),
+				'label'   => __( 'Button Text', 'blackwidgets' ),
 				'type'    => Controls_Manager::TEXT,
-				'default' => __( 'Read More', 'black-widgets' ),
+				'default' => __( 'Read More', 'blackwidgets' ),
 			]
 		);
 
 		$repeater->add_control(
 			'read_more_link',
 			[
-				'label'       => __( 'Button Link', 'black-widgets' ),
+				'label'       => __( 'Button Link', 'blackwidgets' ),
 				'type'        => Controls_Manager::URL,
-				'placeholder' => __( 'https://your-link.com', 'black-widgets' ),
+				'placeholder' => __( 'https://your-link.com', 'blackwidgets' ),
 			]
 		);
 
@@ -505,7 +505,7 @@ class GSAPTab extends Widget_Base {
 		$repeater->add_control(
 			'read_more_icon',
 			[
-				'label'   => __( 'Button Icon', 'black-widgets' ),
+				'label'   => __( 'Button Icon', 'blackwidgets' ),
 				'type'    => Controls_Manager::ICONS,
 				'default' => [
 					'value'   => 'fas fa-arrow-right',
@@ -517,18 +517,18 @@ class GSAPTab extends Widget_Base {
         $this->add_control(
             'tabs_vertical',
             [
-                'label'       => __( 'Tab Items', 'black-widgets' ),
+                'label'       => __( 'Tab Items', 'blackwidgets' ),
                 'type'        => Controls_Manager::REPEATER,
                 'fields'      => $repeater->get_controls(),
                 'default'     => [
                     [
-                        'tab_title'      => __( 'Vertical Tab 1', 'black-widgets' ),
-                        'tab_content'    => __( 'This is the description for vertical tab 1.', 'black-widgets' ),
+                        'tab_title'      => __( 'Vertical Tab 1', 'blackwidgets' ),
+                        'tab_content'    => __( 'This is the description for vertical tab 1.', 'blackwidgets' ),
                         'media_type'     => 'image',
                         'tab_image'      => [
                             'url' => 'https://placehold.co/1024x1024/171717/EEE/png',
                         ],
-                        'read_more_text' => __( 'Read More', 'black-widgets' ),
+                        'read_more_text' => __( 'Read More', 'blackwidgets' ),
                         'read_more_link' => [ 'url' => 'https://example.com' ],
                         'read_more_icon' => [
                             'value'   => 'fas fa-arrow-right',
@@ -536,13 +536,13 @@ class GSAPTab extends Widget_Base {
                         ],
                     ],
                     [
-                        'tab_title'      => __( 'Vertical Tab 2', 'black-widgets' ),
-                        'tab_content'    => __( 'This is the description for vertical tab 2.', 'black-widgets' ),
+                        'tab_title'      => __( 'Vertical Tab 2', 'blackwidgets' ),
+                        'tab_content'    => __( 'This is the description for vertical tab 2.', 'blackwidgets' ),
                         'media_type'     => 'image',
                         'tab_image'      => [
                             'url' => 'https://placehold.co/1024x1024/171717/EEE/png',
                         ],
-                        'read_more_text' => __( 'Learn More', 'black-widgets' ),
+                        'read_more_text' => __( 'Learn More', 'blackwidgets' ),
                         'read_more_link' => [ 'url' => 'https://example.com' ],
                         'read_more_icon' => [
                             'value'   => 'fas fa-info-circle',
@@ -550,13 +550,13 @@ class GSAPTab extends Widget_Base {
                         ],
                     ],
                     [
-                        'tab_title'      => __( 'Vertical Tab 3', 'black-widgets' ),
-                        'tab_content'    => __( 'This is the description for vertical tab 3.', 'black-widgets' ),
+                        'tab_title'      => __( 'Vertical Tab 3', 'blackwidgets' ),
+                        'tab_content'    => __( 'This is the description for vertical tab 3.', 'blackwidgets' ),
                         'media_type'     => 'image',
                         'tab_image'      => [
                             'url' => 'https://placehold.co/1024x1024/171717/EEE/png',
                         ],
-                        'read_more_text'  => __( 'Learn More', 'black-widgets' ),
+                        'read_more_text'  => __( 'Learn More', 'blackwidgets' ),
                         'read_more_link'  => [ 'url' => 'https://example.com' ],
                         'read_more_icon' => [
                             'value'   => 'fas fa-info-circle',
@@ -605,7 +605,7 @@ class GSAPTab extends Widget_Base {
 		$this->start_controls_section(
 			'section_default_box_style',
 			[
-				'label' => __( 'Box Style', 'black-widgets' ),
+				'label' => __( 'Box Style', 'blackwidgets' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
                 'condition' => [
 	                'tab_type' => 'default',
@@ -616,7 +616,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			'default_box_padding',
 			[
-				'label'      => __( 'Padding', 'black-widgets' ),
+				'label'      => __( 'Padding', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
@@ -628,7 +628,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			'default_box_margin',
 			[
-				'label'      => __( 'Margin', 'black-widgets' ),
+				'label'      => __( 'Margin', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
@@ -640,7 +640,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			'default_column_gap',
 			[
-				'label'      => __( 'Gap Between Columns', 'black-widgets' ),
+				'label'      => __( 'Gap Between Columns', 'blackwidgets' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range'      => [
@@ -656,7 +656,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			'default_column_width_ratio',
 			[
-				'label'     => __( 'Left / Right Column Width (%)', 'black-widgets' ),
+				'label'     => __( 'Left / Right Column Width (%)', 'blackwidgets' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [
 					'%' => [ 'min' => 10, 'max' => 90 ],
@@ -685,7 +685,7 @@ class GSAPTab extends Widget_Base {
 		$this->start_controls_section(
 			'section_default_tabs_style',
 			[
-				'label' => __( 'Tabs List', 'black-widgets' ),
+				'label' => __( 'Tabs List', 'blackwidgets' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'tab_type' => 'default',
@@ -696,7 +696,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'default_tabs_title_heading',
 			[
-				'label'     => __( 'Titles', 'black-widgets' ),
+				'label'     => __( 'Titles', 'blackwidgets' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -717,14 +717,14 @@ class GSAPTab extends Widget_Base {
 		$this->start_controls_tab(
 			'default_tabs_title_normal_color_tab',
 			[
-				'label' => esc_html__( 'Normal', 'black-widgets' ),
+				'label' => esc_html__( 'Normal', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'default_tabs_title_normal_color',
 			[
-				'label'     => __( 'Title Normal Color', 'black-widgets' ),
+				'label'     => __( 'Title Normal Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .black-tab__tab-title' => 'color: {{VALUE}};',
@@ -737,14 +737,14 @@ class GSAPTab extends Widget_Base {
 		$this->start_controls_tab(
 			'default_tabs_title_hover_color_tab',
 			[
-				'label' => esc_html__( 'Hover', 'black-widgets' ),
+				'label' => esc_html__( 'Hover', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'default_tabs_title_hover_color',
 			[
-				'label'     => __( 'Title Hover Color', 'black-widgets' ),
+				'label'     => __( 'Title Hover Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .black-tab__tab-title:not(.black-tab__tab-title--active):hover' => 'color: {{VALUE}};',
@@ -757,14 +757,14 @@ class GSAPTab extends Widget_Base {
 		$this->start_controls_tab(
 			'default_tabs_title_active_color_tab',
 			[
-				'label' => esc_html__( 'Active', 'black-widgets' ),
+				'label' => esc_html__( 'Active', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'default_tabs_title_active_color',
 			[
-				'label'     => __( 'Title Active Color', 'black-widgets' ),
+				'label'     => __( 'Title Active Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .black-tab__tab-title.black-tab__tab-title--active' => 'color: {{VALUE}};',
@@ -779,7 +779,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			'default_tabs_title_margin',
 			[
-				'label'      => __( 'Title Margin', 'black-widgets' ),
+				'label'      => __( 'Title Margin', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -791,7 +791,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'default_tabs_description_heading',
 			[
-				'label'     => __( 'Description', 'black-widgets' ),
+				'label'     => __( 'Description', 'blackwidgets' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -808,7 +808,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'default_tabs_description_color',
 			[
-				'label'     => __( 'Description Text Color', 'black-widgets' ),
+				'label'     => __( 'Description Text Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .black-tab__tab-description' => 'color: {{VALUE}};',
@@ -819,7 +819,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			'default_tabs_description_margin',
 			[
-				'label'      => __( 'Description Margin', 'black-widgets' ),
+				'label'      => __( 'Description Margin', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -831,7 +831,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'default_tabs_item_heading',
 			[
-				'label'     => __( 'Tab Item', 'black-widgets' ),
+				'label'     => __( 'Tab Item', 'blackwidgets' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -844,14 +844,14 @@ class GSAPTab extends Widget_Base {
 		$this->start_controls_tab(
 			'default_tabs_item_normal_background_tab',
 			[
-				'label' => esc_html__( 'Normal', 'black-widgets' ),
+				'label' => esc_html__( 'Normal', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'default_tab_item_background',
 			[
-				'label'     => __( 'Tab Item Normal Background', 'black-widgets' ),
+				'label'     => __( 'Tab Item Normal Background', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .black-tab__tab' => 'background-color: {{VALUE}};',
@@ -864,14 +864,14 @@ class GSAPTab extends Widget_Base {
 		$this->start_controls_tab(
 			'default_tabs_item_hover_background_tab',
 			[
-				'label' => esc_html__( 'Hover', 'black-widgets' ),
+				'label' => esc_html__( 'Hover', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'default_tab_item_hover_background',
 			[
-				'label'     => __( 'Tab Item Hover Background', 'black-widgets' ),
+				'label'     => __( 'Tab Item Hover Background', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .black-tab__tab:hover' => 'background-color: {{VALUE}};',
@@ -887,7 +887,7 @@ class GSAPTab extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'     => 'default_tab_item_border',
-				'label'    => __( 'Tab Item Border', 'black-widgets' ),
+				'label'    => __( 'Tab Item Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .black-tab__tab',
 			]
 		);
@@ -895,7 +895,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'default_tab_item_border_radius',
 			[
-				'label'      => __( 'Tab Item Border Radius', 'black-widgets' ),
+				'label'      => __( 'Tab Item Border Radius', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -908,7 +908,7 @@ class GSAPTab extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'     => 'default_tab_item_box_shadow',
-				'label'    => __( 'Tab Item Box Shadow', 'black-widgets' ),
+				'label'    => __( 'Tab Item Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .black-tab__tab',
 			]
 		);
@@ -928,7 +928,7 @@ class GSAPTab extends Widget_Base {
 		$this->start_controls_section(
 			'section_content_style',
 			[
-				'label' => __( 'Content', 'black-widgets' ),
+				'label' => __( 'Content', 'blackwidgets' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -936,7 +936,7 @@ class GSAPTab extends Widget_Base {
         $this->add_control(
             'content_color',
             [
-                'label' => esc_html__( 'Color', 'black-widgets' ),
+                'label' => esc_html__( 'Color', 'blackwidgets' ),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .black-tab__content p' => 'color: {{VALUE}}',
@@ -967,7 +967,7 @@ class GSAPTab extends Widget_Base {
 		$this->start_controls_section(
 			'section_default_timeline_style',
 			[
-				'label' => __( 'Timeline Indicator', 'black-widgets' ),
+				'label' => __( 'Timeline Indicator', 'blackwidgets' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'tab_type' => 'default',
@@ -982,14 +982,14 @@ class GSAPTab extends Widget_Base {
 		$this->start_controls_tab(
 			'default_timeline_active_thickness_tabs',
 			[
-				'label' => esc_html__( 'Active', 'black-widgets' ),
+				'label' => esc_html__( 'Active', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'default_timeline_indicator_active_thickness',
 			[
-				'label'      => __( 'Active Timeline Indicator Thickness', 'black-widgets' ),
+				'label'      => __( 'Active Timeline Indicator Thickness', 'blackwidgets' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range'      => [
@@ -1009,14 +1009,14 @@ class GSAPTab extends Widget_Base {
 		$this->start_controls_tab(
 			'default_timeline_not_active_thickness_tabs',
 			[
-				'label' => esc_html__( 'Not Active', 'black-widgets' ),
+				'label' => esc_html__( 'Not Active', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'default_timeline_indicator_not_active_thickness',
 			[
-				'label'      => __( 'Not Active Timeline Indicator Thickness', 'black-widgets' ),
+				'label'      => __( 'Not Active Timeline Indicator Thickness', 'blackwidgets' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range'      => [
@@ -1038,7 +1038,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'default_timeline_track_color',
 			[
-				'label'     => __( 'Timeline Track Color', 'black-widgets' ),
+				'label'     => __( 'Timeline Track Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .black-tab__tab-timeline' => 'background-color: {{VALUE}};',
@@ -1049,7 +1049,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'default_timeline_fill_color',
 			[
-				'label'     => __( 'Timeline Fill Color', 'black-widgets' ),
+				'label'     => __( 'Timeline Fill Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .black-tab__timeline-fill' => 'background-color: {{VALUE}};',
@@ -1060,7 +1060,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'default_timeline_border_radius',
 			[
-				'label'      => __( 'Timeline Border Radius', 'black-widgets' ),
+				'label'      => __( 'Timeline Border Radius', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -1072,7 +1072,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			'default_timeline_gap_offset',
 			[
-				'label'      => __( 'Timeline Gap / Offset', 'black-widgets' ),
+				'label'      => __( 'Timeline Gap / Offset', 'blackwidgets' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range'      => [
@@ -1105,7 +1105,7 @@ class GSAPTab extends Widget_Base {
 		$this->start_controls_section(
 			'section_default_media_style',
 			[
-				'label' => __( 'Media', 'black-widgets' ),
+				'label' => __( 'Media', 'blackwidgets' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'tab_type' => 'default',
@@ -1116,7 +1116,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			'default_media_max_width',
 			[
-				'label'      => __( 'Max Width', 'black-widgets' ),
+				'label'      => __( 'Max Width', 'blackwidgets' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'em' ],
 				'range'      => [
@@ -1138,7 +1138,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			'default_media_max_height',
 			[
-				'label'      => __( 'Max Height', 'black-widgets' ),
+				'label'      => __( 'Max Height', 'blackwidgets' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range'      => [
@@ -1161,7 +1161,7 @@ class GSAPTab extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'     => 'default_media_border',
-				'label'    => __( 'Media Area Border', 'black-widgets' ),
+				'label'    => __( 'Media Area Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .black-tab__media',
 			]
 		);
@@ -1169,7 +1169,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'default_media_border_radius',
 			[
-				'label'      => __( 'Media Area Border Radius', 'black-widgets' ),
+				'label'      => __( 'Media Area Border Radius', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -1182,7 +1182,7 @@ class GSAPTab extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'     => 'default_media_box_shadow',
-				'label'    => __( 'Media Area Box Shadow', 'black-widgets' ),
+				'label'    => __( 'Media Area Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .black-tab__media',
 			]
 		);
@@ -1190,14 +1190,14 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'default_media_object_fit',
 			[
-				'label'     => __( 'Object Fit', 'black-widgets' ),
+				'label'     => __( 'Object Fit', 'blackwidgets' ),
 				'type'      => Controls_Manager::SELECT,
 				'options'   => [
-					'contain'    => __( 'Contain', 'black-widgets' ),
-					'cover'      => __( 'Cover', 'black-widgets' ),
-					'fill'       => __( 'Fill', 'black-widgets' ),
-					'none'       => __( 'None', 'black-widgets' ),
-					'scale-down' => __( 'Scale Down', 'black-widgets' ),
+					'contain'    => __( 'Contain', 'blackwidgets' ),
+					'cover'      => __( 'Cover', 'blackwidgets' ),
+					'fill'       => __( 'Fill', 'blackwidgets' ),
+					'none'       => __( 'None', 'blackwidgets' ),
+					'scale-down' => __( 'Scale Down', 'blackwidgets' ),
 				],
 				'default'   => 'contain',
 				'selectors' => [
@@ -1209,7 +1209,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'default_media_background_color',
 			[
-				'label'     => __( 'Background Color', 'black-widgets' ),
+				'label'     => __( 'Background Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .black-tab__right' => 'background-color: {{VALUE}};',
@@ -1231,7 +1231,7 @@ class GSAPTab extends Widget_Base {
         $this->start_controls_section(
             'section_default_read_more_button_style',
             [
-                'label' => __( 'Read More Button', 'black-widgets' ),
+                'label' => __( 'Read More Button', 'blackwidgets' ),
                 'tab'   => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'tab_type' => 'default',
@@ -1253,14 +1253,14 @@ class GSAPTab extends Widget_Base {
         $this->start_controls_tab(
             'default_tab_read_more_button_normal',
             [
-                'label' => __( 'Normal', 'black-widgets' ),
+                'label' => __( 'Normal', 'blackwidgets' ),
             ]
         );
 
         $this->add_control(
             'default_read_more_button_text_color_normal',
             [
-                'label'     => __( 'Text Color', 'black-widgets' ),
+                'label'     => __( 'Text Color', 'blackwidgets' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .black-tab__read-more' => 'color: {{VALUE}};',
@@ -1271,7 +1271,7 @@ class GSAPTab extends Widget_Base {
         $this->add_control(
             'default_read_more_button_background_color_normal',
             [
-                'label'     => __( 'Background Color', 'black-widgets' ),
+                'label'     => __( 'Background Color', 'blackwidgets' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .black-tab__read-more' => 'background-color: {{VALUE}};',
@@ -1282,7 +1282,7 @@ class GSAPTab extends Widget_Base {
         $this->add_control(
             'default_read_more_button_icon_color_normal',
             [
-                'label'     => __( 'Icon Color', 'black-widgets' ),
+                'label'     => __( 'Icon Color', 'blackwidgets' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .black-tab__read-more svg' => 'fill: {{VALUE}}; stroke: {{VALUE}};',
@@ -1296,14 +1296,14 @@ class GSAPTab extends Widget_Base {
         $this->start_controls_tab(
             'default_tab_read_more_button_hover',
             [
-                'label' => __( 'Hover', 'black-widgets' ),
+                'label' => __( 'Hover', 'blackwidgets' ),
             ]
         );
 
         $this->add_control(
             'default_read_more_button_text_color_hover',
             [
-                'label'     => __( 'Text Color', 'black-widgets' ),
+                'label'     => __( 'Text Color', 'blackwidgets' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .black-tab__read-more:hover' => 'color: {{VALUE}};',
@@ -1314,7 +1314,7 @@ class GSAPTab extends Widget_Base {
         $this->add_control(
             'default_read_more_button_background_color_hover',
             [
-                'label'     => __( 'Background Color', 'black-widgets' ),
+                'label'     => __( 'Background Color', 'blackwidgets' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .black-tab__read-more:hover' => 'background-color: {{VALUE}};',
@@ -1325,7 +1325,7 @@ class GSAPTab extends Widget_Base {
         $this->add_control(
             'default_read_more_button_icon_color_hover',
             [
-                'label'     => __( 'Icon Color', 'black-widgets' ),
+                'label'     => __( 'Icon Color', 'blackwidgets' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .black-tab__read-more:hover svg' => 'fill: {{VALUE}}; stroke: {{VALUE}};',
@@ -1341,7 +1341,7 @@ class GSAPTab extends Widget_Base {
         $this->add_responsive_control(
             'default_read_more_button_padding',
             [
-                'label'      => __( 'Padding', 'black-widgets' ),
+                'label'      => __( 'Padding', 'blackwidgets' ),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors'  => [
@@ -1354,7 +1354,7 @@ class GSAPTab extends Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name'     => 'default_read_more_button_border',
-                'label'    => __( 'Border', 'black-widgets' ),
+                'label'    => __( 'Border', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .black-tab__read-more',
             ]
         );
@@ -1362,7 +1362,7 @@ class GSAPTab extends Widget_Base {
         $this->add_control(
             'default_read_more_button_border_radius',
             [
-                'label'      => __( 'Border Radius', 'black-widgets' ),
+                'label'      => __( 'Border Radius', 'blackwidgets' ),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%' ],
                 'selectors'  => [
@@ -1375,7 +1375,7 @@ class GSAPTab extends Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name'     => 'default_read_more_button_box_shadow',
-                'label'    => __( 'Box Shadow', 'black-widgets' ),
+                'label'    => __( 'Box Shadow', 'blackwidgets' ),
                 'selector' => '{{WRAPPER}} .black-tab__read-more',
             ]
         );
@@ -1383,7 +1383,7 @@ class GSAPTab extends Widget_Base {
         $this->add_control(
             'default_read_more_button_icon_spacing',
             [
-                'label'      => __( 'Icon Spacing', 'black-widgets' ),
+                'label'      => __( 'Icon Spacing', 'blackwidgets' ),
                 'type'       => Controls_Manager::SLIDER,
                 'size_units' => [ 'px' ],
                 'range'      => [
@@ -1401,7 +1401,7 @@ class GSAPTab extends Widget_Base {
         $this->add_control(
             'default_read_more_button_icon_size',
             [
-                'label'      => __( 'Icon Size', 'black-widgets' ),
+                'label'      => __( 'Icon Size', 'blackwidgets' ),
                 'type'       => Controls_Manager::SLIDER,
                 'size_units' => [ 'px', 'em' ],
                 'range'      => [
@@ -1449,7 +1449,7 @@ class GSAPTab extends Widget_Base {
 		$this->start_controls_section(
 			'section_vertical_wrapper_style',
 			[
-				'label' => __( 'Box Styles', 'black-widgets' ),
+				'label' => __( 'Box Styles', 'blackwidgets' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'tab_type' => 'vertical_tab',
@@ -1461,7 +1461,7 @@ class GSAPTab extends Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name'     => 'vertical_wrapper_background',
-				'label'    => __( 'Background', 'black-widgets' ),
+				'label'    => __( 'Background', 'blackwidgets' ),
 				'types'    => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .black-tab',
 			]
@@ -1471,7 +1471,7 @@ class GSAPTab extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'     => 'vertical_wrapper_border',
-				'label'    => __( 'Border', 'black-widgets' ),
+				'label'    => __( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .black-tab',
 			]
 		);
@@ -1479,7 +1479,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'vertical_wrapper_border_radius',
 			[
-				'label'      => __( 'Border Radius', 'black-widgets' ),
+				'label'      => __( 'Border Radius', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
@@ -1492,7 +1492,7 @@ class GSAPTab extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'     => 'vertical_wrapper_box_shadow',
-				'label'    => __( 'Box Shadow', 'black-widgets' ),
+				'label'    => __( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .black-tab',
 			]
 		);
@@ -1500,7 +1500,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			'vertical_wrapper_padding',
 			[
-				'label'      => __( 'Padding', 'black-widgets' ),
+				'label'      => __( 'Padding', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
@@ -1513,7 +1513,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			'vertical_wrapper_margin',
 			[
-				'label'      => __( 'Margin', 'black-widgets' ),
+				'label'      => __( 'Margin', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
@@ -1536,7 +1536,7 @@ class GSAPTab extends Widget_Base {
 		$this->start_controls_section(
 			'section_vertical_tab_titles_style',
 			[
-				'label' => __( 'Tab Titles', 'black-widgets' ),
+				'label' => __( 'Tab Titles', 'blackwidgets' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
                 'condition' => [
                   'tab_type' => 'vertical_tab'
@@ -1547,7 +1547,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			'vertical_tabs_container_width',
 			[
-				'label' => __( 'Tabs Container Width', 'black-widgets' ),
+				'label' => __( 'Tabs Container Width', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ '%', 'px', 'vw' ],
 				'range' => [
@@ -1573,7 +1573,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'vertical_tab_titles_wrapper_heading',
 			[
-				'label' => __( 'Wrapper', 'black-widgets' ),
+				'label' => __( 'Wrapper', 'blackwidgets' ),
 				'type'  => Controls_Manager::HEADING,
 			]
 		);
@@ -1590,7 +1590,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'vertical_tab_titles_container_heading',
 			[
-				'label' => __( 'Container', 'black-widgets' ),
+				'label' => __( 'Container', 'blackwidgets' ),
 				'type'  => Controls_Manager::HEADING,
 			]
 		);
@@ -1607,7 +1607,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			"vertical_tab_titles_container_padding",
 			[
-				'label'      => __( 'Padding', 'black-widgets' ),
+				'label'      => __( 'Padding', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
@@ -1619,7 +1619,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			"vertical_tab_titles_container_margin",
 			[
-				'label'      => __( 'Margin', 'black-widgets' ),
+				'label'      => __( 'Margin', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
@@ -1631,7 +1631,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'vertical_tab_titles_item_heading',
 			[
-				'label'     => __( 'Tab Item', 'black-widgets' ),
+				'label'     => __( 'Tab Item', 'blackwidgets' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -1660,14 +1660,14 @@ class GSAPTab extends Widget_Base {
 		$this->start_controls_tab(
 			'vertical_tabs_title_item_normal_text_color_tab',
 			[
-				'label' => esc_html__( 'Normal', 'black-widgets' ),
+				'label' => esc_html__( 'Normal', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'vertical_tab_titles_item_text_color',
 			[
-				'label'     => __( 'Text Color', 'black-widgets' ),
+				'label'     => __( 'Text Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .black-tab__tab' => 'color: {{VALUE}};',
@@ -1678,7 +1678,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'vertical_tab_titles_item_normal_background_color',
 			[
-				'label'     => __( 'Background Color', 'black-widgets' ),
+				'label'     => __( 'Background Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .black-tab__tabs .black-tab__tab' => 'background-color: {{VALUE}};',
@@ -1689,7 +1689,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'vertical_tab_titles_item_normal_border_color',
 			[
-				'label'     => __( 'Border Color', 'black-widgets' ),
+				'label'     => __( 'Border Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [
 					'vertical_tab_titles_item_border_border!' => '',
@@ -1705,14 +1705,14 @@ class GSAPTab extends Widget_Base {
 		$this->start_controls_tab(
 			'vertical_tabs_title_item_active_text_color_tab',
 			[
-				'label' => esc_html__( 'Active', 'black-widgets' ),
+				'label' => esc_html__( 'Active', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'vertical_tab_titles_item_active_text_color',
 			[
-				'label'     => __( 'Text Color', 'black-widgets' ),
+				'label'     => __( 'Text Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .black-tab__tab.black-tab__tab--active' => 'color: {{VALUE}};',
@@ -1723,7 +1723,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'vertical_tab_titles_item_active_background_color',
 			[
-				'label'     => __( 'Background Color', 'black-widgets' ),
+				'label'     => __( 'Background Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .black-tab__tab.black-tab__tab--active' => 'background-color: {{VALUE}};',
@@ -1734,7 +1734,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'vertical_tab_titles_item_active_border_color',
 			[
-				'label'     => __( 'Border Color', 'black-widgets' ),
+				'label'     => __( 'Border Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [
 					'vertical_tab_titles_item_border_border!' => '',
@@ -1750,14 +1750,14 @@ class GSAPTab extends Widget_Base {
 		$this->start_controls_tab(
 			'vertical_tabs_title_item_hover_text_color_tab',
 			[
-				'label' => esc_html__( 'Hover', 'black-widgets' ),
+				'label' => esc_html__( 'Hover', 'blackwidgets' ),
 			]
 		);
 
 		$this->add_control(
 			'vertical_tab_titles_item_hover_text_color',
 			[
-				'label'     => __( 'Text Color', 'black-widgets' ),
+				'label'     => __( 'Text Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .black-tab__tabs .black-tab__tab:hover' => 'color: {{VALUE}};',
@@ -1768,7 +1768,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'vertical_tab_titles_item_hover_background_color',
 			[
-				'label'     => __( 'Background Color', 'black-widgets' ),
+				'label'     => __( 'Background Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .black-tab__tabs .black-tab__tab:hover' => 'background-color: {{VALUE}};',
@@ -1779,7 +1779,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'vertical_tab_titles_item_hover_border_color',
 			[
-				'label'     => __( 'Border Color', 'black-widgets' ),
+				'label'     => __( 'Border Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [
 					'vertical_tab_titles_item_border_border!' => '',
@@ -1797,19 +1797,19 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			'vertical_tab_titles_text_align',
 			[
-				'label'     => __( 'Text Align', 'black-widgets' ),
+				'label'     => __( 'Text Align', 'blackwidgets' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [
 					'left'   => [
-						'title' => __( 'Left', 'black-widgets' ),
+						'title' => __( 'Left', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => __( 'Center', 'black-widgets' ),
+						'title' => __( 'Center', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [
-						'title' => __( 'Right', 'black-widgets' ),
+						'title' => __( 'Right', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -1822,7 +1822,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			"vertical_tab_titles_item_padding",
 			[
-				'label'      => __( 'Padding', 'black-widgets' ),
+				'label'      => __( 'Padding', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
@@ -1834,7 +1834,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			"vertical_tab_titles_item_margin",
 			[
-				'label'      => __( 'Margin', 'black-widgets' ),
+				'label'      => __( 'Margin', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
@@ -1846,7 +1846,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'vertical_tab_titles_item_border_radius',
 			[
-				'label'      => __( 'Border Radius', 'black-widgets' ),
+				'label'      => __( 'Border Radius', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
@@ -1877,7 +1877,7 @@ class GSAPTab extends Widget_Base {
 		$this->start_controls_section(
 			'section_vertical_content_area_style',
 			[
-				'label' => __( 'Content Area', 'black-widgets' ),
+				'label' => __( 'Content Area', 'blackwidgets' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
                 'condition' => [
                         'tab_type' => 'vertical_tab',
@@ -1888,7 +1888,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			'vertical_content_area_padding',
 			[
-				'label'      => __( 'Padding', 'black-widgets' ),
+				'label'      => __( 'Padding', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
@@ -1900,7 +1900,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			'vertical_content_area_margin',
 			[
-				'label'      => __( 'Margin', 'black-widgets' ),
+				'label'      => __( 'Margin', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
@@ -1912,23 +1912,23 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			'vertical_content_area_text_align',
 			[
-				'label'     => __( 'Text Align', 'black-widgets' ),
+				'label'     => __( 'Text Align', 'blackwidgets' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [
 					'left'    => [
-						'title' => __( 'Left', 'black-widgets' ),
+						'title' => __( 'Left', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center'  => [
-						'title' => __( 'Center', 'black-widgets' ),
+						'title' => __( 'Center', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'   => [
-						'title' => __( 'Right', 'black-widgets' ),
+						'title' => __( 'Right', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 					'justify' => [
-						'title' => __( 'Justify', 'black-widgets' ),
+						'title' => __( 'Justify', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
@@ -1952,7 +1952,7 @@ class GSAPTab extends Widget_Base {
 		$this->start_controls_section(
 			'section_vertical_media_style',
 			[
-				'label' => __( 'Media', 'black-widgets' ),
+				'label' => __( 'Media', 'blackwidgets' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
                 'condition' => [
 	                'tab_type' => 'vertical_tab',
@@ -1963,7 +1963,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			'vertical_media_max_width',
 			[
-				'label'      => __( 'Max Width', 'black-widgets' ),
+				'label'      => __( 'Max Width', 'blackwidgets' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'vw' ],
 				'range'      => [
@@ -1980,7 +1980,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			'vertical_media_max_height',
 			[
-				'label'      => __( 'Max Height', 'black-widgets' ),
+				'label'      => __( 'Max Height', 'blackwidgets' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'vh' ],
 				'range'      => [
@@ -2024,7 +2024,7 @@ class GSAPTab extends Widget_Base {
 		$this->start_controls_section(
 			'section_vertical_read_more_button_style',
 			[
-				'label' => __( 'Read More Button', 'black-widgets' ),
+				'label' => __( 'Read More Button', 'blackwidgets' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
                 'condition' => [
 	                'tab_type' => 'vertical_tab',
@@ -2043,7 +2043,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'vertical_read_more_text_color',
 			[
-				'label'     => __( 'Text Color', 'black-widgets' ),
+				'label'     => __( 'Text Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .black-tab__read-more' => 'color: {{VALUE}};',
@@ -2054,7 +2054,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_control(
 			'vertical_read_more_background_color',
 			[
-				'label'     => __( 'Background Color', 'black-widgets' ),
+				'label'     => __( 'Background Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .black-tab__read-more' => 'background-color: {{VALUE}};',
@@ -2073,7 +2073,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			'vertical_read_more_border_radius',
 			[
-				'label'      => __( 'Border Radius', 'black-widgets' ),
+				'label'      => __( 'Border Radius', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -2085,7 +2085,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			'vertical_read_more_padding',
 			[
-				'label'      => __( 'Padding', 'black-widgets' ),
+				'label'      => __( 'Padding', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
@@ -2097,7 +2097,7 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			'vertical_read_more_margin',
 			[
-				'label'      => __( 'Margin', 'black-widgets' ),
+				'label'      => __( 'Margin', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
@@ -2109,7 +2109,7 @@ class GSAPTab extends Widget_Base {
         $this->add_control(
             'vertical_read_more_icon_color',
             [
-                'label'     => __( 'Icon Color', 'black-widgets' ),
+                'label'     => __( 'Icon Color', 'blackwidgets' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .black-tab__read-more-icon' => 'color: {{VALUE}};',
@@ -2121,7 +2121,7 @@ class GSAPTab extends Widget_Base {
         $this->add_responsive_control(
             'vertical_read_more_icon_size',
             [
-                'label'      => __( 'Icon Size', 'black-widgets' ),
+                'label'      => __( 'Icon Size', 'blackwidgets' ),
                 'type'       => Controls_Manager::SLIDER,
                 'range'      => [
                     'px' => [
@@ -2138,7 +2138,7 @@ class GSAPTab extends Widget_Base {
         $this->add_responsive_control(
             'vertical_read_more_icon_spacing',
             [
-                'label'     => __( 'Icon Spacing', 'black-widgets' ),
+                'label'     => __( 'Icon Spacing', 'blackwidgets' ),
                 'type'      => Controls_Manager::SLIDER,
                 'range'     => [
                     'px' => [

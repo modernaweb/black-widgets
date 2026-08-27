@@ -51,7 +51,7 @@ class Icon extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Black Icon', 'black-widgets' );
+		return __( 'Black Icon', 'blackwidgets' );
 	}
 
 	/**
@@ -105,7 +105,7 @@ class Icon extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => esc_html__( 'Content', 'black-widgets' ),
+				'label' => esc_html__( 'Content', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -115,11 +115,11 @@ class Icon extends \Elementor\Widget_Base {
 			[
 				'type' => \Elementor\Controls_Manager::ALERT,
 				'alert_type' => 'info',     /* info, success, warning, danger */
-				'heading' => esc_html__( 'Feel free to edit. Check this widget\'s demo.', 'black-widgets' ),
+				'heading' => esc_html__( 'Feel free to edit. Check this widget\'s demo.', 'blackwidgets' ),
 				'content' => sprintf(
 					'%s <a href="https://modernaweb.net/black-widgets/all-widgets/black-icon/" target="_blank">%s</a>',
-					esc_html__( 'Check ', 'black-widgets' ),
-					esc_html__( 'Demo', 'black-widgets' )
+					esc_html__( 'Check ', 'blackwidgets' ),
+					esc_html__( 'Demo', 'blackwidgets' )
 				),
 			]
 		);
@@ -128,14 +128,14 @@ class Icon extends \Elementor\Widget_Base {
 		// $this->add_control(
 		// 	'widget_type',
 		// 	[
-		// 		'label' => esc_html__( 'Select Type', 'black-widgets' ),
+		// 		'label' => esc_html__( 'Select Type', 'blackwidgets' ),
 		// 		'type' => \Elementor\Controls_Manager::SELECT,
 		// 		'default' => 'bw-t-2',
 		// 		'options' => [
-		// 			'bw-t-1' 	=> esc_html__( 'Type 1', 'black-widgets' ),
-		// 			'bw-t-2' 	=> esc_html__( 'Type 2', 'black-widgets' ),
-		// 			'bw-t-3' 	=> esc_html__( 'Type 3', 'black-widgets' ),
-		// 			'bw-t-4' 	=> esc_html__( 'Type 4', 'black-widgets' ),
+		// 			'bw-t-1' 	=> esc_html__( 'Type 1', 'blackwidgets' ),
+		// 			'bw-t-2' 	=> esc_html__( 'Type 2', 'blackwidgets' ),
+		// 			'bw-t-3' 	=> esc_html__( 'Type 3', 'blackwidgets' ),
+		// 			'bw-t-4' 	=> esc_html__( 'Type 4', 'blackwidgets' ),
 		// 		],
 		// 	]
 		// );
@@ -143,7 +143,7 @@ class Icon extends \Elementor\Widget_Base {
 		$this->add_control(
 			'icon_widget',
 			[
-				'label' => esc_html__( 'Icon', 'black-widgets' ),
+				'label' => esc_html__( 'Icon', 'blackwidgets' ),
 				'type' => Controls_Manager::ICONS,
 				'default' => [
 					'value' => 'eicon eicon-nerd',
@@ -158,19 +158,19 @@ class Icon extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_alignment',
 			[
-				'label'     => esc_html__( 'Text Alignment', 'black-widgets' ),
+				'label'     => esc_html__( 'Text Alignment', 'blackwidgets' ),
 				'type'      => \Elementor\Controls_Manager::CHOOSE,
 				'options'   => [
 					'left'   => [
-						'title' => esc_html__( 'Left', 'black-widgets' ),
+						'title' => esc_html__( 'Left', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => esc_html__( 'Center', 'black-widgets' ),
+						'title' => esc_html__( 'Center', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [
-						'title' => esc_html__( 'Right', 'black-widgets' ),
+						'title' => esc_html__( 'Right', 'blackwidgets' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -187,7 +187,7 @@ class Icon extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section',
 			[
-				'label' => esc_html__( 'Box Style', 'black-widgets' ),
+				'label' => esc_html__( 'Box Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -197,7 +197,7 @@ class Icon extends \Elementor\Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'widget_box_background',
-				'label' => esc_html__( 'Background', 'black-widgets' ),
+				'label' => esc_html__( 'Background', 'blackwidgets' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .bw-icon-box .bw-icon-into',
 			]
@@ -208,7 +208,7 @@ class Icon extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'widget_box_border',
-				'label' => esc_html__( 'Border', 'black-widgets' ),
+				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-icon-box .bw-icon-into',
 			]
 		);
@@ -218,7 +218,7 @@ class Icon extends \Elementor\Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'widget_box_box_shadow',
-				'label' => esc_html__( 'Box Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-icon-box .bw-icon-into',
 			]
 		);
@@ -226,7 +226,7 @@ class Icon extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_box_border_radius', //param_name
 			[
-				'label' 		=> esc_html__( 'Border Radius', 'black-widgets' ),
+				'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -239,7 +239,7 @@ class Icon extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
-				'label' => esc_html__( 'Margin', 'black-widgets' ),
+				'label' => esc_html__( 'Margin', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -252,7 +252,7 @@ class Icon extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
-				'label' => esc_html__( 'Padding', 'black-widgets' ),
+				'label' => esc_html__( 'Padding', 'blackwidgets' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -269,7 +269,7 @@ class Icon extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'icon_section',
 			[
-				'label' => esc_html__( 'Icon Style', 'black-widgets' ),
+				'label' => esc_html__( 'Icon Style', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
         );
@@ -278,12 +278,12 @@ class Icon extends \Elementor\Widget_Base {
 		$this->add_control(
 			'widget_file_format',
 			[
-				'label' => esc_html__( 'Is the icon in SVG format?', 'black-widgets' ),
+				'label' => esc_html__( 'Is the icon in SVG format?', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'no',
 				'options' => [
-					'no' 	=> esc_html__( 'No', 'black-widgets' ),
-					'svg' 	=> esc_html__( 'Yes', 'black-widgets' ),
+					'no' 	=> esc_html__( 'No', 'blackwidgets' ),
+					'svg' 	=> esc_html__( 'Yes', 'blackwidgets' ),
 				],
 			]
 		);
@@ -291,7 +291,7 @@ class Icon extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_icon_alert_size',
 			[
-				'label' => esc_html__( 'Icon Size', 'black-widgets' ),
+				'label' => esc_html__( 'Icon Size', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -316,7 +316,7 @@ class Icon extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_icon_alert_color',
 			[
-				'label' => esc_html__( 'Icon Color', 'black-widgets' ),
+				'label' => esc_html__( 'Icon Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'condition'  => [
 					'widget_file_format' => [
@@ -334,7 +334,7 @@ class Icon extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'style_Icon_alert_text_shadow',
-				'label' => esc_html__( 'Text Shadow', 'black-widgets' ),
+				'label' => esc_html__( 'Text Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-icon-box .bw-icon-into i',
 				'condition'  => [
 					'widget_file_format' => [
@@ -347,7 +347,7 @@ class Icon extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_svg_icon_width',
 			[
-				'label' => esc_html__( 'Icon Size', 'black-widgets' ),
+				'label' => esc_html__( 'Icon Size', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -371,7 +371,7 @@ class Icon extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_svg_icon_height',
 			[
-				'label' => esc_html__( 'Icon Size', 'black-widgets' ),
+				'label' => esc_html__( 'Icon Size', 'blackwidgets' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -396,7 +396,7 @@ class Icon extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_svg_icon_color',
 			[
-				'label' => esc_html__( 'SVG Color(fill)', 'black-widgets' ),
+				'label' => esc_html__( 'SVG Color(fill)', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'condition'  => [
 					'widget_file_format' => [
@@ -413,7 +413,7 @@ class Icon extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style_svg_path_color',
 			[
-				'label' => esc_html__( 'Path Color(stroke)', 'black-widgets' ),
+				'label' => esc_html__( 'Path Color(stroke)', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
 				'condition'  => [
 					'widget_file_format' => [
