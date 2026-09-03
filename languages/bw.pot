@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Black Widgets 1.4.0\n"
 "Report-Msgid-Bugs-To: https://modernaweb.net/black-widgets\n"
-"POT-Creation-Date: 2026-08-26 18:29+0000\n"
+"POT-Creation-Date: 2026-09-01 21:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,6 +43,10 @@ msgstr ""
 
 #: src/widgets/bw-title-animate.php:465
 msgid "&"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:375
+msgid "( Lorem ipsum )"
 msgstr ""
 
 #: src/widgets/bw-gsap-trigger.php:331 src/widgets/bw-gsap-trigger.php:342
@@ -1672,6 +1676,22 @@ msgstr ""
 msgid "Extra Image Parallax"
 msgstr ""
 
+#: src/widgets/bw-scroll-heat.php:373
+msgid "Eyebrow"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:1092
+msgid "Eyebrow Color"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:1187
+msgid "Eyebrow Gap"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:1157
+msgid "Eyebrow Width"
+msgstr ""
+
 #: src/widgets/bw-flipbox.php:170
 msgid "Face"
 msgstr ""
@@ -2408,6 +2428,18 @@ msgstr ""
 msgid "Inactive Bullets Color"
 msgstr ""
 
+#: src/widgets/bw-scroll-heat.php:350
+msgid "Index"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:1071
+msgid "Index Color"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:1104
+msgid "Index Width"
+msgstr ""
+
 #: src/widgets/bw-image-carousel.php:374
 #: src/widgets/bw-title-animate.php:393
 msgid "Infinite Loop"
@@ -2636,6 +2668,11 @@ msgstr ""
 msgid "Line Height"
 msgstr ""
 
+#: src/widgets/bw-scroll-heat.php:202 src/widgets/bw-scroll-heat.php:315
+#: src/widgets/bw-scroll-heat.php:1033
+msgid "Line Reveal"
+msgstr ""
+
 #: src/widgets/bw-typography.php:2240
 msgid "Line Styles"
 msgstr ""
@@ -2722,6 +2759,10 @@ msgstr ""
 
 #: src/widgets/bw-title-animate.php:359
 msgid "Loop"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:327
+msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
 msgstr ""
 
 #: src/widgets/bw-gsap-interactive-links.php:1253
@@ -3270,7 +3311,7 @@ msgstr ""
 msgid "Pagination Style"
 msgstr ""
 
-#: src/widgets/bw-icon-box.php:300
+#: src/widgets/bw-icon-box.php:300 src/widgets/bw-scroll-heat.php:324
 msgid "Paragraph"
 msgstr ""
 
@@ -3450,8 +3491,12 @@ msgstr ""
 msgid "Replay Every Time In View"
 msgstr ""
 
-#: src/widgets/bw-scroll-heat.php:465
+#: src/widgets/bw-scroll-heat.php:552
 msgid "Replay When Scrolling Back"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:775
+msgid "Replay on Every Scroll"
 msgstr ""
 
 #: src/widgets/bw-scroll-text.php:275
@@ -3916,8 +3961,16 @@ msgstr ""
 msgid "Show"
 msgstr ""
 
+#: src/widgets/bw-scroll-heat.php:361
+msgid "Show Eyebrow"
+msgstr ""
+
 #: src/widgets/bw-magic-link.php:356
 msgid "Show Icon"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:338
+msgid "Show Index"
 msgstr ""
 
 #: src/widgets/bw-image-carousel.php:482

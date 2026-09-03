@@ -153,6 +153,7 @@ After updating to 1.4.0, if GSAP animations stop, set the GSAP, ScrollTrigger, a
 - Added: New widget: Black Image Marquee
 - Added: New widget: Black Image Carousel
 - Added: New widget: Black Scroll Heat (Scroll Heat + Animated Text; replaces unreleased Black Revealed Text)
+- Added: Black Scroll Heat — new type: Line Reveal (floating index and eyebrow beside the first line, GSAP SplitText line masks)
 - Added: New widget: Black Text Animate
 - Added: New widget: GSAP Tab
 - Added: New widget: GSAP Interactive Links

@@ -108,6 +108,31 @@
 		return typeof gsap !== 'undefined' && registerPlugins();
 	}
 
+	var fontsReady = false;
+
+	function whenFontsReady(cb) {
+		if (fontsReady) {
+			cb();
+			return;
+		}
+		var settled = false;
+		function finish() {
+			if (settled) {
+				return;
+			}
+			settled = true;
+			fontsReady = true;
+			cb();
+		}
+		if (document.fonts && document.fonts.ready) {
+			document.fonts.ready.then(finish).catch(finish);
+			// Editor iframes can leave fonts.ready pending forever.
+			setTimeout(finish, 1000);
+			return;
+		}
+		finish();
+	}
+
 	function getAnimDefaults(type) {
 		var map = {
 			'from-bottom': { split: 'chars', duration: 0.9, stagger: 0.028, ease: 'expo.out' },
@@ -417,7 +442,6 @@
 		var scrollTrigger = null;
 		var hasPlayed = false;
 		var isBusy = false;
-		var fontsReady = false;
 		var destroyed = false;
 
 		function revertSplit() {
@@ -726,30 +750,592 @@
 			root.classList.remove('is-ready', 'is-complete', 'is-playing');
 		};
 
-		function whenFontsReady(cb) {
-			if (fontsReady) {
-				cb();
-				return;
+		whenFontsReady(function () {
+			if (!destroyed) {
+				startEngine();
 			}
-			if (document.fonts && document.fonts.ready) {
-				document.fonts.ready.then(function () {
-					fontsReady = true;
-					if (!destroyed) {
-						cb();
-					}
-				}).catch(function () {
-					fontsReady = true;
-					if (!destroyed) {
-						cb();
-					}
-				});
-				return;
+		});
+	}
+
+	function readLrMotion(root) {
+		return {
+			duration: readDataNumber(root, 'data-duration', '--mws-ew-lr-duration', 1),
+			stagger: readDataNumber(root, 'data-stagger', '--mws-ew-lr-stagger', 0.09)
+		};
+	}
+
+	function applyLineMasks(split) {
+		if (!split) {
+			return;
+		}
+		var i;
+		var el;
+		if (split.masks) {
+			for (i = 0; i < split.masks.length; i++) {
+				el = split.masks[i];
+				if (!el) {
+					continue;
+				}
+				// overflow:clip does not create a BFC, so the first line would not shrink beside the float.
+				el.style.overflow = 'hidden';
+				el.style.display = 'block';
 			}
-			fontsReady = true;
-			cb();
+		}
+		if (split.lines) {
+			for (i = 0; i < split.lines.length; i++) {
+				el = split.lines[i];
+				if (el) {
+					el.style.display = 'block';
+				}
+			}
+		}
+	}
+
+	function isRtlContext(el) {
+		var node = el;
+		while (node && node.nodeType === 1) {
+			try {
+				if (window.getComputedStyle(node).direction === 'rtl') {
+					return true;
+				}
+			} catch (e) {
+				return false;
+			}
+			node = node.parentElement;
+		}
+		return false;
+	}
+
+	function wrapWordsAsLines(split) {
+		// SplitText type:"lines" detects wraps with an LTR left-edge test, so RTL collapses to one line.
+		var words = split && split.words ? split.words : [];
+		if (!words.length) {
+			return;
 		}
 
-		whenFontsReady(startEngine);
+		var groups = [];
+		var current = [];
+		var lastTop = null;
+		var i;
+		var j;
+		var word;
+		var top;
+		var next;
+		var mask;
+		var line;
+		var lines = [];
+		var masks = [];
+
+		for (i = 0; i < words.length; i++) {
+			word = words[i];
+			top = word.getBoundingClientRect().top;
+			if (lastTop !== null && top > lastTop + 2) {
+				groups.push(current);
+				current = [];
+			}
+			current.push(word);
+			lastTop = top;
+		}
+		if (current.length) {
+			groups.push(current);
+		}
+
+		for (i = 0; i < groups.length; i++) {
+			current = groups[i];
+			if (!current.length || !current[0].parentNode) {
+				continue;
+			}
+			mask = document.createElement('span');
+			mask.className = 'mws-ew-at__line-mask mws-ew-lr__line-mask';
+			mask.setAttribute('aria-hidden', 'true');
+			mask.style.display = 'block';
+			mask.style.overflow = 'hidden';
+			line = document.createElement('span');
+			line.className = 'mws-ew-at__line mws-ew-lr__line';
+			line.setAttribute('aria-hidden', 'true');
+			line.style.display = 'block';
+			current[0].parentNode.insertBefore(mask, current[0]);
+			mask.appendChild(line);
+			for (j = 0; j < current.length; j++) {
+				word = current[j];
+				next = word.nextSibling;
+				line.appendChild(word);
+				if (next && next.nodeType === 3) {
+					line.appendChild(next);
+				}
+			}
+			lines.push(line);
+			masks.push(mask);
+		}
+
+		split.lines = lines;
+		split.masks = masks;
+	}
+
+	function syncEyebrowHeight(eyebrow, split) {
+		if (!eyebrow || !split || !split.lines || !split.lines[0]) {
+			return;
+		}
+		if (window.matchMedia && window.matchMedia('(max-width: 767px)').matches) {
+			eyebrow.style.height = '';
+			return;
+		}
+		var h = split.lines[0].getBoundingClientRect().height;
+		if (h > 0) {
+			eyebrow.style.height = h + 'px';
+		}
+	}
+
+	function setLrHidden(inner, index, eyebrow, lines) {
+		if (index) {
+			gsap.set(index, { y: 16, opacity: 0 });
+		}
+		if (eyebrow) {
+			gsap.set(eyebrow, { y: 16, opacity: 0 });
+		}
+		if (lines && lines.length) {
+			gsap.set(lines, { yPercent: 110, opacity: 0 });
+		}
+	}
+
+	function buildLrTimeline(root, inner, index, eyebrow, split) {
+		var motion = readLrMotion(root);
+		var lines = split && split.lines ? split.lines : [];
+
+		setLrHidden(inner, index, eyebrow, lines);
+
+		var tl = gsap.timeline({
+			paused: true,
+			defaults: { ease: 'power4.out' },
+			onStart: function () {
+				root.classList.add('is-playing');
+				root.classList.remove('is-complete');
+			},
+			onComplete: function () {
+				root.classList.remove('is-playing');
+				root.classList.add('is-complete');
+			}
+		});
+
+		if (index) {
+			tl.to(index, { y: 0, opacity: 1, duration: 0.6 }, 0);
+		}
+		if (eyebrow) {
+			tl.to(eyebrow, { y: 0, opacity: 1, duration: 0.6 }, index ? '<0.05' : 0);
+		}
+		if (lines.length) {
+			tl.to(
+				lines,
+				{
+					yPercent: 0,
+					opacity: 1,
+					duration: motion.duration,
+					stagger: motion.stagger
+				},
+				'-=0.25'
+			);
+		}
+
+		return tl;
+	}
+
+	function showLrFinal(root, title, inner, index, eyebrow) {
+		root.classList.add('is-ready', 'is-complete');
+		root.classList.remove('is-playing');
+		if (title) {
+			title.style.visibility = 'visible';
+		}
+		if (typeof gsap === 'undefined') {
+			return;
+		}
+		if (inner) {
+			gsap.set(inner, { clearProps: 'transform,opacity' });
+		}
+		if (index) {
+			gsap.set(index, { clearProps: 'transform,opacity' });
+		}
+		if (eyebrow) {
+			gsap.set(eyebrow, { clearProps: 'transform,opacity' });
+		}
+	}
+
+	function canAutoSplit() {
+		if (typeof SplitText === 'undefined' || typeof SplitText.create !== 'function') {
+			return false;
+		}
+		if (typeof gsap === 'undefined' || !gsap.version) {
+			return true;
+		}
+		var parts = String(gsap.version).split('.');
+		var major = parseInt(parts[0], 10) || 0;
+		var minor = parseInt(parts[1], 10) || 0;
+		return major > 3 || (major === 3 && minor >= 13);
+	}
+
+	function cleanupLineReveal(root) {
+		if (!root) {
+			return;
+		}
+
+		if (typeof root._mwsEwLrCancelGsap === 'function') {
+			root._mwsEwLrCancelGsap();
+			delete root._mwsEwLrCancelGsap;
+		}
+
+		if (typeof root._mwsEwLrCleanup === 'function') {
+			root._mwsEwLrCleanup();
+		}
+
+		delete root._mwsEwLrCleanup;
+		delete root.dataset.mwsEwLrInit;
+		delete root.dataset.mwsEwLrPending;
+		root.removeAttribute('data-mws-ew-lr-tries');
+		root.classList.remove('is-ready', 'is-complete', 'is-playing');
+	}
+
+	function initLineReveal(root) {
+		if (!root || root.dataset.mwsEwLrInit === '1') {
+			return;
+		}
+
+		var title = root.querySelector('.mws-ew-lr__title');
+		if (!title) {
+			return;
+		}
+
+		root.dataset.mwsEwLrInit = '1';
+
+		var originalHTML = title.innerHTML;
+		var inner = root.querySelector('.mws-ew-lr__inner');
+		var index = root.querySelector('.mws-ew-lr__index');
+		var eyebrow = root.querySelector('.mws-ew-lr__eyebrow');
+		var start = root.getAttribute('data-start') || 'top 75%';
+		var replay = root.getAttribute('data-replay') === 'yes';
+
+		var splitInstance = null;
+		var activeTween = null;
+		var scrollTrigger = null;
+		var hasPlayed = false;
+		var destroyed = false;
+		var detachResize = null;
+
+		function revertSplit() {
+			if (activeTween) {
+				activeTween.kill();
+				activeTween = null;
+			}
+
+			if (splitInstance) {
+				try {
+					if (typeof splitInstance.revert === 'function') {
+						splitInstance.revert();
+					}
+				} catch (e) {
+					/* no-op */
+				}
+				splitInstance = null;
+			}
+
+			title.innerHTML = originalHTML;
+			if (eyebrow) {
+				eyebrow.style.height = '';
+			}
+			if (typeof gsap !== 'undefined') {
+				if (inner) {
+					gsap.set(inner, { clearProps: 'transform,opacity,visibility' });
+				}
+				if (index) {
+					gsap.set(index, { clearProps: 'transform,opacity,visibility' });
+				}
+				if (eyebrow) {
+					gsap.set(eyebrow, { clearProps: 'transform,opacity,visibility' });
+				}
+				gsap.set(title, { clearProps: 'transform,opacity,visibility' });
+			}
+		}
+
+		function markReady() {
+			title.style.visibility = 'visible';
+			root.classList.add('is-ready');
+		}
+
+		function finishSplit(self) {
+			if (isRtlContext(title)) {
+				wrapWordsAsLines(self);
+			}
+			applyLineMasks(self);
+			syncEyebrowHeight(eyebrow, self);
+		}
+
+		function onSplit(self) {
+			finishSplit(self);
+			splitInstance = self;
+			activeTween = buildLrTimeline(root, inner, index, eyebrow, self);
+			return activeTween;
+		}
+
+		function createModernSplit() {
+			try {
+				if (isRtlContext(title)) {
+					return SplitText.create(title, {
+						type: 'words',
+						wordsClass: 'mws-ew-at__word',
+						autoSplit: true,
+						onSplit: onSplit
+					});
+				}
+				return SplitText.create(title, {
+					type: 'lines',
+					linesClass: 'mws-ew-at__line mws-ew-lr__line',
+					mask: 'lines',
+					autoSplit: true,
+					onSplit: onSplit
+				});
+			} catch (e) {
+				return null;
+			}
+		}
+
+		function createLegacySplit() {
+			try {
+				if (isRtlContext(title)) {
+					return new SplitText(title, {
+						type: 'words',
+						wordsClass: 'mws-ew-at__word'
+					});
+				}
+				return new SplitText(title, {
+					type: 'lines',
+					linesClass: 'mws-ew-at__line mws-ew-lr__line'
+				});
+			} catch (e) {
+				return null;
+			}
+		}
+
+		function rebuildLegacy(keepComplete) {
+			var complete = keepComplete || root.classList.contains('is-complete') || (hasPlayed && !replay);
+
+			revertSplit();
+			splitInstance = createLegacySplit();
+			if (!splitInstance) {
+				showLrFinal(root, title, inner, index, eyebrow);
+				return;
+			}
+			finishSplit(splitInstance);
+			activeTween = buildLrTimeline(root, inner, index, eyebrow, splitInstance);
+			markReady();
+			if (complete && activeTween) {
+				activeTween.progress(1);
+				hasPlayed = true;
+			}
+		}
+
+		function attachLegacyResize() {
+			var lastWidth = title.getBoundingClientRect().width;
+			var timer = 0;
+
+			function check() {
+				if (destroyed) {
+					return;
+				}
+				var w = title.getBoundingClientRect().width;
+				if (Math.abs(w - lastWidth) < 1) {
+					return;
+				}
+				lastWidth = w;
+				rebuildLegacy(false);
+			}
+
+			function onResize() {
+				clearTimeout(timer);
+				timer = setTimeout(check, 200);
+			}
+
+			window.addEventListener('resize', onResize);
+			var ro = null;
+			if (typeof ResizeObserver === 'function') {
+				ro = new ResizeObserver(onResize);
+				ro.observe(title);
+			}
+
+			return function () {
+				window.removeEventListener('resize', onResize);
+				clearTimeout(timer);
+				if (ro) {
+					ro.disconnect();
+				}
+			};
+		}
+
+		function playNow() {
+			if (activeTween) {
+				activeTween.restart();
+				hasPlayed = true;
+				return;
+			}
+			showLrFinal(root, title, inner, index, eyebrow);
+		}
+
+		function setupScroll() {
+			if (isElementorEditMode()) {
+				playNow();
+				return;
+			}
+
+			scrollTrigger = createEnterTrigger({
+				trigger: root,
+				start: start,
+				once: !replay,
+				onEnter: function () {
+					playNow();
+				},
+				onLeaveBack: function () {
+					if (!replay) {
+						return;
+					}
+					if (activeTween) {
+						activeTween.pause(0);
+					}
+					setLrHidden(inner, index, eyebrow, splitInstance && splitInstance.lines ? splitInstance.lines : []);
+					root.classList.remove('is-playing', 'is-complete');
+					hasPlayed = false;
+				}
+			});
+
+			if (!scrollTrigger) {
+				playNow();
+			}
+		}
+
+		function startEngine() {
+			if (destroyed) {
+				return;
+			}
+
+			if (prefersReducedMotion()) {
+				showLrFinal(root, title, inner, index, eyebrow);
+				return;
+			}
+
+			if (!canAnimate()) {
+				if (window.mwsEw && typeof mwsEw.whenGsapReady === 'function') {
+					if (root.dataset.mwsEwLrPending === '1') {
+						return;
+					}
+					root.dataset.mwsEwLrPending = '1';
+					root._mwsEwLrCancelGsap = mwsEw.whenGsapReady(
+						function () {
+							delete root.dataset.mwsEwLrPending;
+							delete root._mwsEwLrCancelGsap;
+							if (!destroyed) {
+								startEngine();
+							}
+						},
+						{
+							plugins: ['SplitText', 'ScrollTrigger'],
+							onReduced: function () {
+								delete root.dataset.mwsEwLrPending;
+								delete root._mwsEwLrCancelGsap;
+								showLrFinal(root, title, inner, index, eyebrow);
+							},
+							onGiveUp: function () {
+								delete root.dataset.mwsEwLrPending;
+								delete root._mwsEwLrCancelGsap;
+								showLrFinal(root, title, inner, index, eyebrow);
+							}
+						}
+					);
+					return;
+				}
+				var tries = parseInt(root.getAttribute('data-mws-ew-lr-tries') || '0', 10);
+				if (tries < 25) {
+					root.setAttribute('data-mws-ew-lr-tries', String(tries + 1));
+					setTimeout(function () {
+						if (!destroyed) {
+							startEngine();
+						}
+					}, 160);
+					return;
+				}
+				showLrFinal(root, title, inner, index, eyebrow);
+				return;
+			}
+
+			root.removeAttribute('data-mws-ew-lr-tries');
+			delete root.dataset.mwsEwLrPending;
+
+			title.style.visibility = 'hidden';
+
+			try {
+				if (canAutoSplit()) {
+					splitInstance = createModernSplit();
+				}
+
+				if (!splitInstance) {
+					splitInstance = createLegacySplit();
+					if (!splitInstance) {
+						showLrFinal(root, title, inner, index, eyebrow);
+						return;
+					}
+					finishSplit(splitInstance);
+					activeTween = buildLrTimeline(root, inner, index, eyebrow, splitInstance);
+					detachResize = attachLegacyResize();
+				}
+
+				if (!activeTween) {
+					showLrFinal(root, title, inner, index, eyebrow);
+					return;
+				}
+
+				markReady();
+				setupScroll();
+			} catch (e) {
+				showLrFinal(root, title, inner, index, eyebrow);
+				return;
+			}
+
+			setTimeout(function () {
+				if (destroyed) {
+					return;
+				}
+				if (!root.classList.contains('is-ready')) {
+					showLrFinal(root, title, inner, index, eyebrow);
+					return;
+				}
+				if (!hasPlayed && !root.classList.contains('is-playing') && !root.classList.contains('is-complete')) {
+					var rect = root.getBoundingClientRect();
+					var vh = window.innerHeight || 0;
+					if (rect.top < vh && rect.bottom > 0) {
+						playNow();
+					}
+				}
+			}, 1200);
+		}
+
+		root._mwsEwLrCleanup = function () {
+			destroyed = true;
+
+			if (detachResize) {
+				detachResize();
+				detachResize = null;
+			}
+
+			if (scrollTrigger && typeof scrollTrigger.kill === 'function') {
+				scrollTrigger.kill();
+			}
+			scrollTrigger = null;
+
+			revertSplit();
+			title.style.visibility = '';
+			root.classList.remove('is-ready', 'is-complete', 'is-playing');
+		};
+
+		whenFontsReady(function () {
+			if (!destroyed) {
+				startEngine();
+			}
+		});
 	}
 
 	function refreshScrollTrigger(delayMs) {
@@ -778,11 +1364,31 @@
 		}
 		var roots = rootEl.querySelectorAll('[data-bw-animated-text="1"], [data-mws-ew-at]');
 		Array.prototype.forEach.call(roots, function (root) {
-			cleanupInstance(root);
-			delete root.dataset.mwsEwAtInit;
-			delete root.dataset.mwsEwAtPending;
-			registerPlugins();
-			initInstance(root);
+			try {
+				cleanupInstance(root);
+				delete root.dataset.mwsEwAtInit;
+				delete root.dataset.mwsEwAtPending;
+				registerPlugins();
+				initInstance(root);
+			} catch (e) {
+				if (root && root.classList) {
+					root.classList.add('is-ready', 'is-complete');
+				}
+			}
+		});
+		var lrRoots = rootEl.querySelectorAll('[data-bw-line-reveal="1"], [data-mws-ew-lr]');
+		Array.prototype.forEach.call(lrRoots, function (root) {
+			try {
+				cleanupLineReveal(root);
+				delete root.dataset.mwsEwLrInit;
+				delete root.dataset.mwsEwLrPending;
+				registerPlugins();
+				initLineReveal(root);
+			} catch (e) {
+				if (root && root.classList) {
+					root.classList.add('is-ready', 'is-complete');
+				}
+			}
 		});
 		refreshScrollTrigger(150);
 	}

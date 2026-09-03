@@ -10,7 +10,7 @@ use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Text_Shadow;
 
 /**
- * Black Scroll Heat - Type 1: scrubbed word heat; Type 2: animated text.
+ * Black Scroll Heat - Type 1: scrubbed word heat; Type 2: animated text; Type 3: line reveal.
  */
 class ScrollHeat extends \Elementor\Widget_Base {
 
@@ -26,6 +26,12 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		wp_register_style(
 			'black-widgets-scroll-heat-animated',
 			BLACK_WIDGETS_PLUGIN_URL . 'assets/css/scroll-heat-animated.css',
+			[],
+			BLACK_WIDGETS_VERSION
+		);
+		wp_register_style(
+			'black-widgets-scroll-heat-line-reveal',
+			BLACK_WIDGETS_PLUGIN_URL . 'assets/css/scroll-heat-line-reveal.css',
 			[],
 			BLACK_WIDGETS_VERSION
 		);
@@ -50,7 +56,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 	}
 
 	public function get_keywords() {
-		return [ 'scroll', 'heat', 'animated', 'text', 'gsap', 'reveal', 'split', 'black' ];
+		return [ 'scroll', 'heat', 'animated', 'text', 'gsap', 'reveal', 'split', 'line', 'black' ];
 	}
 
 	protected function is_dynamic_content(): bool {
@@ -63,7 +69,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 	private function get_widget_type() {
 		$settings = $this->get_early_settings();
 		$type     = isset( $settings['widget_type'] ) ? (string) $settings['widget_type'] : 'scroll_heat';
-		return in_array( $type, [ 'scroll_heat', 'animated_text' ], true ) ? $type : 'scroll_heat';
+		return in_array( $type, [ 'scroll_heat', 'animated_text', 'line_reveal' ], true ) ? $type : 'scroll_heat';
 	}
 
 	/**
@@ -81,7 +87,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 
 	public function get_style_depends() {
 		// Avoid reading instance settings during early Elementor enqueue.
-		return [ 'black-widgets-scroll-heat', 'black-widgets-scroll-heat-animated' ];
+		return [ 'black-widgets-scroll-heat', 'black-widgets-scroll-heat-animated', 'black-widgets-scroll-heat-line-reveal' ];
 	}
 
 	public function get_script_depends() {
@@ -191,8 +197,9 @@ class ScrollHeat extends \Elementor\Widget_Base {
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'scroll_heat',
 				'options' => [
-					'scroll_heat'    => esc_html__( 'Scroll Heat', 'blackwidgets' ),
-					'animated_text'  => esc_html__( 'Animated Text', 'blackwidgets' ),
+					'scroll_heat'   => esc_html__( 'Scroll Heat', 'blackwidgets' ),
+					'animated_text' => esc_html__( 'Animated Text', 'blackwidgets' ),
+					'line_reveal'   => esc_html__( 'Line Reveal', 'blackwidgets' ),
 				],
 			]
 		);
@@ -210,10 +217,13 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->end_controls_section();
 
 		$this->register_shared_content_controls();
+		$this->register_line_reveal_content_controls();
 		$this->register_heat_animation_controls();
 		$this->register_animated_animation_controls();
+		$this->register_line_reveal_animation_controls();
 		$this->register_heat_style_controls();
 		$this->register_animated_style_controls();
+		$this->register_line_reveal_style_controls();
 	}
 
 	private function register_shared_content_controls() {
@@ -236,6 +246,9 @@ class ScrollHeat extends \Elementor\Widget_Base {
 				'description' => esc_html__( 'Allowed HTML: <br>, <strong>, <b>, <hr>. No attributes.', 'blackwidgets' ),
 				'label_block' => true,
 				'dynamic'     => [ 'active' => true ],
+				'condition'   => [
+					'widget_type!' => 'line_reveal',
+				],
 			]
 		);
 
@@ -284,10 +297,84 @@ class ScrollHeat extends \Elementor\Widget_Base {
 				],
 				'default'   => 'left',
 				'selectors' => [
-					'{{WRAPPER}} .mws-ew-hw'       => 'text-align: {{VALUE}};',
-					'{{WRAPPER}} .mws-ew-hw__text' => 'text-align: {{VALUE}};',
-					'{{WRAPPER}} .mws-ew-at'       => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .mws-ew-hw'          => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .mws-ew-hw__text'    => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .mws-ew-at'          => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .mws-ew-lr__content' => 'text-align: {{VALUE}};',
 				],
+			]
+		);
+
+		$this->end_controls_section();
+	}
+
+	private function register_line_reveal_content_controls() {
+		$this->start_controls_section(
+			'section_lr_content',
+			[
+				'label'     => esc_html__( 'Line Reveal', 'blackwidgets' ),
+				'tab'       => Controls_Manager::TAB_CONTENT,
+				'condition' => [ 'widget_type' => 'line_reveal' ],
+			]
+		);
+
+		$this->add_control(
+			'lr_text',
+			[
+				'label'       => esc_html__( 'Paragraph', 'blackwidgets' ),
+				'type'        => Controls_Manager::TEXTAREA,
+				'rows'        => 5,
+				'default'     => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', 'blackwidgets' ),
+				'placeholder' => esc_html__( 'Enter text…', 'blackwidgets' ),
+				'description' => esc_html__( 'Allowed HTML: <br>, <strong>, <b>, <hr>. No attributes.', 'blackwidgets' ),
+				'label_block' => true,
+				'dynamic'     => [ 'active' => true ],
+			]
+		);
+
+		$this->add_control(
+			'lr_show_index',
+			[
+				'label'        => esc_html__( 'Show Index', 'blackwidgets' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Yes', 'blackwidgets' ),
+				'label_off'    => esc_html__( 'No', 'blackwidgets' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'lr_index',
+			[
+				'label'     => esc_html__( 'Index', 'blackwidgets' ),
+				'type'      => Controls_Manager::TEXT,
+				'default'   => '01',
+				'dynamic'   => [ 'active' => true ],
+				'condition' => [ 'lr_show_index' => 'yes' ],
+			]
+		);
+
+		$this->add_control(
+			'lr_show_eyebrow',
+			[
+				'label'        => esc_html__( 'Show Eyebrow', 'blackwidgets' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Yes', 'blackwidgets' ),
+				'label_off'    => esc_html__( 'No', 'blackwidgets' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'lr_eyebrow',
+			[
+				'label'     => esc_html__( 'Eyebrow', 'blackwidgets' ),
+				'type'      => Controls_Manager::TEXT,
+				'default'   => esc_html__( '( Lorem ipsum )', 'blackwidgets' ),
+				'dynamic'   => [ 'active' => true ],
+				'condition' => [ 'lr_show_eyebrow' => 'yes' ],
 			]
 		);
 
@@ -614,6 +701,89 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->end_controls_section();
 	}
 
+	private function register_line_reveal_animation_controls() {
+		$this->start_controls_section(
+			'section_lr_animation',
+			[
+				'label'     => esc_html__( 'Animation', 'blackwidgets' ),
+				'tab'       => Controls_Manager::TAB_CONTENT,
+				'condition' => [ 'widget_type' => 'line_reveal' ],
+			]
+		);
+
+		$this->add_control(
+			'lr_scroll_start',
+			[
+				'label'   => esc_html__( 'Scroll Start', 'blackwidgets' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'top 75%',
+				'options' => [
+					'top bottom' => esc_html__( 'When Visible (Footer Safe)', 'blackwidgets' ),
+					'top 90%'    => esc_html__( 'Early (Top 90%)', 'blackwidgets' ),
+					'top 80%'    => esc_html__( 'Top 80%', 'blackwidgets' ),
+					'top 75%'    => esc_html__( 'Default (Top 75%)', 'blackwidgets' ),
+					'top 60%'    => esc_html__( 'Top 60%', 'blackwidgets' ),
+					'top 50%'    => esc_html__( 'Center (Top 50%)', 'blackwidgets' ),
+					'top 40%'    => esc_html__( 'Late (Top 40%)', 'blackwidgets' ),
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'lr_duration',
+			[
+				'label'       => esc_html__( 'Duration (s)', 'blackwidgets' ),
+				'type'        => Controls_Manager::SLIDER,
+				'render_type' => 'template',
+				'range'       => [
+					'px' => [
+						'min'  => 0.2,
+						'max'  => 2.5,
+						'step' => 0.05,
+					],
+				],
+				'default'     => [ 'size' => 1 ],
+				'selectors'   => [
+					'{{WRAPPER}} .mws-ew-lr' => '--mws-ew-lr-duration: {{SIZE}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'lr_stagger',
+			[
+				'label'       => esc_html__( 'Stagger', 'blackwidgets' ),
+				'type'        => Controls_Manager::SLIDER,
+				'render_type' => 'template',
+				'range'       => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 0.3,
+						'step' => 0.01,
+					],
+				],
+				'default'     => [ 'size' => 0.09 ],
+				'selectors'   => [
+					'{{WRAPPER}} .mws-ew-lr' => '--mws-ew-lr-stagger: {{SIZE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'lr_replay',
+			[
+				'label'        => esc_html__( 'Replay on Every Scroll', 'blackwidgets' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Yes', 'blackwidgets' ),
+				'label_off'    => esc_html__( 'No', 'blackwidgets' ),
+				'return_value' => 'yes',
+				'default'      => '',
+			]
+		);
+
+		$this->end_controls_section();
+	}
+
 	private function register_heat_style_controls() {
 		$this->start_controls_section(
 			'section_heat_style',
@@ -856,14 +1026,246 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->end_controls_section();
 	}
 
+	private function register_line_reveal_style_controls() {
+		$this->start_controls_section(
+			'section_lr_style',
+			[
+				'label'     => esc_html__( 'Line Reveal', 'blackwidgets' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => [ 'widget_type' => 'line_reveal' ],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'lr_typography',
+				'selector' => '{{WRAPPER}} .mws-ew-lr__title',
+			]
+		);
+
+		$this->add_control(
+			'lr_color',
+			[
+				'label'     => esc_html__( 'Color', 'blackwidgets' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#1B1B18',
+				'selectors' => [
+					'{{WRAPPER}} .mws-ew-lr__title' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'      => 'lr_index_typography',
+				'selector'  => '{{WRAPPER}} .mws-ew-lr__index',
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'lr_index_color',
+			[
+				'label'     => esc_html__( 'Index Color', 'blackwidgets' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#9A9A9A',
+				'selectors' => [
+					'{{WRAPPER}} .mws-ew-lr__index' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'      => 'lr_eyebrow_typography',
+				'selector'  => '{{WRAPPER}} .mws-ew-lr__eyebrow',
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'lr_eyebrow_color',
+			[
+				'label'     => esc_html__( 'Eyebrow Color', 'blackwidgets' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#9A9A9A',
+				'selectors' => [
+					'{{WRAPPER}} .mws-ew-lr__eyebrow' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'lr_index_width',
+			[
+				'label'      => esc_html__( 'Index Width', 'blackwidgets' ),
+				'type'       => Controls_Manager::SLIDER,
+				'separator'  => 'before',
+				'size_units' => [ 'px', '%' ],
+				'range'      => [
+					'px' => [
+						'min' => 20,
+						'max' => 400,
+					],
+					'%'  => [
+						'min' => 5,
+						'max' => 50,
+					],
+				],
+				'default'    => [
+					'unit' => 'px',
+					'size' => 120,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .mws-ew-lr' => '--mws-ew-lr-index-w: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'lr_gap',
+			[
+				'label'      => esc_html__( 'Gap', 'blackwidgets' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em' ],
+				'range'      => [
+					'px' => [
+						'min' => 0,
+						'max' => 120,
+					],
+					'em' => [
+						'min' => 0,
+						'max' => 8,
+					],
+				],
+				'default'    => [
+					'unit' => 'px',
+					'size' => 24,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .mws-ew-lr' => '--mws-ew-lr-gap: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'lr_eyebrow_width',
+			[
+				'label'      => esc_html__( 'Eyebrow Width', 'blackwidgets' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em' ],
+				'range'      => [
+					'px' => [
+						'min' => 40,
+						'max' => 600,
+					],
+					'%'  => [
+						'min' => 10,
+						'max' => 80,
+					],
+					'em' => [
+						'min' => 2,
+						'max' => 40,
+					],
+				],
+				'default'    => [
+					'unit' => 'px',
+					'size' => 280,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .mws-ew-lr' => '--mws-ew-lr-eyebrow-w: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'lr_eyebrow_gap',
+			[
+				'label'      => esc_html__( 'Eyebrow Gap', 'blackwidgets' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em' ],
+				'range'      => [
+					'px' => [
+						'min' => 0,
+						'max' => 80,
+					],
+					'em' => [
+						'min' => 0,
+						'max' => 4,
+					],
+				],
+				'default'    => [
+					'unit' => 'px',
+					'size' => 16,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .mws-ew-lr' => '--mws-ew-lr-eyebrow-gap: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'lr_max_width',
+			[
+				'label'      => esc_html__( 'Max Width', 'blackwidgets' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'vw' ],
+				'range'      => [
+					'px' => [
+						'min' => 200,
+						'max' => 1400,
+					],
+					'%'  => [
+						'min' => 20,
+						'max' => 100,
+					],
+					'vw' => [
+						'min' => 20,
+						'max' => 100,
+					],
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .mws-ew-lr__title' => 'max-width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'lr_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'blackwidgets' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .mws-ew-lr' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+	}
+
 	protected function render() {
 		$settings = $this->get_settings_for_display();
-		$text     = isset( $settings['text'] ) ? trim( (string) $settings['text'] ) : '';
+		$type     = isset( $settings['widget_type'] ) ? (string) $settings['widget_type'] : $this->get_widget_type();
+		if ( ! in_array( $type, [ 'scroll_heat', 'animated_text', 'line_reveal' ], true ) ) {
+			$type = $this->get_widget_type();
+		}
+
+		if ( 'line_reveal' === $type ) {
+			$text = isset( $settings['text'] ) ? trim( (string) $settings['text'] ) : '';
+			$this->render_line_reveal( $settings, $text );
+			return;
+		}
+
+		$text = isset( $settings['text'] ) ? trim( (string) $settings['text'] ) : '';
 		if ( '' === $text ) {
 			return;
 		}
 
-		$type = $this->get_widget_type();
 		if ( 'animated_text' === $type ) {
 			$this->render_animated_text( $settings, $text );
 			return;
@@ -1012,6 +1414,71 @@ class ScrollHeat extends \Elementor\Widget_Base {
 			<<?php echo esc_html( $tag ); ?> <?php $this->print_render_attribute_string( 'at_title' ); ?>>
 				<?php echo $this->escape_typography_text( $text ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			</<?php echo esc_html( $tag ); ?>>
+		</div>
+		<?php
+	}
+
+	/**
+	 * @param array  $settings Settings.
+	 * @param string $text Shared text fallback.
+	 */
+	private function render_line_reveal( $settings, $text ) {
+		$body = isset( $settings['lr_text'] ) ? trim( (string) $settings['lr_text'] ) : '';
+		if ( '' === $body ) {
+			$body = $text;
+		}
+		if ( '' === $body ) {
+			$body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
+		}
+
+		$tag          = $this->get_allowed_tag( $settings['html_tag'] ?? 'p', 'p' );
+		$scroll_start = ! empty( $settings['lr_scroll_start'] ) ? (string) $settings['lr_scroll_start'] : 'top 75%';
+		$replay       = ( ! empty( $settings['lr_replay'] ) && 'yes' === $settings['lr_replay'] ) ? 'yes' : '';
+
+		$allowed_starts = [ 'top bottom', 'top 90%', 'top 80%', 'top 75%', 'top 60%', 'top 50%', 'top 40%' ];
+		if ( ! in_array( $scroll_start, $allowed_starts, true ) ) {
+			$scroll_start = 'top 75%';
+		}
+
+		$show_index   = ( ! empty( $settings['lr_show_index'] ) && 'yes' === $settings['lr_show_index'] );
+		$show_eyebrow = ( ! empty( $settings['lr_show_eyebrow'] ) && 'yes' === $settings['lr_show_eyebrow'] );
+		$index        = isset( $settings['lr_index'] ) ? (string) $settings['lr_index'] : '';
+		$eyebrow      = isset( $settings['lr_eyebrow'] ) ? (string) $settings['lr_eyebrow'] : '';
+
+		$this->add_render_attribute(
+			'lr_root',
+			[
+				'class'               => 'mws-ew-lr',
+				'data-mws-ew-lr'      => '1',
+				'data-bw-line-reveal' => '1',
+				'data-start'          => $scroll_start,
+				'data-duration'       => (string) $this->get_slider_size( $settings, 'lr_duration', 1 ),
+				'data-stagger'        => (string) $this->get_slider_size( $settings, 'lr_stagger', 0.09 ),
+				'data-replay'         => $replay,
+			]
+		);
+
+		$this->add_render_attribute(
+			'lr_title',
+			[
+				'class' => 'mws-ew-lr__title',
+			]
+		);
+		?>
+		<div <?php $this->print_render_attribute_string( 'lr_root' ); ?>>
+			<div class="mws-ew-lr__inner">
+				<?php if ( $show_index && '' !== trim( $index ) ) : ?>
+					<div class="mws-ew-lr__index"><?php echo esc_html( $index ); ?></div>
+				<?php endif; ?>
+				<div class="mws-ew-lr__content">
+					<?php if ( $show_eyebrow && '' !== trim( $eyebrow ) ) : ?>
+						<div class="mws-ew-lr__eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
+					<?php endif; ?>
+					<<?php echo esc_html( $tag ); ?> <?php $this->print_render_attribute_string( 'lr_title' ); ?>>
+						<?php echo $this->escape_typography_text( $body ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					</<?php echo esc_html( $tag ); ?>>
+				</div>
+			</div>
 		</div>
 		<?php
 	}

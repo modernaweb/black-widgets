@@ -1,0 +1,126 @@
+/* Black Scroll Heat - Line Reveal (Type 3) */
+
+.mws-ew-lr {
+	--mws-ew-lr-index-w: 120px;
+	--mws-ew-lr-gap: 24px;
+	--mws-ew-lr-eyebrow-w: 280px;
+	--mws-ew-lr-eyebrow-gap: 16px;
+	position: relative;
+	display: block;
+	width: 100%;
+	max-width: 100%;
+}
+
+.mws-ew-lr__inner {
+	display: flex;
+	gap: var(--mws-ew-lr-gap);
+	align-items: flex-start;
+}
+
+.mws-ew-lr__index {
+	flex: 0 0 var(--mws-ew-lr-index-w);
+	width: var(--mws-ew-lr-index-w);
+	line-height: 1;
+}
+
+.mws-ew-lr__content {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.mws-ew-lr__eyebrow {
+	float: inline-start;
+	width: var(--mws-ew-lr-eyebrow-w);
+	max-width: 100%;
+	padding-inline-end: var(--mws-ew-lr-eyebrow-gap);
+	height: 1lh;
+	display: flex;
+	align-items: center;
+	box-sizing: border-box;
+}
+
+@supports not (height: 1lh) {
+	.mws-ew-lr__eyebrow {
+		height: 1.4em;
+	}
+}
+
+@supports not (float: inline-start) {
+	.mws-ew-lr__eyebrow {
+		float: left;
+	}
+
+	[dir="rtl"] .mws-ew-lr__eyebrow {
+		float: right;
+	}
+}
+
+.mws-ew-lr__title {
+	display: block;
+	margin: 0;
+	overflow-wrap: break-word;
+	word-break: break-word;
+}
+
+.mws-ew-lr[data-mws-ew-lr]:not(.is-ready) .mws-ew-lr__title {
+	visibility: hidden;
+}
+
+.mws-ew-lr.is-ready .mws-ew-lr__title {
+	visibility: visible;
+}
+
+.mws-ew-lr__line-mask,
+.mws-ew-at__line-mask {
+	display: block;
+	overflow: hidden;
+}
+
+.mws-ew-lr__line {
+	display: block;
+}
+
+.mws-ew-lr.is-playing .mws-ew-lr__line,
+.mws-ew-lr.is-playing .mws-ew-lr__index,
+.mws-ew-lr.is-playing .mws-ew-lr__eyebrow {
+	will-change: transform, opacity;
+}
+
+.mws-ew-lr.is-complete .mws-ew-lr__line,
+.mws-ew-lr.is-complete .mws-ew-lr__index,
+.mws-ew-lr.is-complete .mws-ew-lr__eyebrow {
+	will-change: auto;
+}
+
+@media (max-width: 767px) {
+	.mws-ew-lr__inner {
+		display: block;
+	}
+
+	.mws-ew-lr__index {
+		flex: none;
+		width: auto;
+		margin-bottom: 16px;
+	}
+
+	.mws-ew-lr__eyebrow {
+		float: none;
+		width: auto;
+		height: auto;
+		display: block;
+		padding-inline-end: 0;
+		margin-bottom: 20px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.mws-ew-lr,
+	.mws-ew-lr * {
+		animation: none !important;
+		transition: none !important;
+	}
+
+	.mws-ew-lr[data-mws-ew-lr] .mws-ew-lr__title {
+		visibility: visible !important;
+	}
+}
