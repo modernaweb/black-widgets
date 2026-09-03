@@ -1,0 +1,64 @@
+.bw-text-marquee-wrapper {
+    --bw-marquee-gap: 0px;
+    display: block;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    /* Height is auto by default - only forced when Elementor Height is set. */
+    height: auto;
+    line-height: normal;
+}
+
+.bw-text-marquee-wrapper .bw-text-marquee-content {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: max-content;
+    max-width: none;
+    white-space: nowrap;
+    will-change: transform;
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    font-size: 14px;
+    gap: 0; /* never gap between seamless halves */
+}
+
+/* One repeating unit - gap lives as trailing margin so -shift seams cleanly. */
+.bw-text-marquee-wrapper .bw-marquee-seq {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 0;
+}
+
+.bw-text-marquee-wrapper .bw-marquee-seq > * {
+    flex-shrink: 0;
+    margin-inline-end: var(--bw-marquee-gap);
+}
+
+.bw-text-marquee-wrapper .bw-text-marquee-text {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.bw-text-marquee-wrapper.pause-on-hover:hover .bw-marquee-inner {
+    animation-play-state: paused !important;
+}
+
+.bw-text-marquee-wrapper.pause-on-hover:hover .bw-marquee-inner-single {
+    animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bw-text-marquee-wrapper .bw-text-marquee-content,
+    .bw-text-marquee-wrapper .bw-marquee-inner,
+    .bw-text-marquee-wrapper .bw-marquee-inner-single {
+        animation: none !important;
+        position: relative !important;
+        transform: none !important;
+        will-change: auto;
+    }
+}

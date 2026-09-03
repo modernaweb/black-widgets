@@ -1,0 +1,31 @@
+.bw-alert-box {
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: rgb(0, 0, 0, 0.07);
+    border: 2px solid rgb(0, 0, 0, 1);
+    color: #000000;
+    font-weight: 600;
+}
+
+.bw-alert-box i {
+    padding: 0 8px 0 0;
+    font-size: 20px;
+}
+
+.bw-alert-box.warning {
+    background: rgba(255, 242, 45, 0.07);
+    border-color: #fff22d;
+    color: #efca15;
+}
+
+.bw-alert-box.error {
+    background: rgb(255, 0, 0, 0.07);
+    border-color: #ff0000;
+    color: #ff0000;
+}
+
+.bw-alert-box.success {
+    background: rgba(38, 131, 108, 0.07);
+    border-color: #26836c;
+    color: #26836c;
+}

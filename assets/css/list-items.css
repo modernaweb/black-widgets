@@ -1,0 +1,51 @@
+.bw-list .bw-list-item {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.bw-list .bw-list-item .bw-list-content {
+    display: flex;
+    align-items: center;
+}
+
+.bw-list .bw-list-item .bw-icon-section {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-right: 7px;
+}
+
+.bw-list .bw-list-item .bw-icon-section i,
+.bw-list .bw-list-item .bw-icon-section svg {
+    font-size: 14px;
+    display: block;
+}
+
+.bw-list .bw-list-item .bw-icon-section svg {
+    width: 1em;
+    height: 1em;
+}
+
+.bw-list .bw-list-item .bw-list-content > span:not(.bw-icon-section) {
+    font-size: 14px;
+    letter-spacing: 0.07px;
+    color: #1b1e2f;
+    font-weight: 400;
+}
+
+.bw-list .bw-list-item:hover .bw-list-content > span:not(.bw-icon-section),
+.bw-list .bw-list-item:hover .bw-icon-section i,
+.bw-list .bw-list-item:hover .bw-icon-section svg {
+    transition: all .27s ease-in-out;
+    -webkit-transition: all .27s ease-in-out;
+    -moz-transition: all .27s ease-in-out;
+    -ms-transition: all .27s ease-in-out;
+    -o-transition: all .27s ease-in-out;
+}
+
+.bw-list .bw-list-item-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}

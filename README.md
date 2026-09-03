@@ -1,11 +1,11 @@
-# Black Widgets For Elementor
+# Black Widgets
 
 **Contributors:** skalanter, modernaweb \
 **Donate link:** http://modernaweb.net/ \
 **Tags:** page builder, editor, elementor widgets, elementor addon, typography \
-**Stable tag:** 1.3.9 \
+**Stable tag:** 1.4.0 \
 **Requires at least:** 6.0 \
-**Tested up to:** 6.7 \
+**Tested up to:** 6.8 \
 **Requires PHP:** 7.4 \
 **License:** GPLv3 or later \
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.html
@@ -25,11 +25,12 @@ We will add more widgets with more and more styles that may surprise you in the 
 
 ### Create your own styles
 
-✔️ 21 Widgets
+✔️ Up to 29 widgets (24 always available; more with GSAP enabled)
 ⚡ An Awesome Typography
-⚡ Great Animate with AnimeJS and GSAP
+⚡ Great Animate with AnimeJS and GSAP 3.15 (BYO CDN)
 ⚡ CSS Transform(2D & 3D CSS Styles)
-⚡ Scroll Trigger(with CDN)
+⚡ Scroll Trigger (GSAP ScrollTrigger CDN)
+⚡ Awards Elements
 
 ### ✹ Dsgn
 
@@ -61,9 +62,26 @@ Dsgn is a simple way to start a website easily, quickly, and free. This is Free 
 *   [Black Box](https://modernaweb.net/black-widgets/all-widgets/black-box/)
 *   [Black Flat Nav(menu)](https://modernaweb.net/black-widgets/all-widgets/black-flat-nav/)
 *   [Black Sentence](https://modernaweb.net/black-widgets/all-widgets/black-sentence/)
+*   Black Text Animate
+*   Black Scroll Heat
+*   Black Text Marquee
+*   Black Image Marquee
+*   Black Image Carousel
+
+GSAP widgets (enable JS → CDN in Settings, then paste GSAP 3.15 + ScrollTrigger URLs; SplitText when needed):
+
 *   [Black Trigger(for experts)](https://modernaweb.net/black-widgets/all-widgets/black-trigger/)
 *   [Black Horizontal(for experts)](https://modernaweb.net/black-widgets/all-widgets/black-horizontal/)
+*   Black Tab
+*   Black Interactive Links
+*   Black Scroll Text (can be toggled in Settings; default ON)
 
+### GSAP CDN notes
+
+*   Required for GSAP features: GSAP core CDN + ScrollTrigger CDN (free GSAP 3.15 recommended). SplitText CDN is required for Black Scroll Heat and Perspective Flip button.
+*   TweenMax CDN field still appears for upgrade compatibility but is deprecated and is not loaded by Black Widgets.
+*   Saved CDN URLs are never changed automatically on update.
+*   Elementor Dark Mode setting was removed in 1.4.0.
 
 
 ### Features
@@ -85,7 +103,7 @@ If you found an issue or have a new suggestion, contact us: [ **modernawebdesign
 
 ## Upgrade Notice
 
-WordPress 5.3+
+After updating to 1.4.0, if GSAP animations stop, set the GSAP, ScrollTrigger, and (when needed) SplitText CDN fields to GSAP 3.15 (jsDelivr examples are shown in Settings). TweenMax is deprecated and not required. The Elementor Dark Mode setting has been removed.
 
 
 ## Installation
@@ -125,7 +143,32 @@ WordPress 5.3+
 
 ## Changelog
 
-### 1.3.9 — 2024-11-18
+### 1.4.0 — 2026-09 
+- Refactored: Plugin Structure
+- Improved: All Settings
+- Compatibility: WordPress v6.8
+- Compatibility: Elementor v3.28 (requires Elementor 3.5+)
+- Requires: PHP 7.4+
+- Added: New widget: Black Text Marquee
+- Added: New widget: Black Image Marquee
+- Added: New widget: Black Image Carousel
+- Added: New widget: Black Scroll Heat (Scroll Heat + Animated Text; replaces unreleased Black Revealed Text)
+- Added: Black Scroll Heat — new type: Line Reveal (floating index and eyebrow beside the first line, GSAP SplitText line masks)
+- Added: New widget: Black Text Animate
+- Added: New widget: GSAP Tab
+- Added: New widget: GSAP Interactive Links
+- Added: New widget: Black Scroll Text (optional; Settings toggle, default ON)
+- Improved: Black Horizontal scroll distance now scales with section width/panel count (replaces fixed +=2700 from 1.3.9)
+- Improved: GSAP loads per widget via CDN (GSAP 3.15 + ScrollTrigger + SplitText); TweenMax deprecated and not enqueued
+- Fixed: Cross-site scripting (XSS) vulnerability for the Black List widget; Thanks to Patchstack team
+- Fixed: Hardened Elementor repeater `_id` output (List + Sentence) against attribute-breakout XSS
+- Fixed: Cross-site scripting (XSS) vulnerability for uploading SVG and image as code by adding SVG sanitizer; Thanks to Patchstack team
+- Fixed: SVG-as-code output no longer emptied by post KSES after sanitizing
+- Kept: Text domain `blackwidgets` (unchanged from 1.3.9 so existing translations keep working)
+- Removed: Elementor Dark Mode Setting (legacy `bw_dark_style` option is cleaned on upgrade / Settings save)
+
+
+### 1.3.9 — 2024-12-21
 - Compatibility: WordPress v6.7
 - Compatibility: Elementor v3.26
 - Improved: Cross-site scripting (XSS) vulnerability for Magic Link widget; Thanks to Patchstack team

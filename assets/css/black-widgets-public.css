@@ -1,0 +1,225 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+
+/* cursor */
+.bw-cursor-auto {
+    cursor: auto;
+}
+
+.bw-cursor-default {
+    cursor: default;
+}
+
+.bw-cursor-none {
+    cursor: none;
+}
+
+.bw-cursor-pointer {
+    cursor: pointer;
+}
+
+.bw-cursor-not-Allowed {
+    cursor: not-Allowed;
+}
+
+.bw-cursor-wait {
+    cursor: wait;
+}
+
+.bw-cursor-progress {
+    cursor: progress;
+}
+
+.bw-cursor-help {
+    cursor: help;
+}
+
+.bw-cursor-context-menu {
+    cursor: context-menu;
+}
+
+.bw-cursor-cell {
+    cursor: cell;
+}
+
+.bw-cursor-crosshair {
+    cursor: crosshair;
+}
+
+.bw-cursor-text {
+    cursor: text;
+}
+
+.bw-cursor-wetical-text {
+    cursor: wetical-text;
+}
+
+.bw-cursor-grab {
+    cursor: grab;
+}
+
+.bw-cursor-grabbing {
+    cursor: grabbing;
+}
+
+.bw-cursor-alias {
+    cursor: alias;
+}
+
+.bw-cursor-copy {
+    cursor: copy;
+}
+
+.bw-cursor-move {
+    cursor: move;
+}
+
+.bw-cursor-zoom-in {
+    cursor: zoom-in;
+}
+
+.bw-cursor-zoom-out {
+    cursor: zoom-out;
+}
+
+.bw-cursor-col-resize {
+    cursor: col-resize;
+}
+
+.bw-cursor-row-resize {
+    cursor: row-resize;
+}
+
+.bw-cursor-nesw-resize {
+    cursor: nesw-resize;
+}
+
+.bw-cursor-newse-resize {
+    cursor: newse-resize;
+}
+
+.bw-cursor-ew-resize {
+    cursor: ew-resize;
+}
+
+.bw-cursor-ns-resize {
+    cursor: ns-resize;
+}
+
+.bw-cursor-n-resize {
+    cursor: n-resize;
+}
+
+.bw-cursor-w-resize {
+    cursor: w-resize;
+}
+
+.bw-cursor-s-resize {
+    cursor: s-resize;
+}
+
+.bw-cursor-e-resize {
+    cursor: e-resize;
+}
+
+.bw-cursor-nw-resize {
+    cursor: nw-resize;
+}
+
+.bw-cursor-ne-resize {
+    cursor: ne-resize;
+}
+
+.bw-cursor-sw-resize {
+    cursor: sw-resize;
+}
+
+.bw-cursor-se-resize {
+    cursor: se-resize;
+}
+
+
+/* Blur Class - classic columns + Elementor containers + widget-level */
+.bw-blur > .elementor-widget-wrap,
+.bw-blur.e-con,
+.bw-blur > .e-con-inner,
+.bw-blur.elementor-widget,
+.elementor-widget.bw-blur > .elementor-widget-container {
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+}
+
+/* Extra margin removal - columns, containers, and widgets */
+.no-margin,
+.no-margin.elementor-widget,
+.no-margin.e-con,
+.elementor-widget.no-margin,
+.elementor-column.no-margin,
+.e-con.no-margin {
+    margin-bottom: 0 !important;
+}
+
+.no-margin.elementor-widget > .elementor-widget-container,
+.elementor-widget.no-margin > .elementor-widget-container {
+    margin-bottom: 0 !important;
+}
+
+
+/* Black Image */
+.bw-image img {
+    transition: all 0.17s ease;
+}
+
+/* Black Alignment */
+
+.bw-left {
+    text-align: left;
+}
+
+.bw-center {
+    text-align: center;
+}
+
+.bw-right {
+    text-align: right;
+}
+
+/**
+ * Black Video Sequence
+ */
+
+.bw-scroll-video {
+    position: relative;
+    min-height: 100vh;
+}
+
+.bw-sencor {
+    position: absolute;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.bw-sencor--active {
+    position: sticky;
+    transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+}
+
+.bw-sencor--ended {
+    position: absolute;
+    bottom: 0;
+    top: auto;
+}
+
+.bw-video-scroller {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

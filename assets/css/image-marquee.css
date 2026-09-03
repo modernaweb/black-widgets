@@ -1,0 +1,118 @@
+/* Wrapper */
+.bw-image-marquee-wrapper {
+    --bw-marquee-gap: 40px;
+    --bw-marquee-shift: 0px;
+    overflow: hidden;
+    width: 100%;
+    height: 120px;
+    position: relative;
+    /*
+     * Force LTR for transform-based marquee math (translateX px).
+     * Logical left/right from controls are mirrored in JS when the page is RTL.
+     */
+    direction: ltr;
+}
+
+/* Track */
+.bw-image-marquee-track {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    width: max-content;
+    height: 100%;
+    gap: 0; /* never gap between seamless halves */
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    will-change: transform;
+}
+
+/* Group / sequence */
+.bw-image-marquee-group {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    align-items: stretch;
+    gap: 0;
+    height: 100%;
+}
+
+/* Gap as trailing margin - keeps -shift seam pixel-perfect. */
+.bw-image-marquee-group .bw-image-marquee-item {
+    flex: 0 0 auto;
+    height: 100%;
+    margin-inline-end: var(--bw-marquee-gap);
+}
+
+.bw-image-marquee-item img {
+    display: block;
+    height: 100%;
+    width: auto;
+    max-width: none;
+    transition: filter 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Vertical Mode */
+.bw-image-marquee-wrapper.vertical {
+    width: 100%;
+    height: 400px;
+}
+
+.bw-image-marquee-wrapper.vertical .bw-image-marquee-track.vertical {
+    flex-direction: column;
+    align-items: center;
+    width: unset;
+    height: max-content;
+}
+
+.bw-image-marquee-wrapper.vertical .bw-image-marquee-group {
+    flex-direction: column;
+    height: auto;
+}
+
+.bw-image-marquee-wrapper.vertical .bw-image-marquee-group .bw-image-marquee-item {
+    height: auto;
+    margin-inline-end: 0;
+    margin-block-end: var(--bw-marquee-gap);
+}
+
+.bw-image-marquee-wrapper.vertical .bw-image-marquee-item img {
+    width: 200px;
+    height: auto;
+}
+
+/* Pixel-perfect loop (shift set by JS)
+ * Class names follow Elementor control values:
+ * "left"  = Left To Right: content drifts right (legacy)
+ * "right" = Right To Left: content drifts left
+ */
+@keyframes bw-im-scroll-left {
+    from { transform: translate3d(calc(-1 * var(--bw-marquee-shift)), 0, 0); }
+    to   { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes bw-im-scroll-right {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(calc(-1 * var(--bw-marquee-shift)), 0, 0); }
+}
+
+@keyframes bw-im-scroll-up {
+    from { transform: translate3d(0, calc(-1 * var(--bw-marquee-shift)), 0); }
+    to   { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes bw-im-scroll-down {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(0, calc(-1 * var(--bw-marquee-shift)), 0); }
+}
+
+.bw-image-marquee-track.scroll-left  { animation-name: bw-im-scroll-left; }
+.bw-image-marquee-track.scroll-right { animation-name: bw-im-scroll-right; }
+.bw-image-marquee-track.scroll-up    { animation-name: bw-im-scroll-up; }
+.bw-image-marquee-track.scroll-down  { animation-name: bw-im-scroll-down; }
+
+@media (prefers-reduced-motion: reduce) {
+    .bw-image-marquee-track {
+        animation: none !important;
+        will-change: auto;
+    }
+}

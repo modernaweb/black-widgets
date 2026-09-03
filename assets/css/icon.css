@@ -1,0 +1,21 @@
+.bw-icon-box {
+    display: block;
+}
+
+.bw-icon-box .bw-icon-into {
+    display: inline-block;
+    background: #fff;
+    padding: 14px 15px;
+    border-radius: 50%;
+    box-shadow: 0 12px 38px rgba(0, 0, 0, 0.2);
+}
+
+.bw-icon-box .bw-icon-into i {
+    font-size: 44px;
+    color: #222;
+    transition: all .4s cubic-bezier(0.91, 0.53, 0.57, 0.79);
+    -webkit-transition: all .4s cubic-bezier(0.91, 0.53, 0.57, 0.79);
+    -moz-transition: all .4s cubic-bezier(0.91, 0.53, 0.57, 0.79);
+    -ms-transition: all .4s cubic-bezier(0.91, 0.53, 0.57, 0.79);
+    -o-transition: all .4s cubic-bezier(0.91, 0.53, 0.57, 0.79);
+}

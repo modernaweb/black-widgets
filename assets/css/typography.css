@@ -1,0 +1,689 @@
+.bw-typograpgy {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    word-break: keep-all;
+    box-sizing: border-box;
+}
+
+/* Scroll Text: fill Elementor wrapper so Advanced padding/bg/border wrap the text,
+   and SplitText line FX (Mask Rise / Clip Wipe) can measure a real width. */
+.bw-typograpgy.bw-scroll-text,
+.bw-typograpgy.bw-scroll-text .bw-typograpgy-wrap,
+.bw-typograpgy.bw-scroll-text .bw-typograpgy-animate {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.bw-typograpgy.bw-scroll-text .bw-typograpgy-animate {
+    white-space: pre-line;
+}
+
+.bw-scroll-text-box {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.bw-scroll-text-link {
+    display: block;
+    width: 100%;
+    color: inherit;
+    text-decoration: none;
+}
+
+.bw-scroll-text-link:hover,
+.bw-scroll-text-link:focus {
+    color: inherit;
+    text-decoration: none;
+}
+
+/*
+ * Hide pending scroll FX until typography.js attaches [data-bw-fx].
+ * Without this the frontend paints visible text, then GSAP sets opacity:0,
+ * waits for the delay and animates (flash then hide).
+ */
+.bw-typograpgy-animate[data-bw-splitting]:not([data-bw-fx]):not([data-bw-no-animate]) {
+    visibility: hidden;
+}
+
+.bw-typograpgy-animate[data-bw-fx],
+.bw-typograpgy-animate[data-bw-no-animate] {
+    visibility: visible;
+}
+
+/* Repetitive lines: same FOUC class until the wrap is marked ready. */
+.bw-typograpgy-repetitive-wrap[data-bw-repetitive-anim]:not([data-bw-repetitive-ready]) .bw-typograpgy-repetitive {
+    visibility: hidden;
+}
+
+.bw-typograpgy-repetitive-wrap[data-bw-repetitive-ready] .bw-typograpgy-repetitive {
+    visibility: visible;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bw-typograpgy-animate[data-bw-splitting],
+    .bw-typograpgy-repetitive-wrap[data-bw-repetitive-anim] .bw-typograpgy-repetitive {
+        visibility: visible !important;
+    }
+}
+
+.bw-typograpgy-main-title {
+    word-break: keep-all !important;
+}
+
+.bw-typograpgy.left {
+    text-align: left;
+}
+
+.bw-typograpgy.center {
+    text-align: center;
+}
+
+.bw-typograpgy.right {
+    text-align: right;
+}
+
+.bw-typograpgy.bw-t-1,
+.bw-typograpgy.bw-t-2 {
+    display: flex;
+    width: 100%;
+}
+
+.bw-typograpgy.bw-t-1.left,
+.bw-typograpgy.bw-t-2.left {
+    justify-content: flex-start;
+}
+
+.bw-typograpgy.bw-t-1.center,
+.bw-typograpgy.bw-t-2.center {
+    justify-content: center;
+}
+
+.bw-typograpgy.bw-t-1.right,
+.bw-typograpgy.bw-t-2.right {
+    justify-content: flex-end;
+}
+
+.bw-typograpgy.bw-t-3 {
+    display: block;
+    width: 100%;
+}
+
+.bw-t-1 .bw-typograpgy-main-title.bw-block {
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    white-space: nowrap;
+}
+
+.bw-typograpgy-animate .bw-char {
+    text-transform: none;
+}
+
+.bw-typograpgy-animate span.char,
+.bw-typograpgy-animate span.word {
+    display: inline-block;
+    white-space: break-spaces;
+}
+
+.bw-typograpgy-animate .char-wrap {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* Simple Style */
+.bw-typograpgy-wrap {
+    position: relative;
+    z-index: 2;
+    word-break: break-word;
+}
+
+.bw-typograpgy.bw-t-1 .bw-typograpgy-main-title {
+    display: block;
+}
+
+.bw-typograpgy-wrap em {
+    position: relative;
+}
+
+.bw-typograpgy-wrap em .bw-code-em {
+    position: absolute;
+    top: auto;
+    bottom: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transition: all .38s ease;
+    -webkit-transition: all .38s ease;
+    -moz-transition: all .38s ease;
+    -ms-transition: all .38s ease;
+    -o-transition: all .38s ease;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+}
+
+.bw-typograpgy-wrap em .bw-code-em svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-width: 100%;
+}
+
+.bw-typograpgy-wrap em .bw-code-em path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    opacity: 0;
+}
+
+@keyframes bwsvg {
+    0% {
+        stroke-dashoffset: 1;
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+.bw-typograpgy-wrap em {
+    background-image: none!important;
+}
+
+@keyframes bw-animated {
+    100% {
+        /* creates the drawing effect */
+        stroke-dashoffset: 0;
+    }
+}
+
+.bw-typograpgy-wrap em .bw-code-em.run path {
+    opacity: 1;
+    /* beginning of L */
+    stroke-dasharray: 10000;
+    stroke-dashoffset: 10000;
+    /* animation: bw-animated 3s linear forwards 1s; */
+    animation: bw-animated 3.7s cubic-bezier(.65, 0, .35, 1) forwards;
+}
+
+
+/* With Shape */
+
+.bw-typograpgy.bw-t-2 {
+    width: 100%;
+}
+
+.bw-typograpgy.bw-t-2 .bw-typograpgy-with-title.style-x-1,
+.bw-typograpgy.bw-t-2 .bw-typograpgy-with-title.style-x-2,
+.bw-typograpgy.bw-t-2 .bw-typograpgy-with-title.style-x-3 {
+    width: fit-content;
+    max-width: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bw-typograpgy.bw-t-2.center .bw-typograpgy-with-title.style-x-1,
+.bw-typograpgy.bw-t-2.center .bw-typograpgy-with-title.style-x-2,
+.bw-typograpgy.bw-t-2.center .bw-typograpgy-with-title.style-x-3,
+.bw-typograpgy.bw-t-2.center .bw-typograpgy-with-title.style-x-4,
+.bw-typograpgy.bw-t-2.center .bw-typograpgy-with-title.style-x-5,
+.bw-typograpgy.bw-t-2.center .bw-typograpgy-with-title.style-x-6,
+.bw-typograpgy.bw-t-2.center .bw-typograpgy-with-title.custom-style {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bw-typograpgy.bw-t-2.left .bw-typograpgy-with-title {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.bw-typograpgy.bw-t-2.right .bw-typograpgy-with-title {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.bw-typograpgy.bw-t-2 .bw-typograpgy-with-title.style-x-4,
+.bw-typograpgy.bw-t-2 .bw-typograpgy-with-title.style-x-5,
+.bw-typograpgy.bw-t-2 .bw-typograpgy-with-title.style-x-6 {
+    width: fit-content;
+    max-width: 100%;
+    margin: 0;
+    display: block;
+}
+
+.bw-typograpgy.bw-t-2 .line-1,
+.bw-typograpgy.bw-t-2 .line-2 {
+    width: 46px;
+    height: 2px;
+    background: #000;
+    display: block;
+    margin: 7px auto;
+    flex-shrink: 0;
+}
+
+.bw-typograpgy.bw-t-2 .bw-bw-t-2-text {
+    margin: 7px;
+}
+
+
+/* Custom Style */
+
+.bw-typograpgy.bw-t-2 .bw-typograpgy-with-title.custom-style {
+    width: fit-content;
+    max-width: 100%;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35em;
+    text-align: center;
+}
+
+.bw-typograpgy.bw-t-2 .bw-typograpgy-with-title.custom-style .top-bottom {
+    min-width: 100%;
+    width: 100% !important;
+    display: block !important;
+    max-width: 100%;
+}
+
+.bw-typograpgy .bw-left-top.top-bottom,
+.bw-typograpgy .bw-right-bottom.top-bottom {
+    min-width: 100%;
+    width: 100%;
+    display: block;
+}
+
+.bw-typograpgy.bw-t-2 .bw-typograpgy-with-title.custom-style .bw-bw-t-2-text {
+    margin: auto;
+}
+
+.bw-typograpgy .bw-left-top,
+.bw-typograpgy .bw-right-bottom {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+    flex-shrink: 0;
+}
+
+.bw-typograpgy .bw-left-top div,
+.bw-typograpgy .bw-right-bottom div {
+    line-height: 0;
+}
+
+.bw-typograpgy .bw-iconbox-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    line-height: 1;
+    overflow: hidden;
+}
+
+.bw-typograpgy .bw-iconbox-icon i {
+    font-size: 24px;
+    line-height: 1;
+    width: 1em;
+    height: 1em;
+}
+
+.bw-typograpgy .bw-iconbox-icon svg {
+    width: 24px;
+    height: 24px;
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
+
+.bw-typograpgy .bw-iconbox-img {
+    width: 24px;
+    max-width: 100%;
+    line-height: 0;
+}
+
+.bw-typograpgy .bw-iconbox-img img,
+.bw-typograpgy .bw-iconbox-img svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-width: 100%;
+}
+
+.bw-typograpgy .bw-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    box-sizing: border-box;
+}
+
+.bw-typograpgy.bw-has-overlay {
+    /* Clips overlay to border-radius set on .bw-overlay / parent */
+    isolation: isolate;
+}
+
+
+/* Vertical Title */
+
+.bw-typograpgy-wrap .bw-wrapper-unset,
+.bw-typograpgy-wrap .bw-unset {
+    display: unset !important;
+}
+
+.bw-typograpgy-wrap .bw-wrapper-block,
+.bw-typograpgy-wrap .bw-block {
+    display: block !important;
+}
+
+.bw-typography-this-title {
+    word-break: break-word;
+}
+
+.bw-typograpgy-repetitive-wrap {
+    display: block;
+    width: 100%;
+}
+
+.bw-typograpgy-repetitive-wrap[data-bw-repetitive-anim] .bw-typograpgy-repetitive {
+    will-change: transform, opacity;
+}
+
+/* SplitText / mask helpers for new Awwwards-style FX (opt-in types only) */
+.bw-typograpgy-animate.bw-split-ready,
+.bw-typograpgy-repetitive-wrap.bw-split-ready {
+    visibility: visible;
+}
+
+/* Kinetic repetitive animations */
+.bw-typograpgy-repetitive-wrap.bw-kinetic-apple,
+.bw-typograpgy-repetitive-wrap[data-bw-repetitive-anim^="kinetic-"] {
+    overflow: visible;
+}
+
+.bw-kinetic-echo {
+    position: relative;
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    margin-inline: auto;
+}
+
+.bw-kinetic-echo .bw-kinetic-echo-main {
+    position: relative;
+    z-index: 5;
+}
+
+.bw-kinetic-echo .bw-kinetic-echo-layer {
+    pointer-events: none;
+    white-space: nowrap;
+    color: inherit;
+    -webkit-text-fill-color: currentColor;
+}
+
+.bw-typograpgy-repetitive-wrap[data-bw-repetitive-anim="kinetic-slice"] .bw-typograpgy-repetitive,
+.bw-typograpgy-repetitive-wrap[data-bw-repetitive-anim="kinetic-skew"] .bw-line {
+    overflow: hidden;
+}
+
+.bw-typograpgy-animate .bw-line,
+.bw-typograpgy-repetitive .bw-line {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    vertical-align: top;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.bw-typograpgy-animate .bw-word,
+.bw-typograpgy-animate .bw-char,
+.bw-typograpgy-repetitive .bw-word,
+.bw-typograpgy-repetitive .bw-char {
+    display: inline-block;
+    will-change: transform, opacity, filter;
+}
+
+.bw-typograpgy-animate[data-bw-bw-scroll-e-9] .bw-line,
+.bw-typograpgy-animate[data-bw-bw-scroll-e-10] .bw-line,
+.bw-typograpgy-animate[data-bw-bw-scroll-e-11] .bw-line,
+.bw-typograpgy-animate[data-bw-bw-scroll-e-12] .bw-line {
+    overflow: hidden;
+    padding-bottom: 0.12em;
+    margin-bottom: -0.12em;
+}
+
+.bw-typograpgy-animate[data-bw-bw-scroll-e-12] .bw-line {
+    /* Ensure wipe animates against a full-width line box in Elementor flex columns. */
+    display: block;
+    width: 100%;
+}
+
+.bw-typograpgy-wrap .bw-wrapper-unset .bw-typograpgy-repetitive.bw-typography-this-title,
+.bw-typograpgy-wrap .bw-wrapper-block .bw-typograpgy-repetitive.bw-typography-this-title {
+    display: unset !important;
+}
+
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-1,
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-2,
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-3,
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-4,
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-5,
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-6,
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-7,
+.bw-typograpgy-wrap .bw-typograpgy-animate.bw-rotation-1,
+.bw-typograpgy-wrap .bw-typograpgy-animate.bw-rotation-2,
+.bw-typograpgy-wrap .bw-typograpgy-animate.bw-rotation-3,
+.bw-typograpgy-wrap .bw-typograpgy-animate.bw-rotation-4,
+.bw-typograpgy-wrap .bw-typograpgy-animate.bw-rotation-5,
+.bw-typograpgy-wrap .bw-typograpgy-animate.bw-rotation-6,
+.bw-typograpgy-wrap .bw-typograpgy-animate.bw-rotation-7,
+.bw-typograpgy-wrap .bw-rotation-1 .bw-typography-this-title,
+.bw-typograpgy-wrap .bw-rotation-2 .bw-typography-this-title,
+.bw-typograpgy-wrap .bw-rotation-3 .bw-typography-this-title,
+.bw-typograpgy-wrap .bw-rotation-4 .bw-typography-this-title,
+.bw-typograpgy-wrap .bw-rotation-6 .bw-typography-this-title,
+.bw-typograpgy-wrap .bw-rotation-7 .bw-typography-this-title {
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    white-space: nowrap;
+}
+
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-1,
+.bw-typograpgy-wrap .bw-typograpgy-animate.bw-rotation-1,
+.bw-typograpgy-wrap .bw-rotation-1 .bw-typography-this-title {
+    transform: rotate( -180deg);
+    -webkit-transform: rotate( -180deg);
+    -moz-transform: rotate( -180deg);
+    -ms-transform: rotate( -180deg);
+    -o-transform: rotate( -180deg);
+}
+
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-2,
+.bw-typograpgy-wrap .bw-typograpgy-animate.bw-rotation-2,
+.bw-typograpgy-wrap .bw-rotation-2 .bw-typography-this-title {
+    transform: rotate( -90deg);
+    -webkit-transform: rotate( -90deg);
+    -moz-transform: rotate( -90deg);
+    -ms-transform: rotate( -90deg);
+    -o-transform: rotate( -90deg);
+}
+
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-3,
+.bw-typograpgy-wrap .bw-typograpgy-animate.bw-rotation-3,
+.bw-typograpgy-wrap .bw-rotation-3 .bw-typography-this-title {
+    transform: rotate( -45deg);
+    -webkit-transform: rotate( -45deg);
+    -moz-transform: rotate( -45deg);
+    -ms-transform: rotate( -45deg);
+    -o-transform: rotate( -45deg);
+}
+
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-4,
+.bw-typograpgy-wrap .bw-typograpgy-animate.bw-rotation-4,
+.bw-typograpgy-wrap .bw-rotation-4 .bw-typography-this-title {
+    transform: rotate( 0deg);
+    -webkit-transform: rotate( 0deg);
+    -moz-transform: rotate( 0deg);
+    -ms-transform: rotate( 0deg);
+    -o-transform: rotate( 0deg);
+}
+
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-5,
+.bw-typograpgy-wrap .bw-typograpgy-animate.bw-rotation-5,
+.bw-typograpgy-wrap .bw-rotation-5 .bw-typography-this-title {
+    transform: rotate( 45deg);
+    -webkit-transform: rotate( 45deg);
+    -moz-transform: rotate( 45deg);
+    -ms-transform: rotate( 45deg);
+    -o-transform: rotate( 45deg);
+}
+
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-6,
+.bw-typograpgy-wrap .bw-typograpgy-animate.bw-rotation-6,
+.bw-typograpgy-wrap .bw-rotation-6 .bw-typography-this-title {
+    transform: rotate( 90deg);
+    -webkit-transform: rotate( 90deg);
+    -moz-transform: rotate( 90deg);
+    -ms-transform: rotate( 90deg);
+    -o-transform: rotate( 90deg);
+}
+
+.bw-typograpgy-wrap .bw-typograpgy-main-title.bw-rotation-7,
+.bw-typograpgy-wrap .bw-typograpgy-animate.bw-rotation-7,
+.bw-typograpgy-wrap .bw-rotation-7 .bw-typography-this-title {
+    transform: rotate( 180deg);
+    -webkit-transform: rotate( 180deg);
+    -moz-transform: rotate( 180deg);
+    -ms-transform: rotate( 180deg);
+    -o-transform: rotate( 180deg);
+}
+
+
+/* Gradient */
+
+.bw-typograpgy.bw-gradient .bw-typography-this-title,
+.bw-typograpgy.bw-gradient .bw-typograpgy-main-title {
+    -webkit-text-fill-color: transparent !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    word-break: keep-all !important;
+}
+
+/* Responsive alignment + shape placement */
+@media (max-width: 1024px) {
+    .bw-typograpgy.tablet-left {
+        text-align: left;
+        justify-content: flex-start;
+    }
+
+    .bw-typograpgy.tablet-center {
+        text-align: center;
+        justify-content: center;
+    }
+
+    .bw-typograpgy.tablet-right {
+        text-align: right;
+        justify-content: flex-end;
+    }
+
+    .bw-typograpgy.bw-t-2.tablet-left .bw-typograpgy-with-title {
+        margin-left: 0;
+        margin-right: auto;
+    }
+
+    .bw-typograpgy.bw-t-2.tablet-center .bw-typograpgy-with-title {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .bw-typograpgy.bw-t-2.tablet-right .bw-typograpgy-with-title {
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .bw-typograpgy .bw-left-top.tablet-top-bottom,
+    .bw-typograpgy .bw-right-bottom.tablet-top-bottom {
+        min-width: 100%;
+        width: 100%;
+        display: block;
+    }
+
+    .bw-typograpgy .bw-left-top.tablet-left-right,
+    .bw-typograpgy .bw-right-bottom.tablet-left-right {
+        min-width: 0;
+        width: auto;
+        display: inline-flex;
+    }
+}
+
+@media (max-width: 767px) {
+    .bw-typograpgy.mobile-left {
+        text-align: left;
+        justify-content: flex-start;
+    }
+
+    .bw-typograpgy.mobile-center {
+        text-align: center;
+        justify-content: center;
+    }
+
+    .bw-typograpgy.mobile-right {
+        text-align: right;
+        justify-content: flex-end;
+    }
+
+    .bw-typograpgy.bw-t-2.mobile-left .bw-typograpgy-with-title {
+        margin-left: 0;
+        margin-right: auto;
+    }
+
+    .bw-typograpgy.bw-t-2.mobile-center .bw-typograpgy-with-title {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .bw-typograpgy.bw-t-2.mobile-right .bw-typograpgy-with-title {
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .bw-typograpgy .bw-left-top.mobile-top-bottom,
+    .bw-typograpgy .bw-right-bottom.mobile-top-bottom {
+        min-width: 100%;
+        width: 100%;
+        display: block;
+    }
+
+    .bw-typograpgy .bw-left-top.mobile-left-right,
+    .bw-typograpgy .bw-right-bottom.mobile-left-right {
+        min-width: 0;
+        width: auto;
+        display: inline-flex;
+    }
+
+    .bw-typograpgy.bw-t-2 .bw-typograpgy-with-title.custom-style {
+        width: 100%;
+        justify-content: center;
+    }
+}
+

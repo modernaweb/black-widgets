@@ -1,0 +1,21 @@
+/**
+ * Admin sidebar menu icon - loaded on every wp-admin screen.
+ * The SVG asset has a large intrinsic size; without these rules it looks huge in #adminmenu.
+ */
+
+#adminmenu #toplevel_page_black-widgets .wp-menu-image img,
+#adminmenu .toplevel_page_black-widgets .wp-menu-image img {
+	width: 20px !important;
+	height: 20px !important;
+	max-width: 20px !important;
+	max-height: 20px !important;
+	padding: 7px 0 0 !important;
+	opacity: 0.6;
+	object-fit: contain;
+}
+
+#adminmenu #toplevel_page_black-widgets:hover .wp-menu-image img,
+#adminmenu #toplevel_page_black-widgets.wp-has-current-submenu .wp-menu-image img,
+#adminmenu #toplevel_page_black-widgets.current .wp-menu-image img {
+	opacity: 1;
+}

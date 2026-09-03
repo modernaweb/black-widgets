@@ -1,0 +1,135 @@
+.bw-interactive-link-box {
+    position: relative;
+    /* Must stay visible - hover preview is fixed/follow and must not clip. */
+    overflow: visible;
+    margin: 0;
+    padding: 30px;
+    border-radius: 14px;
+    background: linear-gradient(145deg, #1e1e1e, #292929);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+}
+
+.bw-il-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.bw-il-menu li {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-block: 20px;
+    padding: 18px 22px;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.03);
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.bw-il-menu li:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+}
+
+.bw-il-menu li a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.bw-il-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+.bw-il-menu li:hover .bw-il-title {
+    color: #00d4ff;
+}
+
+.bw-il-description {
+    margin: 0;
+    font-size: 14px;
+    color: #bbb;
+    font-style: italic;
+    opacity: 0;
+    transform: translateX(10px);
+    pointer-events: none;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.bw-il-menu li:hover .bw-il-description {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+/* Viewport-follow preview layer (often portaled to <body> by JS). */
+.bw-il-image-container {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.bw-il-hover-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: min(280px, 42vw);
+    max-width: 420px;
+    height: auto;
+    overflow: hidden;
+    border-radius: 14px;
+    box-shadow: 0 22px 48px rgba(0, 0, 0, 0.38);
+    transform-origin: center center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.bw-il-hover-image {
+    display: block;
+    width: 100%;
+    /* Resolves to "auto" (full, uncropped image) while the wrapper's height
+       is auto; becomes a real 100% once a fixed height is set via Style
+       controls, letting object-fit keep the full image visible either way. */
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateZ(0);
+}
+
+@media (max-width: 767px) {
+    .bw-il-hover-wrapper {
+        width: min(200px, 48vw);
+    }
+
+    .bw-il-image-container {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bw-il-menu li,
+    .bw-il-menu li:hover,
+    .bw-il-description,
+    .bw-il-menu li:hover .bw-il-description {
+        transition: none;
+        transform: none;
+    }
+}

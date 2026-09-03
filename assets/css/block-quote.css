@@ -1,0 +1,97 @@
+.bw-blockquote {
+    background: #fff;
+    padding: 30px 25px 30px 25px;
+    box-shadow: 0 7px 80px -24px rgba(0, 0, 0, 0.2);
+    display: flex;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+}
+
+.bw-blockquote .bw-icon-into {
+    width: 25%;
+    padding-right: 12px;
+}
+
+.bw-blockquote .bw-icon-into i {
+    font-size: 60px;
+    color: #000;
+}
+
+.bw-blockquote .bw-icon-into img,
+.bw-blockquote .bw-icon-into svg {
+    max-width: 60px;
+    max-height: 60px;
+    display: block;
+    margin-top: -9px;
+    width: -webkit-fill-available;
+}
+
+.bw-blockquote .bw-icon-into img {
+    margin: 0;
+}
+
+.bw-blockquote .content {
+    width: 75%;
+    padding-left: 20px;
+    border-left: 4px solid;
+}
+
+.bw-blockquote .content .bw-description {
+    color: #000;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 28px;
+    letter-spacing: 0.014em;
+    line-height: 30px;
+    margin-top: -8px;
+}
+
+.bw-blockquote .content .bw-name {
+    color: #000;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.014em;
+    margin: 0 0 -8px 0;
+}
+
+@media(max-width: 780px) {
+    .bw-blockquote {
+        padding: 25px 20px;
+    }
+    .bw-blockquote .bw-icon-into {
+        width: 30%;
+    }
+    .bw-blockquote .content {
+        width: 70%;
+    }
+    .bw-blockquote .content .bw-description {
+        font-size: 14px;
+        line-height: 24px;
+    }
+}
+
+.bw-blockquote-right {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.bw-blockquote-right .bw-icon-into {
+    padding-right: 0;
+    padding-left: 12px;
+}
+
+.bw-blockquote-right .content {
+    padding-left: 0;
+    padding-right: 20px;
+    border-left: 0 solid;
+    border-right: 4px solid;
+    text-align: right;
+}
+
+.bw-blockquote-right .bw-icon-into img,
+.bw-blockquote-right .bw-icon-into svg {
+    float: right;
+}

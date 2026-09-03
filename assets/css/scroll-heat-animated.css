@@ -1,0 +1,132 @@
+/* Black Scroll Heat - Animated Text (Type 2) - GSAP SplitText + ScrollTrigger */
+
+.mws-ew-at {
+	--mws-ew-at-color: inherit;
+	--mws-ew-at-grad-from: #1B1B18;
+	--mws-ew-at-grad-mid: #4A5CFF;
+	--mws-ew-at-grad-to: #1B1B18;
+	--mws-ew-at-grad-size: 260%;
+	--mws-ew-at-grad-image: linear-gradient(
+		90deg,
+		var(--mws-ew-at-grad-from) 0%,
+		var(--mws-ew-at-grad-from) 45%,
+		var(--mws-ew-at-grad-mid) 55%,
+		var(--mws-ew-at-grad-to) 65%
+	);
+	position: relative;
+	display: block;
+	width: 100%;
+	max-width: 100%;
+}
+
+.mws-ew-at__title {
+	display: block;
+	margin: 0;
+	color: var(--mws-ew-at-color);
+	overflow: hidden;
+	will-change: auto;
+	/* Prevent long words (e.g. German compounds) from clipping/overflowing the section. */
+	overflow-wrap: break-word;
+	word-break: break-word;
+	hyphens: auto;
+}
+
+/* Hide until JS marks .is-ready; avoids a flash before the GSAP from-state. */
+.mws-ew-at[data-mws-ew-at]:not(.is-ready) .mws-ew-at__title {
+	visibility: hidden;
+}
+
+.mws-ew-at.is-ready .mws-ew-at__title {
+	visibility: visible;
+}
+
+.mws-ew-at__title.mws-ew-at__title--inline {
+	display: inline-block;
+	max-width: 100%;
+}
+
+/* Gradient must be applied to SplitText children - parent clip does not paint through nested spans. */
+.mws-ew-at--gradient .mws-ew-at__title,
+.mws-ew-at--gradient .mws-ew-at__char,
+.mws-ew-at--gradient .mws-ew-at__word,
+.mws-ew-at--gradient .mws-ew-at__line,
+.mws-ew-at--gradient .mws-ew-at__word-holder {
+	background-image: var(--mws-ew-at-grad-image);
+	background-size: var(--mws-ew-at-grad-size) 100%;
+	background-position: 0% 0;
+	background-repeat: no-repeat;
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	-webkit-text-fill-color: transparent;
+}
+
+/* Mask reveal starts the sheen off-canvas, then sweeps across. */
+.mws-ew-at--gradient[data-anim="mask"] .mws-ew-at__title,
+.mws-ew-at--gradient[data-anim="mask"] .mws-ew-at__char,
+.mws-ew-at--gradient[data-anim="mask"] .mws-ew-at__word,
+.mws-ew-at--gradient[data-anim="mask"] .mws-ew-at__line,
+.mws-ew-at--gradient[data-anim="mask"] .mws-ew-at__word-holder {
+	background-position: 150% 0;
+}
+
+.mws-ew-at--flip3d .mws-ew-at__title {
+	perspective: 900px;
+}
+
+.mws-ew-at__word-holder {
+	display: inline-block;
+	overflow: hidden;
+	padding: 0 0.01em;
+	vertical-align: top;
+	overflow-wrap: break-word;
+	word-break: break-word;
+}
+
+.mws-ew-at__word {
+	display: inline-block;
+	overflow: hidden;
+	padding-bottom: 0.08em;
+	vertical-align: top;
+	overflow-wrap: break-word;
+	word-break: break-word;
+}
+
+.mws-ew-at__char {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.mws-ew-at.is-playing .mws-ew-at__char,
+.mws-ew-at.is-playing .mws-ew-at__word {
+	will-change: transform, opacity, filter;
+}
+
+.mws-ew-at__line {
+	overflow: hidden;
+}
+
+.mws-ew-at.is-complete .mws-ew-at__char,
+.mws-ew-at.is-complete .mws-ew-at__word {
+	will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.mws-ew-at,
+	.mws-ew-at * {
+		animation: none !important;
+		transition: none !important;
+	}
+
+	.mws-ew-at[data-mws-ew-at] .mws-ew-at__title {
+		visibility: visible !important;
+	}
+
+	.mws-ew-at--gradient .mws-ew-at__title,
+	.mws-ew-at--gradient .mws-ew-at__char,
+	.mws-ew-at--gradient .mws-ew-at__word,
+	.mws-ew-at--gradient .mws-ew-at__line,
+	.mws-ew-at--gradient .mws-ew-at__word-holder {
+		background-position: -50% 0;
+	}
+}
