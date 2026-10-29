@@ -16,9 +16,9 @@ use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Text_Shadow;
 
 /**
- * Elementor title Widget.
+ * Call to action widget.
  *
- * Elementor widget that inserts an embbedable content into the page, from any given URL.
+ * Call to action with a title, a subtitle and a link button.
  *
  * @since 1.0.0
  */
@@ -32,7 +32,7 @@ class CallToAction extends \Elementor\Widget_Base {
 	/**
 	 * Get widget name.
 	 *
-	 * Retrieve button widget name.
+	 * Retrieve the call to action widget name.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -46,7 +46,7 @@ class CallToAction extends \Elementor\Widget_Base {
 	/**
 	 * Get widget title.
 	 *
-	 * Retrieve button widget title.
+	 * Retrieve the call to action widget title.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -60,7 +60,7 @@ class CallToAction extends \Elementor\Widget_Base {
 	/**
 	 * Get widget icon.
 	 *
-	 * Retrieve button widget icon.
+	 * Retrieve the call to action widget icon.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -74,7 +74,7 @@ class CallToAction extends \Elementor\Widget_Base {
 	/**
 	 * Get widget categories.
 	 *
-	 * Retrieve the list of categories the button widget belongs to.
+	 * Retrieve the list of categories the call to action widget belongs to.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -94,17 +94,13 @@ class CallToAction extends \Elementor\Widget_Base {
     }
 
 	/**
-	 * Register button widget controls.
-	 *
-	 * Adds different input fields to allow the user to change and customize the widget settings.
+	 * Register the call to action widget controls.
 	 *
 	 * @since 1.0.0
 	 * @access protected
 	 */
 	protected function register_controls() {
 
-		// Start
-		// Content section
 		$this->start_controls_section(
 			'content_section',
 			[
@@ -127,7 +123,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Title
 		$this->add_control(
 			'widget_title',
 			[
@@ -139,7 +134,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// HTML Tag
 		$this->add_control(
 			'widget_html_tag_title',
 			[
@@ -162,7 +156,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Subtitle
 		$this->add_control(
 			'widget_subtitle',
 			[
@@ -174,7 +167,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// HTML Tag
 		$this->add_control(
 			'widget_html_tag_subtitle',
 			[
@@ -223,10 +215,7 @@ class CallToAction extends \Elementor\Widget_Base {
         );
 
 		$this->end_controls_section();
-		// End
 
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'style_section',
 			[
@@ -235,7 +224,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Style Subtitle Tabs
 		$this->start_controls_tabs('black_widget_1_tab');
 		$this->start_controls_tab(
 			'tab_1_normal',
@@ -244,7 +232,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -288,7 +275,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
@@ -301,7 +287,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
@@ -321,7 +306,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -331,7 +315,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -361,7 +344,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -379,7 +361,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'widget_hover_box_margin',
 			[
@@ -392,7 +373,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'widget_hover_box_padding',
 			[
@@ -412,7 +392,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -422,7 +401,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -445,12 +423,10 @@ class CallToAction extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_tab();
-		$this->end_controls_tabs(); // End Tabs
+		$this->end_controls_tabs();
 
 		$this->end_controls_section();
-        // End
 
-		// Start
 		// Title Style section
 		$this->start_controls_section(
 			'title_style_section',
@@ -460,7 +436,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		$this->start_controls_tabs('inner_title_tab'); // Start Tabs
+		$this->start_controls_tabs('inner_title_tab');
 		$this->start_controls_tab(
 			'title_tab_1',
 			[
@@ -468,7 +444,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_icon_box_title_normal_color',
 			[
@@ -489,7 +464,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_icon_box_title_hover_color',
 			[
@@ -502,7 +476,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_tab();
-		$this->end_controls_tabs(); // End Tabs
+		$this->end_controls_tabs();
 
 		$this->add_control(
 			'title_hr1',
@@ -511,7 +485,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Typography
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -524,7 +497,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Text shadow
 		$this->add_group_control(
 			Group_Control_Text_Shadow::get_type(),
 			[
@@ -534,7 +506,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -545,7 +516,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'content_title__margin',
 			[
@@ -558,7 +528,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'content_title__padding',
 			[
@@ -571,7 +540,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -581,7 +549,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border Radius
 		$this->add_control(
 			'content_title__border_radius', //param_name
 			[
@@ -594,7 +561,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -605,9 +571,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-        // End
 
-		// Start
 		// Subtitle Style section
 		$this->start_controls_section(
 			'subtitle_style_section',
@@ -617,7 +581,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		$this->start_controls_tabs('inner_subtitle_tab'); // Start Tabs
+		$this->start_controls_tabs('inner_subtitle_tab');
 		$this->start_controls_tab(
 			'subtitle_tab_1',
 			[
@@ -625,7 +589,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_icon_box_subtitle_normal_color',
 			[
@@ -646,7 +609,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_icon_box_subtitle_hover_color',
 			[
@@ -659,7 +621,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_tab();
-		$this->end_controls_tabs(); // End Tabs
+		$this->end_controls_tabs();
 
 		$this->add_control(
 			'subtitle_hr1',
@@ -668,7 +630,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Typography
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -681,7 +642,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Text shadow
 		$this->add_group_control(
 			Group_Control_Text_Shadow::get_type(),
 			[
@@ -691,7 +651,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -702,7 +661,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'content_subtitle__margin',
 			[
@@ -715,7 +673,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'content_subtitle__padding',
 			[
@@ -728,7 +685,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -738,7 +694,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border Radius
 		$this->add_control(
 			'content_subtitle__border_radius', //param_name
 			[
@@ -751,7 +706,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -762,9 +716,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-        // End
 
-        // Start
 		// Link Style section
 		$this->start_controls_section(
 			'link_style_section',
@@ -774,7 +726,7 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		$this->start_controls_tabs('inner_link_tab'); // Start Tabs
+		$this->start_controls_tabs('inner_link_tab');
 		$this->start_controls_tab(
 			'link_tab_1',
 			[
@@ -782,7 +734,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_icon_box_link_normal_color',
 			[
@@ -795,7 +746,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -814,7 +764,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_icon_box_link_hover_color',
 			[
@@ -826,7 +775,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -838,7 +786,7 @@ class CallToAction extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_tab();
-		$this->end_controls_tabs(); // End Tabs
+		$this->end_controls_tabs();
 
 		$this->add_control(
 			'link_hr1',
@@ -847,7 +795,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Typography
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -860,7 +807,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Text shadow
 		$this->add_group_control(
 			Group_Control_Text_Shadow::get_type(),
 			[
@@ -870,7 +816,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'content_link_margin',
 			[
@@ -883,7 +828,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'content_link_padding',
 			[
@@ -896,7 +840,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -906,7 +849,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border Radius
 		$this->add_control(
 			'content_link_border_radius', //param_name
 			[
@@ -919,7 +861,6 @@ class CallToAction extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -930,16 +871,13 @@ class CallToAction extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-        // End
-
-
 
 	}
 
 	/**
-	 * Render title widget output on the frontend.
+	 * Render the call to action widget output on the frontend.
 	 *
-	 * Written in PHP and used to generate the final HTML.
+	 * Outputs the widget HTML.
 	 *
 	 * @since 1.0.0
 	 * @access protected
@@ -985,7 +923,6 @@ class CallToAction extends \Elementor\Widget_Base {
 		$safe_title    = wp_kses( $title, $allowed_inline_html );
 		$safe_subtitle = wp_kses( $subtitle, $allowed_inline_html );
 
-		// Render
 		echo '<div class="bw-cta">';
 			echo '<div class="bw-cta-content">';
 				echo '<' . $title_tag . ' class="bw-cta-title">' . $safe_title . '</' . $title_tag . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_kses()'d inline HTML

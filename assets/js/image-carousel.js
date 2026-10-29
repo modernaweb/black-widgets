@@ -93,6 +93,16 @@
         el._bwSwiperIO = observer;
     }
 
+    function hardenSlideMedia(el) {
+        if (!el || !el.querySelectorAll) {
+            return;
+        }
+        var nodes = el.querySelectorAll('img, svg, video, picture, canvas, a');
+        for (var i = 0; i < nodes.length; i++) {
+            nodes[i].setAttribute('draggable', 'false');
+        }
+    }
+
     function attachDragGuards(el, instance) {
         if (!instance || typeof instance.on !== 'function') {
             return;
@@ -104,7 +114,14 @@
             el._bwDragGuards = null;
         }
 
+        var ownerDoc = el.ownerDocument || document;
+        var ownerWin = ownerDoc.defaultView || window;
+
         var clearTimer = null;
+        var releaseTimer = null;
+        var cancelWatchActive = false;
+        var moveWatchActive = false;
+        var capturedPointerId = null;
         var didDrag = false;
         var scrollLockX = 0;
         var scrollLockY = 0;
@@ -144,9 +161,201 @@
             }
         }
 
+        // Swiper 11 ignores pointercancel/pointerout/pointerleave outside Safari, so a
+        // native drag (link, image, selected text) or a mouseup outside the window can
+        // leave touchEventsData latched and the track keeps following the pointer.
+        function isDragLatched() {
+            var data = instance.touchEventsData;
+            return !!data && instance.destroyed !== true && (data.isTouched || data.isMoved);
+        }
+
+        function releaseStuckDrag() {
+            if (!isDragLatched()) {
+                return;
+            }
+
+            var data = instance.touchEventsData;
+            var fake =
+                data.touchId != null
+                    ? { type: 'touchcancel', changedTouches: [{ identifier: data.touchId }] }
+                    : { type: 'pointerup', pointerType: 'mouse', pointerId: data.pointerId };
+            fake.target = el;
+            fake.composedPath = function () {
+                return [el];
+            };
+            fake.preventDefault = function () {};
+            fake.stopPropagation = function () {};
+
+            try {
+                // Regular Swiper path, so the track still snaps and 'touchEnd' fires.
+                instance.onTouchEnd(fake);
+            } catch (e) {
+                // ignore
+            }
+
+            if (!isDragLatched()) {
+                return;
+            }
+
+            data.isTouched = false;
+            data.isMoved = false;
+            data.startMoving = false;
+            data.allowTouchCallbacks = false;
+            data.pointerId = null;
+            data.touchId = null;
+            try {
+                if (instance.params.grabCursor) {
+                    instance.setGrabCursor(false);
+                }
+                if (typeof instance.slideToClosest === 'function') {
+                    instance.slideToClosest();
+                }
+            } catch (e2) {
+                // ignore
+            }
+            onTouchEnd();
+        }
+
+        function scheduleRelease() {
+            if (releaseTimer) {
+                return;
+            }
+            // Let Swiper's own document handlers run first.
+            releaseTimer = setTimeout(function () {
+                releaseTimer = null;
+                releaseStuckDrag();
+            }, 0);
+        }
+
+        function onPointerWatchdog(event) {
+            if (event.pointerType === 'touch') {
+                return;
+            }
+            if (typeof event.buttons === 'number' && event.buttons !== 0) {
+                return;
+            }
+            releaseStuckDrag();
+            stopMoveWatch();
+        }
+
+        function startCancelWatch() {
+            if (cancelWatchActive) {
+                return;
+            }
+            cancelWatchActive = true;
+            ownerDoc.addEventListener('pointercancel', scheduleRelease);
+            ownerDoc.addEventListener('lostpointercapture', scheduleRelease);
+            ownerDoc.addEventListener('contextmenu', scheduleRelease);
+            ownerDoc.addEventListener('visibilitychange', scheduleRelease);
+            ownerWin.addEventListener('blur', scheduleRelease);
+        }
+
+        function startMoveWatch() {
+            if (moveWatchActive) {
+                return;
+            }
+            moveWatchActive = true;
+            // Window capture runs before Swiper's capturing document listener, so a
+            // move with no button held is dropped instead of dragging the track once more.
+            ownerWin.addEventListener('pointermove', onPointerWatchdog, true);
+        }
+
+        function stopMoveWatch() {
+            if (!moveWatchActive) {
+                return;
+            }
+            moveWatchActive = false;
+            ownerWin.removeEventListener('pointermove', onPointerWatchdog, true);
+        }
+
+        function stopReleaseWatch() {
+            if (releaseTimer) {
+                clearTimeout(releaseTimer);
+                releaseTimer = null;
+            }
+            stopMoveWatch();
+            if (!cancelWatchActive) {
+                return;
+            }
+            cancelWatchActive = false;
+            ownerDoc.removeEventListener('pointercancel', scheduleRelease);
+            ownerDoc.removeEventListener('lostpointercapture', scheduleRelease);
+            ownerDoc.removeEventListener('contextmenu', scheduleRelease);
+            ownerDoc.removeEventListener('visibilitychange', scheduleRelease);
+            ownerWin.removeEventListener('blur', scheduleRelease);
+        }
+
+        function releasePointerCapture() {
+            if (capturedPointerId == null || !el.releasePointerCapture) {
+                capturedPointerId = null;
+                return;
+            }
+            try {
+                if (el.hasPointerCapture && el.hasPointerCapture(capturedPointerId)) {
+                    el.releasePointerCapture(capturedPointerId);
+                }
+            } catch (e) {
+                // ignore
+            }
+            capturedPointerId = null;
+        }
+
+        function isEditableTarget(target) {
+            return !!(
+                target &&
+                target.closest &&
+                target.closest('input, textarea, select, option, [contenteditable="true"]')
+            );
+        }
+
+        function isMediaTarget(target) {
+            return !!(
+                target &&
+                target.closest &&
+                target.closest('img, svg, video, picture, canvas')
+            );
+        }
+
+        function isNavTarget(target) {
+            return !!(
+                target &&
+                target.closest &&
+                target.closest(
+                    '.bw-swiper-button-prev, .bw-swiper-button-next, .swiper-pagination-bullet, .bw-swiper-pagination'
+                )
+            );
+        }
+
+        function onPointerDownCapture(event) {
+            if (event.isPrimary === false) {
+                return;
+            }
+            if (isEditableTarget(event.target) || isNavTarget(event.target)) {
+                return;
+            }
+            // Block native image/link drag so Chrome does not fire pointercancel
+            // and leave Swiper latched (common on Custom Template slides).
+            if (isMediaTarget(event.target) && event.cancelable) {
+                event.preventDefault();
+            }
+            if (event.pointerType === 'mouse' && event.pointerId != null && el.setPointerCapture) {
+                try {
+                    el.setPointerCapture(event.pointerId);
+                    capturedPointerId = event.pointerId;
+                } catch (e) {
+                    capturedPointerId = null;
+                }
+            }
+        }
+
+        function onDragStartCapture(event) {
+            event.preventDefault();
+        }
+
         function onTouchStart() {
             didDrag = false;
             readScrollPos();
+            startCancelWatch();
         }
 
         function onFirstMove() {
@@ -155,6 +364,7 @@
             readScrollPos();
             scrollLockActive = true;
             setDragging(true);
+            startMoveWatch();
         }
 
         function onMove() {
@@ -166,6 +376,8 @@
         }
 
         function onTouchEnd() {
+            stopReleaseWatch();
+            releasePointerCapture();
             restoreScrollPos();
             setDragging(false);
             if (didDrag) {
@@ -206,8 +418,6 @@
             }
         }
 
-        // Lock scroll only after Swiper confirms a horizontal swipe - otherwise
-        // vertical page scroll starting on the carousel is blocked.
         instance.on('touchStart', onTouchStart);
         instance.on('sliderFirstMove', onFirstMove);
         instance.on('sliderMove', onMove);
@@ -216,9 +426,15 @@
 
         el.addEventListener('focusin', onFocusIn, true);
         el.addEventListener('click', onClickCapture, true);
+        el.addEventListener('pointerdown', onPointerDownCapture, true);
+        // Native HTML5 drag on a slide link / image / selected text is what makes the
+        // browser fire pointercancel and latch the track in the first place.
+        el.addEventListener('dragstart', onDragStartCapture, true);
 
         el._bwDragGuards = {
             detach: function () {
+                stopReleaseWatch();
+                releasePointerCapture();
                 if (clearTimer) {
                     clearTimeout(clearTimer);
                     clearTimer = null;
@@ -232,6 +448,8 @@
                 }
                 el.removeEventListener('focusin', onFocusIn, true);
                 el.removeEventListener('click', onClickCapture, true);
+                el.removeEventListener('pointerdown', onPointerDownCapture, true);
+                el.removeEventListener('dragstart', onDragStartCapture, true);
                 el.classList.remove('bw-is-dragging');
                 scrollLockActive = false;
                 didDrag = false;
@@ -282,16 +500,6 @@
         return options;
     }
 
-    /**
-     * Mirrors Swiper's own internal loopFix requirement (verified against the
-     * bundled swiper-bundle.min.js): Swiper needs at least
-     * ceil(slidesPerView) [bumped to odd when centeredSlides + even] +
-     * slidesPerGroup + loopAdditionalSlides *real* slides in the DOM, or it
-     * logs "not enough slides for loop mode" and the loop visibly glitches
-     * (empty-looking slide / jump at the wrap point). loopAdditionalSlides is
-     * kept at Swiper's default 0 - raising it inflates this requirement and
-     * forces needless duplicate slides. Checked per breakpoint.
-     */
     function requiredLoopSlideCount(slidesPerView, slidesPerGroup, centeredSlides) {
         var f = Math.ceil(slidesPerView);
         if (centeredSlides && f % 2 === 0) {
@@ -316,16 +524,6 @@
         return Math.abs(a * b) / greatestCommonDivisor(a, b);
     }
 
-    /**
-     * How many copies of the *whole* item set the loop needs.
-     *
-     * Two separate constraints, both of which make items visibly disappear or
-     * repeat unevenly when ignored:
-     *  1. Swiper needs `minSlides` nodes (see requiredLoopSlideCount).
-     *  2. Swiper's loopCreate appends empty `.swiper-slide-blank` nodes when
-     *     the slide count is not divisible by slidesPerGroup - growing the
-     *     multiple instead keeps the track free of blank gaps.
-     */
     function resolveLoopCopies(originalCount, minSlides, groupSize) {
         var copies = Math.max(1, Math.ceil(minSlides / originalCount));
         var guard = 0;
@@ -336,29 +534,18 @@
         return copies;
     }
 
-    /**
-     * Cap slidesPerView so 1-2 items never fight responsive settings
-     * (e.g. desktop=3 with only 2 slides).
-     */
     function capPerView(value, originalCount, peekMin) {
         var n = Math.min(10, Math.max(1, value));
         if (originalCount < 1) {
             return 1;
         }
-        // Never ask Swiper to show more than we have (before loop clones).
         n = Math.min(n, originalCount);
         if (peekMin && originalCount >= 2) {
-            // Peek only when there is at least one neighbor slide.
             n = Math.min(originalCount, Math.max(n, peekMin));
         }
         return n;
     }
 
-    /**
-     * centeredSlides + slidesPerView >= slide count (no loop) shifts the track
-     * and clips edge slides - you only "see" ~2 of 3. Disable centering when
-     * every slide already fits; keep it for peek/editorial when extras exist.
-     */
     function resolveCenteredSlides(wantCentered, loop, perView, slideCount) {
         if (!wantCentered) {
             return false;
@@ -375,15 +562,6 @@
         return true;
     }
 
-    /**
-     * Strip id="" attributes from a cloned slide's markup (and any nested
-     * elements) so loop clones never create duplicate DOM ids - this matters
-     * most for "Elementor Template" slides, which can contain nested widgets
-     * with their own ids. Visibility/focusability of clones is intentionally
-     * left to Swiper's own a11y module (clones do become the real, focused
-     * slide as the user scrolls through the loop, so they must stay
-     * accessible - they are not purely decorative padding).
-     */
     function stripDuplicateIds(html) {
         if (typeof document === 'undefined' || typeof document.createElement !== 'function') {
             return html;
@@ -407,15 +585,6 @@
         return root.outerHTML;
     }
 
-    /**
-     * Repeat the *whole* item set `copies` times so Swiper's loop has enough
-     * nodes. Topping the track up with a partial set (just the 2-3 extra nodes
-     * Swiper technically needs) is what makes a carousel look like it is
-     * skipping items: the first few items then appear twice per revolution and
-     * the rest once. Whole-set copies keep every item on screen equally often.
-     *
-     * Works for 1+ items (a single item is simply repeated).
-     */
     function repeatSlidesForLoop(el, copies) {
         var wrapper = el.querySelector(':scope > .bw-swiper-wrapper, :scope > .swiper-wrapper');
         if (!wrapper) {
@@ -425,7 +594,6 @@
             return 0;
         }
 
-        // Direct children only - nested carousels must not inflate slide counts.
         var originals = wrapper.querySelectorAll(':scope > .bw-swiper-slide, :scope > .swiper-slide');
         if (!originals.length) {
             originals = wrapper.querySelectorAll('.bw-swiper-slide, .swiper-slide');
@@ -458,10 +626,6 @@
 
     function buildBulletHtml(type, className, label, customDot) {
         if (customDot && isSafeMediaUrl(customDot)) {
-            // Rendered as a CSS mask (not <img>) so the Bullet Color controls
-            // can still recolor the icon for both inactive/active states.
-            // Defensive: a literal single quote in the URL could otherwise
-            // break out of the CSS url('...') wrapper below.
             var safeDotUrl = customDot.replace(/'/g, '%27');
             var style = "--bw-dot-icon-url:url('" + safeDotUrl + "')";
             return (
@@ -494,12 +658,6 @@
         );
     }
 
-    /**
-     * Toggle a class on the root element when there is a genuine single
-     * centered slide for the *current* breakpoint (centeredSlides on AND the
-     * rounded effective slidesPerView is odd, or a peek view under 2).
-     * Drives the optional Peek Focus "Center Slide Emphasis" scale-up.
-     */
     function updateCenterSingleClass(el, instance) {
         if (!instance || !instance.params) {
             return;
@@ -512,12 +670,25 @@
             numeric > 0 &&
             (numeric < 2 || Math.round(numeric) % 2 === 1);
         el.classList.toggle('bw-swiper-center-single', hasSingleCenter);
+        updateType4ArrowInset(el, instance);
     }
 
-    /**
-     * Peek Focus: drive scale/opacity from each slide's Swiper progress so the
-     * effect stays smooth while dragging (class-based active CSS snaps).
-     */
+    function updateType4ArrowInset(el, instance) {
+        if (!el || !instance || !instance.params) {
+            return;
+        }
+        var spv = instance.params.slidesPerView;
+        var numeric = typeof spv === 'number' ? spv : parseFloat(spv);
+        if (isNaN(numeric) || numeric < 1) {
+            numeric = 1;
+        }
+        var side = ((1 - 1 / numeric) / 2) * 100;
+        if (side < 0) {
+            side = 0;
+        }
+        el.style.setProperty('--bw-type4-arrow-inset', 'calc(' + side.toFixed(2) + '% + 6px)');
+    }
+
     function attachPeekProgressFx(el, instance, peekCenterEmphasis) {
         if (!el || !instance || typeof instance.on !== 'function') {
             return;
@@ -525,8 +696,18 @@
 
         el.classList.add('bw-swiper-peek-progress');
 
-        var minScale = 0.92;
-        var minOpacity = 0.45;
+        function peekLimits() {
+            var narrow = false;
+            try {
+                narrow = window.matchMedia('(max-width: 767px)').matches;
+            } catch (e) {
+                narrow = false;
+            }
+            if (narrow) {
+                return { minScale: 0.96, minOpacity: 0.72, maxScaleCap: 1.04 };
+            }
+            return { minScale: 0.92, minOpacity: 0.45, maxScaleCap: 0 };
+        }
 
         function readMaxScale() {
             var maxScale = 1;
@@ -545,6 +726,10 @@
                     maxScale = 1.1;
                 }
             }
+            var cap = peekLimits().maxScaleCap;
+            if (cap > 0 && maxScale > cap) {
+                maxScale = cap;
+            }
             return maxScale;
         }
 
@@ -553,6 +738,17 @@
             if (!slides || !slides.length) {
                 return;
             }
+            if (prefersReducedMotion()) {
+                for (var j = 0; j < slides.length; j++) {
+                    if (!slides[j] || !slides[j].style) {
+                        continue;
+                    }
+                    slides[j].style.transform = '';
+                    slides[j].style.opacity = '';
+                }
+                return;
+            }
+            var limits = peekLimits();
             var maxScale = readMaxScale();
             for (var i = 0; i < slides.length; i++) {
                 var slide = slides[i];
@@ -566,8 +762,8 @@
                 var t = Math.min(1, Math.abs(progress));
                 // Soft falloff so neighbors ease instead of linear snap.
                 t = t * t * (3 - 2 * t);
-                var scale = maxScale + (minScale - maxScale) * t;
-                var opacity = 1 + (minOpacity - 1) * t;
+                var scale = maxScale + (limits.minScale - maxScale) * t;
+                var opacity = 1 + (limits.minOpacity - 1) * t;
                 slide.style.transform = 'scale(' + scale + ')';
                 slide.style.opacity = String(opacity);
             }
@@ -612,22 +808,10 @@
         applyPeekProgress();
     }
 
-    /**
-     * Pagination/nav elements normally live inside .bw-swiper, but the
-     * "Outside" position setting renders them as siblings under the
-     * .bw-swiper-outer wrapper instead (so Swiper's own overflow:hidden on
-     * .bw-swiper can't clip them). Searching from the outer wrapper - or
-     * .bw-swiper itself as a defensive fallback - finds them either way.
-     */
     function getNavPaginationScope(el) {
         return (el.closest && el.closest('.bw-swiper-outer')) || el.parentElement || el;
     }
 
-    /**
-     * Progressbar can fail silently when the pagination el lives outside
-     * `.swiper` (Outside position): Swiper's size selectors never match and
-     * the lock class can hide it. Force a visible track + fill, then update.
-     */
     function ensureProgressbarPagination(instance, pagEl) {
         if (!instance || !pagEl) {
             return;
@@ -661,8 +845,6 @@
             // ignore
         }
 
-        // If Swiper still left fill at scale(0) with no progress (e.g. 1 slide),
-        // show a minimal filled state so the bar is obviously present.
         fill = pagEl.querySelector('.swiper-pagination-progressbar-fill');
         if (fill) {
             var transform = '';
@@ -732,7 +914,6 @@
         instance.on('resize', syncBullets);
         syncBullets();
 
-        // Clicking a visible bullet should jump to that unique slide.
         pagEl.addEventListener('click', function (event) {
             var btn = event.target.closest('.swiper-pagination-bullet');
             if (!btn || !pagEl.contains(btn)) {
@@ -756,11 +937,6 @@
     }
 
     function initBwSwiper($scope, skipInitialized) {
-        // Every .bw-swiper is always rendered as a direct child of its own
-        // .bw-swiper-outer wrapper (regardless of how many Elementor wrapper
-        // levels sit above that, e.g. .elementor-widget-container) - and never
-        // nested inside another .bw-swiper (a template used as a slide could
-        // in theory contain its own carousel widget, which must init separately).
         var $carousels = $scope.find('.bw-swiper-outer > .bw-swiper').filter(function () {
             if (skipInitialized && this._bwSwiper) {
                 return false;
@@ -774,7 +950,8 @@
 
             destroyBwSwiper(el);
 
-            if (typeof Swiper === 'undefined') {
+            var SwiperCtor = window.BlackWidgetsSwiper || window.Swiper;
+            if (typeof SwiperCtor === 'undefined') {
                 return;
             }
 
@@ -832,10 +1009,7 @@
                 el.classList.add('bw-swiper--few');
             }
 
-            // Responsive per-view - capped to item count (no conflict with 1-2 items).
-            // Type4 peek only applies to a single-focus view (slidesPerView <= 1).
-            // On 2-3-up layouts it clips whole slides.
-            var peekMobile = type === 'type4' && slidesMobile <= 1 ? 1.15 : 0;
+            var peekMobile = type === 'type4' && slidesMobile <= 1 ? 1.55 : 0;
             var peekTablet = type === 'type4' && slidesTablet <= 1 ? 1.25 : 0;
             var peekDesktop = type === 'type4' && slidesDesktop <= 1 ? 1.35 : 0;
 
@@ -843,7 +1017,6 @@
             var bpTablet = capPerView(slidesTablet, originalCount, peekTablet);
             var bpDesktop = capPerView(slidesDesktop, originalCount, peekDesktop);
 
-            // Single item: always one full slide, no peek/half-empty track.
             if (originalCount === 1) {
                 bpMobile = 1;
                 bpTablet = 1;
@@ -854,15 +1027,9 @@
             slidesToScroll = Math.min(slidesToScroll, originalCount);
 
             var wantCentered = !!typeOptions.centeredSlides;
-
             var groupMobile = Math.min(slidesToScroll, Math.max(1, Math.floor(bpMobile)));
             var groupTablet = Math.min(slidesToScroll, Math.max(1, Math.floor(bpTablet)));
             var groupDesktop = Math.min(slidesToScroll, Math.max(1, Math.floor(bpDesktop)));
-
-            // Real minimum required by Swiper's own loopFix (see requiredLoopSlideCount
-            // docblock) - checked across every breakpoint, since the DOM slide count is
-            // fixed regardless of viewport. Assume centered whenever the type wants it
-            // (strictest), since centering bumps slidesPerView to the next odd number.
             var minLoopSlides = loop
                 ? Math.max(
                       requiredLoopSlideCount(bpMobile, groupMobile, wantCentered),
@@ -871,16 +1038,12 @@
                   )
                 : 0;
 
-            // slidesPerGroup differs per breakpoint but the DOM node count does not,
-            // so the total has to divide by all three to stay blank-slide free.
             var groupLcm = leastCommonMultiple(leastCommonMultiple(groupMobile, groupTablet), groupDesktop);
 
-            // Infinite loop must work with 1+ items - repeat the item set as needed.
             var slideCount = originalCount;
             if (loop) {
                 slideCount = repeatSlidesForLoop(el, resolveLoopCopies(originalCount, minLoopSlides, groupLcm));
                 if (slideCount < 2) {
-                    // Empty after a failed repeat - disable loop only then.
                     loop = false;
                 }
             }
@@ -888,6 +1051,15 @@
             var centerMobile = resolveCenteredSlides(wantCentered, loop, bpMobile, originalCount);
             var centerTablet = resolveCenteredSlides(wantCentered, loop, bpTablet, originalCount);
             var centerDesktop = resolveCenteredSlides(wantCentered, loop, bpDesktop, originalCount);
+
+            var hasSpaceOverride = !isNaN(spaceBetweenParsed) && spaceBetweenParsed >= 0;
+            var spaceDefault = originalCount === 1 ? 0 : typeOptions.spaceBetween;
+            var spaceMobile = hasSpaceOverride ? spaceBetweenParsed : spaceDefault;
+            var spaceTablet = spaceMobile;
+            var spaceDesktop = spaceMobile;
+            if (!hasSpaceOverride && originalCount !== 1 && type === 'type4') {
+                spaceMobile = 12;
+            }
 
             var navPaginationScope = getNavPaginationScope(el);
             var pagEl = navPaginationScope.querySelector('.bw-swiper-pagination');
@@ -898,12 +1070,8 @@
                 slidesPerView: bpMobile,
                 slidesPerGroup: groupMobile,
                 centeredSlides: centerMobile,
-                // Without loop, keep edge slides fully inside the viewport instead of
-                // half-clipping them (common on Editorial / Peek Focus with 3 items).
                 centeredSlidesBounds: !loop && wantCentered,
-                // Fractional slidesPerView (Peek 1.2-1.5) jumps with roundLengths.
                 roundLengths: type !== 'type4',
-                // Needed for smooth Peek Focus scale/opacity while dragging.
                 watchSlidesProgress: type === 'type4',
                 breakpoints: {
                     768: {
@@ -911,21 +1079,20 @@
                         slidesPerGroup: groupTablet,
                         centeredSlides: centerTablet,
                         centeredSlidesBounds: !loop && wantCentered,
+                        spaceBetween: spaceTablet,
                     },
                     1025: {
                         slidesPerView: bpDesktop,
                         slidesPerGroup: groupDesktop,
                         centeredSlides: centerDesktop,
                         centeredSlidesBounds: !loop && wantCentered,
+                        spaceBetween: spaceDesktop,
                     },
                 },
                 loop: loop,
                 loopAdditionalSlides: 0,
-                // The track is already sized to a whole number of item sets, so Swiper
-                // must never pad it with empty slides.
                 loopAddBlankSlides: false,
                 rewind: !loop && originalCount > 1,
-                // With 1-2 items + loop clones, don't let watchOverflow kill interaction.
                 watchOverflow: !loop && originalCount <= 1,
                 grabCursor: originalCount > 1 || loop,
                 simulateTouch: true,
@@ -948,15 +1115,9 @@
                               disableOnInteraction: false,
                           }
                         : false,
-                spaceBetween:
-                    !isNaN(spaceBetweenParsed) && spaceBetweenParsed >= 0
-                        ? spaceBetweenParsed
-                        : originalCount === 1
-                          ? 0
-                          : typeOptions.spaceBetween,
+                spaceBetween: spaceMobile,
                 a11y: {
                     enabled: true,
-                    // Swiper 11: focusing the active slide must not scroll the page.
                     scrollOnFocus: false,
                     prevSlideMessage: $this.attr('data-prev-label') || 'Previous slide',
                     nextSlideMessage: $this.attr('data-next-label') || 'Next slide',
@@ -967,8 +1128,6 @@
 
             if (pagination && pagEl) {
                 if (paginationType === 'fraction') {
-                    // Loop-clone padding can inflate Swiper's own slide count beyond the
-                    // unique originals - remap the displayed numbers back to originalCount.
                     swiperOptions.pagination = {
                         el: pagEl,
                         type: 'fraction',
@@ -984,7 +1143,6 @@
                         el: pagEl,
                         type: 'progressbar',
                     };
-                    // Seed Swiper classes early so CSS sizes apply even before init.
                     pagEl.classList.add('swiper-pagination-progressbar', 'bw-swiper-pagination--progressbar');
                 } else {
                     swiperOptions.pagination = {
@@ -1009,8 +1167,9 @@
             }
 
             try {
-                var instance = new Swiper(el, swiperOptions);
+                var instance = new SwiperCtor(el, swiperOptions);
                 el._bwSwiper = instance;
+                hardenSlideMedia(el);
                 attachDragGuards(el, instance);
 
                 if (pagination && paginationType === 'dots' && (loop || fewSlides)) {
@@ -1046,8 +1205,6 @@
                     });
                 }
 
-                // Elementor preview often inits before the column has a real width -
-                // force layout recalculation so slides are not 0-width / invisible.
                 refreshBwSwiperLayout(el, instance);
             } catch (err) {
                 el.classList.remove('swiper-initialized');
@@ -1106,12 +1263,6 @@
         );
     });
 
-    /**
-     * Safety net for carousels that frontend/element_ready never reaches -
-     * widgets printed inside a loop grid / popup / saved template, or a theme
-     * that loads Elementor's frontend bundle after this file. Already-running
-     * instances are skipped so a sweep never resets position or autoplay.
-     */
     function sweepDocument() {
         initBwSwiper(jQuery(document), true);
     }

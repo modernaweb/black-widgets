@@ -15,9 +15,9 @@ use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
 
 /**
- * Elementor title Widget.
+ * Sentence widget.
  *
- * Elementor widget that inserts an embbedable content into the page, from any given URL.
+ * Text sentence with per-word styling and optional animation.
  *
  * @since 1.0.0
  */
@@ -31,7 +31,7 @@ class Sentence extends \Elementor\Widget_Base {
 	/**
 	 * Get widget name.
 	 *
-	 * Retrieve button widget name.
+	 * Retrieve the sentence widget name.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -45,7 +45,7 @@ class Sentence extends \Elementor\Widget_Base {
 	/**
 	 * Get widget title.
 	 *
-	 * Retrieve button widget title.
+	 * Retrieve the sentence widget title.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -59,7 +59,7 @@ class Sentence extends \Elementor\Widget_Base {
 	/**
 	 * Get widget icon.
 	 *
-	 * Retrieve button widget icon.
+	 * Retrieve the sentence widget icon.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -73,7 +73,7 @@ class Sentence extends \Elementor\Widget_Base {
 	/**
 	 * Get widget categories.
 	 *
-	 * Retrieve the list of categories the button widget belongs to.
+	 * Retrieve the list of categories the sentence widget belongs to.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -93,17 +93,13 @@ class Sentence extends \Elementor\Widget_Base {
     }
 
 	/**
-	 * Register button widget controls.
-	 *
-	 * Adds different input fields to allow the user to change and customize the widget settings.
+	 * Register the sentence widget controls.
 	 *
 	 * @since 1.0.0
 	 * @access protected
 	 */
 	protected function register_controls() {
 
-		// Start
-		// Content section
 		$this->start_controls_section(
 			'content_section',
 			[
@@ -948,7 +944,7 @@ class Sentence extends \Elementor\Widget_Base {
 		);
 
 		$repeater->end_controls_tab();
-		$repeater->end_controls_tabs(); // End Tabs
+		$repeater->end_controls_tabs();
 
 		$this->add_control(
 			'sentence_perf_note',
@@ -984,9 +980,7 @@ class Sentence extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
-		// Start
 		// Typography section
 		$this->start_controls_section(
 			'all_general_typography_section',
@@ -996,7 +990,6 @@ class Sentence extends \Elementor\Widget_Base {
 			]
         );
 
-		// Color
 		$this->add_control(
 			'all_general_color_sentence',
 			[
@@ -1012,7 +1005,6 @@ class Sentence extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Typography
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -1060,9 +1052,9 @@ class Sentence extends \Elementor\Widget_Base {
 	}
 
 	/**
-	 * Render title widget output on the frontend.
+	 * Render the sentence widget output on the frontend.
 	 *
-	 * Written in PHP and used to generate the final HTML.
+	 * Outputs the widget HTML.
 	 *
 	 * @since 1.0.0
 	 * @access protected
@@ -1074,7 +1066,6 @@ class Sentence extends \Elementor\Widget_Base {
 		$type 	                = isset($settings['sentence_type'])				? $settings['sentence_type']				: '';
 		$allowed_tags 			= ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'];
 		$title_tag 				= isset($settings['widget_html_tag_title']) 	? $settings['widget_html_tag_title']		: '';
-		// Validate the HTML tag
 		if (!in_array($title_tag, $allowed_tags)) {
 			$title_tag = 'h1';
 		}
@@ -1083,7 +1074,6 @@ class Sentence extends \Elementor\Widget_Base {
 		$data_id				= 'bw_' . uniqid();
 		$script_id				= '#' . $data_id;
 
-		// Render
         if ( $settings['sentence'] ) {
 			echo '<div class="bw-sentence bw-showcase">';
 				echo '<'. $title_tag .' class="bw-sentence-items bw-'. esc_attr( $justify ) .'">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

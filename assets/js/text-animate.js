@@ -55,6 +55,19 @@
         });
     }
 
+    function getHscrollPanel(el) {
+        const wrap = el.closest('.bw-horizontal-section');
+        if (!wrap || wrap.classList.contains('bw-hscroll-stacked') || wrap.classList.contains('bw-hscroll-editor')) {
+            return null;
+        }
+        return el.closest('.bw-hscroll-track > .elementor') || el.closest('.bw-section > .elementor') || el.closest('.elementor');
+    }
+
+    function isInsideInactiveHscroll(el) {
+        const panel = getHscrollPanel(el);
+        return !!(panel && !panel.classList.contains('bw-hscroll-active'));
+    }
+
     function destroyBwTextAnimate($scope) {
         const api = $scope.data(API_KEY);
         if (!api) {
@@ -62,6 +75,15 @@
         }
         if (api.observer) {
             api.observer.disconnect();
+        }
+        if (api.enterCleanups) {
+            api.enterCleanups.forEach(function (fn) {
+                try {
+                    fn();
+                } catch (e) {
+                    // no-op
+                }
+            });
         }
         $scope.removeData(API_KEY);
     }
@@ -78,7 +100,6 @@
             resetBwTextAnimate($(this));
         });
 
-        // In editor, IntersectionObserver often won't re-fire after reinit - play once.
         if (isElementorEditor()) {
             $targetElements.each(function () {
                 playBwTextAnimate($(this));
@@ -91,6 +112,9 @@
                 if (!entry.isIntersecting) {
                     return;
                 }
+                if (isInsideInactiveHscroll(entry.target)) {
+                    return;
+                }
                 const $el = $(entry.target);
                 playBwTextAnimate($el);
                 obs.unobserve(entry.target);
@@ -99,11 +123,27 @@
             threshold: 0.4,
         });
 
+        const enterCleanups = [];
         $targetElements.each(function () {
             observer.observe(this);
+            const panel = getHscrollPanel(this);
+            if (!panel) {
+                return;
+            }
+            const el = this;
+            const onEnter = function () {
+                if (el.getAttribute('data-bw-animated') === '1') {
+                    return;
+                }
+                playBwTextAnimate($(el));
+            };
+            panel.addEventListener('bw-hscroll-panel-enter', onEnter);
+            enterCleanups.push(function () {
+                panel.removeEventListener('bw-hscroll-panel-enter', onEnter);
+            });
         });
 
-        $scope.data(API_KEY, { observer: observer });
+        $scope.data(API_KEY, { observer: observer, enterCleanups: enterCleanups });
     }
 
     $(window).on('elementor/frontend/init', function () {

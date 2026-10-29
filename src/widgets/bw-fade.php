@@ -13,9 +13,9 @@ use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Image_Size;
 
 /**
- * Elementor title Widget.
+ * Fade widget.
  *
- * Elementor widget that inserts an embbedable content into the page, from any given URL.
+ * Block that animates its content with fade effects.
  *
  * @since 1.0.0
  */
@@ -29,7 +29,7 @@ class Fade extends \Elementor\Widget_Base {
 	/**
 	 * Get widget name.
 	 *
-	 * Retrieve line widget name.
+	 * Retrieve the fade widget name.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -43,7 +43,7 @@ class Fade extends \Elementor\Widget_Base {
 	/**
 	 * Get widget title.
 	 *
-	 * Retrieve line widget title.
+	 * Retrieve the fade widget title.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -57,7 +57,7 @@ class Fade extends \Elementor\Widget_Base {
 	/**
 	 * Get widget icon.
 	 *
-	 * Retrieve line widget icon.
+	 * Retrieve the fade widget icon.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -71,7 +71,7 @@ class Fade extends \Elementor\Widget_Base {
 	/**
 	 * Get widget categories.
 	 *
-	 * Retrieve the list of categories the line widget belongs to.
+	 * Retrieve the list of categories the fade widget belongs to.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -87,7 +87,6 @@ class Fade extends \Elementor\Widget_Base {
     }
 
     public function get_script_depends() {
-        // Scroll grow / accent-line animations live in bw-public (pulls anime.js).
         return [ 'bw-public' ];
     }
 
@@ -96,17 +95,13 @@ class Fade extends \Elementor\Widget_Base {
     }
 
 	/**
-	 * Register line widget controls.
-	 *
-	 * Adds different input fields to allow the user to change and customize the widget settings.
+	 * Register the fade widget controls.
 	 *
 	 * @since 1.0.0
 	 * @access protected
 	 */
 	protected function register_controls() {
 
-		// Start
-		// Content section
 		$this->start_controls_section(
 			'content_section',
 			[
@@ -164,7 +159,7 @@ class Fade extends \Elementor\Widget_Base {
 		$this->add_group_control(
 			Group_Control_Image_Size::get_type(),
 			[
-				'name' => 'thumbnail', // Usage: `{name}_size` → `thumbnail_size`.
+				'name' => 'thumbnail',
 				'exclude' => [ 'custom' ],
 				'include' => [],
 				'default' => 'full',
@@ -208,6 +203,9 @@ class Fade extends \Elementor\Widget_Base {
 					'nofollow' => true,
                 ],
 				'condition'  => [
+					'widget_type' => [
+						'bw-t-1',
+					],
 					'image_link' => [
 						'yes',
 					],
@@ -236,10 +234,7 @@ class Fade extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'style_section',
 			[
@@ -248,7 +243,6 @@ class Fade extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -266,7 +260,6 @@ class Fade extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
@@ -279,7 +272,6 @@ class Fade extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
@@ -299,7 +291,6 @@ class Fade extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -326,7 +317,6 @@ class Fade extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -337,10 +327,7 @@ class Fade extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'line_style_section',
 			[
@@ -378,7 +365,6 @@ class Fade extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -422,7 +408,6 @@ class Fade extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -454,11 +439,7 @@ class Fade extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-        // End
 
-
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'transform_section',
 			[
@@ -485,7 +466,6 @@ class Fade extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Style Subtitle Tabs
 		$this->start_controls_tabs('transform_tabs', [
 			'condition' 	=> [
 				'transform_normal_option' 	=> [
@@ -499,8 +479,6 @@ class Fade extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Move', 'blackwidgets' ),
 			]
 		);
-
-		// Start normal tab content
 
 		$this->add_responsive_control(
 			'move_normal_x',
@@ -565,8 +543,6 @@ class Fade extends \Elementor\Widget_Base {
 			]
 		);
 
-		// end normal tab content
-
 		$this->end_controls_tab();
 		$this->start_controls_tab(
 			'transform_tab_scale',
@@ -574,8 +550,6 @@ class Fade extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Scale', 'blackwidgets' ),
 			]
 		);
-
-		// Start hover tab content
 
 		$this->add_responsive_control(
 			'scale_normal_x',
@@ -682,8 +656,6 @@ class Fade extends \Elementor\Widget_Base {
 			]
 		);
 
-		// end hover tab content
-
 		$this->end_controls_tab();
 		$this->start_controls_tab(
 			'transform_tab_rotate',
@@ -691,8 +663,6 @@ class Fade extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Rotate', 'blackwidgets' ),
 			]
 		);
-
-		// Start hover tab content
 
 		$this->add_responsive_control(
 			'rotate_normal_x',
@@ -754,8 +724,6 @@ class Fade extends \Elementor\Widget_Base {
 			]
 		);
 
-		// end hover tab content
-
 		$this->end_controls_tab();
 		$this->start_controls_tab(
 			'transform_tab_skew',
@@ -763,8 +731,6 @@ class Fade extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Skew', 'blackwidgets' ),
 			]
 		);
-
-		// Start hover tab content
 
 		$this->add_responsive_control(
 			'skew_normal_x',
@@ -806,17 +772,11 @@ class Fade extends \Elementor\Widget_Base {
 			]
 		);
 
-		// end hover tab content
-
 		$this->end_controls_tab();
-		$this->end_controls_tabs(); // End Tabs
+		$this->end_controls_tabs();
 
 		$this->end_controls_section();
-		// End
 
-
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'image_pro_cursor_animate',
 			[
@@ -887,11 +847,7 @@ class Fade extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
-
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'transform_section_hover',
 			[
@@ -918,7 +874,6 @@ class Fade extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Style Subtitle Tabs
 		$this->start_controls_tabs('transform_hover_tabs', [
 			'condition' 	=> [
 				'transform_hover_option' 	=> [
@@ -932,8 +887,6 @@ class Fade extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Move', 'blackwidgets' ),
 			]
 		);
-
-		// Start normal tab content
 
 		$this->add_responsive_control(
 			'move_hover_x',
@@ -998,8 +951,6 @@ class Fade extends \Elementor\Widget_Base {
 			]
 		);
 
-		// end normal tab content
-
 		$this->end_controls_tab();
 		$this->start_controls_tab(
 			'transform_tab_scale_hover',
@@ -1007,8 +958,6 @@ class Fade extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Scale', 'blackwidgets' ),
 			]
 		);
-
-		// Start hover tab content
 
 		$this->add_responsive_control(
 			'scale_hover_x',
@@ -1115,8 +1064,6 @@ class Fade extends \Elementor\Widget_Base {
 			]
 		);
 
-		// end hover tab content
-
 		$this->end_controls_tab();
 		$this->start_controls_tab(
 			'transform_tab_rotate_hover',
@@ -1124,8 +1071,6 @@ class Fade extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Rotate', 'blackwidgets' ),
 			]
 		);
-
-		// Start hover tab content
 
 		$this->add_responsive_control(
 			'rotate_hover_x',
@@ -1187,8 +1132,6 @@ class Fade extends \Elementor\Widget_Base {
 			]
 		);
 
-		// end hover tab content
-
 		$this->end_controls_tab();
 		$this->start_controls_tab(
 			'transform_tab_skew_hover',
@@ -1196,8 +1139,6 @@ class Fade extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Skew', 'blackwidgets' ),
 			]
 		);
-
-		// Start hover tab content
 
 		$this->add_responsive_control(
 			'skew_hover_x',
@@ -1239,20 +1180,17 @@ class Fade extends \Elementor\Widget_Base {
 			]
 		);
 
-		// end hover tab content
-
 		$this->end_controls_tab();
-		$this->end_controls_tabs(); // End Tabs
+		$this->end_controls_tabs();
 
 		$this->end_controls_section();
-		// End
 
 	}
 
 	/**
-	 * Render title widget output on the frontend.
+	 * Render the fade widget output on the frontend.
 	 *
-	 * Written in PHP and used to generate the final HTML.
+	 * Outputs the widget HTML.
 	 *
 	 * @since 1.0.0
 	 * @access protected
@@ -1265,12 +1203,15 @@ class Fade extends \Elementor\Widget_Base {
 		$img_grow					= isset($settings['img_grow']) 							? $settings['img_grow']								: '';
         $image_URL 	       			= isset( $settings['image']['url']) 					?  $settings['image']['url'] 						: '';
         $image_link 	   			= isset($settings['image_link']) 						? $settings['image_link'] 							: '';
-		$target            			= isset($settings['image_link_url']['is_external']) 	? 'target="_blank"' 								: '';
-        $nofollow          			= isset($settings['image_link_url']['nofollow']) 		? ' rel="nofollow"' 								: '';
+		$link_url          			= isset($settings['image_link_url']['url']) 			? $settings['image_link_url']['url'] 				: '';
+		$has_image_link    			= ( $image_link === 'yes' && ! empty( $link_url ) );
+		if ( $has_image_link ) {
+			$this->add_link_attributes( 'image_link', $settings['image_link_url'] );
+			$this->add_render_attribute( 'image_link', 'class', 'bw-image-link' );
+		}
 		// Transform Option
 		$normal_transform			= isset($settings['transform_normal_option'])			? $settings['transform_normal_option']				: '';
 		$hover_transform			= isset($settings['transform_hover_option'])			? $settings['transform_hover_option']				: '';
-		//Transform Styles
 		$move_normal_x				= isset($settings['move_normal_x'])						? $settings['move_normal_x']						: '0px';
 		$move_normal_y				= isset($settings['move_normal_y'])						? $settings['move_normal_y']						: '0px';
 		$move_normal_z				= isset($settings['move_normal_z'])						? $settings['move_normal_z']						: '0px';
@@ -1284,10 +1225,8 @@ class Fade extends \Elementor\Widget_Base {
 		$skew_normal_y				= isset($settings['skew_normal_y'])						? $settings['skew_normal_y']						: '0deg';
 		$perspective				= isset($settings['perspective'])						? $settings['perspective']							: '0px';
 		$perspective_child			= isset($settings['perspective_child'])					? $settings['perspective_child']					: '0px';
-		// Cursor and Animate
 		$cursor						= isset($settings['widget_cursor'])						? $settings['widget_cursor']						: 'auto';
 		$animate					= isset($settings['image_pro_anime'])					? $settings['image_pro_anime']						: 'all 0.3s ease';
-		//Transform Styles
 		$move_hover_x				= isset($settings['move_hover_x'])						? $settings['move_hover_x']							: '0px';
 		$move_hover_y				= isset($settings['move_hover_y'])						? $settings['move_hover_y']							: '0px';
 		$move_hover_z				= isset($settings['move_hover_z'])						? $settings['move_hover_z']							: '0px';
@@ -1301,74 +1240,63 @@ class Fade extends \Elementor\Widget_Base {
 		$skew_hover_y				= isset($settings['skew_hover_y'])						? $settings['skew_hover_y']							: '0deg';
 		$perspective_hover			= isset($settings['perspective_hover'])					? $settings['perspective_hover']					: '0px';
 		$perspective_child_hover	= isset($settings['perspective_child_hover'])			? $settings['perspective_child_hover']				: '0px';
-		//ID Settings
 		$data_id                	= 'bw_' . uniqid();
-		//Transform Normal Styles
-		// Normal Move
 		$translatex 				= isset( $move_normal_x["size"] ) 						? $move_normal_x["size"] . $move_normal_x["unit"] : '';
 		$translatey 				= isset( $move_normal_y["size"] ) 						? $move_normal_y["size"] . $move_normal_y["unit"] : '';
 		$translatez 				= isset( $move_normal_z["size"] ) 						? $move_normal_z["size"] . $move_normal_z["unit"] : '';
 		$translate3d 				= 'translate3d(' . $translatex . ', ' . $translatey . ', ' . $translatez . ')';
-		// Normal Scale
 		$scalex 					= isset( $scale_normal_x["size"] ) 						? $scale_normal_x["size"] : '';
 		$scaley 					= isset( $scale_normal_y["size"] ) 						? $scale_normal_y["size"] : '';
 		$scalez 					= isset( $scale_normal_z["size"] ) 						? $scale_normal_z["size"] : '';
 		$scale3dx 					= isset( $scale_normal_z["size"] ) 						? '-webkit-transform-style: preserve-3d; transform-style: preserve-3d;' : '';
 		$scale3d 					= 'scale3d(' . $scalex . ', ' . $scaley . ', ' . $scalez . ')';
-		// Normal Rotate
 		$rotatex 					= isset( $rotate_normal_x["size"] ) 					? 'rotateX(' . $rotate_normal_x["size"] . $rotate_normal_x["unit"] . ')' : '';
 		$rotatey 					= isset( $rotate_normal_y["size"] ) 					? 'rotateY(' . $rotate_normal_y["size"] . $rotate_normal_y["unit"] . ')' : '';
 		$rotatez 					= isset( $rotate_normal_z["size"] ) 					? 'rotateZ(' . $rotate_normal_z["size"] . $rotate_normal_z["unit"] . ')' : '';
-		// Normal Skew
 		$skewx 						= isset( $skew_normal_x["size"] ) 						? $skew_normal_x["size"] . $skew_normal_x["unit"] : '';
 		$skewy 						= isset( $skew_normal_y["size"] ) 						? $skew_normal_y["size"] . $skew_normal_y["unit"] : '';
 		$skew 						= 'skew(' . $skewx . ', ' . $skewy . ')';
-		// Normal Self perspective
 		$perspective 				=  isset( $perspective["size"] ) 						? 'perspective:' . $perspective["size"] . $perspective["unit"] . '; -webkit-perspective:' . $perspective["size"] . $perspective["unit"] . ';': '';
-		// Normal Child perspective
 		$perspective_child 			=  isset( $perspective_child["size"] ) 					? 'perspective(' . $perspective_child["size"] . $perspective_child["unit"] . ')': '';
-		//Transform Hover Styles
-		//Hover Move
 		$translatex_hover			= isset( $move_hover_x["size"] ) 						? $move_hover_x["size"] . $move_hover_x["unit"] : '';
 		$translatey_hover			= isset( $move_hover_y["size"] ) 						? $move_hover_y["size"] . $move_hover_y["unit"] : '';
 		$translatez_hover			= isset( $move_hover_z["size"] ) 						? $move_hover_z["size"] . $move_hover_z["unit"] : '';
 		$translate3d_hover			= 'translate3d(' . $translatex_hover . ', ' . $translatey_hover . ', ' . $translatez_hover . ')';
-		// Hover Scale
 		$scalex_hover 				= isset( $scale_hover_x["size"] ) 						? $scale_hover_x["size"] : '';
 		$scaley_hover 				= isset( $scale_hover_y["size"] ) 						? $scale_hover_y["size"] : '';
 		$scalez_hover 				= isset( $scale_hover_z["size"] ) 						? $scale_hover_z["size"] : '';
 		$scale3dx_hover 			= isset( $scale_hover_z["size"] ) 						?'-webkit-transform-style: preserve-3d; transform-style: preserve-3d;' : '';
 		$scale3d_hover 				= 'scale3d(' . $scalex_hover . ', ' . $scaley_hover . ', ' . $scalez_hover . ')';
-		// Hover Rotate
 		$rotatex_hover 				= isset( $rotate_hover_x["size"] ) 						? 'rotateX(' . $rotate_hover_x["size"] . $rotate_hover_x["unit"] . ')' : '';
 		$rotatey_hover 				= isset( $rotate_hover_y["size"] ) 						? 'rotateY(' . $rotate_hover_y["size"] . $rotate_hover_y["unit"] . ')' : '';
 		$rotatez_hover 				= isset( $rotate_hover_z["size"] ) 						? 'rotateZ(' . $rotate_hover_z["size"] . $rotate_hover_z["unit"] . ')' : '';
-		// Hover Skew
 		$skewx_hover 				= isset( $skew_hover_x["size"] ) 						? $skew_hover_x["size"] . $skew_hover_x["unit"] : '';
 		$skewy_hover 				= isset( $skew_hover_y["size"] ) 						? $skew_hover_y["size"] . $skew_hover_y["unit"] : '';
 		$skew_hover 				= 'skew(' . $skewx_hover . ', ' . $skewy_hover . ')';
-		// Hover Self perspective
 		$perspective_hover 			= isset( $perspective_hover["size"] ) 					? 'perspective:' . $perspective_hover["size"] . $perspective_hover["unit"] . '; -webkit-perspective:' . $perspective_hover["size"] . $perspective_hover["unit"] . ';' : '';
-		// Hover Child perspective
 		$perspective_child_hover	= isset( $perspective_child_hover["size"] ) 			? 'perspective(' . $perspective_child_hover["size"] . $perspective_child_hover["unit"] . ')' : '';
 		// Create a Custom CSS for Normal and Hover Styles
 		$normal_transform_style 	= ($normal_transform == 'normal_transform') 			? "#$data_id { -webkit-transition: $animate; -o-transition: $animate; transition: $animate; $perspective transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; -webkit-transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; $scale3dx }" : '';
 		$hover_transform_style 		= ($hover_transform == 'hover_transform') 				? "#$data_id:hover { $perspective_hover transform: $perspective_child_hover $skew_hover $rotatex_hover $rotatey_hover $rotatez_hover $scale3d_hover $translate3d_hover; -webkit-transform: $perspective_child_hover $skew_hover $rotatex_hover $rotatey_hover $rotatez_hover $scale3d_hover $translate3d_hover; $scale3dx_hover }" : '';
-		//Return all of the styles
 		echo "<style>" . esc_html( $normal_transform_style ) . " " . esc_html( $hover_transform_style ) . "</style>";
 
-		// Render
         switch ($type) {
 			case 'bw-t-1':
+				$hover_animation = isset( $settings['hover_animation'] ) ? $settings['hover_animation'] : '';
+				$image_id        = isset( $settings['image']['id'] ) ? $settings['image']['id'] : '';
+				$image_url       = $image_id ? Group_Control_Image_Size::get_attachment_image_src( $image_id, 'thumbnail', $settings ) : '';
+				if ( ! $image_url && $image_URL ) {
+					$image_url = $image_URL;
+				}
 				echo '<div class="bw-load-img bw-cursor-' . esc_attr( $cursor ) .'" id="'. $data_id .'">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					echo '<div class="bw-img ' . esc_attr( $settings['hover_animation'] ) . '">';
-						if ( $image_link == 'yes') { echo '<a href="' . esc_url( $settings['image_link_url']['url'] ) . '"' . $target . $nofollow . ' class="bw-image-link">'; } // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					echo '<div class="bw-img ' . esc_attr( $hover_animation ) . '">';
 						echo '<div class="bw-image-grow-cover ' . esc_attr( $img_grow ) . '"></div>';
-                              $image_url = Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail', $settings );
-                              if ( $image_url ) {
-                                  echo '<img src="' . esc_url( $image_url ) . '" class="' . esc_attr( $img_grow ) . '">'; // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
-                              }
-						if ( $image_link == 'yes'){ echo '</a>'; }
+						if ( $image_url ) {
+							echo '<img src="' . esc_url( $image_url ) . '" class="' . esc_attr( $img_grow ) . '">'; // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
+						}
+						if ( $has_image_link ) {
+							echo '<a ' . $this->get_render_attribute_string( 'image_link' ) . '></a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						}
 					echo '</div>';
 				echo '</div>';
 				break;

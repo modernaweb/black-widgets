@@ -1,10 +1,22 @@
-.bw-gsap-code-box .bw-eg {
+.bw-gsap-code-box.bw-trigger-demo-styles .bw-eg {
     transform-style: preserve-3d;
     opacity: 1;
     visibility: inherit;
     transform: translate(0px, 25px) rotate(3deg) skew(26deg, -42deg) scale(1, 0);
     color: #000;
     line-height: 150px;
+}
+
+.bw-gsap-img {
+    text-align: inherit;
+}
+
+.bw-gsap-img img,
+.bw-gsap-code-box.bw-trigger-style-html-imgs img {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .bw-boxer {

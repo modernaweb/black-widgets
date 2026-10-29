@@ -159,10 +159,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
     }
 
     /**
-     * Check if GSAP is enabled based on plugin options.
-     *
-     * Retrieves the plugin options from the database, then verifies
-     * if the GSAP options and both CDN URLs are set and not empty.
+     * Check whether GSAP is enabled in the plugin options.
      *
      * @since 1.4.0
      *
@@ -682,7 +679,6 @@ class ImageMarquee extends \Elementor\Widget_Base {
         $use_gsap_attr   = 'false';
         $gsap_start      = 'top bottom';
         $gsap_end        = 'bottom top';
-        // Align with widget_gsap_speed control default (1).
         $speedScroll     = 1;
 
         if ( $this->is_gsap_enabled() ) {

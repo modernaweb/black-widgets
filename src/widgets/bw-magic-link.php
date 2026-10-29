@@ -15,9 +15,9 @@ use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Text_Shadow;
 
 /**
- * Elementor title Widget.
+ * Magic link widget.
  *
- * Elementor widget that inserts an embbedable content into the page, from any given URL.
+ * Animated link with optional SplitText hover effects.
  *
  * @since 1.0.0
  */
@@ -25,14 +25,14 @@ class MagicLink extends \Elementor\Widget_Base {
 
     public function __construct( $data = [], $args = null ) {
         parent::__construct( $data, $args );
-        wp_register_style( 'black-widgets-magic', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/magic.css', [], BLACK_WIDGETS_VERSION );
+        wp_register_style( 'black-widgets-magic', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/magic.css', [], $this->magic_asset_ver( 'assets/css/magic.css' ) );
         $this->register_magic_link_script();
     }
 
 	/**
 	 * Get widget name.
 	 *
-	 * Retrieve button widget name.
+	 * Retrieve the magic link widget name.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -46,7 +46,7 @@ class MagicLink extends \Elementor\Widget_Base {
 	/**
 	 * Get widget title.
 	 *
-	 * Retrieve button widget title.
+	 * Retrieve the magic link widget title.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -60,7 +60,7 @@ class MagicLink extends \Elementor\Widget_Base {
 	/**
 	 * Get widget icon.
 	 *
-	 * Retrieve button widget icon.
+	 * Retrieve the magic link widget icon.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -74,7 +74,7 @@ class MagicLink extends \Elementor\Widget_Base {
 	/**
 	 * Get widget categories.
 	 *
-	 * Retrieve the list of categories the button widget belongs to.
+	 * Retrieve the list of categories the magic link widget belongs to.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -101,6 +101,21 @@ class MagicLink extends \Elementor\Widget_Base {
     }
 
     /**
+     * Cache-bust CSS/JS when the file changes (same plugin version).
+     *
+     * @param string $rel Path relative to the plugin root.
+     * @return string
+     */
+    private function magic_asset_ver( $rel ) {
+        $ver  = BLACK_WIDGETS_VERSION;
+        $path = BLACK_WIDGETS_PLUGIN_PATH . ltrim( $rel, '/\\' );
+        if ( is_readable( $path ) ) {
+            $ver .= '.' . (int) filemtime( $path );
+        }
+        return $ver;
+    }
+
+    /**
      * Re-register Magic Link script with current GSAP deps (deregister first so deps update).
      */
     private function register_magic_link_script() {
@@ -122,7 +137,7 @@ class MagicLink extends \Elementor\Widget_Base {
             'black-widgets-magic-link',
             BLACK_WIDGETS_PLUGIN_URL . 'assets/js/magic-link.js',
             $deps,
-            BLACK_WIDGETS_VERSION,
+            $this->magic_asset_ver( 'assets/js/magic-link.js' ),
             true
         );
     }
@@ -212,17 +227,13 @@ class MagicLink extends \Elementor\Widget_Base {
     }
 
 	/**
-	 * Register button widget controls.
-	 *
-	 * Adds different input fields to allow the user to change and customize the widget settings.
+	 * Register the magic link widget controls.
 	 *
 	 * @since 1.0.0
 	 * @access protected
 	 */
 	protected function register_controls() {
 
-		// Start
-		// Content section
 		$this->start_controls_section(
 			'content_section',
 			[
@@ -407,10 +418,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'style_section',
 			[
@@ -419,7 +427,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Style Subtitle Tabs
 		$this->start_controls_tabs('black_widget_1_tab');
 		$this->start_controls_tab(
 			'tab_1_normal',
@@ -428,7 +435,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -474,7 +480,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
@@ -487,7 +492,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
@@ -507,7 +511,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -517,7 +520,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -547,7 +549,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -565,7 +566,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'widget_hover_box_margin',
 			[
@@ -578,7 +578,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'widget_hover_box_padding',
 			[
@@ -598,7 +597,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -608,7 +606,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -631,13 +628,10 @@ class MagicLink extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_tab();
-		$this->end_controls_tabs(); // End Tabs
+		$this->end_controls_tabs();
 
 		$this->end_controls_section();
-        // End
 
-		// Start
-		// Main Text Typography
 		$this->start_controls_section(
 			'style_section_back_link_typo',
 			[
@@ -646,7 +640,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'style_main_back_link_color',
 			[
@@ -658,7 +651,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Typography
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -671,7 +663,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Text shadow
 		$this->add_group_control(
 			Group_Control_Text_Shadow::get_type(),
 			[
@@ -688,7 +679,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -706,7 +696,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'style_main_back_link_margin',
 			[
@@ -719,7 +708,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'style_main_back_link_padding',
 			[
@@ -739,7 +727,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -749,7 +736,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border Radius
 		$this->add_control(
 			'style_main_back_link_border_radius', //param_name
 			[
@@ -762,7 +748,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -773,10 +758,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
-		// Start
-		// Main Text Typography
 		$this->start_controls_section(
 			'style_section_back_link_hover_typo',
 			[
@@ -785,7 +767,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'style_main_back_link_hover_color',
 			[
@@ -797,7 +778,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Typography
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -810,7 +790,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Text shadow
 		$this->add_group_control(
 			Group_Control_Text_Shadow::get_type(),
 			[
@@ -827,7 +806,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -845,7 +823,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'style_main_back_link_hover_margin',
 			[
@@ -858,7 +835,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'style_main_back_link_hover_padding',
 			[
@@ -878,7 +854,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -888,7 +863,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border Radius
 		$this->add_control(
 			'style_main_back_link_hover_border_radius', //param_name
 			[
@@ -901,7 +875,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -912,10 +885,7 @@ class MagicLink extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
-		// Start
-		// Main Text Typography
 		$this->start_controls_section(
 			'style_section_other',
 			[
@@ -1094,7 +1064,6 @@ class MagicLink extends \Elementor\Widget_Base {
             ]
         );
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -1117,7 +1086,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-        // Color
         $this->add_control(
             'line_color_modern',
             [
@@ -1137,7 +1105,6 @@ class MagicLink extends \Elementor\Widget_Base {
             ]
         );
 
-		// Color
 		$this->add_control(
 			'svg_heart_color',
 			[
@@ -1154,7 +1121,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'svg_wheel_color',
 			[
@@ -1191,7 +1157,6 @@ class MagicLink extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
 		// Split icon style (CDN Split types only)
 		$this->start_controls_section(
@@ -1374,9 +1339,9 @@ class MagicLink extends \Elementor\Widget_Base {
     }
 
 	/**
-	 * Render title widget output on the frontend.
+	 * Render the magic link widget output on the frontend.
 	 *
-	 * Written in PHP and used to generate the final HTML.
+	 * Outputs the widget HTML.
 	 *
 	 * @since 1.0.0
 	 * @access protected
@@ -1436,7 +1401,6 @@ class MagicLink extends \Elementor\Widget_Base {
 			return;
 		}
 
-		// Render - alignment via Elementor selectors on .bw-magic-link (no left/center/right classes)
 		switch ($type) {
 			case 'heart':
                 echo '<div class="bw-magic-link"><a href="' . esc_url( $url ) . '"' . $target . $nofollow . ' class="bw-magic-' . $type . '">' . $text . ' <span><svg height="512px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="512px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="160,115.4 180.7,96 352,256 180.7,416 160,396.7 310.5,256 "/></svg></span></a></div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -1448,7 +1412,7 @@ class MagicLink extends \Elementor\Widget_Base {
 				echo '<div class="bw-magic-link"><a href="' . esc_url( $url ) . '"' . $target . $nofollow . ' class="bw-magic-' . $type . '">' . $text . '<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="16" height="16" fill="currentColor"><path d="M438.6 233.4L278.6 73.37c-9.373-9.373-24.56-9.373-33.94 0s-9.373 24.56 0 33.94L370.7 224H24C10.75 224 0 234.8 0 248S10.75 272 24 272h346.7l-126.1 116.7c-9.373 9.373-9.373 24.56 0 33.94C250.3 426.5 255.1 428.3 260 428.3s9.373-1.811 13.06-5.498l160-160C448 257.9 448 242.1 438.6 233.4z"/></svg></span></a></div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			break;
 			case 'wheel':
-				echo '<div class="bw-magic-link"><a href="' . esc_url( $url ) . '"' . $target . $nofollow . ' class="bw-magic-' . $type . '"><svg><g><line x2="227.62" y1="31.28" y2="31.28"></line><polyline points="222.62 25.78 228.12 31.28 222.62 36.78"></polyline><circle cx="224.67" cy="30.94" r="30.5" transform="rotate(180 224.67 30.94) scale(1, -1) translate(0, -61)"></circle></g></svg><span>' . $text . '</span></a></div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo '<div class="bw-magic-link"><a href="' . esc_url( $url ) . '"' . $target . $nofollow . ' class="bw-magic-' . $type . '"><svg viewBox="0 0 64 64" width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="32" cy="32" r="14"></circle><line x1="24" y1="32" x2="40" y2="32"></line><polyline points="34 26 42 32 34 38"></polyline></svg><span>' . $text . '</span></a></div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			break;
 			default:
 				echo '<div class="bw-magic-link"><a href="' . esc_url( $url ) . '"' . $target . $nofollow . ' class="bw-magic-' . $type . '">' . $text . '</a></div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

@@ -1,6 +1,5 @@
 /**
- * All of the CSS for your admin-specific functionality should be
- * included in this file.
+ * Admin styles for Black Widgets (settings screen, Elementor panel tiles, branding).
  */
  
 /* Menu icon sizing lives in black-widgets-admin-menu.css (loaded globally). */
@@ -122,7 +121,7 @@ body.toplevel_page_black-widgets .bw-box-backend .bw-btn:hover {
 }
  
  
-/* BLack Widgets Settings */
+/* Black Widgets settings screen */
 #bw-wrap {
     padding: 40px;
 }

@@ -23,8 +23,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
 
     public function __construct( $data = [], $args = null ) {
         parent::__construct( $data, $args );
-        wp_register_script( 'black-widgets-swiper', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/libraries/swiper-bundle.min.js', [], BLACK_WIDGETS_VERSION, true );
-        wp_register_style( 'black-widgets-swiper', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/libraries/swiper-bundle.min.css', [], BLACK_WIDGETS_VERSION );
+        \Modernaweb\BlackWidgets\Plugin_Options::register_swiper_assets();
 
         wp_register_style( 'black-widgets-image-carousel', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/image-carousel.css', [ 'black-widgets-swiper' ], BLACK_WIDGETS_VERSION );
         wp_register_script( 'black-widgets-image-carousel', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/image-carousel.js', [ 'jquery', 'black-widgets-swiper' ], BLACK_WIDGETS_VERSION, true );
@@ -131,7 +130,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
                     'is_external' => false,
                     'nofollow' => false,
                 ],
-                'description' => esc_html__( 'Optional - makes this slide clickable.', 'blackwidgets' ),
+                'description' => esc_html__( 'Optional. Opens this URL from the image and the caption.', 'blackwidgets' ),
                 'condition' => [
                     'item_type' => 'image',
                 ],
@@ -208,7 +207,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
             ]
         );
 
-        // Peek Focus only - emphasize the centered slide instead of just dimming the neighbors.
+        // Peek Focus: emphasize the centered slide instead of only dimming the neighbors.
         $this->add_control(
             'peek_center_emphasis',
             [
@@ -1444,14 +1443,14 @@ class ImageCarousel extends \Elementor\Widget_Base {
         ?>
         <button
             type="button"
-            class="bw-swiper-button-prev swiper-button-prev"
+            class="bw-swiper-button-prev swiper-button-prev swiper-no-swiping"
             aria-label="<?php echo esc_attr__( 'Previous slide', 'blackwidgets' ); ?>"
         >
             <?php $this->render_nav_arrow_icon( 'prev', $prev_icon ); ?>
         </button>
         <button
             type="button"
-            class="bw-swiper-button-next swiper-button-next"
+            class="bw-swiper-button-next swiper-button-next swiper-no-swiping"
             aria-label="<?php echo esc_attr__( 'Next slide', 'blackwidgets' ); ?>"
         >
             <?php $this->render_nav_arrow_icon( 'next', $next_icon ); ?>
@@ -1692,7 +1691,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
                                 $link_target = ! empty( $item['link']['is_external'] ) ? ' target="_blank"' : '';
                                 $link_rel = ! empty( $item['link']['nofollow'] ) ? ' rel="nofollow"' : '';
                                 printf(
-                                    '<a class="bw-swiper-slide-link" href="%1$s"%2$s%3$s>',
+                                    '<a class="bw-swiper-slide-link" draggable="false" href="%1$s"%2$s%3$s>',
                                     esc_url( $link_url ),
                                     $link_target, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                                     $link_rel // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

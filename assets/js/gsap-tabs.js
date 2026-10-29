@@ -1,7 +1,7 @@
 (function ($) {
     'use strict';
 
-    const API_KEY = 'bwTabApi';
+    const API_KEY = 'bwTabsApi';
 
     function parseAutoplayDelay(raw) {
         if (raw === undefined || raw === null || raw === '' || raw === false) {
@@ -33,13 +33,13 @@
             $(this)
                 .attr('aria-selected', isActive ? 'true' : 'false')
                 .attr('tabindex', isActive ? '0' : '-1')
-                .toggleClass('black-tab__tab--active', isActive);
+                .toggleClass('black-tabs__tab--active', isActive);
         });
 
         $panels.each(function (i) {
             const isActive = i === activeIndex;
             const $panel = $(this);
-            $panel.toggleClass('black-tab__panel--active', isActive);
+            $panel.toggleClass('black-tabs__panel--active', isActive);
             if (isActive) {
                 $panel.removeAttr('hidden');
             } else {
@@ -49,7 +49,7 @@
     }
 
     function bindTabKeyboard($tabs, activateFn) {
-        $tabs.on('keydown.bwTab', function (e) {
+        $tabs.on('keydown.bwTabs', function (e) {
             const count = $tabs.length;
             const current = $tabs.index(this);
             let next = -1;
@@ -84,16 +84,16 @@
         });
     }
 
-    const BlackTabDefault = function ($scope) {
+    const BlackTabsDefault = function ($scope) {
         if (typeof gsap === 'undefined') {
             return;
         }
 
-        $scope.find('.black-tab--default').each(function () {
+        $scope.find('.black-tabs--default').each(function () {
             const $tabWidget = $(this);
-            const $tabs = $tabWidget.find('.black-tab__tab');
-            const $mediaItems = $tabWidget.find('.black-tab__media');
-            const $timelineFills = $tabWidget.find('.black-tab__timeline-fill');
+            const $tabs = $tabWidget.find('.black-tabs__tab');
+            const $mediaItems = $tabWidget.find('.black-tabs__media');
+            const $timelineFills = $tabWidget.find('.black-tabs__timeline-fill');
             const reduceMotion = prefersReducedMotion();
 
             destroyTabApi($tabWidget);
@@ -107,7 +107,7 @@
                 syncTabAria($tabs, $mediaItems, index);
 
                 $tabs.each(function (i) {
-                    $(this).find('.black-tab__tab-title').toggleClass('black-tab__tab-title--active', i === index);
+                    $(this).find('.black-tabs__tab-title').toggleClass('black-tabs__tab-title--active', i === index);
                 });
 
                 $timelineFills.each(function (i) {
@@ -146,7 +146,7 @@
                 });
 
                 $tabs.each(function (i) {
-                    const $desc = $(this).find('.black-tab__tab-description');
+                    const $desc = $(this).find('.black-tabs__tab-description');
                     if (!$desc.length) {
                         return;
                     }
@@ -223,7 +223,7 @@
                 activateTab(index, true);
             }
 
-            $tabs.on('click.bwTab', onTabClick);
+            $tabs.on('click.bwTabs', onTabClick);
             bindTabKeyboard($tabs, function (index, fromUser) {
                 stopAutoplay();
                 activateTab(index, fromUser);
@@ -250,14 +250,14 @@
                     if (viewportObserver) {
                         viewportObserver.disconnect();
                     }
-                    $tabs.off('click.bwTab keydown.bwTab');
+                    $tabs.off('click.bwTabs keydown.bwTabs');
                     $timelineFills.each(function () {
                         gsap.killTweensOf(this);
                     });
                     $mediaItems.each(function () {
                         gsap.killTweensOf(this);
                     });
-                    $tabs.find('.black-tab__tab-description').each(function () {
+                    $tabs.find('.black-tabs__tab-description').each(function () {
                         gsap.killTweensOf(this);
                     });
                 },
@@ -270,15 +270,15 @@
         });
     };
 
-    const BlackTabVertical = function ($scope) {
+    const BlackTabsVertical = function ($scope) {
         if (typeof gsap === 'undefined') {
             return;
         }
 
-        $scope.find('.black-tab--vertical').each(function () {
+        $scope.find('.black-tabs--vertical').each(function () {
             const $widget = $(this);
-            const $tabs = $widget.find('.black-tab__tab');
-            const $panels = $widget.find('.black-tab__panel');
+            const $tabs = $widget.find('.black-tabs__tab');
+            const $panels = $widget.find('.black-tabs__panel');
             const reduceMotion = prefersReducedMotion();
 
             destroyTabApi($widget);
@@ -296,7 +296,7 @@
                 const $tab = $tabs.eq(index);
                 const $panel = $panels.eq(index);
 
-                if ($tab.hasClass('black-tab__tab--active') && index === activeIndex) {
+                if ($tab.hasClass('black-tabs__tab--active') && index === activeIndex) {
                     return;
                 }
 
@@ -350,7 +350,7 @@
                 showTab(index, true);
             }
 
-            $tabs.on('click.bwTab', onTabClick);
+            $tabs.on('click.bwTabs', onTabClick);
             bindTabKeyboard($tabs, function (index, fromUser) {
                 showTab(index, fromUser);
             });
@@ -376,7 +376,7 @@
                     if (viewportObserver) {
                         viewportObserver.disconnect();
                     }
-                    $tabs.off('click.bwTab keydown.bwTab');
+                    $tabs.off('click.bwTabs keydown.bwTabs');
                     $panels.each(function () {
                         gsap.killTweensOf(this);
                     });
@@ -392,7 +392,7 @@
 
     // Always register hooks - GSAP may be missing; handlers no-op safely.
     $(window).on('elementor/frontend/init', function () {
-        elementorFrontend.hooks.addAction('frontend/element_ready/b_gsap_tab.default', BlackTabDefault);
-        elementorFrontend.hooks.addAction('frontend/element_ready/b_gsap_tab.default', BlackTabVertical);
+        elementorFrontend.hooks.addAction('frontend/element_ready/b_gsap_tabs.default', BlackTabsDefault);
+        elementorFrontend.hooks.addAction('frontend/element_ready/b_gsap_tabs.default', BlackTabsVertical);
     });
 })(jQuery);

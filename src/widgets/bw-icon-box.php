@@ -16,9 +16,9 @@ use Elementor\Group_Control_Text_Shadow;
 use Elementor\Group_Control_Image_Size;
 
 /**
- * Elementor title Widget.
+ * Icon box widget.
  *
- * Elementor widget that inserts an embbedable content into the page, from any given URL.
+ * Box with an icon, SVG or image, a title, a subtitle, a paragraph and a link.
  *
  * @since 1.0.0
  */
@@ -26,15 +26,16 @@ class IconBox extends \Elementor\Widget_Base {
 
     public function __construct( $data = [], $args = null ) {
         parent::__construct( $data, $args );
-        wp_register_style( 'black-widgets-icon-box', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/icon-box.css', [], BLACK_WIDGETS_VERSION );
-
-        wp_register_script( 'black-widgets-icon-box', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/icon-box.js', [ 'jquery' ], BLACK_WIDGETS_VERSION, true );
+        if ( ! wp_style_is( 'black-widgets-icon-box', 'registered' ) ) {
+            wp_register_style( 'black-widgets-icon-box', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/icon-box.css', [], $this->icon_box_asset_ver( 'assets/css/icon-box.css' ) );
+        }
+        $this->register_icon_box_script();
     }
 
 	/**
 	 * Get widget name.
 	 *
-	 * Retrieve button widget name.
+	 * Retrieve the icon box widget name.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -48,7 +49,7 @@ class IconBox extends \Elementor\Widget_Base {
 	/**
 	 * Get widget title.
 	 *
-	 * Retrieve button widget title.
+	 * Retrieve the icon box widget title.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -62,7 +63,7 @@ class IconBox extends \Elementor\Widget_Base {
 	/**
 	 * Get widget icon.
 	 *
-	 * Retrieve button widget icon.
+	 * Retrieve the icon box widget icon.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -76,7 +77,7 @@ class IconBox extends \Elementor\Widget_Base {
 	/**
 	 * Get widget categories.
 	 *
-	 * Retrieve the list of categories the button widget belongs to.
+	 * Retrieve the list of categories the icon box widget belongs to.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -92,7 +93,70 @@ class IconBox extends \Elementor\Widget_Base {
     }
 
     public function get_script_depends() {
+        $this->register_icon_box_script();
         return [ 'black-widgets-icon-box' ];
+    }
+
+    /**
+     * Raw settings safe when Elementor data is not initialized yet.
+     *
+     * @return array
+     */
+    protected function get_early_settings(): array {
+        return black_widgets_elementor_raw_settings( $this );
+    }
+
+    /**
+     * Whether GSAP core + ScrollTrigger are ready in Settings.
+     *
+     * @return bool
+     */
+    public function is_gsap_enabled() {
+        return \Modernaweb\BlackWidgets\Plugin_Options::is_gsap_ready();
+    }
+
+    /**
+     * Cache-bust CSS/JS when the file changes (same plugin version).
+     *
+     * @param string $rel Path relative to the plugin root.
+     * @return string
+     */
+    private function icon_box_asset_ver( $rel ) {
+        $ver  = BLACK_WIDGETS_VERSION;
+        $path = BLACK_WIDGETS_PLUGIN_PATH . ltrim( $rel, '/\\' );
+        if ( is_readable( $path ) ) {
+            $ver .= '.' . (int) filemtime( $path );
+        }
+        return $ver;
+    }
+
+    /**
+     * Register the widget script once. GSAP is a dep whenever Settings CDN is ready
+     * so the editor can enable Animate without a full reload.
+     */
+    private function register_icon_box_script() {
+        if ( wp_script_is( 'black-widgets-icon-box', 'registered' ) ) {
+            return;
+        }
+
+        $deps = [ 'jquery' ];
+        if ( $this->is_gsap_enabled() ) {
+            \Modernaweb\BlackWidgets\Plugin_Options::register_gsap_scripts();
+            if ( wp_script_is( 'GSAP', 'registered' ) ) {
+                $deps[] = 'GSAP';
+            }
+            if ( wp_script_is( 'GSAP-ScrollTrigger', 'registered' ) ) {
+                $deps[] = 'GSAP-ScrollTrigger';
+            }
+        }
+
+        wp_register_script(
+            'black-widgets-icon-box',
+            BLACK_WIDGETS_PLUGIN_URL . 'assets/js/icon-box.js',
+            $deps,
+            $this->icon_box_asset_ver( 'assets/js/icon-box.js' ),
+            true
+        );
     }
 
     protected function is_dynamic_content(): bool {
@@ -100,17 +164,13 @@ class IconBox extends \Elementor\Widget_Base {
     }
 
 	/**
-	 * Register button widget controls.
-	 *
-	 * Adds different input fields to allow the user to change and customize the widget settings.
+	 * Register the icon box widget controls.
 	 *
 	 * @since 1.0.0
 	 * @access protected
 	 */
 	protected function register_controls() {
 
-		// Start
-		// Content section
 		$this->start_controls_section(
 			'position_section',
 			[
@@ -153,10 +213,7 @@ class IconBox extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
-		// Start
-		// Content section
 		$this->start_controls_section(
 			'content_section',
 			[
@@ -186,7 +243,7 @@ class IconBox extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::TEXT,
 				'default' => esc_html__( 'This is Title', 'blackwidgets' ),
 				'placeholder' => esc_html__( 'Type your title here', 'blackwidgets' ),
-				'description' => esc_html__( 'You can use all other HTML tags into the title field e.g. code, mark, abbr, blockquote and  ...', 'blackwidgets' ),
+				'description' => esc_html__( 'Plain text only. HTML is escaped.', 'blackwidgets' ),
 				'condition'  => [
 					'widget_title_enable' => [
 						'title_enable',
@@ -244,7 +301,7 @@ class IconBox extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::TEXT,
 				'default' => esc_html__( 'This is Subtitle', 'blackwidgets' ),
 				'placeholder' => esc_html__( 'Type your subtitle here', 'blackwidgets' ),
-				'description' => esc_html__( 'You can use all other HTML tags into the subtitle field e.g. code, mark, abbr, blockquote and  ...', 'blackwidgets' ),
+				'description' => esc_html__( 'Plain text only. HTML is escaped.', 'blackwidgets' ),
 				'condition'  => [
 					'widget_subtitle_enable' => [
 						'subtitle_enable',
@@ -398,8 +455,10 @@ class IconBox extends \Elementor\Widget_Base {
 			'widget_code',
 			[
 				'label' => esc_html__( 'CODE', 'blackwidgets' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => esc_html__( 'SVG CODE HERE', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::TEXTAREA,
+				'rows' => 6,
+				'default' => '',
+				'placeholder' => esc_html__( 'Paste SVG markup here', 'blackwidgets' ),
 				'condition'  => [
 					'widget_icon_image_enable' => [
 						'icon_image_enable',
@@ -453,7 +512,7 @@ class IconBox extends \Elementor\Widget_Base {
 		$this->add_group_control(
 			Group_Control_Image_Size::get_type(),
 			[
-				'name' => 'thumbnail', // Usage: `{name}_size` → `thumbnail_size`.
+				'name' => 'thumbnail',
 				'exclude' => [ 'custom' ],
 				'include' => [],
 				'default' => 'full',
@@ -482,14 +541,209 @@ class IconBox extends \Elementor\Widget_Base {
 					'widget_icon_image_enable' => [
 						'icon_image_enable',
 					],
+					'widget_icon_image_type' => [
+						'enable_code',
+						'enable_image',
+					],
 				],
 			]
 		);
 
 		$this->end_controls_section();
-		// End
 
-		// Start
+		if ( $this->is_gsap_enabled() ) {
+			$this->start_controls_section(
+				'animate_section',
+				[
+					'label' => esc_html__( 'Animate', 'blackwidgets' ),
+					'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+					'condition'  => [
+						'widget_icon_image_enable' => [
+							'icon_image_enable',
+						],
+					],
+				]
+			);
+
+			$this->add_control(
+				'widget_animate_enable',
+				[
+					'label' 		=> esc_html__( 'Enable Animate', 'blackwidgets' ),
+					'type' 			=> \Elementor\Controls_Manager::SWITCHER,
+					'label_on' 		=> esc_html__( 'Yes', 'blackwidgets' ),
+					'label_off' 	=> esc_html__( 'No !', 'blackwidgets' ),
+					'return_value' 	=> 'yes',
+					'default' 		=> '',
+					'description'	=> esc_html__( 'Needs GSAP and ScrollTrigger in Black Widgets Settings.', 'blackwidgets' ),
+				]
+			);
+
+			$this->add_control(
+				'widget_animate_type',
+				[
+					'label' => esc_html__( 'Animation Type', 'blackwidgets' ),
+					'type' => \Elementor\Controls_Manager::SELECT,
+					'default' => 'fade_up',
+					'options' => [
+						'fade'    => esc_html__( 'Fade', 'blackwidgets' ),
+						'fade_up' => esc_html__( 'Fade Up', 'blackwidgets' ),
+						'scale'   => esc_html__( 'Scale', 'blackwidgets' ),
+						'rotate'  => esc_html__( 'Rotate', 'blackwidgets' ),
+						'bounce'  => esc_html__( 'Bounce', 'blackwidgets' ),
+					],
+					'condition' => [
+						'widget_animate_enable' => 'yes',
+						'widget_icon_image_type' => 'enable_icon',
+					],
+				]
+			);
+
+			$this->add_control(
+				'widget_animate_type_svg',
+				[
+					'label' => esc_html__( 'Animation Type', 'blackwidgets' ),
+					'type' => \Elementor\Controls_Manager::SELECT,
+					'default' => 'draw',
+					'options' => [
+						'draw'    => esc_html__( 'Draw (SVG)', 'blackwidgets' ),
+						'fade'    => esc_html__( 'Fade', 'blackwidgets' ),
+						'fade_up' => esc_html__( 'Fade Up', 'blackwidgets' ),
+						'scale'   => esc_html__( 'Scale', 'blackwidgets' ),
+						'rotate'  => esc_html__( 'Rotate', 'blackwidgets' ),
+						'bounce'  => esc_html__( 'Bounce', 'blackwidgets' ),
+					],
+					'description' => esc_html__( 'Draw traces SVG paths. Raster images fall back to Fade Up.', 'blackwidgets' ),
+					'condition' => [
+						'widget_animate_enable' => 'yes',
+						'widget_icon_image_type' => [ 'enable_code', 'enable_image' ],
+					],
+				]
+			);
+
+			$this->add_control(
+				'widget_animate_trigger',
+				[
+					'label' => esc_html__( 'Trigger', 'blackwidgets' ),
+					'type' => \Elementor\Controls_Manager::SELECT,
+					'default' => 'scroll_once',
+					'options' => [
+						'on_load'      => esc_html__( 'On Load', 'blackwidgets' ),
+						'scroll_once'  => esc_html__( 'On Scroll Once', 'blackwidgets' ),
+						'scroll_every' => esc_html__( 'On Every Scroll', 'blackwidgets' ),
+					],
+					'condition' => [
+						'widget_animate_enable' => 'yes',
+					],
+				]
+			);
+
+			$this->add_control(
+				'widget_animate_hover',
+				[
+					'label' => esc_html__( 'Hover', 'blackwidgets' ),
+					'type' => \Elementor\Controls_Manager::SELECT,
+					'default' => 'none',
+					'options' => [
+						'none'   => esc_html__( 'None', 'blackwidgets' ),
+						'scale'  => esc_html__( 'Scale', 'blackwidgets' ),
+						'rotate' => esc_html__( 'Rotate', 'blackwidgets' ),
+					],
+					'condition' => [
+						'widget_animate_enable' => 'yes',
+						'widget_icon_image_type' => 'enable_icon',
+					],
+				]
+			);
+
+			$this->add_control(
+				'widget_animate_hover_svg',
+				[
+					'label' => esc_html__( 'Hover', 'blackwidgets' ),
+					'type' => \Elementor\Controls_Manager::SELECT,
+					'default' => 'none',
+					'options' => [
+						'none'   => esc_html__( 'None', 'blackwidgets' ),
+						'scale'  => esc_html__( 'Scale', 'blackwidgets' ),
+						'rotate' => esc_html__( 'Rotate', 'blackwidgets' ),
+						'draw'   => esc_html__( 'Draw', 'blackwidgets' ),
+					],
+					'condition' => [
+						'widget_animate_enable' => 'yes',
+						'widget_icon_image_type' => [ 'enable_code', 'enable_image' ],
+					],
+				]
+			);
+
+			$this->add_control(
+				'widget_animate_loop',
+				[
+					'label' => esc_html__( 'Loop (in view)', 'blackwidgets' ),
+					'type' => \Elementor\Controls_Manager::SELECT,
+					'default' => 'none',
+					'options' => [
+						'none'  => esc_html__( 'None', 'blackwidgets' ),
+						'float' => esc_html__( 'Float', 'blackwidgets' ),
+						'pulse' => esc_html__( 'Pulse', 'blackwidgets' ),
+						'spin'  => esc_html__( 'Spin', 'blackwidgets' ),
+					],
+					'condition' => [
+						'widget_animate_enable' => 'yes',
+					],
+				]
+			);
+
+			$this->add_control(
+				'widget_animate_duration',
+				[
+					'label' => esc_html__( 'Duration (ms)', 'blackwidgets' ),
+					'type' => \Elementor\Controls_Manager::NUMBER,
+					'min' => 100,
+					'max' => 6000,
+					'step' => 50,
+					'default' => 800,
+					'condition' => [
+						'widget_animate_enable' => 'yes',
+					],
+				]
+			);
+
+			$this->add_control(
+				'widget_animate_delay',
+				[
+					'label' => esc_html__( 'Delay (ms)', 'blackwidgets' ),
+					'type' => \Elementor\Controls_Manager::NUMBER,
+					'min' => 0,
+					'max' => 4000,
+					'step' => 50,
+					'default' => 0,
+					'condition' => [
+						'widget_animate_enable' => 'yes',
+					],
+				]
+			);
+
+			$this->add_control(
+				'widget_animate_ease',
+				[
+					'label' => esc_html__( 'Easing', 'blackwidgets' ),
+					'type' => \Elementor\Controls_Manager::SELECT,
+					'default' => 'power2.out',
+					'options' => [
+						'power2.out'  => esc_html__( 'Soft', 'blackwidgets' ),
+						'power2.inOut'=> esc_html__( 'Smooth', 'blackwidgets' ),
+						'power3.out'  => esc_html__( 'Snappy', 'blackwidgets' ),
+						'back.out(1.4)' => esc_html__( 'Overshoot', 'blackwidgets' ),
+						'none'        => esc_html__( 'Linear', 'blackwidgets' ),
+					],
+					'condition' => [
+						'widget_animate_enable' => 'yes',
+					],
+				]
+			);
+
+			$this->end_controls_section();
+		}
+
 		// Box Style section
 		$this->start_controls_section(
 			'style_section',
@@ -564,7 +818,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Style Subtitle Tabs
 		$this->start_controls_tabs('black_widget_1_tab');
 		$this->start_controls_tab(
 			'tab_1_normal',
@@ -573,7 +826,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -615,7 +867,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
@@ -628,7 +879,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
@@ -648,7 +898,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -658,7 +907,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -688,7 +936,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -730,7 +977,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'widget_hover_box_margin',
 			[
@@ -743,7 +989,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'widget_hover_box_padding',
 			[
@@ -763,7 +1008,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -773,7 +1017,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -796,12 +1039,66 @@ class IconBox extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_tab();
-		$this->end_controls_tabs(); // End Tabs
+		$this->end_controls_tabs();
 
 		$this->end_controls_section();
-        // End
 
-		// Start
+		$this->start_controls_section(
+			'icon_shape_section',
+			[
+				'label' => esc_html__( 'Icon Shape', 'blackwidgets' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+				'condition'  => [
+					'widget_icon_image_enable' => [
+						'icon_image_enable',
+					],
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_shape',
+			[
+				'label' => esc_html__( 'Shape', 'blackwidgets' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'auto',
+				'options' => [
+					'auto'    => esc_html__( 'Auto', 'blackwidgets' ),
+					'square'  => esc_html__( 'Square', 'blackwidgets' ),
+					'circle'  => esc_html__( 'Circle', 'blackwidgets' ),
+					'rounded' => esc_html__( 'Rounded', 'blackwidgets' ),
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'icon_shape_size',
+			[
+				'label' => esc_html__( 'Box Size', 'blackwidgets' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 24,
+						'max' => 240,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'size' => 72,
+					'unit' => 'px',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bw-iconbox' => '--bw-icon-shape-size: {{SIZE}}{{UNIT}};',
+				],
+				'condition' => [
+					'icon_shape!' => 'auto',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
 		// Title Style section
 		$this->start_controls_section(
 			'title_style_section',
@@ -816,7 +1113,7 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		$this->start_controls_tabs('inner_title_tab'); // Start Tabs
+		$this->start_controls_tabs('inner_title_tab');
 		$this->start_controls_tab(
 			'title_tab_1',
 			[
@@ -824,7 +1121,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_icon_box_title_normal_color',
 			[
@@ -844,7 +1140,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_icon_box_title_hover_color',
 			[
@@ -857,7 +1152,7 @@ class IconBox extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_tab();
-		$this->end_controls_tabs(); // End Tabs
+		$this->end_controls_tabs();
 
 		$this->add_control(
 			'title_hr1',
@@ -866,7 +1161,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Typography
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -879,7 +1173,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Text shadow
 		$this->add_group_control(
 			Group_Control_Text_Shadow::get_type(),
 			[
@@ -889,7 +1182,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -927,7 +1219,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'content_title__margin',
 			[
@@ -940,7 +1231,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'content_title__padding',
 			[
@@ -953,7 +1243,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -963,7 +1252,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border Radius
 		$this->add_control(
 			'content_title__border_radius', //param_name
 			[
@@ -976,7 +1264,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -987,9 +1274,7 @@ class IconBox extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-        // End
 
-		// Start
 		// Subtitle Style section
 		$this->start_controls_section(
 			'subtitle_style_section',
@@ -1004,7 +1289,7 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		$this->start_controls_tabs('inner_subtitle_tab'); // Start Tabs
+		$this->start_controls_tabs('inner_subtitle_tab');
 		$this->start_controls_tab(
 			'subtitle_tab_1',
 			[
@@ -1012,7 +1297,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_icon_box_subtitle_normal_color',
 			[
@@ -1032,7 +1316,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_icon_box_subtitle_hover_color',
 			[
@@ -1045,7 +1328,7 @@ class IconBox extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_tab();
-		$this->end_controls_tabs(); // End Tabs
+		$this->end_controls_tabs();
 
 		$this->add_control(
 			'subtitle_hr1',
@@ -1054,7 +1337,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Typography
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -1067,7 +1349,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Text shadow
 		$this->add_group_control(
 			Group_Control_Text_Shadow::get_type(),
 			[
@@ -1077,7 +1358,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -1115,7 +1395,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'content_subtitle__margin',
 			[
@@ -1128,7 +1407,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'content_subtitle__padding',
 			[
@@ -1141,7 +1419,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -1151,7 +1428,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border Radius
 		$this->add_control(
 			'content_subtitle__border_radius', //param_name
 			[
@@ -1164,7 +1440,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -1175,9 +1450,7 @@ class IconBox extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-        // End
 
-        // Start
 		// Paragraph Style section
 		$this->start_controls_section(
 			'paragraph_style_section',
@@ -1192,7 +1465,7 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		$this->start_controls_tabs('inner_paragraph_tab'); // Start Tabs
+		$this->start_controls_tabs('inner_paragraph_tab');
 		$this->start_controls_tab(
 			'paragraph_tab_1',
 			[
@@ -1200,7 +1473,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_icon_box_paragraph_normal_color',
 			[
@@ -1220,7 +1492,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_icon_box_paragraph_hover_color',
 			[
@@ -1233,7 +1504,7 @@ class IconBox extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_tab();
-		$this->end_controls_tabs(); // End Tabs
+		$this->end_controls_tabs();
 
 		$this->add_control(
 			'paragraph_hr1',
@@ -1242,7 +1513,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Typography
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -1255,7 +1525,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Text shadow
 		$this->add_group_control(
 			Group_Control_Text_Shadow::get_type(),
 			[
@@ -1265,7 +1534,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -1303,7 +1571,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'content_paragraph__margin',
 			[
@@ -1316,7 +1583,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'content_paragraph__padding',
 			[
@@ -1329,7 +1595,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -1339,7 +1604,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border Radius
 		$this->add_control(
 			'content_paragraph__border_radius', //param_name
 			[
@@ -1352,7 +1616,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -1363,9 +1626,7 @@ class IconBox extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-        // End
 
-        // Start
 		// Link Style section
 		$this->start_controls_section(
 			'link_style_section',
@@ -1380,7 +1641,7 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		$this->start_controls_tabs('inner_link_tab'); // Start Tabs
+		$this->start_controls_tabs('inner_link_tab');
 		$this->start_controls_tab(
 			'link_tab_1',
 			[
@@ -1388,7 +1649,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_icon_box_link_normal_color',
 			[
@@ -1408,7 +1668,7 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
+		// Box hover uses the Title/Subtitle colors; link hover is set separately.
 		$this->add_control(
 			'widget_icon_box_link_hover_color',
 			[
@@ -1416,12 +1676,13 @@ class IconBox extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox .bw-btn:hover' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .bw-iconbox:hover .bw-btn' => 'color: {{VALUE}}',
 				],
 			]
 		);
 
 		$this->end_controls_tab();
-		$this->end_controls_tabs(); // End Tabs
+		$this->end_controls_tabs();
 
 		$this->add_control(
 			'link_hr1',
@@ -1430,7 +1691,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Typography
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -1443,7 +1703,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Text shadow
 		$this->add_group_control(
 			Group_Control_Text_Shadow::get_type(),
 			[
@@ -1453,7 +1712,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -1486,12 +1744,11 @@ class IconBox extends \Elementor\Widget_Base {
 				],
 				'toggle'    => true,
 				'selectors' => [
-					'{{WRAPPER}} .bw-iconbox .bw-btn' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .bw-iconbox .bw-btn' => 'text-align: {{VALUE}}; display: block; width: 100%;',
 				],
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'content_link__margin',
 			[
@@ -1504,7 +1761,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'content_link__padding',
 			[
@@ -1517,7 +1773,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -1527,7 +1782,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border Radius
 		$this->add_control(
 			'content_link__border_radius', //param_name
 			[
@@ -1540,7 +1794,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -1551,9 +1804,7 @@ class IconBox extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-        // End
 
-		// Start
 		// Icon Style section
 		$this->start_controls_section(
 			'icon_style_section',
@@ -1561,15 +1812,19 @@ class IconBox extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Icon Styles', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 				'condition'  => [
+					'widget_icon_image_enable' => [
+						'icon_image_enable',
+					],
 					'widget_icon_image_type' => [
 						'enable_icon',
 						'enable_code',
+						'enable_image',
 					],
 				],
 			]
 		);
 
-		$this->start_controls_tabs('inner_icon_tab'); // Start Tabs
+		$this->start_controls_tabs('inner_icon_tab');
 		$this->start_controls_tab(
 			'icon_tab_1',
 			[
@@ -1577,7 +1832,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_icon_box_icon_normal_color',
 			[
@@ -1591,7 +1845,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_svg_fill_icon_box_icon_normal_color',
 			[
@@ -1606,7 +1859,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_svg_stroke_icon_box_icon_normal_color',
 			[
@@ -1621,7 +1873,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -1682,7 +1933,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -1694,7 +1944,7 @@ class IconBox extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_tab();
-		$this->end_controls_tabs(); // End Tabs
+		$this->end_controls_tabs();
 
 		$this->add_control(
 			'icon_hr1',
@@ -1719,7 +1969,11 @@ class IconBox extends \Elementor\Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon' => 'font-size: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon i' => 'font-size: {{SIZE}}{{UNIT}} !important;',
-					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg' => 'width: {{SIZE}}{{UNIT}} !important; height: {{SIZE}}{{UNIT}} !important;',
+				],
+				'condition' => [
+					'widget_icon_image_type' => [
+						'enable_icon',
+					],
 				],
 			]
 		);
@@ -1744,8 +1998,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Alignment, no selectors: re-render updates .left|.center|.right (Pos 1/2
-		// horizontal) and .bw-icon-align-* (Pos 3-6 vertical via align-items).
 		$this->add_responsive_control(
 			'the_icon_alignment',
 			[
@@ -1766,10 +2018,59 @@ class IconBox extends \Elementor\Widget_Base {
 					],
 				],
 				'toggle'    => true,
+				'selectors_dictionary' => [
+					'left'   => 'flex-start',
+					'center' => 'center',
+					'right'  => 'flex-end',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bw-iconbox-media-row' => 'justify-content: {{VALUE}};',
+				],
 			]
 		);
 
-		// Margin
+		$this->add_responsive_control(
+			'the_icon_v_alignment',
+			[
+				'label'     => esc_html__( 'Icon Vertical Align', 'blackwidgets' ),
+				'type'      => \Elementor\Controls_Manager::CHOOSE,
+				'options'   => [
+					'top'   => [
+						'title' => esc_html__( 'Top', 'blackwidgets' ),
+						'icon'  => 'eicon-v-align-top',
+					],
+					'middle' => [
+						'title' => esc_html__( 'Middle', 'blackwidgets' ),
+						'icon'  => 'eicon-v-align-middle',
+					],
+					'bottom'  => [
+						'title' => esc_html__( 'Bottom', 'blackwidgets' ),
+						'icon'  => 'eicon-v-align-bottom',
+					],
+				],
+				'toggle'    => true,
+				'selectors_dictionary' => [
+					'top'    => 'flex-start',
+					'middle' => 'center',
+					'bottom' => 'flex-end',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bw-iconbox.bw-position-3' => 'align-items: {{VALUE}};',
+					'{{WRAPPER}} .bw-iconbox.bw-position-4' => 'align-items: {{VALUE}};',
+					'{{WRAPPER}} .bw-iconbox.bw-position-5 .bw-wrapper' => 'align-items: {{VALUE}};',
+					'{{WRAPPER}} .bw-iconbox.bw-position-6 .bw-wrapper' => 'align-items: {{VALUE}};',
+				],
+				'condition' => [
+					'widget_position' => [
+						'position-3',
+						'position-4',
+						'position-5',
+						'position-6',
+					],
+				],
+			]
+		);
+
 		$this->add_responsive_control(
 			'content_icon__margin',
 			[
@@ -1782,7 +2083,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'content_icon__padding',
 			[
@@ -1795,7 +2095,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -1805,7 +2104,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border Radius
 		$this->add_control(
 			'content_icon__border_radius', //param_name
 			[
@@ -1818,7 +2116,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -1829,9 +2126,7 @@ class IconBox extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-        // End
 
-		// Start
 		// Image Style section
 		$this->start_controls_section(
 			'image_style_section',
@@ -1839,6 +2134,9 @@ class IconBox extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Image Styles', 'blackwidgets' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 				'condition'  => [
+					'widget_icon_image_enable' => [
+						'icon_image_enable',
+					],
 					'widget_icon_image_type' => [
 						'enable_image',
 					],
@@ -1846,7 +2144,7 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		$this->start_controls_tabs('inner_image_tab'); // Start Tabs
+		$this->start_controls_tabs('inner_image_tab');
 		$this->start_controls_tab(
 			'image_tab_1',
 			[
@@ -1854,7 +2152,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -1873,7 +2170,6 @@ class IconBox extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -1885,7 +2181,7 @@ class IconBox extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_tab();
-		$this->end_controls_tabs(); // End Tabs
+		$this->end_controls_tabs();
 
 		$this->add_control(
 			'image_hr1',
@@ -1914,6 +2210,7 @@ class IconBox extends \Elementor\Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox .bw-iconbox-img img' => 'width: {{SIZE}}{{UNIT}} !important; height: auto;',
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-img.bw-iconbox-svg-file svg' => 'width: {{SIZE}}{{UNIT}} !important; height: auto; max-width: 100%;',
 				],
 			]
 		);
@@ -1942,7 +2239,6 @@ class IconBox extends \Elementor\Widget_Base {
 		// 	]
 		// );
 
-		// Margin
 		$this->add_responsive_control(
 			'content_image_margin',
 			[
@@ -1950,12 +2246,11 @@ class IconBox extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-iconbox .bw-iconbox-img img' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-img img, {{WRAPPER}} .bw-iconbox .bw-iconbox-img.bw-iconbox-svg-file svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'content_image_padding',
 			[
@@ -1963,22 +2258,20 @@ class IconBox extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-iconbox .bw-iconbox-img img' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-img img, {{WRAPPER}} .bw-iconbox .bw-iconbox-img.bw-iconbox-svg-file svg' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'content_image_border',
 				'label' => esc_html__( 'Border', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .bw-iconbox .bw-iconbox-img img',
+				'selector' => '{{WRAPPER}} .bw-iconbox .bw-iconbox-img img, {{WRAPPER}} .bw-iconbox .bw-iconbox-img.bw-iconbox-svg-file svg',
 			]
 		);
 
-		// Border Radius
 		$this->add_control(
 			'content_image_border_radius', //param_name
 			[
@@ -1986,224 +2279,501 @@ class IconBox extends \Elementor\Widget_Base {
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-iconbox .bw-iconbox-img img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-iconbox .bw-iconbox-img img, {{WRAPPER}} .bw-iconbox .bw-iconbox-img.bw-iconbox-svg-file svg' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'content_image_box_shadow',
 				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .bw-iconbox .bw-iconbox-img img',
+				'selector' => '{{WRAPPER}} .bw-iconbox .bw-iconbox-img img, {{WRAPPER}} .bw-iconbox .bw-iconbox-img.bw-iconbox-svg-file svg',
 			]
 		);
 
 		$this->end_controls_section();
-		// End
 
 	}
 
 	/**
-	 * Render title widget output on the frontend.
+	 * Render the icon box widget output on the frontend.
 	 *
-	 * Written in PHP and used to generate the final HTML.
+	 * Outputs the widget HTML.
 	 *
 	 * @since 1.0.0
 	 * @access protected
 	 */
 	protected function render() {
+		$settings = $this->get_settings_for_display();
 
-		// Variables
-		$settings   			= $this->get_settings_for_display();
-		// Title
-		$enable_title			= isset( $settings['widget_title_enable'] ) && 'title_enable' === $settings['widget_title_enable'] ? 'title_enable' : '';
-		$allowed_tags 			= ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'];
-		$title_tag 				= isset($settings['widget_html_tag_title']) 					? $settings['widget_html_tag_title']			: ''; // HTML Tag
-		// Validate the HTML tag
-		if (!in_array($title_tag, $allowed_tags)) {
-			$title_tag 			= 'h3';
+		$enable_title     = isset( $settings['widget_title_enable'] ) && 'title_enable' === $settings['widget_title_enable'];
+		$allowed_tags     = [ 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span' ];
+		$title_tag        = isset( $settings['widget_html_tag_title'] ) ? $settings['widget_html_tag_title'] : 'h3';
+		if ( ! in_array( $title_tag, $allowed_tags, true ) ) {
+			$title_tag = 'h3';
 		}
-		$title 					= isset($settings['widget_title']) 								? $settings['widget_title']						: '';
-		// Subtitle
-		$enable_subtitle		= isset( $settings['widget_subtitle_enable'] ) && 'subtitle_enable' === $settings['widget_subtitle_enable'] ? 'subtitle_enable' : '';
-		$subtitle_tag			= isset($settings['widget_html_tag_subtitle']) 					? $settings['widget_html_tag_subtitle']			: ''; // HTML Tag
-		// Validate the HTML tag
-		if (!in_array($subtitle_tag, $allowed_tags)) {
-			$subtitle_tag 		= 'h4';
+		$title            = isset( $settings['widget_title'] ) ? $settings['widget_title'] : '';
+		$enable_subtitle  = isset( $settings['widget_subtitle_enable'] ) && 'subtitle_enable' === $settings['widget_subtitle_enable'];
+		$subtitle_tag     = isset( $settings['widget_html_tag_subtitle'] ) ? $settings['widget_html_tag_subtitle'] : 'h4';
+		if ( ! in_array( $subtitle_tag, $allowed_tags, true ) ) {
+			$subtitle_tag = 'h4';
 		}
-		$subtitle				= isset($settings['widget_subtitle'])							? $settings['widget_subtitle']					: '';
-		// Paragraph
-		$enable_paragraph		= isset( $settings['widget_paragraph_enable'] ) && 'paragraph_enable' === $settings['widget_paragraph_enable'] ? 'paragraph_enable' : '';
-		$paragraph				= isset($settings['widget_paragraph'])							? $settings['widget_paragraph']					: '';
-		// Image Or Icon
-		$enable_icon_image		= isset( $settings['widget_icon_image_enable'] ) && 'icon_image_enable' === $settings['widget_icon_image_enable'] ? 'icon_image_enable' : '';
-		$icon_image				= isset($settings['widget_icon_image_type'])					? $settings['widget_icon_image_type']			: '';
-		$iconset				= isset($settings['widget_icon'])								? $settings['widget_icon']						: ''; // Icon
-		$svgcode				= isset($settings['widget_code'])								? $settings['widget_code']						: ''; // Icon
-        $thumbnail = 'thumbnail';
-		// Link
-		$enable_link			= isset( $settings['widget_link_enable'] ) && 'link_enable' === $settings['widget_link_enable'] ? 'link_enable' : '';
-		$link					= isset($settings['widget_link_url']['url'])					? $settings['widget_link_url']['url']			: ''; // Link URL
-		$link_text 	        	= isset($settings['widget_link_text'])							? $settings['widget_link_text'] 				: ''; // Link Text
-		$link_target         	= isset($settings['widget_link_url']['is_external'])			? 'target="_blank"' 							: '';
-		$link_nofollow       	= isset($settings['widget_link_url']['nofollow'] )				? ' rel="nofollow"'								: '';
-		// Position Options
-		$position				= isset( $settings['widget_position'] )							? $settings['widget_position']					: '';
-		// Alignment (responsive choose controls must stay strings for class names)
-		$box_align				= isset($settings['box_text_alignment']) && is_string( $settings['box_text_alignment'] ) ? $settings['box_text_alignment'] : 'left';
-		$box_b_align			= isset($settings['box_b_text_alignment']) && is_string( $settings['box_b_text_alignment'] ) ? $settings['box_b_text_alignment'] : 'left';
-		$title_align			= isset($settings['content_title_text_alignment']) && is_string( $settings['content_title_text_alignment'] ) ? $settings['content_title_text_alignment'] : '';
-		$subtitle_align			= isset($settings['content_subtitle_text_alignment']) && is_string( $settings['content_subtitle_text_alignment'] ) ? $settings['content_subtitle_text_alignment'] : '';
-		$paragraph_align		= isset($settings['content_paragraph_text_alignment']) && is_string( $settings['content_paragraph_text_alignment'] ) ? $settings['content_paragraph_text_alignment'] : '';
-		$link_align				= isset($settings['content_link_text_alignment']) && is_string( $settings['content_link_text_alignment'] ) ? $settings['content_link_text_alignment'] : '';
-		// Icon Position:
-		$icon_position			= isset($settings['the_icon_alignment']) && is_string( $settings['the_icon_alignment'] ) ? $settings['the_icon_alignment'] : '';
-		$icon_align_class		= $icon_position ? 'bw-icon-align-' . $icon_position : '';
-		$svg_animate			= isset( $settings['widget_svg_animate'] ) && 'bw-iconbox-svg-animate' === $settings['widget_svg_animate'] ? 'bw-iconbox-svg-animate' : '';
-		$data_id				= 'bw_' . uniqid();
-		$animate_id				= '#' . $data_id;
+		$subtitle         = isset( $settings['widget_subtitle'] ) ? $settings['widget_subtitle'] : '';
+		$enable_paragraph = isset( $settings['widget_paragraph_enable'] ) && 'paragraph_enable' === $settings['widget_paragraph_enable'];
+		$paragraph        = isset( $settings['widget_paragraph'] ) ? $settings['widget_paragraph'] : '';
+		$enable_icon      = isset( $settings['widget_icon_image_enable'] ) && 'icon_image_enable' === $settings['widget_icon_image_enable'];
+		$enable_link      = isset( $settings['widget_link_enable'] ) && 'link_enable' === $settings['widget_link_enable'];
+		$link             = isset( $settings['widget_link_url']['url'] ) ? $settings['widget_link_url']['url'] : '';
+		$link_text        = isset( $settings['widget_link_text'] ) ? $settings['widget_link_text'] : '';
+		$link_target      = ! empty( $settings['widget_link_url']['is_external'] ) ? ' target="_blank"' : '';
+		$link_nofollow    = ! empty( $settings['widget_link_url']['nofollow'] ) ? ' rel="nofollow"' : '';
+		$position         = isset( $settings['widget_position'] ) ? $settings['widget_position'] : 'position-5';
 
-        $svgcode = black_widgets_sanitize_svg_markup( $svgcode );
+		$title_align     = $this->choose_string( $settings, 'content_title_text_alignment' );
+		$subtitle_align  = $this->choose_string( $settings, 'content_subtitle_text_alignment' );
+		$paragraph_align = $this->choose_string( $settings, 'content_paragraph_text_alignment' );
+		$link_align      = $this->choose_string( $settings, 'content_link_text_alignment' );
+		$is_stacked      = in_array( $position, [ 'position-3', 'position-4', 'position-5', 'position-6' ], true );
+		$icon_h_class    = $this->icon_horizontal_classes( $settings );
+		$box_side        = $this->box_side_classes( $settings, $position );
+		$shape           = $this->choose_string( $settings, 'icon_shape' );
+		if ( ! in_array( $shape, [ 'auto', 'square', 'circle', 'rounded' ], true ) ) {
+			$shape = 'auto';
+		}
+		$svg_animate = ( isset( $settings['widget_svg_animate'] ) && 'bw-iconbox-svg-animate' === $settings['widget_svg_animate'] ) ? 'bw-iconbox-svg-animate' : '';
+		$data_id     = 'bw_ibox_' . $this->get_id();
 
-		// Render
-		switch ($position) {
+		$root_classes = [
+			'bw-iconbox',
+			'bw-' . $position,
+			'bw-icon-shape-' . $shape,
+			$box_side,
+			$svg_animate,
+		];
+		if ( $is_stacked ) {
+			$root_classes[] = $this->icon_vertical_classes( $settings );
+			$root_classes[] = $this->icon_column_h_classes( $settings );
+		}
+
+		$anim_attrs = $this->animate_data_attributes( $settings );
+
+		echo '<div id="' . esc_attr( $data_id ) . '" class="' . esc_attr( trim( preg_replace( '/\s+/', ' ', implode( ' ', $root_classes ) ) ) ) . '"' . $anim_attrs . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- attrs escaped in helper
+
+		switch ( $position ) {
 			case 'position-2':
-				echo '<div id="' . $data_id . '" class="bw-iconbox bw-box-'. esc_attr( $box_align ).' bw-' . esc_attr( $position ) . ' ' . $svg_animate . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					// Title
-					if ( $enable_title ) echo '<' . $title_tag . ' class="bw-it-is-title ' . esc_attr( $title_align ) . '">' . esc_html($title) . '</' . $title_tag . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					// Subtitle
-					if ( $enable_subtitle ) echo '<' . $subtitle_tag . ' class="bw-it-is-subtitle ' . esc_attr( $subtitle_align ) . '">' . esc_html($subtitle) . '</' . $subtitle_tag . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					// Image
-                if ( $enable_icon_image ) {
-                    if ( $icon_image == 'enable_icon' ) {
-                        echo '<div class="bw-iconbox-icon ' . esc_attr( $icon_position ) . '">';
-                        \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] );
-                        echo '</div>';
-                    } elseif ( $icon_image == 'enable_code' ) {
-                        echo '<div class="bw-iconbox-img xcv--mw ' . esc_attr( $icon_position ) . '">' . $svgcode . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- sanitized SVG
-                    } else {
-                        $image_url = Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], $thumbnail, $settings );
-                        if ( $image_url ) {
-                            echo '<div class="bw-iconbox-img ' . esc_attr( $icon_position ) . '">';
-                            echo '<img src="' . esc_url( $image_url ) . '" class="bw-iconbox-image">';  // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
-                            echo '</div>';
-                        }
-                    }
-                }
-					// Paragraph
-					if ( $enable_paragraph ) echo '<p class="bw-it-is-paragraph ' . esc_attr( $paragraph_align ) . '">' . esc_html($paragraph) . '</p>';
-					// Link
-					if ( $enable_link ) echo '<a href="' . esc_url( $link ) . '"' . $link_target . $link_nofollow . ' class="bw-btn ' . esc_attr( $link_align ) . '">' . esc_html($link_text) . '</a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				$this->render_heading( $enable_title, $title_tag, $title, $title_align, 'bw-it-is-title' );
+				$this->render_heading( $enable_subtitle, $subtitle_tag, $subtitle, $subtitle_align, 'bw-it-is-subtitle' );
+				$this->render_media( $settings, $enable_icon, $icon_h_class );
+				$this->render_paragraph( $enable_paragraph, $paragraph, $paragraph_align );
+				$this->render_link( $enable_link, $link, $link_text, $link_target, $link_nofollow, $link_align );
+				break;
+
+			case 'position-3':
+			case 'position-4':
+				if ( $enable_icon ) {
+					echo '<div class="bw-image-wrap">';
+					$this->render_media( $settings, true, $icon_h_class );
+					echo '</div>';
+				}
+				echo '<div class="bw-content-wrap">';
+				$this->render_heading( $enable_title, $title_tag, $title, $title_align, 'bw-it-is-title' );
+				$this->render_heading( $enable_subtitle, $subtitle_tag, $subtitle, $subtitle_align, 'bw-it-is-subtitle' );
+				$this->render_paragraph( $enable_paragraph, $paragraph, $paragraph_align );
+				$this->render_link( $enable_link, $link, $link_text, $link_target, $link_nofollow, $link_align );
 				echo '</div>';
 				break;
 
-				case 'position-3':
-				case 'position-4':
-					echo '<div id="' . $data_id . '" class="bw-iconbox bw-box-'. esc_attr( $box_b_align ) .' bw-' . esc_attr( $position ) . ' ' . esc_attr( $icon_align_class ) . ' ' . $svg_animate . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            if ( $enable_icon_image ) {
-						echo '<div class="bw-image-wrap">';
-                if ( $icon_image == 'enable_icon' ) {
-                    echo '<div class="bw-iconbox-icon ' . esc_attr( $icon_position ) . '">';
-                    \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] );
-                    echo '</div>';
-                } elseif ( $icon_image == 'enable_code' ) {
-                    echo '<div class="bw-iconbox-img xcv--mw ' . esc_attr( $icon_position ) . '">' . $svgcode . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- sanitized SVG
-                } else {
-                    $image_url = Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], $thumbnail, $settings );
-                    if ( $image_url ) {
-                        echo '<div class="bw-iconbox-img ' . esc_attr( $icon_position ) . '">';
-                        echo '<img src="' . esc_url( $image_url ) . '" class="bw-iconbox-image" alt="">';             // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
-                        echo '</div>';
-                    }
-                }
-						echo '</div>';
-            }
-						echo '<div class="bw-content-wrap">';
-							// Title
-							if ( $enable_title ) echo '<' . $title_tag . ' class="bw-it-is-title ' . esc_attr( $title_align ) . '">' . esc_html($title) . '</' . $title_tag . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-							// Subtitle
-							if ( $enable_subtitle ) echo '<' . $subtitle_tag . ' class="bw-it-is-subtitle ' . esc_attr( $subtitle_align ) . '">' . esc_html($subtitle) . '</' . $subtitle_tag . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-							// Paragraph
-							if ( $enable_paragraph ) echo '<p class="bw-it-is-paragraph ' . esc_attr( $paragraph_align ) . '">' . esc_html($paragraph) . '</p>';
-							// Link
-							if ( $enable_link ) echo '<a href="' . esc_url( $link ) . '"' . $link_target . $link_nofollow . ' class="bw-btn ' . esc_attr( $link_align ) . '">' . esc_html($link_text) . '</a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						echo '</div>';
-					echo '</div>';
-					break;
-
 			case 'position-5':
 			case 'position-6':
-				echo '<div id="' . $data_id . '" class="bw-iconbox bw-box-'. esc_attr( $box_b_align ) .' bw-' . esc_attr( $position ) . ' ' . esc_attr( $icon_align_class ) . ' ' . $svg_animate . '">';// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					echo '<div class="bw-wrapper">';
-					// Image
-            if ( $enable_icon_image ) {
-                if ( $icon_image == 'enable_icon' ) {
-                    echo '<div class="bw-iconbox-icon ' . esc_attr( $icon_position ) . '">';
-                    \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] );
-                    echo '</div>';
-                } elseif ( $icon_image == 'enable_code' ) {
-                    echo '<div class="bw-iconbox-img xcv--mw ' . esc_attr( $icon_position ) . '">' . $svgcode . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- sanitized SVG
-                } else {
-                    $image_url = Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], $thumbnail, $settings );
-                    if ( $image_url ) {
-                        echo '<div class="bw-iconbox-img ' . esc_attr( $icon_position ) . '">';
-                        echo '<img src="' . esc_url( $image_url ) . '" class="bw-iconbox-image" alt="">';  // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
-                        echo '</div>';
-                    }
-                }
-            }
-						echo '<div class="bw-typography-wrapper">';
-							echo '<div class="bw-icon-box-title">';
-								// Title
-								if ( $enable_title ) echo '<' . $title_tag . ' class="bw-it-is-title ' . esc_attr( $title_align ) . '">' . esc_html($title) . '</' . $title_tag . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-								// Subtitle
-								if ( $enable_subtitle ) echo '<' . $subtitle_tag . ' class="bw-it-is-subtitle ' . esc_attr( $subtitle_align ) . '">' . esc_html($subtitle) . '</' . $subtitle_tag . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-							echo '</div>';
-							// Paragraph
-							if ( $enable_paragraph ) echo '<p class="bw-it-is-paragraph ' . esc_attr( $paragraph_align ) . '">' . esc_html($paragraph) . '</p>';
-							// Link
-							if ( $enable_link ) echo '<a href="' . esc_url( $link ) . '"' . $link_target . $link_nofollow . ' class="bw-btn ' . esc_attr( $link_align ) . '">' . esc_html($link_text) . '</a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						echo '</div>';
-					echo '</div>';
+				echo '<div class="bw-wrapper">';
+				$this->render_media( $settings, $enable_icon, $icon_h_class );
+				echo '<div class="bw-typography-wrapper">';
+				echo '<div class="bw-icon-box-title">';
+				$this->render_heading( $enable_title, $title_tag, $title, $title_align, 'bw-it-is-title' );
+				$this->render_heading( $enable_subtitle, $subtitle_tag, $subtitle, $subtitle_align, 'bw-it-is-subtitle' );
+				echo '</div>';
+				$this->render_paragraph( $enable_paragraph, $paragraph, $paragraph_align );
+				$this->render_link( $enable_link, $link, $link_text, $link_target, $link_nofollow, $link_align );
+				echo '</div>';
 				echo '</div>';
 				break;
 
 			default:
-				echo '<div id="' . $data_id . '" class="bw-iconbox bw-box-'. esc_attr( $box_align ) .' bw-' . esc_attr( $position ) . ' ' . $svg_animate . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						// Image
-						// echo '<div class="bw-iconbox-icon-svg-code"><div class="bw-iconbox-img xcv--mw">'.$svgcode.'</div></div>';
-                if ( $enable_icon_image ) {
-                    if ( $icon_image === 'enable_icon' ) {
-                        echo '<div class="bw-iconbox-icon ' . esc_attr( $icon_position ) . '">';
-                        \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] );
-                        echo '</div>';
-                    } elseif ( $icon_image === 'enable_code' ) {
-                        echo '<div class="bw-iconbox-img xcv--mw ' . esc_attr( $icon_position ) . '">' . $svgcode . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- sanitized SVG
-                    } else {
-                        $image_url = Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], $thumbnail, $settings );
-                        if ( $image_url ) {
-                            echo '<div class="bw-iconbox-img ' . esc_attr( $icon_position ) . '">';
-                            echo '<img src="' . esc_url( $image_url ) . '" class="bw-iconbox-image" alt="">';                 // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
-                            echo '</div>';
-                        }
-                    }
-                }
-						// elseif ( $icon_image == 'enable_icon' ): echo '<div class="bw-iconbox-icon">'; \Elementor\Icons_Manager::render_icon( $iconset, [ 'aria-hidden' => 'true' ] ); echo '</div>';  else: echo '<div class="bw-iconbox-img"><img src="' . Group_Control_Image_Size::get_attachment_image_src( $settings['widget_image']['id'], $thumbnail, $settings ) . '" class="bw-iconbox-image"></div>';
-						// Title
-						if ( $enable_title ) echo '<' . $title_tag . ' class="bw-it-is-title ' . esc_attr( $title_align ) . '">' . esc_html($title) . '</' . $title_tag . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						// Subtitle
-						if ( $enable_subtitle ) echo '<' . $subtitle_tag . ' class="bw-it-is-subtitle ' . esc_attr( $subtitle_align ) . '">' . esc_html($subtitle) . '</' . $subtitle_tag . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						// Paragraph
-						if ( $enable_paragraph ) echo '<p class="bw-it-is-paragraph ' . esc_attr( $paragraph_align ) . '">' . esc_html($paragraph) . '</p>';
-						// Link
-						if ( $enable_link ) echo '<a href="' . esc_url( $link ) . '"' . $link_target . $link_nofollow . ' class="bw-btn ' . $link_align . '">' . esc_html($link_text) . '</a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					echo '</div>';
-					break;
+				$this->render_media( $settings, $enable_icon, $icon_h_class );
+				$this->render_heading( $enable_title, $title_tag, $title, $title_align, 'bw-it-is-title' );
+				$this->render_heading( $enable_subtitle, $subtitle_tag, $subtitle, $subtitle_align, 'bw-it-is-subtitle' );
+				$this->render_paragraph( $enable_paragraph, $paragraph, $paragraph_align );
+				$this->render_link( $enable_link, $link, $link_text, $link_target, $link_nofollow, $link_align );
+				break;
 		}
 
+		echo '</div>';
+	}
+
+	/**
+	 * @param array  $settings Settings.
+	 * @param string $key      Control ID.
+	 * @return string
+	 */
+	private function choose_string( $settings, $key ) {
+		return ( isset( $settings[ $key ] ) && is_string( $settings[ $key ] ) ) ? $settings[ $key ] : '';
+	}
+
+	/**
+	 * Pos 1/2 icon wrap classes including tablet/mobile.
+	 *
+	 * @param array $settings Settings.
+	 * @return string
+	 */
+	private function icon_horizontal_classes( $settings ) {
+		$classes = [];
+		$desktop = $this->choose_string( $settings, 'the_icon_alignment' );
+		if ( $desktop === '' ) {
+			$desktop = $this->choose_string( $settings, 'the_icon_h_alignment' );
+		}
+		$tablet  = $this->choose_string( $settings, 'the_icon_alignment_tablet' );
+		if ( $tablet === '' ) {
+			$tablet = $this->choose_string( $settings, 'the_icon_h_alignment_tablet' );
+		}
+		$mobile  = $this->choose_string( $settings, 'the_icon_alignment_mobile' );
+		if ( $mobile === '' ) {
+			$mobile = $this->choose_string( $settings, 'the_icon_h_alignment_mobile' );
+		}
+		if ( $desktop ) {
+			$classes[] = $desktop;
+		}
+		if ( $tablet ) {
+			$classes[] = 'bw-align-tablet-' . $tablet;
+		}
+		if ( $mobile ) {
+			$classes[] = 'bw-align-mobile-' . $mobile;
+		}
+		return trim( implode( ' ', $classes ) );
+	}
+
+	/**
+	 * Map leftover left/center/right icon align to vertical values.
+	 *
+	 * @param string $value Choose value.
+	 * @return string
+	 */
+	private function map_legacy_valign( $value ) {
+		$map = [
+			'left'   => 'top',
+			'center' => 'middle',
+			'right'  => 'bottom',
+			'top'    => 'top',
+			'middle' => 'middle',
+			'bottom' => 'bottom',
+		];
+		return isset( $map[ $value ] ) ? $map[ $value ] : '';
+	}
+
+	/**
+	 * Pos 3-6 vertical align classes.
+	 *
+	 * @param array $settings Settings.
+	 * @return string
+	 */
+	private function icon_vertical_classes( $settings ) {
+		$desktop = $this->choose_string( $settings, 'the_icon_v_alignment' );
+		if ( ! $desktop ) {
+			$desktop = $this->map_legacy_valign( $this->choose_string( $settings, 'the_icon_alignment' ) );
+		}
+		$tablet = $this->choose_string( $settings, 'the_icon_v_alignment_tablet' );
+		if ( ! $tablet ) {
+			$tablet = $this->map_legacy_valign( $this->choose_string( $settings, 'the_icon_alignment_tablet' ) );
+		}
+		$mobile = $this->choose_string( $settings, 'the_icon_v_alignment_mobile' );
+		if ( ! $mobile ) {
+			$mobile = $this->map_legacy_valign( $this->choose_string( $settings, 'the_icon_alignment_mobile' ) );
+		}
+
+		$classes = [];
+		$legacy  = [
+			'top'    => 'left',
+			'middle' => 'center',
+			'bottom' => 'right',
+		];
+		if ( $desktop ) {
+			$classes[] = 'bw-icon-valign-' . $desktop;
+			if ( isset( $legacy[ $desktop ] ) ) {
+				$classes[] = 'bw-icon-align-' . $legacy[ $desktop ];
+			}
+		}
+		if ( $tablet ) {
+			$classes[] = 'bw-icon-valign-tablet-' . $tablet;
+		}
+		if ( $mobile ) {
+			$classes[] = 'bw-icon-valign-mobile-' . $mobile;
+		}
+		return trim( implode( ' ', $classes ) );
+	}
+
+	/**
+	 * Pos 3-6 horizontal align of the icon column.
+	 *
+	 * @param array $settings Settings.
+	 * @return string
+	 */
+	private function icon_column_h_classes( $settings ) {
+		$classes = [];
+		$desktop = $this->choose_string( $settings, 'the_icon_h_alignment' );
+		$tablet  = $this->choose_string( $settings, 'the_icon_h_alignment_tablet' );
+		$mobile  = $this->choose_string( $settings, 'the_icon_h_alignment_mobile' );
+		if ( $desktop ) {
+			$classes[] = 'bw-icon-halign-' . $desktop;
+		}
+		if ( $tablet ) {
+			$classes[] = 'bw-icon-halign-tablet-' . $tablet;
+		}
+		if ( $mobile ) {
+			$classes[] = 'bw-icon-halign-mobile-' . $mobile;
+		}
+		return trim( implode( ' ', $classes ) );
+	}
+
+	/**
+	 * Box left/right (and tablet/mobile) classes.
+	 *
+	 * @param array  $settings Settings.
+	 * @param string $position Position key.
+	 * @return string
+	 */
+	private function box_side_classes( $settings, $position ) {
+		$is_stack = in_array( $position, [ 'position-3', 'position-4', 'position-5', 'position-6' ], true );
+		$key      = $is_stack ? 'box_b_text_alignment' : 'box_text_alignment';
+		$desktop  = $this->choose_string( $settings, $key );
+		if ( $desktop === '' ) {
+			$desktop = 'left';
+		}
+		$classes = [ 'bw-box-' . $desktop ];
+		if ( $is_stack ) {
+			$tablet = $this->choose_string( $settings, $key . '_tablet' );
+			$mobile = $this->choose_string( $settings, $key . '_mobile' );
+			if ( $tablet ) {
+				$classes[] = 'bw-box-tablet-' . $tablet;
+			}
+			if ( $mobile ) {
+				$classes[] = 'bw-box-mobile-' . $mobile;
+			}
+		}
+		return implode( ' ', $classes );
+	}
+
+	/**
+	 * GSAP data attributes when Settings CDN is ready and Animate is on.
+	 *
+	 * @param array $settings Settings.
+	 * @return string
+	 */
+	private function animate_data_attributes( $settings ) {
+		if ( ! $this->is_gsap_enabled() ) {
+			return '';
+		}
+		if ( empty( $settings['widget_animate_enable'] ) || $settings['widget_animate_enable'] !== 'yes' ) {
+			return '';
+		}
+
+		$media    = $this->media_kind( $settings );
+		$type     = $this->resolve_animate_type( $settings, $media );
+		$trigger  = isset( $settings['widget_animate_trigger'] ) ? $settings['widget_animate_trigger'] : 'scroll_once';
+		$hover    = $this->resolve_animate_hover( $settings, $media );
+		$loop     = isset( $settings['widget_animate_loop'] ) ? $settings['widget_animate_loop'] : 'none';
+		$duration = isset( $settings['widget_animate_duration'] ) ? (int) $settings['widget_animate_duration'] : 800;
+		$delay    = isset( $settings['widget_animate_delay'] ) ? (int) $settings['widget_animate_delay'] : 0;
+		$ease     = isset( $settings['widget_animate_ease'] ) ? $settings['widget_animate_ease'] : 'power2.out';
+
+		$allowed_trigger = [ 'on_load', 'scroll_once', 'scroll_every' ];
+		$allowed_loop    = [ 'none', 'float', 'pulse', 'spin' ];
+		if ( ! in_array( $trigger, $allowed_trigger, true ) ) {
+			$trigger = 'scroll_once';
+		}
+		if ( ! in_array( $loop, $allowed_loop, true ) ) {
+			$loop = 'none';
+		}
+
+		return sprintf(
+			' data-bw-media="%s" data-bw-anim="%s" data-bw-anim-trigger="%s" data-bw-anim-hover="%s" data-bw-anim-loop="%s" data-bw-anim-duration="%d" data-bw-anim-delay="%d" data-bw-anim-ease="%s"',
+			esc_attr( $media ),
+			esc_attr( $type ),
+			esc_attr( $trigger ),
+			esc_attr( $hover ),
+			esc_attr( $loop ),
+			max( 100, $duration ),
+			max( 0, $delay ),
+			esc_attr( $ease )
+		);
+	}
+
+	/**
+	 * Returns the media type (icon, svg or image) that decides which Animate options apply.
+	 *
+	 * @param array $settings Settings.
+	 * @return string
+	 */
+	private function media_kind( $settings ) {
+		$type = isset( $settings['widget_icon_image_type'] ) ? $settings['widget_icon_image_type'] : 'enable_icon';
+		if ( $type === 'enable_code' ) {
+			return 'svg';
+		}
+		if ( $type === 'enable_image' ) {
+			$attachment_id = isset( $settings['widget_image']['id'] ) ? (int) $settings['widget_image']['id'] : 0;
+			if ( $attachment_id && black_widgets_get_inline_svg_from_attachment( $attachment_id ) !== '' ) {
+				return 'svg';
+			}
+			return 'image';
+		}
+		return 'icon';
+	}
+
+	/**
+	 * @param array  $settings Settings.
+	 * @param string $media    Media kind.
+	 * @return string
+	 */
+	private function resolve_animate_type( $settings, $media ) {
+		$allowed = [ 'fade', 'fade_up', 'scale', 'rotate', 'bounce' ];
+		if ( $media === 'svg' ) {
+			$allowed[] = 'draw';
+		}
+
+		$type = '';
+		if ( $media === 'svg' && ! empty( $settings['widget_animate_type_svg'] ) ) {
+			$type = $settings['widget_animate_type_svg'];
+		}
+		if ( $type === '' && ! empty( $settings['widget_animate_type'] ) ) {
+			$type = $settings['widget_animate_type'];
+		}
+		if ( ! in_array( $type, $allowed, true ) ) {
+			return $media === 'svg' ? 'draw' : 'fade_up';
+		}
+		return $type;
+	}
+
+	/**
+	 * @param array  $settings Settings.
+	 * @param string $media    Media kind.
+	 * @return string
+	 */
+	private function resolve_animate_hover( $settings, $media ) {
+		$allowed = [ 'none', 'scale', 'rotate' ];
+		if ( $media === 'svg' ) {
+			$allowed[] = 'draw';
+		}
+
+		$hover = '';
+		if ( $media === 'svg' && ! empty( $settings['widget_animate_hover_svg'] ) ) {
+			$hover = $settings['widget_animate_hover_svg'];
+		}
+		if ( $hover === '' && ! empty( $settings['widget_animate_hover'] ) ) {
+			$hover = $settings['widget_animate_hover'];
+		}
+		if ( ! in_array( $hover, $allowed, true ) ) {
+			return 'none';
+		}
+		return $hover;
+	}
+
+	/**
+	 * @param bool   $enable Whether to print.
+	 * @param string $tag    Allowed tag.
+	 * @param string $text   Text.
+	 * @param string $align  Align class.
+	 * @param string $class  Base class.
+	 */
+	private function render_heading( $enable, $tag, $text, $align, $class ) {
+		if ( ! $enable ) {
+			return;
+		}
+		echo '<' . $tag . ' class="' . esc_attr( trim( $class . ' ' . $align ) ) . '">' . esc_html( $text ) . '</' . $tag . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- tag allowlisted
+	}
+
+	/**
+	 * @param bool   $enable Whether to print.
+	 * @param string $text   Text.
+	 * @param string $align  Align class.
+	 */
+	private function render_paragraph( $enable, $text, $align ) {
+		if ( ! $enable ) {
+			return;
+		}
+		echo '<p class="bw-it-is-paragraph ' . esc_attr( $align ) . '">' . esc_html( $text ) . '</p>';
+	}
+
+	/**
+	 * @param bool   $enable   Whether to print.
+	 * @param string $url      URL.
+	 * @param string $text     Label.
+	 * @param string $target   Escaped attribute snippet.
+	 * @param string $nofollow Escaped attribute snippet.
+	 * @param string $align    Align class.
+	 */
+	private function render_link( $enable, $url, $text, $target, $nofollow, $align ) {
+		if ( ! $enable ) {
+			return;
+		}
+		echo '<a href="' . esc_url( $url ) . '"' . $target . $nofollow . ' class="bw-btn ' . esc_attr( $align ) . '">' . esc_html( $text ) . '</a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- target/nofollow built from booleans
+	}
+
+	/**
+	 * Icon / image / SVG media block.
+	 *
+	 * @param array  $settings Settings.
+	 * @param bool   $enable   Whether media is on.
+	 * @param string $align    Extra wrap classes.
+	 */
+	private function render_media( $settings, $enable, $align ) {
+		if ( ! $enable ) {
+			return;
+		}
+
+		$type        = isset( $settings['widget_icon_image_type'] ) ? $settings['widget_icon_image_type'] : '';
+		$align_class = $align ? ' ' . $align : '';
+
+		echo '<div class="bw-iconbox-media-row' . esc_attr( $align_class ) . '">';
+
+		if ( $type === 'enable_icon' ) {
+			echo '<div class="bw-iconbox-icon">';
+			\Elementor\Icons_Manager::render_icon( isset( $settings['widget_icon'] ) ? $settings['widget_icon'] : [], [ 'aria-hidden' => 'true' ] );
+			echo '</div>';
+			echo '</div>';
+			return;
+		}
+
+		if ( $type === 'enable_code' ) {
+			$svg = black_widgets_sanitize_svg_markup( isset( $settings['widget_code'] ) ? $settings['widget_code'] : '' );
+			echo '<div class="bw-iconbox-img">' . $svg . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- sanitized SVG
+			echo '</div>';
+			return;
+		}
+
+		$attachment_id = isset( $settings['widget_image']['id'] ) ? (int) $settings['widget_image']['id'] : 0;
+		$inline        = $attachment_id ? black_widgets_get_inline_svg_from_attachment( $attachment_id ) : '';
+		if ( $inline !== '' ) {
+			echo '<div class="bw-iconbox-img bw-iconbox-svg-file">' . $inline . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- sanitized SVG
+			echo '</div>';
+			return;
+		}
+
+		$image_url = '';
+		if ( $attachment_id ) {
+			$image_url = Group_Control_Image_Size::get_attachment_image_src( $attachment_id, 'thumbnail', $settings );
+		}
+		if ( ! $image_url && ! empty( $settings['widget_image']['url'] ) ) {
+			$image_url = $settings['widget_image']['url'];
+		}
+		if ( ! $image_url ) {
+			echo '</div>';
+			return;
+		}
+
+		echo '<div class="bw-iconbox-img">';
+		echo '<img src="' . esc_url( $image_url ) . '" class="bw-iconbox-image" alt="">'; // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
+		echo '</div>';
+		echo '</div>';
 	}
 }
 

@@ -1,15 +1,23 @@
+.bw-title-animate {
+    display: block;
+    width: 100%;
+}
+
 .bw-title-animate.left {
     text-align: left;
 }
 
 .bw-title-animate.center {
     text-align: center;
-    width: fit-content;
-    margin: auto;
 }
 
 .bw-title-animate.right {
     text-align: right;
+}
+
+body.elementor-editor-active .elementor-widget-b_TitleAnimate .bw-title-animate {
+    min-width: 2em;
+    min-height: 1em;
 }
 
 .bw-title-animate h1,
@@ -109,7 +117,7 @@
     left: 0;
     height: 2px;
     width: 100%;
-    background-color: #fff;
+    background-color: currentColor;
     bottom: 0;
     transform-origin: 100% 100%;
 }
@@ -127,16 +135,25 @@
 
 .bw-title-animate .bw-effective {
     position: relative;
-    min-height: 95px;
+    display: inline-grid;
+    justify-items: start;
+    align-items: center;
+}
+
+.bw-title-animate.center .bw-effective {
+    justify-items: center;
+}
+
+.bw-title-animate.right .bw-effective {
+    justify-items: end;
 }
 
 .bw-title-animate .bw-effective .bw-letters {
-    position: absolute;
-    margin: auto;
-    left: 0;
-    top: 0;
-    right: auto;
+    grid-area: 1 / 1;
+    position: static;
+    margin: 0;
     opacity: 0;
+    white-space: nowrap;
 }
 
 
@@ -145,6 +162,7 @@
 .bw-title-animate .bw-typing .bw-text-wrapper {
     position: relative;
     display: inline-block;
+    padding-left: 0.35em;
     padding-right: 0.05em;
 }
 
@@ -154,7 +172,7 @@
     left: 0;
     height: 100%;
     width: 3px;
-    background-color: #fff;
+    background-color: currentColor;
     transform-origin: 0 50%;
 }
 
@@ -196,7 +214,7 @@
 }
 
 
-/* FadeIn FadeOut - Out Now*/
+/* Fade-in and fade-out text styles */
 
 .bw-title-animate .bw-fout,
 .bw-title-animate .bw-fin {
@@ -211,9 +229,10 @@
 
 /* Glitch */
 .bw-glitch {
-    width: fit-content;
-    margin: 0 auto;
-    display: -webkit-inline-box !important;
+    display: inline-block;
+    position: relative;
+    width: auto;
+    margin: 0;
 }
 
 .bw-glitch.bw-no-loop::before,
@@ -229,12 +248,11 @@
 
 /* Glitch One */
 .bw-animate-text.bw-glitch {
-    display: block;
+    display: inline-block;
 }
 
 .bw-glitch {
     position: relative;
-    margin: 0 auto;
 }
 
 .bw-glitch::before,
@@ -719,12 +737,14 @@
 /* Rotator */
 
 .bw-title-animate .bw-rotator .bw-text-wrapper {
-    display: flex;
+    display: inline-flex;
+    align-items: baseline;
+    max-width: 100%;
 }
 
 .bw-title-animate .bw-rotator-item {
-    position: absolute;
-    left: 2px;
+    grid-area: 1 / 1;
+    position: static;
 }
 
 .bw-title-animate .bw-rotator .bw-line {
@@ -740,7 +760,15 @@
 
 .bw-title-animate .bw-rotator-wrapper {
     position: relative;
+    display: inline-grid;
+    align-items: baseline;
     margin-left: 8px;
+    min-width: 1em;
+}
+
+.bw-title-animate .bw-rotator-clip,
+.bw-title-animate .bw-rotator-tlatter {
+    overflow: hidden;
 }
 
 .bw-title-animate .bw-rotator .bw-letter {
@@ -748,7 +776,7 @@
 }
 
 .bw-title-animate .bw-rotator-clip .bw-rotator-item {
-    left: 2px;
+    left: auto;
 }
 
 .bw-title-animate .bw-rotator-lrotate .bw-rotator-item,
@@ -780,6 +808,8 @@
 /* SVG */
 .bw-title-animate .bw-svg-wrapper {
     position: relative;
+    display: inline-block;
+    min-width: 1.25em;
 }
 
 .bw-title-animate .bw-svg-wrapper svg {
@@ -790,27 +820,66 @@
     z-index: -1;
     fill: none;
     stroke: black;
-    stroke-width: 5px;
+    stroke-width: 3px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
     stroke-dasharray: 1000;
     stroke-dashoffset: 1000;
+    transform: translate(var(--bw-svg-offset-x, 0px), var(--bw-svg-offset-y, 0px));
 }
 
-.bw-title-animate .bw-svg-line1 svg {
-    bottom: -40%;
+.bw-title-animate .bw-svg-vector1 svg {
+    bottom: -55%;
+    height: 45%;
+    top: auto;
 }
 
-.bw-title-animate .bw-svg-line2 svg {
-    bottom: -40%;
+.bw-title-animate .bw-svg-vector2 svg {
+    bottom: -45%;
+    height: 95%;
+    top: auto;
 }
 
-.bw-title-animate .bw-svg-line3 svg {
+.bw-title-animate .bw-svg-vector3 svg {
     bottom: -50%;
+    height: 70%;
+    top: auto;
 }
 
-.bw-title-animate .bw-svg-line4 svg {
-    bottom: -25%;
+.bw-title-animate .bw-svg-vector4 svg {
+    bottom: -45%;
+    height: 70%;
+    top: auto;
 }
 
-.bw-title-animate .bw-svg-line5 svg {
-    bottom: -30%;
+.bw-title-animate .bw-svg-vector5 svg {
+    bottom: -50%;
+    height: 60%;
+    top: auto;
+}
+
+.bw-title-animate .bw-svg-vector6 svg {
+    top: -30%;
+    left: -8%;
+    width: 116%;
+    height: 160%;
+    bottom: auto;
+}
+
+.bw-title-animate .bw-svg-vector7 svg {
+    bottom: -40%;
+    height: 120%;
+    top: auto;
+}
+
+.bw-title-animate .bw-svg-vector8 svg {
+    bottom: -35%;
+    height: 110%;
+    top: auto;
+}
+
+.bw-title-animate .bw-svg-vector9 svg {
+    bottom: -35%;
+    height: 100%;
+    top: auto;
 }

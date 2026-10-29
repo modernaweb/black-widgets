@@ -13,9 +13,9 @@ use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
 
 /**
- * Elementor title Widget.
+ * Nav widget.
  *
- * Elementor widget that inserts an embbedable content into the page, from any given URL.
+ * Navigation menu rendered from a WordPress menu.
  *
  * @since 1.0.0
  */
@@ -127,17 +127,13 @@ class FlatNav extends \Elementor\Widget_Base {
 	}
 
 	/**
-	 * Register link widget controls.
-	 *
-	 * Adds different input fields to allow the user to change and customize the widget settings.
+	 * Register the nav widget controls.
 	 *
 	 * @since 1.0.0
 	 * @access protected
 	 */
 	protected function register_controls() {
 
-		// Start
-		// Content section
 		$this->start_controls_section(
 			'content_section',
 			[
@@ -342,10 +338,7 @@ class FlatNav extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'style_section',
 			[
@@ -354,7 +347,6 @@ class FlatNav extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -365,7 +357,6 @@ class FlatNav extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -375,7 +366,6 @@ class FlatNav extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -397,7 +387,6 @@ class FlatNav extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
@@ -410,7 +399,6 @@ class FlatNav extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
@@ -424,10 +412,7 @@ class FlatNav extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-        // End
 
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'typography1_section',
 			[
@@ -436,7 +421,6 @@ class FlatNav extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Style Subtitle Tabs
 		$this->start_controls_tabs('black_widget_1_tab');
 		$this->start_controls_tab(
 			'tab_1_normal',
@@ -445,7 +429,6 @@ class FlatNav extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_link_solid_color',
 			[
@@ -457,7 +440,6 @@ class FlatNav extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Typography
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -477,7 +459,6 @@ class FlatNav extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_link_hover_solid_color',
 			[
@@ -489,7 +470,6 @@ class FlatNav extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Typography
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -501,15 +481,12 @@ class FlatNav extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_tab();
-		$this->end_controls_tabs(); // End Tabs
+		$this->end_controls_tabs();
 
 		$this->end_controls_section();
-		// End
 
 
 
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'shape1_section',
 			[
@@ -527,7 +504,6 @@ class FlatNav extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_shape1_solid_color',
 			[
@@ -544,7 +520,6 @@ class FlatNav extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -567,10 +542,7 @@ class FlatNav extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'shape2_section',
 			[
@@ -584,7 +556,6 @@ class FlatNav extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_shape3_normal_solid_color',
 			[
@@ -601,7 +572,6 @@ class FlatNav extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_shape3_hover_solid_color',
 			[
@@ -619,10 +589,7 @@ class FlatNav extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'shape9_section',
 			[
@@ -636,7 +603,6 @@ class FlatNav extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_decoration_normal_solid_color',
 			[
@@ -648,7 +614,6 @@ class FlatNav extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_decoration_hover_solid_color',
 			[
@@ -661,10 +626,8 @@ class FlatNav extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
 
-		// Start
 		// Icon Style Section
 		$this->start_controls_section(
 			'shapex_section',
@@ -699,7 +662,6 @@ class FlatNav extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Style Subtitle Tabs
 		$this->start_controls_tabs('black_widget_icon_1_tab');
 		$this->start_controls_tab(
 			'icon_tab_1_normal',
@@ -729,7 +691,6 @@ class FlatNav extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_icon_link_hover_solid_color',
 			[
@@ -742,14 +703,13 @@ class FlatNav extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
 	}
 
 	/**
-	 * Render title widget output on the frontend.
+	 * Render the nav widget output on the frontend.
 	 *
-	 * Written in PHP and used to generate the final HTML.
+	 * Outputs the widget HTML.
 	 *
 	 * @since 1.0.0
 	 * @access protected
@@ -816,7 +776,6 @@ class FlatNav extends \Elementor\Widget_Base {
 
 			$menu_html = wp_nav_menu( $args );
 
-			// Render
 
 
 			echo '<div class="bw-nav ' . esc_attr( $custom_nav_styles ) . ' ' . esc_attr( $alignment ) . ' ' . esc_attr( $list_style_class ) . '">';

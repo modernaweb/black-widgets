@@ -72,7 +72,7 @@ GSAP widgets (enable JS → CDN in Settings, then paste GSAP 3.15 + ScrollTrigge
 
 *   [Black Trigger(for experts)](https://modernaweb.net/black-widgets/all-widgets/black-trigger/)
 *   [Black Horizontal(for experts)](https://modernaweb.net/black-widgets/all-widgets/black-horizontal/)
-*   Black Tab
+*   Black Tabs
 *   Black Interactive Links
 *   Black Scroll Text (can be toggled in Settings; default ON)
 

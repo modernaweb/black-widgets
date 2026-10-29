@@ -427,7 +427,41 @@ function black_widgets_sanitize_svg_markup( $raw ) {
 		return '';
 	}
 
+	// Inline output: drop the XML declaration so it is not echoed as a bogus comment.
+	$clean = preg_replace( '/^\s*<\?xml[^>]*\?>\s*/i', '', $clean );
+
 	return $clean;
+}
+
+/**
+ * Inline a local SVG attachment after sanitizing the markup.
+ *
+ * @param int $attachment_id Attachment ID.
+ * @return string Clean SVG markup, or empty string on failure.
+ */
+function black_widgets_get_inline_svg_from_attachment( $attachment_id ) {
+	$attachment_id = (int) $attachment_id;
+	if ( $attachment_id <= 0 ) {
+		return '';
+	}
+
+	$mime = get_post_mime_type( $attachment_id );
+	if ( $mime !== 'image/svg+xml' ) {
+		return '';
+	}
+
+	$path = get_attached_file( $attachment_id );
+	if ( ! is_string( $path ) || $path === '' || ! is_readable( $path ) ) {
+		return '';
+	}
+
+	// Local attachment path only (not a remote URL).
+	$raw = file_get_contents( $path ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+	if ( ! is_string( $raw ) || $raw === '' ) {
+		return '';
+	}
+
+	return black_widgets_sanitize_svg_markup( $raw );
 }
 
 /**
@@ -472,8 +506,7 @@ function black_widgets_elementor_raw_settings( $stack ) {
 			return [];
 		}
 		$prop = $ref->getProperty( 'data' );
-		// No-op since PHP 8.1 (all properties are implicitly accessible) and
-		// deprecated in 8.5, so only call it where it is still required.
+		// No-op since PHP 8.1 and deprecated in PHP 8.5; call only where still required.
 		if ( PHP_VERSION_ID < 80100 ) {
 			$prop->setAccessible( true );
 		}

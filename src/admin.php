@@ -123,8 +123,6 @@ class Admin {
 
 
     public function validate_options( $input ) {
-        // Rebuild allow-listed options. Drop legacy keys (e.g. bw_dark_style).
-        // Disabled GSAP child fields may be omitted from POST; keep prior CDN values.
         $prev  = Plugin_Options::all();
         $input = is_array( $input ) ? $input : [];
         $clean = [];
@@ -165,13 +163,9 @@ class Admin {
                     $clean[ $field ] = $sanitized;
                     $archive         = '';
                 } elseif ( $prev_rejected && ( '' === $submitted || $submitted === $prev_url ) ) {
-                    // Rejected URLs render as an empty field, so an empty (or unchanged) submission
-                    // cannot mean "clear it". Keep the raw value and archive it for the notice.
                     $clean[ $field ] = $prev_url;
                     $archive         = $prev_url;
                 } else {
-                    // URL the user just typed: sanitize_gsap_cdn_url() still decides what is stored,
-                    // but archive the text so the notice can say why the field came back empty.
                     $clean[ $field ] = '';
                     if ( '' !== $submitted ) {
                         $archive = $submitted;
@@ -184,8 +178,7 @@ class Admin {
             }
         }
 
-        // Reference-only archive of the pre-1.4.0 TimelineMax URL - has no field, so the
-        // allow-list rebuild above would drop it on the first save after the upgrade.
+        // Keep the pre-1.4.0 TimelineMax archive: the allowlist rebuild above would drop it on the next save.
         $timelinemax_key     = Plugin_Options::legacy_timelinemax_key();
         $timelinemax_archive = isset( $prev[ $timelinemax_key ] ) ? trim( (string) $prev[ $timelinemax_key ] ) : '';
         if ( '' !== $timelinemax_archive ) {
@@ -395,14 +388,11 @@ class Admin {
 	}
 
 	/**
-	 * One-time upgrade routine: data migrations, the CDN notice flag, and the
+	 * One-time upgrade routine: data migrations, the CDN notice flag and the
 	 * Elementor CSS rebuild.
 	 *
-	 * Deliberately not gated on current_user_can(). This is a data migration, not
-	 * a user action: a WP-CLI upgrade or a background auto-update must not leave
-	 * the site rendering stale Elementor CSS just because no administrator has
-	 * opened wp-admin yet. The stored version guard makes it run at most once, and
-	 * the notices it queues keep their own capability checks at render time.
+	 * Not gated on current_user_can(): WP-CLI and background updates must run it
+	 * too. The stored version guard makes it run at most once.
 	 */
 	public function maybe_upgrade_plugin_db_version() {
 		$stored  = get_option( 'bw_plugin_db_version', '0' );
@@ -417,9 +407,7 @@ class Admin {
 
 		// Upgrading from before 1.4.0: queue the CDN migration notice once.
 		if ( version_compare( (string) $stored, '1.4.0', '<' ) ) {
-			// 1.3.9's activation-redirect flag was autoloaded, so an install where the
-			// redirect never fired carries it on every request. Cleaned up here rather
-			// than on admin_init, where the check itself would cost a query forever.
+			// v1.3.9 activation-redirect flag was autoloaded.
 			delete_option( 'my_plugin_do_activation_redirect' );
 
 			if ( ! get_option( 'bw_cdn_notice_dismissed' ) ) {
@@ -429,9 +417,7 @@ class Admin {
 			$this->migrate_legacy_timelinemax_cdn();
 		}
 
-		// Hold the stored version back when Elementor is not available (updated while
-		// it was inactive): every step above is idempotent, so retrying is safe and
-		// far better than permanently skipping the CSS rebuild.
+		// Hold the stored version back when Elementor is not available
 		if ( ! $this->clear_elementor_css_cache() ) {
 			return;
 		}

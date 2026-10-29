@@ -6,18 +6,19 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-
 use Elementor\Controls_Manager;
+use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Css_Filter;
+use Elementor\Group_Control_Text_Shadow;
 
 /**
- * Elementor title Widget.
+ * Image Pro widget.
  *
- * Elementor widget that inserts an embbedable content into the page, from any given URL.
+ * Image with optional parallax, transform effects and scroll-based movement.
  *
  * @since 1.0.0
  */
@@ -25,16 +26,16 @@ class ImagePro extends \Elementor\Widget_Base {
 
     public function __construct( $data = [], $args = null ) {
         parent::__construct( $data, $args );
-        wp_register_style( 'black-widgets-image', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/image.css', [], BLACK_WIDGETS_VERSION );
+        wp_register_style( 'black-widgets-image', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/image.css', [], $this->image_asset_ver( 'assets/css/image.css' ) );
 
-        // Note that since we can't localize the script this early, GSAP related functionallities still remian as inline js
-        wp_register_script( 'black-widgets-image', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/image.js', [ 'jquery', 'black-widgets-simple-parallax' ], BLACK_WIDGETS_VERSION, true );
+        // The script cannot be localized this early, so GSAP-related functionality is output as inline JS.
+        wp_register_script( 'black-widgets-image', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/image.js', [ 'jquery', 'black-widgets-simple-parallax' ], $this->image_asset_ver( 'assets/js/image.js' ), true );
     }
 
     /**
      * Get widget name.
      *
-     * Retrieve button widget name.
+     * Retrieve the image widget name.
      *
      * @since 1.0.0
      * @access public
@@ -48,7 +49,7 @@ class ImagePro extends \Elementor\Widget_Base {
     /**
      * Get widget title.
      *
-     * Retrieve button widget title.
+     * Retrieve the image widget title.
      *
      * @since 1.0.0
      * @access public
@@ -62,7 +63,7 @@ class ImagePro extends \Elementor\Widget_Base {
     /**
      * Get widget icon.
      *
-     * Retrieve button widget icon.
+     * Retrieve the image widget icon.
      *
      * @since 1.0.0
      * @access public
@@ -76,7 +77,7 @@ class ImagePro extends \Elementor\Widget_Base {
     /**
      * Get widget categories.
      *
-     * Retrieve the list of categories the button widget belongs to.
+     * Retrieve the list of categories the image widget belongs to.
      *
      * @since 1.0.0
      * @access public
@@ -91,9 +92,22 @@ class ImagePro extends \Elementor\Widget_Base {
         return [ 'black-widgets-image' ];
     }
 
+    /**
+     * Cache-bust CSS/JS when the file changes (same plugin version).
+     *
+     * @param string $rel Path relative to the plugin root.
+     * @return string
+     */
+    private function image_asset_ver( $rel ) {
+        $ver  = BLACK_WIDGETS_VERSION;
+        $path = BLACK_WIDGETS_PLUGIN_PATH . ltrim( $rel, '/\\' );
+        if ( is_readable( $path ) ) {
+            $ver .= '.' . (int) filemtime( $path );
+        }
+        return $ver;
+    }
+
     public function get_script_depends() {
-        // simple-parallax must be listed so Extra Image Parallax always has the library.
-        // Avoid reading instance settings during early Elementor enqueue.
         $deps = [ 'black-widgets-simple-parallax', 'black-widgets-image' ];
 
         if ( $this->is_gsap_enabled() ) {
@@ -127,17 +141,13 @@ class ImagePro extends \Elementor\Widget_Base {
     }
 
     /**
-     * Register button widget controls.
-     *
-     * Adds different input fields to allow the user to change and customize the widget settings.
+     * Register the image widget controls.
      *
      * @since 1.0.0
      * @access protected
      */
     protected function register_controls() {
 
-        // Start
-        // Content section
         $this->start_controls_section(
             'content_section',
             [
@@ -199,7 +209,7 @@ class ImagePro extends \Elementor\Widget_Base {
         $this->add_group_control(
             Group_Control_Image_Size::get_type(),
             [
-                'name' => 'thumbnail', // Usage: `{name}_size` and `{name}_custom_dimension` → `thumbnail_size`, `thumbnail_custom_dimension`.
+                'name' => 'thumbnail',
                 'exclude' => [ 'custom' ],
                 'include' => [],
                 'default' => 'full',
@@ -237,6 +247,19 @@ class ImagePro extends \Elementor\Widget_Base {
                         'yes',
                     ],
                 ],
+            ]
+        );
+
+        $this->add_control(
+            'show_caption',
+            [
+                'label'        => esc_html__( 'Show Caption', 'blackwidgets' ),
+                'description'  => esc_html__( 'Uses the Caption field from the WordPress media library for the chosen image.', 'blackwidgets' ),
+                'type'         => \Elementor\Controls_Manager::SWITCHER,
+                'label_on'     => esc_html__( 'Show', 'blackwidgets' ),
+                'label_off'    => esc_html__( 'Hide', 'blackwidgets' ),
+                'return_value' => 'yes',
+                'default'      => '',
             ]
         );
 
@@ -358,7 +381,6 @@ class ImagePro extends \Elementor\Widget_Base {
                     ],
                 ]
             );
-
 
             // Enable Image Movement Animate
             $this->add_control(
@@ -490,12 +512,8 @@ class ImagePro extends \Elementor\Widget_Base {
             ]
         );
 
-
         $this->end_controls_section();
-        // End
 
-        // Start
-        // Style section
         $this->start_controls_section(
             'style_section',
             [
@@ -503,7 +521,6 @@ class ImagePro extends \Elementor\Widget_Base {
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
-
 
         $this->add_responsive_control(
             'widget_img_width',
@@ -528,7 +545,6 @@ class ImagePro extends \Elementor\Widget_Base {
             ]
         );
 
-        // Style Subtitle Tabs
         $this->start_controls_tabs('black_widget_1_tab');
         $this->start_controls_tab(
             'tab_1_normal',
@@ -537,7 +553,6 @@ class ImagePro extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -579,7 +594,6 @@ class ImagePro extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'widget_box_margin',
             [
@@ -592,7 +606,6 @@ class ImagePro extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'widget_box_padding',
             [
@@ -612,7 +625,6 @@ class ImagePro extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -622,7 +634,6 @@ class ImagePro extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -661,7 +672,6 @@ class ImagePro extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -703,7 +713,6 @@ class ImagePro extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'widget_hover_box_margin',
             [
@@ -716,7 +725,6 @@ class ImagePro extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'widget_hover_box_padding',
             [
@@ -736,7 +744,6 @@ class ImagePro extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -746,7 +753,6 @@ class ImagePro extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -787,13 +793,110 @@ class ImagePro extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_tab();
-        $this->end_controls_tabs(); // End Tabs
+        $this->end_controls_tabs();
 
         $this->end_controls_section();
-        // End
 
-        // Start
-        // Style section
+        $this->start_controls_section(
+            'style_caption_section',
+            [
+                'label' => esc_html__( 'Caption', 'blackwidgets' ),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'show_caption' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'caption_typography',
+                'selector' => '{{WRAPPER}} .bw-image .bw-image-caption',
+            ]
+        );
+
+        $this->add_control(
+            'caption_color',
+            [
+                'label' => esc_html__( 'Text Color', 'blackwidgets' ),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .bw-image .bw-image-caption' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name' => 'caption_background',
+                'label' => esc_html__( 'Background', 'blackwidgets' ),
+                'types' => [ 'classic', 'gradient' ],
+                'selector' => '{{WRAPPER}} .bw-image .bw-image-caption',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Text_Shadow::get_type(),
+            [
+                'name' => 'caption_text_shadow',
+                'label' => esc_html__( 'Text Shadow', 'blackwidgets' ),
+                'selector' => '{{WRAPPER}} .bw-image .bw-image-caption',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'caption_text_align',
+            [
+                'label' => esc_html__( 'Text Align', 'blackwidgets' ),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'left' => [
+                        'title' => esc_html__( 'Left', 'blackwidgets' ),
+                        'icon' => 'eicon-text-align-left',
+                    ],
+                    'center' => [
+                        'title' => esc_html__( 'Center', 'blackwidgets' ),
+                        'icon' => 'eicon-text-align-center',
+                    ],
+                    'right' => [
+                        'title' => esc_html__( 'Right', 'blackwidgets' ),
+                        'icon' => 'eicon-text-align-right',
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .bw-image .bw-image-caption' => 'text-align: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'caption_margin',
+            [
+                'label' => esc_html__( 'Margin', 'blackwidgets' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
+                'selectors' => [
+                    '{{WRAPPER}} .bw-image .bw-image-caption' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'caption_padding',
+            [
+                'label' => esc_html__( 'Padding', 'blackwidgets' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
+                'selectors' => [
+                    '{{WRAPPER}} .bw-image .bw-image-caption' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
         $this->start_controls_section(
             'transform_section',
             [
@@ -815,7 +918,6 @@ class ImagePro extends \Elementor\Widget_Base {
             ]
         );
 
-        // Style Subtitle Tabs
         $this->start_controls_tabs('transform_tabs', [
             'condition' 	=> [
                 'transform_normal_option' 	=> [
@@ -829,8 +931,6 @@ class ImagePro extends \Elementor\Widget_Base {
                 'label' => esc_html__( 'Move', 'blackwidgets' ),
             ]
         );
-
-        // Start normal tab content
 
         $this->add_responsive_control(
             'move_normal_x',
@@ -895,8 +995,6 @@ class ImagePro extends \Elementor\Widget_Base {
             ]
         );
 
-        // end normal tab content
-
         $this->end_controls_tab();
         $this->start_controls_tab(
             'transform_tab_scale',
@@ -904,8 +1002,6 @@ class ImagePro extends \Elementor\Widget_Base {
                 'label' => esc_html__( 'Scale', 'blackwidgets' ),
             ]
         );
-
-        // Start hover tab content
 
         $this->add_responsive_control(
             'scale_normal_x',
@@ -1012,8 +1108,6 @@ class ImagePro extends \Elementor\Widget_Base {
             ]
         );
 
-        // end hover tab content
-
         $this->end_controls_tab();
         $this->start_controls_tab(
             'transform_tab_rotate',
@@ -1021,8 +1115,6 @@ class ImagePro extends \Elementor\Widget_Base {
                 'label' => esc_html__( 'Rotate', 'blackwidgets' ),
             ]
         );
-
-        // Start hover tab content
 
         $this->add_responsive_control(
             'rotate_normal_x',
@@ -1084,8 +1176,6 @@ class ImagePro extends \Elementor\Widget_Base {
             ]
         );
 
-        // end hover tab content
-
         $this->end_controls_tab();
         $this->start_controls_tab(
             'transform_tab_skew',
@@ -1093,8 +1183,6 @@ class ImagePro extends \Elementor\Widget_Base {
                 'label' => esc_html__( 'Skew', 'blackwidgets' ),
             ]
         );
-
-        // Start hover tab content
 
         $this->add_responsive_control(
             'skew_normal_x',
@@ -1136,17 +1224,11 @@ class ImagePro extends \Elementor\Widget_Base {
             ]
         );
 
-        // end hover tab content
-
         $this->end_controls_tab();
-        $this->end_controls_tabs(); // End Tabs
+        $this->end_controls_tabs();
 
         $this->end_controls_section();
-        // End
 
-
-        // Start
-        // Style section
         $this->start_controls_section(
             'image_pro_cursor_animate',
             [
@@ -1212,11 +1294,7 @@ class ImagePro extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
-
-        // Start
-        // Style section
         $this->start_controls_section(
             'transform_section_hover',
             [
@@ -1238,7 +1316,6 @@ class ImagePro extends \Elementor\Widget_Base {
             ]
         );
 
-        // Style Subtitle Tabs
         $this->start_controls_tabs('transform_hover_tabs', [
             'condition' 	=> [
                 'transform_hover_option' 	=> [
@@ -1252,8 +1329,6 @@ class ImagePro extends \Elementor\Widget_Base {
                 'label' => esc_html__( 'Move', 'blackwidgets' ),
             ]
         );
-
-        // Start normal tab content
 
         $this->add_responsive_control(
             'move_hover_x',
@@ -1318,8 +1393,6 @@ class ImagePro extends \Elementor\Widget_Base {
             ]
         );
 
-        // end normal tab content
-
         $this->end_controls_tab();
         $this->start_controls_tab(
             'transform_tab_scale_hover',
@@ -1327,8 +1400,6 @@ class ImagePro extends \Elementor\Widget_Base {
                 'label' => esc_html__( 'Scale', 'blackwidgets' ),
             ]
         );
-
-        // Start hover tab content
 
         $this->add_responsive_control(
             'scale_hover_x',
@@ -1435,8 +1506,6 @@ class ImagePro extends \Elementor\Widget_Base {
             ]
         );
 
-        // end hover tab content
-
         $this->end_controls_tab();
         $this->start_controls_tab(
             'transform_tab_rotate_hover',
@@ -1444,8 +1513,6 @@ class ImagePro extends \Elementor\Widget_Base {
                 'label' => esc_html__( 'Rotate', 'blackwidgets' ),
             ]
         );
-
-        // Start hover tab content
 
         $this->add_responsive_control(
             'rotate_hover_x',
@@ -1507,8 +1574,6 @@ class ImagePro extends \Elementor\Widget_Base {
             ]
         );
 
-        // end hover tab content
-
         $this->end_controls_tab();
         $this->start_controls_tab(
             'transform_tab_skew_hover',
@@ -1516,8 +1581,6 @@ class ImagePro extends \Elementor\Widget_Base {
                 'label' => esc_html__( 'Skew', 'blackwidgets' ),
             ]
         );
-
-        // Start hover tab content
 
         $this->add_responsive_control(
             'skew_hover_x',
@@ -1559,20 +1622,17 @@ class ImagePro extends \Elementor\Widget_Base {
             ]
         );
 
-        // end hover tab content
-
         $this->end_controls_tab();
-        $this->end_controls_tabs(); // End Tabs
+        $this->end_controls_tabs();
 
         $this->end_controls_section();
-        // End
 
     }
 
     /**
-     * Render title widget output on the frontend.
+     * Render the image widget output on the frontend.
      *
-     * Written in PHP and used to generate the final HTML.
+     * Outputs the widget HTML.
      *
      * @since 1.0.0
      * @access protected
@@ -1584,16 +1644,32 @@ class ImagePro extends \Elementor\Widget_Base {
         $type 	           			= isset($settings['widget_type']) 						? $settings['widget_type'] 							: 'type';
         $alignment 	       			= isset($settings['widget_alignment']) 					? $settings['widget_alignment'] 					: '';
         $image_link 	   			= isset($settings['image_link']) 						? $settings['image_link'] 							: '';
-        // $img_url 	   				= isset($settings['image_link_url'])					? $settings['image_link_url']						: '';
-        $target            			= !empty($settings['image_link_url']['is_external']) 	? 'target="_blank"' 								: '';
-        $nofollow          			= !empty($settings['image_link_url']['nofollow']) 		? ' rel="nofollow"' 								: '';
-        // Paralax
+        $link_url                   = ( isset( $settings['image_link_url'] ) && is_array( $settings['image_link_url'] ) && ! empty( $settings['image_link_url']['url'] ) )
+            ? trim( (string) $settings['image_link_url']['url'] )
+            : '';
+        $has_image_link             = ( 'yes' === $image_link && '' !== $link_url );
+        if ( $has_image_link ) {
+            $this->remove_render_attribute( 'image_link' );
+            $this->add_link_attributes( 'image_link', $settings['image_link_url'] );
+            $this->add_render_attribute( 'image_link', 'class', 'bw-image-link' );
+        }
+
+        $show_caption = isset( $settings['show_caption'] ) ? $settings['show_caption'] : '';
+        $caption_text = '';
+        if ( 'yes' === $show_caption && isset( $settings['image'] ) && is_array( $settings['image'] ) && ! empty( $settings['image']['id'] ) ) {
+            $image_id = absint( $settings['image']['id'] );
+            if ( $image_id > 0 && function_exists( 'wp_get_attachment_caption' ) ) {
+                $maybe_caption = wp_get_attachment_caption( $image_id );
+                $caption_text  = is_string( $maybe_caption ) ? trim( $maybe_caption ) : '';
+            }
+        }
+        $has_caption = ( '' !== $caption_text );
+        // Parallax
         $parallax					= isset($settings['image_parllax'])						? $settings['image_parllax']						: '';
         // $imagelink					= isset($settings['bw_image_link']['url'])				? $settings['bw_image_link']['url']						: '';
         // Transform Option
         $normal_transform			= isset($settings['transform_normal_option'])			? $settings['transform_normal_option']				: '';
         $hover_transform			= isset($settings['transform_hover_option'])			? $settings['transform_hover_option']				: '';
-        //Transform Styles
         $move_normal_x				= isset($settings['move_normal_x'])						? $settings['move_normal_x']						: '0px';
         $move_normal_y				= isset($settings['move_normal_y'])						? $settings['move_normal_y']						: '0px';
         $move_normal_z				= isset($settings['move_normal_z'])						? $settings['move_normal_z']						: '0px';
@@ -1607,10 +1683,11 @@ class ImagePro extends \Elementor\Widget_Base {
         $skew_normal_y				= isset($settings['skew_normal_y'])						? $settings['skew_normal_y']						: '0deg';
         $perspective				= isset($settings['perspective'])						? $settings['perspective']							: '0px';
         $perspective_child			= isset($settings['perspective_child'])					? $settings['perspective_child']					: '0px';
-        // Cursor and Animate
         $cursor						= isset($settings['widget_cursor'])						? $settings['widget_cursor']						: 'auto';
+        if ( $has_image_link && ( 'auto' === $cursor || 'default' === $cursor ) ) {
+            $cursor = 'pointer';
+        }
         $animate					= isset($settings['image_pro_anime'])					? $settings['image_pro_anime']						: 'all 0.3s ease';
-        //Transform Styles
         $move_hover_x				= isset($settings['move_hover_x'])						? $settings['move_hover_x']							: '0px';
         $move_hover_y				= isset($settings['move_hover_y'])						? $settings['move_hover_y']							: '0px';
         $move_hover_z				= isset($settings['move_hover_z'])						? $settings['move_hover_z']							: '0px';
@@ -1624,75 +1701,65 @@ class ImagePro extends \Elementor\Widget_Base {
         $skew_hover_y				= isset($settings['skew_hover_y'])						? $settings['skew_hover_y']							: '0deg';
         $perspective_hover			= isset($settings['perspective_hover'])					? $settings['perspective_hover']					: '0px';
         $perspective_child_hover	= isset($settings['perspective_child_hover'])			? $settings['perspective_child_hover']				: '0px';
-        //ID Settings
         $data_id                	= 'bw_' . uniqid();
         $gsap_ready                 = \Modernaweb\BlackWidgets\Plugin_Options::is_gsap_ready();
         $image_movement  = isset( $settings['image_movement'] ) ? $settings['image_movement'] : '';
         $image_movement2 = isset( $settings['image_movement2'] ) ? $settings['image_movement2'] : '';
-        //Transform Normal Styles
-        // Normal Move
         $translatex 				= isset( $move_normal_x["size"] ) 						? $move_normal_x["size"] . $move_normal_x["unit"] : '';
         $translatey 				= isset( $move_normal_y["size"] ) 						? $move_normal_y["size"] . $move_normal_y["unit"] : '';
         $translatez 				= isset( $move_normal_z["size"] ) 						? $move_normal_z["size"] . $move_normal_z["unit"] : '';
         $translate3d 				= 'translate3d(' . $translatex . ', ' . $translatey . ', ' . $translatez . ')';
-        // Normal Scale
         $scalex 					= isset( $scale_normal_x["size"] ) 						? $scale_normal_x["size"] : '';
         $scaley 					= isset( $scale_normal_y["size"] ) 						? $scale_normal_y["size"] : '';
         $scalez 					= isset( $scale_normal_z["size"] ) 						? $scale_normal_z["size"] : '';
         $scale3dx 					= isset( $scale_normal_z["size"] ) 						? '-webkit-transform-style: preserve-3d; transform-style: preserve-3d;' : '';
         $scale3d 					= 'scale3d(' . $scalex . ', ' . $scaley . ', ' . $scalez . ')';
-        // Normal Rotate
         $rotatex 					= isset( $rotate_normal_x["size"] ) 					? 'rotateX(' . $rotate_normal_x["size"] . $rotate_normal_x["unit"] . ')' : '';
         $rotatey 					= isset( $rotate_normal_y["size"] ) 					? 'rotateY(' . $rotate_normal_y["size"] . $rotate_normal_y["unit"] . ')' : '';
         $rotatez 					= isset( $rotate_normal_z["size"] ) 					? 'rotateZ(' . $rotate_normal_z["size"] . $rotate_normal_z["unit"] . ')' : '';
-        // Normal Skew
         $skewx 						= isset( $skew_normal_x["size"] ) 						? $skew_normal_x["size"] . $skew_normal_x["unit"] : '';
         $skewy 						= isset( $skew_normal_y["size"] ) 						? $skew_normal_y["size"] . $skew_normal_y["unit"] : '';
         $skew 						= 'skew(' . $skewx . ', ' . $skewy . ')';
-        // Normal Self perspective
         $perspective 				= isset( $perspective["size"] ) 						? 'perspective:' . $perspective["size"] . $perspective["unit"] . '; -webkit-perspective:' . $perspective["size"] . $perspective["unit"] . ';': '';
-        // Normal Child perspective
         $perspective_child 			= isset( $perspective_child["size"] ) 					? 'perspective(' . $perspective_child["size"] . $perspective_child["unit"] . ')': '';
-        //Transform Hover Styles
-        //Hover Move
         $translatex_hover			= isset( $move_hover_x["size"] ) 						? $move_hover_x["size"] . $move_hover_x["unit"] : '';
         $translatey_hover			= isset( $move_hover_y["size"] ) 						? $move_hover_y["size"] . $move_hover_y["unit"] : '';
         $translatez_hover			= isset( $move_hover_z["size"] ) 						? $move_hover_z["size"] . $move_hover_z["unit"] : '';
         $translate3d_hover			= 'translate3d(' . $translatex_hover . ', ' . $translatey_hover . ', ' . $translatez_hover . ')';
-        // Hover Scale
         $scalex_hover 				= isset( $scale_hover_x["size"] ) 						? $scale_hover_x["size"] : '';
         $scaley_hover 				= isset( $scale_hover_y["size"] ) 						? $scale_hover_y["size"] : '';
         $scalez_hover 				= isset( $scale_hover_z["size"] ) 						? $scale_hover_z["size"] : '';
         $scale3dx_hover 			= isset( $scale_hover_z["size"] ) 						?'-webkit-transform-style: preserve-3d; transform-style: preserve-3d;' : '';
         $scale3d_hover 				= 'scale3d(' . $scalex_hover . ', ' . $scaley_hover . ', ' . $scalez_hover . ')';
-        // Hover Rotate
         $rotatex_hover 				= isset( $rotate_hover_x["size"] ) 						? 'rotateX(' . $rotate_hover_x["size"] . $rotate_hover_x["unit"] . ')' : '';
         $rotatey_hover 				= isset( $rotate_hover_y["size"] ) 						? 'rotateY(' . $rotate_hover_y["size"] . $rotate_hover_y["unit"] . ')' : '';
         $rotatez_hover 				= isset( $rotate_hover_z["size"] ) 						? 'rotateZ(' . $rotate_hover_z["size"] . $rotate_hover_z["unit"] . ')' : '';
-        // Hover Skew
         $skewx_hover 				= isset( $skew_hover_x["size"] ) 						? $skew_hover_x["size"] . $skew_hover_x["unit"] : '';
         $skewy_hover 				= isset( $skew_hover_y["size"] ) 						? $skew_hover_y["size"] . $skew_hover_y["unit"] : '';
         $skew_hover 				= 'skew(' . $skewx_hover . ', ' . $skewy_hover . ')';
-        // Hover Self perspective
         $perspective_hover 			= isset( $perspective_hover["size"] ) 					? 'perspective:' . $perspective_hover["size"] . $perspective_hover["unit"] . '; -webkit-perspective:' . $perspective_hover["size"] . $perspective_hover["unit"] . ';' : '';
-        // Hover Child perspective
         $perspective_child_hover	= isset( $perspective_child_hover["size"] ) 			? 'perspective(' . $perspective_child_hover["size"] . $perspective_child_hover["unit"] . ')' : '';
         // Create a Custom CSS for Normal and Hover Styles
         $normal_transform_style 	= ($normal_transform == 'normal_transform')				? "#$data_id { -webkit-transition: $animate; -o-transition: $animate; transition: $animate; $perspective transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; -webkit-transform: $perspective_child $skew $rotatex $rotatey $rotatez $scale3d $translate3d; $scale3dx }" : '';
         $hover_transform_style 		= ($hover_transform == 'hover_transform')				? "#$data_id:hover { $perspective_hover transform: $perspective_child_hover $skew_hover $rotatex_hover $rotatey_hover $rotatez_hover $scale3d_hover $translate3d_hover; -webkit-transform: $perspective_child_hover $skew_hover $rotatex_hover $rotatey_hover $rotatez_hover $scale3d_hover $translate3d_hover; $scale3dx_hover }" : '';
-        //Return all of the styles
         echo "<style>" . esc_html( $normal_transform_style ) . " " . esc_html( $hover_transform_style ) . "</style>";
 
         if ( ! in_array( $alignment, [ 'left', 'center', 'right' ] ) ) {
             $alignment = 'center';
         }
 
-        // Render
         echo '<div class="bw-image" style="text-align: ' . $alignment . ';">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
-        echo '<div class="bw-img-' . esc_attr( $type ) . ' ' . esc_attr( $settings['hover_animation'] ) . ' bw-cursor-' . esc_attr( $cursor ) .'" id="'. $data_id .'">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        $hover_animation = isset( $settings['hover_animation'] ) ? (string) $settings['hover_animation'] : '';
+        echo '<div class="bw-img-' . esc_attr( $type ) . ' ' . esc_attr( $hover_animation ) . ' bw-cursor-' . esc_attr( $cursor ) .'" id="'. $data_id .'">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
-        if ( isset($image_link) && $image_link == 'yes') { echo '<a href="' . esc_url( $settings['image_link_url']['url'] ) . '"' . $target . $nofollow . ' class="bw-image-link">'; } // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        if ( $has_caption ) {
+            echo '<figure class="bw-image-figure">';
+        }
+
+        if ( $has_image_link ) {
+            echo '<a ' . $this->get_render_attribute_string( 'image_link' ) . '>';
+        }
 
         // Second arg is the Image Size group control name (reads thumbnail_size), not the size value.
         $image_html = Group_Control_Image_Size::get_attachment_image_html(
@@ -1723,13 +1790,20 @@ class ImagePro extends \Elementor\Widget_Base {
             echo $image_html;
         }
 
-        if ( isset($image_link) && $image_link == 'yes'){ echo '</a>'; }
+        if ( $has_image_link ) {
+            echo '</a>';
+        }
+
+        if ( $has_caption ) {
+            echo '<figcaption class="bw-image-caption">' . wp_kses_post( $caption_text ) . '</figcaption>';
+            echo '</figure>';
+        }
 
         echo '</div>';
 
         echo '</div>';
 
-        // Init parallax on load in case element_ready timing misses.
+        // Init parallax on load in case element_ready timing misses
         if ( $parallax === 'bw-parallax' ) {
             echo '<script>
 			jQuery(function () {
@@ -1748,8 +1822,7 @@ class ImagePro extends \Elementor\Widget_Base {
 			</script>';
         }
 
-        // Emit ScrollTrigger only when at least one movement timeline is enabled.
-        // Avoids empty scrub triggers for plain Image Pro instances.
+        // ScrollTrigger only when at least one Movement Timeline is enabled
         if ( $gsap_ready && ( $image_movement === 'on' || $image_movement2 === 'on' ) ) {
             $trigger_hook = ! empty( $settings['trigger_hook'] ) ?  $settings['trigger_hook']  : '';
             $trigger_hook2 = ! empty( $settings['trigger_hook2'] ) ?  $settings['trigger_hook2']  : '';
@@ -1793,12 +1866,14 @@ class ImagePro extends \Elementor\Widget_Base {
             echo '<script>
                   	jQuery(window).ready(function($) {
                         if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+                        var triggerEl = document.getElementById("' . esc_js( $data_id ) . '");
+                        if (!triggerEl) { return; }
                   		gsap.registerPlugin(ScrollTrigger);
                   		ScrollTrigger.config({ limitCallbacks: true });
                   
                   		const tl = gsap.timeline({
                   			scrollTrigger: {
-                  				trigger: "#' . esc_js( $data_id ) . '",
+                  				trigger: triggerEl,
                   				start: "' . esc_js( $trigger_hook2 ) . ' ' . esc_js( $trigger_hook4 )  . '", 
                   				end: "' .  esc_js( $trigger_hook ) . ' ' . esc_js( $trigger_hook3 )  . '",
                   				scrub: true

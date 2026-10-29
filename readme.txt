@@ -70,7 +70,7 @@ GSAP widgets (enable JS → CDN in Settings, then paste GSAP 3.15 + ScrollTrigge
 
 *   [Black Trigger(for experts)](https://modernaweb.net/black-widgets/all-widgets/black-trigger/)
 *   [Black Horizontal(for experts)](https://modernaweb.net/black-widgets/all-widgets/black-horizontal/)
-*   Black Tab
+*   Black Tabs
 *   Black Interactive Links
 *   Black Scroll Text (can be toggled in Settings; default ON)
 
@@ -138,6 +138,10 @@ GSAP is **not** bundled. It is loaded from a CDN URL that you supply in Settings
 ## Changelog
 
 = 1.4.0 — 2026-09 =
+- Fixed: SVG upload sanitizer bypass (case-insensitive extension check and content sniffing for uploads)
+- Improved: Remote references are stripped from uploaded SVG files
+- Fixed: XML declaration no longer output in inline SVG markup
+- Fixed: Nested SVG elements are kept intact in the Black Trigger (GSAP) widget
 - Refactored: Plugin Structure
 - Improved: All Settings
 - Compatibility: WordPress v6.8
@@ -174,8 +178,12 @@ GSAP is **not** bundled. It is loaded from a CDN URL that you supply in Settings
 - Fixed: Hardened Elementor repeater `_id` output (List + Sentence) against attribute-breakout XSS
 - Fixed: Cross-site scripting (XSS) vulnerability for uploading SVG and image as code by adding SVG sanitizer; Thanks to Patchstack team
 - Fixed: SVG-as-code output no longer emptied by post KSES after sanitizing
+- Security: Updated bundled enshrined/svg-sanitize to 1.0.0 (advisories affecting 0.22.0 and earlier)
 - Kept: Text domain `blackwidgets` (unchanged from 1.3.9 so existing translations keep working)
 - Removed: Elementor Dark Mode Setting (legacy `bw_dark_style` option is cleaned on upgrade / Settings save)
+- Improved: Black Icon Box Pro icon wrap no longer stretches full width; optional Square / Circle / Rounded icon shape
+- Added: Black Icon Box Pro Animate (Draw, Fade, Scale, Rotate, Bounce, scroll triggers, hover, loop) when GSAP + ScrollTrigger are ready in Settings
+- Added: Uploaded SVG files in Icon Box Pro are sanitized and inlined so color and Draw animation can run
 
 = 1.3.9 — 2024-12-21 =
 - Compatibility: WordPress v6.7

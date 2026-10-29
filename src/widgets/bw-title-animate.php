@@ -16,9 +16,9 @@ use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Text_Shadow;
 
 /**
- * Elementor title Widget.
+ * Title animate widget.
  *
- * Elementor widget that inserts an embbedable content into the page, from any given URL.
+ * Title with animated text effects (fade, rotate, SVG and rotator types).
  *
  * @since 1.0.0
  */
@@ -26,14 +26,14 @@ class TitleAnimate extends \Elementor\Widget_Base {
 
     public function __construct( $data = [], $args = null ) {
         parent::__construct( $data, $args );
-        wp_register_style( 'black-widgets-title-animate', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/title-animate.css', [], BLACK_WIDGETS_VERSION );
-        wp_register_script( 'black-widgets-title-animate', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/title-animate.js', [ 'jquery', 'black-widgets-anime', 'bw-public' ], BLACK_WIDGETS_VERSION, true );
+        wp_register_style( 'black-widgets-title-animate', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/title-animate.css', [], $this->title_animate_asset_ver( 'assets/css/title-animate.css' ) );
+        wp_register_script( 'black-widgets-title-animate', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/title-animate.js', [ 'jquery', 'black-widgets-anime', 'bw-public' ], $this->title_animate_asset_ver( 'assets/js/title-animate.js' ), true );
     }
 
     /**
      * Get widget name.
      *
-     * Retrieve button widget name.
+     * Retrieve the title animate widget name.
      *
      * @since 1.0.0
      * @access public
@@ -47,7 +47,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
     /**
      * Get widget title.
      *
-     * Retrieve button widget title.
+     * Retrieve the title animate widget title.
      *
      * @since 1.0.0
      * @access public
@@ -61,7 +61,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
     /**
      * Get widget icon.
      *
-     * Retrieve button widget icon.
+     * Retrieve the title animate widget icon.
      *
      * @since 1.0.0
      * @access public
@@ -75,7 +75,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
     /**
      * Get widget categories.
      *
-     * Retrieve the list of categories the button widget belongs to.
+     * Retrieve the list of categories the title animate widget belongs to.
      *
      * @since 1.0.0
      * @access public
@@ -84,6 +84,21 @@ class TitleAnimate extends \Elementor\Widget_Base {
      */
     public function get_categories() {
         return [ 'black_widgets' ];
+    }
+
+    /**
+     * Cache-bust CSS/JS when the file changes (same plugin version).
+     *
+     * @param string $rel Path relative to the plugin root.
+     * @return string
+     */
+    private function title_animate_asset_ver( $rel ) {
+        $ver  = BLACK_WIDGETS_VERSION;
+        $path = BLACK_WIDGETS_PLUGIN_PATH . ltrim( $rel, '/\\' );
+        if ( is_readable( $path ) ) {
+            $ver .= '.' . (int) filemtime( $path );
+        }
+        return $ver;
     }
 
     public function get_style_depends() {
@@ -99,17 +114,13 @@ class TitleAnimate extends \Elementor\Widget_Base {
     }
 
     /**
-     * Register button widget controls.
-     *
-     * Adds different input fields to allow the user to change and customize the widget settings.
+     * Register the title animate widget controls.
      *
      * @since 1.0.0
      * @access protected
      */
     protected function register_controls() {
 
-        // Start
-        // Content section
         $this->start_controls_section(
             'content_section',
             [
@@ -260,16 +271,17 @@ class TitleAnimate extends \Elementor\Widget_Base {
             [
                 'label' => esc_html__( 'Select SVG', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
-                'default' => 'line1',
+                'default' => 'vector1',
                 'options' => [
-                    'line1' 	    => esc_html__( 'Line 1', 'blackwidgets' ),
-                    'line2' 	    => esc_html__( 'Line 2', 'blackwidgets' ),
-                    'line3' 	    => esc_html__( 'Line 3', 'blackwidgets' ),
-                    'line4' 	    => esc_html__( 'Line 4', 'blackwidgets' ),
-                    'line5' 	    => esc_html__( 'Line 5', 'blackwidgets' ),
-                    'circle1' 	    => esc_html__( 'Circle 1', 'blackwidgets' ),
-                    'circle2' 	    => esc_html__( 'Circle 2', 'blackwidgets' ),
-                    'circle3' 	    => esc_html__( 'Circle 3', 'blackwidgets' ),
+                    'vector1' => esc_html__( 'Vector 1', 'blackwidgets' ),
+                    'vector2' => esc_html__( 'Vector 2', 'blackwidgets' ),
+                    'vector3' => esc_html__( 'Vector 3', 'blackwidgets' ),
+                    'vector4' => esc_html__( 'Vector 4', 'blackwidgets' ),
+                    'vector5' => esc_html__( 'Vector 5', 'blackwidgets' ),
+                    'vector6' => esc_html__( 'Vector 6', 'blackwidgets' ),
+                    'vector7' => esc_html__( 'Vector 7', 'blackwidgets' ),
+                    'vector8' => esc_html__( 'Vector 8', 'blackwidgets' ),
+                    'vector9' => esc_html__( 'Vector 9', 'blackwidgets' ),
                 ],
                 'condition' => [
                     'widget_type' => 'svg',
@@ -623,9 +635,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
-        // Start
         // Tag section
         $this->start_controls_section(
             'tag_section',
@@ -661,10 +671,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
-        // Start
-        // Style section
         $this->start_controls_section(
             'style_section',
             [
@@ -673,7 +680,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'widget_box_margin',
             [
@@ -686,7 +692,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'widget_box_padding',
             [
@@ -699,7 +704,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -737,7 +741,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -747,7 +750,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border Radius
         $this->add_control(
             'widget_box_border_radius', //param_name
             [
@@ -760,7 +762,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -771,9 +772,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
-        // Start
         // Before Text Typography
         $this->start_controls_section(
             'style_section_before_typo',
@@ -797,7 +796,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'style_before_title_color',
             [
@@ -812,7 +810,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Typography
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
@@ -825,7 +822,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Text shadow
         $this->add_group_control(
             Group_Control_Text_Shadow::get_type(),
             [
@@ -842,7 +838,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -860,7 +855,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'style_before_title_margin',
             [
@@ -873,7 +867,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'style_before_title_padding',
             [
@@ -893,7 +886,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -903,7 +895,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border Radius
         $this->add_control(
             'style_before_title_border_radius', //param_name
             [
@@ -916,7 +907,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -927,10 +917,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
-        // Start
-        // Main Text Typography
         $this->start_controls_section(
             'style_section_main_text_typo',
             [
@@ -945,7 +932,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'style_main_text_color',
             [
@@ -961,7 +947,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Typography
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
@@ -974,7 +959,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Text shadow
         $this->add_group_control(
             Group_Control_Text_Shadow::get_type(),
             [
@@ -991,7 +975,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -1009,7 +992,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'style_main_text_margin',
             [
@@ -1023,7 +1005,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'style_main_text_padding',
             [
@@ -1044,7 +1025,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -1055,7 +1035,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border Radius
         $this->add_control(
             'style_main_text_border_radius', //param_name
             [
@@ -1069,7 +1048,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -1080,11 +1058,8 @@ class TitleAnimate extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
 
-        // Start
-        // Main Text Typography
         $this->start_controls_section(
             'style_section_main_typo',
             [
@@ -1098,7 +1073,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'style_main_title_color',
             [
@@ -1142,7 +1116,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Typography
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
@@ -1155,7 +1128,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Text shadow
         $this->add_group_control(
             Group_Control_Text_Shadow::get_type(),
             [
@@ -1172,7 +1144,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -1190,7 +1161,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'style_main_title_margin',
             [
@@ -1203,7 +1173,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'style_main_title_padding',
             [
@@ -1223,7 +1192,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -1233,7 +1201,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border Radius
         $this->add_control(
             'style_main_title_border_radius', //param_name
             [
@@ -1246,7 +1213,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -1257,9 +1223,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
-        // Start
         // symbol Text Typography
         $this->start_controls_section(
             'style_section_symbol_typo',
@@ -1274,7 +1238,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'style_symbol_title_color',
             [
@@ -1289,7 +1252,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Typography
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
@@ -1302,7 +1264,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Text shadow
         $this->add_group_control(
             Group_Control_Text_Shadow::get_type(),
             [
@@ -1319,7 +1280,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -1337,7 +1297,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'style_symbol_title_margin',
             [
@@ -1350,7 +1309,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'style_symbol_title_padding',
             [
@@ -1370,7 +1328,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -1380,7 +1337,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border Radius
         $this->add_control(
             'style_symbol_title_border_radius', //param_name
             [
@@ -1393,7 +1349,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -1404,10 +1359,8 @@ class TitleAnimate extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
 
-        // Start
         // After Text Typography
         $this->start_controls_section(
             'style_section_after_typo',
@@ -1431,7 +1384,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'style_after_title_color',
             [
@@ -1446,7 +1398,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Typography
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
@@ -1459,7 +1410,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Text shadow
         $this->add_group_control(
             Group_Control_Text_Shadow::get_type(),
             [
@@ -1476,7 +1426,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -1494,7 +1443,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'style_after_title_margin',
             [
@@ -1507,7 +1455,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'style_after_title_padding',
             [
@@ -1527,7 +1474,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -1537,7 +1483,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border Radius
         $this->add_control(
             'style_after_title_border_radius', //param_name
             [
@@ -1550,7 +1495,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -1561,9 +1505,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
-        // Start
         // Line Text Typography
         $this->start_controls_section(
             'style_section_symbol_line',
@@ -1576,7 +1518,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'style_after_line_color',
             [
@@ -1653,7 +1594,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'style_after_line_color1',
             [
@@ -1717,7 +1657,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
         $this->start_controls_section(
             'style_section_symbol_svg',
@@ -1732,7 +1671,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'style_svg_color',
             [
@@ -1766,50 +1704,54 @@ class TitleAnimate extends \Elementor\Widget_Base {
             ]
         );
 
-        $this->add_control(
-            'style_svg_width',
+        $this->add_responsive_control(
+            'svg_translate_x',
             [
-                'label' => esc_html__( 'Width', 'blackwidgets' ),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => [ 'px' ],
+                'label' => esc_html__( 'Horizontal Offset', 'blackwidgets' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'em' ],
                 'range' => [
-                    'px' => [
-                        'min' => 0,
-                        'max' => 1000,
-                        'step' => 1,
-                    ],
+                    'px' => [ 'min' => -200, 'max' => 200, 'step' => 1 ],
+                    'em' => [ 'min' => -10, 'max' => 10, 'step' => 0.1 ],
                 ],
+                'default' => [ 'unit' => 'px', 'size' => 0 ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-title-animate .bw-svg-wrapper svg' => 'width: {{SIZE}}{{UNIT}} !important;',
+                    '{{WRAPPER}} .bw-title-animate .bw-svg-wrapper' => '--bw-svg-offset-x: {{SIZE}}{{UNIT}};',
                 ],
-                'render_type' => 'template',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'svg_translate_y',
+            [
+                'label' => esc_html__( 'Vertical Offset', 'blackwidgets' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'em' ],
+                'range' => [
+                    'px' => [ 'min' => -200, 'max' => 200, 'step' => 1 ],
+                    'em' => [ 'min' => -10, 'max' => 10, 'step' => 0.1 ],
+                ],
+                'default' => [ 'unit' => 'px', 'size' => 0 ],
+                'description' => esc_html__( 'Positive values push the SVG lower than the text, negative values pull it up. 40px moves it 40px down.', 'blackwidgets' ),
+                'selectors' => [
+                    '{{WRAPPER}} .bw-title-animate .bw-svg-wrapper' => '--bw-svg-offset-y: {{SIZE}}{{UNIT}};',
+                ],
             ]
         );
 
         $this->add_control(
-            'style_svg_height',
+            'svg_viewbox_heading',
             [
-                'label' => esc_html__( 'Height', 'blackwidgets' ),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => [ 'px' ],
-                'range' => [
-                    'px' => [
-                        'min' => 0,
-                        'max' => 1000,
-                        'step' => 1,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .bw-title-animate .bw-svg-wrapper svg' => 'height: {{SIZE}}{{UNIT}} !important;',
-                ],
-                'render_type' => 'template',
+                'label' => esc_html__( 'View Box (advanced)', 'blackwidgets' ),
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'separator' => 'before',
             ]
         );
 
         $this->add_control(
             'svg_viewbox_width',
             [
-                'label' => __( 'View Box Width', 'blackwidgets' ),
+                'label' => esc_html__( 'View Box Width', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'step' => 1,
             ]
@@ -1818,7 +1760,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
         $this->add_control(
             'svg_viewbox_height',
             [
-                'label' => __( 'View Box Height', 'blackwidgets' ),
+                'label' => esc_html__( 'View Box Height', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'step' => 1,
             ]
@@ -1827,7 +1769,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
         $this->add_control(
             'svg_viewbox_min_x',
             [
-                'label' => __( 'View Box Min-X', 'blackwidgets' ),
+                'label' => esc_html__( 'View Box Min-X', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'step' => 0.01,
             ]
@@ -1836,33 +1778,9 @@ class TitleAnimate extends \Elementor\Widget_Base {
         $this->add_control(
             'svg_viewbox_min_y',
             [
-                'label' => __( 'View Box Min-Y', 'blackwidgets' ),
+                'label' => esc_html__( 'View Box Min-Y', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'step' => 0.01,
-            ]
-        );
-
-        $this->add_responsive_control(
-            'svg_translate_x',
-            [
-                'label' => __('Offset X', 'blackwidgets'),
-                'type' => \Elementor\Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => ['min' => -200, 'max' => 200],
-                ],
-                'default' => ['size' => 0],
-            ]
-        );
-
-        $this->add_responsive_control(
-            'svg_translate_y',
-            [
-                'label' => __('Offset Y', 'blackwidgets'),
-                'type' => \Elementor\Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => ['min' => -200, 'max' => 200],
-                ],
-                'default' => ['size' => 0],
             ]
         );
 
@@ -1888,9 +1806,9 @@ class TitleAnimate extends \Elementor\Widget_Base {
     }
 
     /**
-     * Render title widget output on the frontend.
+     * Render the title animate widget output on the frontend.
      *
-     * Written in PHP and used to generate the final HTML.
+     * Outputs the widget HTML.
      *
      * @since 1.0.0
      * @access protected
@@ -1924,6 +1842,12 @@ class TitleAnimate extends \Elementor\Widget_Base {
 
         $HTML   		= isset($settings['widget_html_tag']) 					? $settings['widget_html_tag']					: '';
         $alignment 		= isset($settings['widget_alignment']) 					? $settings['widget_alignment']					: '';
+        if ( is_array( $alignment ) ) {
+            $alignment = '';
+        }
+        if ( ! in_array( $alignment, [ 'left', 'center', 'right' ], true ) ) {
+            $alignment = '';
+        }
 
         // Rotator related
         $rotator_text = isset( $settings['widget_rotator_text'] ) ? esc_html( $settings['widget_rotator_text'] ) : '';
@@ -1934,7 +1858,12 @@ class TitleAnimate extends \Elementor\Widget_Base {
         $title_color1 = isset( $settings['style_main_title_color1'] ) ? esc_attr( $this->resolve_elementor_color($settings['style_main_title_color1']) ) : '#ff5b5b';
         $title_color2 = isset( $settings['style_main_title_color2'] ) ? esc_attr( $this->resolve_elementor_color($settings['style_main_title_color2']) ) : 'blue';
 
-        $svg = isset( $settings['widget_svg'] ) ? esc_attr( $settings['widget_svg'] ) : 'line1';
+        $svg_known = [ 'vector1', 'vector2', 'vector3', 'vector4', 'vector5', 'vector6', 'vector7', 'vector8', 'vector9' ];
+        $svg = isset( $settings['widget_svg'] ) ? (string) $settings['widget_svg'] : 'vector1';
+        if ( ! in_array( $svg, $svg_known, true ) ) {
+            $svg = 'vector1';
+        }
+        $svg = esc_attr( $svg );
         $svg_before_text = isset( $settings['widget_svg_before_text'] ) ? esc_html( $settings['widget_svg_before_text'] ) : '';
         $svg_after_text = isset( $settings['widget_svg_after_text'] ) ? esc_html( $settings['widget_svg_after_text'] ) : '';
         $svg_anim_text = isset( $settings['widget_svg_animation_text'] ) ? esc_html( $settings['widget_svg_animation_text'] ) : '';
@@ -1965,53 +1894,55 @@ class TitleAnimate extends \Elementor\Widget_Base {
         }
         $anim_speed_attr = esc_attr( (string) $anim_speed );
 
-        $min_x  = $settings['svg_viewbox_min_x'];
-        $min_y  = $settings['svg_viewbox_min_y'];
-        $vb_w   = $settings['svg_viewbox_width'];
-        $vb_h   = $settings['svg_viewbox_height'];
+        $min_x  = isset( $settings['svg_viewbox_min_x'] ) ? $settings['svg_viewbox_min_x'] : '';
+        $min_y  = isset( $settings['svg_viewbox_min_y'] ) ? $settings['svg_viewbox_min_y'] : '';
+        $vb_w   = isset( $settings['svg_viewbox_width'] ) ? $settings['svg_viewbox_width'] : '';
+        $vb_h   = isset( $settings['svg_viewbox_height'] ) ? $settings['svg_viewbox_height'] : '';
 
         if ( empty($min_x) && empty($vb_w) ) {
             switch ( $svg ) {
-                case 'line1':
-                    $min_x = 0; $min_y = 0; $vb_w = 220; $vb_h = 30;
+                case 'vector1':
+                    $min_x = 0; $min_y = 0; $vb_w = 223; $vb_h = 6;
                     break;
-                case 'line2':
-                    $min_x = 0; $min_y = 0; $vb_w = 106; $vb_h = 40;
+                case 'vector2':
+                    $min_x = 0; $min_y = 0; $vb_w = 223; $vb_h = 31;
                     break;
-                case 'line3':
-                    $min_x = 0; $min_y = 0; $vb_w = 160; $vb_h = 50;
+                case 'vector3':
+                    $min_x = 0; $min_y = 0; $vb_w = 223; $vb_h = 17;
                     break;
-                case 'line4':
-                    $min_x = 0; $min_y = 0; $vb_w = 230; $vb_h = 50;
+                case 'vector4':
+                    $min_x = 0; $min_y = 0; $vb_w = 195; $vb_h = 17;
                     break;
-                case 'line5':
-                    $min_x = 0; $min_y = 0; $vb_w = 230; $vb_h = 50;
+                case 'vector5':
+                    $min_x = 0; $min_y = 0; $vb_w = 223; $vb_h = 14;
                     break;
-                case 'circle1':
-                    $min_x = -3; $min_y = 0; $vb_w = 86; $vb_h = 100;
+                case 'vector6':
+                    $min_x = 0; $min_y = 0; $vb_w = 191; $vb_h = 39;
                     break;
-                case 'circle2':
-                    $min_x = -4; $min_y = 0; $vb_w = 90; $vb_h = 100;
+                case 'vector7':
+                    $min_x = 0; $min_y = 0; $vb_w = 223; $vb_h = 43;
                     break;
-                case 'circle3': 
-                    $min_x = -2; $min_y = 0; $vb_w = 106; $vb_h = 120;
+                case 'vector8':
+                    $min_x = 0; $min_y = 0; $vb_w = 214; $vb_h = 29;
+                    break;
+                case 'vector9':
+                    $min_x = 0; $min_y = 0; $vb_w = 217; $vb_h = 22;
                     break;
                 default:
-                    $min_x = 0; $min_y = 0; $vb_w = 0; $vb_h = 0;
+                    $min_x = 0; $min_y = 0; $vb_w = 223; $vb_h = 6;
                     break;
             }
         }
 
         $viewBox = "{$min_x} {$min_y} {$vb_w} {$vb_h}";
 
-        $offset_x = $settings['svg_translate_x']['size'] ?? 0;
-        $offset_y = $settings['svg_translate_y']['size'] ?? 0;
-
-        $inline_transform = "transform: translate({$offset_x}px, {$offset_y}px);";
+        // Horizontal/vertical offsets are applied through the --bw-svg-offset-* custom
+        // properties (see the svg_translate_* controls) so they survive the animation
+        // reset, which strips inline transforms from every node inside the widget.
 
         $data_id                = 'bw-' . uniqid();
 
-        // wp_kses is rather slow so we manullay sanitize the html
+        // wp_kses is slow here, so the HTML tag is validated manually.
         if ( ! in_array( $HTML, ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'] ) ) {
             $HTML = 'h1';
         }
@@ -2020,82 +1951,31 @@ class TitleAnimate extends \Elementor\Widget_Base {
         echo '<div class="bw-title-animate ' . esc_attr( $alignment ) . '">';
         switch ($type) {
             case 'svg':
+                $svg_paths = [
+                    'vector1' => 'M1.25 3.65841C31.25 0.658408 51.25 6.65841 81.25 2.65841C111.25 -1.34159 131.25 6.65841 161.25 2.65841C191.25 -1.34159 209.25 4.65841 221.25 2.65841',
+                    'vector2' => 'M1.25 29.7252C1.25 11.7252 9.25 -0.274806 19.25 5.72519C29.25 11.7252 31.25 27.7252 43.25 19.7252C55.25 11.7252 63.25 -0.274806 73.25 5.72519C83.25 11.7252 85.25 27.7252 99.25 19.7252C141.25 3.72519 186.25 -0.274807 221.25 1.72519',
+                    'vector3' => 'M1.25 15.25C21.25 13.25 29.25 1.25 37.25 1.25C45.25 1.25 45.25 13.25 51.25 13.25C71.25 13.25 79.25 1.25 87.25 1.25C95.25 1.25 95.25 13.25 103.25 13.25C123.25 13.25 131.25 1.25 139.25 1.25C147.25 1.25 147.25 13.25 153.25 13.25C173.25 13.25 187.25 13.25 221.25 11.25',
+                    'vector4' => 'M1.25049 8.25C33.2505 -1.08333 65.2505 -1.08333 97.2505 8.25C129.25 17.5833 161.25 17.5833 193.25 8.25',
+                    'vector5' => 'M1.25 3.25C51.25 1.25 81.25 3.25 101.25 7.25C121.25 11.25 131.25 15.25 151.25 9.25C171.25 3.25 196.25 1.25 221.25 1.25',
+                    'vector6' => 'M95.5 1.5C160.5 1.5 189.5 13.5 189.5 19.5C189.5 25.5 160.5 37.5 95.5 37.5C30.5 37.5 1.5 25.5 1.5 19.5C1.5 13.5 30.5 1.5 95.5 1.5Z',
+                    'vector7' => 'M1.25024 16.6104C51.2502 8.61036 111.25 6.61036 146.25 20.6104C165.25 28.6104 161.25 42.6104 135.25 40.6104C101.25 38.6104 63.2502 28.6104 71.2502 12.6104C83.2502 -5.38964 151.25 0.610361 221.25 12.6104',
+                    'vector8' => 'M2.3445 9.63819C4.3445 1.63819 12.3445 -0.361807 16.3445 7.63819C20.3445 15.6382 14.3445 19.6382 6.3445 15.6382C-1.6555 11.6382 0.344505 3.63819 8.3445 1.63819C16.3445 -0.361807 24.3445 5.63819 26.3445 15.6382C28.3445 25.6382 22.3445 29.6382 16.3445 25.6382C32.3445 19.6382 82.3445 11.6382 212.344 9.63819',
+                    'vector9' => 'M14.7857 12.5317C12.7857 2.53172 6.78574 -1.46828 2.78574 4.53172C-1.21426 10.5317 2.78574 20.5317 12.7857 20.5317C22.7857 20.5317 28.7857 10.5317 24.7857 4.53172C20.7857 -1.46828 12.7857 0.531721 12.7857 12.5317C14.7857 20.5317 64.7857 14.5317 214.786 10.5317',
+                ];
+                $svg_path_d = isset( $svg_paths[ $svg ] ) ? $svg_paths[ $svg ] : $svg_paths['vector1'];
                 ?>
             <div class="bw-title-anime bw-svg bw-svg-<?php echo $svg; ?> <?php echo $data_id; ?>" data-duration="<?php echo $svg_duration; ?>" data-delay="<?php echo $svg_delay; ?>" data-loop="<?php echo $loop; ?>" data-speed="<?php echo $anim_speed_attr; ?>"> <?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                 <<?php echo $HTML; ?> class="bw-text-wrapper"> <?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                 <span class="bw-svg-text"><?php echo $svg_before_text; ?></span> <?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                 <span class="bw-svg-wrapper bw-animate-text">
                     <span class="bw-svg-content"><?php echo $svg_anim_text; ?></span> <?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-                    <?php if ( $svg == 'line1' ): ?>
-                        <svg 
-                        style="<?php echo $inline_transform; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" 
-                        viewBox="<?php echo esc_attr($viewBox); ?>" 
-                        preserveAspectRatio="none" 
+                    <svg
+                        viewBox="<?php echo esc_attr( $viewBox ); ?>"
+                        preserveAspectRatio="none"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 15C30 12 50 18 80 14C110 10 130 18 160 14C190 10 208 16 220 14"/>
-                        </svg>
-                    <?php elseif ( $svg == 'line2' ): ?>
-                        <svg 
-                        style="<?php echo $inline_transform; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" 
- viewBox="<?php echo esc_attr($viewBox); ?>" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 20C8 7.99999 16 32 24 20C32 7.99999 40 32 48 20C56 7.99999 64 32 72 20C80 7.99999 88 32 96 20C100 14 104 18 106 20"/>
-                        </svg>
-                    <?php elseif ( $svg == 'line3' ): ?>
-                        <svg 
-                        style="<?php echo $inline_transform; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" 
-                        viewBox="<?php echo esc_attr($viewBox); ?>" 
-                        preserveAspectRatio="none" 
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 14C20.0002 6.00002 10.0002 4.00002 6.0002 10C2.0002 16 8.0002 24 20.0002 22C60.0002 14 100 14 140 22C152 24 158 16 154 10C150 4.00002 140 6.00002 140 14"/>
-                        </svg>
-                    <?php elseif ( $svg == 'line4' ): ?>
-                        <svg 
-                        style="<?php echo $inline_transform; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" 
-                        viewBox="<?php echo esc_attr($viewBox); ?>" 
-                        preserveAspectRatio="none" 
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 36C30 34 38 22 46 22C54 22 54 34 60 34C80 34 88 22 96 22C104 22 104 34 112 34C132 34 140 22 148 22C156 22 156 34 162 34C182 34 196 34 230 32"/>
-                        </svg>
-                    <?php elseif ( $svg == 'line5' ): ?>
-                        <svg 
-                        style="<?php echo $inline_transform; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" 
-                        viewBox="<?php echo esc_attr($viewBox); ?>" 
-                        preserveAspectRatio="none" 
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 22C90 18 162 20 230 22C180 24 100 30 10 36C90 36 165 36 230 36"/>
-                        </svg>
-                    <?php elseif ( $svg == 'circle1' ): ?>
-                        <svg 
-                        style="<?php echo $inline_transform; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" 
-                        viewBox="<?php echo esc_attr($viewBox); ?>" 
-                        preserveAspectRatio="none" 
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                            <path d="M40 12C20 9.99997 0 28 0 50C0 72 18 90 40 90C62 90 80 72 80 50C80 30 64 15 45 12C28 8.99997 10 22 6 42" />
-                        </svg>
-                    <?php elseif ( $svg == 'circle2' ): ?>
-                        <svg 
-                        style="<?php echo $inline_transform; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" 
-                        viewBox="<?php echo esc_attr($viewBox); ?>" 
-                        preserveAspectRatio="none" 
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                            <path d="M41 10C63 8.00003 81 24 83 48C85 66 73 86 53 92C33 98 9 90 0.99997 70C-7.00003 50 3 24 23 14C37 8.00003 51 8.00003 59 18C71 32 67 60 49 76C31 92 7 84 5 62" />
-                        </svg>
-                    <?php else: ?>
-                        <svg 
-                        style="<?php echo $inline_transform; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" 
-                        viewBox="<?php echo esc_attr($viewBox); ?>" 
-                        preserveAspectRatio="none" 
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                            <path d="M45.9999 8C81.9999 8 100 30 98 60C96 90 73.9999 108 45.9999 108C17.9999 108 -0.0001 88 1.9999 60C3.9999 36 19.9999 20 40.9999 20C57.9999 20 69.9999 32 69.9999 50C69.9999 68 57.9999 76 45.9999 76M29.9999 68L45.9999 78L49.9999 62" />
-                        </svg>
-                    <?php endif; ?>
+                        <path d="<?php echo esc_attr( $svg_path_d ); ?>"/>
+                    </svg>
                     </span>
                     <span class="bw-svg-text"><?php echo $svg_after_text; ?></span> <?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                 </<?php echo esc_html( $HTML ); ?>>

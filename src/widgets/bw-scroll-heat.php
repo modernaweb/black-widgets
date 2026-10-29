@@ -86,7 +86,6 @@ class ScrollHeat extends \Elementor\Widget_Base {
 	}
 
 	public function get_style_depends() {
-		// Avoid reading instance settings during early Elementor enqueue.
 		return [ 'black-widgets-scroll-heat', 'black-widgets-scroll-heat-animated', 'black-widgets-scroll-heat-line-reveal' ];
 	}
 
@@ -297,10 +296,10 @@ class ScrollHeat extends \Elementor\Widget_Base {
 				],
 				'default'   => 'left',
 				'selectors' => [
-					'{{WRAPPER}} .mws-ew-hw'          => 'text-align: {{VALUE}};',
-					'{{WRAPPER}} .mws-ew-hw__text'    => 'text-align: {{VALUE}};',
-					'{{WRAPPER}} .mws-ew-at'          => 'text-align: {{VALUE}};',
-					'{{WRAPPER}} .mws-ew-lr__content' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .bw-hw, {{WRAPPER}} .mws-ew-hw'                   => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .bw-hw__text, {{WRAPPER}} .mws-ew-hw__text'       => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .bw-at, {{WRAPPER}} .mws-ew-at'                   => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .bw-lr__content, {{WRAPPER}} .mws-ew-lr__content' => 'text-align: {{VALUE}};',
 				],
 			]
 		);
@@ -439,7 +438,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 				],
 				'default'     => [ 'size' => 0.35 ],
 				'selectors'   => [
-					'{{WRAPPER}} .mws-ew-hw' => '--mws-ew-hw-scrub: {{SIZE}};',
+					'{{WRAPPER}} .bw-hw, {{WRAPPER}} .mws-ew-hw' => '--bw-hw-scrub: {{SIZE}}; --mws-ew-hw-scrub: {{SIZE}};',
 				],
 				'description' => esc_html__( 'Higher values feel softer. 0 follows the scroll exactly.', 'blackwidgets' ),
 			]
@@ -459,7 +458,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 				],
 				'default'     => [ 'size' => 0.06 ],
 				'selectors'   => [
-					'{{WRAPPER}} .mws-ew-hw' => '--mws-ew-hw-stagger: {{SIZE}};',
+					'{{WRAPPER}} .bw-hw, {{WRAPPER}} .mws-ew-hw' => '--bw-hw-stagger: {{SIZE}}; --mws-ew-hw-stagger: {{SIZE}};',
 				],
 				'description' => esc_html__( 'Delay between each word.', 'blackwidgets' ),
 			]
@@ -598,7 +597,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 				],
 				'default'     => [ 'size' => 1 ],
 				'selectors'   => [
-					'{{WRAPPER}} .mws-ew-at' => '--mws-ew-at-scrub: {{SIZE}};',
+					'{{WRAPPER}} .bw-at, {{WRAPPER}} .mws-ew-at' => '--bw-at-scrub: {{SIZE}}; --mws-ew-at-scrub: {{SIZE}};',
 				],
 				'condition'   => [
 					'trigger_mode' => [ 'scroll', 'inview' ],
@@ -623,7 +622,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 				],
 				'default'     => [ 'size' => 0.9 ],
 				'selectors'   => [
-					'{{WRAPPER}} .mws-ew-at' => '--mws-ew-at-duration: {{SIZE}};',
+					'{{WRAPPER}} .bw-at, {{WRAPPER}} .mws-ew-at' => '--bw-at-duration: {{SIZE}}; --mws-ew-at-duration: {{SIZE}};',
 				],
 				'condition'   => [
 					'scroll_mode!' => 'scrub',
@@ -646,7 +645,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 				],
 				'default'     => [ 'size' => 0.028 ],
 				'selectors'   => [
-					'{{WRAPPER}} .mws-ew-at' => '--mws-ew-at-stagger: {{SIZE}};',
+					'{{WRAPPER}} .bw-at, {{WRAPPER}} .mws-ew-at' => '--bw-at-stagger: {{SIZE}}; --mws-ew-at-stagger: {{SIZE}};',
 				],
 			]
 		);
@@ -666,7 +665,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 				],
 				'default'     => [ 'size' => 0 ],
 				'selectors'   => [
-					'{{WRAPPER}} .mws-ew-at' => '--mws-ew-at-delay: {{SIZE}};',
+					'{{WRAPPER}} .bw-at, {{WRAPPER}} .mws-ew-at' => '--bw-at-delay: {{SIZE}}; --mws-ew-at-delay: {{SIZE}};',
 				],
 				'condition'   => [
 					'scroll_mode!' => 'scrub',
@@ -744,7 +743,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 				],
 				'default'     => [ 'size' => 1 ],
 				'selectors'   => [
-					'{{WRAPPER}} .mws-ew-lr' => '--mws-ew-lr-duration: {{SIZE}};',
+					'{{WRAPPER}} .bw-lr, {{WRAPPER}} .mws-ew-lr' => '--bw-lr-duration: {{SIZE}}; --mws-ew-lr-duration: {{SIZE}};',
 				],
 			]
 		);
@@ -764,7 +763,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 				],
 				'default'     => [ 'size' => 0.09 ],
 				'selectors'   => [
-					'{{WRAPPER}} .mws-ew-lr' => '--mws-ew-lr-stagger: {{SIZE}};',
+					'{{WRAPPER}} .bw-lr, {{WRAPPER}} .mws-ew-lr' => '--bw-lr-stagger: {{SIZE}}; --mws-ew-lr-stagger: {{SIZE}};',
 				],
 			]
 		);
@@ -798,7 +797,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'heat_typography',
-				'selector' => '{{WRAPPER}} .mws-ew-hw__text',
+				'selector' => '{{WRAPPER}} .bw-hw__text, {{WRAPPER}} .mws-ew-hw__text',
 			]
 		);
 
@@ -809,7 +808,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 				'type'        => Controls_Manager::COLOR,
 				'default'     => '#D7D8D4',
 				'selectors'   => [
-					'{{WRAPPER}} .mws-ew-hw' => '--mws-ew-hw-dim: {{VALUE}};',
+					'{{WRAPPER}} .bw-hw, {{WRAPPER}} .mws-ew-hw' => '--bw-hw-dim: {{VALUE}}; --mws-ew-hw-dim: {{VALUE}};',
 				],
 				'description' => esc_html__( 'Word color before scroll highlights them.', 'blackwidgets' ),
 			]
@@ -822,7 +821,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 				'type'        => Controls_Manager::COLOR,
 				'default'     => '#16171B',
 				'selectors'   => [
-					'{{WRAPPER}} .mws-ew-hw' => '--mws-ew-hw-lit: {{VALUE}};',
+					'{{WRAPPER}} .bw-hw, {{WRAPPER}} .mws-ew-hw' => '--bw-hw-lit: {{VALUE}}; --mws-ew-hw-lit: {{VALUE}};',
 				],
 				'description' => esc_html__( 'Word color after scroll highlights them.', 'blackwidgets' ),
 			]
@@ -853,7 +852,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 					'size' => 760,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .mws-ew-hw__text' => 'max-width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bw-hw__text, {{WRAPPER}} .mws-ew-hw__text' => 'max-width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -873,7 +872,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 					'isLinked' => false,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .mws-ew-hw' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-hw, {{WRAPPER}} .mws-ew-hw' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -882,7 +881,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name'     => 'heat_text_shadow',
-				'selector' => '{{WRAPPER}} .mws-ew-hw__text',
+				'selector' => '{{WRAPPER}} .bw-hw__text, {{WRAPPER}} .mws-ew-hw__text',
 			]
 		);
 
@@ -903,7 +902,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'at_typography',
-				'selector' => '{{WRAPPER}} .mws-ew-at__title',
+				'selector' => '{{WRAPPER}} .bw-at__title, {{WRAPPER}} .mws-ew-at__title',
 			]
 		);
 
@@ -914,7 +913,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#1B1B18',
 				'selectors' => [
-					'{{WRAPPER}} .mws-ew-at' => '--mws-ew-at-color: {{VALUE}};',
+					'{{WRAPPER}} .bw-at, {{WRAPPER}} .mws-ew-at' => '--bw-at-color: {{VALUE}}; --mws-ew-at-color: {{VALUE}};',
 				],
 				'condition' => [
 					'enable_gradient!' => 'yes',
@@ -942,7 +941,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#1B1B18',
 				'selectors' => [
-					'{{WRAPPER}} .mws-ew-at' => '--mws-ew-at-grad-from: {{VALUE}};',
+					'{{WRAPPER}} .bw-at, {{WRAPPER}} .mws-ew-at' => '--bw-at-grad-from: {{VALUE}}; --mws-ew-at-grad-from: {{VALUE}};',
 				],
 				'condition' => [ 'enable_gradient' => 'yes' ],
 			]
@@ -955,7 +954,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#4A5CFF',
 				'selectors' => [
-					'{{WRAPPER}} .mws-ew-at' => '--mws-ew-at-grad-mid: {{VALUE}};',
+					'{{WRAPPER}} .bw-at, {{WRAPPER}} .mws-ew-at' => '--bw-at-grad-mid: {{VALUE}}; --mws-ew-at-grad-mid: {{VALUE}};',
 				],
 				'condition' => [ 'enable_gradient' => 'yes' ],
 			]
@@ -968,7 +967,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#1B1B18',
 				'selectors' => [
-					'{{WRAPPER}} .mws-ew-at' => '--mws-ew-at-grad-to: {{VALUE}};',
+					'{{WRAPPER}} .bw-at, {{WRAPPER}} .mws-ew-at' => '--bw-at-grad-to: {{VALUE}}; --mws-ew-at-grad-to: {{VALUE}};',
 				],
 				'condition' => [ 'enable_gradient' => 'yes' ],
 			]
@@ -995,7 +994,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .mws-ew-at' => 'max-width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bw-at, {{WRAPPER}} .mws-ew-at' => 'max-width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1007,7 +1006,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .mws-ew-at' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-at, {{WRAPPER}} .mws-ew-at' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1016,7 +1015,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name'      => 'at_text_shadow',
-				'selector'  => '{{WRAPPER}} .mws-ew-at__title',
+				'selector'  => '{{WRAPPER}} .bw-at__title, {{WRAPPER}} .mws-ew-at__title',
 				'condition' => [
 					'enable_gradient!' => 'yes',
 				],
@@ -1040,7 +1039,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'lr_typography',
-				'selector' => '{{WRAPPER}} .mws-ew-lr__title',
+				'selector' => '{{WRAPPER}} .bw-lr__title, {{WRAPPER}} .mws-ew-lr__title',
 			]
 		);
 
@@ -1051,7 +1050,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#1B1B18',
 				'selectors' => [
-					'{{WRAPPER}} .mws-ew-lr__title' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bw-lr__title, {{WRAPPER}} .mws-ew-lr__title' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1060,7 +1059,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'      => 'lr_index_typography',
-				'selector'  => '{{WRAPPER}} .mws-ew-lr__index',
+				'selector'  => '{{WRAPPER}} .bw-lr__index, {{WRAPPER}} .mws-ew-lr__index',
 				'separator' => 'before',
 			]
 		);
@@ -1072,7 +1071,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#9A9A9A',
 				'selectors' => [
-					'{{WRAPPER}} .mws-ew-lr__index' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bw-lr__index, {{WRAPPER}} .mws-ew-lr__index' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1081,7 +1080,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'      => 'lr_eyebrow_typography',
-				'selector'  => '{{WRAPPER}} .mws-ew-lr__eyebrow',
+				'selector'  => '{{WRAPPER}} .bw-lr__eyebrow, {{WRAPPER}} .mws-ew-lr__eyebrow',
 				'separator' => 'before',
 			]
 		);
@@ -1093,7 +1092,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#9A9A9A',
 				'selectors' => [
-					'{{WRAPPER}} .mws-ew-lr__eyebrow' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bw-lr__eyebrow, {{WRAPPER}} .mws-ew-lr__eyebrow' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1101,10 +1100,12 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'lr_index_width',
 			[
-				'label'      => esc_html__( 'Index Width', 'blackwidgets' ),
-				'type'       => Controls_Manager::SLIDER,
-				'separator'  => 'before',
-				'size_units' => [ 'px', '%' ],
+				'label'       => esc_html__( 'Index Width', 'blackwidgets' ),
+				'description' => esc_html__( 'Reserved column for the index (e.g. DSGN or 01). Letters stay on the left; leftover space is the column.', 'blackwidgets' ),
+				'type'        => Controls_Manager::SLIDER,
+				'render_type' => 'template',
+				'separator'   => 'before',
+				'size_units'  => [ 'px', '%' ],
 				'range'      => [
 					'px' => [
 						'min' => 20,
@@ -1120,7 +1121,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 					'size' => 120,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .mws-ew-lr' => '--mws-ew-lr-index-w: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bw-lr, {{WRAPPER}} .mws-ew-lr' => '--bw-lr-index-w: {{SIZE}}{{UNIT}}; --mws-ew-lr-index-w: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1128,8 +1129,10 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'lr_gap',
 			[
-				'label'      => esc_html__( 'Gap', 'blackwidgets' ),
-				'type'       => Controls_Manager::SLIDER,
+				'label'       => esc_html__( 'Index Gap', 'blackwidgets' ),
+				'description' => esc_html__( 'Space between the index column and the eyebrow + paragraph. 0 pulls them together.', 'blackwidgets' ),
+				'type'        => Controls_Manager::SLIDER,
+				'render_type' => 'template',
 				'size_units' => [ 'px', 'em' ],
 				'range'      => [
 					'px' => [
@@ -1146,16 +1149,33 @@ class ScrollHeat extends \Elementor\Widget_Base {
 					'size' => 24,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .mws-ew-lr' => '--mws-ew-lr-gap: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bw-lr, {{WRAPPER}} .mws-ew-lr' => '--bw-lr-gap: {{SIZE}}{{UNIT}}; --mws-ew-lr-gap: {{SIZE}}{{UNIT}};',
 				],
+			]
+		);
+
+		$this->add_control(
+			'lr_eyebrow_fixed',
+			[
+				'label'        => esc_html__( 'Fixed Eyebrow Column', 'blackwidgets' ),
+				'description'  => esc_html__( 'Lock the eyebrow to Eyebrow Width so stacked Line Reveal widgets keep paragraphs on one column. Off = eyebrow hugs its text.', 'blackwidgets' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Yes', 'blackwidgets' ),
+				'label_off'    => esc_html__( 'No', 'blackwidgets' ),
+				'return_value' => 'yes',
+				'default'      => '',
+				'separator'    => 'before',
+				'render_type'  => 'template',
 			]
 		);
 
 		$this->add_responsive_control(
 			'lr_eyebrow_width',
 			[
-				'label'      => esc_html__( 'Eyebrow Width', 'blackwidgets' ),
-				'type'       => Controls_Manager::SLIDER,
+				'label'       => esc_html__( 'Eyebrow Width', 'blackwidgets' ),
+				'description' => esc_html__( 'Max eyebrow width, not an empty column. The eyebrow hugs its text unless Fixed Eyebrow Column is on.', 'blackwidgets' ),
+				'type'        => Controls_Manager::SLIDER,
+				'render_type' => 'template',
 				'size_units' => [ 'px', '%', 'em' ],
 				'range'      => [
 					'px' => [
@@ -1176,7 +1196,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 					'size' => 280,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .mws-ew-lr' => '--mws-ew-lr-eyebrow-w: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bw-lr, {{WRAPPER}} .mws-ew-lr' => '--bw-lr-eyebrow-w: {{SIZE}}{{UNIT}}; --mws-ew-lr-eyebrow-w: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1184,13 +1204,15 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'lr_eyebrow_gap',
 			[
-				'label'      => esc_html__( 'Eyebrow Gap', 'blackwidgets' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em' ],
-				'range'      => [
+				'label'       => esc_html__( 'Eyebrow Gap', 'blackwidgets' ),
+				'description' => esc_html__( 'Space between the eyebrow and the start of the paragraph. Use a small value (16-24) for a tight first line.', 'blackwidgets' ),
+				'type'        => Controls_Manager::SLIDER,
+				'render_type' => 'template',
+				'size_units'  => [ 'px', 'em' ],
+				'range'       => [
 					'px' => [
 						'min' => 0,
-						'max' => 80,
+						'max' => 200,
 					],
 					'em' => [
 						'min' => 0,
@@ -1202,7 +1224,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 					'size' => 16,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .mws-ew-lr' => '--mws-ew-lr-eyebrow-gap: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bw-lr, {{WRAPPER}} .mws-ew-lr' => '--bw-lr-eyebrow-gap: {{SIZE}}{{UNIT}}; --mws-ew-lr-eyebrow-gap: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1210,8 +1232,9 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'lr_max_width',
 			[
-				'label'      => esc_html__( 'Max Width', 'blackwidgets' ),
-				'type'       => Controls_Manager::SLIDER,
+				'label'       => esc_html__( 'Max Width', 'blackwidgets' ),
+				'description' => esc_html__( 'Max width of the whole block (index + eyebrow + paragraph).', 'blackwidgets' ),
+				'type'        => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'vw' ],
 				'range'      => [
 					'px' => [
@@ -1228,7 +1251,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .mws-ew-lr__title' => 'max-width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bw-lr, {{WRAPPER}} .mws-ew-lr' => 'max-width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1236,11 +1259,12 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'lr_padding',
 			[
-				'label'      => esc_html__( 'Padding', 'blackwidgets' ),
+				'label'       => esc_html__( 'Padding', 'blackwidgets' ),
+				'description' => esc_html__( 'Inner spacing of the widget.', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .mws-ew-lr' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bw-lr, {{WRAPPER}} .mws-ew-lr' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1296,8 +1320,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_render_attribute(
 			'heat_root',
 			[
-				'class'               => 'mws-ew-hw',
-				'data-mws-ew-hw'      => '1',
+				'class'               => 'bw-hw mws-ew-hw',
 				'data-bw-scroll-heat' => '1',
 				'data-start'          => $scroll_start,
 				'data-end'            => $scroll_end,
@@ -1309,7 +1332,7 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_render_attribute(
 			'heat_text',
 			[
-				'class' => 'mws-ew-hw__text',
+				'class' => 'bw-hw__text mws-ew-hw__text',
 			]
 		);
 		?>
@@ -1370,16 +1393,19 @@ class ScrollHeat extends \Elementor\Widget_Base {
 
 		$ease = ! empty( $settings['ease'] ) ? (string) $settings['ease'] : 'auto';
 
-		$classes = [ 'mws-ew-at' ];
+		$classes = [ 'bw-at', 'mws-ew-at' ];
 		if ( $enable_grad ) {
+			$classes[] = 'bw-at--gradient';
 			$classes[] = 'mws-ew-at--gradient';
 		}
 		if ( 'flip3d' === $anim_type ) {
+			$classes[] = 'bw-at--flip3d';
 			$classes[] = 'mws-ew-at--flip3d';
 		}
 
-		$title_classes = [ 'mws-ew-at__title' ];
+		$title_classes = [ 'bw-at__title', 'mws-ew-at__title' ];
 		if ( 'span' === $tag ) {
+			$title_classes[] = 'bw-at__title--inline';
 			$title_classes[] = 'mws-ew-at__title--inline';
 		}
 
@@ -1387,7 +1413,6 @@ class ScrollHeat extends \Elementor\Widget_Base {
 			'at_root',
 			[
 				'class'                 => $classes,
-				'data-mws-ew-at'        => '1',
 				'data-bw-animated-text' => '1',
 				'data-anim'             => $anim_type,
 				'data-split'            => $split_type,
@@ -1423,10 +1448,10 @@ class ScrollHeat extends \Elementor\Widget_Base {
 	 * @param string $text Shared text fallback.
 	 */
 	private function render_line_reveal( $settings, $text ) {
+		// Line Reveal uses its own paragraph field ($settings['lr_text']). It does
+		// not fall back to the shared Scroll Heat "text" control (that control is
+		// hidden for this type and would leak its default text into the paragraph).
 		$body = isset( $settings['lr_text'] ) ? trim( (string) $settings['lr_text'] ) : '';
-		if ( '' === $body ) {
-			$body = $text;
-		}
 		if ( '' === $body ) {
 			$body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
 		}
@@ -1440,16 +1465,21 @@ class ScrollHeat extends \Elementor\Widget_Base {
 			$scroll_start = 'top 75%';
 		}
 
-		$show_index   = ( ! empty( $settings['lr_show_index'] ) && 'yes' === $settings['lr_show_index'] );
-		$show_eyebrow = ( ! empty( $settings['lr_show_eyebrow'] ) && 'yes' === $settings['lr_show_eyebrow'] );
-		$index        = isset( $settings['lr_index'] ) ? (string) $settings['lr_index'] : '';
-		$eyebrow      = isset( $settings['lr_eyebrow'] ) ? (string) $settings['lr_eyebrow'] : '';
+		$show_index    = ( ! empty( $settings['lr_show_index'] ) && 'yes' === $settings['lr_show_index'] );
+		$show_eyebrow  = ( ! empty( $settings['lr_show_eyebrow'] ) && 'yes' === $settings['lr_show_eyebrow'] );
+		$eyebrow_fixed = ( ! empty( $settings['lr_eyebrow_fixed'] ) && 'yes' === $settings['lr_eyebrow_fixed'] );
+		$index         = isset( $settings['lr_index'] ) ? (string) $settings['lr_index'] : '';
+		$eyebrow       = isset( $settings['lr_eyebrow'] ) ? (string) $settings['lr_eyebrow'] : '';
+
+		$root_classes = [ 'bw-lr', 'mws-ew-lr' ];
+		if ( $eyebrow_fixed ) {
+			$root_classes[] = 'is-eyebrow-fixed';
+		}
 
 		$this->add_render_attribute(
 			'lr_root',
 			[
-				'class'               => 'mws-ew-lr',
-				'data-mws-ew-lr'      => '1',
+				'class'               => $root_classes,
 				'data-bw-line-reveal' => '1',
 				'data-start'          => $scroll_start,
 				'data-duration'       => (string) $this->get_slider_size( $settings, 'lr_duration', 1 ),
@@ -1461,18 +1491,18 @@ class ScrollHeat extends \Elementor\Widget_Base {
 		$this->add_render_attribute(
 			'lr_title',
 			[
-				'class' => 'mws-ew-lr__title',
+				'class' => 'bw-lr__title mws-ew-lr__title',
 			]
 		);
 		?>
 		<div <?php $this->print_render_attribute_string( 'lr_root' ); ?>>
-			<div class="mws-ew-lr__inner">
+			<div class="bw-lr__inner mws-ew-lr__inner">
 				<?php if ( $show_index && '' !== trim( $index ) ) : ?>
-					<div class="mws-ew-lr__index"><?php echo esc_html( $index ); ?></div>
+					<div class="bw-lr__index mws-ew-lr__index"><?php echo esc_html( $index ); ?></div>
 				<?php endif; ?>
-				<div class="mws-ew-lr__content">
+				<div class="bw-lr__content mws-ew-lr__content">
 					<?php if ( $show_eyebrow && '' !== trim( $eyebrow ) ) : ?>
-						<div class="mws-ew-lr__eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
+						<div class="bw-lr__eyebrow mws-ew-lr__eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
 					<?php endif; ?>
 					<<?php echo esc_html( $tag ); ?> <?php $this->print_render_attribute_string( 'lr_title' ); ?>>
 						<?php echo $this->escape_typography_text( $body ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>

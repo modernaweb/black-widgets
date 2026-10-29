@@ -16,9 +16,9 @@ use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Text_Shadow;
 
 /**
- * Elementor title Widget.
+ * Dropcap widget.
  *
- * Elementor widget that inserts an embbedable content into the page, from any given URL.
+ * Drop cap widget that styles the first letter of a paragraph.
  *
  * @since 1.0.0
  */
@@ -94,17 +94,13 @@ class Dropcap extends \Elementor\Widget_Base {
     }
 
 	/**
-	 * Register dropcap widget controls.
-	 *
-	 * Adds different input fields to allow the user to change and customize the widget settings.
+	 * Register the dropcap widget controls.
 	 *
 	 * @since 1.0.0
 	 * @access protected
 	 */
 	protected function register_controls() {
 
-		// Start
-		// Content section
 		$this->start_controls_section(
 			'content_section',
 			[
@@ -138,11 +134,8 @@ class Dropcap extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
 
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'style_section',
 			[
@@ -151,7 +144,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Style Subtitle Tabs
 		$this->start_controls_tabs('black_widget_1_tab');
 		$this->start_controls_tab(
 			'tab_1_normal',
@@ -160,7 +152,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -178,7 +169,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
@@ -191,7 +181,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
@@ -211,7 +200,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -221,7 +209,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -251,7 +238,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -269,7 +255,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'widget_hover_box_margin',
 			[
@@ -282,7 +267,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'widget_hover_box_padding',
 			[
@@ -302,7 +286,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -312,7 +295,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -335,13 +317,10 @@ class Dropcap extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_tab();
-		$this->end_controls_tabs(); // End Tabs
+		$this->end_controls_tabs();
 
 		$this->end_controls_section();
-        // End
 
-		// Start
-		// Main Text Typography
 		$this->start_controls_section(
 			'style_section_back_first_letter_paragraph_typo',
 			[
@@ -350,7 +329,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'style_main_back_first_letter_paragraph_color',
 			[
@@ -365,7 +343,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Typography
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -378,7 +355,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Text shadow
 		$this->add_group_control(
 			Group_Control_Text_Shadow::get_type(),
 			[
@@ -395,7 +371,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -413,7 +388,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'style_main_back_first_letter_paragraph_margin',
 			[
@@ -426,7 +400,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'style_main_back_first_letter_paragraph_padding',
 			[
@@ -446,7 +419,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -456,7 +428,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border Radius
 		$this->add_control(
 			'style_main_back_first_letter_paragraph_border_radius', //param_name
 			[
@@ -469,7 +440,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -480,10 +450,7 @@ class Dropcap extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
-		// Start
-		// Main Text Typography
 		$this->start_controls_section(
 			'style_section_back_paragraph_typo',
 			[
@@ -492,7 +459,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'style_main_back_paragraph_color',
 			[
@@ -507,7 +473,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Typography
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -520,7 +485,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Text shadow
 		$this->add_group_control(
 			Group_Control_Text_Shadow::get_type(),
 			[
@@ -537,7 +501,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -555,7 +518,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'style_main_back_paragraph_margin',
 			[
@@ -568,7 +530,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'style_main_back_paragraph_padding',
 			[
@@ -588,7 +549,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -598,7 +558,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border Radius
 		$this->add_control(
 			'style_main_back_paragraph_border_radius', //param_name
 			[
@@ -611,7 +570,6 @@ class Dropcap extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -622,15 +580,14 @@ class Dropcap extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
 
 	}
 
 	/**
-	 * Render title widget output on the frontend.
+	 * Render the dropcap widget output on the frontend.
 	 *
-	 * Written in PHP and used to generate the final HTML.
+	 * Outputs the widget HTML.
 	 *
 	 * @since 1.0.0
 	 * @access protected
@@ -642,7 +599,6 @@ class Dropcap extends \Elementor\Widget_Base {
 		// Variables
         $description	= isset($settings['widget_dropcap'])	? $settings['widget_dropcap']		: '';
 
-		// Render
         echo '<div class="bw-dropcap-wrap"><p class="bw-dropcap">' . esc_html( $description ) . '</p></div>';
 
 	}

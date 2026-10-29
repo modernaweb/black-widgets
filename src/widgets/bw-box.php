@@ -16,9 +16,9 @@ use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Css_Filter;
 
 /**
- * Elementor title Widget.
+ * Box widget.
  *
- * Elementor widget that inserts an embbedable content into the page, from any given URL.
+ * Box with 2D and 3D transforms on normal and hover states.
  *
  * @since 1.0.0
  */
@@ -33,7 +33,7 @@ class Box extends \Elementor\Widget_Base {
     /**
      * Get widget name.
      *
-     * Retrieve button widget name.
+     * Retrieve the box widget name.
      *
      * @since 1.0.0
      * @access public
@@ -47,7 +47,7 @@ class Box extends \Elementor\Widget_Base {
     /**
      * Get widget title.
      *
-     * Retrieve button widget title.
+     * Retrieve the box widget title.
      *
      * @since 1.0.0
      * @access public
@@ -61,7 +61,7 @@ class Box extends \Elementor\Widget_Base {
     /**
      * Get widget icon.
      *
-     * Retrieve button widget icon.
+     * Retrieve the box widget icon.
      *
      * @since 1.0.0
      * @access public
@@ -75,7 +75,7 @@ class Box extends \Elementor\Widget_Base {
     /**
      * Get widget categories.
      *
-     * Retrieve the list of categories the button widget belongs to.
+     * Retrieve the list of categories the box widget belongs to.
      *
      * @since 1.0.0
      * @access public
@@ -99,17 +99,13 @@ class Box extends \Elementor\Widget_Base {
     }
 
     /**
-     * Register button widget controls.
-     *
-     * Adds different input fields to allow the user to change and customize the widget settings.
+     * Register the box widget controls.
      *
      * @since 1.0.0
      * @access protected
      */
     protected function register_controls() {
 
-        // Start
-        // Content section
         $this->start_controls_section(
             'content_section',
             [
@@ -209,7 +205,7 @@ class Box extends \Elementor\Widget_Base {
         $this->add_group_control(
             Group_Control_Image_Size::get_type(),
             [
-                'name' => 'thumbnail', // Usage: `{name}_size` → `thumbnail_size` (keep name for BC with 1.3.9).
+                'name' => 'thumbnail', // Kept for backward compatibility with 1.3.9.
                 'exclude' => [ 'custom' ],
                 'include' => [],
                 'default' => 'full',
@@ -335,10 +331,7 @@ class Box extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
-        // Start
-        // Style section
         $this->start_controls_section(
             'style_section',
             [
@@ -347,7 +340,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Style Subtitle Tabs
         $this->start_controls_tabs('black_widget_1_tab');
         $this->start_controls_tab(
             'tab_1_normal',
@@ -356,7 +348,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -374,7 +365,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'widget_box_margin',
             [
@@ -387,7 +377,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'widget_box_padding',
             [
@@ -407,7 +396,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -417,7 +405,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -447,7 +434,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -465,7 +451,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'widget_hover_box_margin',
             [
@@ -478,7 +463,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'widget_hover_box_padding',
             [
@@ -498,7 +482,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -508,7 +491,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -531,12 +513,10 @@ class Box extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_tab();
-        $this->end_controls_tabs(); // End Tabs
+        $this->end_controls_tabs();
 
         $this->end_controls_section();
 
-        // Start
-        // Start Style section
         $this->start_controls_section(
             'typography_section',
             [
@@ -545,8 +525,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-
-        // Color
         $this->add_control(
             'title_solid_color',
             [
@@ -559,7 +537,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Typography
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
@@ -572,7 +549,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'subtitle_solid_color',
             [
@@ -585,7 +561,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Typography
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
@@ -598,15 +573,8 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-
         $this->end_controls_section();
-        // End Style Section
-        // End
 
-
-
-        // Start
-        // Style section
         $this->start_controls_section(
             'transform_section',
             [
@@ -628,7 +596,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Style Subtitle Tabs
         $this->start_controls_tabs('transform_tabs', [
             'condition' 	=> [
                 'transform_normal_option' 	=> [
@@ -642,8 +609,6 @@ class Box extends \Elementor\Widget_Base {
                 'label' => esc_html__( 'Move', 'blackwidgets' ),
             ]
         );
-
-        // Start normal tab content
 
         $this->add_responsive_control(
             'move_normal_x',
@@ -708,8 +673,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // end normal tab content
-
         $this->end_controls_tab();
         $this->start_controls_tab(
             'transform_tab_scale',
@@ -717,8 +680,6 @@ class Box extends \Elementor\Widget_Base {
                 'label' => esc_html__( 'Scale', 'blackwidgets' ),
             ]
         );
-
-        // Start hover tab content
 
         $this->add_responsive_control(
             'scale_normal_x',
@@ -825,8 +786,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // end hover tab content
-
         $this->end_controls_tab();
         $this->start_controls_tab(
             'transform_tab_rotate',
@@ -834,8 +793,6 @@ class Box extends \Elementor\Widget_Base {
                 'label' => esc_html__( 'Rotate', 'blackwidgets' ),
             ]
         );
-
-        // Start hover tab content
 
         $this->add_responsive_control(
             'rotate_normal_x',
@@ -897,8 +854,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // end hover tab content
-
         $this->end_controls_tab();
         $this->start_controls_tab(
             'transform_tab_skew',
@@ -906,8 +861,6 @@ class Box extends \Elementor\Widget_Base {
                 'label' => esc_html__( 'Skew', 'blackwidgets' ),
             ]
         );
-
-        // Start hover tab content
 
         $this->add_responsive_control(
             'skew_normal_x',
@@ -949,17 +902,11 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // end hover tab content
-
         $this->end_controls_tab();
-        $this->end_controls_tabs(); // End Tabs
+        $this->end_controls_tabs();
 
         $this->end_controls_section();
-        // End
 
-
-        // Start
-        // Style section
         $this->start_controls_section(
             'image_pro_cursor_animate',
             [
@@ -1025,11 +972,7 @@ class Box extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
-
-        // Start
-        // Style section
         $this->start_controls_section(
             'transform_section_hover',
             [
@@ -1051,7 +994,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Style Subtitle Tabs
         $this->start_controls_tabs('transform_hover_tabs', [
             'condition' 	=> [
                 'transform_hover_option' 	=> [
@@ -1065,8 +1007,6 @@ class Box extends \Elementor\Widget_Base {
                 'label' => esc_html__( 'Move', 'blackwidgets' ),
             ]
         );
-
-        // Start normal tab content
 
         $this->add_responsive_control(
             'move_hover_x',
@@ -1131,8 +1071,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // end normal tab content
-
         $this->end_controls_tab();
         $this->start_controls_tab(
             'transform_tab_scale_hover',
@@ -1140,8 +1078,6 @@ class Box extends \Elementor\Widget_Base {
                 'label' => esc_html__( 'Scale', 'blackwidgets' ),
             ]
         );
-
-        // Start hover tab content
 
         $this->add_responsive_control(
             'scale_hover_x',
@@ -1248,8 +1184,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // end hover tab content
-
         $this->end_controls_tab();
         $this->start_controls_tab(
             'transform_tab_rotate_hover',
@@ -1257,8 +1191,6 @@ class Box extends \Elementor\Widget_Base {
                 'label' => esc_html__( 'Rotate', 'blackwidgets' ),
             ]
         );
-
-        // Start hover tab content
 
         $this->add_responsive_control(
             'rotate_hover_x',
@@ -1320,8 +1252,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // end hover tab content
-
         $this->end_controls_tab();
         $this->start_controls_tab(
             'transform_tab_skew_hover',
@@ -1329,8 +1259,6 @@ class Box extends \Elementor\Widget_Base {
                 'label' => esc_html__( 'Skew', 'blackwidgets' ),
             ]
         );
-
-        // Start hover tab content
 
         $this->add_responsive_control(
             'skew_hover_x',
@@ -1372,17 +1300,11 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // end hover tab content
-
         $this->end_controls_tab();
-        $this->end_controls_tabs(); // End Tabs
+        $this->end_controls_tabs();
 
         $this->end_controls_section();
-        // End
 
-
-        // Start
-        // Style section
         $this->start_controls_section(
             'image_style_section',
             [
@@ -1391,7 +1313,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Style Subtitle Tabs
         $this->start_controls_tabs('black_widget_2_tab');
         $this->start_controls_tab(
             'img_tab_1_normal',
@@ -1400,7 +1321,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -1418,7 +1338,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'image_style_margin',
             [
@@ -1431,7 +1350,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'image_style_padding',
             [
@@ -1451,7 +1369,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -1461,7 +1378,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -1500,7 +1416,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -1518,7 +1433,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'image_style_hover_box_margin',
             [
@@ -1531,7 +1445,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'image_style_hover_box_padding',
             [
@@ -1551,7 +1464,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -1561,7 +1473,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -1602,12 +1513,9 @@ class Box extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_tab();
-        $this->end_controls_tabs(); // End Tabs
+        $this->end_controls_tabs();
 
         $this->end_controls_section();
-        // End
-        // Start
-        // Style section
         $this->start_controls_section(
             'style2_link_section',
             [
@@ -1621,7 +1529,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -1632,7 +1539,6 @@ class Box extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -1644,25 +1550,13 @@ class Box extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
-
-
-
-
-
-
-
-
-
-
-
 
     }
 
     /**
-     * Render title widget output on the frontend.
+     * Render the box widget output on the frontend.
      *
-     * Written in PHP and used to generate the final HTML.
+     * Outputs the widget HTML.
      *
      * @since 1.0.0
      * @access protected

@@ -29,7 +29,6 @@ class TextMarquee extends \Elementor\Widget_Base {
     public function __construct( $data = [], $args = null ) {
         parent::__construct( $data, $args );
 
-        // Register widget stylesheet.
         wp_register_style(
             'black-widgets-text-marquee',
             BLACK_WIDGETS_PLUGIN_URL . 'assets/css/text-marquee.css',
@@ -156,10 +155,7 @@ class TextMarquee extends \Elementor\Widget_Base {
     }
 
     /**
-     * Check if GSAP is enabled based on plugin options.
-     *
-     * Retrieves the plugin options from the database, then verifies
-     * if the GSAP options and both CDN URLs are set and not empty.
+     * Check whether GSAP is enabled in the plugin options.
      *
      * @since 1.4.0
      *
@@ -552,35 +548,35 @@ class TextMarquee extends \Elementor\Widget_Base {
     protected function render() {
         $settings = $this->get_settings_for_display();
 
-        $direction       = sanitize_text_field( $settings['widget_direction'] ?? '' );
-        $speed           = (int) ( $settings['widget_speed'] ?? 20 );
+        $direction        = sanitize_text_field( $settings['widget_direction'] ?? '' );
+        $speed            = (int) ( $settings['widget_speed'] ?? 20 );
         if ( $speed <= 0 ) {
             $speed = 20;
         }
-        $pause           = ( $settings['widget_pause_on_hover'] ?? '' ) === 'yes' ? 'pause-on-hover' : '';
-        $mode            = sanitize_text_field( $settings['widget_type'] ?? 'type1' );
-        $gap             = (int) ( $settings['widget_gap'] ?? 0 );
+        $pause            = ( $settings['widget_pause_on_hover'] ?? '' ) === 'yes' ? 'pause-on-hover' : '';
+        $mode             = sanitize_text_field( $settings['widget_type'] ?? 'type1' );
+        $gap              = (int) ( $settings['widget_gap'] ?? 0 );
         $scrollControlled = false;
-        $gsap_start      = 'top bottom';
-        $gsap_end        = 'bottom top';
-        $speedScroll        = 2;
+        $gsap_start       = 'top bottom';
+        $gsap_end         = 'bottom top';
+        $speedScroll      = 2;
 
         if ( $this->is_gsap_enabled() ) {
             $scrollControlled = ( $settings['widget_mos'] ?? '' ) === 'yes';
             $speedScroll      = sanitize_text_field( $settings['widget_gsap_speed'] ?? $speedScroll );
         }
 
-        $inner_class = ( $mode === 'type1' ) ? 'bw-marquee-inner-single' : 'bw-marquee-inner';
+        $inner_class      = ( $mode === 'type1' ) ? 'bw-marquee-inner-single' : 'bw-marquee-inner';
 
-        $allowed_tags = [
-            'a'      => [ 'href' => [], 'target' => [], 'rel' => [], 'style' => [] ],
-            'strong' => [],
-            'em'     => [],
-            'span'   => [ 'style' => [] ],
-            'b'      => [],
-            'i'      => [],
-            'u'      => [],
-            'br'     => [],
+        $allowed_tags     = [
+            'a'           => [ 'href' => [], 'target' => [], 'rel' => [], 'style' => [] ],
+            'strong'      => [],
+            'em'          => [],
+            'span'        => [ 'style' => [] ],
+            'b'           => [],
+            'i'           => [],
+            'u'           => [],
+            'br'          => [],
         ];
 
         ?>

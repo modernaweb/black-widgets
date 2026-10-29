@@ -34,4 +34,4 @@ Black Button widget (plus the Elementor editor preview).
 ## GSAP
 
 GSAP is deliberately **not** bundled. It is loaded from a CDN URL entered in
-Black Widgets → Settings, so no GSAP code ships with this plugin.
+Black Widgets → Settings, so no GSAP code ships with this plugin at all.

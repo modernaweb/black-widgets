@@ -75,9 +75,7 @@ class ScrollText extends \Elementor\Widget_Base {
         }
 
         \Modernaweb\BlackWidgets\Plugin_Options::register_gsap_scripts();
-
-        // Do not deregister shared handles. List GSAP explicitly so Elementor
-        // enqueues the chain even if this widget registered before CDN handles.
+        // Keep shared handles registered and list GSAP explicitly, so Elementor enqueues the full chain even when this widget registers before the CDN handles.
         $deps = [ 'black-widgets-typography', 'GSAP', 'GSAP-ScrollTrigger' ];
         if ( \Modernaweb\BlackWidgets\Plugin_Options::is_gsap_split_ready() && wp_script_is( 'GSAP-SplitText', 'registered' ) ) {
             $deps[] = 'GSAP-SplitText';
@@ -584,7 +582,7 @@ class ScrollText extends \Elementor\Widget_Base {
                 'global'   => [
                     'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
                 ],
-                'selector' => '{{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-animate .bw-line, {{WRAPPER}} .bw-typograpgy-animate .bw-word, {{WRAPPER}} .bw-typograpgy-animate .bw-char, {{WRAPPER}} .bw-typograpgy-animate .char',
+                'selector' => '{{WRAPPER}} .bw-typograpgy-animate, {{WRAPPER}} .bw-typograpgy-animate .bw-line-mask, {{WRAPPER}} .bw-typograpgy-animate .bw-line, {{WRAPPER}} .bw-typograpgy-animate .bw-word, {{WRAPPER}} .bw-typograpgy-animate .bw-char, {{WRAPPER}} .bw-typograpgy-animate .char-wrap, {{WRAPPER}} .bw-typograpgy-animate .word, {{WRAPPER}} .bw-typograpgy-animate .char',
             ]
         );
 
@@ -893,9 +891,7 @@ class ScrollText extends \Elementor\Widget_Base {
             }
         }
 
-        // The movement timeline is built by typography.js from this attribute.
-        // An inline <script> would never run in the editor, because Elementor
-        // injects re-rendered widget markup with innerHTML.
+        // Movement Timeline is built by typography.js
         $movement_attr = empty( $movement )
             ? ''
             : ' data-bw-move="' . esc_attr( wp_json_encode( $movement ) ) . '"';

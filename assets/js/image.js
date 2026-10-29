@@ -26,7 +26,6 @@
             if (!el || el.closest('.simpleParallax')) {
                 continue;
             }
-            // Pass a single IMG node - plain arrays are treated as one invalid "element".
             new simpleParallax(el);
         }
     }

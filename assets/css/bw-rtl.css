@@ -97,7 +97,7 @@
 .rtl .bw-magic-link .bw-magic-heart:hover span,
 [dir="rtl"] .bw-magic-link .bw-magic-heart:hover span {
     margin-left: 0;
-    margin-right: 42px;
+    margin-right: 0.6em;
 }
 
 .rtl .bw-magic-link .bw-magic-heart span svg,
@@ -125,14 +125,26 @@
 .rtl .bw-magic-link .bw-magic-wheel,
 [dir="rtl"] .bw-magic-link .bw-magic-wheel {
     padding-left: 0;
-    padding-right: 2.5em;
+    padding-right: 2.4em;
 }
 
 .rtl .bw-magic-link .bw-magic-wheel svg,
 [dir="rtl"] .bw-magic-link .bw-magic-wheel svg {
     left: auto;
     right: 0;
-    transform: scaleX(-1);
+    transform: translateY(-50%) scaleX(-1);
+}
+
+.rtl .bw-magic-link .bw-magic-wheel:hover,
+[dir="rtl"] .bw-magic-link .bw-magic-wheel:hover {
+    transform: translateZ(0) translateX(-0.5em);
+    -webkit-transform: translateZ(0) translateX(-0.5em);
+}
+
+.rtl .bw-magic-link .bw-magic-minimal,
+[dir="rtl"] .bw-magic-link .bw-magic-minimal {
+    padding-left: 0;
+    padding-right: 14px;
 }
 
 .rtl .bw-magic-link .bw-magic-minimal:hover,

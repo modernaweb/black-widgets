@@ -14,9 +14,7 @@
 			return false;
 		}
 		gsap.registerPlugin(SplitText, ScrollTrigger);
-		if (window.mwsEw && typeof mwsEw.ensureScrollTriggerConfig === 'function') {
-			mwsEw.ensureScrollTriggerConfig();
-		} else if (typeof ScrollTrigger.config === 'function') {
+		if (typeof ScrollTrigger.config === 'function') {
 			ScrollTrigger.config({ limitCallbacks: true });
 		}
 		pluginsRegistered = true;
@@ -37,13 +35,16 @@
 	}
 
 	function readDataNumber(root, attr, cssProp, fallback) {
-		if (window.mwsEw && typeof mwsEw.readMotionNumber === 'function') {
-			return mwsEw.readMotionNumber(root, attr, cssProp, fallback);
-		}
 		// Prefer CSS vars - Elementor selector controls update them without remount.
 		var fromCss = readCssNumber(root, cssProp, NaN);
 		if (!isNaN(fromCss)) {
 			return fromCss;
+		}
+		if (cssProp && cssProp.indexOf('--bw-') === 0) {
+			fromCss = readCssNumber(root, '--mws-ew-' + cssProp.slice(5), NaN);
+			if (!isNaN(fromCss)) {
+				return fromCss;
+			}
 		}
 		var raw = root.getAttribute(attr);
 		if (raw !== null && raw !== '') {
@@ -53,9 +54,6 @@
 	}
 
 	function isElementorEditMode() {
-		if (window.mwsEw && typeof mwsEw.isElementorEditMode === 'function') {
-			return mwsEw.isElementorEditMode();
-		}
 		try {
 			return !!(
 				window.elementorFrontend &&
@@ -68,9 +66,6 @@
 	}
 
 	function createEnterTrigger(vars) {
-		if (window.mwsEw && typeof mwsEw.createEnterTrigger === 'function') {
-			return mwsEw.createEnterTrigger(vars);
-		}
 		try {
 			return ScrollTrigger.create(vars);
 		} catch (e) {
@@ -80,17 +75,14 @@
 
 	function readMotionOpts(root, defaults, triggerMode) {
 		return {
-			duration: readDataNumber(root, 'data-duration', '--mws-ew-at-duration', defaults.duration),
-			stagger: readDataNumber(root, 'data-stagger', '--mws-ew-at-stagger', defaults.stagger),
-			delay: readDataNumber(root, 'data-delay', '--mws-ew-at-delay', triggerMode === 'load' ? 0.15 : 0),
-			scrub: readDataNumber(root, 'data-scrub', '--mws-ew-at-scrub', 1)
+			duration: readDataNumber(root, 'data-duration', '--bw-at-duration', defaults.duration),
+			stagger: readDataNumber(root, 'data-stagger', '--bw-at-stagger', defaults.stagger),
+			delay: readDataNumber(root, 'data-delay', '--bw-at-delay', triggerMode === 'load' ? 0.15 : 0),
+			scrub: readDataNumber(root, 'data-scrub', '--bw-at-scrub', 1)
 		};
 	}
 
 	function prefersReducedMotion() {
-		if (window.mwsEw && typeof mwsEw.prefersReducedMotion === 'function') {
-			return mwsEw.prefersReducedMotion();
-		}
 		try {
 			return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 		} catch (e) {
@@ -102,10 +94,56 @@
 		if (prefersReducedMotion()) {
 			return false;
 		}
-		if (window.mwsEw && typeof mwsEw.canUseGsap === 'function') {
-			return mwsEw.canUseGsap() && registerPlugins();
-		}
 		return typeof gsap !== 'undefined' && registerPlugins();
+	}
+
+	function prepareSplitBox(el) {
+		if (!el) {
+			return;
+		}
+		el.style.display = 'block';
+		el.style.width = '100%';
+		el.style.maxWidth = '';
+		el.style.boxSizing = 'border-box';
+		void el.offsetWidth;
+	}
+
+	function watchBoxWidth(el, onChange) {
+		if (!el || typeof onChange !== 'function') {
+			return function () {};
+		}
+
+		var lastWidth = el.clientWidth;
+		var timer = 0;
+
+		function check() {
+			var w = el.clientWidth;
+			if (Math.abs(w - lastWidth) < 1) {
+				return;
+			}
+			lastWidth = w;
+			onChange();
+		}
+
+		function onResize() {
+			clearTimeout(timer);
+			timer = setTimeout(check, 200);
+		}
+
+		window.addEventListener('resize', onResize);
+		var ro = null;
+		if (typeof ResizeObserver === 'function') {
+			ro = new ResizeObserver(onResize);
+			ro.observe(el);
+		}
+
+		return function () {
+			window.removeEventListener('resize', onResize);
+			clearTimeout(timer);
+			if (ro) {
+				ro.disconnect();
+			}
+		};
 	}
 
 	var fontsReady = false;
@@ -154,36 +192,100 @@
 		return getAnimDefaults(animType).split;
 	}
 
+	function bakeTitleTextTransform(title) {
+		if (!title) {
+			return;
+		}
+
+		var transform = title.getAttribute('data-bw-at-transform');
+		if (!transform) {
+			try {
+				transform = window.getComputedStyle(title).textTransform || 'none';
+			} catch (e) {
+				transform = 'none';
+			}
+			title.setAttribute('data-bw-at-transform', transform);
+		}
+
+		title.style.textTransform = 'none';
+		if (transform !== 'uppercase' && transform !== 'lowercase' && transform !== 'capitalize') {
+			return;
+		}
+
+		var walker = document.createTreeWalker(title, NodeFilter.SHOW_TEXT, null);
+		var nodes = [];
+		while (walker.nextNode()) {
+			nodes.push(walker.currentNode);
+		}
+
+		nodes.forEach(function (node) {
+			var text = node.nodeValue || '';
+			if (!text) {
+				return;
+			}
+			if (transform === 'uppercase') {
+				node.nodeValue = text.toLocaleUpperCase();
+				return;
+			}
+			if (transform === 'lowercase') {
+				node.nodeValue = text.toLocaleLowerCase();
+				return;
+			}
+			node.nodeValue = text.replace(/([^\s])([^\s]*)/g, function (_, first, rest) {
+				return first.toLocaleUpperCase() + rest.toLocaleLowerCase();
+			});
+		});
+	}
+
+	function lockSplitCharCase(split) {
+		if (!split || !split.chars || !split.chars.length) {
+			return;
+		}
+		var i;
+		for (i = 0; i < split.chars.length; i++) {
+			if (split.chars[i]) {
+				split.chars[i].style.textTransform = 'none';
+			}
+		}
+	}
+
 	function createSplit(title, splitType) {
 		var config;
+		var split;
+
+		bakeTitleTextTransform(title);
 
 		if (splitType === 'lines') {
 			config = {
 				type: 'lines',
-				linesClass: 'mws-ew-at__line',
+				linesClass: 'bw-at__line',
 				mask: 'lines'
 			};
 		} else if (splitType === 'words') {
 			config = {
 				type: 'words',
-				wordsClass: 'mws-ew-at__word'
+				wordsClass: 'bw-at__word'
 			};
 		} else {
 			config = {
 				type: 'words,chars',
-				wordsClass: 'mws-ew-at__word-holder',
-				charsClass: 'mws-ew-at__char'
+				wordsClass: 'bw-at__word-holder',
+				charsClass: 'bw-at__char'
 			};
 		}
 
 		try {
 			if (typeof SplitText.create === 'function') {
-				return SplitText.create(title, config);
+				split = SplitText.create(title, config);
+			} else {
+				split = new SplitText(title, config);
 			}
-			return new SplitText(title, config);
 		} catch (e) {
 			return null;
 		}
+
+		lockSplitCharCase(split);
+		return split;
 	}
 
 	function getTargets(split, splitType) {
@@ -254,7 +356,7 @@
 		if (!root || !title || !targets || !targets.length) {
 			return;
 		}
-		if (!root.classList.contains('mws-ew-at--gradient')) {
+		if (!root.classList.contains('bw-at--gradient') && !root.classList.contains('mws-ew-at--gradient')) {
 			return;
 		}
 
@@ -275,7 +377,7 @@
 			}
 			r = el.getBoundingClientRect();
 			offsets[i] = r.left - titleRect.left;
-			el._mwsGradOffset = offsets[i];
+			el._bwGradOffset = offsets[i];
 		}
 
 		for (i = 0; i < targets.length; i++) {
@@ -283,7 +385,7 @@
 			if (!el) {
 				continue;
 			}
-			el.style.backgroundImage = 'var(--mws-ew-at-grad-image)';
+			el.style.backgroundImage = 'var(--bw-at-grad-image, var(--mws-ew-at-grad-image))';
 			el.style.backgroundSize = bgSize;
 			el.style.backgroundPosition = -offsets[i] + 'px 0';
 			el.style.backgroundRepeat = 'no-repeat';
@@ -328,7 +430,7 @@
 		syncGradientSplit(root, title, targets);
 		gsap.set(targets, pair.from);
 
-		if (animType === 'mask' && root && root.classList.contains('mws-ew-at--gradient')) {
+		if (animType === 'mask' && root && (root.classList.contains('bw-at--gradient') || root.classList.contains('mws-ew-at--gradient'))) {
 			var titleW = Math.max(1, title.getBoundingClientRect().width);
 			// Offsets already cached by syncGradientSplit - avoid a second gBCR pass.
 			var sweep = { pos: titleW * 1.5 };
@@ -348,7 +450,7 @@
 					onUpdate: function () {
 						targets.forEach(function (el) {
 							el.style.backgroundPosition =
-								sweep.pos - (el._mwsGradOffset || 0) + 'px 0';
+								sweep.pos - (el._bwGradOffset || 0) + 'px 0';
 						});
 					}
 				},
@@ -380,33 +482,40 @@
 			return;
 		}
 
-		if (typeof root._mwsEwAtCancelGsap === 'function') {
-			root._mwsEwAtCancelGsap();
-			delete root._mwsEwAtCancelGsap;
+		if (typeof root._bwAtCancelGsap === 'function') {
+			root._bwAtCancelGsap();
+			delete root._bwAtCancelGsap;
 		}
 
-		if (typeof root._mwsEwAtCleanup === 'function') {
-			root._mwsEwAtCleanup();
+		if (typeof root._bwAtCleanup === 'function') {
+			root._bwAtCleanup();
 		}
 
-		delete root._mwsEwAtCleanup;
-		delete root.dataset.mwsEwAtInit;
-		delete root.dataset.mwsEwAtPending;
-		root.removeAttribute('data-mws-ew-at-tries');
+		delete root._bwAtCleanup;
+		delete root.dataset.bwAtInit;
+		delete root.dataset.bwAtPending;
+		root.removeAttribute('data-bw-at-tries');
 		root.classList.remove('is-ready', 'is-complete', 'is-playing');
+		if (root.querySelector) {
+			var atTitle = root.querySelector('.bw-at__title, .mws-ew-at__title');
+			if (atTitle) {
+				atTitle.removeAttribute('data-bw-at-transform');
+				atTitle.style.textTransform = '';
+			}
+		}
 	}
 
 	function initInstance(root) {
-		if (!root || root.dataset.mwsEwAtInit === '1') {
+		if (!root || root.dataset.bwAtInit === '1') {
 			return;
 		}
 
-		var title = root.querySelector('.mws-ew-at__title');
+		var title = root.querySelector('.bw-at__title, .mws-ew-at__title');
 		if (!title) {
 			return;
 		}
 
-		root.dataset.mwsEwAtInit = '1';
+		root.dataset.bwAtInit = '1';
 
 		// Capture server-rendered (kses'd) markup so replay keeps <br>/<strong>/<b>/<hr>.
 		var originalHTML = title.innerHTML;
@@ -443,6 +552,7 @@
 		var hasPlayed = false;
 		var isBusy = false;
 		var destroyed = false;
+		var detachResize = null;
 
 		function revertSplit() {
 			if (activeTween) {
@@ -462,13 +572,16 @@
 			}
 
 			title.innerHTML = originalHTML;
+			title.style.width = '';
+			title.style.maxWidth = '';
 			if (typeof gsap !== 'undefined') {
-				gsap.set(title, { clearProps: 'transform,opacity,filter,backgroundPosition' });
+				gsap.set(title, { clearProps: 'transform,opacity,filter,backgroundPosition,width' });
 			}
 		}
 
 		function ensureSplit() {
 			if (!splitInstance) {
+				prepareSplitBox(title);
 				splitInstance = createSplit(title, splitType);
 			}
 			return splitInstance;
@@ -541,6 +654,7 @@
 			var pair = getFromTo(animType);
 
 			revertSplit();
+			prepareSplitBox(title);
 
 			splitInstance = createSplit(title, splitType);
 			if (!splitInstance) {
@@ -588,6 +702,7 @@
 
 		function setupReverse() {
 			revertSplit();
+			prepareSplitBox(title);
 
 			splitInstance = createSplit(title, splitType);
 			if (!splitInstance) {
@@ -623,6 +738,58 @@
 				hasPlayed = true;
 				root.classList.add('is-complete');
 			});
+		}
+
+		function rebuildForWidth() {
+			if (destroyed) {
+				return;
+			}
+
+			if (scrollTrigger && typeof scrollTrigger.kill === 'function') {
+				scrollTrigger.kill();
+			}
+			scrollTrigger = null;
+
+			var complete = root.classList.contains('is-complete') || hasPlayed;
+			var useScroll = triggerMode === 'scroll' || triggerMode === 'inview';
+
+			if (useScroll && scrollMode === 'scrub') {
+				setupScrub();
+				return;
+			}
+
+			if (useScroll && scrollMode === 'reverse') {
+				setupReverse();
+				return;
+			}
+
+			revertSplit();
+			prepareSplitBox(title);
+			ensureSplit();
+			if (!splitInstance) {
+				showFinalState(root, title);
+				return;
+			}
+
+			if (complete) {
+				activeTween = buildTween(title, animType, splitInstance, splitType, currentOpts(true), root);
+				if (activeTween && typeof activeTween.progress === 'function') {
+					activeTween.progress(1);
+				}
+				title.style.visibility = 'visible';
+				root.classList.add('is-ready', 'is-complete');
+				root.classList.remove('is-playing');
+				hasPlayed = true;
+				isBusy = false;
+				return;
+			}
+
+			title.style.visibility = 'hidden';
+			if (isElementorEditMode() || triggerMode === 'load' || !useScroll) {
+				play(false);
+				return;
+			}
+			setupScrollCallbacks();
 		}
 
 		function setupScrollCallbacks() {
@@ -662,51 +829,32 @@
 
 			// GSAP / SplitText may still be loading.
 			if (!canAnimate()) {
-				if (window.mwsEw && typeof mwsEw.whenGsapReady === 'function') {
-					if (root.dataset.mwsEwAtPending === '1') {
-						return;
-					}
-					root.dataset.mwsEwAtPending = '1';
-					root._mwsEwAtCancelGsap = mwsEw.whenGsapReady(
-						function () {
-							delete root.dataset.mwsEwAtPending;
-							delete root._mwsEwAtCancelGsap;
-							if (!destroyed) {
-								startEngine();
-							}
-						},
-						{
-							plugins: ['SplitText', 'ScrollTrigger'],
-							onReduced: function () {
-								delete root.dataset.mwsEwAtPending;
-								delete root._mwsEwAtCancelGsap;
-								showFinalState(root, title);
-							},
-							onGiveUp: function () {
-								delete root.dataset.mwsEwAtPending;
-								delete root._mwsEwAtCancelGsap;
-								showFinalState(root, title);
-							}
-						}
-					);
-					return;
-				}
-				var tries = parseInt(root.getAttribute('data-mws-ew-at-tries') || '0', 10);
+				var tries = parseInt(root.getAttribute('data-bw-at-tries') || '0', 10);
 				if (tries < 25) {
-					root.setAttribute('data-mws-ew-at-tries', String(tries + 1));
-					setTimeout(function () {
+					root.setAttribute('data-bw-at-tries', String(tries + 1));
+					root.dataset.bwAtPending = '1';
+					var atTimer = setTimeout(function () {
+						delete root.dataset.bwAtPending;
+						delete root._bwAtCancelGsap;
 						if (!destroyed) {
 							startEngine();
 						}
 					}, 160);
+					root._bwAtCancelGsap = function () {
+						clearTimeout(atTimer);
+					};
 					return;
 				}
 				showFinalState(root, title);
 				return;
 			}
 
-			root.removeAttribute('data-mws-ew-at-tries');
-			delete root.dataset.mwsEwAtPending;
+			root.removeAttribute('data-bw-at-tries');
+			delete root.dataset.bwAtPending;
+
+			if (!detachResize) {
+				detachResize = watchBoxWidth(root, rebuildForWidth);
+			}
 
 			// Editor: preview immediately so duration/stagger/delay remounts are visible.
 			if (isElementorEditMode() || triggerMode === 'load') {
@@ -736,9 +884,14 @@
 			setupScrollCallbacks();
 		}
 
-		root._mwsEwAtCleanup = function () {
+		root._bwAtCleanup = function () {
 			destroyed = true;
 			isBusy = false;
+
+			if (detachResize) {
+				detachResize();
+				detachResize = null;
+			}
 
 			if (scrollTrigger && typeof scrollTrigger.kill === 'function') {
 				scrollTrigger.kill();
@@ -759,8 +912,8 @@
 
 	function readLrMotion(root) {
 		return {
-			duration: readDataNumber(root, 'data-duration', '--mws-ew-lr-duration', 1),
-			stagger: readDataNumber(root, 'data-stagger', '--mws-ew-lr-stagger', 0.09)
+			duration: readDataNumber(root, 'data-duration', '--bw-lr-duration', 1),
+			stagger: readDataNumber(root, 'data-stagger', '--bw-lr-stagger', 0.09)
 		};
 	}
 
@@ -776,7 +929,6 @@
 				if (!el) {
 					continue;
 				}
-				// overflow:clip does not create a BFC, so the first line would not shrink beside the float.
 				el.style.overflow = 'hidden';
 				el.style.display = 'block';
 			}
@@ -789,6 +941,98 @@
 				}
 			}
 		}
+	}
+
+	/**
+	 * After SplitText, drop the measure spacer and keep line 1 shifted with
+	 * margin. nowrap prevents an already-measured line from wrapping again.
+	 */
+	function applyLrFirstLineShift(title, split, indent) {
+		var lines = split && split.lines ? split.lines : [];
+		var masks = split && split.masks ? split.masks : [];
+		var i;
+		var el;
+
+		if (title) {
+			title.style.textIndent = '';
+			title.style.setProperty('--bw-lr-indent', '0px');
+			title.style.setProperty('--mws-ew-lr-indent', '0px');
+		}
+
+		for (i = 0; i < lines.length; i++) {
+			el = lines[i];
+			if (!el) {
+				continue;
+			}
+			el.style.textIndent = '0';
+			el.style.whiteSpace = 'nowrap';
+		}
+
+		for (i = 0; i < masks.length; i++) {
+			el = masks[i];
+			if (!el) {
+				continue;
+			}
+			el.style.textIndent = '0';
+			el.style.marginInlineStart = '';
+		}
+
+		if (indent > 0) {
+			el = masks[0] || lines[0];
+			if (el) {
+				el.style.marginInlineStart = indent + 'px';
+			}
+		}
+	}
+
+	/**
+	 * Reserve the eyebrow before SplitText measures by setting --bw-lr-indent
+	 * (title::before float). Only line 1 wraps short; later lines stay full width.
+	 * Also sets is-stacked / is-compact on narrow columns.
+	 */
+	function prepareLrLayout(root, title, content, eyebrow) {
+		var stackedMq = !!(window.matchMedia && window.matchMedia('(max-width: 767px)').matches);
+		var compact = stackedMq || innerIsCompact(root, content);
+		var stacked = stackedMq;
+		var indent = 0;
+
+		if (root) {
+			root.classList.toggle('is-compact', compact);
+			root._bwLrIndent = 0;
+		}
+
+		if (!stackedMq && content && eyebrow) {
+			void content.offsetWidth;
+			indent = eyebrow.offsetWidth;
+			if (indent <= 0 || content.clientWidth - indent < 96) {
+				stacked = true;
+				indent = 0;
+			}
+		}
+
+		if (root) {
+			root.classList.toggle('is-stacked', stacked);
+			if (stacked) {
+				root.classList.add('is-compact');
+			}
+			root._bwLrIndent = indent;
+		}
+
+		if (title) {
+			title.style.textIndent = '';
+			title.style.setProperty('--bw-lr-indent', indent > 0 ? indent + 'px' : '0px');
+			title.style.setProperty('--mws-ew-lr-indent', indent > 0 ? indent + 'px' : '0px');
+		}
+
+		return stacked;
+	}
+
+	function innerIsCompact(root, content) {
+		var inner = root && root.querySelector ? root.querySelector('.bw-lr__inner, .mws-ew-lr__inner') : null;
+		if (inner && inner.clientWidth > 0 && inner.clientWidth < 420) {
+			return true;
+		}
+		return !!(content && content.clientWidth > 0 && content.clientWidth < 280);
 	}
 
 	function isRtlContext(el) {
@@ -846,12 +1090,12 @@
 				continue;
 			}
 			mask = document.createElement('span');
-			mask.className = 'mws-ew-at__line-mask mws-ew-lr__line-mask';
+			mask.className = 'bw-at__line-mask bw-lr__line-mask';
 			mask.setAttribute('aria-hidden', 'true');
 			mask.style.display = 'block';
 			mask.style.overflow = 'hidden';
 			line = document.createElement('span');
-			line.className = 'mws-ew-at__line mws-ew-lr__line';
+			line.className = 'bw-at__line bw-lr__line';
 			line.setAttribute('aria-hidden', 'true');
 			line.style.display = 'block';
 			current[0].parentNode.insertBefore(mask, current[0]);
@@ -873,16 +1117,34 @@
 	}
 
 	function syncEyebrowHeight(eyebrow, split) {
-		if (!eyebrow || !split || !split.lines || !split.lines[0]) {
+		var lrRoot = eyebrow && eyebrow.closest ? eyebrow.closest('.bw-lr, .mws-ew-lr') : null;
+		var stacked = !!(
+			(lrRoot && lrRoot.classList.contains('is-stacked')) ||
+			(window.matchMedia && window.matchMedia('(max-width: 767px)').matches)
+		);
+
+		if (stacked) {
+			if (lrRoot) {
+				lrRoot.style.removeProperty('--bw-lr-first-h');
+				lrRoot.style.removeProperty('--mws-ew-lr-first-h');
+			}
+			if (eyebrow) {
+				eyebrow.style.height = '';
+			}
 			return;
 		}
-		if (window.matchMedia && window.matchMedia('(max-width: 767px)').matches) {
+
+		if (!split || !split.lines || !split.lines[0]) {
+			return;
+		}
+
+		var h = split.lines[0].offsetHeight;
+		if (h > 0 && lrRoot) {
+			lrRoot.style.setProperty('--bw-lr-first-h', h + 'px');
+			lrRoot.style.setProperty('--mws-ew-lr-first-h', h + 'px');
+		}
+		if (eyebrow) {
 			eyebrow.style.height = '';
-			return;
-		}
-		var h = split.lines[0].getBoundingClientRect().height;
-		if (h > 0) {
-			eyebrow.style.height = h + 'px';
 		}
 	}
 
@@ -977,38 +1239,39 @@
 			return;
 		}
 
-		if (typeof root._mwsEwLrCancelGsap === 'function') {
-			root._mwsEwLrCancelGsap();
-			delete root._mwsEwLrCancelGsap;
+		if (typeof root._bwLrCancelGsap === 'function') {
+			root._bwLrCancelGsap();
+			delete root._bwLrCancelGsap;
 		}
 
-		if (typeof root._mwsEwLrCleanup === 'function') {
-			root._mwsEwLrCleanup();
+		if (typeof root._bwLrCleanup === 'function') {
+			root._bwLrCleanup();
 		}
 
-		delete root._mwsEwLrCleanup;
-		delete root.dataset.mwsEwLrInit;
-		delete root.dataset.mwsEwLrPending;
-		root.removeAttribute('data-mws-ew-lr-tries');
-		root.classList.remove('is-ready', 'is-complete', 'is-playing');
+		delete root._bwLrCleanup;
+		delete root._bwLrIndent;
+		delete root.dataset.bwLrInit;
+		delete root.dataset.bwLrPending;
+		root.removeAttribute('data-bw-lr-tries');
+		root.classList.remove('is-ready', 'is-complete', 'is-playing', 'is-stacked', 'is-compact');
 	}
 
 	function initLineReveal(root) {
-		if (!root || root.dataset.mwsEwLrInit === '1') {
+		if (!root || root.dataset.bwLrInit === '1') {
 			return;
 		}
 
-		var title = root.querySelector('.mws-ew-lr__title');
+		var title = root.querySelector('.bw-lr__title, .mws-ew-lr__title');
 		if (!title) {
 			return;
 		}
 
-		root.dataset.mwsEwLrInit = '1';
+		root.dataset.bwLrInit = '1';
 
 		var originalHTML = title.innerHTML;
-		var inner = root.querySelector('.mws-ew-lr__inner');
-		var index = root.querySelector('.mws-ew-lr__index');
-		var eyebrow = root.querySelector('.mws-ew-lr__eyebrow');
+		var inner = root.querySelector('.bw-lr__inner, .mws-ew-lr__inner');
+		var index = root.querySelector('.bw-lr__index, .mws-ew-lr__index');
+		var eyebrow = root.querySelector('.bw-lr__eyebrow, .mws-ew-lr__eyebrow');
 		var start = root.getAttribute('data-start') || 'top 75%';
 		var replay = root.getAttribute('data-replay') === 'yes';
 
@@ -1037,9 +1300,16 @@
 			}
 
 			title.innerHTML = originalHTML;
+			title.style.textIndent = '';
+			title.style.width = '';
+			title.style.maxWidth = '';
+			title.style.removeProperty('--bw-lr-indent');
+			title.style.removeProperty('--mws-ew-lr-indent');
 			if (eyebrow) {
 				eyebrow.style.height = '';
 			}
+			root.style.removeProperty('--bw-lr-first-h');
+			root.style.removeProperty('--mws-ew-lr-first-h');
 			if (typeof gsap !== 'undefined') {
 				if (inner) {
 					gsap.set(inner, { clearProps: 'transform,opacity,visibility' });
@@ -1050,7 +1320,7 @@
 				if (eyebrow) {
 					gsap.set(eyebrow, { clearProps: 'transform,opacity,visibility' });
 				}
-				gsap.set(title, { clearProps: 'transform,opacity,visibility' });
+				gsap.set(title, { clearProps: 'transform,opacity,visibility,width' });
 			}
 		}
 
@@ -1064,36 +1334,46 @@
 				wrapWordsAsLines(self);
 			}
 			applyLineMasks(self);
+			applyLrFirstLineShift(title, self, root._bwLrIndent || 0);
 			syncEyebrowHeight(eyebrow, self);
 		}
 
-		function onSplit(self) {
-			finishSplit(self);
-			splitInstance = self;
-			activeTween = buildLrTimeline(root, inner, index, eyebrow, self);
-			return activeTween;
-		}
-
+		// autoSplit is intentionally OFF. We drive every re-split ourselves in
+		// attachResize()/rebuildSplit() so prepareLrLayout() (indent + stacked
+		// classes) always runs before the split. Relying on GSAP's built-in
+		// autoSplit re-split on resize was the responsive bug: it re-broke the
+		// lines with a stale text-indent and never refreshed is-stacked/compact.
 		function createModernSplit() {
 			try {
 				if (isRtlContext(title)) {
 					return SplitText.create(title, {
 						type: 'words',
-						wordsClass: 'mws-ew-at__word',
-						autoSplit: true,
-						onSplit: onSplit
+						wordsClass: 'bw-at__word',
+						autoSplit: false
 					});
 				}
 				return SplitText.create(title, {
 					type: 'lines',
-					linesClass: 'mws-ew-at__line mws-ew-lr__line',
+					linesClass: 'bw-at__line bw-lr__line',
 					mask: 'lines',
-					autoSplit: true,
-					onSplit: onSplit
+					autoSplit: false
 				});
 			} catch (e) {
 				return null;
 			}
+		}
+
+		// Single creation path shared by the initial split and every rebuild:
+		// modern SplitText.create when available (GSAP >= 3.13 / 3.15), else legacy.
+		function createSplitInstance() {
+			var instance = null;
+			if (canAutoSplit()) {
+				instance = createModernSplit();
+			}
+			if (!instance) {
+				instance = createLegacySplit();
+			}
+			return instance;
 		}
 
 		function createLegacySplit() {
@@ -1101,23 +1381,27 @@
 				if (isRtlContext(title)) {
 					return new SplitText(title, {
 						type: 'words',
-						wordsClass: 'mws-ew-at__word'
+						wordsClass: 'bw-at__word'
 					});
 				}
 				return new SplitText(title, {
 					type: 'lines',
-					linesClass: 'mws-ew-at__line mws-ew-lr__line'
+					linesClass: 'bw-at__line bw-lr__line'
 				});
 			} catch (e) {
 				return null;
 			}
 		}
 
-		function rebuildLegacy(keepComplete) {
+		// Recompute layout (indent + is-stacked/compact) before re-splitting, then
+		// rebuild. Used on every resize for both the modern and legacy paths.
+		function rebuildSplit(keepComplete) {
 			var complete = keepComplete || root.classList.contains('is-complete') || (hasPlayed && !replay);
 
 			revertSplit();
-			splitInstance = createLegacySplit();
+			prepareSplitBox(title);
+			prepareLrLayout(root, title, title.parentElement, eyebrow);
+			splitInstance = createSplitInstance();
 			if (!splitInstance) {
 				showLrFinal(root, title, inner, index, eyebrow);
 				return;
@@ -1131,41 +1415,13 @@
 			}
 		}
 
-		function attachLegacyResize() {
-			var lastWidth = title.getBoundingClientRect().width;
-			var timer = 0;
-
-			function check() {
-				if (destroyed) {
-					return;
+		function attachResize() {
+			var box = root.querySelector('.bw-lr__inner, .mws-ew-lr__inner') || root;
+			return watchBoxWidth(box, function () {
+				if (!destroyed) {
+					rebuildSplit(false);
 				}
-				var w = title.getBoundingClientRect().width;
-				if (Math.abs(w - lastWidth) < 1) {
-					return;
-				}
-				lastWidth = w;
-				rebuildLegacy(false);
-			}
-
-			function onResize() {
-				clearTimeout(timer);
-				timer = setTimeout(check, 200);
-			}
-
-			window.addEventListener('resize', onResize);
-			var ro = null;
-			if (typeof ResizeObserver === 'function') {
-				ro = new ResizeObserver(onResize);
-				ro.observe(title);
-			}
-
-			return function () {
-				window.removeEventListener('resize', onResize);
-				clearTimeout(timer);
-				if (ro) {
-					ro.disconnect();
-				}
-			};
+			});
 		}
 
 		function playNow() {
@@ -1219,69 +1475,48 @@
 			}
 
 			if (!canAnimate()) {
-				if (window.mwsEw && typeof mwsEw.whenGsapReady === 'function') {
-					if (root.dataset.mwsEwLrPending === '1') {
-						return;
-					}
-					root.dataset.mwsEwLrPending = '1';
-					root._mwsEwLrCancelGsap = mwsEw.whenGsapReady(
-						function () {
-							delete root.dataset.mwsEwLrPending;
-							delete root._mwsEwLrCancelGsap;
-							if (!destroyed) {
-								startEngine();
-							}
-						},
-						{
-							plugins: ['SplitText', 'ScrollTrigger'],
-							onReduced: function () {
-								delete root.dataset.mwsEwLrPending;
-								delete root._mwsEwLrCancelGsap;
-								showLrFinal(root, title, inner, index, eyebrow);
-							},
-							onGiveUp: function () {
-								delete root.dataset.mwsEwLrPending;
-								delete root._mwsEwLrCancelGsap;
-								showLrFinal(root, title, inner, index, eyebrow);
-							}
-						}
-					);
-					return;
-				}
-				var tries = parseInt(root.getAttribute('data-mws-ew-lr-tries') || '0', 10);
+				var tries = parseInt(root.getAttribute('data-bw-lr-tries') || '0', 10);
 				if (tries < 25) {
-					root.setAttribute('data-mws-ew-lr-tries', String(tries + 1));
-					setTimeout(function () {
+					root.setAttribute('data-bw-lr-tries', String(tries + 1));
+					root.dataset.bwLrPending = '1';
+					var lrTimer = setTimeout(function () {
+						delete root.dataset.bwLrPending;
+						delete root._bwLrCancelGsap;
 						if (!destroyed) {
 							startEngine();
 						}
 					}, 160);
+					root._bwLrCancelGsap = function () {
+						clearTimeout(lrTimer);
+					};
 					return;
 				}
 				showLrFinal(root, title, inner, index, eyebrow);
 				return;
 			}
 
-			root.removeAttribute('data-mws-ew-lr-tries');
-			delete root.dataset.mwsEwLrPending;
+			root.removeAttribute('data-bw-lr-tries');
+			delete root.dataset.bwLrPending;
 
 			title.style.visibility = 'hidden';
+			prepareSplitBox(title);
+			prepareLrLayout(root, title, title.parentElement, eyebrow);
 
 			try {
-				if (canAutoSplit()) {
-					splitInstance = createModernSplit();
+				splitInstance = createSplitInstance();
+				if (!splitInstance) {
+					showLrFinal(root, title, inner, index, eyebrow);
+					return;
 				}
 
-				if (!splitInstance) {
-					splitInstance = createLegacySplit();
-					if (!splitInstance) {
-						showLrFinal(root, title, inner, index, eyebrow);
-						return;
-					}
-					finishSplit(splitInstance);
-					activeTween = buildLrTimeline(root, inner, index, eyebrow, splitInstance);
-					detachResize = attachLegacyResize();
+				finishSplit(splitInstance);
+				activeTween = buildLrTimeline(root, inner, index, eyebrow, splitInstance);
+				// Watch the inner box, not the title. SplitText can lock title
+				// width, so observing the title would miss an Elementor expand.
+				if (detachResize) {
+					detachResize();
 				}
+				detachResize = attachResize();
 
 				if (!activeTween) {
 					showLrFinal(root, title, inner, index, eyebrow);
@@ -1313,7 +1548,7 @@
 			}, 1200);
 		}
 
-		root._mwsEwLrCleanup = function () {
+		root._bwLrCleanup = function () {
 			destroyed = true;
 
 			if (detachResize) {
@@ -1339,16 +1574,21 @@
 	}
 
 	function refreshScrollTrigger(delayMs) {
-		if (window.mwsEw && typeof mwsEw.refreshScrollTrigger === 'function') {
-			mwsEw.refreshScrollTrigger(delayMs);
+		if (typeof ScrollTrigger === 'undefined' || !ScrollTrigger.refresh) {
 			return;
 		}
-		if (typeof ScrollTrigger !== 'undefined' && ScrollTrigger.refresh) {
-			if (typeof ScrollTrigger.config === 'function') {
-				ScrollTrigger.config({ limitCallbacks: true });
-			}
-			ScrollTrigger.refresh();
+		if (typeof ScrollTrigger.config === 'function') {
+			ScrollTrigger.config({ limitCallbacks: true });
 		}
+		if (delayMs) {
+			window.setTimeout(function () {
+				if (typeof ScrollTrigger !== 'undefined' && ScrollTrigger.refresh) {
+					ScrollTrigger.refresh();
+				}
+			}, delayMs);
+			return;
+		}
+		ScrollTrigger.refresh();
 	}
 
 	window.addEventListener('load', function () {
@@ -1362,12 +1602,12 @@
 		} else if (scope && scope.jquery && scope[0] && scope[0].nodeType === 1) {
 			rootEl = scope[0];
 		}
-		var roots = rootEl.querySelectorAll('[data-bw-animated-text="1"], [data-mws-ew-at]');
+		var roots = rootEl.querySelectorAll('[data-bw-animated-text="1"]');
 		Array.prototype.forEach.call(roots, function (root) {
 			try {
 				cleanupInstance(root);
-				delete root.dataset.mwsEwAtInit;
-				delete root.dataset.mwsEwAtPending;
+				delete root.dataset.bwAtInit;
+				delete root.dataset.bwAtPending;
 				registerPlugins();
 				initInstance(root);
 			} catch (e) {
@@ -1376,12 +1616,12 @@
 				}
 			}
 		});
-		var lrRoots = rootEl.querySelectorAll('[data-bw-line-reveal="1"], [data-mws-ew-lr]');
+		var lrRoots = rootEl.querySelectorAll('[data-bw-line-reveal="1"]');
 		Array.prototype.forEach.call(lrRoots, function (root) {
 			try {
 				cleanupLineReveal(root);
-				delete root.dataset.mwsEwLrInit;
-				delete root.dataset.mwsEwLrPending;
+				delete root.dataset.bwLrInit;
+				delete root.dataset.bwLrPending;
 				registerPlugins();
 				initLineReveal(root);
 			} catch (e) {

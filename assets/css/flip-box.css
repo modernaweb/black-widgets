@@ -109,7 +109,6 @@
 }
 
 .bw-flipbox .bw-flip-card .bw-back .bw-button {
-    background: linear-gradient(135deg, #333, #555);
     text-decoration: none;
     display: inline-block;
     transition: all .6s ease-in-out;
@@ -117,10 +116,6 @@
     -moz-transition: all .6s ease-in-out;
     -ms-transition: all .6s ease-in-out;
     -o-transition: all .6s ease-in-out;
-}
-
-.bw-flipbox .bw-flip-card .bw-back .bw-button:hover {
-    background: linear-gradient(135deg, #444, #666);
 }
 
 .bw-flipbox .bw-flip-card:nth-child(even):hover .bw-back {
@@ -133,17 +128,8 @@
 
 .bw-flipbox .bw-flip-card .bw-button {
     cursor: pointer;
-    font-weight: bold;
-    color: #fff;
-    padding: 9px 32px;
-    border-radius: 100px;
-    font: inherit;
-    border: none;
     position: relative;
     z-index: 2;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    line-height: 1.4;
     white-space: nowrap;
     max-width: 100%;
     box-sizing: border-box;
@@ -162,11 +148,7 @@
     width: calc(100% - 20px);
     left: 10px;
     top: 16px;
-    border-radius: 100px;
-    -webkit-border-radius: 100px;
-    -moz-border-radius: 100px;
-    -ms-border-radius: 100px;
-    -o-border-radius: 100px;
+    border-radius: inherit;
     transition: 300ms ease;
     -webkit-transition: 300ms ease;
     -moz-transition: 300ms ease;
@@ -344,7 +326,7 @@
 }
 
 
-/* Default Typography For FlipBox*/
+/* Default typography for the flip box */
 
 .bw-flipbox .bw-flip-card .title-box,
 .bw-flipbox .bw-flip-card .description {

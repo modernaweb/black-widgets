@@ -22,7 +22,9 @@
       }
       const wrapEl = document.createElement(wrapType);
       wrapEl.className = wrapClass;
-      char.parentNode.appendChild(wrapEl);
+      // Wrap in place - appendChild would move every wrapper to the end of the
+      // parent and strand the whitespace text nodes between words at the front.
+      char.parentNode.insertBefore(wrapEl, char);
       wrapEl.appendChild(char);
     });
   }
@@ -33,10 +35,6 @@
       : 'chars';
   }
 
-  /**
-   * Whole-animation start delay (ms to seconds). Not stagger.
-   * Reads from the animate root; ignored for scrub timelines.
-   */
   function getAnimDelaySec(el) {
     if (!el) {
       return 0;
@@ -193,7 +191,9 @@
     });
 
     const q = function (sel) {
-      return [...root.querySelectorAll(sel)];
+      return [...root.querySelectorAll(sel)].filter(function (el) {
+        return !shouldDeferHscroll(el);
+      });
     };
 
     const typographyFX_1 = q('.bw-typograpgy-animate[data-bw-splitting][data-no-scrub][data-bw-bw-scroll-e-1]:not([data-bw-fx]):not([data-bw-no-animate])');
@@ -976,11 +976,27 @@
     );
     titles.forEach(function (title) {
       title.setAttribute('data-bw-fx', '');
+      // No [data-bw-fx] means no tween owns the split children, so a half-built
+      // split can leave them at a from-state (opacity 0, shifted, or clipped).
+      var parts = title.querySelectorAll('.bw-line, .bw-line-mask, .bw-word, .bw-char, .char, .word');
       if (typeof gsap !== 'undefined') {
         gsap.set(title, { opacity: 1, visibility: 'visible', clearProps: 'clipPath,filter' });
+        if (parts.length) {
+          gsap.set(parts, {
+            opacity: 1,
+            visibility: 'visible',
+            clearProps: 'clipPath,filter,transform'
+          });
+        }
       } else {
         title.style.visibility = 'visible';
         title.style.opacity = '1';
+        parts.forEach(function (part) {
+          part.style.visibility = 'visible';
+          part.style.opacity = '1';
+          part.style.clipPath = 'none';
+          part.style.transform = 'none';
+        });
       }
     });
 
@@ -1040,8 +1056,8 @@
     return typeof SplitText !== 'undefined';
   }
 
-  // Once we know we're in the Elementor canvas, stay there. Early boot can
-  // miss environmentMode / body classes and wrongly attach ScrollTrigger.
+  // Latch edit mode once detected: early boot may miss environmentMode and
+  // body classes, which would wrongly attach ScrollTrigger.
   var editModeSticky = false;
 
   /**
@@ -1177,6 +1193,121 @@
   }
 
   /**
+   * Line-based split where SplitText owns the clipping wrapper (mask:'lines')
+   * and re-splits itself on font load / resize (autoSplit).
+   *
+   * Hand-rolling the mask with overflow:hidden plus a negative bottom margin
+   * left a line box only a few pixels tall, so a failed or late tween showed a
+   * horizontal slice of the glyphs instead of the text. autoSplit also rebuilds
+   * the tween, so the previous line elements can no longer stay frozen at the
+   * from-state (invisible text) after a re-split.
+   *
+   * @param {Element}  title      Title element to split.
+   * @param {Object}   config     SplitText config (must include lines in type).
+   * @param {Function} buildTween Receives the split instance, returns a tween.
+   * @return {boolean} True when a tween was built.
+   */
+  function splitWithMask(title, config, buildTween) {
+    var built = false;
+    var previous = null;
+    var completed = false;
+
+    function build(split) {
+      // A re-split leaves the old ScrollTrigger behind; drop it so repeated
+      // resizes cannot stack triggers on the same title.
+      if (previous) {
+        if (previous.scrollTrigger) {
+          previous.scrollTrigger.kill();
+        }
+        previous.kill();
+        previous = null;
+      }
+      var tween = buildTween(split);
+      if (tween) {
+        previous = tween;
+        built = true;
+        if (completed) {
+          // Already played once - a resize re-split must not replay it.
+          tween.progress(1);
+        } else {
+          tween.eventCallback('onComplete', function () {
+            completed = true;
+          });
+        }
+      }
+      return tween;
+    }
+
+    if (typeof SplitText.create === 'function') {
+      try {
+        SplitText.create(title, Object.assign({}, config, {
+          mask: 'lines',
+          autoSplit: true,
+          onSplit: build
+        }));
+      } catch (e) {
+        built = false;
+      }
+      return built;
+    }
+
+    // GSAP < 3.13 has no mask / autoSplit / onSplit - split once and mask by hand.
+    var legacy;
+    try {
+      legacy = new SplitText(title, config);
+    } catch (e) {
+      return false;
+    }
+    if (!legacy || !legacy.lines || !legacy.lines.length) {
+      return false;
+    }
+    gsap.set(legacy.lines, { overflow: 'hidden' });
+    return !!build(legacy);
+  }
+
+  function hscrollTweenFor(el) {
+    if (typeof window.bwGetHscrollTween === 'function') {
+      return window.bwGetHscrollTween(el);
+    }
+    if (!el || !el.closest) {
+      return null;
+    }
+    var wrap = el.closest('.bw-horizontal-section');
+    if (!wrap || wrap.classList.contains('bw-hscroll-stacked') || wrap.classList.contains('bw-hscroll-editor')) {
+      return null;
+    }
+    var section = wrap.querySelector('.bw-section');
+    return (section && section._bwHorizontalTween) || null;
+  }
+
+  function shouldDeferHscroll(el) {
+    if (!el || !el.closest || isElementorEditMode()) {
+      return false;
+    }
+    var wrap = el.closest('.bw-horizontal-section');
+    if (!wrap || wrap.classList.contains('bw-hscroll-stacked') || wrap.classList.contains('bw-hscroll-editor')) {
+      return false;
+    }
+    return !hscrollTweenFor(el);
+  }
+
+  function withHscroll(opts, el) {
+    var tween = hscrollTweenFor(el);
+    if (!tween || !opts) {
+      return opts;
+    }
+    opts.containerAnimation = tween;
+    if (opts.scrub) {
+      opts.start = 'left right';
+      opts.end = 'right left';
+    } else {
+      opts.start = 'left 75%';
+      opts.end = 'right 20%';
+    }
+    return opts;
+  }
+
+  /**
    * Non-scrub viewport enter options. Supports data-bw-replay for re-play on
    * every re-entry (scroll back to top, then down again).
    * In the Elementor editor ScrollTrigger is stripped by withEditorGsap; the
@@ -1186,7 +1317,10 @@
     var src = replaySource || triggerEl;
     var opts = {
       trigger: triggerEl,
-      start: 'top 85%'
+      start: 'top 85%',
+      // Splitting text changes the element's height, so start/end must be
+      // recomputed on refresh instead of keeping the pre-split values.
+      invalidateOnRefresh: true
     };
     if (src && src.hasAttribute && src.hasAttribute('data-bw-replay')) {
       opts.once = false;
@@ -1194,17 +1328,18 @@
     } else {
       opts.once = true;
     }
-    return opts;
+    return withHscroll(opts, triggerEl);
   }
 
   function scrubOpts(title) {
     if (title.hasAttribute('scrub_mode')) {
-      return {
+      return withHscroll({
         trigger: title,
         start: 'center+=20% bottom',
         end: '+=50%',
-        scrub: true
-      };
+        scrub: true,
+        invalidateOnRefresh: true
+      }, title);
     }
     return playOnceOpts(title);
   }
@@ -1239,22 +1374,24 @@
     return;
   }
 
-  function runSplitScrollFX(root) {
-    if (!hasSplitText()) {
-      return;
-    }
+  var SPLIT_FX_MAP = [
+    { sel: '[data-bw-bw-scroll-e-9]:not([data-bw-fx])', fn: fxMaskRise },
+    { sel: '[data-bw-bw-scroll-e-10]:not([data-bw-fx])', fn: fxWordCascade },
+    { sel: '[data-bw-bw-scroll-e-11]:not([data-bw-fx])', fn: fxCharWave },
+    { sel: '[data-bw-bw-scroll-e-12]:not([data-bw-fx])', fn: fxClipWipe }
+  ];
 
-    gsap.registerPlugin(SplitText, ScrollTrigger);
+  var SPLIT_FX_PENDING = SPLIT_FX_MAP.map(function (item) {
+    return '.bw-typograpgy-animate' + item.sel;
+  }).join(',');
 
-    var map = [
-      { sel: '[data-bw-bw-scroll-e-9]:not([data-bw-fx])', fn: fxMaskRise },
-      { sel: '[data-bw-bw-scroll-e-10]:not([data-bw-fx])', fn: fxWordCascade },
-      { sel: '[data-bw-bw-scroll-e-11]:not([data-bw-fx])', fn: fxCharWave },
-      { sel: '[data-bw-bw-scroll-e-12]:not([data-bw-fx])', fn: fxClipWipe }
-    ];
-
-    map.forEach(function (item) {
+  function runSplitFxPass(root) {
+    var built = 0;
+    SPLIT_FX_MAP.forEach(function (item) {
       root.querySelectorAll('.bw-typograpgy-animate' + item.sel + ':not([data-bw-no-animate])').forEach(function (title) {
+        if (shouldDeferHscroll(title)) {
+          return;
+        }
         var ok = false;
         try {
           ok = item.fn(title) !== false;
@@ -1266,56 +1403,68 @@
         if (ok) {
           title.setAttribute('data-bw-fx', '');
           title.classList.add('bw-split-ready');
+          built++;
         }
       });
     });
+    return built;
+  }
 
+  function refreshScrollTriggers() {
     if (typeof ScrollTrigger !== 'undefined' && typeof ScrollTrigger.refresh === 'function') {
       ScrollTrigger.refresh();
     }
+  }
 
+  // One font retry per root. runSplitScrollFX() is re-entered from
+  // DOMContentLoaded, window.load and element_ready, and a fonts.ready handler
+  // per call meant a burst of refreshes that fired triggers all at once.
+  var fontRetryRoots = typeof WeakSet === 'function' ? new WeakSet() : null;
+
+  function scheduleFontRetry(root) {
+    if (!document.fonts || !document.fonts.ready || !document.fonts.ready.then) {
+      return;
+    }
+    if (fontRetryRoots) {
+      if (fontRetryRoots.has(root)) {
+        return;
+      }
+      fontRetryRoots.add(root);
+    }
     // Elementor often applies kit fonts after first paint - retry line splits once fonts settle.
-    if (document.fonts && typeof document.fonts.ready !== 'undefined' && document.fonts.ready.then) {
-      document.fonts.ready.then(function () {
-        var pending = root.querySelectorAll(
-          '.bw-typograpgy-animate[data-bw-bw-scroll-e-9]:not([data-bw-fx]),' +
-          '.bw-typograpgy-animate[data-bw-bw-scroll-e-10]:not([data-bw-fx]),' +
-          '.bw-typograpgy-animate[data-bw-bw-scroll-e-11]:not([data-bw-fx]),' +
-          '.bw-typograpgy-animate[data-bw-bw-scroll-e-12]:not([data-bw-fx])'
-        );
-        if (!pending.length) {
-          revealTypographyInEditor(root);
-          return;
-        }
+    document.fonts.ready.then(function () {
+      if (root.querySelectorAll(SPLIT_FX_PENDING).length) {
         withEditorGsap(function () {
-          map.forEach(function (item) {
-            root.querySelectorAll('.bw-typograpgy-animate' + item.sel + ':not([data-bw-no-animate])').forEach(function (title) {
-              var ok = false;
-              try {
-                ok = item.fn(title) !== false;
-              } catch (err) {
-                ok = false;
-              }
-              if (ok) {
-                title.setAttribute('data-bw-fx', '');
-                title.classList.add('bw-split-ready');
-              }
-            });
-          });
-          if (typeof ScrollTrigger !== 'undefined' && typeof ScrollTrigger.refresh === 'function') {
-            ScrollTrigger.refresh();
+          if (runSplitFxPass(root)) {
+            refreshScrollTriggers();
           }
         });
-        revealTypographyInEditor(root);
-      });
+      }
+      revealTypographyInEditor(root);
+    });
+  }
+
+  function runSplitScrollFX(root) {
+    if (!hasSplitText()) {
+      return;
     }
+
+    gsap.registerPlugin(SplitText, ScrollTrigger);
+
+    if (runSplitFxPass(root)) {
+      refreshScrollTriggers();
+    }
+
+    scheduleFontRetry(root);
   }
   function fxMaskRise(title) {
     // Prefer plain text node; unwrap legacy .word span for clean SplitText.
     prepareTitleForSplit(title);
     ensureSplitLayout(title);
     var byWords = getSplitUnit(title) === 'words';
-    var split = makeSplit(title, byWords ? {
+    var scrubLike = title.hasAttribute('scrub_mode');
+
+    return splitWithMask(title, byWords ? {
       type: 'lines,words',
       linesClass: 'bw-line',
       wordsClass: 'bw-word'
@@ -1323,27 +1472,24 @@
       type: 'lines,chars',
       linesClass: 'bw-line',
       charsClass: 'bw-char'
+    }, function (split) {
+      var targets = byWords ? split.words : split.chars;
+      if (!targets || !targets.length) {
+        return null;
+      }
+      return gsap.fromTo(targets, {
+        yPercent: 110,
+        opacity: 0,
+        rotateZ: 4
+      }, withST({
+        yPercent: 0,
+        opacity: 1,
+        rotateZ: 0,
+        ease: 'power4.out',
+        stagger: byWords ? 0.06 : 0.018,
+        duration: 0.9
+      }, scrubOpts(title), scrubLike));
     });
-    var targets = byWords ? split.words : split.chars;
-    if (!targets || !targets.length) {
-      return false;
-    }
-    gsap.set(split.lines, { overflow: 'hidden' });
-    var scrubLike = title.hasAttribute('scrub_mode');
-    var tw = gsap.fromTo(targets, {
-      yPercent: 110,
-      opacity: 0,
-      rotateZ: 4
-    }, withST({
-      yPercent: 0,
-      opacity: 1,
-      rotateZ: 0,
-      ease: 'power4.out',
-      stagger: byWords ? 0.06 : 0.018,
-      duration: 0.9
-    }, scrubOpts(title), scrubLike));
-    playTweenInEditor(tw, scrubLike);
-    return true;
   }
 
   /** e-10 - words cascade with blur */
@@ -1416,28 +1562,28 @@
   function fxClipWipe(title) {
     prepareTitleForSplit(title);
     ensureSplitLayout(title);
-    var split = makeSplit(title, {
+    var scrubLike = title.hasAttribute('scrub_mode');
+
+    return splitWithMask(title, {
       type: 'lines',
       linesClass: 'bw-line'
+    }, function (split) {
+      if (!split.lines || !split.lines.length) {
+        return null;
+      }
+      return gsap.fromTo(split.lines, {
+        clipPath: 'inset(0 100% 0 0)',
+        opacity: 0.35,
+        x: -24
+      }, withST({
+        clipPath: 'inset(0 0% 0 0)',
+        opacity: 1,
+        x: 0,
+        ease: 'power4.inOut',
+        stagger: 0.12,
+        duration: 1.05
+      }, scrubOpts(title), scrubLike));
     });
-    if (!split.lines || !split.lines.length) {
-      return false;
-    }
-    var scrubLike = title.hasAttribute('scrub_mode');
-    var tw = gsap.fromTo(split.lines, {
-      clipPath: 'inset(0 100% 0 0)',
-      opacity: 0.35,
-      x: -24
-    }, withST({
-      clipPath: 'inset(0 0% 0 0)',
-      opacity: 1,
-      x: 0,
-      ease: 'power4.inOut',
-      stagger: 0.12,
-      duration: 1.05
-    }, scrubOpts(title), scrubLike));
-    playTweenInEditor(tw, scrubLike);
-    return true;
   }
 
   function prepareTitleForSplit(title) {
@@ -1503,6 +1649,9 @@
     var root = $scope && $scope[0] ? $scope[0] : document;
 
     root.querySelectorAll('.bw-typograpgy-wrap[data-bw-move]:not([data-bw-move-ready])').forEach(function (el) {
+      if (shouldDeferHscroll(el)) {
+        return;
+      }
       var config;
       try {
         config = JSON.parse(el.getAttribute('data-bw-move'));
@@ -1520,12 +1669,12 @@
       }
 
       var tl = gsap.timeline({
-        scrollTrigger: {
+        scrollTrigger: withHscroll({
           trigger: el,
           start: 'center bottom',
           end: 'center top',
           scrub: true
-        }
+        }, el)
       });
       if (from) {
         tl.from(el, from);
@@ -1535,6 +1684,42 @@
       }
       el.setAttribute('data-bw-move-ready', '');
     });
+  }
+
+  /**
+   * Repetitive fade presets. Every line starts on the Unique line's side and
+   * settles outward, so `base` is the travel of the first neighbour and `step`
+   * how much further each additional line away from the Unique line travels.
+   */
+  var REPETITIVE_FADE_PRESETS = {
+    // Pure opacity: lines light up one by one, nothing moves.
+    fade: { base: 0, step: 0, duration: 0.6, each: 0.13, ease: 'power1.out' },
+    // Every line slides the same short distance out of the Unique line.
+    'fade-outward': { base: 30, step: 0, duration: 0.7, each: 0.07, ease: 'power3.out' },
+    // Slow unfold with heavy overlap: outer lines travel a little further.
+    'fade-soft': { base: 10, step: 12, duration: 1.2, each: 0.05, ease: 'power2.out' },
+    // Snap: almost no travel and the lines land nearly together.
+    'fade-tight': { base: 6, step: 0, duration: 0.3, each: 0.025, ease: 'power2.out' },
+    // Wide unfold, clearly one pair at a time.
+    'fade-deep': { base: 16, step: 26, duration: 1, each: 0.18, ease: 'power4.out' }
+  };
+
+  function resolveRepetitiveFadeType(type) {
+    return REPETITIVE_FADE_PRESETS[type] ? type : 'fade-outward';
+  }
+
+  function uniqueRepetitiveIndex(lines) {
+    var origin = -1;
+    for (var i = 0; i < lines.length; i++) {
+      if (lines[i].classList.contains('bw-unique')) {
+        origin = i;
+        break;
+      }
+    }
+    if (origin < 0) {
+      origin = Math.floor((lines.length - 1) / 2);
+    }
+    return origin;
   }
 
   function repetitiveAnim($scope) {
@@ -1547,346 +1732,55 @@
     const wraps = root.querySelectorAll('.bw-typograpgy-repetitive-wrap[data-bw-repetitive-anim]:not([data-bw-repetitive-ready])');
 
     wraps.forEach(function (wrap) {
+      if (shouldDeferHscroll(wrap)) {
+        return;
+      }
       const lines = wrap.querySelectorAll('.bw-typograpgy-repetitive');
       if (!lines.length) {
         return;
       }
 
-      const type = wrap.getAttribute('data-bw-repetitive-anim') || 'fade-up';
+      const type = resolveRepetitiveFadeType(wrap.getAttribute('data-bw-repetitive-anim') || 'fade-outward');
+      const preset = REPETITIVE_FADE_PRESETS[type];
       const playOnce = wrap.getAttribute('data-bw-repetitive-once') !== 'no';
-      const stBase = {
+      const stBase = withHscroll({
         trigger: wrap,
         start: 'top 85%',
         once: playOnce,
         toggleActions: playOnce ? 'play none none none' : 'play reverse play reverse'
-      };
+      }, wrap);
 
-      // SplitText repetitive styles (opt-in).
-      var splitTypes = {
-        'mask-up': 1,
-        'chars-stagger': 1,
-        'words-blur': 1,
-        'line-wave': 1,
-        'kinetic-slam': 1,
-        'kinetic-scatter': 1,
-        'kinetic-skew': 1,
-        'kinetic-flip': 1,
-        'kinetic-echo': 1,
-        'kinetic-stack': 1,
-        'kinetic-bloom': 1,
-        'kinetic-slice': 1
-      };
-      if (hasSplitText() && splitTypes[type]) {
-        gsap.registerPlugin(SplitText);
-        runRepetitiveSplit(wrap, lines, type, stBase);
-        wrap.setAttribute('data-bw-repetitive-ready', '');
-        wrap.classList.add('bw-split-ready');
-        return;
-      }
+      var lineList = Array.prototype.slice.call(lines);
+      var origin = uniqueRepetitiveIndex(lineList);
+      var tl = gsap.timeline({ scrollTrigger: stBase });
 
-      const from = { opacity: 0, force3D: true };
-      const to = {
-        opacity: 1,
-        duration: 0.7,
-        ease: 'power3.out',
-        force3D: true,
-        stagger: type === 'stagger' ? 0.12 : 0.04,
-        scrollTrigger: stBase
-      };
+      lineList.forEach(function (line, i) {
+        var distance = Math.abs(i - origin);
+        var travel = distance ? preset.base + preset.step * (distance - 1) : 0;
+        // Lines above start lower and lines below start higher, so both settle
+        // away from the Unique line instead of sliding in the same direction.
+        var fromY = i < origin ? travel : -travel;
 
-      if (type === 'fade-up') {
-        from.y = 36;
-        to.y = 0;
-      } else if (type === 'scale') {
-        from.scale = 0.92;
-        to.scale = 1;
-      } else if (type === 'stagger') {
-        from.y = 24;
-        to.y = 0;
-      }
+        tl.fromTo(
+          line,
+          { opacity: 0, y: fromY, force3D: true },
+          {
+            opacity: 1,
+            y: 0,
+            duration: preset.duration,
+            ease: preset.ease,
+            force3D: true
+          },
+          distance * preset.each
+        );
+      });
 
-      gsap.fromTo(lines, from, to);
       wrap.setAttribute('data-bw-repetitive-ready', '');
     });
 
     requestAnimationFrame(function () {
       ScrollTrigger.refresh();
     });
-  }
-
-  function runRepetitiveSplit(wrap, lines, type, stBase) {
-    var lineList = Array.prototype.slice.call(lines);
-
-    // Stack Focus: whole lines bloom from the middle row (reference: solid center + echoes).
-    if (type === 'kinetic-stack') {
-      wrap.classList.add('bw-kinetic-apple');
-      gsap.fromTo(
-        lineList,
-        { opacity: 0, y: 28, filter: 'blur(6px)' },
-        {
-          opacity: 1,
-          y: 0,
-          filter: 'blur(0px)',
-          ease: 'power4.out',
-          duration: 0.95,
-          stagger: { each: 0.1, from: 'center' },
-          force3D: true,
-          scrollTrigger: stBase
-        }
-      );
-      return;
-    }
-
-    // Echo Trail: ghost copies behind each line, then SplitText chars from center.
-    if (type === 'kinetic-echo') {
-      wrap.classList.add('bw-kinetic-apple');
-      var tl = gsap.timeline({ scrollTrigger: stBase });
-      var allChars = [];
-
-      lineList.forEach(function (line) {
-        var shell = document.createElement('div');
-        shell.className = 'bw-kinetic-echo';
-        line.parentNode.insertBefore(shell, line);
-        shell.appendChild(line);
-        line.classList.add('bw-kinetic-echo-main');
-
-        var layers = [];
-        for (var i = 4; i >= 1; i--) {
-          var layer = line.cloneNode(true);
-          layer.classList.remove('bw-unique', 'bw-kinetic-echo-main');
-          layer.classList.add('bw-kinetic-echo-layer');
-          layer.setAttribute('aria-hidden', 'true');
-          shell.insertBefore(layer, line);
-          gsap.set(layer, {
-            position: 'absolute',
-            left: 0,
-            top: 0,
-            opacity: 0,
-            x: 0,
-            y: 0,
-            zIndex: i
-          });
-          layers.push({ el: layer, depth: i });
-        }
-
-        layers.forEach(function (item) {
-          tl.fromTo(
-            item.el,
-            { opacity: 0, y: 0, x: 0 },
-            {
-              opacity: 0.08 + item.depth * 0.07,
-              y: -item.depth * 6,
-              x: item.depth * 2,
-              duration: 0.9,
-              ease: 'power3.out'
-            },
-            0.04 * (5 - item.depth)
-          );
-        });
-
-        var split = makeSplit(line, { type: 'chars', charsClass: 'bw-char' });
-        if (split.chars && split.chars.length) {
-          allChars = allChars.concat(Array.from(split.chars));
-        }
-      });
-
-      if (allChars.length) {
-        tl.fromTo(
-          allChars,
-          { opacity: 0, y: 18, scale: 0.96 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.85,
-            ease: 'expo.out',
-            stagger: { each: 0.018, from: 'center' },
-            force3D: true
-          },
-          0.12
-        );
-      }
-      return;
-    }
-
-    var targets = [];
-    var splits = [];
-    var needsLineMask = type === 'mask-up' || type === 'kinetic-skew' || type === 'kinetic-slice';
-
-    lineList.forEach(function (line) {
-      var splitType = 'chars';
-      var classMap = { charsClass: 'bw-char' };
-      if (type === 'words-blur') {
-        splitType = 'words';
-        classMap = { wordsClass: 'bw-word' };
-      } else if (type === 'line-wave' || type === 'mask-up' || type === 'kinetic-skew' || type === 'kinetic-slice') {
-        classMap = { charsClass: 'bw-char', linesClass: 'bw-line' };
-        if (type === 'mask-up' || type === 'kinetic-skew') {
-          splitType = 'lines,chars';
-        } else if (type === 'kinetic-slice') {
-          splitType = 'chars';
-        }
-      }
-
-      var split = makeSplit(line, Object.assign({ type: splitType }, classMap));
-      splits.push(split);
-
-      if (needsLineMask && split.lines) {
-        gsap.set(split.lines, { overflow: 'hidden' });
-      }
-      if (type === 'kinetic-slice') {
-        gsap.set(line, { overflow: 'hidden' });
-      }
-
-      if (type === 'words-blur' && split.words) {
-        targets = targets.concat(Array.from(split.words));
-      } else if (split.chars) {
-        targets = targets.concat(Array.from(split.chars));
-      }
-    });
-
-    if (!targets.length) {
-      return;
-    }
-
-    wrap.classList.add('bw-kinetic-apple');
-
-    var centerStagger = { each: 0.02, from: 'center' };
-
-    if (type === 'mask-up') {
-      gsap.fromTo(targets, { yPercent: 110, opacity: 0 }, {
-        yPercent: 0,
-        opacity: 1,
-        ease: 'power4.out',
-        duration: 0.9,
-        stagger: { each: 0.014, from: 'center' },
-        scrollTrigger: stBase
-      });
-    } else if (type === 'chars-stagger') {
-      // Chars stagger from center.
-      gsap.fromTo(targets, { y: 22, opacity: 0 }, {
-        y: 0,
-        opacity: 1,
-        ease: 'expo.out',
-        duration: 0.75,
-        stagger: centerStagger,
-        force3D: true,
-        scrollTrigger: stBase
-      });
-    } else if (type === 'words-blur') {
-      gsap.fromTo(targets, { y: 28, opacity: 0, filter: 'blur(8px)' }, {
-        y: 0,
-        opacity: 1,
-        filter: 'blur(0px)',
-        ease: 'power3.out',
-        duration: 0.85,
-        stagger: { each: 0.055, from: 'center' },
-        scrollTrigger: stBase
-      });
-    } else if (type === 'line-wave') {
-      gsap.fromTo(targets, { y: 36, opacity: 0 }, {
-        y: 0,
-        opacity: 1,
-        ease: 'power4.out',
-        duration: 0.8,
-        stagger: centerStagger,
-        force3D: true,
-        scrollTrigger: stBase
-      });
-    } else if (type === 'kinetic-slam') {
-      // Soft Slam - gentle scale from center, no tilt.
-      gsap.fromTo(targets, {
-        opacity: 0,
-        scale: 1.28,
-        transformOrigin: '50% 50%'
-      }, {
-        opacity: 1,
-        scale: 1,
-        ease: 'expo.out',
-        duration: 0.9,
-        stagger: centerStagger,
-        force3D: true,
-        scrollTrigger: stBase
-      });
-    } else if (type === 'kinetic-scatter') {
-      // Soft Gather - only slight vertical offset from center (no random/crooked).
-      gsap.fromTo(targets, {
-        opacity: 0,
-        y: 24,
-        scale: 0.94
-      }, {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        ease: 'power4.out',
-        duration: 0.95,
-        stagger: centerStagger,
-        force3D: true,
-        scrollTrigger: stBase
-      });
-    } else if (type === 'kinetic-skew') {
-      // Center Rise (key kept for BC) - masked rise, no skew.
-      gsap.fromTo(targets, {
-        yPercent: 105,
-        opacity: 0
-      }, {
-        yPercent: 0,
-        opacity: 1,
-        ease: 'expo.out',
-        duration: 0.88,
-        stagger: centerStagger,
-        force3D: true,
-        scrollTrigger: stBase
-      });
-    } else if (type === 'kinetic-flip') {
-      // Soft Focus - blur to sharp from center.
-      gsap.fromTo(targets, {
-        opacity: 0,
-        y: 14,
-        filter: 'blur(10px)',
-        scale: 1.04
-      }, {
-        opacity: 1,
-        y: 0,
-        filter: 'blur(0px)',
-        scale: 1,
-        ease: 'power3.out',
-        duration: 1,
-        stagger: centerStagger,
-        force3D: true,
-        scrollTrigger: stBase
-      });
-    } else if (type === 'kinetic-bloom') {
-      // Bloom - expand from center letter.
-      gsap.fromTo(targets, {
-        opacity: 0,
-        scale: 0.6,
-        transformOrigin: '50% 50%'
-      }, {
-        opacity: 1,
-        scale: 1,
-        ease: 'back.out(1.2)',
-        duration: 0.85,
-        stagger: { each: 0.025, from: 'center' },
-        force3D: true,
-        scrollTrigger: stBase
-      });
-    } else if (type === 'kinetic-slice') {
-      // Slice Reveal - open from center.
-      gsap.fromTo(targets, {
-        opacity: 0,
-        scaleX: 0,
-        transformOrigin: '50% 50%'
-      }, {
-        opacity: 1,
-        scaleX: 1,
-        ease: 'power4.inOut',
-        duration: 0.9,
-        stagger: { each: 0.03, from: 'center' },
-        force3D: true,
-        scrollTrigger: stBase
-      });
-    }
   }
 
   // Always register Elementor hooks - GSAP may load after this file.
@@ -1927,13 +1821,6 @@
     });
   });
 
-  /**
-   * Document-wide sweep. Every step is guarded by a "already done" attribute,
-   * so this is purely a safety net for the cases where
-   * frontend/element_ready never reaches us - widgets printed inside a loop
-   * grid / popup / saved template, or a theme that loads Elementor's frontend
-   * bundle after this file. Without it the FX silently never start.
-   */
   function sweepDocument() {
     initTypographyScope(jQuery(document));
   }

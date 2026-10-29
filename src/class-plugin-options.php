@@ -117,12 +117,10 @@ final class Plugin_Options {
 		$allowed_hosts = self::allowed_cdn_hosts();
 
 		/*
-		 * 1.3.9 saved this field unsanitized, so upgrades can arrive with http://.
-		 * Dropping those URLs would silently kill the animations, and every
-		 * allowlisted CDN serves the same file over HTTPS - a browser on an HTTPS
-		 * site would block the http:// request as mixed content anyway. Only hosts
-		 * we actually recognise are upgraded; anything else still falls through to
-		 * the https-only check below.
+		 * Versions up to 1.3.9 saved this field without sanitizing it, so http:// URLs
+		 * can exist. Upgrade them to https:// for allowlisted hosts instead of dropping
+		 * them, which would silently disable the animations. Other hosts fall through
+		 * to the https-only check below.
 		 */
 		if ( 0 === stripos( $url, 'http://' ) && self::host_matches_allowlist( wp_parse_url( $url, PHP_URL_HOST ), $allowed_hosts ) ) {
 			$url = 'https://' . substr( $url, strlen( 'http://' ) );
@@ -284,6 +282,71 @@ final class Plugin_Options {
 	}
 
 	/**
+	 * Register the bundled Swiper 11 assets without leaking window.Swiper
+	 * when another copy is already on the page.
+	 */
+	public static function register_swiper_assets() {
+		if ( ! wp_script_is( 'black-widgets-swiper', 'registered' ) ) {
+			wp_register_script(
+				'black-widgets-swiper',
+				BLACK_WIDGETS_PLUGIN_URL . 'assets/js/libraries/swiper-bundle.min.js',
+				[],
+				BLACK_WIDGETS_VERSION,
+				true
+			);
+		}
+		if ( ! wp_style_is( 'black-widgets-swiper', 'registered' ) ) {
+			wp_register_style(
+				'black-widgets-swiper',
+				BLACK_WIDGETS_PLUGIN_URL . 'assets/css/libraries/swiper-bundle.min.css',
+				[],
+				BLACK_WIDGETS_VERSION
+			);
+		}
+
+		static $guarded = false;
+		if ( $guarded || ! wp_script_is( 'black-widgets-swiper', 'registered' ) ) {
+			return;
+		}
+		$guarded = true;
+
+		wp_add_inline_script( 'black-widgets-swiper', 'window.__bwPrevSwiper=window.Swiper;', 'before' );
+		wp_add_inline_script(
+			'black-widgets-swiper',
+			'window.BlackWidgetsSwiper=window.Swiper;if(window.__bwPrevSwiper){window.Swiper=window.__bwPrevSwiper;}delete window.__bwPrevSwiper;',
+			'after'
+		);
+	}
+
+	/**
+	 * Snapshot/restore a window global around a classic script tag.
+	 *
+	 * @param string $handle WP script handle.
+	 * @param string $prop   window property name (gsap, ScrollTrigger, SplitText).
+	 */
+	private static function preserve_window_global( $handle, $prop ) {
+		static $attached = [];
+
+		$prop = preg_replace( '/[^A-Za-z0-9_]/', '', (string) $prop );
+		if ( '' === $prop || ! wp_script_is( $handle, 'registered' ) ) {
+			return;
+		}
+
+		$key = $handle . '|' . $prop;
+		if ( isset( $attached[ $key ] ) ) {
+			return;
+		}
+		$attached[ $key ] = true;
+
+		wp_add_inline_script( $handle, 'window.__bwHad' . $prop . '=window.' . $prop . ';', 'before' );
+		wp_add_inline_script(
+			$handle,
+			'if(window.__bwHad' . $prop . '){window.' . $prop . '=window.__bwHad' . $prop . ';}delete window.__bwHad' . $prop . ';',
+			'after'
+		);
+	}
+
+	/**
 	 * Register GSAP script handles from CDN settings when the master toggle is on.
 	 * Safe to call multiple times (skips already-registered handles).
 	 */
@@ -297,16 +360,25 @@ final class Plugin_Options {
 		$cdn3 = self::cdn( 3 );
 		$cdn4 = self::cdn( 4 );
 
-		if ( $cdn1 && ! wp_script_is( 'GSAP', 'registered' ) ) {
-			wp_register_script( 'GSAP', $cdn1, [], BLACK_WIDGETS_VERSION, true );
+		if ( $cdn1 ) {
+			if ( ! wp_script_is( 'GSAP', 'registered' ) ) {
+				wp_register_script( 'GSAP', $cdn1, [], BLACK_WIDGETS_VERSION, true );
+			}
+			self::preserve_window_global( 'GSAP', 'gsap' );
 		}
 
-		if ( $cdn2 && ! wp_script_is( 'GSAP-ScrollTrigger', 'registered' ) ) {
-			wp_register_script( 'GSAP-ScrollTrigger', $cdn2, [ 'GSAP' ], BLACK_WIDGETS_VERSION, true );
+		if ( $cdn2 ) {
+			if ( ! wp_script_is( 'GSAP-ScrollTrigger', 'registered' ) ) {
+				wp_register_script( 'GSAP-ScrollTrigger', $cdn2, [ 'GSAP' ], BLACK_WIDGETS_VERSION, true );
+			}
+			self::preserve_window_global( 'GSAP-ScrollTrigger', 'ScrollTrigger' );
 		}
 
-		if ( $cdn3 && ! wp_script_is( 'GSAP-SplitText', 'registered' ) ) {
-			wp_register_script( 'GSAP-SplitText', $cdn3, [ 'GSAP' ], BLACK_WIDGETS_VERSION, true );
+		if ( $cdn3 ) {
+			if ( ! wp_script_is( 'GSAP-SplitText', 'registered' ) ) {
+				wp_register_script( 'GSAP-SplitText', $cdn3, [ 'GSAP' ], BLACK_WIDGETS_VERSION, true );
+			}
+			self::preserve_window_global( 'GSAP-SplitText', 'SplitText' );
 		}
 
 		// Deprecated soft-compat - not used as a widget dependency.

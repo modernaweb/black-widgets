@@ -17,13 +17,11 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
     /**
      * Constructor for the Interactive Links widget.
      *
-     * @since 1.4.0
-     *
-     * This method is automatically called when the widget is instantiated.
-     * It registers the required CSS and JS files specific to the Interactive Links widget.
+     * Registers the CSS and JS assets used by the widget.
      *
      * @param array $data Optional. Widget data. Default empty array.
      * @param mixed $args Optional. Additional arguments. Default null.
+     * @since 1.4.0
      */
     public function __construct( $data = [], $args = null ) {
         parent::__construct( $data, $args );
@@ -31,8 +29,8 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
         wp_register_style(
             'black-widgets-gsap-interactive-links',
             BLACK_WIDGETS_PLUGIN_URL . 'assets/css/interactive-links.css',
-            [], // Dependencies
-            BLACK_WIDGETS_VERSION // Version for cache busting
+            [],
+            $this->interactive_links_asset_ver( 'assets/css/interactive-links.css' )
         );
 
         $this->register_interactive_links_script();
@@ -62,7 +60,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             'black-widgets-gsap-interactive-links',
             BLACK_WIDGETS_PLUGIN_URL . 'assets/js/interactive-links.js',
             $deps,
-            BLACK_WIDGETS_VERSION, // Version for cache busting
+            $this->interactive_links_asset_ver( 'assets/js/interactive-links.js' ),
             true
         );
     }
@@ -70,7 +68,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
     /**
      * Get widget name.
      *
-     * Retrieve button widget name.
+     * Retrieve the interactive links widget name.
      *
      * @since 1.4.0
      * @access public
@@ -84,7 +82,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
     /**
      * Get widget title.
      *
-     * Retrieve button widget title.
+     * Retrieve the interactive links widget title.
      *
      * @since 1.4.0
      * @access public
@@ -98,7 +96,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
     /**
      * Get widget icon.
      *
-     * Retrieve button widget icon.
+     * Retrieve the interactive links widget icon.
      *
      * @since 1.4.0
      * @access public
@@ -112,7 +110,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
     /**
      * Get widget categories.
      *
-     * Retrieve the list of categories the button widget belongs to.
+     * Retrieve the list of categories the interactive links widget belongs to.
      *
      * @access public
      *
@@ -158,8 +156,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
     /**
      * Register widget controls.
      *
-     * This is the main entry point to register all controls for the widget in Elementor editor.
-     * It delegates control grouping to specialized private methods for better modularity.
+     * Registers all widget controls by delegating to the settings and style helpers.
      *
      * @since 1.4.0
      * @access protected
@@ -173,9 +170,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
     /**
      * Register widget settings controls.
      *
-     * This method is responsible for registering the controls related to the widget's
-     * content and settings, such as widget type, items list, title, description, link, and image.
-     * The controls are grouped into a section with the tab "Content" in the Elementor editor.
+     * Registers the content controls (type, items, title, description, link, image) in the Content tab.
      *
      * @since 1.4.0
      * @access private
@@ -292,8 +287,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
     /**
      * Register all style controls.
      *
-     * This method organizes the style-related controls into separate modular sections
-     * such as box, list, items, titles, descriptions, and image hover effects.
+     * Groups the style controls into sections: box, list, items, titles, descriptions, and image hover.
      *
      * @since 1.4.0
      * @access private
@@ -312,9 +306,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
     /**
      * Register style controls for the widget box.
      *
-     * This method registers various style controls for the widget's box, such as background,
-     * border, padding, margin, and box shadow for both normal and hover states. These controls
-     * allow the user to customize the appearance of the widget box in the Elementor editor.
+     * Registers the box style controls (background, border, padding, margin, shadow) for normal and hover states.
      *
      * @since 1.4.0
      * @access private
@@ -357,7 +349,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'widget_box_border_radius',
             [
                 'label' => __('Border Radius', 'blackwidgets'),
@@ -430,7 +422,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'widget_box_hover_border_radius',
             [
                 'label' => __('Border Radius', 'blackwidgets'),
@@ -485,9 +477,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
     /**
      * Register style controls for the list items.
      *
-     * This method registers style controls for the individual list items (`li`) within the widget.
-     * It allows users to customize the typography, text color, background color, and hover effects
-     * (text color, background color, and box shadow) for the list items.
+     * Registers the style controls for the list items (li): typography, colors, and hover states.
      *
      * @since 1.4.0
      * @access private
@@ -510,13 +500,63 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'li_gap',
             [
                 'label' => __( 'Items Gap', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%', 'em' ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 120,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 40,
+                    ],
+                    'em' => [
+                        'min' => 0,
+                        'max' => 8,
+                        'step' => 0.1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 12,
+                ],
                 'selectors' => [
-                    '{{WRAPPER}} .bw-il-menu li' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .bw-il-menu' => 'gap: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'li_alignment',
+            [
+                'label' => __( 'Alignment', 'blackwidgets' ),
+                'type' => \Elementor\Controls_Manager::CHOOSE,
+                'options' => [
+                    'left' => [
+                        'title' => __( 'Left', 'blackwidgets' ),
+                        'icon' => 'eicon-text-align-left',
+                    ],
+                    'center' => [
+                        'title' => __( 'Center', 'blackwidgets' ),
+                        'icon' => 'eicon-text-align-center',
+                    ],
+                    'right' => [
+                        'title' => __( 'Right', 'blackwidgets' ),
+                        'icon' => 'eicon-text-align-right',
+                    ],
+                ],
+                'selectors_dictionary' => [
+                    'left' => 'start',
+                    'center' => 'center',
+                    'right' => 'end',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .bw-il-menu li, {{WRAPPER}} .bw-il-menu a' => 'align-items: {{VALUE}}; text-align: {{VALUE}};',
                 ],
             ]
         );
@@ -558,7 +598,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'li_border_radius',
             [
                 'label' => __('Border Radius', 'blackwidgets'),
@@ -643,7 +683,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'li_hover_border_radius',
             [
                 'label' => __('Border Radius', 'blackwidgets'),
@@ -698,8 +738,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
     /**
      * Register style controls for links and titles.
      *
-     * This method registers the style controls for links and titles within the widget.
-     * It allows users to customize the typography, color, hover color, and padding for titles and link elements.
+     * Registers the style controls for links and titles: typography, color, hover color, and padding.
      *
      * @since 1.4.0
      * @access private
@@ -759,6 +798,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bw-il-menu li:hover .bw-il-title' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .bw-il-menu li:hover a' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -772,8 +812,21 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             [
                 'label' => __( 'Title Padding', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
                     '{{WRAPPER}} .bw-il-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'title_margin',
+            [
+                'label' => __( 'Title Margin', 'blackwidgets' ),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
+                'selectors' => [
+                    '{{WRAPPER}} .bw-il-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -784,9 +837,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
     /**
      * Register style controls for description text.
      *
-     * This method registers the style controls for the description text within the widget.
-     * It allows users to customize the typography, color, background, text shadow, padding, margin, and text alignment
-     * for the description text in both normal and hover states.
+     * Registers the style controls for the description text in normal and hover states.
      *
      * @since 1.4.0
      * @access private
@@ -891,6 +942,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             [
                 'label' => __( 'Padding', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
                     '{{WRAPPER}} .bw-il-description' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
@@ -902,6 +954,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             [
                 'label' => __( 'Margin', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
                     '{{WRAPPER}} .bw-il-description' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
@@ -940,8 +993,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
     /**
      * Register style controls for the image container.
      *
-     * This method registers the style controls for the image container within the widget.
-     * It allows users to customize the background, border, box shadow, padding, and margin for the image container.
+     * Registers the background, border, box shadow, padding and margin controls of the image container.
      *
      * @since 1.4.0
      * @access private
@@ -987,6 +1039,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             [
                 'label' => __( 'Padding', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
                     '.bw-il-uid-{{ID}}' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
@@ -998,6 +1051,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             [
                 'label' => __( 'Margin', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
                     '.bw-il-uid-{{ID}}' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
@@ -1010,9 +1064,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
     /**
      * Register style controls for the hover image.
      *
-     * This method registers the style controls for the hover image section of the widget.
-     * It allows users to customize the opacity, border, box shadow, border radius,
-     * margin, and padding for the hover image in both normal and hover states.
+     * Registers the style controls for the hover image: opacity, border, shadow, radius, margin, and padding.
      *
      * @since 1.4.0
      * @access private
@@ -1034,24 +1086,28 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             [
                 'label' => __('Image Width', 'blackwidgets'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
-                'size_units' => ['px', 'em', 'rem', 'vw'],
+                'size_units' => ['px', '%', 'em', 'rem', 'vw'],
                 'range' => [
                     'px' => [
-                        'min' => 80,
-                        'max' => 520,
+                        'min' => 40,
+                        'max' => 900,
+                    ],
+                    '%' => [
+                        'min' => 10,
+                        'max' => 100,
                     ],
                     'vw' => [
                         'min' => 10,
-                        'max' => 60,
+                        'max' => 90,
                     ],
                 ],
                 'default' => [
                     'unit' => 'px',
                     'size' => 280,
                 ],
-                'description' => __( 'Try 240px to 320px for the hover image size.', 'blackwidgets' ),
+                'description' => __( 'Width of the follow image. Tablet and mobile values are applied separately.', 'blackwidgets' ),
                 'selectors' => [
-                    '.bw-il-uid-{{ID}}' => 'width: {{SIZE}}{{UNIT}}; max-width: min(420px, {{SIZE}}{{UNIT}}, 42vw);',
+                    '.bw-il-uid-{{ID}}' => 'width: {{SIZE}}{{UNIT}}; max-width: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -1061,16 +1117,25 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             [
                 'label' => __('Image Height', 'blackwidgets'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
-                'size_units' => ['px', 'em', 'rem'],
+                'size_units' => ['px', '%', 'em', 'rem', 'vh'],
                 'range' => [
                     'px' => [
-                        'min' => 80,
-                        'max' => 720,
+                        'min' => 40,
+                        'max' => 900,
+                    ],
+                    '%' => [
+                        'min' => 10,
+                        'max' => 100,
+                    ],
+                    'vh' => [
+                        'min' => 10,
+                        'max' => 90,
                     ],
                 ],
                 'description' => __( 'Leave empty to auto-scale height and show the full image at its own aspect ratio.', 'blackwidgets' ),
                 'selectors' => [
                     '.bw-il-uid-{{ID}}' => 'height: {{SIZE}}{{UNIT}}; aspect-ratio: auto;',
+                    '.bw-il-uid-{{ID}} .bw-il-hover-image' => 'height: 100%; object-fit: cover;',
                 ],
             ]
         );
@@ -1108,6 +1173,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             [
                 'label' => __( 'Border Radius', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
                 'default' => [
                     'top' => 14,
                     'right' => 14,
@@ -1128,6 +1194,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             [
                 'label' => __( 'Margin', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
                     '.bw-il-uid-{{ID}} .bw-il-hover-image' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
@@ -1139,6 +1206,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
             [
                 'label' => __( 'Padding', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
                     '.bw-il-uid-{{ID}} .bw-il-hover-image' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
@@ -1151,8 +1219,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
     /**
      * Register GSAP hover effect controls.
      *
-     * This method registers controls for customizing GSAP-based hover effects, such as rotation, translation, brightness,
-     * fade-in/out durations, and animation duration for the image and main widget elements.
+     * Registers the GSAP hover effect controls (rotation, translation, brightness, fade and duration) for the image and main element.
      *
      * @since 1.4.0
      * @access private
@@ -1278,9 +1345,24 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
     }
 
     /**
-     * Render title widget output on the frontend.
+     * Cache-bust CSS/JS when the file changes.
      *
-     * Written in PHP and used to generate the final HTML.
+     * @param string $rel Path relative to the plugin root.
+     * @return string
+     */
+    private function interactive_links_asset_ver( $rel ) {
+        $ver  = BLACK_WIDGETS_VERSION;
+        $path = BLACK_WIDGETS_PLUGIN_PATH . ltrim( $rel, '/\\' );
+        if ( is_readable( $path ) ) {
+            $ver .= '.' . (int) filemtime( $path );
+        }
+        return $ver;
+    }
+
+    /**
+     * Render the interactive links widget output on the frontend.
+     *
+     * Outputs the widget HTML.
      *
      * @since 1.4.0
      * @access protected
@@ -1334,10 +1416,10 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
                     <li data-image="<?php echo esc_url( $img ); ?>">
                         <a href="<?php echo esc_url( $url ); ?>"<?php echo $target . $nofollow; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
                             <<?php echo esc_attr( $tag ); ?> class="bw-il-title"><?php echo esc_html( $title ); ?></<?php echo esc_attr( $tag ); ?>>
+                            <?php if ( $description ) : ?>
+                                <p class="bw-il-description"><?php echo esc_html( $description ); ?></p>
+                            <?php endif; ?>
                         </a>
-                        <?php if ( $description ) : ?>
-                            <p class="bw-il-description"><?php echo esc_html( $description ); ?></p>
-                        <?php endif; ?>
                     </li>
                 <?php endforeach; ?>
             </ul>

@@ -2,23 +2,6 @@
     width: 100%;
 }
 
-.bw-social-box {
-    display: flex;
-    align-items: center;
-}
-
-.bw-social-box.left {
-    justify-content: flex-start;
-}
-
-.bw-social-box.center {
-    justify-content: center;
-}
-
-.bw-social-box.right {
-    justify-content: flex-end;
-}
-
 .bw-social-links .bw-social {
     display: inline-flex;
     align-items: center;

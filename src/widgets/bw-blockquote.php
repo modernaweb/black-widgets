@@ -17,9 +17,9 @@ use Elementor\Group_Control_Text_Shadow;
 use Elementor\Group_Control_Image_Size;
 
 /**
- * Elementor title Widget.
+ * Blockquote widget.
  *
- * Elementor widget that inserts an embbedable content into the page, from any given URL.
+ * Quote with a text, an author name and an optional image or SVG icon.
  *
  * @since 1.0.0
  */
@@ -33,7 +33,7 @@ class BlockQuote extends \Elementor\Widget_Base {
     /**
      * Get widget name.
      *
-     * Retrieve button widget name.
+     * Retrieve the blockquote widget name.
      *
      * @since 1.0.0
      * @access public
@@ -47,7 +47,7 @@ class BlockQuote extends \Elementor\Widget_Base {
     /**
      * Get widget title.
      *
-     * Retrieve button widget title.
+     * Retrieve the blockquote widget title.
      *
      * @since 1.0.0
      * @access public
@@ -61,7 +61,7 @@ class BlockQuote extends \Elementor\Widget_Base {
     /**
      * Get widget icon.
      *
-     * Retrieve button widget icon.
+     * Retrieve the blockquote widget icon.
      *
      * @since 1.0.0
      * @access public
@@ -75,7 +75,7 @@ class BlockQuote extends \Elementor\Widget_Base {
     /**
      * Get widget categories.
      *
-     * Retrieve the list of categories the button widget belongs to.
+     * Retrieve the list of categories the blockquote widget belongs to.
      *
      * @since 1.0.0
      * @access public
@@ -95,17 +95,13 @@ class BlockQuote extends \Elementor\Widget_Base {
     }
 
     /**
-     * Register button widget controls.
-     *
-     * Adds different input fields to allow the user to change and customize the widget settings.
+     * Register the blockquote widget controls.
      *
      * @since 1.0.0
      * @access protected
      */
     protected function register_controls() {
 
-        // Start
-        // Content section
         $this->start_controls_section(
             'content_section',
             [
@@ -205,7 +201,7 @@ class BlockQuote extends \Elementor\Widget_Base {
         $this->add_group_control(
             Group_Control_Image_Size::get_type(),
             [
-                'name' => 'thumbnail', // Usage: `{name}_size` → `thumbnail_size` (BC with 1.3.9).
+                'name' => 'thumbnail', // Kept for backward compatibility with 1.3.9.
                 'exclude' => [ 'custom' ],
                 'include' => [],
                 'default' => 'full',
@@ -238,9 +234,7 @@ class BlockQuote extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
-        // Start
         // Box Style section
         $this->start_controls_section(
             'style_section',
@@ -250,7 +244,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Style Subtitle Tabs
         $this->start_controls_tabs('black_widget_1_tab');
         $this->start_controls_tab(
             'tab_1_normal',
@@ -259,7 +252,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -277,7 +269,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'widget_box_margin',
             [
@@ -290,7 +281,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'widget_box_padding',
             [
@@ -310,7 +300,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -320,7 +309,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -350,7 +338,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -368,7 +355,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'widget_hover_box_margin',
             [
@@ -381,7 +367,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'widget_hover_box_padding',
             [
@@ -401,7 +386,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -411,7 +395,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -434,14 +417,12 @@ class BlockQuote extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_tab();
-        $this->end_controls_tabs(); // End Tabs
+        $this->end_controls_tabs();
 
         $this->end_controls_section();
-        // End
 
 
 
-        // Start
         // Box Style section
         $this->start_controls_section(
             'content_style_section',
@@ -451,7 +432,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'content_style_margin',
             [
@@ -464,7 +444,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'content_style_padding',
             [
@@ -477,7 +456,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -487,7 +465,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border Radius
         $this->add_control(
             'content_style_border_radius', //param_name
             [
@@ -501,9 +478,7 @@ class BlockQuote extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
-        // Start
         // Quote Style section
         $this->start_controls_section(
             'quote_style_section',
@@ -513,7 +488,7 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        $this->start_controls_tabs('inner_quote_tab'); // Start Tabs
+        $this->start_controls_tabs('inner_quote_tab');
         $this->start_controls_tab(
             'quote_tab_1',
             [
@@ -521,7 +496,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'widget_icon_box_quote_normal_color',
             [
@@ -544,7 +518,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'widget_icon_box_quote_hover_color',
             [
@@ -560,7 +533,7 @@ class BlockQuote extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_tab();
-        $this->end_controls_tabs(); // End Tabs
+        $this->end_controls_tabs();
 
         $this->add_control(
             'quote_hr1',
@@ -569,7 +542,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Typography
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
@@ -582,7 +554,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Text shadow
         $this->add_group_control(
             Group_Control_Text_Shadow::get_type(),
             [
@@ -592,7 +563,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -603,7 +573,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'content_quote__margin',
             [
@@ -616,7 +585,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'content_quote__padding',
             [
@@ -629,7 +597,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -639,7 +606,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border Radius
         $this->add_control(
             'content_quote__border_radius', //param_name
             [
@@ -652,7 +618,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -663,9 +628,7 @@ class BlockQuote extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
-        // Start
         // Name Style section
         $this->start_controls_section(
             'name_style_section',
@@ -675,7 +638,7 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        $this->start_controls_tabs('inner_name_tab'); // Start Tabs
+        $this->start_controls_tabs('inner_name_tab');
         $this->start_controls_tab(
             'name_tab_1',
             [
@@ -683,7 +646,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'widget_icon_box_name_normal_color',
             [
@@ -706,7 +668,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'widget_icon_box_name_hover_color',
             [
@@ -722,7 +683,7 @@ class BlockQuote extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_tab();
-        $this->end_controls_tabs(); // End Tabs
+        $this->end_controls_tabs();
 
         $this->add_control(
             'name_hr1',
@@ -731,7 +692,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Typography
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
@@ -744,7 +704,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Text shadow
         $this->add_group_control(
             Group_Control_Text_Shadow::get_type(),
             [
@@ -754,7 +713,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -765,7 +723,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'content_name__margin',
             [
@@ -778,7 +735,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'content_name__padding',
             [
@@ -791,7 +747,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -801,7 +756,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border Radius
         $this->add_control(
             'content_name__border_radius', //param_name
             [
@@ -814,7 +768,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -825,9 +778,7 @@ class BlockQuote extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
-        // Start
         // SVG Image Icon Style section
         $this->start_controls_section(
             'icon_svg_image_style_section',
@@ -861,7 +812,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'style_icon_quote_color',
             [
@@ -908,7 +858,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'style_svg_quote_color',
             [
@@ -931,7 +880,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'custom__margin',
             [
@@ -944,7 +892,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'custom__padding',
             [
@@ -957,7 +904,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -967,7 +913,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border Radius
         $this->add_control(
             'custom__border_radius', //param_name
             [
@@ -980,7 +925,6 @@ class BlockQuote extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -991,14 +935,13 @@ class BlockQuote extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
     }
 
     /**
-     * Render title widget output on the frontend.
+     * Render the blockquote widget output on the frontend.
      *
-     * Written in PHP and used to generate the final HTML.
+     * Outputs the widget HTML.
      *
      * @since 1.0.0
      * @access protected
@@ -1015,7 +958,6 @@ class BlockQuote extends \Elementor\Widget_Base {
         $image_link		= isset($settings['image_link']) 				? $settings['image_link']					: '';
         $name			= isset($settings['widget_title']) 				? $settings['widget_title']					: '';
 
-        // Render
         echo '<div class="bw-blockquote bw-blockquote-'. esc_attr( $alignment ) .'">';
         echo '<div class="bw-icon-into">';
         switch ($type) {

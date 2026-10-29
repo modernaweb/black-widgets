@@ -1,15 +1,89 @@
 .bw-horizontal-section {
+    --bw-hscroll-panel-w: 100%;
     width: 100%;
     display: block;
-    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 .bw-section {
-    display: flex;
     width: 100%;
+    overflow: hidden;
 }
 
-.bw-section>.elementor {
-    display: inline;
-    min-width: 100%;
+.bw-hscroll-track {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    width: max-content;
+    height: 100%;
+    will-change: transform;
+}
+
+.bw-hscroll-track > .elementor,
+.bw-section > .elementor {
+    display: block;
+    box-sizing: border-box;
+    flex: 0 0 var(--bw-hscroll-panel-w);
+    width: var(--bw-hscroll-panel-w);
+    max-width: var(--bw-hscroll-panel-w);
+}
+
+.bw-horizontal-section:not(.bw-hscroll-stacked):not(.bw-hscroll-editor) .bw-hscroll-track > .elementor {
+    pointer-events: none;
+}
+
+.bw-horizontal-section:not(.bw-hscroll-stacked):not(.bw-hscroll-editor) .bw-hscroll-track > .elementor.bw-hscroll-active {
+    pointer-events: auto;
+}
+
+.bw-horizontal-section[data-height="viewport"]:not(.bw-hscroll-stacked):not(.bw-hscroll-editor) .bw-section {
+    height: 100vh;
+    height: 100dvh;
+}
+
+.bw-horizontal-section[data-height="viewport"]:not(.bw-hscroll-stacked):not(.bw-hscroll-editor) .bw-hscroll-track > .elementor {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.bw-horizontal-section[data-height="auto"]:not(.bw-hscroll-stacked):not(.bw-hscroll-editor) .bw-hscroll-track > .elementor {
+    max-height: 100vh;
+    max-height: 100dvh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.bw-horizontal-section.bw-hscroll-stacked .bw-section,
+.bw-horizontal-section.bw-hscroll-editor .bw-section {
+    overflow: visible;
+    height: auto !important;
+}
+
+.bw-horizontal-section.bw-hscroll-stacked .bw-hscroll-track,
+.bw-horizontal-section.bw-hscroll-editor .bw-hscroll-track {
+    display: block;
+    width: 100%;
+    height: auto;
+    transform: none !important;
+    will-change: auto;
+}
+
+.bw-horizontal-section.bw-hscroll-stacked .bw-hscroll-track > .elementor,
+.bw-horizontal-section.bw-hscroll-editor .bw-hscroll-track > .elementor {
+    flex: none;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+}
+
+.bw-horizontal-section.bw-hscroll-stacked[data-height="viewport"] .bw-hscroll-track > .elementor {
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+.bw-horizontal-section.bw-hscroll-editor .bw-hscroll-track > .elementor {
+    margin-bottom: 24px;
 }

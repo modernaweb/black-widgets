@@ -1,6 +1,6 @@
 /**
  * Black Magic Link - SplitText hover types.
- * Requires GSAP + SplitText (CDN1 + CDN3).
+ * Requires GSAP core and SplitText, loaded from the plugin CDN settings.
  */
 (function ($) {
 	'use strict';
@@ -197,6 +197,7 @@
 		gsap.set(chars, {
 			display: 'inline-block',
 			transformOrigin: '50% 50%',
+			transformPerspective: 800,
 			force3D: true,
 		});
 
@@ -211,21 +212,24 @@
 
 			switch (effect) {
 				case 'rise':
-					tl.to(chars, {
-						yPercent: -110,
-						duration: 0.32,
-						ease: 'power2.in',
-						stagger: { each: 0.02, from: staggerFrom },
-					}).fromTo(
-						chars,
-						{ yPercent: 110 },
-						{
-							yPercent: 0,
-							duration: 0.45,
-							ease: 'power3.out',
-							stagger: { each: 0.02, from: staggerFrom },
-						}
-					);
+					for (var ri = 0; ri < chars.length; ri++) {
+						var char = chars[ri];
+						var at = (staggerFrom === 'end' ? (chars.length - 1 - ri) : ri) * 0.02;
+						tl.to(char, {
+							yPercent: -105,
+							duration: 0.28,
+							ease: 'power2.in',
+						}, at).fromTo(
+							char,
+							{ yPercent: 105 },
+							{
+								yPercent: 0,
+								duration: 0.4,
+								ease: 'power3.out',
+							},
+							at + 0.28
+						);
+					}
 					break;
 				case 'fade':
 					tl.to(chars, {
@@ -244,7 +248,7 @@
 					break;
 				case 'wave':
 					tl.to(chars, {
-						y: -9,
+						yPercent: -35,
 						duration: 0.22,
 						ease: 'power2.out',
 						stagger: { each: 0.035, from: staggerFrom },

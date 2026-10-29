@@ -16,9 +16,9 @@ use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Text_Shadow;
 
 /**
- * Elementor title Widget.
+ * Title widget.
  *
- * Elementor widget that inserts an embbedable content into the page, from any given URL.
+ * Title and subtitle with a configurable HTML tag, shape and rotation.
  *
  * @since 1.0.0
  */
@@ -32,7 +32,7 @@ class Title extends \Elementor\Widget_Base {
 	/**
 	 * Get widget name.
 	 *
-	 * Retrieve title widget name.
+	 * Retrieve the title widget name.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -46,7 +46,7 @@ class Title extends \Elementor\Widget_Base {
 	/**
 	 * Get widget title.
 	 *
-	 * Retrieve title widget title.
+	 * Retrieve the title widget title.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -60,7 +60,7 @@ class Title extends \Elementor\Widget_Base {
 	/**
 	 * Get widget icon.
 	 *
-	 * Retrieve title widget icon.
+	 * Retrieve the title widget icon.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -94,17 +94,13 @@ class Title extends \Elementor\Widget_Base {
     }
 
 	/**
-	 * Register title widget controls.
-	 *
-	 * Adds different input fields to allow the user to change and customize the widget settings.
+	 * Register the title widget controls.
 	 *
 	 * @since 1.0.0
 	 * @access protected
 	 */
 	protected function register_controls() {
 
-		// Start
-		// Content section
 		$this->start_controls_section(
 			'content_section',
 			[
@@ -268,10 +264,7 @@ class Title extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
-		// Start
-		// Content section
 		$this->start_controls_section(
 			'custom_section',
 			[
@@ -323,10 +316,7 @@ class Title extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'style_section',
 			[
@@ -335,7 +325,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -377,7 +366,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
@@ -390,7 +378,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
@@ -410,7 +397,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -420,7 +406,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -431,10 +416,7 @@ class Title extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'typography1_section',
 			[
@@ -443,7 +425,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_title_solid_color',
 			[
@@ -458,7 +439,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Typography
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -471,7 +451,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Typography 8-2
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -489,7 +468,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Text shadow
 		$this->add_group_control(
 			Group_Control_Text_Shadow::get_type(),
 			[
@@ -506,7 +484,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -524,7 +501,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'widget_typography_title_margin',
 			[
@@ -537,7 +513,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'widget_typography_title_padding',
 			[
@@ -557,7 +532,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -567,7 +541,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border Radius
 		$this->add_control(
 			'widget_typography_title_border_radius', //param_name
 			[
@@ -580,7 +553,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -591,10 +563,7 @@ class Title extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'typography2_section',
 			[
@@ -603,7 +572,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'widget_subtitle_solid_color',
 			[
@@ -618,7 +586,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Typography
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -631,7 +598,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Typography 8-2
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -649,7 +615,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Text shadow
 		$this->add_group_control(
 			Group_Control_Text_Shadow::get_type(),
 			[
@@ -666,7 +631,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -684,7 +648,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'widget_typography_subtitle_margin',
 			[
@@ -697,7 +660,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'widget_typography_subtitle_padding',
 			[
@@ -717,7 +679,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -727,7 +688,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border Radius
 		$this->add_control(
 			'widget_typography_subtitle_border_radius', //param_name
 			[
@@ -740,7 +700,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -751,10 +710,7 @@ class Title extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'shape_type_section',
 			[
@@ -863,8 +819,6 @@ class Title extends \Elementor\Widget_Base {
 
         $this->end_controls_section();
 
-        // Start
-        // Style section
         $this->start_controls_section(
 			'shape_section',
 			[
@@ -878,7 +832,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Position
 		$this->add_responsive_control(
 			'widget_shape_position',
 			[
@@ -895,7 +848,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Top position
 		$this->add_responsive_control(
 			'widget_shape_top_position',
 			[
@@ -913,7 +865,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Left position
 		$this->add_responsive_control(
 			'widget_shape_left_position',
 			[
@@ -931,7 +882,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Bottom position
 		$this->add_responsive_control(
 			'widget_shape_bottom_position',
 			[
@@ -949,7 +899,6 @@ class Title extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Right position
 		$this->add_responsive_control(
 			'widget_shape_right_position',
 			[
@@ -968,14 +917,13 @@ class Title extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
 	}
 
 	/**
-	 * Render title widget output on the frontend.
+	 * Render the title widget output on the frontend.
 	 *
-	 * Written in PHP and used to generate the final HTML.
+	 * Outputs the widget HTML.
 	 *
 	 * @since 1.0.0
 	 * @access protected
@@ -993,11 +941,10 @@ class Title extends \Elementor\Widget_Base {
 		$title 			= isset($settings['widget_title']) 				? $settings['widget_title'] 											: '';
 		$subtitle 		= isset($settings['widget_subtitle']) 			? $settings['widget_subtitle'] 											: '';
 
-		// Added this for XSS - Vulnerable to Cross Site Scripting (XSS)
+		// Only whitelisted tags are allowed for the title and subtitle wrappers (XSS protection).
 		$allowed_tags 			= ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'];
 		$title_tag 				= isset($settings['widget_html_tag_title'])				 ? $settings['widget_html_tag_title']					: '';
 		$subtitle_tag   		= isset($settings['widget_html_tag_subtitle']) 			 ? $settings['widget_html_tag_subtitle']				: '';
-		// Validate the HTML tag
 		if (!in_array($title_tag, $allowed_tags)) {
 			$title_tag = 'div';
 		}
@@ -1007,7 +954,6 @@ class Title extends \Elementor\Widget_Base {
         $title 			        = isset($settings['widget_title'])                       ? $settings['widget_title']					: '';
 		$shape 			= isset($settings['custom_shape']) 				? '<img src="' . esc_url( $settings['custom_shape']['url'] ) . '" class="shape">' 	: ''; // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
 
-		// Alignment classes: desktop + optional tablet/mobile overrides for decorative shapes
 		$box_classes = array_filter( [
 			'bw-title-box',
 			$type,
@@ -1016,7 +962,6 @@ class Title extends \Elementor\Widget_Base {
 			$alignment_mobile ? 'mobile-' . $alignment_mobile : '',
 		] );
 
-        // Render
 		echo '<div class="' . esc_attr( implode( ' ', $box_classes ) ) . '">';
 			echo '<div class="bw-title"><' . $title_tag . ' class="bw-div">' .esc_html($title). '</' . $title_tag . '></div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $shape; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

@@ -13,9 +13,9 @@ use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Text_Shadow;
 
 /**
- * Elementor title Widget.
+ * Icon widget.
  *
- * Elementor widget that inserts an embbedable content into the page, from any given URL.
+ * Displays an icon (font icon or SVG) with alignment and style settings.
  *
  * @since 1.0.0
  */
@@ -29,7 +29,7 @@ class Icon extends \Elementor\Widget_Base {
 	/**
 	 * Get widget name.
 	 *
-	 * Retrieve button widget name.
+	 * Retrieve the icon widget name.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -43,7 +43,7 @@ class Icon extends \Elementor\Widget_Base {
 	/**
 	 * Get widget title.
 	 *
-	 * Retrieve button widget title.
+	 * Retrieve the icon widget title.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -57,7 +57,7 @@ class Icon extends \Elementor\Widget_Base {
 	/**
 	 * Get widget icon.
 	 *
-	 * Retrieve button widget icon.
+	 * Retrieve the icon widget icon.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -71,7 +71,7 @@ class Icon extends \Elementor\Widget_Base {
 	/**
 	 * Get widget categories.
 	 *
-	 * Retrieve the list of categories the button widget belongs to.
+	 * Retrieve the list of categories the icon widget belongs to.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -91,17 +91,13 @@ class Icon extends \Elementor\Widget_Base {
     }
 
 	/**
-	 * Register button widget controls.
-	 *
-	 * Adds different input fields to allow the user to change and customize the widget settings.
+	 * Register the icon widget controls.
 	 *
 	 * @since 1.0.0
 	 * @access protected
 	 */
 	protected function register_controls() {
 
-		// Start
-		// Content section
 		$this->start_controls_section(
 			'content_section',
 			[
@@ -180,10 +176,7 @@ class Icon extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'style_section',
 			[
@@ -192,7 +185,6 @@ class Icon extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -203,7 +195,6 @@ class Icon extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -213,7 +204,6 @@ class Icon extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -235,7 +225,6 @@ class Icon extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
@@ -248,7 +237,6 @@ class Icon extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
@@ -262,9 +250,7 @@ class Icon extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-        // End
 
-		// Start
 		// Typography section
 		$this->start_controls_section(
 			'icon_section',
@@ -312,7 +298,6 @@ class Icon extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'style_icon_alert_color',
 			[
@@ -329,7 +314,6 @@ class Icon extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Text shadow
 		$this->add_group_control(
 			Group_Control_Text_Shadow::get_type(),
 			[
@@ -392,7 +376,6 @@ class Icon extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'style_svg_icon_color',
 			[
@@ -409,7 +392,6 @@ class Icon extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'style_svg_path_color',
 			[
@@ -432,9 +414,9 @@ class Icon extends \Elementor\Widget_Base {
 	}
 
 	/**
-	 * Render title widget output on the frontend.
+	 * Render the icon widget output on the frontend.
 	 *
-	 * Written in PHP and used to generate the final HTML.
+	 * Outputs the widget HTML.
 	 *
 	 * @since 1.0.0
 	 * @access protected
@@ -449,7 +431,6 @@ class Icon extends \Elementor\Widget_Base {
             $alignment = 'center';
         }
 
-		// Render
 		echo '<div class="bw-icon-box" style="text-align: ' . $alignment . ';">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		
 		echo '<div class="bw-icon-into">';

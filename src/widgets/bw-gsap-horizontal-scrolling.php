@@ -12,9 +12,9 @@ use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 
 /**
- * Elementor title Widget.
+ * Horizontal scrolling widget.
  *
- * Elementor widget that inserts an embbedable content into the page, from any given URL.
+ * Horizontal scrolling section driven by GSAP ScrollTrigger.
  *
  * @since 1.0.0
  */
@@ -30,7 +30,7 @@ class GSAPHorizontalScrolling extends \Elementor\Widget_Base {
 	/**
 	 * Get widget name.
 	 *
-	 * Retrieve button widget name.
+	 * Retrieve the horizontal scrolling widget name.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -44,7 +44,7 @@ class GSAPHorizontalScrolling extends \Elementor\Widget_Base {
 	/**
 	 * Get widget title.
 	 *
-	 * Retrieve button widget title.
+	 * Retrieve the horizontal scrolling widget title.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -58,7 +58,7 @@ class GSAPHorizontalScrolling extends \Elementor\Widget_Base {
 	/**
 	 * Get widget icon.
 	 *
-	 * Retrieve button widget icon.
+	 * Retrieve the horizontal scrolling widget icon.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -72,7 +72,7 @@ class GSAPHorizontalScrolling extends \Elementor\Widget_Base {
 	/**
 	 * Get widget categories.
 	 *
-	 * Retrieve the list of categories the button widget belongs to.
+	 * Retrieve the list of categories the horizontal scrolling widget belongs to.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -128,17 +128,13 @@ class GSAPHorizontalScrolling extends \Elementor\Widget_Base {
     }
 
 	/**
-	 * Register button widget controls.
-	 *
-	 * Adds different input fields to allow the user to change and customize the widget settings.
+	 * Register the horizontal scrolling widget controls.
 	 *
 	 * @since 1.0.0
 	 * @access protected
 	 */
 	protected function register_controls() {
 
-		// Start
-		// Content section
 		$this->start_controls_section(
 			'content_section',
 			[
@@ -228,9 +224,45 @@ class GSAPHorizontalScrolling extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
-		// Start
+		$this->start_controls_section(
+			'layout_section',
+			[
+				'label' => esc_html__( 'Layout', 'blackwidgets' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'section_height',
+			[
+				'label'   => esc_html__( 'Height', 'blackwidgets' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'auto',
+				'options' => [
+					'auto'     => esc_html__( 'Auto', 'blackwidgets' ),
+					'viewport' => esc_html__( 'Fit Viewport', 'blackwidgets' ),
+				],
+			]
+		);
+
+		$this->add_control(
+			'stack_below',
+			[
+				'label'       => esc_html__( 'Stack Below', 'blackwidgets' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => 'mobile',
+				'options'     => [
+					'mobile' => esc_html__( 'Mobile', 'blackwidgets' ),
+					'tablet' => esc_html__( 'Tablet', 'blackwidgets' ),
+					'never'  => esc_html__( 'Never', 'blackwidgets' ),
+				],
+				'description' => esc_html__( 'Below this breakpoint, panels stack vertically.', 'blackwidgets' ),
+			]
+		);
+
+		$this->end_controls_section();
+
 		// Typography section
 		$this->start_controls_section(
 			'typo_section',
@@ -240,7 +272,6 @@ class GSAPHorizontalScrolling extends \Elementor\Widget_Base {
 			]
         );
 
-		// Color
 		$this->add_control(
 			'style_alert_color',
 			[
@@ -255,7 +286,6 @@ class GSAPHorizontalScrolling extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Typography
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -272,41 +302,50 @@ class GSAPHorizontalScrolling extends \Elementor\Widget_Base {
 
 	}
 
-	/**
-	 * Render title widget output on the frontend.
-	 *
-	 * Written in PHP and used to generate the final HTML.
-	 *
-	 * @since 1.0.0
-	 * @access protected
-	 */
 	protected function render() {
 
-		$settings   	= $this->get_settings_for_display();
+		$settings = $this->get_settings_for_display();
 
-		// Variables
-        $type 	        = isset($settings['widget_type']) ? $settings['widget_type'] : '';
-        $message        = isset($settings['widget_text']) ? $settings['widget_text'] : '';
-
-		// Section Template
-		// $ctsection		= isset( $settings['custom_template']) ? $settings['custom_template'] : '';
-        // $returnx        =  \Elementor\Plugin::instance()->frontend->get_builder_content_for_display( $ctsection );
-        // echo  \Elementor\Plugin::instance()->frontend->get_builder_content_for_display( $settings['custom_template'] );
-
-		$data_id                	= 'bw_' . uniqid();
-		$script_id              	= '#' . $data_id;
-
-
-		// Render
-        if ( $settings['list'] ) {
-            echo '<div class="bw-horizontal-section">';
-			    echo '<div class="bw-section">';
-                foreach (  $settings['list'] as $item ) {
-                    echo  \Elementor\Plugin::instance()->frontend->get_builder_content_for_display( $item['custom_template'], true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                }
-                echo '</div>';
-			echo '</div>';
+		if ( empty( $settings['list'] ) ) {
+			return;
 		}
+
+		$height = isset( $settings['section_height'] ) ? (string) $settings['section_height'] : 'auto';
+		if ( 'viewport' !== $height ) {
+			$height = 'auto';
+		}
+
+		$stack_below = isset( $settings['stack_below'] ) ? (string) $settings['stack_below'] : 'mobile';
+		if ( ! in_array( $stack_below, [ 'mobile', 'tablet', 'never' ], true ) ) {
+			$stack_below = 'mobile';
+		}
+
+		$this->add_render_attribute(
+			'hscroll',
+			[
+				'class'            => 'bw-horizontal-section',
+				'data-height'      => $height,
+				'data-stack-below' => $stack_below,
+			]
+		);
+
+		echo '<div ' . $this->get_render_attribute_string( 'hscroll' ) . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo '<div class="bw-section">';
+		echo '<div class="bw-hscroll-track">';
+		foreach ( $settings['list'] as $item ) {
+			$template_id = isset( $item['custom_template'] ) ? $item['custom_template'] : 0;
+			if ( is_array( $template_id ) ) {
+				$template_id = isset( $template_id['value'] ) ? $template_id['value'] : 0;
+			}
+			$template_id = absint( $template_id );
+			if ( ! $template_id ) {
+				continue;
+			}
+			echo \Elementor\Plugin::instance()->frontend->get_builder_content_for_display( $template_id, true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		}
+		echo '</div>';
+		echo '</div>';
+		echo '</div>';
 	}
 
 }

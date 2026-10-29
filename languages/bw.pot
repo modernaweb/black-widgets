@@ -239,8 +239,8 @@ msgstr ""
 msgid "Abstract Skin"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:760 src/widgets/bw-gsap-tab.php:985
-#: src/widgets/bw-gsap-tab.php:1708
+#: src/widgets/bw-gsap-tabs.php:760 src/widgets/bw-gsap-tabs.php:985
+#: src/widgets/bw-gsap-tabs.php:1708
 msgid "Active"
 msgstr ""
 
@@ -252,7 +252,7 @@ msgstr ""
 msgid "Active Bullets Color"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:992
+#: src/widgets/bw-gsap-tabs.php:992
 msgid "Active Timeline Indicator Thickness"
 msgstr ""
 
@@ -452,7 +452,7 @@ msgstr ""
 msgid "Autoplay"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:214
+#: src/widgets/bw-gsap-tabs.php:214
 msgid "Autoplay Delay (ms)"
 msgstr ""
 
@@ -512,7 +512,7 @@ msgstr ""
 #: src/widgets/bw-flipbox.php:1144 src/widgets/bw-flipbox.php:1286
 #: src/widgets/bw-flipbox.php:1428
 #: src/widgets/bw-gsap-interactive-links.php:345
-#: src/widgets/bw-gsap-tab.php:1464 src/widgets/bw-gsap-trigger.php:807
+#: src/widgets/bw-gsap-tabs.php:1464 src/widgets/bw-gsap-trigger.php:807
 #: src/widgets/bw-icon-box.php:581 src/widgets/bw-icon-box.php:696
 #: src/widgets/bw-icon-box.php:897 src/widgets/bw-icon-box.php:1085
 #: src/widgets/bw-icon-box.php:1273 src/widgets/bw-icon-box.php:1461
@@ -552,10 +552,10 @@ msgstr ""
 msgid "Background /color/ with low opacity is required."
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1212 src/widgets/bw-gsap-tab.php:1274
-#: src/widgets/bw-gsap-tab.php:1317 src/widgets/bw-gsap-tab.php:1681
-#: src/widgets/bw-gsap-tab.php:1726 src/widgets/bw-gsap-tab.php:1771
-#: src/widgets/bw-gsap-tab.php:2057 src/widgets/bw-image-carousel.php:1290
+#: src/widgets/bw-gsap-tabs.php:1212 src/widgets/bw-gsap-tabs.php:1274
+#: src/widgets/bw-gsap-tabs.php:1317 src/widgets/bw-gsap-tabs.php:1681
+#: src/widgets/bw-gsap-tabs.php:1726 src/widgets/bw-gsap-tabs.php:1771
+#: src/widgets/bw-gsap-tabs.php:2057 src/widgets/bw-image-carousel.php:1290
 msgid "Background Color"
 msgstr ""
 
@@ -684,8 +684,8 @@ msgstr ""
 msgid "Black Social Links"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:48
-msgid "Black Tab"
+#: src/widgets/bw-gsap-tabs.php:48
+msgid "Black Tabs"
 msgstr ""
 
 #: src/widgets/bw-text-animate.php:49
@@ -799,7 +799,7 @@ msgstr ""
 #: src/widgets/bw-gsap-interactive-links.php:355
 #: src/widgets/bw-gsap-interactive-links.php:556
 #: src/widgets/bw-gsap-interactive-links.php:641
-#: src/widgets/bw-gsap-tab.php:1357 src/widgets/bw-gsap-tab.php:1474
+#: src/widgets/bw-gsap-tabs.php:1357 src/widgets/bw-gsap-tabs.php:1474
 #: src/widgets/bw-gsap-trigger.php:818 src/widgets/bw-icon-box.php:656
 #: src/widgets/bw-icon-box.php:771 src/widgets/bw-icon-box.php:961
 #: src/widgets/bw-icon-box.php:1149 src/widgets/bw-icon-box.php:1337
@@ -829,8 +829,8 @@ msgstr ""
 msgid "Border"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1692 src/widgets/bw-gsap-tab.php:1737
-#: src/widgets/bw-gsap-tab.php:1782 src/widgets/bw-scroll-text.php:520
+#: src/widgets/bw-gsap-tabs.php:1692 src/widgets/bw-gsap-tabs.php:1737
+#: src/widgets/bw-gsap-tabs.php:1782 src/widgets/bw-scroll-text.php:520
 #: src/widgets/bw-scroll-text.php:725
 msgid "Border Color"
 msgstr ""
@@ -857,8 +857,8 @@ msgstr ""
 #: src/widgets/bw-gsap-interactive-links.php:564
 #: src/widgets/bw-gsap-interactive-links.php:649
 #: src/widgets/bw-gsap-interactive-links.php:1109
-#: src/widgets/bw-gsap-tab.php:1365 src/widgets/bw-gsap-tab.php:1482
-#: src/widgets/bw-gsap-tab.php:1849 src/widgets/bw-gsap-tab.php:2076
+#: src/widgets/bw-gsap-tabs.php:1365 src/widgets/bw-gsap-tabs.php:1482
+#: src/widgets/bw-gsap-tabs.php:1849 src/widgets/bw-gsap-tabs.php:2076
 #: src/widgets/bw-gsap-trigger.php:836 src/widgets/bw-icon-box.php:674
 #: src/widgets/bw-icon-box.php:789 src/widgets/bw-icon-box.php:970
 #: src/widgets/bw-icon-box.php:1158 src/widgets/bw-icon-box.php:1346
@@ -938,7 +938,7 @@ msgstr ""
 #: src/widgets/bw-gsap-interactive-links.php:400
 #: src/widgets/bw-gsap-interactive-links.php:601
 #: src/widgets/bw-gsap-interactive-links.php:686
-#: src/widgets/bw-gsap-tab.php:1378 src/widgets/bw-gsap-tab.php:1495
+#: src/widgets/bw-gsap-tabs.php:1378 src/widgets/bw-gsap-tabs.php:1495
 #: src/widgets/bw-gsap-trigger.php:828 src/widgets/bw-icon-box.php:666
 #: src/widgets/bw-icon-box.php:781 src/widgets/bw-icon-box.php:984
 #: src/widgets/bw-icon-box.php:1172 src/widgets/bw-icon-box.php:1360
@@ -973,7 +973,7 @@ msgstr ""
 #: src/widgets/bw-call-to-action.php:233 src/widgets/bw-dropcap.php:149
 #: src/widgets/bw-fade.php:246 src/widgets/bw-flipbox.php:403
 #: src/widgets/bw-gsap-interactive-links.php:327
-#: src/widgets/bw-gsap-tab.php:608 src/widgets/bw-gsap-trigger.php:797
+#: src/widgets/bw-gsap-tabs.php:608 src/widgets/bw-gsap-trigger.php:797
 #: src/widgets/bw-icon-box.php:497 src/widgets/bw-icon.php:190
 #: src/widgets/bw-image-carousel.php:553
 #: src/widgets/bw-image-marquee.php:372 src/widgets/bw-list.php:201
@@ -985,7 +985,7 @@ msgstr ""
 msgid "Box Style"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1452
+#: src/widgets/bw-gsap-tabs.php:1452
 msgid "Box Styles"
 msgstr ""
 
@@ -1022,17 +1022,17 @@ msgstr ""
 msgid "Button Hover Background"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:342 src/widgets/bw-gsap-tab.php:508
+#: src/widgets/bw-gsap-tabs.php:342 src/widgets/bw-gsap-tabs.php:508
 msgid "Button Icon"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:332 src/widgets/bw-gsap-tab.php:498
+#: src/widgets/bw-gsap-tabs.php:332 src/widgets/bw-gsap-tabs.php:498
 msgid "Button Link"
 msgstr ""
 
 #: src/widgets/bw-button.php:380 src/widgets/bw-call-to-action.php:203
-#: src/widgets/bw-flipbox.php:370 src/widgets/bw-gsap-tab.php:323
-#: src/widgets/bw-gsap-tab.php:489 src/widgets/bw-magic-link.php:317
+#: src/widgets/bw-flipbox.php:370 src/widgets/bw-gsap-tabs.php:323
+#: src/widgets/bw-gsap-tabs.php:489 src/widgets/bw-magic-link.php:317
 msgid "Button Text"
 msgstr ""
 
@@ -1070,7 +1070,7 @@ msgstr ""
 #: src/widgets/bw-box.php:320 src/widgets/bw-button.php:415
 #: src/widgets/bw-call-to-action.php:269 src/widgets/bw-flipbox.php:457
 #: src/widgets/bw-gsap-interactive-links.php:922
-#: src/widgets/bw-gsap-tab.php:1808 src/widgets/bw-gsap-tab.php:1923
+#: src/widgets/bw-gsap-tabs.php:1808 src/widgets/bw-gsap-tabs.php:1923
 #: src/widgets/bw-icon-box.php:514 src/widgets/bw-icon-box.php:915
 #: src/widgets/bw-icon-box.php:1103 src/widgets/bw-icon-box.php:1291
 #: src/widgets/bw-icon-box.php:1479 src/widgets/bw-icon-box.php:1760
@@ -1227,7 +1227,7 @@ msgstr ""
 #: src/widgets/bw-flipbox.php:953 src/widgets/bw-flipbox.php:1098
 #: src/widgets/bw-flipbox.php:1240 src/widgets/bw-flipbox.php:1382
 #: src/widgets/bw-gsap-horizontal-scrolling.php:247
-#: src/widgets/bw-gsap-tab.php:939 src/widgets/bw-gsap-trigger.php:893
+#: src/widgets/bw-gsap-tabs.php:939 src/widgets/bw-gsap-trigger.php:893
 #: src/widgets/bw-image-carousel.php:1004 src/widgets/bw-list.php:491
 #: src/widgets/bw-list.php:607 src/widgets/bw-list.php:750
 #: src/widgets/bw-list.php:858 src/widgets/bw-magic-link.php:653
@@ -1263,11 +1263,11 @@ msgstr ""
 msgid "Color Effect"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1196 src/widgets/bw-image-carousel.php:318
+#: src/widgets/bw-gsap-tabs.php:1196 src/widgets/bw-image-carousel.php:318
 msgid "Contain"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1593
+#: src/widgets/bw-gsap-tabs.php:1593
 msgid "Container"
 msgstr ""
 
@@ -1276,8 +1276,8 @@ msgstr ""
 #: src/widgets/bw-call-to-action.php:111 src/widgets/bw-dropcap.php:111
 #: src/widgets/bw-fade.php:113 src/widgets/bw-flipbox.php:111
 #: src/widgets/bw-gsap-horizontal-scrolling.php:145
-#: src/widgets/bw-gsap-tab.php:159 src/widgets/bw-gsap-tab.php:169
-#: src/widgets/bw-gsap-tab.php:931 src/widgets/bw-gsap-trigger.php:167
+#: src/widgets/bw-gsap-tabs.php:159 src/widgets/bw-gsap-tabs.php:169
+#: src/widgets/bw-gsap-tabs.php:931 src/widgets/bw-gsap-trigger.php:167
 #: src/widgets/bw-icon-box.php:163 src/widgets/bw-icon.php:108
 #: src/widgets/bw-image-carousel.php:76 src/widgets/bw-image-marquee.php:210
 #: src/widgets/bw-image-pro.php:144 src/widgets/bw-list.php:110
@@ -1295,7 +1295,7 @@ msgstr ""
 msgid "Content Alignment"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1880
+#: src/widgets/bw-gsap-tabs.php:1880
 msgid "Content Area"
 msgstr ""
 
@@ -1320,7 +1320,7 @@ msgstr ""
 msgid "Control List Style"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1197 src/widgets/bw-image-carousel.php:319
+#: src/widgets/bw-gsap-tabs.php:1197 src/widgets/bw-image-carousel.php:319
 msgid "Cover"
 msgstr ""
 
@@ -1439,7 +1439,7 @@ msgid "Deprecated. Leave empty. Black Widgets does not load this file."
 msgstr ""
 
 #: src/widgets/bw-gsap-interactive-links.php:800
-#: src/widgets/bw-gsap-tab.php:794
+#: src/widgets/bw-gsap-tabs.php:794
 msgid "Description"
 msgstr ""
 
@@ -1451,11 +1451,11 @@ msgstr ""
 msgid "Description (limit character 300)"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:822
+#: src/widgets/bw-gsap-tabs.php:822
 msgid "Description Margin"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:811
+#: src/widgets/bw-gsap-tabs.php:811
 msgid "Description Text Color"
 msgstr ""
 
@@ -1639,7 +1639,7 @@ msgstr ""
 msgid "Enable"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:202
+#: src/widgets/bw-gsap-tabs.php:202
 msgid "Enable Autoplay"
 msgstr ""
 
@@ -1664,7 +1664,7 @@ msgstr ""
 msgid "Enter text…"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:171
+#: src/widgets/bw-gsap-tabs.php:171
 msgid "Enter your content here"
 msgstr ""
 
@@ -1761,7 +1761,7 @@ msgstr ""
 msgid "Fancy Skin"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:136
+#: src/widgets/bw-gsap-tabs.php:136
 msgid "Feel free to edit."
 msgstr ""
 
@@ -1779,7 +1779,7 @@ msgstr ""
 msgid "Feel free to edit. Check this widget's demo."
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1198
+#: src/widgets/bw-gsap-tabs.php:1198
 msgid "Fill"
 msgstr ""
 
@@ -1940,7 +1940,7 @@ msgstr ""
 msgid "Gap Around Separator"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:643
+#: src/widgets/bw-gsap-tabs.php:643
 msgid "Gap Between Columns"
 msgstr ""
 
@@ -2131,7 +2131,7 @@ msgstr ""
 msgid "Higher values feel softer. 0 follows the scroll exactly."
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:148
+#: src/widgets/bw-gsap-tabs.php:148
 msgid "Horizontal  Tab"
 msgstr ""
 
@@ -2158,8 +2158,8 @@ msgstr ""
 #: src/widgets/bw-gsap-interactive-links.php:751
 #: src/widgets/bw-gsap-interactive-links.php:854
 #: src/widgets/bw-gsap-interactive-links.php:1192
-#: src/widgets/bw-gsap-tab.php:740 src/widgets/bw-gsap-tab.php:867
-#: src/widgets/bw-gsap-tab.php:1299 src/widgets/bw-gsap-tab.php:1753
+#: src/widgets/bw-gsap-tabs.php:740 src/widgets/bw-gsap-tabs.php:867
+#: src/widgets/bw-gsap-tabs.php:1299 src/widgets/bw-gsap-tabs.php:1753
 #: src/widgets/bw-icon-box.php:687 src/widgets/bw-icon-box.php:843
 #: src/widgets/bw-icon-box.php:1031 src/widgets/bw-icon-box.php:1219
 #: src/widgets/bw-icon-box.php:1407 src/widgets/bw-icon-box.php:1639
@@ -2263,8 +2263,8 @@ msgstr ""
 
 #: src/widgets/bw-alert.php:371 src/widgets/bw-blockquote.php:868
 #: src/widgets/bw-button.php:1100 src/widgets/bw-button.php:1199
-#: src/widgets/bw-gsap-tab.php:1285 src/widgets/bw-gsap-tab.php:1328
-#: src/widgets/bw-gsap-tab.php:2112 src/widgets/bw-gsap-trigger.php:954
+#: src/widgets/bw-gsap-tabs.php:1285 src/widgets/bw-gsap-tabs.php:1328
+#: src/widgets/bw-gsap-tabs.php:2112 src/widgets/bw-gsap-trigger.php:954
 #: src/widgets/bw-icon.php:319 src/widgets/bw-social-links.php:960
 #: src/widgets/bw-social-links.php:1009 src/widgets/bw-typography.php:2395
 msgid "Icon Color"
@@ -2285,7 +2285,7 @@ msgstr ""
 
 #: src/widgets/bw-alert.php:351 src/widgets/bw-blockquote.php:843
 #: src/widgets/bw-button.php:1079 src/widgets/bw-button.php:1178
-#: src/widgets/bw-gsap-tab.php:1404 src/widgets/bw-gsap-tab.php:2124
+#: src/widgets/bw-gsap-tabs.php:1404 src/widgets/bw-gsap-tabs.php:2124
 #: src/widgets/bw-gsap-trigger.php:934 src/widgets/bw-icon-box.php:1709
 #: src/widgets/bw-icon.php:294 src/widgets/bw-icon.php:350
 #: src/widgets/bw-icon.php:374 src/widgets/bw-list.php:506
@@ -2295,7 +2295,7 @@ msgstr ""
 msgid "Icon Size"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1386 src/widgets/bw-gsap-tab.php:2141
+#: src/widgets/bw-gsap-tabs.php:1386 src/widgets/bw-gsap-tabs.php:2141
 msgid "Icon Spacing"
 msgstr ""
 
@@ -2337,8 +2337,8 @@ msgstr ""
 msgid "If you want to use scale Z or 3D Scale, you should set perspective size"
 msgstr ""
 
-#: src/widgets/bw-fade.php:140 src/widgets/bw-gsap-tab.php:283
-#: src/widgets/bw-gsap-tab.php:449 src/widgets/bw-gsap-trigger.php:198
+#: src/widgets/bw-fade.php:140 src/widgets/bw-gsap-tabs.php:283
+#: src/widgets/bw-gsap-tabs.php:449 src/widgets/bw-gsap-trigger.php:198
 #: src/widgets/bw-image-carousel.php:90 src/widgets/bw-sentence.php:161
 msgid "Image"
 msgstr ""
@@ -2514,7 +2514,7 @@ msgstr ""
 msgid "JS: GSAP tl.to"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1931 src/widgets/bw-scroll-heat.php:281
+#: src/widgets/bw-gsap-tabs.php:1931 src/widgets/bw-scroll-heat.php:281
 msgid "Justify"
 msgstr ""
 
@@ -2540,8 +2540,8 @@ msgstr ""
 msgid "Latter Rotate"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:381 src/widgets/bw-gsap-tab.php:396
-#: src/widgets/bw-gsap-tab.php:545 src/widgets/bw-gsap-tab.php:559
+#: src/widgets/bw-gsap-tabs.php:381 src/widgets/bw-gsap-tabs.php:396
+#: src/widgets/bw-gsap-tabs.php:545 src/widgets/bw-gsap-tabs.php:559
 msgid "Learn More"
 msgstr ""
 
@@ -2569,7 +2569,7 @@ msgstr ""
 #: src/widgets/bw-button.php:411 src/widgets/bw-call-to-action.php:265
 #: src/widgets/bw-flipbox.php:453
 #: src/widgets/bw-gsap-interactive-links.php:918
-#: src/widgets/bw-gsap-tab.php:1804 src/widgets/bw-gsap-tab.php:1919
+#: src/widgets/bw-gsap-tabs.php:1804 src/widgets/bw-gsap-tabs.php:1919
 #: src/widgets/bw-icon-box.php:510 src/widgets/bw-icon-box.php:544
 #: src/widgets/bw-icon-box.php:911 src/widgets/bw-icon-box.php:1099
 #: src/widgets/bw-icon-box.php:1287 src/widgets/bw-icon-box.php:1475
@@ -2585,7 +2585,7 @@ msgstr ""
 msgid "Left"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:659
+#: src/widgets/bw-gsap-tabs.php:659
 #, php-format
 msgid "Left / Right Column Width (%)"
 msgstr ""
@@ -2805,9 +2805,9 @@ msgstr ""
 #: src/widgets/bw-gsap-interactive-links.php:903
 #: src/widgets/bw-gsap-interactive-links.php:999
 #: src/widgets/bw-gsap-interactive-links.php:1129
-#: src/widgets/bw-gsap-tab.php:631 src/widgets/bw-gsap-tab.php:1516
-#: src/widgets/bw-gsap-tab.php:1622 src/widgets/bw-gsap-tab.php:1837
-#: src/widgets/bw-gsap-tab.php:1903 src/widgets/bw-gsap-tab.php:2100
+#: src/widgets/bw-gsap-tabs.php:631 src/widgets/bw-gsap-tabs.php:1516
+#: src/widgets/bw-gsap-tabs.php:1622 src/widgets/bw-gsap-tabs.php:1837
+#: src/widgets/bw-gsap-tabs.php:1903 src/widgets/bw-gsap-tabs.php:2100
 #: src/widgets/bw-gsap-trigger.php:849 src/widgets/bw-icon-box.php:622
 #: src/widgets/bw-icon-box.php:737 src/widgets/bw-icon-box.php:934
 #: src/widgets/bw-icon-box.php:1122 src/widgets/bw-icon-box.php:1310
@@ -2855,7 +2855,7 @@ msgstr ""
 msgid "Mask Rise (SplitText)"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1141 src/widgets/bw-gsap-tab.php:1983
+#: src/widgets/bw-gsap-tabs.php:1141 src/widgets/bw-gsap-tabs.php:1983
 msgid "Max Height"
 msgstr ""
 
@@ -2875,28 +2875,28 @@ msgstr ""
 msgid "Max Translate Y"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1119 src/widgets/bw-gsap-tab.php:1966
+#: src/widgets/bw-gsap-tabs.php:1119 src/widgets/bw-gsap-tabs.php:1966
 #: src/widgets/bw-scroll-heat.php:664 src/widgets/bw-scroll-heat.php:810
 msgid "Max Width"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1108 src/widgets/bw-gsap-tab.php:1955
+#: src/widgets/bw-gsap-tabs.php:1108 src/widgets/bw-gsap-tabs.php:1955
 msgid "Media"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1164
+#: src/widgets/bw-gsap-tabs.php:1164
 msgid "Media Area Border"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1172
+#: src/widgets/bw-gsap-tabs.php:1172
 msgid "Media Area Border Radius"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1185
+#: src/widgets/bw-gsap-tabs.php:1185
 msgid "Media Area Box Shadow"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:280 src/widgets/bw-gsap-tab.php:446
+#: src/widgets/bw-gsap-tabs.php:280 src/widgets/bw-gsap-tabs.php:446
 msgid "Media Type"
 msgstr ""
 
@@ -2995,7 +2995,7 @@ msgid "Next slide"
 msgstr ""
 
 #: src/widgets/bw-box.php:165 src/widgets/bw-fade.php:187
-#: src/widgets/bw-gsap-tab.php:205 src/widgets/bw-gsap-trigger.php:256
+#: src/widgets/bw-gsap-tabs.php:205 src/widgets/bw-gsap-trigger.php:256
 #: src/widgets/bw-icon.php:285 src/widgets/bw-image-carousel.php:218
 #: src/widgets/bw-image-carousel.php:377
 #: src/widgets/bw-image-carousel.php:391
@@ -3028,7 +3028,7 @@ msgstr ""
 msgid "Noise Skin"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1199 src/widgets/bw-scroll-text.php:97
+#: src/widgets/bw-gsap-tabs.php:1199 src/widgets/bw-scroll-text.php:97
 #: src/widgets/bw-text-animate.php:137
 msgid "None"
 msgstr ""
@@ -3050,8 +3050,8 @@ msgstr ""
 #: src/widgets/bw-gsap-interactive-links.php:730
 #: src/widgets/bw-gsap-interactive-links.php:818
 #: src/widgets/bw-gsap-interactive-links.php:1176
-#: src/widgets/bw-gsap-tab.php:720 src/widgets/bw-gsap-tab.php:847
-#: src/widgets/bw-gsap-tab.php:1256 src/widgets/bw-gsap-tab.php:1663
+#: src/widgets/bw-gsap-tabs.php:720 src/widgets/bw-gsap-tabs.php:847
+#: src/widgets/bw-gsap-tabs.php:1256 src/widgets/bw-gsap-tabs.php:1663
 #: src/widgets/bw-icon-box.php:572 src/widgets/bw-icon-box.php:823
 #: src/widgets/bw-icon-box.php:1011 src/widgets/bw-icon-box.php:1199
 #: src/widgets/bw-icon-box.php:1387 src/widgets/bw-icon-box.php:1576
@@ -3087,15 +3087,15 @@ msgstr ""
 msgid "Normal Width"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1012
+#: src/widgets/bw-gsap-tabs.php:1012
 msgid "Not Active"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1019
+#: src/widgets/bw-gsap-tabs.php:1019
 msgid "Not Active Timeline Indicator Thickness"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1193
+#: src/widgets/bw-gsap-tabs.php:1193
 msgid "Object Fit"
 msgstr ""
 
@@ -3261,10 +3261,10 @@ msgstr ""
 #: src/widgets/bw-gsap-interactive-links.php:892
 #: src/widgets/bw-gsap-interactive-links.php:988
 #: src/widgets/bw-gsap-interactive-links.php:1140
-#: src/widgets/bw-gsap-tab.php:619 src/widgets/bw-gsap-tab.php:1344
-#: src/widgets/bw-gsap-tab.php:1503 src/widgets/bw-gsap-tab.php:1610
-#: src/widgets/bw-gsap-tab.php:1825 src/widgets/bw-gsap-tab.php:1891
-#: src/widgets/bw-gsap-tab.php:2088 src/widgets/bw-gsap-trigger.php:862
+#: src/widgets/bw-gsap-tabs.php:619 src/widgets/bw-gsap-tabs.php:1344
+#: src/widgets/bw-gsap-tabs.php:1503 src/widgets/bw-gsap-tabs.php:1610
+#: src/widgets/bw-gsap-tabs.php:1825 src/widgets/bw-gsap-tabs.php:1891
+#: src/widgets/bw-gsap-tabs.php:2088 src/widgets/bw-gsap-trigger.php:862
 #: src/widgets/bw-icon-box.php:635 src/widgets/bw-icon-box.php:750
 #: src/widgets/bw-icon-box.php:947 src/widgets/bw-icon-box.php:1135
 #: src/widgets/bw-icon-box.php:1323 src/widgets/bw-icon-box.php:1511
@@ -3457,12 +3457,12 @@ msgstr ""
 msgid "Quote Styles"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:325 src/widgets/bw-gsap-tab.php:366
-#: src/widgets/bw-gsap-tab.php:491 src/widgets/bw-gsap-tab.php:531
+#: src/widgets/bw-gsap-tabs.php:325 src/widgets/bw-gsap-tabs.php:366
+#: src/widgets/bw-gsap-tabs.php:491 src/widgets/bw-gsap-tabs.php:531
 msgid "Read More"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1234 src/widgets/bw-gsap-tab.php:2027
+#: src/widgets/bw-gsap-tabs.php:1234 src/widgets/bw-gsap-tabs.php:2027
 msgid "Read More Button"
 msgstr ""
 
@@ -3511,7 +3511,7 @@ msgstr ""
 #: src/widgets/bw-button.php:419 src/widgets/bw-call-to-action.php:273
 #: src/widgets/bw-flipbox.php:461
 #: src/widgets/bw-gsap-interactive-links.php:926
-#: src/widgets/bw-gsap-tab.php:1812 src/widgets/bw-gsap-tab.php:1927
+#: src/widgets/bw-gsap-tabs.php:1812 src/widgets/bw-gsap-tabs.php:1927
 #: src/widgets/bw-icon-box.php:518 src/widgets/bw-icon-box.php:548
 #: src/widgets/bw-icon-box.php:919 src/widgets/bw-icon-box.php:1107
 #: src/widgets/bw-icon-box.php:1295 src/widgets/bw-icon-box.php:1483
@@ -3674,15 +3674,15 @@ msgstr ""
 msgid "Same as link text if empty"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:359
+#: src/widgets/bw-gsap-tabs.php:359
 msgid "Sample Tab 1"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:374
+#: src/widgets/bw-gsap-tabs.php:374
 msgid "Sample Tab 2"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:389
+#: src/widgets/bw-gsap-tabs.php:389
 msgid "Sample Tab 3"
 msgstr ""
 
@@ -3701,7 +3701,7 @@ msgstr ""
 msgid "Scale"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1200
+#: src/widgets/bw-gsap-tabs.php:1200
 msgid "Scale Down"
 msgstr ""
 
@@ -3812,7 +3812,7 @@ msgstr ""
 msgid "Select Elementor template"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:293 src/widgets/bw-gsap-tab.php:459
+#: src/widgets/bw-gsap-tabs.php:293 src/widgets/bw-gsap-tabs.php:459
 msgid "Select Image"
 msgstr ""
 
@@ -3844,7 +3844,7 @@ msgstr ""
 msgid "Select Type"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:308 src/widgets/bw-gsap-tab.php:474
+#: src/widgets/bw-gsap-tabs.php:308 src/widgets/bw-gsap-tabs.php:474
 msgid "Select Video"
 msgstr ""
 
@@ -3891,7 +3891,7 @@ msgstr ""
 msgid "Set to 0 for square/pill-shaped dots instead of circles."
 msgstr ""
 
-#: src/admin.php:115 src/admin.php:116 src/widgets/bw-gsap-tab.php:195
+#: src/admin.php:115 src/admin.php:116 src/widgets/bw-gsap-tabs.php:195
 msgid "Settings"
 msgstr ""
 
@@ -3952,7 +3952,7 @@ msgstr ""
 msgid "Sharp"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:271 src/widgets/bw-gsap-tab.php:437
+#: src/widgets/bw-gsap-tabs.php:271 src/widgets/bw-gsap-tabs.php:437
 msgid "Short Description"
 msgstr ""
 
@@ -4332,68 +4332,68 @@ msgstr ""
 msgid "Symbol Text Typography"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:834 src/widgets/bw-gsap-tab.php:1634
+#: src/widgets/bw-gsap-tabs.php:834 src/widgets/bw-gsap-tabs.php:1634
 msgid "Tab Item"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:890
+#: src/widgets/bw-gsap-tabs.php:890
 msgid "Tab Item Border"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:898
+#: src/widgets/bw-gsap-tabs.php:898
 msgid "Tab Item Border Radius"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:911
+#: src/widgets/bw-gsap-tabs.php:911
 msgid "Tab Item Box Shadow"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:874
+#: src/widgets/bw-gsap-tabs.php:874
 msgid "Tab Item Hover Background"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:854
+#: src/widgets/bw-gsap-tabs.php:854
 msgid "Tab Item Normal Background"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:354 src/widgets/bw-gsap-tab.php:520
+#: src/widgets/bw-gsap-tabs.php:354 src/widgets/bw-gsap-tabs.php:520
 msgid "Tab Items"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:241 src/widgets/bw-gsap-tab.php:243
-#: src/widgets/bw-gsap-tab.php:427 src/widgets/bw-gsap-tab.php:429
+#: src/widgets/bw-gsap-tabs.php:241 src/widgets/bw-gsap-tabs.php:243
+#: src/widgets/bw-gsap-tabs.php:427 src/widgets/bw-gsap-tabs.php:429
 msgid "Tab Title"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:251
+#: src/widgets/bw-gsap-tabs.php:251
 msgid "Tab Title HTML Tag"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1539
+#: src/widgets/bw-gsap-tabs.php:1539
 msgid "Tab Titles"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:144
+#: src/widgets/bw-gsap-tabs.php:144
 msgid "Tab Type"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:439
+#: src/widgets/bw-gsap-tabs.php:439
 msgid "Tab description goes here."
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:273
+#: src/widgets/bw-gsap-tabs.php:273
 msgid "Tab short description goes here."
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:183
+#: src/widgets/bw-gsap-tabs.php:183
 msgid "Tabs"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1550
+#: src/widgets/bw-gsap-tabs.php:1550
 msgid "Tabs Container Width"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:688
+#: src/widgets/bw-gsap-tabs.php:688
 msgid "Tabs List"
 msgstr ""
 
@@ -4416,7 +4416,7 @@ msgid "Text 3"
 msgstr ""
 
 #: src/widgets/bw-gsap-interactive-links.php:914
-#: src/widgets/bw-gsap-tab.php:1800 src/widgets/bw-gsap-tab.php:1915
+#: src/widgets/bw-gsap-tabs.php:1800 src/widgets/bw-gsap-tabs.php:1915
 #: src/widgets/bw-image-carousel.php:1314
 msgid "Text Align"
 msgstr ""
@@ -4439,9 +4439,9 @@ msgstr ""
 
 #: src/widgets/bw-gsap-interactive-links.php:536
 #: src/widgets/bw-gsap-interactive-links.php:825
-#: src/widgets/bw-gsap-tab.php:1263 src/widgets/bw-gsap-tab.php:1306
-#: src/widgets/bw-gsap-tab.php:1670 src/widgets/bw-gsap-tab.php:1715
-#: src/widgets/bw-gsap-tab.php:1760 src/widgets/bw-gsap-tab.php:2046
+#: src/widgets/bw-gsap-tabs.php:1263 src/widgets/bw-gsap-tabs.php:1306
+#: src/widgets/bw-gsap-tabs.php:1670 src/widgets/bw-gsap-tabs.php:1715
+#: src/widgets/bw-gsap-tabs.php:1760 src/widgets/bw-gsap-tabs.php:2046
 #: src/widgets/bw-image-carousel.php:1279
 msgid "Text Color"
 msgstr ""
@@ -4538,15 +4538,15 @@ msgstr ""
 msgid "This is Title"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:361
+#: src/widgets/bw-gsap-tabs.php:361
 msgid "This is a short description for sample tab 1."
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:376
+#: src/widgets/bw-gsap-tabs.php:376
 msgid "This is a short description for sample tab 2."
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:391
+#: src/widgets/bw-gsap-tabs.php:391
 msgid "This is a short description for sample tab 3."
 msgstr ""
 
@@ -4554,35 +4554,35 @@ msgstr ""
 msgid "This is paragraph"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:526
+#: src/widgets/bw-gsap-tabs.php:526
 msgid "This is the description for vertical tab 1."
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:540
+#: src/widgets/bw-gsap-tabs.php:540
 msgid "This is the description for vertical tab 2."
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:554
+#: src/widgets/bw-gsap-tabs.php:554
 msgid "This is the description for vertical tab 3."
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1063
+#: src/widgets/bw-gsap-tabs.php:1063
 msgid "Timeline Border Radius"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1052
+#: src/widgets/bw-gsap-tabs.php:1052
 msgid "Timeline Fill Color"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1075
+#: src/widgets/bw-gsap-tabs.php:1075
 msgid "Timeline Gap / Offset"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:970
+#: src/widgets/bw-gsap-tabs.php:970
 msgid "Timeline Indicator"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1041
+#: src/widgets/bw-gsap-tabs.php:1041
 msgid "Timeline Track Color"
 msgstr ""
 
@@ -4600,7 +4600,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:767
+#: src/widgets/bw-gsap-tabs.php:767
 msgid "Title Active Color"
 msgstr ""
 
@@ -4629,16 +4629,16 @@ msgid "Title Color"
 msgstr ""
 
 #: src/widgets/bw-gsap-interactive-links.php:758
-#: src/widgets/bw-gsap-tab.php:747
+#: src/widgets/bw-gsap-tabs.php:747
 msgid "Title Hover Color"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:782 src/widgets/bw-title.php:531
+#: src/widgets/bw-gsap-tabs.php:782 src/widgets/bw-title.php:531
 #: src/widgets/bw-typography.php:1415 src/widgets/bw-typography.php:1679
 msgid "Title Margin"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:727
+#: src/widgets/bw-gsap-tabs.php:727
 msgid "Title Normal Color"
 msgstr ""
 
@@ -4657,7 +4657,7 @@ msgstr ""
 msgid "Title Typography"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:699
+#: src/widgets/bw-gsap-tabs.php:699
 msgid "Titles"
 msgstr ""
 
@@ -4749,7 +4749,7 @@ msgstr ""
 msgid "Twitter"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:126 src/widgets/bw-image-marquee.php:238
+#: src/widgets/bw-gsap-tabs.php:126 src/widgets/bw-image-marquee.php:238
 #: src/widgets/bw-scroll-heat.php:182 src/widgets/bw-text-marquee.php:219
 msgid "Type"
 msgstr ""
@@ -4967,19 +4967,19 @@ msgstr ""
 msgid "Vertical Swap"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:147
+#: src/widgets/bw-gsap-tabs.php:147
 msgid "Vertical Tab"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:525
+#: src/widgets/bw-gsap-tabs.php:525
 msgid "Vertical Tab 1"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:539
+#: src/widgets/bw-gsap-tabs.php:539
 msgid "Vertical Tab 2"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:553
+#: src/widgets/bw-gsap-tabs.php:553
 msgid "Vertical Tab 3"
 msgstr ""
 
@@ -4987,7 +4987,7 @@ msgstr ""
 msgid "Vertical Title"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:284 src/widgets/bw-gsap-tab.php:450
+#: src/widgets/bw-gsap-tabs.php:284 src/widgets/bw-gsap-tabs.php:450
 msgid "Video"
 msgstr ""
 
@@ -5028,7 +5028,7 @@ msgstr ""
 msgid "We create some skin before, you can use these or no! make a new custom type."
 msgstr ""
 
-#: src/widgets/bw-box.php:146 src/widgets/bw-gsap-tab.php:137
+#: src/widgets/bw-box.php:146 src/widgets/bw-gsap-tabs.php:137
 #: src/widgets/bw-title.php:148
 msgid "We created some skin before, you can use these or no! make a new custom type."
 msgstr ""
@@ -5111,7 +5111,7 @@ msgstr ""
 msgid "World"
 msgstr ""
 
-#: src/widgets/bw-gsap-tab.php:1576
+#: src/widgets/bw-gsap-tabs.php:1576
 msgid "Wrapper"
 msgstr ""
 
@@ -5125,7 +5125,7 @@ msgid "Wrapper tag for SEO and document structure."
 msgstr ""
 
 #: src/widgets/bw-box.php:166 src/widgets/bw-button.php:454
-#: src/widgets/bw-fade.php:188 src/widgets/bw-gsap-tab.php:204
+#: src/widgets/bw-fade.php:188 src/widgets/bw-gsap-tabs.php:204
 #: src/widgets/bw-gsap-trigger.php:255 src/widgets/bw-icon-box.php:174
 #: src/widgets/bw-icon-box.php:232 src/widgets/bw-icon-box.php:290
 #: src/widgets/bw-icon-box.php:320 src/widgets/bw-icon-box.php:369
@@ -5291,7 +5291,7 @@ msgstr ""
 
 #: src/widgets/bw-box.php:176 src/widgets/bw-button.php:392
 #: src/widgets/bw-fade.php:203 src/widgets/bw-flipbox.php:382
-#: src/widgets/bw-gsap-tab.php:334 src/widgets/bw-gsap-tab.php:500
+#: src/widgets/bw-gsap-tabs.php:334 src/widgets/bw-gsap-tabs.php:500
 #: src/widgets/bw-icon-box.php:347 src/widgets/bw-image-pro.php:228
 #: src/widgets/bw-list.php:158 src/widgets/bw-magic-link.php:329
 #: src/widgets/bw-scroll-text.php:202 src/widgets/bw-sentence.php:215

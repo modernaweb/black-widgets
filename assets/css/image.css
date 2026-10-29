@@ -4,6 +4,26 @@
 
 .bw-image img {
     display: inline-block;
+    max-width: 100%;
+    height: auto;
+}
+
+.bw-image .bw-image-link {
+    display: inline-block;
+    max-width: 100%;
+    line-height: 0;
+}
+
+.bw-image .bw-image-figure {
+    display: inline-block;
+    margin: 0;
+    max-width: 100%;
+}
+
+.bw-image .bw-image-caption {
+    display: block;
+    margin-top: 0.6em;
+    line-height: 1.5;
 }
 
 .bw-parallax {

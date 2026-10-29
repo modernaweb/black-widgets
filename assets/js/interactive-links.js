@@ -143,12 +143,9 @@
         const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
         const pos = { x: mouse.x, y: mouse.y };
         const rot = { x: 0, y: 0, z: 0 };
-        // Tracks the cursor's own last position (not the lagging follow
-        // position) so the Z tilt reflects real, instantaneous mouse
-        // velocity and settles back to 0 as soon as the cursor stops.
+
         let lastMouseX = mouse.x;
 
-        // Follow / tilt - tuned for a ~280px card (not a full-viewport sheet).
         const followSpeed = typeof gsapSettings.followSpeed === 'number' ? gsapSettings.followSpeed : 0.22;
         const rotSpeed = typeof gsapSettings.rotSpeed === 'number' ? gsapSettings.rotSpeed : 0.14;
         const maxRotX = gsapSettings.maxRotX != null ? gsapSettings.maxRotX : 8;
@@ -213,9 +210,6 @@
                 pos.y = mouse.y;
             }
 
-            // Use the raw cursor delta (not the lagging follow position) for the
-            // Z tilt, so the image sits flat by default and only shakes while the
-            // mouse is actually moving, easing back to 0 the instant it stops.
             const velocityX = mouse.x - lastMouseX;
             lastMouseX = mouse.x;
             const relX = (mouse.x / window.innerWidth - 0.5) * 2;

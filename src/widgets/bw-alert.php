@@ -16,9 +16,9 @@ use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Text_Shadow;
 
 /**
- * Elementor title Widget.
+ * Alert widget.
  *
- * Elementor widget that inserts an embbedable content into the page, from any given URL.
+ * Alert box with a title, a message and an optional icon.
  *
  * @since 1.0.0
  */
@@ -32,7 +32,7 @@ class Alert extends \Elementor\Widget_Base {
 	/**
 	 * Get widget name.
 	 *
-	 * Retrieve button widget name.
+	 * Retrieve the alert widget name.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -46,7 +46,7 @@ class Alert extends \Elementor\Widget_Base {
 	/**
 	 * Get widget title.
 	 *
-	 * Retrieve button widget title.
+	 * Retrieve the alert widget title.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -60,7 +60,7 @@ class Alert extends \Elementor\Widget_Base {
 	/**
 	 * Get widget icon.
 	 *
-	 * Retrieve button widget icon.
+	 * Retrieve the alert widget icon.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -74,7 +74,7 @@ class Alert extends \Elementor\Widget_Base {
 	/**
 	 * Get widget categories.
 	 *
-	 * Retrieve the list of categories the button widget belongs to.
+	 * Retrieve the list of categories the alert widget belongs to.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -94,17 +94,13 @@ class Alert extends \Elementor\Widget_Base {
     }
 
 	/**
-	 * Register button widget controls.
-	 *
-	 * Adds different input fields to allow the user to change and customize the widget settings.
+	 * Register the alert widget controls.
 	 *
 	 * @since 1.0.0
 	 * @access protected
 	 */
 	protected function register_controls() {
 
-		// Start
-		// Content section
 		$this->start_controls_section(
 			'content_section',
 			[
@@ -182,10 +178,7 @@ class Alert extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'style_section',
 			[
@@ -194,7 +187,6 @@ class Alert extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -229,7 +221,6 @@ class Alert extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -239,7 +230,6 @@ class Alert extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -261,7 +251,6 @@ class Alert extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
@@ -274,7 +263,6 @@ class Alert extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
@@ -288,9 +276,7 @@ class Alert extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-        // End
 
-		// Start
 		// Typography section
 		$this->start_controls_section(
 			'typo_section',
@@ -300,7 +286,6 @@ class Alert extends \Elementor\Widget_Base {
 			]
         );
 
-		// Color
 		$this->add_control(
 			'style_alert_color',
 			[
@@ -315,7 +300,6 @@ class Alert extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Typography
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -328,7 +312,6 @@ class Alert extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Text shadow
 		$this->add_group_control(
 			Group_Control_Text_Shadow::get_type(),
 			[
@@ -364,7 +347,6 @@ class Alert extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'style_icon_alert_color',
 			[
@@ -379,7 +361,6 @@ class Alert extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Text shadow
 		$this->add_group_control(
 			Group_Control_Text_Shadow::get_type(),
 			[
@@ -394,9 +375,9 @@ class Alert extends \Elementor\Widget_Base {
 	}
 
 	/**
-	 * Render title widget output on the frontend.
+	 * Render the alert widget output on the frontend.
 	 *
-	 * Written in PHP and used to generate the final HTML.
+	 * Outputs the widget HTML.
 	 *
 	 * @since 1.0.0
 	 * @access protected
@@ -409,7 +390,6 @@ class Alert extends \Elementor\Widget_Base {
         $type 	        = isset($settings['widget_type']) ? $settings['widget_type'] : '';
         $message        = isset($settings['widget_text']) ? $settings['widget_text'] : '';
 
-		// Render
         echo '<div class="bw-alert-box ' . esc_attr( $type ) . '">';
             \Elementor\Icons_Manager::render_icon( $settings['icon_widget'], [ 'aria-hidden' => 'true' ] );
             echo esc_html( $message );

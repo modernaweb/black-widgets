@@ -18,6 +18,17 @@
     -webkit-transform: translateZ(0);
 }
 
+.bw-load-img .bw-img {
+    position: relative;
+}
+
+.bw-load-img .bw-image-link {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: block;
+}
+
 .bw-image-grow-cover {
     position: absolute;
     z-index: 1;
@@ -26,6 +37,7 @@
     width: 100%;
     height: 100%;
     background-color: #222;
+    pointer-events: none;
 }
 
 .bw-image-grow-cover.ltr {

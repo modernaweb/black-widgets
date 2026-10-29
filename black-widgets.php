@@ -5,7 +5,7 @@
  * Description: Build web pages with black widgets.
  * Author: Modernaweb Studio
  * Version: 1.4.0
- * Requires at least: 6.0
+ * Requires at least: 7.1
  * Requires PHP: 7.4
  * Author URI: https://modernaweb.net/
  * License: GPLv3 or later
@@ -65,5 +65,3 @@ function black_widgets_redirect() {
 	wp_safe_redirect( admin_url( 'admin.php?page=black-widgets' ) );
 	exit;
 }
-
-

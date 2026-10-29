@@ -2345,10 +2345,7 @@
 }
 
 
-/* General Alignment
- * Elementor responsive Alignment drives `.bw-button-wrapper { text-align }`.
- * Keep the button inline-block so left/center/right work on all breakpoints.
- */
+/* General Alignment */
 
 .bw-button-box.left,
 .bw-button-box.right,
@@ -2379,4 +2376,3 @@
 .bw-button-box.modern.m-2.right {
     display: inline-block;
 }
-

@@ -17,14 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Black Tab Widget
+ * Black Tabs Widget
  *
  * A tab-based content widget powered by GSAP animations.
  * Includes automatic tab switching, image/video display, and responsive layout.
  *
  * @since 1.3.6
  */
-class GSAPTab extends Widget_Base {
+class GSAPTabs extends Widget_Base {
 
 	/**
 	 * Get widget name.
@@ -34,7 +34,7 @@ class GSAPTab extends Widget_Base {
 	 * @access public
 	 */
 	public function get_name(): string {
-		return 'b_gsap_tab';
+		return 'b_gsap_tabs';
 	}
 
 	/**
@@ -45,7 +45,7 @@ class GSAPTab extends Widget_Base {
 	 * @access public
 	 */
 	public function get_title(): string {
-		return __( 'Black Tab', 'blackwidgets' );
+		return __( 'Black Tabs', 'blackwidgets' );
 	}
 
 	/**
@@ -85,7 +85,7 @@ class GSAPTab extends Widget_Base {
 	 * @return array An array of CSS style handles.
 	 */
 	public function get_style_depends(): array {
-		return [ 'black-widgets-gsap-tab' ];
+		return [ 'black-widgets-gsap-tabs' ];
 	}
 
 	/**
@@ -94,7 +94,7 @@ class GSAPTab extends Widget_Base {
 	 * @return array An array of script handles that this widget depends on.
 	 */
 	public function get_script_depends(): array {
-		return [ 'black-widgets-gsap-tab' ];
+		return [ 'black-widgets-gsap-tabs' ];
 	}
 
 	/**
@@ -620,7 +620,7 @@ class GSAPTab extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -632,7 +632,7 @@ class GSAPTab extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -642,13 +642,43 @@ class GSAPTab extends Widget_Base {
 			[
 				'label'      => __( 'Gap Between Columns', 'blackwidgets' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%' ],
+				'size_units' => [ 'px', '%', 'em' ],
 				'range'      => [
 					'px' => [ 'min' => 0, 'max' => 200 ],
 					'%'  => [ 'min' => 0, 'max' => 20 ],
+					'em' => [ 'min' => 0, 'max' => 12, 'step' => 0.1 ],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab' => 'gap: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs__inner' => 'gap: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'default_inner_layout',
+			[
+				'label' => __( 'Columns Layout', 'blackwidgets' ),
+				'type'  => Controls_Manager::CHOOSE,
+				'options' => [
+					'row' => [
+						'title' => __( 'Side by Side', 'blackwidgets' ),
+						'icon'  => 'eicon-columns',
+					],
+					'column' => [
+						'title' => __( 'Stacked', 'blackwidgets' ),
+						'icon'  => 'eicon-align-stretch-vert',
+					],
+				],
+				'default'        => 'row',
+				'tablet_default' => 'row',
+				'mobile_default' => 'column',
+				'toggle'         => false,
+				'selectors_dictionary' => [
+					'row'    => 'var(--bw-tabs-cols, 1fr 1fr)',
+					'column' => 'minmax(0, 1fr)',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .black-tabs__inner' => 'grid-template-columns: {{VALUE}};',
 				],
 			]
 		);
@@ -656,17 +686,18 @@ class GSAPTab extends Widget_Base {
 		$this->add_responsive_control(
 			'default_column_width_ratio',
 			[
-				'label'     => __( 'Left / Right Column Width (%)', 'blackwidgets' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
+				'label'      => __( 'Left / Right Column Width (%)', 'blackwidgets' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ '%' ],
+				'range'      => [
 					'%' => [ 'min' => 10, 'max' => 90 ],
 				],
-				'default'   => [
+				'default'    => [
 					'size' => 50,
 					'unit' => '%',
 				],
-				'selectors' => [
-					'{{WRAPPER}} .black-tab__inner' => 'grid-template-columns: {{SIZE}}% calc(100% - {{SIZE}}%);',
+				'selectors'  => [
+					'{{WRAPPER}} .black-tabs__inner' => '--bw-tabs-cols: {{SIZE}}% calc(100% - {{SIZE}}%);',
 				],
 			]
 		);
@@ -706,7 +737,7 @@ class GSAPTab extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'default_tabs_title_typography',
-				'selector' => '{{WRAPPER}} .black-tab__tab-title',
+				'selector' => '{{WRAPPER}} .black-tabs__tab-title',
 			]
 		);
 
@@ -727,7 +758,7 @@ class GSAPTab extends Widget_Base {
 				'label'     => __( 'Title Normal Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .black-tab__tab-title' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .black-tabs__tab-title' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -747,7 +778,7 @@ class GSAPTab extends Widget_Base {
 				'label'     => __( 'Title Hover Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .black-tab__tab-title:not(.black-tab__tab-title--active):hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .black-tabs__tab:hover .black-tabs__tab-title:not(.black-tabs__tab-title--active)' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -767,7 +798,7 @@ class GSAPTab extends Widget_Base {
 				'label'     => __( 'Title Active Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .black-tab__tab-title.black-tab__tab-title--active' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .black-tabs__tab-title.black-tabs__tab-title--active' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -777,13 +808,25 @@ class GSAPTab extends Widget_Base {
 		$this->end_controls_tabs();
 
 		$this->add_responsive_control(
+			'default_tabs_title_padding',
+			[
+				'label'      => __( 'Title Padding', 'blackwidgets' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .black-tabs__tab-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
 			'default_tabs_title_margin',
 			[
 				'label'      => __( 'Title Margin', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', '%' ],
+				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab__tab-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs__tab-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -801,7 +844,7 @@ class GSAPTab extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'default_tabs_description_typography',
-				'selector' => '{{WRAPPER}} .black-tab__tab-description',
+				'selector' => '{{WRAPPER}} .black-tabs__tab-description',
 			]
 		);
 
@@ -811,7 +854,19 @@ class GSAPTab extends Widget_Base {
 				'label'     => __( 'Description Text Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .black-tab__tab-description' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .black-tabs__tab-description' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'default_tabs_description_padding',
+			[
+				'label'      => __( 'Description Padding', 'blackwidgets' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .black-tabs__tab-description' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -821,9 +876,9 @@ class GSAPTab extends Widget_Base {
 			[
 				'label'      => __( 'Description Margin', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', '%' ],
+				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab__tab-description' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs__tab-description' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -854,7 +909,7 @@ class GSAPTab extends Widget_Base {
 				'label'     => __( 'Tab Item Normal Background', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .black-tab__tab' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .black-tabs__tab' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -874,7 +929,7 @@ class GSAPTab extends Widget_Base {
 				'label'     => __( 'Tab Item Hover Background', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .black-tab__tab:hover' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .black-tabs__tab:hover' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -888,18 +943,42 @@ class GSAPTab extends Widget_Base {
 			[
 				'name'     => 'default_tab_item_border',
 				'label'    => __( 'Tab Item Border', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .black-tab__tab',
+				'selector' => '{{WRAPPER}} .black-tabs__tab',
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'default_tab_item_border_radius',
 			[
 				'label'      => __( 'Tab Item Border Radius', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%' ],
+				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab__tab' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs__tab' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'default_tab_item_padding',
+			[
+				'label'      => __( 'Tab Item Padding', 'blackwidgets' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .black-tabs__tab' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'default_tab_item_margin',
+			[
+				'label'      => __( 'Tab Item Margin', 'blackwidgets' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .black-tabs__tab' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -909,7 +988,7 @@ class GSAPTab extends Widget_Base {
 			[
 				'name'     => 'default_tab_item_box_shadow',
 				'label'    => __( 'Tab Item Box Shadow', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .black-tab__tab',
+				'selector' => '{{WRAPPER}} .black-tabs__tab',
 			]
 		);
 
@@ -939,7 +1018,7 @@ class GSAPTab extends Widget_Base {
                 'label' => esc_html__( 'Color', 'blackwidgets' ),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .black-tab__content p' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .black-tabs__content, {{WRAPPER}} .black-tabs__content p, {{WRAPPER}} .black-tabs__description, {{WRAPPER}} .black-tabs__description p' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -948,9 +1027,33 @@ class GSAPTab extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'content_typography',
-                'selector' => '{{WRAPPER}} .black-tab__content p',
+                'selector' => '{{WRAPPER}} .black-tabs__content, {{WRAPPER}} .black-tabs__content p, {{WRAPPER}} .black-tabs__description, {{WRAPPER}} .black-tabs__description p',
             ]
         );
+
+		$this->add_responsive_control(
+			'content_padding',
+			[
+				'label'      => __( 'Padding', 'blackwidgets' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .black-tabs__content, {{WRAPPER}} .black-tabs__description' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'content_margin',
+			[
+				'label'      => __( 'Margin', 'blackwidgets' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .black-tabs__content, {{WRAPPER}} .black-tabs__description' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
 
         $this->end_controls_section();
 	}
@@ -999,7 +1102,7 @@ class GSAPTab extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab__tab--active .black-tab__tab-timeline' => 'width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs__tab--active .black-tabs__tab-timeline' => 'width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1026,7 +1129,7 @@ class GSAPTab extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab__tab-timeline' => 'width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs__tab-timeline' => 'width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1041,7 +1144,7 @@ class GSAPTab extends Widget_Base {
 				'label'     => __( 'Timeline Track Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .black-tab__tab-timeline' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .black-tabs__tab-timeline' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -1052,19 +1155,19 @@ class GSAPTab extends Widget_Base {
 				'label'     => __( 'Timeline Fill Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .black-tab__timeline-fill' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .black-tabs__timeline-fill' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'default_timeline_border_radius',
 			[
 				'label'      => __( 'Timeline Border Radius', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%' ],
+				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab__tab-timeline' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs__tab-timeline' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1086,7 +1189,7 @@ class GSAPTab extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab__tab-timeline' => 'left: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs__tab-timeline' => 'inset-inline-start: {{SIZE}}{{UNIT}}; left: auto; right: auto;',
 				],
 			]
 		);
@@ -1130,7 +1233,7 @@ class GSAPTab extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab__media' => 'max-width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs__media' => 'max-width: {{SIZE}}{{UNIT}}; width: 100%;',
 				],
 			]
 		);
@@ -1140,7 +1243,7 @@ class GSAPTab extends Widget_Base {
 			[
 				'label'      => __( 'Max Height', 'blackwidgets' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%' ],
+				'size_units' => [ 'px', '%', 'vh' ],
 				'range'      => [
 					'px' => [
 						'min' => 0,
@@ -1150,9 +1253,14 @@ class GSAPTab extends Widget_Base {
 						'min' => 0,
 						'max' => 100,
 					],
+					'vh' => [
+						'min' => 0,
+						'max' => 100,
+					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab__media' => 'max-height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs__media' => 'max-height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs__image, {{WRAPPER}} .black-tabs__video' => 'max-height: {{SIZE}}{{UNIT}}; width: 100%;',
 				],
 			]
 		);
@@ -1162,18 +1270,18 @@ class GSAPTab extends Widget_Base {
 			[
 				'name'     => 'default_media_border',
 				'label'    => __( 'Media Area Border', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .black-tab__media',
+				'selector' => '{{WRAPPER}} .black-tabs__media',
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'default_media_border_radius',
 			[
 				'label'      => __( 'Media Area Border Radius', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%' ],
+				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab__right, {{WRAPPER}} .black-tab__media, {{WRAPPER}} .black-tab__image, {{WRAPPER}} .black-tab__video' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+					'{{WRAPPER}} .black-tabs__right, {{WRAPPER}} .black-tabs__media, {{WRAPPER}} .black-tabs__image, {{WRAPPER}} .black-tabs__video' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1183,7 +1291,7 @@ class GSAPTab extends Widget_Base {
 			[
 				'name'     => 'default_media_box_shadow',
 				'label'    => __( 'Media Area Box Shadow', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .black-tab__media',
+				'selector' => '{{WRAPPER}} .black-tabs__media',
 			]
 		);
 
@@ -1201,7 +1309,7 @@ class GSAPTab extends Widget_Base {
 				],
 				'default'   => 'contain',
 				'selectors' => [
-					'{{WRAPPER}} .black-tab__image, {{WRAPPER}} .black-tab__video' => 'object-fit: {{VALUE}};',
+					'{{WRAPPER}} .black-tabs__image, {{WRAPPER}} .black-tabs__video' => 'object-fit: {{VALUE}};',
 				],
 			]
 		);
@@ -1212,7 +1320,7 @@ class GSAPTab extends Widget_Base {
 				'label'     => __( 'Background Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .black-tab__right' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .black-tabs__right' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -1243,7 +1351,7 @@ class GSAPTab extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'default_read_more_button_typography',
-                'selector' => '{{WRAPPER}} .black-tab__read-more',
+                'selector' => '{{WRAPPER}} .black-tabs__read-more',
             ]
         );
 
@@ -1263,7 +1371,7 @@ class GSAPTab extends Widget_Base {
                 'label'     => __( 'Text Color', 'blackwidgets' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .black-tab__read-more' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .black-tabs__read-more' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -1274,7 +1382,7 @@ class GSAPTab extends Widget_Base {
                 'label'     => __( 'Background Color', 'blackwidgets' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .black-tab__read-more' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .black-tabs__read-more' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -1285,7 +1393,7 @@ class GSAPTab extends Widget_Base {
                 'label'     => __( 'Icon Color', 'blackwidgets' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .black-tab__read-more svg' => 'fill: {{VALUE}}; stroke: {{VALUE}};',
+                    '{{WRAPPER}} .black-tabs__read-more svg' => 'fill: {{VALUE}}; stroke: {{VALUE}};',
                 ],
             ]
         );
@@ -1306,7 +1414,7 @@ class GSAPTab extends Widget_Base {
                 'label'     => __( 'Text Color', 'blackwidgets' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .black-tab__read-more:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .black-tabs__read-more:hover' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -1317,7 +1425,7 @@ class GSAPTab extends Widget_Base {
                 'label'     => __( 'Background Color', 'blackwidgets' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .black-tab__read-more:hover' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .black-tabs__read-more:hover' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -1328,7 +1436,7 @@ class GSAPTab extends Widget_Base {
                 'label'     => __( 'Icon Color', 'blackwidgets' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .black-tab__read-more:hover svg' => 'fill: {{VALUE}}; stroke: {{VALUE}};',
+                    '{{WRAPPER}} .black-tabs__read-more:hover svg' => 'fill: {{VALUE}}; stroke: {{VALUE}};',
                 ],
             ]
         );
@@ -1345,7 +1453,7 @@ class GSAPTab extends Widget_Base {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors'  => [
-                    '{{WRAPPER}} .black-tab__read-more' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .black-tabs__read-more' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1355,18 +1463,18 @@ class GSAPTab extends Widget_Base {
             [
                 'name'     => 'default_read_more_button_border',
                 'label'    => __( 'Border', 'blackwidgets' ),
-                'selector' => '{{WRAPPER}} .black-tab__read-more',
+                'selector' => '{{WRAPPER}} .black-tabs__read-more',
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'default_read_more_button_border_radius',
             [
                 'label'      => __( 'Border Radius', 'blackwidgets' ),
                 'type'       => Controls_Manager::DIMENSIONS,
-                'size_units' => [ 'px', '%' ],
+                'size_units' => [ 'px', '%', 'em' ],
                 'selectors'  => [
-                    '{{WRAPPER}} .black-tab__read-more' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .black-tabs__read-more' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1376,29 +1484,34 @@ class GSAPTab extends Widget_Base {
             [
                 'name'     => 'default_read_more_button_box_shadow',
                 'label'    => __( 'Box Shadow', 'blackwidgets' ),
-                'selector' => '{{WRAPPER}} .black-tab__read-more',
+                'selector' => '{{WRAPPER}} .black-tabs__read-more',
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'default_read_more_button_icon_spacing',
             [
                 'label'      => __( 'Icon Spacing', 'blackwidgets' ),
                 'type'       => Controls_Manager::SLIDER,
-                'size_units' => [ 'px' ],
+                'size_units' => [ 'px', 'em' ],
                 'range'      => [
                     'px' => [
                         'min' => 0,
                         'max' => 50,
                     ],
+                    'em' => [
+                        'min' => 0,
+                        'max' => 4,
+                        'step' => 0.1,
+                    ],
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .black-tab__read-more' => 'gap: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .black-tabs__read-more' => 'gap: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'default_read_more_button_icon_size',
             [
                 'label'      => __( 'Icon Size', 'blackwidgets' ),
@@ -1407,11 +1520,16 @@ class GSAPTab extends Widget_Base {
                 'range'      => [
                     'px' => [
                         'min' => 5,
-                        'max' => 50,
+                        'max' => 80,
+                    ],
+                    'em' => [
+                        'min' => 0.5,
+                        'max' => 5,
+                        'step' => 0.1,
                     ],
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .black-tab__read-more svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .black-tabs__read-more svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -1463,7 +1581,7 @@ class GSAPTab extends Widget_Base {
 				'name'     => 'vertical_wrapper_background',
 				'label'    => __( 'Background', 'blackwidgets' ),
 				'types'    => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .black-tab',
+				'selector' => '{{WRAPPER}} .black-tabs',
 			]
 		);
 
@@ -1472,18 +1590,18 @@ class GSAPTab extends Widget_Base {
 			[
 				'name'     => 'vertical_wrapper_border',
 				'label'    => __( 'Border', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .black-tab',
+				'selector' => '{{WRAPPER}} .black-tabs',
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'vertical_wrapper_border_radius',
 			[
 				'label'      => __( 'Border Radius', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1493,7 +1611,7 @@ class GSAPTab extends Widget_Base {
 			[
 				'name'     => 'vertical_wrapper_box_shadow',
 				'label'    => __( 'Box Shadow', 'blackwidgets' ),
-				'selector' => '{{WRAPPER}} .black-tab',
+				'selector' => '{{WRAPPER}} .black-tabs',
 			]
 		);
 
@@ -1504,7 +1622,7 @@ class GSAPTab extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1517,7 +1635,7 @@ class GSAPTab extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1564,8 +1682,16 @@ class GSAPTab extends Widget_Base {
 						'max' => 100,
 					],
 				],
+				'default' => [
+					'size' => 50,
+					'unit' => '%',
+				],
+				'mobile_default' => [
+					'size' => 100,
+					'unit' => '%',
+				],
 				'selectors' => [
-					'{{WRAPPER}} .black-tab__tabs-wrapper .black-tab__tabs' => 'width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs__tabs-wrapper .black-tabs__tabs' => 'width: {{SIZE}}{{UNIT}}; max-width: 100%;',
 				],
 			]
 		);
@@ -1583,7 +1709,19 @@ class GSAPTab extends Widget_Base {
 			[
 				'name'     => 'vertical_tab_titles_wrapper_background',
 				'types'    => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .black-tab__tabs-wrapper',
+				'selector' => '{{WRAPPER}} .black-tabs__tabs-wrapper',
+			]
+		);
+
+		$this->add_responsive_control(
+			'vertical_tab_titles_wrapper_padding',
+			[
+				'label'      => __( 'Wrapper Padding', 'blackwidgets' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .black-tabs__tabs-wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
 			]
 		);
 
@@ -1600,7 +1738,7 @@ class GSAPTab extends Widget_Base {
 			[
 				'name'     => 'vertical_tab_titles_container_background',
 				'types'    => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .black-tab__tabs',
+				'selector' => '{{WRAPPER}} .black-tabs__tabs',
 			]
 		);
 
@@ -1611,7 +1749,7 @@ class GSAPTab extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab__tabs' => "padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};",
+					'{{WRAPPER}} .black-tabs__tabs' => "padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};",
 				],
 			]
 		);
@@ -1623,7 +1761,7 @@ class GSAPTab extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab__tabs' => "margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};",
+					'{{WRAPPER}} .black-tabs__tabs' => "margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};",
 				],
 			]
 		);
@@ -1641,7 +1779,7 @@ class GSAPTab extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'vertical_tab_titles_typography',
-				'selector' => '{{WRAPPER}} .black-tab__tab',
+				'selector' => '{{WRAPPER}} .black-tabs__tab',
 			]
 		);
 
@@ -1649,7 +1787,7 @@ class GSAPTab extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'     => 'vertical_tab_titles_item_border',
-				'selector' => '{{WRAPPER}} .black-tab__tab',
+				'selector' => '{{WRAPPER}} .black-tabs__tab',
 			]
 		);
 
@@ -1670,7 +1808,7 @@ class GSAPTab extends Widget_Base {
 				'label'     => __( 'Text Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .black-tab__tab' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .black-tabs__tab' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1681,7 +1819,7 @@ class GSAPTab extends Widget_Base {
 				'label'     => __( 'Background Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .black-tab__tabs .black-tab__tab' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .black-tabs__tabs .black-tabs__tab' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -1695,7 +1833,7 @@ class GSAPTab extends Widget_Base {
 					'vertical_tab_titles_item_border_border!' => '',
 				],
 				'selectors' => [
-					'{{WRAPPER}} .black-tab__tabs .black-tab__tab' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .black-tabs__tabs .black-tabs__tab' => 'border-color: {{VALUE}};',
 				],
 			]
 		);
@@ -1715,7 +1853,7 @@ class GSAPTab extends Widget_Base {
 				'label'     => __( 'Text Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .black-tab__tab.black-tab__tab--active' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .black-tabs__tab.black-tabs__tab--active' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1726,7 +1864,7 @@ class GSAPTab extends Widget_Base {
 				'label'     => __( 'Background Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .black-tab__tab.black-tab__tab--active' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .black-tabs__tab.black-tabs__tab--active' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -1740,7 +1878,7 @@ class GSAPTab extends Widget_Base {
 					'vertical_tab_titles_item_border_border!' => '',
 				],
 				'selectors' => [
-					'{{WRAPPER}} .black-tab__tab.black-tab__tab--active' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .black-tabs__tab.black-tabs__tab--active' => 'border-color: {{VALUE}};',
 				],
 			]
 		);
@@ -1760,7 +1898,7 @@ class GSAPTab extends Widget_Base {
 				'label'     => __( 'Text Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .black-tab__tabs .black-tab__tab:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .black-tabs__tabs .black-tabs__tab:hover' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1771,7 +1909,7 @@ class GSAPTab extends Widget_Base {
 				'label'     => __( 'Background Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .black-tab__tabs .black-tab__tab:hover' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .black-tabs__tabs .black-tabs__tab:hover' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -1785,7 +1923,7 @@ class GSAPTab extends Widget_Base {
 					'vertical_tab_titles_item_border_border!' => '',
 				],
 				'selectors' => [
-					'{{WRAPPER}} .black-tab__tabs .black-tab__tab:hover' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .black-tabs__tabs .black-tabs__tab:hover' => 'border-color: {{VALUE}};',
 				],
 			]
 		);
@@ -1814,7 +1952,7 @@ class GSAPTab extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .black-tab__tab' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .black-tabs__tab' => 'text-align: {{VALUE}};',
 				],
 			]
 		);
@@ -1826,7 +1964,7 @@ class GSAPTab extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab__tab' => "padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};",
+					'{{WRAPPER}} .black-tabs__tab' => "padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};",
 				],
 			]
 		);
@@ -1838,19 +1976,19 @@ class GSAPTab extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab__tab' => "margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};",
+					'{{WRAPPER}} .black-tabs__tab' => "margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};",
 				],
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'vertical_tab_titles_item_border_radius',
 			[
 				'label'      => __( 'Border Radius', 'blackwidgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab__tab' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs__tab' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1859,7 +1997,7 @@ class GSAPTab extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'     => 'vertical_tab_titles_item_box_shadow',
-				'selector' => '{{WRAPPER}} .black-tab__tab',
+				'selector' => '{{WRAPPER}} .black-tabs__tab',
 			]
 		);
 
@@ -1892,7 +2030,7 @@ class GSAPTab extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab__content-area' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs__content-area' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1904,7 +2042,7 @@ class GSAPTab extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab__content-area' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs__content-area' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1933,7 +2071,7 @@ class GSAPTab extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .black-tab__content-area' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .black-tabs__content-area' => 'text-align: {{VALUE}};',
 				],
 			]
 		);
@@ -1972,7 +2110,7 @@ class GSAPTab extends Widget_Base {
 					'vw' => [ 'min' => 0, 'max' => 100 ],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab__media' => 'max-width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs__media' => 'max-width: {{SIZE}}{{UNIT}}; width: 100%;',
 				],
 			]
 		);
@@ -1989,7 +2127,38 @@ class GSAPTab extends Widget_Base {
 					'vh' => [ 'min' => 0, 'max' => 100 ],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab__media' => 'max-height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs__media' => 'max-height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs__media img, {{WRAPPER}} .black-tabs__media video' => 'max-height: {{SIZE}}{{UNIT}}; width: 100%;',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'vertical_media_border_radius',
+			[
+				'label'      => __( 'Border Radius', 'blackwidgets' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .black-tabs__media, {{WRAPPER}} .black-tabs__media img, {{WRAPPER}} .black-tabs__media video' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'vertical_media_object_fit',
+			[
+				'label'     => __( 'Object Fit', 'blackwidgets' ),
+				'type'      => Controls_Manager::SELECT,
+				'options'   => [
+					'contain'    => __( 'Contain', 'blackwidgets' ),
+					'cover'      => __( 'Cover', 'blackwidgets' ),
+					'fill'       => __( 'Fill', 'blackwidgets' ),
+					'none'       => __( 'None', 'blackwidgets' ),
+					'scale-down' => __( 'Scale Down', 'blackwidgets' ),
+				],
+				'selectors' => [
+					'{{WRAPPER}} .black-tabs__media img, {{WRAPPER}} .black-tabs__media video' => 'object-fit: {{VALUE}};',
 				],
 			]
 		);
@@ -1998,7 +2167,7 @@ class GSAPTab extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'     => 'vertical_media_border',
-				'selector' => '{{WRAPPER}} .black-tab__media',
+				'selector' => '{{WRAPPER}} .black-tabs__media',
 			]
 		);
 
@@ -2006,7 +2175,7 @@ class GSAPTab extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'     => 'vertical_media_box_shadow',
-				'selector' => '{{WRAPPER}} .black-tab__media',
+				'selector' => '{{WRAPPER}} .black-tabs__media',
 			]
 		);
 
@@ -2036,7 +2205,7 @@ class GSAPTab extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'vertical_read_more_typography',
-				'selector' => '{{WRAPPER}} .black-tab__read-more',
+				'selector' => '{{WRAPPER}} .black-tabs__read-more',
 			]
 		);
 
@@ -2046,7 +2215,7 @@ class GSAPTab extends Widget_Base {
 				'label'     => __( 'Text Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .black-tab__read-more' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .black-tabs__read-more' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -2057,7 +2226,7 @@ class GSAPTab extends Widget_Base {
 				'label'     => __( 'Background Color', 'blackwidgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .black-tab__read-more' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .black-tabs__read-more' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -2066,7 +2235,7 @@ class GSAPTab extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'     => 'vertical_read_more_border',
-				'selector' => '{{WRAPPER}} .black-tab__read-more',
+				'selector' => '{{WRAPPER}} .black-tabs__read-more',
 			]
 		);
 
@@ -2077,7 +2246,7 @@ class GSAPTab extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab__read-more' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs__read-more' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -2089,7 +2258,7 @@ class GSAPTab extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab__read-more' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs__read-more' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -2101,7 +2270,7 @@ class GSAPTab extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .black-tab__read-more' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .black-tabs__read-more' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -2112,8 +2281,8 @@ class GSAPTab extends Widget_Base {
                 'label'     => __( 'Icon Color', 'blackwidgets' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .black-tab__read-more-icon' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .black-tab__read-more-icon svg' => 'fill: {{VALUE}}; stroke: {{VALUE}};',
+                    '{{WRAPPER}} .black-tabs__read-more-icon' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .black-tabs__read-more-icon svg' => 'fill: {{VALUE}}; stroke: {{VALUE}};',
                 ],
             ]
         );
@@ -2123,14 +2292,20 @@ class GSAPTab extends Widget_Base {
             [
                 'label'      => __( 'Icon Size', 'blackwidgets' ),
                 'type'       => Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'em' ],
                 'range'      => [
                     'px' => [
                         'min' => 6,
                         'max' => 100,
                     ],
+                    'em' => [
+                        'min' => 0.5,
+                        'max' => 5,
+                        'step' => 0.1,
+                    ],
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .black-tab__read-more-icon, {{WRAPPER}} .black-tab__read-more-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .black-tabs__read-more-icon, {{WRAPPER}} .black-tabs__read-more-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -2138,16 +2313,22 @@ class GSAPTab extends Widget_Base {
         $this->add_responsive_control(
             'vertical_read_more_icon_spacing',
             [
-                'label'     => __( 'Icon Spacing', 'blackwidgets' ),
-                'type'      => Controls_Manager::SLIDER,
-                'range'     => [
+                'label'      => __( 'Icon Spacing', 'blackwidgets' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'em' ],
+                'range'      => [
                     'px' => [
                         'min' => 0,
                         'max' => 100,
                     ],
+                    'em' => [
+                        'min' => 0,
+                        'max' => 6,
+                        'step' => 0.1,
+                    ],
                 ],
-                'selectors' => [
-                    '{{WRAPPER}} .black-tab__read-more' => 'gap: {{SIZE}}{{UNIT}};',
+                'selectors'  => [
+                    '{{WRAPPER}} .black-tabs__read-more' => 'gap: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -2188,51 +2369,49 @@ class GSAPTab extends Widget_Base {
 		$widget_id      = $this->get_id();
 		?>
 
-        <div class="black-tab black-tab--default <?php echo $is_autoplay ? 'black-tab--autoplay' : ''; ?>"
+        <div class="black-tabs black-tabs--default <?php echo $is_autoplay ? 'black-tabs--autoplay' : ''; ?>"
 			<?php if ( $is_autoplay ): ?> data-delay="<?php echo esc_attr( $autoplay_delay ); ?>"<?php endif; ?>>
-            <div class="black-tab__inner">
-                <div class="black-tab__left">
-                    <div class="black-tab__content">
+            <div class="black-tabs__inner">
+                <div class="black-tabs__left">
+                    <div class="black-tabs__content">
 						<?php echo wp_kses_post( $settings['content'] ); ?>
                     </div>
 
-                    <div class="black-tab__tabs" role="tablist" aria-orientation="vertical">
+                    <div class="black-tabs__tabs" role="tablist" aria-orientation="vertical">
 						<?php foreach ( $tabs as $index => $tab ):
-							$tab_id    = 'bw-tab-' . $widget_id . '-' . $index;
-							$panel_id  = 'bw-tabpanel-' . $widget_id . '-' . $index;
+							$tab_id    = 'bw-tabs-' . $widget_id . '-' . $index;
+							$panel_id  = 'bw-tabs-panel-' . $widget_id . '-' . $index;
 							$is_active = $index === 0;
 							?>
-                        <div class="black-tab__tab<?php echo $is_active ? ' black-tab__tab--active' : ''; ?>"
+                        <div class="black-tabs__tab<?php echo $is_active ? ' black-tabs__tab--active' : ''; ?>"
                              role="tab"
                              id="<?php echo esc_attr( $tab_id ); ?>"
                              aria-controls="<?php echo esc_attr( $panel_id ); ?>"
                              aria-selected="<?php echo $is_active ? 'true' : 'false'; ?>"
                              tabindex="<?php echo $is_active ? '0' : '-1'; ?>"
                              data-tab-index="<?php echo esc_attr( $index ); ?>">
-                            <div class="black-tab__tab-header">
-                                <<?php echo esc_html( $tab['tab_title_tag'] ?: 'h3' ); ?>
-                                class="black-tab__tab-title<?php echo $is_active ? ' black-tab__tab-title--active' : ''; ?>
-                                ">
+                            <div class="black-tabs__tab-header">
+                                <<?php echo tag_escape( $tab['tab_title_tag'] ?: 'h3' ); ?> class="black-tabs__tab-title<?php echo $is_active ? ' black-tabs__tab-title--active' : ''; ?>">
                                     <?php echo esc_html( $tab['tab_title'] ); ?>
-                                </<?php echo esc_html( $tab['tab_title_tag'] ?: 'h3' ); ?>>
-                                <p class="black-tab__tab-description" <?php echo $is_active ? '' : 'style="height: 0; opacity: 0;"'; ?>>
+                                </<?php echo tag_escape( $tab['tab_title_tag'] ?: 'h3' ); ?>>
+                                <p class="black-tabs__tab-description" <?php echo $is_active ? '' : 'style="height: 0; opacity: 0;"'; ?>>
                                     <?php echo esc_html( $tab['tab_description'] ); ?>
                                 </p>
                             </div>
-                            <div class="black-tab__tab-timeline">
-                                <div class="black-tab__timeline-fill"></div>
+                            <div class="black-tabs__tab-timeline">
+                                <div class="black-tabs__timeline-fill"></div>
                             </div>
                         </div>
 					    <?php endforeach; ?>
                     </div>
                 </div>
-                <div class="black-tab__right">
+                <div class="black-tabs__right">
                     <?php foreach ( $tabs as $index => $tab ):
-						$tab_id    = 'bw-tab-' . $widget_id . '-' . $index;
-						$panel_id  = 'bw-tabpanel-' . $widget_id . '-' . $index;
+						$tab_id    = 'bw-tabs-' . $widget_id . '-' . $index;
+						$panel_id  = 'bw-tabs-panel-' . $widget_id . '-' . $index;
 						$is_active = $index === 0;
 						?>
-                        <div class="black-tab__media"
+                        <div class="black-tabs__media"
                              role="tabpanel"
                              id="<?php echo esc_attr( $panel_id ); ?>"
                              aria-labelledby="<?php echo esc_attr( $tab_id ); ?>"
@@ -2240,15 +2419,15 @@ class GSAPTab extends Widget_Base {
                              <?php echo $is_active ? '' : 'hidden'; ?>
                             <?php echo $is_active ? '' : 'style="translate: none; rotate: none; scale: none; opacity: 0; transform: translate(0px, 0px); height: 0;"'; ?>>
                             <?php if ( $tab['media_type'] === 'image' && ! empty( $tab['tab_image']['url'] ) ): ?>
-                                <img src="<?php echo esc_url( $tab['tab_image']['url'] ); ?>" alt="<?php echo esc_attr( $tab['tab_title'] ); ?>" class="black-tab__image"/> <?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
+                                <img src="<?php echo esc_url( $tab['tab_image']['url'] ); ?>" alt="<?php echo esc_attr( $tab['tab_title'] ); ?>" class="black-tabs__image"/> <?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
                             <?php elseif ( $tab['media_type'] === 'video' && ! empty( $tab['tab_video']['url'] ) ): ?>
-                                <video class="black-tab__video" src="<?php echo esc_url( $tab['tab_video']['url'] ); ?>"
+                                <video class="black-tabs__video" src="<?php echo esc_url( $tab['tab_video']['url'] ); ?>"
                                        muted autoplay loop></video>
                             <?php endif; ?>
 
                             <?php if ( ! empty( $tab['read_more_text'] ) ): ?>
                                 <a href="<?php echo esc_url( $tab['read_more_link']['url'] ?? '#' ); ?>"
-                                   class="black-tab__read-more"
+                                   class="black-tabs__read-more"
                                    target="<?php echo esc_attr( $tab['read_more_link']['is_external'] ? '_blank' : '_self' ); ?>"
                                    rel="<?php echo esc_attr( $tab['read_more_link']['nofollow'] ? 'nofollow noopener' : 'noopener' ); ?>">
                                     <?php echo esc_html( $tab['read_more_text'] ); ?>
@@ -2271,16 +2450,16 @@ class GSAPTab extends Widget_Base {
 		$autoplay_delay = is_numeric( $settings['autoplay_delay'] ) ? (int) $settings['autoplay_delay'] : 6000;
 		$widget_id      = $this->get_id();
 		?>
-        <div class="black-tab black-tab--vertical <?php echo $is_autoplay ? 'black-tab--autoplay' : ''; ?>"
+        <div class="black-tabs black-tabs--vertical <?php echo $is_autoplay ? 'black-tabs--autoplay' : ''; ?>"
              <?php if ( $is_autoplay ): ?> data-delay="<?php echo esc_attr( $autoplay_delay ); ?>"<?php endif; ?>>
-            <div class="black-tab__tabs-wrapper">
-                <div class="black-tab__tabs" role="tablist" aria-orientation="horizontal">
+            <div class="black-tabs__tabs-wrapper">
+                <div class="black-tabs__tabs" role="tablist" aria-orientation="horizontal">
 					<?php foreach ( $settings['tabs_vertical'] as $index => $tab ) :
-						$tab_id    = 'bw-tab-' . $widget_id . '-' . $index;
-						$panel_id  = 'bw-tabpanel-' . $widget_id . '-' . $index;
+						$tab_id    = 'bw-tabs-' . $widget_id . '-' . $index;
+						$panel_id  = 'bw-tabs-panel-' . $widget_id . '-' . $index;
 						$is_active = $index === 0;
 						?>
-                        <div class="black-tab__tab<?php echo $is_active ? ' black-tab__tab--active' : ''; ?>"
+                        <div class="black-tabs__tab<?php echo $is_active ? ' black-tabs__tab--active' : ''; ?>"
                              role="tab"
                              id="<?php echo esc_attr( $tab_id ); ?>"
                              aria-controls="<?php echo esc_attr( $panel_id ); ?>"
@@ -2293,10 +2472,10 @@ class GSAPTab extends Widget_Base {
                 </div>
             </div>
 
-            <div class="black-tab__content-area">
+            <div class="black-tabs__content-area">
 				<?php foreach ( $settings['tabs_vertical'] as $index => $tab ) :
-					$tab_id     = 'bw-tab-' . $widget_id . '-' . $index;
-					$panel_id   = 'bw-tabpanel-' . $widget_id . '-' . $index;
+					$tab_id     = 'bw-tabs-' . $widget_id . '-' . $index;
+					$panel_id   = 'bw-tabs-panel-' . $widget_id . '-' . $index;
 					$is_active  = $index === 0;
 					$media_type = $tab['media_type'];
 					$media_url  = '';
@@ -2308,15 +2487,15 @@ class GSAPTab extends Widget_Base {
 					}
 
 					?>
-                    <div class="black-tab__panel<?php echo $is_active ? ' black-tab__panel--active' : ''; ?>"
+                    <div class="black-tabs__panel<?php echo $is_active ? ' black-tabs__panel--active' : ''; ?>"
                          role="tabpanel"
                          id="<?php echo esc_attr( $panel_id ); ?>"
                          aria-labelledby="<?php echo esc_attr( $tab_id ); ?>"
                          data-tab-panel="<?php echo esc_attr( $index ); ?>"
                          <?php echo $is_active ? '' : 'hidden'; ?>>
-                        <div class="black-tab__text-content">
+                        <div class="black-tabs__text-content">
 							<?php if ( ! empty( $tab['tab_content'] ) ) : ?>
-                                <div class="black-tab__description">
+                                <div class="black-tabs__description">
 									<?php echo wp_kses_post( $tab['tab_content'] ); ?>
                                 </div>
 							<?php endif; ?>
@@ -2324,20 +2503,20 @@ class GSAPTab extends Widget_Base {
                         </div>
 
 						<?php if ( $media_url ) : ?>
-                            <div class="black-tab__media">
+                            <div class="black-tabs__media">
 								<?php if ( ! empty( $tab['read_more_link']['url'] ) ) : ?>
                                     <a href="<?php echo esc_url( $tab['read_more_link']['url'] ); ?>"
-                                       class="black-tab__read-more"
+                                       class="black-tabs__read-more"
                                        target="<?php echo esc_attr( $tab['read_more_link']['is_external'] ? '_blank' : '_self' ); ?>"
                                        rel="<?php echo esc_attr( $tab['read_more_link']['nofollow'] ? 'nofollow' : '' ); ?>">
 										<?php
 										if ( ! empty( $tab['read_more_icon']['value'] ) ) {
-											echo '<span class="black-tab__read-more-icon">';
+											echo '<span class="black-tabs__read-more-icon">';
 											Icons_Manager::render_icon( $tab['read_more_icon'], [ 'aria-hidden' => 'true' ] );
 											echo '</span>';
 										}
 										?>
-                                        <span class="black-tab__read-more-text">
+                                        <span class="black-tabs__read-more-text">
                                             <?php echo esc_html( $tab['read_more_text'] ); ?>
                                         </span>
                                     </a>

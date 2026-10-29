@@ -17,9 +17,9 @@ use Elementor\Group_Control_Text_Shadow;
 use Elementor\Group_Control_Css_Filter;
 
 /**
- * Elementor title Widget.
+ * Typography widget.
  *
- * Elementor widget that inserts an embbedable content into the page, from any given URL.
+ * Animated typography with split-text, movement and scroll effects.
  *
  * @since 1.0.0
  */
@@ -49,7 +49,7 @@ class Typography extends \Elementor\Widget_Base {
 	/**
 	 * Get widget name.
 	 *
-	 * Retrieve button widget name.
+	 * Retrieve the typography widget name.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -63,7 +63,7 @@ class Typography extends \Elementor\Widget_Base {
 	/**
 	 * Get widget title.
 	 *
-	 * Retrieve button widget title.
+	 * Retrieve the typography widget title.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -77,7 +77,7 @@ class Typography extends \Elementor\Widget_Base {
 	/**
 	 * Get widget icon.
 	 *
-	 * Retrieve button widget icon.
+	 * Retrieve the typography widget icon.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -91,7 +91,7 @@ class Typography extends \Elementor\Widget_Base {
 	/**
 	 * Get widget categories.
 	 *
-	 * Retrieve the list of categories the button widget belongs to.
+	 * Retrieve the list of categories the typography widget belongs to.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -113,7 +113,6 @@ class Typography extends \Elementor\Widget_Base {
 
         \Modernaweb\BlackWidgets\Plugin_Options::register_gsap_scripts();
 
-        // Avoid reading instance settings during early Elementor enqueue.
         $deps = [ 'black-widgets-typography', 'GSAP', 'GSAP-ScrollTrigger' ];
         if ( \Modernaweb\BlackWidgets\Plugin_Options::is_gsap_split_ready() && wp_script_is( 'GSAP-SplitText', 'registered' ) ) {
             $deps[] = 'GSAP-SplitText';
@@ -140,34 +139,19 @@ class Typography extends \Elementor\Widget_Base {
     }
 
 	/**
-	 * Repetitive viewport animation options (legacy + SplitText when CDN ready).
+	 * Repetitive viewport animation options.
+	 * All presets fade from the Unique line outward (up and down).
 	 *
 	 * @return array<string, string>
 	 */
 	protected function get_repetitive_anim_options() {
-		$options = [
-			'fade-up' => esc_html__( 'Fade Up', 'blackwidgets' ),
-			'fade'    => esc_html__( 'Fade', 'blackwidgets' ),
-			'scale'   => esc_html__( 'Scale', 'blackwidgets' ),
-			'stagger' => esc_html__( 'Stagger Lines', 'blackwidgets' ),
+		return [
+			'fade'          => esc_html__( 'Fade', 'blackwidgets' ),
+			'fade-outward'  => esc_html__( 'Fade Outward', 'blackwidgets' ),
+			'fade-soft'     => esc_html__( 'Fade Soft', 'blackwidgets' ),
+			'fade-tight'    => esc_html__( 'Fade Tight', 'blackwidgets' ),
+			'fade-deep'     => esc_html__( 'Fade Deep', 'blackwidgets' ),
 		];
-
-		if ( \Modernaweb\BlackWidgets\Plugin_Options::is_gsap_split_ready() ) {
-			$options['mask-up']           = esc_html__( 'Mask Rise (SplitText)', 'blackwidgets' );
-			$options['chars-stagger']     = esc_html__( 'Chars Stagger', 'blackwidgets' );
-			$options['words-blur']        = esc_html__( 'Words Blur Cascade', 'blackwidgets' );
-			$options['line-wave']         = esc_html__( 'Line Wave', 'blackwidgets' );
-			$options['kinetic-slam']      = esc_html__( 'Soft Slam', 'blackwidgets' );
-			$options['kinetic-scatter']   = esc_html__( 'Soft Gather', 'blackwidgets' );
-			$options['kinetic-skew']      = esc_html__( 'Center Rise', 'blackwidgets' );
-			$options['kinetic-flip']      = esc_html__( 'Soft Focus', 'blackwidgets' );
-			$options['kinetic-echo']      = esc_html__( 'Echo Trail', 'blackwidgets' );
-			$options['kinetic-stack']     = esc_html__( 'Stack Focus', 'blackwidgets' );
-			$options['kinetic-bloom']     = esc_html__( 'Bloom', 'blackwidgets' );
-			$options['kinetic-slice']     = esc_html__( 'Slice Reveal', 'blackwidgets' );
-		}
-
-		return $options;
 	}
 
     protected function is_dynamic_content(): bool {
@@ -175,9 +159,7 @@ class Typography extends \Elementor\Widget_Base {
     }
 
 	/**
-	 * Register button widget controls.
-	 *
-	 * Adds different input fields to allow the user to change and customize the widget settings.
+	 * Register the typography widget controls.
 	 *
 	 * @since 1.0.0
 	 * @access protected
@@ -186,8 +168,6 @@ class Typography extends \Elementor\Widget_Base {
 
 		$gsap_on = \Modernaweb\BlackWidgets\Plugin_Options::is_gsap_toggle_on();
 
-		// Start
-		// Content section
 		$this->start_controls_section(
 			'content_section',
 			[
@@ -368,7 +348,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-        // Style Subtitle Tabs
         $this->start_controls_tabs('tabx');
         $this->start_controls_tab(
             'tab_style_1',
@@ -426,6 +405,7 @@ class Typography extends \Elementor\Widget_Base {
 					// 'selectors' => [
 					// 	'{{WRAPPER}} .bw-typograpgy .bw-left-top' => 'text-align: {{VALUE}};',
 					// ],
+					'render_type' => 'template',
                 ]
             );
 
@@ -542,6 +522,7 @@ class Typography extends \Elementor\Widget_Base {
 					// 'selectors' => [
 					// 	'{{WRAPPER}} .bw-typograpgy .bw-right-bottom' => 'text-align: {{VALUE}};',
 					// ],
+					'render_type' => 'template',
                 ]
             );
 
@@ -602,7 +583,7 @@ class Typography extends \Elementor\Widget_Base {
             );
 
         $this->end_controls_tab();
-        $this->end_controls_tabs(); // End Tabs
+        $this->end_controls_tabs();
 
         $this->add_control(
             'repetitive_repeat',
@@ -691,7 +672,7 @@ class Typography extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Animation Type', 'blackwidgets' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
-				'default' => 'fade-up',
+				'default' => 'fade-outward',
 				'options' => $this->get_repetitive_anim_options(),
 				'condition'  => [
 					'widget_type' => [
@@ -747,12 +728,13 @@ class Typography extends \Elementor\Widget_Base {
                 //     ],
 				// ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-typograpgy' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .bw-typograpgy' => 'text-align: {{VALUE}}; justify-content: {{VALUE}};',
+					'{{WRAPPER}} .bw-typograpgy.bw-t-2 .bw-typograpgy-with-title' => 'margin-left: 0; margin-right: 0;',
 				],
+				'render_type' => 'template',
 			]
 		);
 
-		// Vertical Title
 		$this->add_responsive_control(
 			'vertical_title_option',
 			[
@@ -910,7 +892,6 @@ class Typography extends \Elementor\Widget_Base {
 				]
 			);
 
-
 			// Enable Image Movement Animate
 			$this->add_control(
 				'text_movement',
@@ -1015,10 +996,7 @@ class Typography extends \Elementor\Widget_Base {
 		}
 
 		$this->end_controls_section();
-		// End
 
-		// Start
-		// Content section
 		$this->start_controls_section(
 			'overlay_section',
 			[
@@ -1045,7 +1023,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -1111,7 +1088,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -1122,7 +1098,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border Radius
 		$this->add_responsive_control(
 			'widget_overlay_typography_title_border_radius',
 			[
@@ -1138,10 +1113,7 @@ class Typography extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'style_section',
 			[
@@ -1150,7 +1122,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Style Subtitle Tabs
 		$this->start_controls_tabs('black_widget_1_tab');
 		$this->start_controls_tab(
 			'tab_1_normal',
@@ -1159,7 +1130,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -1177,7 +1147,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
@@ -1190,7 +1159,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
@@ -1210,7 +1178,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -1220,7 +1187,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -1250,7 +1216,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -1268,7 +1233,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'widget_hover_box_margin',
 			[
@@ -1281,7 +1245,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'widget_hover_box_padding',
 			[
@@ -1301,7 +1264,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -1311,7 +1273,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -1334,13 +1295,10 @@ class Typography extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_tab();
-		$this->end_controls_tabs(); // End Tabs
+		$this->end_controls_tabs();
 
 		$this->end_controls_section();
-        // End
 
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'typography1_section',
 			[
@@ -1408,7 +1366,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'widget_typography_title_margin',
 			[
@@ -1440,7 +1397,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -1450,7 +1406,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border Radius
 		$this->add_responsive_control(
 			'widget_typography_title_border_radius',
 			[
@@ -1463,7 +1418,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -1574,8 +1528,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -1592,10 +1544,7 @@ class Typography extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'unique_typography1_section',
 			[
@@ -1609,7 +1558,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'unique_widget_title_solid_color',
 			[
@@ -1624,7 +1572,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Typography
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -1637,7 +1584,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Text shadow
 		$this->add_group_control(
 			Group_Control_Text_Shadow::get_type(),
 			[
@@ -1654,7 +1600,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -1672,7 +1617,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'unique_widget_typography_title_margin',
 			[
@@ -1685,7 +1629,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'unique_widget_typography_title_padding',
 			[
@@ -1705,7 +1648,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -1715,7 +1657,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border Radius
 		$this->add_responsive_control(
 			'unique_widget_typography_title_border_radius',
 			[
@@ -1728,7 +1669,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -1840,7 +1780,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-
 		$this->add_control(
 			'gradient_color2',
 			[
@@ -1860,8 +1799,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -1878,10 +1815,7 @@ class Typography extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'transform_section',
 			[
@@ -1903,7 +1837,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Style Subtitle Tabs
 		$this->start_controls_tabs('transform_tabs', [
 			'condition' 	=> [
 				'transform_normal_option' 	=> [
@@ -1917,8 +1850,6 @@ class Typography extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Move', 'blackwidgets' ),
 			]
 		);
-
-		// Start normal tab content
 
 		$this->add_responsive_control(
 			'move_normal_x',
@@ -1983,8 +1914,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// end normal tab content
-
 		$this->end_controls_tab();
 		$this->start_controls_tab(
 			'transform_tab_scale',
@@ -1992,8 +1921,6 @@ class Typography extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Scale', 'blackwidgets' ),
 			]
 		);
-
-		// Start hover tab content
 
 		$this->add_responsive_control(
 			'scale_normal_x',
@@ -2100,8 +2027,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// end hover tab content
-
 		$this->end_controls_tab();
 		$this->start_controls_tab(
 			'transform_tab_rotate',
@@ -2109,8 +2034,6 @@ class Typography extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Rotate', 'blackwidgets' ),
 			]
 		);
-
-		// Start hover tab content
 
 		$this->add_responsive_control(
 			'rotate_normal_x',
@@ -2172,8 +2095,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// end hover tab content
-
 		$this->end_controls_tab();
 		$this->start_controls_tab(
 			'transform_tab_skew',
@@ -2181,8 +2102,6 @@ class Typography extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Skew', 'blackwidgets' ),
 			]
 		);
-
-		// Start hover tab content
 
 		$this->add_responsive_control(
 			'skew_normal_x',
@@ -2224,16 +2143,11 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// end hover tab content
-
 		$this->end_controls_tab();
-		$this->end_controls_tabs(); // End Tabs
+		$this->end_controls_tabs();
 
 		$this->end_controls_section();
-		// End
 
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'line_section',
 			[
@@ -2288,7 +2202,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -2312,7 +2225,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -2322,7 +2234,6 @@ class Typography extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border Radius
 		$this->add_responsive_control(
 			'widget_line_box_border_radius',
 			[
@@ -2336,10 +2247,7 @@ class Typography extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'icon_section',
 			[
@@ -2406,14 +2314,13 @@ class Typography extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
 	}
 
 	/**
-	 * Render title widget output on the frontend.
+	 * Render the typography widget output on the frontend.
 	 *
-	 * Written in PHP and used to generate the final HTML.
+	 * Outputs the widget HTML.
 	 *
 	 * @since 1.0.0
 	 * @access protected
@@ -2424,7 +2331,7 @@ class Typography extends \Elementor\Widget_Base {
 		// Variables
         $type 	                = isset($settings['widget_type'])                        ? $settings['widget_type']						: '';
 		$shape 	                = isset($settings['shape_widget'])						 ? $settings['shape_widget']					: '';
-		// Added this for XSS - Vulnerable to Cross Site Scripting (XSS)
+		// Only whitelisted tags are allowed for the title and subtitle wrappers (XSS protection).
 		$allowed_tags 			= ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'];
 		$title_tag 				= isset($settings['widget_html_tag_title'])				 ? $settings['widget_html_tag_title']			: '';
 		// Validate the HTML tag
@@ -2469,7 +2376,7 @@ class Typography extends \Elementor\Widget_Base {
         $repeat                 = isset($settings['repetitive_repeat'])                  ? $settings['repetitive_repeat']				: '';
         $other_style            = isset($settings['repetitive_repeat_other_style'])      ? $settings['repetitive_repeat_other_style']	: '';
 		$repetitive_anim_enable = isset($settings['repetitive_anim_enable'])             ? $settings['repetitive_anim_enable']			: '';
-		$repetitive_anim_type   = isset($settings['repetitive_anim_type'])               ? $settings['repetitive_anim_type']				: 'fade-up';
+		$repetitive_anim_type   = isset($settings['repetitive_anim_type'])               ? $settings['repetitive_anim_type']				: 'fade-outward';
 		$repetitive_anim_once   = isset($settings['repetitive_anim_once'])               ? $settings['repetitive_anim_once']				: 'yes';
 		// Overlay
 		$overlay				= isset($settings['overlay_section_enable'])			? $settings['overlay_section_enable']			: '';
@@ -2502,9 +2409,7 @@ class Typography extends \Elementor\Widget_Base {
 			$alignment_2_tablet ? 'tablet-' . esc_attr( $alignment_2_tablet ) : '',
 			$alignment_2_mobile ? 'mobile-' . esc_attr( $alignment_2_mobile ) : '',
 		] ) );
-		// Transform Option
 		$normal_transform		= isset($settings['transform_normal_option'])			? $settings['transform_normal_option']			: '';
-		//Transform Styles
 		$move_normal_x			= isset($settings['move_normal_x'])						? $settings['move_normal_x']					: '0px';
 		$move_normal_y			= isset($settings['move_normal_y'])						? $settings['move_normal_y']					: '0px';
 		$move_normal_z			= isset($settings['move_normal_z'])						? $settings['move_normal_z']					: '0px';
@@ -2526,29 +2431,22 @@ class Typography extends \Elementor\Widget_Base {
 			$text_movement			= $settings['text_movement'];
 			$text_movement2			= $settings['text_movement2'];
 		}
-		//Transform Normal Styles
-		// Normal Move
 		$translatex 			= isset( $move_normal_x["size"] ) 						? $move_normal_x["size"] . $move_normal_x["unit"] : '';
 		$translatey 			= isset( $move_normal_y["size"] ) 						? $move_normal_y["size"] . $move_normal_y["unit"] : '';
 		$translatez 			= isset( $move_normal_z["size"] ) 						? $move_normal_z["size"] . $move_normal_z["unit"] : '';
 		$translate3d 			= 'translate3d(' . $translatex . ', ' . $translatey . ', ' . $translatez . ')';
-		// Normal Scale
 		$scalex 				= isset( $scale_normal_x["size"] ) 						? $scale_normal_x["size"] : '';
 		$scaley 				= isset( $scale_normal_y["size"] ) 						? $scale_normal_y["size"] : '';
 		$scalez 				= isset( $scale_normal_z["size"] ) 						? $scale_normal_z["size"] : '';
 		$scale3dx 				= isset( $scale_normal_z["size"] ) 						? '-webkit-transform-style: preserve-3d; transform-style: preserve-3d;' : '';
 		$scale3d 				= 'scale3d(' . $scalex . ', ' . $scaley . ', ' . $scalez . ')';
-		// Normal Rotate
 		$rotatex 				= isset( $rotate_normal_x["size"] ) 					? 'rotateX(' . $rotate_normal_x["size"] . $rotate_normal_x["unit"] . ')' : '';
 		$rotatey 				= isset( $rotate_normal_y["size"] ) 					? 'rotateY(' . $rotate_normal_y["size"] . $rotate_normal_y["unit"] . ')' : '';
 		$rotatez 				= isset( $rotate_normal_z["size"] ) 					? 'rotateZ(' . $rotate_normal_z["size"] . $rotate_normal_z["unit"] . ')' : '';
-		// Normal Skew
 		$skewx 					= isset( $skew_normal_x["size"] ) 						? $skew_normal_x["size"] . $skew_normal_x["unit"] : '';
 		$skewy 					= isset( $skew_normal_y["size"] ) 						? $skew_normal_y["size"] . $skew_normal_y["unit"] : '';
 		$skew 					= 'skew(' . $skewx . ', ' . $skewy . ')';
-		// Normal Self perspective
 		$perspective 			= isset( $perspective["size"] ) 						? 'perspective:' . $perspective["size"] . $perspective["unit"] . '; -webkit-perspective:' . $perspective["size"] . $perspective["unit"] . ';': '';
-		// Normal Child perspective
 		$perspective_child 		= isset( $perspective_child["size"] ) 					? 'perspective(' . $perspective_child["size"] . $perspective_child["unit"] . ')': '';
         // Typography Z Index (integer-only to prevent CSS/HTML breakout).
 		$z_index = '';
@@ -2569,7 +2467,6 @@ class Typography extends \Elementor\Widget_Base {
 
 		echo '<style>' . esc_html( $normal_transform_style . ' ' . $z_index . ' ' . $unique_z_index ) . '</style>';
 
-		// Render
 		$overlay_class = ( $overlay === 'overlay_enable' ) ? ' bw-has-overlay' : '';
 		$editor_attr   = '';
 		if ( class_exists( '\Elementor\Plugin' ) ) {

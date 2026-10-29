@@ -7,8 +7,7 @@
     box-sizing: border-box;
 }
 
-/* Scroll Text: fill Elementor wrapper so Advanced padding/bg/border wrap the text,
-   and SplitText line FX (Mask Rise / Clip Wipe) can measure a real width. */
+/* Scroll Text */
 .bw-typograpgy.bw-scroll-text,
 .bw-typograpgy.bw-scroll-text .bw-typograpgy-wrap,
 .bw-typograpgy.bw-scroll-text .bw-typograpgy-animate {
@@ -42,11 +41,6 @@
     text-decoration: none;
 }
 
-/*
- * Hide pending scroll FX until typography.js attaches [data-bw-fx].
- * Without this the frontend paints visible text, then GSAP sets opacity:0,
- * waits for the delay and animates (flash then hide).
- */
 .bw-typograpgy-animate[data-bw-splitting]:not([data-bw-fx]):not([data-bw-no-animate]) {
     visibility: hidden;
 }
@@ -120,10 +114,6 @@
     white-space: nowrap;
 }
 
-.bw-typograpgy-animate .bw-char {
-    text-transform: none;
-}
-
 .bw-typograpgy-animate span.char,
 .bw-typograpgy-animate span.word {
     display: inline-block;
@@ -134,6 +124,8 @@
     display: inline-block;
     position: relative;
     overflow: hidden;
+    /* A wrapper holding only a space must keep its width, or words collide. */
+    white-space: break-spaces;
 }
 
 
@@ -211,7 +203,7 @@
 
 .bw-typograpgy-wrap em .bw-code-em.run path {
     opacity: 1;
-    /* beginning of L */
+    /* Line drawing start state: the path is hidden until the animation runs. */
     stroke-dasharray: 10000;
     stroke-dashoffset: 10000;
     /* animation: bw-animated 3s linear forwards 1s; */
@@ -407,41 +399,9 @@
     will-change: transform, opacity;
 }
 
-/* SplitText / mask helpers for new Awwwards-style FX (opt-in types only) */
-.bw-typograpgy-animate.bw-split-ready,
-.bw-typograpgy-repetitive-wrap.bw-split-ready {
+/* SplitText / mask helpers for Type 4 (On Scroll) */
+.bw-typograpgy-animate.bw-split-ready {
     visibility: visible;
-}
-
-/* Kinetic repetitive animations */
-.bw-typograpgy-repetitive-wrap.bw-kinetic-apple,
-.bw-typograpgy-repetitive-wrap[data-bw-repetitive-anim^="kinetic-"] {
-    overflow: visible;
-}
-
-.bw-kinetic-echo {
-    position: relative;
-    display: block;
-    width: max-content;
-    max-width: 100%;
-    margin-inline: auto;
-}
-
-.bw-kinetic-echo .bw-kinetic-echo-main {
-    position: relative;
-    z-index: 5;
-}
-
-.bw-kinetic-echo .bw-kinetic-echo-layer {
-    pointer-events: none;
-    white-space: nowrap;
-    color: inherit;
-    -webkit-text-fill-color: currentColor;
-}
-
-.bw-typograpgy-repetitive-wrap[data-bw-repetitive-anim="kinetic-slice"] .bw-typograpgy-repetitive,
-.bw-typograpgy-repetitive-wrap[data-bw-repetitive-anim="kinetic-skew"] .bw-line {
-    overflow: hidden;
 }
 
 .bw-typograpgy-animate .bw-line,
@@ -463,13 +423,23 @@
     will-change: transform, opacity, filter;
 }
 
-.bw-typograpgy-animate[data-bw-bw-scroll-e-9] .bw-line,
-.bw-typograpgy-animate[data-bw-bw-scroll-e-10] .bw-line,
-.bw-typograpgy-animate[data-bw-bw-scroll-e-11] .bw-line,
-.bw-typograpgy-animate[data-bw-bw-scroll-e-12] .bw-line {
+/* SplitText owns the clipping wrapper via mask:'lines' and sizes it from the
+   real font metrics. The old hand-rolled mask (overflow:hidden plus a negative
+   bottom margin) left a line box a few pixels tall, so a late or failed tween
+   showed a horizontal slice of the glyphs instead of the text. */
+.bw-typograpgy-animate .bw-line-mask,
+.bw-typograpgy-repetitive .bw-line-mask {
+    display: block;
     overflow: hidden;
-    padding-bottom: 0.12em;
-    margin-bottom: -0.12em;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.bw-typograpgy-animate[data-bw-bw-scroll-e-9] .bw-line,
+.bw-typograpgy-animate[data-bw-bw-scroll-e-12] .bw-line {
+    /* The mask already clips - clipping again here would cut descenders. */
+    overflow: visible;
 }
 
 .bw-typograpgy-animate[data-bw-bw-scroll-e-12] .bw-line {
@@ -686,4 +656,3 @@
         justify-content: center;
     }
 }
-

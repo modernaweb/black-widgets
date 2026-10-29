@@ -1,16 +1,18 @@
 .bw-interactive-link-box {
     position: relative;
-    /* Must stay visible - hover preview is fixed/follow and must not clip. */
     overflow: visible;
     margin: 0;
-    padding: 30px;
-    border-radius: 14px;
-    background: linear-gradient(145deg, #1e1e1e, #292929);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+    padding: 28px 32px;
+    border-radius: 16px;
+    background: #161616;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
 }
 
 .bw-il-menu {
     list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     margin: 0;
     padding: 0;
 }
@@ -18,18 +20,18 @@
 .bw-il-menu li {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    margin-block: 20px;
-    padding: 18px 22px;
+    margin: 0;
+    padding: 18px 20px;
     border-radius: 12px;
-    background-color: rgba(255, 255, 255, 0.03);
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     cursor: pointer;
-    transition: background 0.3s ease, transform 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .bw-il-menu li:hover {
     background-color: rgba(255, 255, 255, 0.08);
-    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.12);
 }
 
 .bw-il-menu li a {
@@ -37,40 +39,46 @@
     color: inherit;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
+    min-width: 0;
 }
 
 .bw-il-title {
     margin: 0;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 600;
+    line-height: 1.25;
     color: #fff;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.02em;
     transition: color 0.3s ease;
 }
 
 .bw-il-menu li:hover .bw-il-title {
-    color: #00d4ff;
+    color: #7ee0ff;
 }
 
 .bw-il-description {
     margin: 0;
     font-size: 14px;
-    color: #bbb;
-    font-style: italic;
-    opacity: 0;
-    transform: translateX(10px);
-    pointer-events: none;
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    line-height: 1.55;
+    color: #9a9a9a;
+    font-style: normal;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    transition: color 0.3s ease;
 }
 
 .bw-il-menu li:hover .bw-il-description {
-    opacity: 1;
-    transform: translateX(0);
-    pointer-events: auto;
+    color: #c7c7c7;
 }
 
-/* Viewport-follow preview layer (often portaled to <body> by JS). */
+.bw-il-menu a:focus-visible {
+    outline: 2px solid #7ee0ff;
+    outline-offset: 4px;
+    border-radius: 8px;
+}
+
 .bw-il-image-container {
     position: fixed;
     inset: 0;
@@ -85,8 +93,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: min(280px, 42vw);
-    max-width: 420px;
+    width: 280px;
     height: auto;
     overflow: hidden;
     border-radius: 14px;
@@ -103,10 +110,7 @@
 .bw-il-hover-image {
     display: block;
     width: 100%;
-    /* Resolves to "auto" (full, uncropped image) while the wrapper's height
-       is auto; becomes a real 100% once a fixed height is set via Style
-       controls, letting object-fit keep the full image visible either way. */
-    height: 100%;
+    height: auto;
     object-fit: contain;
     object-position: center center;
     opacity: 0;
@@ -115,18 +119,27 @@
 }
 
 @media (max-width: 767px) {
-    .bw-il-hover-wrapper {
-        width: min(200px, 48vw);
+    .bw-interactive-link-box {
+        padding: 18px 16px;
     }
 
-    .bw-il-image-container {
-        display: none;
+    .bw-il-menu li {
+        padding: 14px 16px;
+    }
+
+    .bw-il-title {
+        font-size: 18px;
+    }
+
+    .bw-il-hover-wrapper {
+        width: 200px;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
     .bw-il-menu li,
     .bw-il-menu li:hover,
+    .bw-il-title,
     .bw-il-description,
     .bw-il-menu li:hover .bw-il-description {
         transition: none;

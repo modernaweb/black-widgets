@@ -16,9 +16,9 @@ use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Text_Shadow;
 
 /**
- * Elementor title Widget.
+ * Flip box widget.
  *
- * Elementor widget that inserts an embbedable content into the page, from any given URL.
+ * Flip box with a front and a back face, optionally in 3D.
  *
  * @since 1.0.0
  */
@@ -32,7 +32,7 @@ class FlipIx extends \Elementor\Widget_Base {
     /**
      * Get widget name.
      *
-     * Retrieve button widget name.
+     * Retrieve the flip box widget name.
      *
      * @since 1.0.0
      * @access public
@@ -46,7 +46,7 @@ class FlipIx extends \Elementor\Widget_Base {
     /**
      * Get widget title.
      *
-     * Retrieve button widget title.
+     * Retrieve the flip box widget title.
      *
      * @since 1.0.0
      * @access public
@@ -60,7 +60,7 @@ class FlipIx extends \Elementor\Widget_Base {
     /**
      * Get widget icon.
      *
-     * Retrieve button widget icon.
+     * Retrieve the flip box widget icon.
      *
      * @since 1.0.0
      * @access public
@@ -74,7 +74,7 @@ class FlipIx extends \Elementor\Widget_Base {
     /**
      * Get widget categories.
      *
-     * Retrieve the list of categories the button widget belongs to.
+     * Retrieve the list of categories the flip box widget belongs to.
      *
      * @since 1.0.0
      * @access public
@@ -94,17 +94,13 @@ class FlipIx extends \Elementor\Widget_Base {
     }
 
     /**
-     * Register button widget controls.
-     *
-     * Adds different input fields to allow the user to change and customize the widget settings.
+     * Register the flip box widget controls.
      *
      * @since 1.0.0
      * @access protected
      */
     protected function register_controls() {
 
-        // Start
-        // Content section
         $this->start_controls_section(
             'content_section',
             [
@@ -163,7 +159,7 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        $this->start_controls_tabs('flipbox_content_tab'); // Start Tabs
+        $this->start_controls_tabs('flipbox_content_tab');
         $this->start_controls_tab(
             'face_tab_content',
             [
@@ -210,7 +206,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -258,7 +253,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -344,7 +338,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -390,13 +383,10 @@ class FlipIx extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_tab();
-        $this->end_controls_tabs(); // End Tabs
+        $this->end_controls_tabs();
 
         $this->end_controls_section();
-        // End
 
-        // Start
-        // Style section
         $this->start_controls_section(
             'style_section',
             [
@@ -405,7 +395,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'widget_box_margin',
             [
@@ -418,7 +407,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'widget_box_padding',
             [
@@ -431,7 +419,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -471,7 +458,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -481,7 +467,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border Radius
         $this->add_control(
             'widget_box_border_radius', //param_name
             [
@@ -494,7 +479,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -505,10 +489,7 @@ class FlipIx extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
-        // Start
-        // Main Text Typography
         $this->start_controls_section(
             'style_section_icon_typo',
             [
@@ -517,7 +498,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'style_main_icon_color',
             [
@@ -533,7 +513,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -580,7 +559,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'style_main_icon_margin',
             [
@@ -594,7 +572,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'style_main_icon_padding',
             [
@@ -615,7 +592,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -625,7 +601,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border Radius
         $this->add_control(
             'style_main_icon_border_radius', //param_name
             [
@@ -639,7 +614,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -650,10 +624,7 @@ class FlipIx extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
-        // Start
-        // Main Text Typography
         $this->start_controls_section(
             'style_section_main_typo',
             [
@@ -662,7 +633,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'style_main_title_color',
             [
@@ -677,7 +647,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Typography
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
@@ -690,7 +659,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Text shadow
         $this->add_group_control(
             Group_Control_Text_Shadow::get_type(),
             [
@@ -707,7 +675,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -725,7 +692,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'style_main_title_margin',
             [
@@ -738,7 +704,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'style_main_title_padding',
             [
@@ -758,7 +723,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -768,7 +732,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border Radius
         $this->add_control(
             'style_main_title_border_radius', //param_name
             [
@@ -781,7 +744,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -792,10 +754,7 @@ class FlipIx extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
-        // Start
-        // Main Text Typography
         $this->start_controls_section(
             'style_section_paragraph_typo',
             [
@@ -804,7 +763,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'style_main_paragraph_color',
             [
@@ -819,7 +777,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Typography
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
@@ -832,7 +789,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Text shadow
         $this->add_group_control(
             Group_Control_Text_Shadow::get_type(),
             [
@@ -849,7 +805,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -867,7 +822,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'style_main_paragraph_margin',
             [
@@ -880,7 +834,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'style_main_paragraph_padding',
             [
@@ -900,7 +853,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -910,7 +862,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border Radius
         $this->add_control(
             'style_main_paragraph_border_radius', //param_name
             [
@@ -923,7 +874,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -934,10 +884,7 @@ class FlipIx extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
-        // Start
-        // Main Text Typography
         $this->start_controls_section(
             'style_section_back_icon_typo',
             [
@@ -946,7 +893,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'style_main_back_icon_color',
             [
@@ -962,7 +908,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -1009,7 +954,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'style_main_back_icon_margin',
             [
@@ -1023,7 +967,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'style_main_back_icon_padding',
             [
@@ -1044,7 +987,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -1054,7 +996,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border Radius
         $this->add_control(
             'style_main_back_icon_border_radius', //param_name
             [
@@ -1068,7 +1009,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -1079,10 +1019,7 @@ class FlipIx extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
-        // Start
-        // Main Text Typography
         $this->start_controls_section(
             'style_section_back_main_typo',
             [
@@ -1091,7 +1028,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'style_main_back_title_color',
             [
@@ -1106,7 +1042,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Typography
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
@@ -1119,7 +1054,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Text shadow
         $this->add_group_control(
             Group_Control_Text_Shadow::get_type(),
             [
@@ -1136,7 +1070,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -1154,7 +1087,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'style_main_back_title_margin',
             [
@@ -1167,7 +1099,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'style_main_back_title_padding',
             [
@@ -1187,7 +1118,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -1197,7 +1127,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border Radius
         $this->add_control(
             'style_main_back_title_border_radius', //param_name
             [
@@ -1210,7 +1139,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -1221,10 +1149,7 @@ class FlipIx extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
-        // Start
-        // Main Text Typography
         $this->start_controls_section(
             'style_section_back_paragraph_typo',
             [
@@ -1233,7 +1158,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'style_main_back_paragraph_color',
             [
@@ -1248,7 +1172,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Typography
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
@@ -1261,7 +1184,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Text shadow
         $this->add_group_control(
             Group_Control_Text_Shadow::get_type(),
             [
@@ -1278,7 +1200,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -1296,7 +1217,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'style_main_back_paragraph_margin',
             [
@@ -1309,7 +1229,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'style_main_back_paragraph_padding',
             [
@@ -1329,7 +1248,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -1339,7 +1257,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border Radius
         $this->add_control(
             'style_main_back_paragraph_border_radius', //param_name
             [
@@ -1352,7 +1269,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -1363,10 +1279,7 @@ class FlipIx extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
-        // Start
-        // Main Text Typography
         $this->start_controls_section(
             'style_section_back_button_typo',
             [
@@ -1375,22 +1288,18 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'style_main_back_button_color',
             [
                 'label' => esc_html__( 'Color', 'blackwidgets' ),
                 'type' => Controls_Manager::COLOR,
-                'global' => [
-                    'default' => Global_Colors::COLOR_PRIMARY,
-                ],
+                'default' => '#FFFFFF',
                 'selectors' => [
                     '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description .bw-button' => 'color: {{VALUE}}',
                 ],
             ]
         );
 
-        // Typography
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
@@ -1400,10 +1309,29 @@ class FlipIx extends \Elementor\Widget_Base {
                     'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
                 ],
                 'selector' => '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description .bw-button',
+                'fields_options' => [
+                    'font_weight' => [
+                        'default' => '700',
+                    ],
+                    'text_transform' => [
+                        'default' => 'uppercase',
+                    ],
+                    'letter_spacing' => [
+                        'default' => [
+                            'unit' => 'px',
+                            'size' => 2,
+                        ],
+                    ],
+                    'line_height' => [
+                        'default' => [
+                            'unit' => 'em',
+                            'size' => 1.4,
+                        ],
+                    ],
+                ],
             ]
         );
 
-        // Text shadow
         $this->add_group_control(
             Group_Control_Text_Shadow::get_type(),
             [
@@ -1420,7 +1348,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -1490,7 +1417,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'style_main_back_button_margin',
             [
@@ -1503,13 +1429,20 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'style_main_back_button_padding',
             [
                 'label' => esc_html__( 'Padding', 'blackwidgets' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
+                'default' => [
+                    'top' => '9',
+                    'right' => '32',
+                    'bottom' => '9',
+                    'left' => '32',
+                    'unit' => 'px',
+                    'isLinked' => false,
+                ],
                 'selectors' => [
                     '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description .bw-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
@@ -1523,7 +1456,6 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -1533,20 +1465,26 @@ class FlipIx extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border Radius
         $this->add_control(
             'style_main_back_button_border_radius', //param_name
             [
                 'label' 		=> esc_html__( 'Border Radius', 'blackwidgets' ),
                 'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', 'em', '%' ],
+                'default' => [
+                    'top' => '100',
+                    'right' => '100',
+                    'bottom' => '100',
+                    'left' => '100',
+                    'unit' => 'px',
+                    'isLinked' => true,
+                ],
                 'selectors' => [
                     '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description .bw-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -1557,14 +1495,13 @@ class FlipIx extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
     }
 
     /**
-     * Render title widget output on the frontend.
+     * Render the flip box widget output on the frontend.
      *
-     * Written in PHP and used to generate the final HTML.
+     * Outputs the widget HTML.
      *
      * @since 1.0.0
      * @access protected

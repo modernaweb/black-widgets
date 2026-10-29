@@ -1,50 +1,14 @@
 jQuery(document).ready(function() {
     'use strict';
 
-    let setupScrollTrigger;
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-        gsap.registerPlugin(ScrollTrigger);
-
-        setupScrollTrigger = function() {
-            const sections = document.querySelectorAll('.bw-section');
-
-            sections.forEach(section => {
-                if (section.scrollTriggerSet) return;
-
-                const elements = gsap.utils.toArray('.elementor', section);
-
-                if (elements.length > 0) {
-                    gsap.to(elements, {
-                        xPercent: -100 * (elements.length - 1),
-                        ease: "none",
-                        scrollTrigger: {
-                            trigger: section,
-                            pin: true,
-                            scrub: 1,
-                            snap: directionalSnap(1 / (elements.length - 1)),
-                            // Set the end based on the number of elements
-                            end: "+=" + (section.offsetWidth * elements.length),
-                        }
-                    });
-
-                    // Mark this section as having the ScrollTrigger set, to avoid reapplying
-                    section.scrollTriggerSet = true;
-                }
-            });
-        }
-
-        // Helper function for directional snap
-        function directionalSnap(increment) {
-            const snapFunc = gsap.utils.snap(increment);
-            return (raw, self) => {
-                const n = snapFunc(raw);
-                return Math.abs(n - raw) < 1e-4 || (n < raw) === self.direction < 0
-                    ? n
-                    : self.direction < 0
-                    ? n - increment
-                    : n + increment;
-            };
-        }
+    var horizontalPreviewTimer = null;
+    function horizontalPreview(scope) {
+        window.clearTimeout(horizontalPreviewTimer);
+        horizontalPreviewTimer = window.setTimeout(function () {
+            if (typeof window.bwInitHorizontalScrolling === 'function') {
+                window.bwInitHorizontalScrolling(scope || document);
+            }
+        }, 120);
     }
 
     function applyTiltEffect($elements) {
@@ -55,8 +19,12 @@ jQuery(document).ready(function() {
     }
 
 
-    function iconBoxAnimate() {
-        const objectSelect = jQuery('.bw-iconbox-svg-animate');
+    function iconBoxAnimate(scope) {
+        if (typeof window.bwInitIconBox === 'function') {
+            window.bwInitIconBox(jQuery(scope || document));
+            return;
+        }
+        const objectSelect = jQuery(scope || document).find('.bw-iconbox-svg-animate');
         if (!objectSelect.length) {
             return;
         }
@@ -68,6 +36,10 @@ jQuery(document).ready(function() {
         } else {
             objectSelect.removeClass('run');
         }
+    }
+
+    function bootIconBox() {
+        iconBoxAnimate(document);
     }
 
     function imageParallax() {
@@ -122,8 +94,6 @@ jQuery(document).ready(function() {
         }
     }
 
-    // Match the node itself or its descendants. Elementor often injects the widget
-    // root (or the animate element) as the added node; .find() alone misses that.
     function matchesIn(node, selector) {
         var $node = jQuery(node);
         return $node.filter(selector).add($node.find(selector));
@@ -140,22 +110,20 @@ jQuery(document).ready(function() {
     const observer = new MutationObserver(function(mutationsList) {
         mutationsList.forEach(function(mutation) {
             mutation.addedNodes.forEach(function(node) {
-                if (node.nodeType === 1) { // Ensure it's an element node
+                if (node.nodeType === 1) {
                     let $newElements = matchesIn(node, '.bw-button-box.modern.m-4 .btn-wrapper');
                     if ($newElements.length && typeof jQuery.fn.tilt === 'function') {
-                        applyTiltEffect($newElements); // Apply tilt effect to new elements
+                        applyTiltEffect($newElements);
                     }
 
-                    if (typeof setupScrollTrigger === 'function' ) {
-                        $newElements = matchesIn(node, '.bw-section');
-                        if ($newElements.length) {
-                            setupScrollTrigger();
-                        }
-                    }
-
-                    $newElements = matchesIn(node, '.bw-iconbox-svg-animate');
+                    $newElements = matchesIn(node, '.bw-section, .bw-horizontal-section, .elementor-widget-b_gsap_horizontal_scrolling');
                     if ($newElements.length) {
-                        iconBoxAnimate();
+                        horizontalPreview(node);
+                    }
+
+                    $newElements = matchesIn(node, '.bw-iconbox-svg-animate, .bw-iconbox[data-bw-anim], .elementor-widget-b_icon_box');
+                    if ($newElements.length) {
+                        iconBoxAnimate(node);
                     }
 
                     $newElements = matchesIn(node, '.bw-parallax');
@@ -184,15 +152,21 @@ jQuery(document).ready(function() {
 
     observer.observe(document.body, { childList: true, subtree: true });
 
-    // Boot typography / scroll-text FX for widgets already on the canvas.
-    // element_ready can race before typography.js / SplitText is parsed.
+    // Boot typography / scroll-text FX for widgets already on the canvas - element_ready can race before typography.js / SplitText is parsed.
     function bootTypographyAndCarousel() {
         typographyAnimate(document);
         imageCarousel(document);
     }
     bootTypographyAndCarousel();
+    bootIconBox();
     setTimeout(bootTypographyAndCarousel, 200);
+    setTimeout(bootIconBox, 200);
     setTimeout(bootTypographyAndCarousel, 600);
+    setTimeout(bootIconBox, 800);
     setTimeout(bootTypographyAndCarousel, 1500);
     setTimeout(bootTypographyAndCarousel, 3000);
+    horizontalPreview(document);
+    setTimeout(function () {
+        horizontalPreview(document);
+    }, 200);
 });

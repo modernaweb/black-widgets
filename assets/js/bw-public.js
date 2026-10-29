@@ -158,8 +158,7 @@
       targets.accentTexts.length;
 
     if (!pending) {
-      // Idle, but stay bound: Fade / Title Animate widgets can still arrive from
-      // the Elementor editor, a popup, or lazy-loaded content.
+      // Idle, but stay bound: Fade / Title Animate widgets can still arrive from the Elementor editor, a popup, or lazy-loaded content.
       hasPendingTargets = false;
       return;
     }
@@ -215,16 +214,11 @@
       return;
     }
 
-    // Widgets whose markup feeds collectTargets(). Editor re-renders replace the
-    // node, so the fresh copy has no .visible class and animates again.
     ['b_fade', 'b_TitleAnimate'].forEach(function (widget) {
       elementorFrontend.hooks.addAction('frontend/element_ready/' + widget + '.default', rescan);
     });
   });
 
-  // First pass for elements already in view (no scroll required), plus a safety
-  // net for markup that arrives without element_ready - loop grids, popups, or a
-  // theme that loads Elementor's frontend bundle after this file.
   onScroll();
   $window.on('load', rescan);
 })(jQuery);

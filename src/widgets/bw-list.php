@@ -15,9 +15,9 @@ use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
 
 /**
- * Elementor title Widget.
+ * List widget.
  *
- * Elementor widget that inserts an embbedable content into the page, from any given URL.
+ * List of repeatable items with content and style controls.
  *
  * @since 1.0.0
  */
@@ -95,15 +95,11 @@ class ListItems extends \Elementor\Widget_Base {
 	/**
 	 * Register list widget controls.
 	 *
-	 * Adds different input fields to allow the user to change and customize the widget settings.
-	 *
 	 * @since 1.0.0
 	 * @access protected
 	 */
 	protected function register_controls() {
 
-		// Start
-		// Content section
 		$this->start_controls_section(
 			'content_section',
 			[
@@ -191,10 +187,7 @@ class ListItems extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-		// End
 
-		// Start
-		// Style section
 		$this->start_controls_section(
 			'style_section',
 			[
@@ -203,7 +196,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -214,7 +206,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -224,7 +215,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -246,7 +236,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'widget_box_margin',
 			[
@@ -259,7 +248,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'widget_box_padding',
 			[
@@ -273,9 +261,7 @@ class ListItems extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-        // End
 
-		// Style section
 		$this->start_controls_section(
 			'style_section_list_items',
 			[
@@ -393,7 +379,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -404,7 +389,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'list_items_margin',
 			[
@@ -417,7 +401,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'list_items_padding',
 			[
@@ -430,7 +413,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -440,7 +422,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border Radius
 		$this->add_control(
 			'list_items_border_radius', //param_name
 			[
@@ -453,7 +434,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -464,9 +444,7 @@ class ListItems extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
-        // End
 
-		// Style section
 		$this->start_controls_section(
 			'style_section_icon',
 			[
@@ -475,7 +453,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Style Subtitle Tabs
 		$this->start_controls_tabs('black_widget_1_tab');
 		$this->start_controls_tab(
 			'tab_1_normal',
@@ -484,7 +461,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'icon_color',
 			[
@@ -520,7 +496,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -531,7 +506,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'icon_margin',
 			[
@@ -544,7 +518,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'icon_padding',
 			[
@@ -557,7 +530,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -567,7 +539,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border Radius
 		$this->add_control(
 			'icon_border_radius', //param_name
 			[
@@ -580,7 +551,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -600,7 +570,6 @@ class ListItems extends \Elementor\Widget_Base {
 		);
 
 
-		// Color
 		$this->add_control(
 			'icon_hover_color',
 			[
@@ -636,7 +605,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -647,7 +615,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'icon_hover_margin',
 			[
@@ -660,7 +627,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'icon_hover_padding',
 			[
@@ -673,7 +639,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -683,7 +648,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border Radius
 		$this->add_control(
 			'icon_hover_border_radius', //param_name
 			[
@@ -696,7 +660,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -707,12 +670,10 @@ class ListItems extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_tab();
-		$this->end_controls_tabs(); // End Tabs		
+		$this->end_controls_tabs();
 
 		$this->end_controls_section();
-        // End
 
-		// Style section
 		$this->start_controls_section(
 			'style_section_text',
 			[
@@ -721,7 +682,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Style Subtitle Tabs
 		$this->start_controls_tabs('black_widget_2_tab');
 		$this->start_controls_tab(
 			'tab_3_normal',
@@ -730,7 +690,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Typography
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -743,7 +702,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'text_color',
 			[
@@ -758,7 +716,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
         );
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -769,7 +726,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'text_margin',
 			[
@@ -782,7 +738,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'text_padding',
 			[
@@ -795,7 +750,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -805,7 +759,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border Radius
 		$this->add_control(
 			'text_border_radius', //param_name
 			[
@@ -818,7 +771,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -838,7 +790,6 @@ class ListItems extends \Elementor\Widget_Base {
 		);
 
 
-		// Typography
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -851,7 +802,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Color
 		$this->add_control(
 			'text_hover_color',
 			[
@@ -866,7 +816,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
         );
 
-		// Background
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -877,7 +826,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Margin
 		$this->add_responsive_control(
 			'text_hover_margin',
 			[
@@ -890,7 +838,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Padding
 		$this->add_responsive_control(
 			'text_hover_padding',
 			[
@@ -903,7 +850,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -913,7 +859,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Border Radius
 		$this->add_control(
 			'text_hover_border_radius', //param_name
 			[
@@ -926,7 +871,6 @@ class ListItems extends \Elementor\Widget_Base {
 			]
 		);
 
-		// Box shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -938,17 +882,16 @@ class ListItems extends \Elementor\Widget_Base {
 
 
 		$this->end_controls_tab();
-		$this->end_controls_tabs(); // End Tabs		
+		$this->end_controls_tabs();
 
 		$this->end_controls_section();
-        // End
 
 	}
 
 	/**
-	 * Render title widget output on the frontend.
+	 * Render the list widget output on the frontend.
 	 *
-	 * Written in PHP and used to generate the final HTML.
+	 * Outputs the widget HTML.
 	 *
 	 * @since 1.0.0
 	 * @access protected
@@ -970,7 +913,6 @@ class ListItems extends \Elementor\Widget_Base {
 			'sup'    => [],
 		];
 
-		// Render
         if ( $settings['list'] ) {
 			echo '<div class="bw-list">';
 			foreach (  $settings['list'] as $item ) {

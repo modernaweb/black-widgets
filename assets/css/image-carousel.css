@@ -1,11 +1,4 @@
 /* Black Image Carousel - shared base */
-
-/* Wraps the Swiper root (.bw-swiper) plus, when Arrows/Pagination Position is
-   set to "Outside", the nav/pagination elements rendered as its siblings.
-   Swiper's own bundled CSS forces "overflow: hidden" on .swiper, so anything
-   meant to be visible below the slider must live outside that element - this
-   wrapper is the shared ancestor both placements inherit spacing/color
-   CSS variables from. */
 .bw-swiper-outer {
 	display: flex;
 	flex-direction: column;
@@ -25,13 +18,10 @@
 	overflow: hidden;
 	width: 100%;
 	min-height: var(--bw-swiper-height, 450px);
-	/* Prefer horizontal swipe; keep vertical page scroll until a drag starts. */
 	touch-action: pan-y;
-	/* Avoid browser scroll-anchoring jumps when loop clones mount/unmount. */
 	overflow-anchor: none;
 }
 
-/* Before Swiper boots (Elementor preview race), keep slides visible in a row. */
 .bw-swiper:not(.swiper-initialized) > .bw-swiper-wrapper,
 .bw-swiper:not(.swiper-initialized) > .swiper-wrapper {
 	display: flex;
@@ -47,9 +37,7 @@
 
 .bw-swiper .bw-swiper-wrapper,
 .bw-swiper .swiper-wrapper {
-	/* Soft ease-out, less snap. Better for centered Editorial / Peek Focus. */
 	transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-	/* Keep swipes on the GPU; avoid layout thrash while dragging. */
 	will-change: transform;
 }
 
@@ -63,16 +51,16 @@
 	touch-action: none;
 }
 
-/* Linked slides use display:contents anchors - disable hit-testing mid-drag so
-   focus/click cannot scroll the page or navigate after a swipe. */
 .bw-swiper.bw-is-dragging .bw-swiper-slide-link,
 .bw-swiper.bw-is-dragging a {
 	pointer-events: none !important;
 }
 
+/* Template slides used to allow text selection, but that (plus live images
+   inside Elementor templates) starts a native drag and latches Swiper. */
 .bw-swiper .has-template {
-	-webkit-user-select: text;
-	user-select: text;
+	-webkit-user-select: none;
+	user-select: none;
 }
 
 .bw-swiper.bw-is-dragging .has-template,
@@ -85,8 +73,16 @@
 	height: var(--bw-swiper-height, 450px);
 	overflow: hidden;
 	position: relative;
-	/* Avoid browser scroll-anchoring jumps when loop clones mount/unmount. */
 	overflow-anchor: none;
+}
+
+/* A native drag inside a slide makes the browser fire pointercancel, which Swiper
+   ignores outside Safari, leaving the track stuck to the pointer. */
+.bw-swiper-slide,
+.bw-swiper-slide a,
+.bw-swiper-slide img,
+.bw-swiper-slide-link {
+	-webkit-user-drag: none;
 }
 
 .bw-swiper-mask {
@@ -114,11 +110,24 @@
 	min-height: 100%;
 }
 
-/* Wraps mask + caption when a per-slide Link is set. "display: contents" keeps
-   it out of the box tree so it never breaks Type 1's flex column layout or the
-   overlay positioning used by the other types; focus is still shown below. */
+/* Same hit-testing as image slides: media must not start a native HTML5 drag.
+   Hover/click still land on the wrapping box or link. */
+.bw-swiper-slide.has-template img,
+.bw-swiper-slide.has-template video,
+.bw-swiper-slide.has-template svg,
+.bw-swiper-slide.has-template picture,
+.bw-swiper-slide.has-template canvas {
+	-webkit-user-drag: none;
+	user-select: none;
+	pointer-events: none;
+}
+
 .bw-swiper-slide-link {
-	display: contents;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	width: 100%;
+	height: 100%;
 	color: inherit;
 	text-decoration: none;
 	cursor: pointer;
@@ -161,14 +170,13 @@
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 	color: #111;
 	font: inherit;
+	z-index: 12;
 	cursor: pointer;
 	appearance: none;
 	-webkit-appearance: none;
 	transition: opacity 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Buttons always render their own icon now (default or custom) - never the
-   Swiper icon-font ::after, regardless of type. */
 .bw-swiper-button-prev::after,
 .bw-swiper-button-next::after {
 	content: none;
@@ -206,8 +214,6 @@
 	color: inherit;
 }
 
-/* Custom uploaded arrow SVG, rendered as a CSS mask so it still respects the
-   Arrows Icon Color control (a plain <img> can't be recolored this way). */
 .bw-swiper-arrow-icon--mask {
 	background-color: currentColor;
 	-webkit-mask-image: var(--bw-mask-url);
@@ -220,9 +226,6 @@
 	mask-position: center;
 }
 
-/* Navigation Arrows: "Outside" position - rendered as siblings of .bw-swiper
-   (never as its descendants) so Swiper's own overflow:hidden on the slider
-   root can't clip them. Laid out as a small centered row below the slider. */
 .bw-swiper-outer--nav-outside > .bw-swiper-nav-outside {
 	display: flex;
 	align-items: center;
@@ -241,10 +244,6 @@
 	transform: none;
 }
 
-/* Pagination shared - unscoped by design (no ".bw-swiper" ancestor requirement)
-   so the exact same look applies whether the pagination element renders
-   inside the slider (default) or outside it. */
-
 .bw-swiper-pagination {
 	display: flex;
 	align-items: center;
@@ -253,8 +252,6 @@
 	bottom: 12px;
 }
 
-/* Pagination: "Outside" position override - back into normal document flow,
-   below the slider, instead of Swiper's default absolute overlay. */
 .bw-swiper-outer--pagination-outside > .bw-swiper-pagination {
 	position: static;
 	margin-top: 14px;
@@ -294,8 +291,6 @@
 	fill: var(--bw-swiper-bullet-active, #111);
 }
 
-/* Custom dot icon: rendered as a CSS mask (not <img>) so the bullet color
-   variables recolor it for both inactive/active states. */
 .bw-swiper-pagination .bw-swiper-pagination-bullet--icon {
 	background: transparent;
 }
@@ -346,11 +341,6 @@
 	margin-inline-start: var(--bw-swiper-fraction-gap, 0.35em);
 }
 
-/* Pagination Style: Progress Bar - minimal hairline default.
-   Swiper only sizes `.swiper-horizontal > .swiper-pagination-progressbar`
-   (direct child). Outside placement never matches that, so we size it ourselves.
-   PHP also adds `.bw-swiper-pagination--progressbar` so styles work before init. */
-
 .bw-swiper-outer .bw-swiper-pagination.bw-swiper-pagination--progressbar,
 .bw-swiper-outer .bw-swiper-pagination.swiper-pagination-progressbar,
 .bw-swiper-pagination.bw-swiper-pagination--progressbar,
@@ -374,7 +364,6 @@
 	pointer-events: none;
 }
 
-/* Inside slider: short hairline, inset from edges, not a full-bleed bar. */
 .bw-swiper > .bw-swiper-pagination.bw-swiper-pagination--progressbar,
 .bw-swiper > .bw-swiper-pagination.swiper-pagination-progressbar {
 	position: absolute !important;
@@ -403,7 +392,6 @@
 	transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Outside placement: centered short rule under the slider. */
 .bw-swiper-outer--pagination-outside > .bw-swiper-pagination.bw-swiper-pagination--progressbar,
 .bw-swiper-outer--pagination-outside > .bw-swiper-pagination.swiper-pagination-progressbar {
 	position: relative !important;
@@ -419,7 +407,6 @@
 	pointer-events: none;
 }
 
-/* Never let Swiper's lock class hide a progress bar we intentionally showed. */
 .bw-swiper-outer .bw-swiper-pagination.bw-swiper-pagination--progressbar.swiper-pagination-lock,
 .bw-swiper-outer .bw-swiper-pagination.swiper-pagination-progressbar.swiper-pagination-lock {
 	display: block !important;
@@ -444,6 +431,12 @@
 	object-fit: contain;
 }
 
+.bw-swiper-type1 .bw-swiper-slide.has-image .bw-swiper-slide-link {
+	flex: 1 1 auto;
+	height: auto;
+	min-height: 100%;
+}
+
 .bw-swiper-type1 .bw-swiper-caption {
 	flex: 0 0 auto;
 	margin-top: 0.5em;
@@ -460,9 +453,6 @@
 	object-fit: cover;
 }
 
-/* Subtle "Ken Burns" zoom on the active slide only. Restarts each time a
-   slide becomes active because the animation only matches while
-   .swiper-slide-active is present. */
 @keyframes bw-carousel-kenburns {
 	from {
 		transform: scale(1);
@@ -560,7 +550,6 @@
 	position: relative !important;
 }
 
-/* Ring-style dot (only shown if Pagination Style is manually set to Dots). */
 .bw-swiper-type3 .bw-swiper-pagination .swiper-pagination-bullet {
 	position: relative;
 	background: transparent;
@@ -607,28 +596,20 @@
 	opacity: 1;
 }
 
-/* Center Slide Emphasis - only engaged by JS when there is a genuine single
-   centered slide (rounded slidesPerView is odd); otherwise the neutral
-   scale(1) rule above applies, so an even slide count never half-enlarges
-   two "middle" slides. */
 .bw-swiper-type4.bw-swiper-center-single .swiper-slide-active {
 	transform: scale(var(--bw-peek-center-scale, 1.1));
 }
 
-/* Progress-driven Peek Focus: JS sets inline transform/opacity every frame
-   (including while dragging). Disable class CSS so it cannot snap mid-drag. */
 .bw-swiper-type4.bw-swiper-peek-progress .bw-swiper-slide,
 .bw-swiper-type4.bw-swiper-peek-progress .bw-swiper-slide-active,
 .bw-swiper-type4.bw-swiper-peek-progress .swiper-slide-active,
 .bw-swiper-type4.bw-swiper-peek-progress.bw-swiper-center-single .swiper-slide-active,
 .bw-swiper-type4.bw-swiper-peek-progress.bw-is-dragging .bw-swiper-slide {
 	transition: none !important;
-	/* Inline styles from JS win; keep a safe fallback before first paint. */
 	transform: scale(0.92);
 	opacity: 0.45;
 }
 
-/* Give scaled-up center slide room so neighbors are not clipped to "half slides". */
 .bw-swiper-type4.bw-swiper-center-single {
 	padding-block: 0;
 	padding-inline: 4%;
@@ -731,14 +712,74 @@
 		font-size: 1.15em;
 		padding: 16px 18px;
 	}
+
+	.bw-swiper-type4.bw-swiper-center-single {
+		padding-inline: 0;
+	}
+
+	.bw-swiper-type4 .bw-swiper-slide:not(.swiper-slide-active) .bw-swiper-caption {
+		opacity: 0;
+		visibility: hidden;
+	}
+
+	.bw-swiper-type4 .bw-swiper-caption {
+		padding-bottom: 28px;
+	}
+
+	.bw-swiper-type4 .bw-swiper-button-prev {
+		left: var(--bw-type4-arrow-inset, 18%);
+	}
+
+	.bw-swiper-type4 .bw-swiper-button-next {
+		right: var(--bw-type4-arrow-inset, 18%);
+	}
+
+	.bw-swiper-type4.swiper-rtl .bw-swiper-button-prev {
+		left: auto;
+		right: var(--bw-type4-arrow-inset, 18%);
+	}
+
+	.bw-swiper-type4.swiper-rtl .bw-swiper-button-next {
+		right: auto;
+		left: var(--bw-type4-arrow-inset, 18%);
+	}
+
+	.bw-swiper-type4 .bw-swiper-slide {
+		transform: scale(0.96);
+		opacity: 0.72;
+	}
+
+	.bw-swiper-type4.bw-swiper-center-single .swiper-slide-active {
+		transform: scale(1.04);
+	}
+
+	.bw-swiper-type4.bw-swiper-peek-progress .bw-swiper-slide,
+	.bw-swiper-type4.bw-swiper-peek-progress .bw-swiper-slide-active,
+	.bw-swiper-type4.bw-swiper-peek-progress .swiper-slide-active,
+	.bw-swiper-type4.bw-swiper-peek-progress.bw-swiper-center-single .swiper-slide-active,
+	.bw-swiper-type4.bw-swiper-peek-progress.bw-is-dragging .bw-swiper-slide {
+		transform: scale(0.96);
+		opacity: 0.72;
+	}
 }
 
-/* Few items (1-2): keep full-bleed slide, no awkward half-empty track */
+@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+	.bw-swiper-type4 .bw-swiper-slide,
+	.bw-swiper-type4.bw-swiper-center-single .swiper-slide-active,
+	.bw-swiper-type4.bw-swiper-peek-progress .bw-swiper-slide,
+	.bw-swiper-type4.bw-swiper-peek-progress .swiper-slide-active,
+	.bw-swiper-type4.bw-swiper-peek-progress.bw-swiper-center-single .swiper-slide-active,
+	.bw-swiper-type4.bw-swiper-peek-progress.bw-is-dragging .bw-swiper-slide {
+		transition: none;
+		transform: none;
+		opacity: 1;
+	}
+}
+
 .bw-swiper.bw-swiper--few .bw-swiper-slide {
 	max-width: 100%;
 }
 
-/* Single unique slide: no Peek Focus dim/scale (nothing to peek) */
 .bw-swiper.bw-swiper--few[data-slide-count="1"].bw-swiper-type4 .bw-swiper-slide {
 	transform: none;
 	opacity: 1;

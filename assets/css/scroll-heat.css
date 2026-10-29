@@ -2,24 +2,33 @@
  * Black Scroll Heat (Type 1)
  */
 
+.bw-hw,
 .mws-ew-hw {
 	--mws-ew-hw-dim: #d7d8d4;
 	--mws-ew-hw-lit: #16171b;
 	--mws-ew-hw-scrub: 0.35;
 	--mws-ew-hw-stagger: 0.06;
+	--bw-hw-dim: var(--mws-ew-hw-dim);
+	--bw-hw-lit: var(--mws-ew-hw-lit);
+	--bw-hw-scrub: var(--mws-ew-hw-scrub);
+	--bw-hw-stagger: var(--mws-ew-hw-stagger);
 
 	position: relative;
 	width: 100%;
 	box-sizing: border-box;
-	color: var(--mws-ew-hw-lit);
+	color: var(--bw-hw-lit, var(--mws-ew-hw-lit));
 }
 
+.bw-hw *,
+.bw-hw *::before,
+.bw-hw *::after,
 .mws-ew-hw *,
 .mws-ew-hw *::before,
 .mws-ew-hw *::after {
 	box-sizing: border-box;
 }
 
+.bw-hw__text,
 .mws-ew-hw__text {
 	margin: 0;
 	max-width: 760px;
@@ -33,25 +42,29 @@
 	hyphens: auto;
 }
 
+.bw-hw__word,
 .mws-ew-hw__word {
-	color: var(--mws-ew-hw-dim);
+	color: var(--bw-hw-dim, var(--mws-ew-hw-dim));
 	will-change: color;
 }
 
+.bw-hw.is-ready .bw-hw__word,
 .mws-ew-hw.is-ready .mws-ew-hw__word {
-	/* SplitText spans inherit dim until scrub lights them. */
-	color: var(--mws-ew-hw-dim);
+	color: var(--bw-hw-dim, var(--mws-ew-hw-dim));
 }
 
+.bw-hw.is-reduced .bw-hw__word,
+.bw-hw.is-reduced .bw-hw__text,
 .mws-ew-hw.is-reduced .mws-ew-hw__word,
 .mws-ew-hw.is-reduced .mws-ew-hw__text {
-	color: var(--mws-ew-hw-lit);
+	color: var(--bw-hw-lit, var(--mws-ew-hw-lit));
 	will-change: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {
+	.bw-hw__word,
 	.mws-ew-hw__word {
-		color: var(--mws-ew-hw-lit) !important;
+		color: var(--bw-hw-lit, var(--mws-ew-hw-lit)) !important;
 		transition: none !important;
 		will-change: auto;
 	}

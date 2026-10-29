@@ -14,9 +14,9 @@ use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Text_Shadow;
 
 /**
- * Elementor title Widget.
+ * Button widget.
  *
- * Elementor widget that inserts an embbedable content into the page, from any given URL.
+ * Button with optional GSAP hover effects (marquee, swap, arrow, flip).
  *
  * @since 1.0.0
  */
@@ -88,14 +88,11 @@ class Button extends \Elementor\Widget_Base {
     }
 
     public function get_style_depends() {
-        // Avoid reading instance settings during early Elementor enqueue.
         return [ 'black-widgets-button', 'black-widgets-button-effects' ];
     }
 
     public function get_script_depends() {
-        // Always register effects script; JS only activates on effect-type markup.
         $this->register_effects_script();
-
         return [ 'black-widgets-button', 'black-widgets-button-effects' ];
     }
 
@@ -150,14 +147,14 @@ class Button extends \Elementor\Widget_Base {
     }
 
     /**
-     * GSAP core available via admin CDN1.
+     * Whether GSAP core is enabled in the plugin CDN settings.
      */
     private function is_gsap_core_enabled() {
         return \Modernaweb\BlackWidgets\Plugin_Options::has_gsap_core();
     }
 
     /**
-     * SplitText available via admin CDN3.
+     * Whether SplitText is enabled in the plugin CDN settings.
      */
     private function is_splittext_enabled() {
         return \Modernaweb\BlackWidgets\Plugin_Options::has_gsap_core()
@@ -194,15 +191,11 @@ class Button extends \Elementor\Widget_Base {
     /**
      * Register button widget controls.
      *
-     * Adds different input fields to allow the user to change and customize the widget settings.
-     *
      * @since 1.0.0
      * @access protected
      */
     protected function register_controls() {
 
-        // Start
-        // Content section
         $this->start_controls_section(
             'content_section',
             [
@@ -246,7 +239,7 @@ class Button extends \Elementor\Widget_Base {
 
         $current_type = $this->get_current_type();
 
-        // New GSAP effects - offer when CDN ready; keep current effect visible if already saved.
+        // GSAP effects are offered only when the CDN is ready; a saved effect stays visible.
         if ( $this->is_gsap_core_enabled() ) {
             $type_options['effect_marquee'] = $effect_labels['effect_marquee'];
             $type_options['effect_swap']    = $effect_labels['effect_swap'];
@@ -428,10 +421,7 @@ class Button extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // End
 
-        // Start
-        // Content section
         $this->start_controls_section(
             'custom_section',
             [
@@ -492,13 +482,8 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-
-
         $this->end_controls_section();
-        // End
 
-        // Start
-        // Style section
         $this->start_controls_section(
             'style_section',
             [
@@ -507,7 +492,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Style Subtitle Tabs
         $this->start_controls_tabs('black_widget_1_tab');
         $this->start_controls_tab(
             'tab_1_normal',
@@ -516,7 +500,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -551,7 +534,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -603,7 +585,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'widget_box_margin',
             [
@@ -616,7 +597,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'widget_box_padding',
             [
@@ -641,7 +621,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -651,7 +630,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -681,7 +659,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -716,7 +693,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Background
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -768,7 +744,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Margin
         $this->add_responsive_control(
             'widget_hover_box_margin',
             [
@@ -781,7 +756,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'widget_hover_box_padding',
             [
@@ -804,7 +778,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Border
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -814,7 +787,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Box shadow
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -837,13 +809,10 @@ class Button extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_tab();
-        $this->end_controls_tabs(); // End Tabs
+        $this->end_controls_tabs();
 
         $this->end_controls_section();
-        // End
 
-        // Start
-        // Style section
         $this->start_controls_section(
             'typography1_section',
             [
@@ -852,7 +821,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Style Subtitle Tabs
         $this->start_controls_tabs('black_widget_2_tab');
         $this->start_controls_tab(
             'tab_2_normal',
@@ -861,7 +829,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'widget_btn_solid_color',
             [
@@ -974,7 +941,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Typography
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
@@ -994,7 +960,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'widget_btn_hover_solid_color',
             [
@@ -1031,7 +996,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Typography
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
@@ -1043,13 +1007,11 @@ class Button extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_tab();
-        $this->end_controls_tabs(); // End Tabs
+        $this->end_controls_tabs();
 
         $this->end_controls_section();
-        // End
 
 
-        // Start
         // Typography section
         $this->start_controls_section(
             'icon_section',
@@ -1064,7 +1026,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Style Subtitle Tabs
         $this->start_controls_tabs('black_widget_3_tab');
         $this->start_controls_tab(
             'tab_3_normal',
@@ -1093,7 +1054,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'style_icon_color_normal',
             [
@@ -1110,7 +1070,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Text shadow
         $this->add_group_control(
             Group_Control_Text_Shadow::get_type(),
             [
@@ -1121,7 +1080,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'style_icon_text_padding_normal',
             [
@@ -1135,7 +1093,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'style_wrapper_padding_normal',
             [
@@ -1192,7 +1149,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Color
         $this->add_control(
             'style_icon_color_hover',
             [
@@ -1209,7 +1165,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Text shadow
         $this->add_group_control(
             Group_Control_Text_Shadow::get_type(),
             [
@@ -1220,7 +1175,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'style_icon_text_padding_hover',
             [
@@ -1234,7 +1188,6 @@ class Button extends \Elementor\Widget_Base {
             ]
         );
 
-        // Padding
         $this->add_responsive_control(
             'style_wrapper_padding_hover',
             [
@@ -1263,7 +1216,7 @@ class Button extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_tab();
-        $this->end_controls_tabs(); // End Tabs
+        $this->end_controls_tabs();
 
 
         $this->end_controls_section();
@@ -1271,9 +1224,9 @@ class Button extends \Elementor\Widget_Base {
     }
 
     /**
-     * Render title widget output on the frontend.
+     * Render the button widget output on the frontend.
      *
-     * Written in PHP and used to generate the final HTML.
+     * Outputs the widget HTML.
      *
      * @since 1.0.0
      * @access protected
@@ -1299,11 +1252,10 @@ class Button extends \Elementor\Widget_Base {
         $alignment 				= isset( $settings['widget_alignment'] ) ? $settings['widget_alignment'] : '';
 
         $custom_icon_position	= isset($settings['custom_icon_position'])		? $settings['custom_icon_position']		: '';
-        // custom_btn_show lives in a section conditioned on widget_type=custom - often unset.
+
         $enable_custom_shape	= isset( $settings['custom_btn_show'] ) && 'enablenow' === $settings['custom_btn_show'] ? 'enablenow' : '';
         $widget_id				= $this->get_id();
 
-        // Render
         echo '<div class="bw-button-wrapper"><div class="bw-button-box ' . esc_attr( $type ) . ' ' . esc_attr( $modern_type ) . ' ' . esc_attr( $fancy_type ) . ' ' . esc_attr( $noise_type ) . ' ' . esc_attr( $abstract_type ) . ' ' . esc_attr( $alignment ) . '">';
 
         if ( $this->is_effect_type( $type ) ) {
@@ -1555,10 +1507,8 @@ class Button extends \Elementor\Widget_Base {
     }
 
     /**
-     * Returns an inline SVG arrow icon used in buttons or UI elements.
+     * Returns the inline SVG markup of a right-pointing arrow.
      *
-     * This method outputs a right-pointing arrow icon as an inline SVG.
-     * The SVG is lightweight and styled with fixed width and height.
      *
      * @return string SVG HTML markup as a string.
      */

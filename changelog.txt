@@ -1,0 +1,6 @@
+= 1.4.0 — 2026-09 =
+- Fixed: SVG upload sanitizer bypass (case-insensitive extension check and content sniffing for uploads)
+- Improved: Remote references are stripped from uploaded SVG files
+- Fixed: XML declaration no longer output in inline SVG markup
+- Fixed: Nested SVG elements are kept intact in the Black Trigger (GSAP) widget
+

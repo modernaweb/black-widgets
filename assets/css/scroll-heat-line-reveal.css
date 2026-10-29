@@ -1,111 +1,207 @@
 /* Black Scroll Heat - Line Reveal (Type 3) */
 
+.bw-lr,
 .mws-ew-lr {
 	--mws-ew-lr-index-w: 120px;
 	--mws-ew-lr-gap: 24px;
 	--mws-ew-lr-eyebrow-w: 280px;
 	--mws-ew-lr-eyebrow-gap: 16px;
+	--mws-ew-lr-first-h: auto;
+	--bw-lr-index-w: var(--mws-ew-lr-index-w);
+	--bw-lr-gap: var(--mws-ew-lr-gap);
+	--bw-lr-eyebrow-w: var(--mws-ew-lr-eyebrow-w);
+	--bw-lr-eyebrow-gap: var(--mws-ew-lr-eyebrow-gap);
+	--bw-lr-first-h: var(--mws-ew-lr-first-h);
 	position: relative;
 	display: block;
 	width: 100%;
 	max-width: 100%;
+	overflow-x: hidden;
 }
 
+.bw-lr__inner,
 .mws-ew-lr__inner {
 	display: flex;
-	gap: var(--mws-ew-lr-gap);
+	gap: var(--bw-lr-gap, var(--mws-ew-lr-gap));
 	align-items: flex-start;
 }
 
+.bw-lr__index,
 .mws-ew-lr__index {
-	flex: 0 0 var(--mws-ew-lr-index-w);
-	width: var(--mws-ew-lr-index-w);
+	flex: 0 0 var(--bw-lr-index-w, var(--mws-ew-lr-index-w));
+	width: var(--bw-lr-index-w, var(--mws-ew-lr-index-w));
+	display: flex;
+	align-items: center;
+	height: var(--bw-lr-first-h, var(--mws-ew-lr-first-h));
 	line-height: 1;
+	box-sizing: border-box;
 }
 
+.bw-lr__content,
 .mws-ew-lr__content {
+	position: relative;
 	flex: 1 1 auto;
 	min-width: 0;
 }
 
+/*
+ * Eyebrow is absolutely positioned (out of flow) so the SplitText line masks
+ * (overflow:hidden block boxes) can never be pushed below it. The first line
+ * is indented in JS by the eyebrow's real width; later lines run full-width
+ * underneath.
+ */
+.bw-lr__eyebrow,
 .mws-ew-lr__eyebrow {
-	float: inline-start;
-	width: var(--mws-ew-lr-eyebrow-w);
-	max-width: 100%;
-	padding-inline-end: var(--mws-ew-lr-eyebrow-gap);
-	height: 1lh;
+	position: absolute;
+	inset-inline-start: 0;
+	top: 0;
+	z-index: 1;
+	/* Hug the eyebrow text. The slider is a max width, not an empty column. */
+	box-sizing: content-box;
+	width: auto;
+	max-width: min(var(--bw-lr-eyebrow-w, var(--mws-ew-lr-eyebrow-w)), 100%);
+	padding-inline-end: var(--bw-lr-eyebrow-gap, var(--mws-ew-lr-eyebrow-gap));
+	height: var(--bw-lr-first-h, var(--mws-ew-lr-first-h));
 	display: flex;
 	align-items: center;
-	box-sizing: border-box;
 }
 
-@supports not (height: 1lh) {
-	.mws-ew-lr__eyebrow {
-		height: 1.4em;
-	}
+/*
+ * Optional fixed eyebrow column: lock the eyebrow to the configured width so
+ * several stacked Line Reveal widgets keep their paragraphs on one vertical
+ * column, instead of each hugging its own eyebrow text.
+ */
+.bw-lr.is-eyebrow-fixed .bw-lr__eyebrow,
+.mws-ew-lr.is-eyebrow-fixed .mws-ew-lr__eyebrow {
+	width: min(var(--bw-lr-eyebrow-w, var(--mws-ew-lr-eyebrow-w)), 100%);
+	max-width: none;
 }
 
-@supports not (float: inline-start) {
-	.mws-ew-lr__eyebrow {
-		float: left;
-	}
-
-	[dir="rtl"] .mws-ew-lr__eyebrow {
-		float: right;
-	}
-}
-
+.bw-lr__title,
 .mws-ew-lr__title {
+	--mws-ew-lr-indent: 0px;
+	--bw-lr-indent: var(--mws-ew-lr-indent);
 	display: block;
 	margin: 0;
 	overflow-wrap: break-word;
-	word-break: break-word;
 }
 
-.mws-ew-lr[data-mws-ew-lr]:not(.is-ready) .mws-ew-lr__title {
+/*
+ * In-flow spacer so SplitText measures line 1 short and lines 2+ full width.
+ * text-indent cannot do this: after each extracted line the leftover text
+ * inherits indent again and every line becomes a short column.
+ */
+.bw-lr__title::before,
+.mws-ew-lr__title::before {
+	content: '';
+	float: inline-start;
+	width: var(--bw-lr-indent, var(--mws-ew-lr-indent));
+	height: 1em;
+	pointer-events: none;
+}
+
+.bw-lr__line-mask,
+.bw-at__line-mask,
+.bw-lr__line,
+.bw-at__line,
+.mws-ew-lr__line-mask,
+.mws-ew-at__line-mask,
+.mws-ew-lr__line,
+.mws-ew-at__line {
+	text-indent: 0;
+}
+
+.bw-lr[data-bw-line-reveal]:not(.is-ready) .bw-lr__title,
+.mws-ew-lr[data-bw-line-reveal]:not(.is-ready) .mws-ew-lr__title {
 	visibility: hidden;
 }
 
+.bw-lr.is-ready .bw-lr__title,
 .mws-ew-lr.is-ready .mws-ew-lr__title {
 	visibility: visible;
 }
 
+.bw-lr__line-mask,
+.bw-at__line-mask,
 .mws-ew-lr__line-mask,
 .mws-ew-at__line-mask {
 	display: block;
 	overflow: hidden;
+	box-sizing: border-box;
 }
 
+.bw-lr__line,
 .mws-ew-lr__line {
 	display: block;
 }
 
+.bw-lr.is-playing .bw-lr__line,
+.bw-lr.is-playing .bw-lr__index,
+.bw-lr.is-playing .bw-lr__eyebrow,
 .mws-ew-lr.is-playing .mws-ew-lr__line,
 .mws-ew-lr.is-playing .mws-ew-lr__index,
 .mws-ew-lr.is-playing .mws-ew-lr__eyebrow {
 	will-change: transform, opacity;
 }
 
+.bw-lr.is-complete .bw-lr__line,
+.bw-lr.is-complete .bw-lr__index,
+.bw-lr.is-complete .bw-lr__eyebrow,
 .mws-ew-lr.is-complete .mws-ew-lr__line,
 .mws-ew-lr.is-complete .mws-ew-lr__index,
 .mws-ew-lr.is-complete .mws-ew-lr__eyebrow {
 	will-change: auto;
 }
 
+.bw-lr.is-compact .bw-lr__inner,
+.bw-lr.is-stacked .bw-lr__inner,
+.mws-ew-lr.is-compact .mws-ew-lr__inner,
+.mws-ew-lr.is-stacked .mws-ew-lr__inner {
+	display: block;
+}
+
+.bw-lr.is-compact .bw-lr__index,
+.bw-lr.is-stacked .bw-lr__index,
+.mws-ew-lr.is-compact .mws-ew-lr__index,
+.mws-ew-lr.is-stacked .mws-ew-lr__index {
+	flex: none;
+	width: auto;
+	height: auto;
+	margin-bottom: 16px;
+}
+
+.bw-lr.is-stacked .bw-lr__eyebrow,
+.mws-ew-lr.is-stacked .mws-ew-lr__eyebrow {
+	position: static;
+	inset-inline-start: auto;
+	width: auto;
+	max-width: 100%;
+	height: auto;
+	display: block;
+	padding-inline-end: 0;
+	margin-bottom: 20px;
+}
+
 @media (max-width: 767px) {
+	.bw-lr__inner,
 	.mws-ew-lr__inner {
 		display: block;
 	}
 
+	.bw-lr__index,
 	.mws-ew-lr__index {
 		flex: none;
 		width: auto;
+		height: auto;
 		margin-bottom: 16px;
 	}
 
+	.bw-lr__eyebrow,
 	.mws-ew-lr__eyebrow {
-		float: none;
+		position: static;
+		inset-inline-start: auto;
 		width: auto;
+		max-width: 100%;
 		height: auto;
 		display: block;
 		padding-inline-end: 0;
@@ -114,13 +210,16 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+	.bw-lr,
+	.bw-lr *,
 	.mws-ew-lr,
 	.mws-ew-lr * {
 		animation: none !important;
 		transition: none !important;
 	}
 
-	.mws-ew-lr[data-mws-ew-lr] .mws-ew-lr__title {
+	.bw-lr[data-bw-line-reveal] .bw-lr__title,
+	.mws-ew-lr[data-bw-line-reveal] .mws-ew-lr__title {
 		visibility: visible !important;
 	}
 }

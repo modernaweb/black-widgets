@@ -34,7 +34,7 @@ use Modernaweb\BlackWidgets\Widgets\{
     TextAnimate,
     GSAPTrigger,
     GSAPHorizontalScrolling,
-    GSAPTab};
+    GSAPTabs};
 use enshrined\svgSanitize\Sanitizer;
 
 final class Main {
@@ -50,10 +50,6 @@ final class Main {
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_public_styles' ] );
         add_action('elementor/frontend/after_register_scripts', [ $this, 'register_widget_scripts' ] );
         add_action('elementor/frontend/after_register_styles', [ $this, 'register_widget_styles']);
-
-        // Registered outside is_admin() on purpose: WP-CLI and cron auto-updates
-        // never load the Admin class, and that is exactly when nobody is around to
-        // trigger the Elementor CSS rebuild from wp-admin.
         add_action( 'upgrader_process_complete', 'black_widgets_clear_css_cache_after_update', 10, 2 );
 
         if ( is_admin() ) {
@@ -63,28 +59,23 @@ final class Main {
     }
 
     public function init() {
-        // Check if Elementor installed and activated
         if ( ! did_action( 'elementor/loaded' ) ) {
             add_action( 'admin_notices', [ $this, 'admin_notice_missing_main_plugin' ] );
             return;
         }
 
-        // Check for required Elementor version
         if ( ! version_compare( ELEMENTOR_VERSION, self::MINIMUM_ELEMENTOR_VERSION, '>=' ) ) {
             add_action( 'admin_notices', [ $this, 'admin_notice_minimum_elementor_version' ] );
             return;
         }
 
-        // Check for required PHP version
         if ( version_compare( PHP_VERSION, self::MINIMUM_PHP_VERSION, '<' ) ) {
             add_action( 'admin_notices', [ $this, 'admin_notice_minimum_php_version' ] );
             return;
         }
 
-        // Add Plugin actions
         add_action( 'elementor/widgets/register', [ $this, 'init_widgets' ] );
 
-        // Add Category
         add_action( 'elementor/elements/categories_registered', [ $this, 'add_elementor_widget_categories' ] );
 
         add_action( 'elementor/editor/after_enqueue_styles', function() {
@@ -102,8 +93,6 @@ final class Main {
         } );
 
         add_action('elementor/editor/before_enqueue_scripts', function() {
-            // Ensure handles exist for the editor chrome; do not force-load on every page.
-            // Widget get_script_depends() loads bw-public/anime only when needed (preview/front).
             if ( ! wp_script_is( 'black-widgets-anime', 'registered' ) ) {
                 wp_register_script( 'black-widgets-anime', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/libraries/anime.js', [ 'jquery' ], BLACK_WIDGETS_VERSION, true );
             }
@@ -122,15 +111,9 @@ final class Main {
             if ( ! wp_script_is( 'bw-public', 'registered' ) ) {
                 wp_register_script( 'bw-public', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/bw-public.js', [ 'jquery', 'black-widgets-anime' ], BLACK_WIDGETS_VERSION, true );
             }
-            if ( ! wp_script_is( 'black-widgets-swiper', 'registered' ) ) {
-                wp_register_script( 'black-widgets-swiper', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/libraries/swiper-bundle.min.js', [], BLACK_WIDGETS_VERSION, true );
-                wp_register_style( 'black-widgets-swiper', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/libraries/swiper-bundle.min.css', [], BLACK_WIDGETS_VERSION );
-            }
+            Plugin_Options::register_swiper_assets();
 
-            // Widget get_script_depends() only covers widgets that were already on the
-            // canvas when the preview document was rendered. Dragging a fresh Scroll
             // Text / Image Carousel in afterwards would otherwise leave the page
-            // without its init script until the editor is reloaded.
             $this->enqueue_preview_widget_assets();
 
             $deps = [ 'black-widgets-tilt', 'black-widgets-simple-parallax', 'black-widgets-anime' ];
@@ -148,6 +131,9 @@ final class Main {
             }
             if ( wp_script_is( 'black-widgets-swiper', 'registered' ) ) {
                 $deps[] = 'black-widgets-swiper';
+            }
+            if ( wp_script_is( 'black-widgets-icon-box', 'registered' ) ) {
+                $deps[] = 'black-widgets-icon-box';
             }
 
             wp_enqueue_script( 'black-widgets-preview', BLACK_WIDGETS_PLUGIN_URL . 'assets/admin/js/black-widgets-preview.js', $deps, BLACK_WIDGETS_VERSION, true );
@@ -175,7 +161,6 @@ final class Main {
         }
 
         // Always enqueue SplitText in the preview when the CDN option is on.
-        // Mask Rise / Clip Wipe need it even if typography.js was registered earlier.
         if ( Plugin_Options::is_gsap_split_ready() && wp_script_is( 'GSAP-SplitText', 'registered' ) ) {
             wp_enqueue_script( 'GSAP-SplitText' );
         }
@@ -188,7 +173,25 @@ final class Main {
             wp_register_script( 'black-widgets-image-carousel', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/image-carousel.js', [ 'jquery', 'black-widgets-swiper' ], BLACK_WIDGETS_VERSION, true );
         }
 
-        foreach ( [ 'black-widgets-typography', 'black-widgets-image-carousel' ] as $handle ) {
+        $ibox_css = BLACK_WIDGETS_PLUGIN_PATH . 'assets/css/icon-box.css';
+        $ibox_js  = BLACK_WIDGETS_PLUGIN_PATH . 'assets/js/icon-box.js';
+        $ibox_css_ver = BLACK_WIDGETS_VERSION . ( is_readable( $ibox_css ) ? '.' . (int) filemtime( $ibox_css ) : '' );
+        $ibox_js_ver  = BLACK_WIDGETS_VERSION . ( is_readable( $ibox_js ) ? '.' . (int) filemtime( $ibox_js ) : '' );
+
+        if ( ! wp_style_is( 'black-widgets-icon-box', 'registered' ) ) {
+            wp_register_style( 'black-widgets-icon-box', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/icon-box.css', [], $ibox_css_ver );
+        }
+
+        if ( ! wp_script_is( 'black-widgets-icon-box', 'registered' ) ) {
+            $ibox_deps = [ 'jquery' ];
+            if ( Plugin_Options::is_gsap_ready() ) {
+                $ibox_deps[] = 'GSAP';
+                $ibox_deps[] = 'GSAP-ScrollTrigger';
+            }
+            wp_register_script( 'black-widgets-icon-box', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/icon-box.js', $ibox_deps, $ibox_js_ver, true );
+        }
+
+        foreach ( [ 'black-widgets-typography', 'black-widgets-image-carousel', 'black-widgets-icon-box' ] as $handle ) {
             if ( wp_style_is( $handle, 'registered' ) ) {
                 wp_enqueue_style( $handle );
             }
@@ -197,12 +200,21 @@ final class Main {
             }
         }
 
-        // Reliable signal for typography.js: preview iframe has no usable scroll,
-        // and elementorFrontend.isEditMode() is not always true on first paint.
+        // Reliable signal for typography.js.
         if ( wp_script_is( 'black-widgets-typography', 'registered' ) ) {
             wp_localize_script(
                 'black-widgets-typography',
                 'bwTypographyEnv',
+                [
+                    'isEditor' => true,
+                ]
+            );
+        }
+
+        if ( wp_script_is( 'black-widgets-icon-box', 'registered' ) ) {
+            wp_localize_script(
+                'black-widgets-icon-box',
+                'bwIconBoxEnv',
                 [
                     'isEditor' => true,
                 ]
@@ -218,7 +230,16 @@ final class Main {
     }
 
     public function sanitize_uploaded_svg( $file ) {
-        if ( $file['type'] !== 'image/svg+xml' && pathinfo( $file['name'], PATHINFO_EXTENSION ) !== 'svg' ) {
+        $extension = strtolower( pathinfo( $file['name'], PATHINFO_EXTENSION ) );
+        $is_svg    = in_array( $extension, array( 'svg', 'svgz' ), true ) || $file['type'] === 'image/svg+xml';
+
+        // Name and type come from the client, so also sniff the first 4 KB for an <svg tag.
+        if ( ! $is_svg ) {
+            $head   = file_get_contents( $file['tmp_name'], false, null, 0, 4096 );
+            $is_svg = is_string( $head ) && stripos( $head, '<svg' ) !== false;
+        }
+
+        if ( ! $is_svg ) {
             return $file;
         }
 
@@ -228,7 +249,13 @@ final class Main {
         }
 
         $dirty_svg = file_get_contents( $file['tmp_name'] );
+        if ( $dirty_svg === false ) {
+            $file['error'] = 'Could not read uploaded SVG file.';
+            return $file;
+        }
+
         $sanitizer = new Sanitizer();
+        $sanitizer->removeRemoteReferences( true );
         $clean_svg = $sanitizer->sanitize( $dirty_svg );
 
         if ( $clean_svg === false || empty( $clean_svg ) ) {
@@ -286,7 +313,6 @@ final class Main {
     }
 
     public function init_widgets() {
-        // Include Widget files
         require_once( __DIR__ . '/widgets/bw-title.php' );
         require_once( __DIR__ . '/widgets/bw-button.php' );
         require_once( __DIR__ . '/widgets/bw-image-pro.php' );
@@ -311,7 +337,6 @@ final class Main {
         require_once( __DIR__ . '/widgets/bw-text-animate.php' );
         require_once( __DIR__ . '/widgets/bw-image-carousel.php' );
 
-        // Register widget
         \Elementor\Plugin::instance()->widgets_manager->register( new Title() );
         \Elementor\Plugin::instance()->widgets_manager->register( new Button() );
         \Elementor\Plugin::instance()->widgets_manager->register( new ImagePro() );
@@ -340,13 +365,13 @@ final class Main {
         if ( Plugin_Options::is_gsap_toggle_on() ) {
             require_once( __DIR__ . '/widgets/bw-gsap-trigger.php' );
             require_once( __DIR__ . '/widgets/bw-gsap-horizontal-scrolling.php' );
-            require_once( __DIR__ . '/widgets/bw-gsap-tab.php' );
+            require_once( __DIR__ . '/widgets/bw-gsap-tabs.php' );
             require_once( __DIR__ . '/widgets/bw-gsap-interactive-links.php' );
             require_once( __DIR__ . '/widgets/bw-scroll-heat.php' );
 
             \Elementor\Plugin::instance()->widgets_manager->register( new GSAPTrigger() );
             \Elementor\Plugin::instance()->widgets_manager->register( new GSAPHorizontalScrolling() );
-            \Elementor\Plugin::instance()->widgets_manager->register( new GSAPTab() );
+            \Elementor\Plugin::instance()->widgets_manager->register( new GSAPTabs() );
             \Elementor\Plugin::instance()->widgets_manager->register( new GSAPInteractiveLinks() );
             \Elementor\Plugin::instance()->widgets_manager->register( new ScrollHeat() );
 
@@ -367,8 +392,7 @@ final class Main {
     }
 
     public function enqueue_public_scripts() {
-        // Register only - enqueue via widget get_script_depends() so pages without
-        // Fade / Title Animate / Text Animate do not pay for anime.js + bw-public.js.
+        // anime.js and bw-public.js are registered here and loaded only by the widgets that use them.
         wp_register_script( 'black-widgets-anime', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/libraries/anime.js', [ 'jquery' ], BLACK_WIDGETS_VERSION, true );
         wp_register_script( 'bw-public', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/bw-public.js', [ 'jquery', 'black-widgets-anime' ], BLACK_WIDGETS_VERSION, true );
 
@@ -376,8 +400,7 @@ final class Main {
 
         wp_register_script( 'black-widgets-simple-parallax', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/libraries/simple-parallax.js', [ 'jquery' ], BLACK_WIDGETS_VERSION, true );
         wp_register_script( 'black-widgets-tilt', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/libraries/tilt.js', [ 'jquery' ], BLACK_WIDGETS_VERSION, true );
-        wp_register_script( 'black-widgets-swiper', BLACK_WIDGETS_PLUGIN_URL . 'assets/js/libraries/swiper-bundle.min.js', [], BLACK_WIDGETS_VERSION, true );
-        wp_register_style( 'black-widgets-swiper', BLACK_WIDGETS_PLUGIN_URL . 'assets/css/libraries/swiper-bundle.min.css', [], BLACK_WIDGETS_VERSION );
+        Plugin_Options::register_swiper_assets();
     }
 
     public function enqueue_public_styles() {
@@ -422,21 +445,27 @@ final class Main {
             $tab_deps[] = 'GSAP';
         }
 
+        $tabs_js = BLACK_WIDGETS_PLUGIN_PATH . 'assets/js/gsap-tabs.js';
+        $tabs_js_ver = BLACK_WIDGETS_VERSION . ( is_readable( $tabs_js ) ? '.' . (int) filemtime( $tabs_js ) : '' );
+
         wp_register_script(
-            'black-widgets-gsap-tab',
-            BLACK_WIDGETS_PLUGIN_URL . 'assets/js/gsap-tab.js',
+            'black-widgets-gsap-tabs',
+            BLACK_WIDGETS_PLUGIN_URL . 'assets/js/gsap-tabs.js',
             $tab_deps,
-            BLACK_WIDGETS_VERSION,
+            $tabs_js_ver,
             true
         );
     }
 
     public function register_widget_styles() {
+        $tabs_css = BLACK_WIDGETS_PLUGIN_PATH . 'assets/css/gsap-tabs.css';
+        $tabs_css_ver = BLACK_WIDGETS_VERSION . ( is_readable( $tabs_css ) ? '.' . (int) filemtime( $tabs_css ) : '' );
+
         wp_register_style(
-            'black-widgets-gsap-tab',
-            BLACK_WIDGETS_PLUGIN_URL . 'assets/css/gsap-tab.css',
+            'black-widgets-gsap-tabs',
+            BLACK_WIDGETS_PLUGIN_URL . 'assets/css/gsap-tabs.css',
             [],
-            BLACK_WIDGETS_VERSION
+            $tabs_css_ver
         );
     }
 }
