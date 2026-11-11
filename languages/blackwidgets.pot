@@ -1,0 +1,5966 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: Black Widgets\n"
+"POT-Creation-Date: 2026-11-01 19:45+0330\n"
+"PO-Revision-Date: 2026-11-01 19:38+0330\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: black-widgets.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;esc_html__;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;"
+"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2;__\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#. translators: %s: user nickname
+#: includes/admin/black-widgets-control-panel.php:14
+#, php-format
+msgid "Hello %s,"
+msgstr ""
+
+#: includes/admin/black-widgets-control-panel.php:18
+msgid "DSGN + BW"
+msgstr ""
+
+#: includes/admin/black-widgets-control-panel.php:19
+msgid ""
+"Dsgn is a simple way to start a WordPress site. More Elementor add-ons and "
+"compatible themes are on the way."
+msgstr ""
+
+#: includes/admin/black-widgets-control-panel.php:20
+msgid "New releases"
+msgstr ""
+
+#: includes/admin/black-widgets-control-panel.php:20
+msgid "Create your free account"
+msgstr ""
+
+#: includes/admin/black-widgets-control-panel.php:24
+msgid "Onward WordPress Theme"
+msgstr ""
+
+#: includes/admin/black-widgets-control-panel.php:25
+msgid ""
+"Onward is a light WordPress theme for Elementor. Simple layout, clean "
+"design, and the usual theme options for background, container size, and "
+"colors."
+msgstr ""
+
+#: includes/admin/black-widgets-control-panel.php:26
+msgid "Free Download"
+msgstr ""
+
+#: includes/admin/black-widgets-control-panel.php:29
+msgid "Support"
+msgstr ""
+
+#: includes/admin/black-widgets-control-panel.php:30
+msgid "Need help? Contact our support team and we will get back to you."
+msgstr ""
+
+#: includes/admin/black-widgets-control-panel.php:31
+msgid "Get Support"
+msgstr ""
+
+#: includes/admin/black-widgets-control-panel.php:33
+msgid "Follow us on:"
+msgstr ""
+
+#: includes/admin/black-widgets-settings.php:11
+msgid "Black Widgets Settings"
+msgstr ""
+
+#: includes/admin/black-widgets-settings.php:21
+msgid "Save Changes"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+#: src/admin.php:88 src/admin.php:89 src/main.php:293 src/main.php:309
+#: src/main.php:426
+msgid "Black Widgets"
+msgstr ""
+
+#: src/admin.php:107 src/admin.php:108
+msgid "Dashboard"
+msgstr ""
+
+#: src/admin.php:115 src/admin.php:116 src/widgets/bw-gsap-tabs.php:195
+msgid "Settings"
+msgstr ""
+
+#: src/admin.php:217 src/widgets/bw-sentence.php:911
+msgid "General Settings"
+msgstr ""
+
+#: src/admin.php:225
+msgid "JS → CDN"
+msgstr ""
+
+#: src/admin.php:240 src/admin.php:673
+msgid "GSAP CDN"
+msgstr ""
+
+#: src/admin.php:252 src/admin.php:674
+msgid "ScrollTrigger CDN"
+msgstr ""
+
+#: src/admin.php:264 src/admin.php:675
+msgid "SplitText CDN"
+msgstr ""
+
+#: src/admin.php:276 src/admin.php:676
+msgid "TweenMax CDN (Deprecated)"
+msgstr ""
+
+#: src/admin.php:288
+msgid "Enable Black Scroll Text"
+msgstr ""
+
+#: src/admin.php:300
+msgid "Scope GSAP Trigger selectors"
+msgstr ""
+
+#: src/admin.php:314
+msgid ""
+"Turn on JS → CDN to unlock the fields below. Add GSAP and ScrollTrigger URLs "
+"for scroll animations. Add SplitText only if you need character or word "
+"effects. TweenMax is optional and unused."
+msgstr ""
+
+#: src/admin.php:329
+msgid ""
+"Shows GSAP widgets in Elementor and unlocks movement options. Add at least "
+"the GSAP CDN URL below. Some widgets also need ScrollTrigger or SplitText."
+msgstr ""
+
+#: src/admin.php:338
+msgid "URL for the GSAP core file. Example:"
+msgstr ""
+
+#: src/admin.php:348
+msgid "URL for ScrollTrigger. Example:"
+msgstr ""
+
+#: src/admin.php:358
+msgid ""
+"Optional. Needed for Perspective Flip on buttons and for text effects that "
+"split characters or words. Example:"
+msgstr ""
+
+#: src/admin.php:367
+msgid "Deprecated. Leave empty. Black Widgets does not load this file."
+msgstr ""
+
+#: src/admin.php:375
+msgid ""
+"Show the Black Scroll Text widget in Elementor. Typography On Scroll still "
+"works if this is off."
+msgstr ""
+
+#: src/admin.php:382
+msgid ""
+"Limit Trigger selectors to the current widget. Off uses the same global "
+"selectors as before. You can also set this per widget."
+msgstr ""
+
+#: src/admin.php:519
+msgid "Black Widgets: SplitText CDN (was TimelineMax)"
+msgstr ""
+
+#: src/admin.php:522
+msgid ""
+"In 2.0.0 the third CDN field is SplitText, not TimelineMax. Your old "
+"TimelineMax URL was saved for reference and removed from this field so the "
+"wrong file is not loaded."
+msgstr ""
+
+#: src/admin.php:526
+msgid "Saved copy (plugin_options key):"
+msgstr ""
+
+#: src/admin.php:536
+msgid ""
+"If you use Perspective Flip or split-text effects, paste a SplitText CDN "
+"URL. If not, leave the field empty."
+msgstr ""
+
+#: src/admin.php:540 src/admin.php:621 src/admin.php:762
+msgid "View Settings"
+msgstr ""
+
+#: src/admin.php:543 src/admin.php:624 src/admin.php:765
+msgid "Dismiss"
+msgstr ""
+
+#: src/admin.php:607
+msgid "Black Widgets 2.0.0"
+msgstr ""
+
+#: src/admin.php:610
+msgid ""
+"GSAP animations work with GSAP 3.15 (core, ScrollTrigger, and SplitText when "
+"needed). TweenMax is no longer used."
+msgstr ""
+
+#: src/admin.php:613
+msgid "If animations stop after updating:"
+msgstr ""
+
+#: src/admin.php:616
+msgid ""
+"Open Settings and set GSAP and ScrollTrigger to the 3.15 examples shown "
+"there. Saved URLs are not changed for you."
+msgstr ""
+
+#: src/admin.php:617
+msgid "Clear your site cache and Elementor CSS/JS cache."
+msgstr ""
+
+#: src/admin.php:744
+msgid "Black Widgets: some CDN URLs were not loaded"
+msgstr ""
+
+#: src/admin.php:747
+msgid ""
+"These URLs are still saved, but they were skipped (must be HTTPS on an "
+"allowed host). The Settings fields look empty for that reason."
+msgstr ""
+
+#: src/admin.php:758
+msgid ""
+"Paste an HTTPS URL from an allowed CDN (see the examples under each field), "
+"or ask a developer to allow your own host."
+msgstr ""
+
+#: src/helpers.php:386
+msgid "Elementor Icons"
+msgstr ""
+
+#. translators: 1: Plugin name 2: Elementor
+#: src/main.php:278
+#, php-format
+msgid "\"%1$s\" requires \"%2$s\" to be installed and activated."
+msgstr ""
+
+#: src/main.php:279
+msgid "Black widgets is Elementor extension"
+msgstr ""
+
+#: src/main.php:280
+msgid "Elementor Plugin"
+msgstr ""
+
+#. translators: 1: Plugin name 2: Elementor 3: Required Elementor version
+#. translators: 1: Plugin name 2: PHP 3: Required PHP version
+#: src/main.php:292 src/main.php:308
+#, php-format
+msgid "\"%1$s\" requires \"%2$s\" version %3$s or greater."
+msgstr ""
+
+#: src/main.php:294
+msgid "Elementor"
+msgstr ""
+
+#: src/main.php:310
+msgid "PHP"
+msgstr ""
+
+#: src/widgets/bw-alert.php:57
+msgid "Black Alert"
+msgstr ""
+
+#: src/widgets/bw-alert.php:107 src/widgets/bw-blockquote.php:108
+#: src/widgets/bw-box.php:112 src/widgets/bw-button.php:202
+#: src/widgets/bw-call-to-action.php:107 src/widgets/bw-dropcap.php:107
+#: src/widgets/bw-fade.php:108 src/widgets/bw-flipbox.php:107
+#: src/widgets/bw-gsap-horizontal-scrolling.php:141
+#: src/widgets/bw-gsap-tabs.php:159 src/widgets/bw-gsap-tabs.php:169
+#: src/widgets/bw-gsap-tabs.php:1010 src/widgets/bw-gsap-trigger.php:179
+#: src/widgets/bw-icon-box.php:220 src/widgets/bw-icon.php:104
+#: src/widgets/bw-image-carousel.php:75 src/widgets/bw-image-marquee.php:207
+#: src/widgets/bw-image-pro.php:154 src/widgets/bw-list.php:106
+#: src/widgets/bw-magic-link.php:240 src/widgets/bw-nav.php:140
+#: src/widgets/bw-scroll-heat.php:232 src/widgets/bw-scroll-text.php:146
+#: src/widgets/bw-sentence.php:106 src/widgets/bw-social-links.php:107
+#: src/widgets/bw-text-animate.php:106 src/widgets/bw-text-marquee.php:189
+#: src/widgets/bw-title-animate.php:127 src/widgets/bw-title-animate.php:312
+#: src/widgets/bw-title-animate.php:456 src/widgets/bw-title.php:107
+#: src/widgets/bw-typography.php:174
+msgid "Content"
+msgstr ""
+
+#: src/widgets/bw-alert.php:117 src/widgets/bw-blockquote.php:118
+#: src/widgets/bw-box.php:122 src/widgets/bw-button.php:212
+#: src/widgets/bw-call-to-action.php:117 src/widgets/bw-dropcap.php:117
+#: src/widgets/bw-fade.php:118 src/widgets/bw-flipbox.php:117
+#: src/widgets/bw-gsap-horizontal-scrolling.php:151
+#: src/widgets/bw-icon-box.php:187 src/widgets/bw-icon.php:114
+#: src/widgets/bw-image-pro.php:164 src/widgets/bw-list.php:116
+#: src/widgets/bw-magic-link.php:250 src/widgets/bw-nav.php:150
+#: src/widgets/bw-sentence.php:116 src/widgets/bw-social-links.php:117
+#: src/widgets/bw-title-animate.php:137 src/widgets/bw-title.php:117
+#: src/widgets/bw-typography.php:184
+msgid "Feel free to edit. Check this widget's demo."
+msgstr ""
+
+#: src/widgets/bw-alert.php:120 src/widgets/bw-blockquote.php:121
+#: src/widgets/bw-box.php:125 src/widgets/bw-button.php:215
+#: src/widgets/bw-call-to-action.php:120 src/widgets/bw-dropcap.php:120
+#: src/widgets/bw-fade.php:121 src/widgets/bw-flipbox.php:120
+#: src/widgets/bw-gsap-horizontal-scrolling.php:154
+#: src/widgets/bw-gsap-trigger.php:192 src/widgets/bw-icon-box.php:190
+#: src/widgets/bw-icon.php:117 src/widgets/bw-image-pro.php:167
+#: src/widgets/bw-list.php:119 src/widgets/bw-magic-link.php:253
+#: src/widgets/bw-nav.php:153 src/widgets/bw-sentence.php:119
+#: src/widgets/bw-social-links.php:120 src/widgets/bw-title-animate.php:140
+#: src/widgets/bw-title.php:120 src/widgets/bw-typography.php:187
+msgid "Check "
+msgstr ""
+
+#: src/widgets/bw-alert.php:121 src/widgets/bw-blockquote.php:122
+#: src/widgets/bw-box.php:126 src/widgets/bw-button.php:216
+#: src/widgets/bw-call-to-action.php:121 src/widgets/bw-dropcap.php:121
+#: src/widgets/bw-fade.php:122 src/widgets/bw-flipbox.php:121
+#: src/widgets/bw-gsap-horizontal-scrolling.php:155
+#: src/widgets/bw-icon-box.php:191 src/widgets/bw-icon.php:118
+#: src/widgets/bw-image-pro.php:168 src/widgets/bw-list.php:120
+#: src/widgets/bw-magic-link.php:254 src/widgets/bw-nav.php:154
+#: src/widgets/bw-sentence.php:120 src/widgets/bw-social-links.php:121
+#: src/widgets/bw-title-animate.php:141 src/widgets/bw-title.php:121
+#: src/widgets/bw-typography.php:188
+msgid "Demo"
+msgstr ""
+
+#: src/widgets/bw-alert.php:130 src/widgets/bw-box.php:135
+#: src/widgets/bw-button.php:257 src/widgets/bw-button.php:468
+#: src/widgets/bw-fade.php:131 src/widgets/bw-flipbox.php:130
+#: src/widgets/bw-gsap-interactive-links.php:191
+#: src/widgets/bw-magic-link.php:291 src/widgets/bw-nav.php:198
+#: src/widgets/bw-scroll-heat.php:195 src/widgets/bw-sentence.php:152
+#: src/widgets/bw-social-links.php:130 src/widgets/bw-title-animate.php:150
+#: src/widgets/bw-title.php:130 src/widgets/bw-typography.php:197
+#: src/widgets/bw-typography.php:277
+msgid "Select Type"
+msgstr ""
+
+#: src/widgets/bw-alert.php:134 src/widgets/bw-blockquote.php:251
+#: src/widgets/bw-blockquote.php:495 src/widgets/bw-blockquote.php:645
+#: src/widgets/bw-box.php:347 src/widgets/bw-box.php:1320
+#: src/widgets/bw-button.php:499 src/widgets/bw-button.php:828
+#: src/widgets/bw-button.php:1033 src/widgets/bw-call-to-action.php:231
+#: src/widgets/bw-call-to-action.php:443 src/widgets/bw-call-to-action.php:593
+#: src/widgets/bw-call-to-action.php:743 src/widgets/bw-dropcap.php:151
+#: src/widgets/bw-gsap-interactive-links.php:329
+#: src/widgets/bw-gsap-interactive-links.php:569
+#: src/widgets/bw-gsap-interactive-links.php:769
+#: src/widgets/bw-gsap-interactive-links.php:869
+#: src/widgets/bw-gsap-interactive-links.php:1243
+#: src/widgets/bw-gsap-tabs.php:751 src/widgets/bw-gsap-tabs.php:902
+#: src/widgets/bw-gsap-tabs.php:1364 src/widgets/bw-gsap-tabs.php:1801
+#: src/widgets/bw-icon-box.php:823 src/widgets/bw-icon-box.php:1118
+#: src/widgets/bw-icon-box.php:1294 src/widgets/bw-icon-box.php:1470
+#: src/widgets/bw-icon-box.php:1646 src/widgets/bw-icon-box.php:1829
+#: src/widgets/bw-icon-box.php:2149 src/widgets/bw-image-pro.php:552
+#: src/widgets/bw-list.php:460 src/widgets/bw-list.php:689
+#: src/widgets/bw-magic-link.php:434 src/widgets/bw-magic-link.php:1236
+#: src/widgets/bw-nav.php:428 src/widgets/bw-nav.php:669
+#: src/widgets/bw-scroll-text.php:431 src/widgets/bw-scroll-text.php:574
+#: src/widgets/bw-sentence.php:316 src/widgets/bw-sentence.php:558
+#: src/widgets/bw-social-links.php:237 src/widgets/bw-social-links.php:450
+#: src/widgets/bw-social-links.php:892 src/widgets/bw-typography.php:1129
+msgid "Normal"
+msgstr ""
+
+#: src/widgets/bw-alert.php:135
+msgid "Success"
+msgstr ""
+
+#: src/widgets/bw-alert.php:136
+msgid "Warning"
+msgstr ""
+
+#: src/widgets/bw-alert.php:137
+msgid "Error"
+msgstr ""
+
+#: src/widgets/bw-alert.php:139 src/widgets/bw-button.php:261
+#: src/widgets/bw-gsap-trigger.php:215 src/widgets/bw-title-animate.php:171
+msgid ""
+"We create some skin before, you can use these or no! make a new custom type."
+msgstr ""
+
+#: src/widgets/bw-alert.php:147
+msgid "Alert Text"
+msgstr ""
+
+#: src/widgets/bw-alert.php:149
+msgid "Type Message Here"
+msgstr ""
+
+#: src/widgets/bw-alert.php:150
+msgid "HTML Available =)"
+msgstr ""
+
+#: src/widgets/bw-alert.php:158
+msgid "Enable Icon"
+msgstr ""
+
+#: src/widgets/bw-alert.php:160 src/widgets/bw-box.php:592
+#: src/widgets/bw-box.php:990 src/widgets/bw-fade.php:462
+#: src/widgets/bw-fade.php:870 src/widgets/bw-flipbox.php:148
+#: src/widgets/bw-image-pro.php:275 src/widgets/bw-image-pro.php:391
+#: src/widgets/bw-image-pro.php:508 src/widgets/bw-image-pro.php:914
+#: src/widgets/bw-image-pro.php:1312 src/widgets/bw-scroll-text.php:260
+#: src/widgets/bw-scroll-text.php:275 src/widgets/bw-scroll-text.php:302
+#: src/widgets/bw-scroll-text.php:361 src/widgets/bw-typography.php:339
+#: src/widgets/bw-typography.php:743 src/widgets/bw-typography.php:799
+#: src/widgets/bw-typography.php:901 src/widgets/bw-typography.php:1833
+msgid "Enable"
+msgstr ""
+
+#: src/widgets/bw-alert.php:161 src/widgets/bw-box.php:593
+#: src/widgets/bw-box.php:991 src/widgets/bw-fade.php:463
+#: src/widgets/bw-fade.php:871 src/widgets/bw-flipbox.php:149
+#: src/widgets/bw-image-pro.php:276 src/widgets/bw-image-pro.php:392
+#: src/widgets/bw-image-pro.php:509 src/widgets/bw-image-pro.php:915
+#: src/widgets/bw-image-pro.php:1313 src/widgets/bw-scroll-text.php:261
+#: src/widgets/bw-scroll-text.php:276 src/widgets/bw-scroll-text.php:303
+#: src/widgets/bw-scroll-text.php:362 src/widgets/bw-typography.php:340
+#: src/widgets/bw-typography.php:744 src/widgets/bw-typography.php:800
+#: src/widgets/bw-typography.php:902 src/widgets/bw-typography.php:1834
+msgid "Disable"
+msgstr ""
+
+#: src/widgets/bw-alert.php:170 src/widgets/bw-blockquote.php:162
+#: src/widgets/bw-blockquote.php:171 src/widgets/bw-button.php:454
+#: src/widgets/bw-flipbox.php:173 src/widgets/bw-flipbox.php:305
+#: src/widgets/bw-icon.php:142 src/widgets/bw-list.php:140
+#: src/widgets/bw-magic-link.php:382 src/widgets/bw-nav.php:329
+#: src/widgets/bw-social-links.php:158
+msgid "Icon"
+msgstr ""
+
+#: src/widgets/bw-alert.php:185 src/widgets/bw-blockquote.php:242
+#: src/widgets/bw-box.php:338 src/widgets/bw-button.php:490
+#: src/widgets/bw-call-to-action.php:222 src/widgets/bw-dropcap.php:142
+#: src/widgets/bw-fade.php:241 src/widgets/bw-flipbox.php:393
+#: src/widgets/bw-gsap-interactive-links.php:319
+#: src/widgets/bw-gsap-tabs.php:608 src/widgets/bw-gsap-trigger.php:849
+#: src/widgets/bw-icon-box.php:751 src/widgets/bw-icon.php:183
+#: src/widgets/bw-image-carousel.php:552 src/widgets/bw-image-marquee.php:369
+#: src/widgets/bw-list.php:194 src/widgets/bw-magic-link.php:425
+#: src/widgets/bw-nav.php:345 src/widgets/bw-scroll-text.php:422
+#: src/widgets/bw-social-links.php:228 src/widgets/bw-text-animate.php:236
+#: src/widgets/bw-text-marquee.php:363 src/widgets/bw-title-animate.php:678
+#: src/widgets/bw-title.php:323 src/widgets/bw-typography.php:1120
+msgid "Box Style"
+msgstr ""
+
+#: src/widgets/bw-alert.php:194 src/widgets/bw-blockquote.php:259
+#: src/widgets/bw-blockquote.php:345 src/widgets/bw-blockquote.php:570
+#: src/widgets/bw-blockquote.php:720 src/widgets/bw-box.php:355
+#: src/widgets/bw-box.php:441 src/widgets/bw-box.php:1328
+#: src/widgets/bw-box.php:1423 src/widgets/bw-box.php:1536
+#: src/widgets/bw-button.php:507 src/widgets/bw-button.php:666
+#: src/widgets/bw-call-to-action.php:239 src/widgets/bw-call-to-action.php:351
+#: src/widgets/bw-call-to-action.php:518 src/widgets/bw-call-to-action.php:668
+#: src/widgets/bw-call-to-action.php:765 src/widgets/bw-call-to-action.php:797
+#: src/widgets/bw-dropcap.php:159 src/widgets/bw-dropcap.php:245
+#: src/widgets/bw-dropcap.php:378 src/widgets/bw-dropcap.php:508
+#: src/widgets/bw-fade.php:250 src/widgets/bw-flipbox.php:260
+#: src/widgets/bw-flipbox.php:426 src/widgets/bw-flipbox.php:682
+#: src/widgets/bw-flipbox.php:812 src/widgets/bw-flipbox.php:1077
+#: src/widgets/bw-flipbox.php:1207 src/widgets/bw-flipbox.php:1357
+#: src/widgets/bw-gsap-interactive-links.php:337
+#: src/widgets/bw-gsap-tabs.php:1582 src/widgets/bw-gsap-trigger.php:858
+#: src/widgets/bw-icon-box.php:831 src/widgets/bw-icon-box.php:941
+#: src/widgets/bw-icon-box.php:1187 src/widgets/bw-icon-box.php:1363
+#: src/widgets/bw-icon-box.php:1539 src/widgets/bw-icon-box.php:1717
+#: src/widgets/bw-icon-box.php:1878 src/widgets/bw-icon-box.php:2157
+#: src/widgets/bw-icon.php:192 src/widgets/bw-image-carousel.php:561
+#: src/widgets/bw-image-carousel.php:646 src/widgets/bw-image-marquee.php:378
+#: src/widgets/bw-image-marquee.php:522 src/widgets/bw-image-pro.php:560
+#: src/widgets/bw-image-pro.php:679 src/widgets/bw-image-pro.php:834
+#: src/widgets/bw-list.php:203 src/widgets/bw-list.php:386
+#: src/widgets/bw-list.php:503 src/widgets/bw-list.php:612
+#: src/widgets/bw-list.php:723 src/widgets/bw-list.php:823
+#: src/widgets/bw-magic-link.php:442 src/widgets/bw-magic-link.php:556
+#: src/widgets/bw-magic-link.php:686 src/widgets/bw-magic-link.php:813
+#: src/widgets/bw-nav.php:354 src/widgets/bw-nav.php:527
+#: src/widgets/bw-scroll-text.php:438 src/widgets/bw-scroll-text.php:509
+#: src/widgets/bw-social-links.php:245 src/widgets/bw-social-links.php:357
+#: src/widgets/bw-text-animate.php:245 src/widgets/bw-text-marquee.php:372
+#: src/widgets/bw-title-animate.php:711 src/widgets/bw-title-animate.php:845
+#: src/widgets/bw-title-animate.php:982 src/widgets/bw-title-animate.php:1147
+#: src/widgets/bw-title-animate.php:1283 src/widgets/bw-title-animate.php:1429
+#: src/widgets/bw-title.php:332 src/widgets/bw-typography.php:1030
+#: src/widgets/bw-typography.php:1137 src/widgets/bw-typography.php:1223
+#: src/widgets/bw-typography.php:2209
+msgid "Background"
+msgstr ""
+
+#: src/widgets/bw-alert.php:203 src/widgets/bw-button.php:516
+#: src/widgets/bw-button.php:555 src/widgets/bw-button.php:675
+#: src/widgets/bw-button.php:714 src/widgets/bw-icon-box.php:840
+#: src/widgets/bw-icon-box.php:950 src/widgets/bw-image-pro.php:569
+#: src/widgets/bw-image-pro.php:688 src/widgets/bw-title.php:341
+msgid "Blur"
+msgstr ""
+
+#: src/widgets/bw-alert.php:204 src/widgets/bw-button.php:517
+#: src/widgets/bw-button.php:556 src/widgets/bw-button.php:676
+#: src/widgets/bw-button.php:715 src/widgets/bw-icon-box.php:841
+#: src/widgets/bw-icon-box.php:951 src/widgets/bw-image-pro.php:570
+#: src/widgets/bw-title.php:342
+msgid "Background (only for color) with low opacity is required."
+msgstr ""
+
+#: src/widgets/bw-alert.php:228 src/widgets/bw-blockquote.php:307
+#: src/widgets/bw-blockquote.php:393 src/widgets/bw-blockquote.php:463
+#: src/widgets/bw-blockquote.php:604 src/widgets/bw-blockquote.php:754
+#: src/widgets/bw-blockquote.php:911 src/widgets/bw-box.php:403
+#: src/widgets/bw-box.php:489 src/widgets/bw-box.php:1376
+#: src/widgets/bw-box.php:1471 src/widgets/bw-button.php:628
+#: src/widgets/bw-button.php:785 src/widgets/bw-call-to-action.php:313
+#: src/widgets/bw-call-to-action.php:399 src/widgets/bw-call-to-action.php:552
+#: src/widgets/bw-call-to-action.php:702 src/widgets/bw-call-to-action.php:862
+#: src/widgets/bw-dropcap.php:207 src/widgets/bw-dropcap.php:293
+#: src/widgets/bw-dropcap.php:426 src/widgets/bw-dropcap.php:556
+#: src/widgets/bw-fade.php:298 src/widgets/bw-fade.php:372
+#: src/widgets/bw-flipbox.php:465 src/widgets/bw-flipbox.php:599
+#: src/widgets/bw-flipbox.php:730 src/widgets/bw-flipbox.php:860
+#: src/widgets/bw-flipbox.php:994 src/widgets/bw-flipbox.php:1125
+#: src/widgets/bw-flipbox.php:1255 src/widgets/bw-flipbox.php:1465
+#: src/widgets/bw-gsap-interactive-links.php:347
+#: src/widgets/bw-gsap-interactive-links.php:596
+#: src/widgets/bw-gsap-interactive-links.php:681
+#: src/widgets/bw-gsap-tabs.php:1465 src/widgets/bw-gsap-tabs.php:1592
+#: src/widgets/bw-gsap-trigger.php:868 src/widgets/bw-icon-box.php:903
+#: src/widgets/bw-icon-box.php:1013 src/widgets/bw-icon-box.php:1248
+#: src/widgets/bw-icon-box.php:1424 src/widgets/bw-icon-box.php:1600
+#: src/widgets/bw-icon-box.php:1778 src/widgets/bw-icon-box.php:2100
+#: src/widgets/bw-icon-box.php:2268 src/widgets/bw-icon.php:202
+#: src/widgets/bw-image-carousel.php:609 src/widgets/bw-image-carousel.php:668
+#: src/widgets/bw-image-marquee.php:471 src/widgets/bw-image-marquee.php:615
+#: src/widgets/bw-image-pro.php:632 src/widgets/bw-image-pro.php:751
+#: src/widgets/bw-list.php:213 src/widgets/bw-list.php:420
+#: src/widgets/bw-list.php:537 src/widgets/bw-list.php:646
+#: src/widgets/bw-list.php:757 src/widgets/bw-list.php:857
+#: src/widgets/bw-magic-link.php:518 src/widgets/bw-magic-link.php:604
+#: src/widgets/bw-magic-link.php:734 src/widgets/bw-magic-link.php:861
+#: src/widgets/bw-nav.php:364 src/widgets/bw-scroll-text.php:472
+#: src/widgets/bw-scroll-text.php:652 src/widgets/bw-sentence.php:512
+#: src/widgets/bw-sentence.php:842 src/widgets/bw-social-links.php:319
+#: src/widgets/bw-social-links.php:405 src/widgets/bw-text-animate.php:293
+#: src/widgets/bw-text-marquee.php:465 src/widgets/bw-title-animate.php:748
+#: src/widgets/bw-title-animate.php:893 src/widgets/bw-title-animate.php:1032
+#: src/widgets/bw-title-animate.php:1195 src/widgets/bw-title-animate.php:1331
+#: src/widgets/bw-title-animate.php:1477 src/widgets/bw-title.php:404
+#: src/widgets/bw-typography.php:1095 src/widgets/bw-typography.php:1185
+#: src/widgets/bw-typography.php:1271
+msgid "Border"
+msgstr ""
+
+#: src/widgets/bw-alert.php:237 src/widgets/bw-blockquote.php:316
+#: src/widgets/bw-blockquote.php:402 src/widgets/bw-blockquote.php:625
+#: src/widgets/bw-blockquote.php:775 src/widgets/bw-blockquote.php:932
+#: src/widgets/bw-box.php:412 src/widgets/bw-box.php:498
+#: src/widgets/bw-box.php:1385 src/widgets/bw-box.php:1480
+#: src/widgets/bw-button.php:637 src/widgets/bw-button.php:794
+#: src/widgets/bw-call-to-action.php:322 src/widgets/bw-call-to-action.php:408
+#: src/widgets/bw-call-to-action.php:573 src/widgets/bw-call-to-action.php:723
+#: src/widgets/bw-call-to-action.php:883 src/widgets/bw-dropcap.php:216
+#: src/widgets/bw-dropcap.php:302 src/widgets/bw-dropcap.php:447
+#: src/widgets/bw-dropcap.php:577 src/widgets/bw-fade.php:324
+#: src/widgets/bw-flipbox.php:486 src/widgets/bw-flipbox.php:621
+#: src/widgets/bw-flipbox.php:751 src/widgets/bw-flipbox.php:881
+#: src/widgets/bw-flipbox.php:1016 src/widgets/bw-flipbox.php:1146
+#: src/widgets/bw-flipbox.php:1276 src/widgets/bw-flipbox.php:1494
+#: src/widgets/bw-gsap-interactive-links.php:392
+#: src/widgets/bw-gsap-interactive-links.php:641
+#: src/widgets/bw-gsap-interactive-links.php:726
+#: src/widgets/bw-gsap-tabs.php:1486 src/widgets/bw-gsap-tabs.php:1613
+#: src/widgets/bw-gsap-trigger.php:877 src/widgets/bw-icon-box.php:912
+#: src/widgets/bw-icon-box.php:1022 src/widgets/bw-icon-box.php:1269
+#: src/widgets/bw-icon-box.php:1445 src/widgets/bw-icon-box.php:1621
+#: src/widgets/bw-icon-box.php:1799 src/widgets/bw-icon-box.php:2121
+#: src/widgets/bw-icon-box.php:2289 src/widgets/bw-icon.php:211
+#: src/widgets/bw-image-carousel.php:618 src/widgets/bw-image-carousel.php:690
+#: src/widgets/bw-image-marquee.php:492 src/widgets/bw-image-marquee.php:654
+#: src/widgets/bw-image-pro.php:641 src/widgets/bw-image-pro.php:760
+#: src/widgets/bw-list.php:222 src/widgets/bw-list.php:441
+#: src/widgets/bw-list.php:558 src/widgets/bw-list.php:667
+#: src/widgets/bw-list.php:778 src/widgets/bw-list.php:878
+#: src/widgets/bw-magic-link.php:527 src/widgets/bw-magic-link.php:613
+#: src/widgets/bw-magic-link.php:755 src/widgets/bw-magic-link.php:882
+#: src/widgets/bw-nav.php:373 src/widgets/bw-scroll-text.php:493
+#: src/widgets/bw-scroll-text.php:530 src/widgets/bw-scroll-text.php:673
+#: src/widgets/bw-scroll-text.php:735 src/widgets/bw-sentence.php:534
+#: src/widgets/bw-sentence.php:864 src/widgets/bw-social-links.php:328
+#: src/widgets/bw-social-links.php:414 src/widgets/bw-text-animate.php:314
+#: src/widgets/bw-text-marquee.php:474 src/widgets/bw-title-animate.php:769
+#: src/widgets/bw-title-animate.php:914 src/widgets/bw-title-animate.php:1054
+#: src/widgets/bw-title-animate.php:1216 src/widgets/bw-title-animate.php:1352
+#: src/widgets/bw-title-animate.php:1498 src/widgets/bw-title.php:413
+#: src/widgets/bw-typography.php:1194 src/widgets/bw-typography.php:1280
+msgid "Box Shadow"
+msgstr ""
+
+#: src/widgets/bw-alert.php:245 src/widgets/bw-blockquote.php:324
+#: src/widgets/bw-blockquote.php:410 src/widgets/bw-blockquote.php:471
+#: src/widgets/bw-blockquote.php:612 src/widgets/bw-blockquote.php:762
+#: src/widgets/bw-blockquote.php:919 src/widgets/bw-box.php:420
+#: src/widgets/bw-box.php:506 src/widgets/bw-box.php:1393
+#: src/widgets/bw-box.php:1488 src/widgets/bw-button.php:645
+#: src/widgets/bw-button.php:802 src/widgets/bw-call-to-action.php:330
+#: src/widgets/bw-call-to-action.php:416 src/widgets/bw-call-to-action.php:560
+#: src/widgets/bw-call-to-action.php:710 src/widgets/bw-call-to-action.php:870
+#: src/widgets/bw-dropcap.php:224 src/widgets/bw-dropcap.php:310
+#: src/widgets/bw-dropcap.php:434 src/widgets/bw-dropcap.php:564
+#: src/widgets/bw-fade.php:306 src/widgets/bw-flipbox.php:473
+#: src/widgets/bw-flipbox.php:607 src/widgets/bw-flipbox.php:738
+#: src/widgets/bw-flipbox.php:868 src/widgets/bw-flipbox.php:1002
+#: src/widgets/bw-flipbox.php:1133 src/widgets/bw-flipbox.php:1263
+#: src/widgets/bw-flipbox.php:1473
+#: src/widgets/bw-gsap-interactive-links.php:355
+#: src/widgets/bw-gsap-interactive-links.php:428
+#: src/widgets/bw-gsap-interactive-links.php:604
+#: src/widgets/bw-gsap-interactive-links.php:689
+#: src/widgets/bw-gsap-interactive-links.php:1174
+#: src/widgets/bw-gsap-tabs.php:1473 src/widgets/bw-gsap-tabs.php:1600
+#: src/widgets/bw-gsap-tabs.php:1987 src/widgets/bw-gsap-tabs.php:2139
+#: src/widgets/bw-gsap-tabs.php:2245 src/widgets/bw-gsap-trigger.php:885
+#: src/widgets/bw-icon-box.php:920 src/widgets/bw-icon-box.php:1030
+#: src/widgets/bw-icon-box.php:1256 src/widgets/bw-icon-box.php:1432
+#: src/widgets/bw-icon-box.php:1608 src/widgets/bw-icon-box.php:1786
+#: src/widgets/bw-icon-box.php:2108 src/widgets/bw-icon-box.php:2276
+#: src/widgets/bw-icon.php:219 src/widgets/bw-image-carousel.php:676
+#: src/widgets/bw-image-carousel.php:1220 src/widgets/bw-image-marquee.php:479
+#: src/widgets/bw-image-marquee.php:623 src/widgets/bw-image-pro.php:649
+#: src/widgets/bw-image-pro.php:768 src/widgets/bw-list.php:230
+#: src/widgets/bw-list.php:428 src/widgets/bw-list.php:545
+#: src/widgets/bw-list.php:654 src/widgets/bw-list.php:765
+#: src/widgets/bw-list.php:865 src/widgets/bw-magic-link.php:535
+#: src/widgets/bw-magic-link.php:621 src/widgets/bw-magic-link.php:742
+#: src/widgets/bw-magic-link.php:869 src/widgets/bw-nav.php:381
+#: src/widgets/bw-scroll-text.php:480 src/widgets/bw-scroll-text.php:660
+#: src/widgets/bw-sentence.php:520 src/widgets/bw-sentence.php:850
+#: src/widgets/bw-social-links.php:336 src/widgets/bw-social-links.php:422
+#: src/widgets/bw-text-animate.php:301 src/widgets/bw-title-animate.php:756
+#: src/widgets/bw-title-animate.php:901 src/widgets/bw-title-animate.php:1040
+#: src/widgets/bw-title-animate.php:1203 src/widgets/bw-title-animate.php:1339
+#: src/widgets/bw-title-animate.php:1485 src/widgets/bw-title.php:547
+#: src/widgets/bw-title.php:694 src/widgets/bw-typography.php:1104
+#: src/widgets/bw-typography.php:1202 src/widgets/bw-typography.php:1288
+#: src/widgets/bw-typography.php:1412 src/widgets/bw-typography.php:1663
+#: src/widgets/bw-typography.php:2240
+msgid "Border Radius"
+msgstr ""
+
+#: src/widgets/bw-alert.php:257 src/widgets/bw-blockquote.php:275
+#: src/widgets/bw-blockquote.php:361 src/widgets/bw-blockquote.php:438
+#: src/widgets/bw-blockquote.php:579 src/widgets/bw-blockquote.php:729
+#: src/widgets/bw-blockquote.php:886 src/widgets/bw-box.php:371
+#: src/widgets/bw-box.php:457 src/widgets/bw-box.php:1344
+#: src/widgets/bw-box.php:1439 src/widgets/bw-button.php:591
+#: src/widgets/bw-button.php:750 src/widgets/bw-call-to-action.php:281
+#: src/widgets/bw-call-to-action.php:367 src/widgets/bw-call-to-action.php:527
+#: src/widgets/bw-call-to-action.php:677 src/widgets/bw-call-to-action.php:837
+#: src/widgets/bw-dropcap.php:175 src/widgets/bw-dropcap.php:261
+#: src/widgets/bw-dropcap.php:394 src/widgets/bw-dropcap.php:524
+#: src/widgets/bw-fade.php:266 src/widgets/bw-flipbox.php:401
+#: src/widgets/bw-flipbox.php:565 src/widgets/bw-flipbox.php:698
+#: src/widgets/bw-flipbox.php:828 src/widgets/bw-flipbox.php:960
+#: src/widgets/bw-flipbox.php:1093 src/widgets/bw-flipbox.php:1223
+#: src/widgets/bw-flipbox.php:1425
+#: src/widgets/bw-gsap-interactive-links.php:379
+#: src/widgets/bw-gsap-interactive-links.php:452
+#: src/widgets/bw-gsap-interactive-links.php:628
+#: src/widgets/bw-gsap-interactive-links.php:713
+#: src/widgets/bw-gsap-interactive-links.php:955
+#: src/widgets/bw-gsap-interactive-links.php:1052
+#: src/widgets/bw-gsap-interactive-links.php:1195
+#: src/widgets/bw-gsap-tabs.php:631 src/widgets/bw-gsap-tabs.php:1049
+#: src/widgets/bw-gsap-tabs.php:1634 src/widgets/bw-gsap-tabs.php:1760
+#: src/widgets/bw-gsap-tabs.php:1975 src/widgets/bw-gsap-tabs.php:2041
+#: src/widgets/bw-gsap-tabs.php:2269 src/widgets/bw-gsap-trigger.php:897
+#: src/widgets/bw-icon-box.php:871 src/widgets/bw-icon-box.php:981
+#: src/widgets/bw-icon-box.php:1223 src/widgets/bw-icon-box.php:1399
+#: src/widgets/bw-icon-box.php:1575 src/widgets/bw-icon-box.php:1753
+#: src/widgets/bw-icon-box.php:2075 src/widgets/bw-icon-box.php:2243
+#: src/widgets/bw-icon.php:231 src/widgets/bw-image-carousel.php:577
+#: src/widgets/bw-image-carousel.php:1043
+#: src/widgets/bw-image-carousel.php:1247 src/widgets/bw-image-marquee.php:439
+#: src/widgets/bw-image-marquee.php:583 src/widgets/bw-image-pro.php:600
+#: src/widgets/bw-image-pro.php:719 src/widgets/bw-image-pro.php:877
+#: src/widgets/bw-list.php:242 src/widgets/bw-list.php:395
+#: src/widgets/bw-list.php:512 src/widgets/bw-list.php:621
+#: src/widgets/bw-list.php:732 src/widgets/bw-list.php:832
+#: src/widgets/bw-magic-link.php:486 src/widgets/bw-magic-link.php:572
+#: src/widgets/bw-magic-link.php:702 src/widgets/bw-magic-link.php:829
+#: src/widgets/bw-magic-link.php:1255 src/widgets/bw-nav.php:393
+#: src/widgets/bw-scroll-text.php:447 src/widgets/bw-scroll-text.php:627
+#: src/widgets/bw-sentence.php:485 src/widgets/bw-sentence.php:815
+#: src/widgets/bw-social-links.php:287 src/widgets/bw-social-links.php:373
+#: src/widgets/bw-text-animate.php:261 src/widgets/bw-text-marquee.php:433
+#: src/widgets/bw-title-animate.php:686 src/widgets/bw-title-animate.php:861
+#: src/widgets/bw-title-animate.php:998 src/widgets/bw-title-animate.php:1163
+#: src/widgets/bw-title-animate.php:1299 src/widgets/bw-title-animate.php:1445
+#: src/widgets/bw-title.php:372 src/widgets/bw-typography.php:1153
+#: src/widgets/bw-typography.php:1239 src/widgets/bw-typography.php:2218
+msgid "Margin"
+msgstr ""
+
+#: src/widgets/bw-alert.php:269 src/widgets/bw-blockquote.php:287
+#: src/widgets/bw-blockquote.php:373 src/widgets/bw-blockquote.php:450
+#: src/widgets/bw-blockquote.php:591 src/widgets/bw-blockquote.php:741
+#: src/widgets/bw-blockquote.php:898 src/widgets/bw-box.php:383
+#: src/widgets/bw-box.php:469 src/widgets/bw-box.php:1356
+#: src/widgets/bw-box.php:1451 src/widgets/bw-button.php:603
+#: src/widgets/bw-button.php:762 src/widgets/bw-button.php:1086
+#: src/widgets/bw-button.php:1181 src/widgets/bw-call-to-action.php:293
+#: src/widgets/bw-call-to-action.php:379 src/widgets/bw-call-to-action.php:539
+#: src/widgets/bw-call-to-action.php:689 src/widgets/bw-call-to-action.php:849
+#: src/widgets/bw-dropcap.php:187 src/widgets/bw-dropcap.php:273
+#: src/widgets/bw-dropcap.php:406 src/widgets/bw-dropcap.php:536
+#: src/widgets/bw-fade.php:278 src/widgets/bw-flipbox.php:413
+#: src/widgets/bw-flipbox.php:578 src/widgets/bw-flipbox.php:710
+#: src/widgets/bw-flipbox.php:840 src/widgets/bw-flipbox.php:973
+#: src/widgets/bw-flipbox.php:1105 src/widgets/bw-flipbox.php:1235
+#: src/widgets/bw-flipbox.php:1437
+#: src/widgets/bw-gsap-interactive-links.php:367
+#: src/widgets/bw-gsap-interactive-links.php:440
+#: src/widgets/bw-gsap-interactive-links.php:616
+#: src/widgets/bw-gsap-interactive-links.php:701
+#: src/widgets/bw-gsap-interactive-links.php:943
+#: src/widgets/bw-gsap-interactive-links.php:1040
+#: src/widgets/bw-gsap-interactive-links.php:1207
+#: src/widgets/bw-gsap-tabs.php:619 src/widgets/bw-gsap-tabs.php:1037
+#: src/widgets/bw-gsap-tabs.php:1452 src/widgets/bw-gsap-tabs.php:1621
+#: src/widgets/bw-gsap-tabs.php:1748 src/widgets/bw-gsap-tabs.php:1963
+#: src/widgets/bw-gsap-tabs.php:2029 src/widgets/bw-gsap-tabs.php:2257
+#: src/widgets/bw-gsap-trigger.php:909 src/widgets/bw-icon-box.php:883
+#: src/widgets/bw-icon-box.php:993 src/widgets/bw-icon-box.php:1235
+#: src/widgets/bw-icon-box.php:1411 src/widgets/bw-icon-box.php:1587
+#: src/widgets/bw-icon-box.php:1765 src/widgets/bw-icon-box.php:2087
+#: src/widgets/bw-icon-box.php:2255 src/widgets/bw-icon.php:243
+#: src/widgets/bw-image-carousel.php:589 src/widgets/bw-image-carousel.php:655
+#: src/widgets/bw-image-carousel.php:1056
+#: src/widgets/bw-image-carousel.php:1301 src/widgets/bw-image-marquee.php:451
+#: src/widgets/bw-image-marquee.php:595 src/widgets/bw-image-pro.php:612
+#: src/widgets/bw-image-pro.php:731 src/widgets/bw-image-pro.php:889
+#: src/widgets/bw-list.php:254 src/widgets/bw-list.php:407
+#: src/widgets/bw-list.php:524 src/widgets/bw-list.php:633
+#: src/widgets/bw-list.php:744 src/widgets/bw-list.php:844
+#: src/widgets/bw-magic-link.php:498 src/widgets/bw-magic-link.php:584
+#: src/widgets/bw-magic-link.php:714 src/widgets/bw-magic-link.php:841
+#: src/widgets/bw-nav.php:405 src/widgets/bw-scroll-heat.php:863
+#: src/widgets/bw-scroll-heat.php:1005 src/widgets/bw-scroll-heat.php:1262
+#: src/widgets/bw-scroll-text.php:459 src/widgets/bw-scroll-text.php:639
+#: src/widgets/bw-sentence.php:498 src/widgets/bw-sentence.php:828
+#: src/widgets/bw-social-links.php:299 src/widgets/bw-social-links.php:385
+#: src/widgets/bw-text-animate.php:273 src/widgets/bw-text-marquee.php:445
+#: src/widgets/bw-title-animate.php:698 src/widgets/bw-title-animate.php:873
+#: src/widgets/bw-title-animate.php:1011 src/widgets/bw-title-animate.php:1175
+#: src/widgets/bw-title-animate.php:1311 src/widgets/bw-title-animate.php:1457
+#: src/widgets/bw-title.php:384 src/widgets/bw-typography.php:1165
+#: src/widgets/bw-typography.php:1251
+msgid "Padding"
+msgstr ""
+
+#: src/widgets/bw-alert.php:284 src/widgets/bw-gsap-trigger.php:1142
+msgid "Typography Style"
+msgstr ""
+
+#: src/widgets/bw-alert.php:292 src/widgets/bw-dropcap.php:335
+#: src/widgets/bw-dropcap.php:465 src/widgets/bw-flipbox.php:504
+#: src/widgets/bw-flipbox.php:639 src/widgets/bw-flipbox.php:769
+#: src/widgets/bw-flipbox.php:899 src/widgets/bw-flipbox.php:1034
+#: src/widgets/bw-flipbox.php:1164 src/widgets/bw-flipbox.php:1294
+#: src/widgets/bw-gsap-horizontal-scrolling.php:278
+#: src/widgets/bw-gsap-tabs.php:1018 src/widgets/bw-gsap-trigger.php:1264
+#: src/widgets/bw-image-carousel.php:1003 src/widgets/bw-list.php:467
+#: src/widgets/bw-list.php:576 src/widgets/bw-list.php:708
+#: src/widgets/bw-list.php:808 src/widgets/bw-magic-link.php:646
+#: src/widgets/bw-magic-link.php:773 src/widgets/bw-magic-link.php:1111
+#: src/widgets/bw-magic-link.php:1127 src/widgets/bw-magic-link.php:1243
+#: src/widgets/bw-magic-link.php:1276 src/widgets/bw-scroll-heat.php:912
+#: src/widgets/bw-scroll-heat.php:1049 src/widgets/bw-scroll-text.php:592
+#: src/widgets/bw-scroll-text.php:688 src/widgets/bw-text-animate.php:334
+#: src/widgets/bw-text-marquee.php:500 src/widgets/bw-title-animate.php:802
+#: src/widgets/bw-title-animate.php:938 src/widgets/bw-title-animate.php:1078
+#: src/widgets/bw-title-animate.php:1240 src/widgets/bw-title-animate.php:1386
+msgid "Color"
+msgstr ""
+
+#: src/widgets/bw-alert.php:307 src/widgets/bw-blockquote.php:549
+#: src/widgets/bw-blockquote.php:699 src/widgets/bw-box.php:523
+#: src/widgets/bw-button.php:948 src/widgets/bw-button.php:1003
+#: src/widgets/bw-call-to-action.php:497 src/widgets/bw-call-to-action.php:647
+#: src/widgets/bw-call-to-action.php:817 src/widgets/bw-dropcap.php:350
+#: src/widgets/bw-dropcap.php:480 src/widgets/bw-flipbox.php:654
+#: src/widgets/bw-flipbox.php:784 src/widgets/bw-flipbox.php:1049
+#: src/widgets/bw-flipbox.php:1179 src/widgets/bw-flipbox.php:1309
+#: src/widgets/bw-gsap-horizontal-scrolling.php:293
+#: src/widgets/bw-gsap-trigger.php:1276 src/widgets/bw-icon-box.php:1166
+#: src/widgets/bw-icon-box.php:1342 src/widgets/bw-icon-box.php:1518
+#: src/widgets/bw-icon-box.php:1696 src/widgets/bw-image-carousel.php:994
+#: src/widgets/bw-list.php:697 src/widgets/bw-list.php:797
+#: src/widgets/bw-magic-link.php:658 src/widgets/bw-magic-link.php:785
+#: src/widgets/bw-nav.php:447 src/widgets/bw-nav.php:477
+#: src/widgets/bw-scroll-text.php:581 src/widgets/bw-sentence.php:346
+#: src/widgets/bw-sentence.php:790 src/widgets/bw-sentence.php:935
+#: src/widgets/bw-text-animate.php:326 src/widgets/bw-text-animate.php:358
+#: src/widgets/bw-text-marquee.php:492 src/widgets/bw-text-marquee.php:515
+#: src/widgets/bw-title-animate.php:817 src/widgets/bw-title-animate.php:954
+#: src/widgets/bw-title-animate.php:1119 src/widgets/bw-title-animate.php:1255
+#: src/widgets/bw-title-animate.php:1401 src/widgets/bw-title.php:446
+#: src/widgets/bw-title.php:593 src/widgets/bw-typography.php:1328
+#: src/widgets/bw-typography.php:1579
+msgid "Typography"
+msgstr ""
+
+#: src/widgets/bw-alert.php:319 src/widgets/bw-alert.php:368
+#: src/widgets/bw-blockquote.php:561 src/widgets/bw-blockquote.php:711
+#: src/widgets/bw-button.php:1077 src/widgets/bw-button.php:1172
+#: src/widgets/bw-call-to-action.php:509 src/widgets/bw-call-to-action.php:659
+#: src/widgets/bw-call-to-action.php:829 src/widgets/bw-dropcap.php:362
+#: src/widgets/bw-dropcap.php:492 src/widgets/bw-flipbox.php:666
+#: src/widgets/bw-flipbox.php:796 src/widgets/bw-flipbox.php:1061
+#: src/widgets/bw-flipbox.php:1191 src/widgets/bw-flipbox.php:1341
+#: src/widgets/bw-gsap-trigger.php:1288 src/widgets/bw-gsap-trigger.php:1334
+#: src/widgets/bw-icon-box.php:1178 src/widgets/bw-icon-box.php:1354
+#: src/widgets/bw-icon-box.php:1530 src/widgets/bw-icon-box.php:1708
+#: src/widgets/bw-icon.php:321 src/widgets/bw-image-pro.php:844
+#: src/widgets/bw-magic-link.php:670 src/widgets/bw-magic-link.php:797
+#: src/widgets/bw-scroll-text.php:609 src/widgets/bw-scroll-text.php:705
+#: src/widgets/bw-text-animate.php:370 src/widgets/bw-text-marquee.php:527
+#: src/widgets/bw-title-animate.php:829 src/widgets/bw-title-animate.php:966
+#: src/widgets/bw-title-animate.php:1131 src/widgets/bw-title-animate.php:1267
+#: src/widgets/bw-title-animate.php:1413 src/widgets/bw-title.php:475
+#: src/widgets/bw-title.php:622 src/widgets/bw-typography.php:1340
+#: src/widgets/bw-typography.php:1591
+msgid "Text Shadow"
+msgstr ""
+
+#: src/widgets/bw-alert.php:334 src/widgets/bw-blockquote.php:794
+#: src/widgets/bw-button.php:1040 src/widgets/bw-button.php:1135
+#: src/widgets/bw-gsap-tabs.php:1517 src/widgets/bw-gsap-tabs.php:2293
+#: src/widgets/bw-gsap-trigger.php:1303 src/widgets/bw-icon-box.php:1957
+#: src/widgets/bw-icon.php:280 src/widgets/bw-icon.php:334
+#: src/widgets/bw-icon.php:358 src/widgets/bw-list.php:482
+#: src/widgets/bw-list.php:591 src/widgets/bw-nav.php:649
+#: src/widgets/bw-social-links.php:914 src/widgets/bw-social-links.php:962
+#: src/widgets/bw-typography.php:2270
+msgid "Icon Size"
+msgstr ""
+
+#: src/widgets/bw-alert.php:353 src/widgets/bw-blockquote.php:818
+#: src/widgets/bw-button.php:1060 src/widgets/bw-button.php:1155
+#: src/widgets/bw-gsap-tabs.php:1393 src/widgets/bw-gsap-tabs.php:1436
+#: src/widgets/bw-gsap-tabs.php:2281 src/widgets/bw-gsap-trigger.php:1322
+#: src/widgets/bw-icon.php:304 src/widgets/bw-social-links.php:899
+#: src/widgets/bw-social-links.php:947 src/widgets/bw-typography.php:2303
+msgid "Icon Color"
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:58
+msgid "Black Blockquote"
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:130
+msgid "Quote"
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:133 src/widgets/bw-flipbox.php:195
+#: src/widgets/bw-flipbox.php:327
+msgid ""
+"Contrary to popular belief, Lorem Ipsum is not simply random text. It has "
+"roots in a piece of classical Latin literature from 45 BC, making it over "
+"2000 years old."
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:134 src/widgets/bw-flipbox.php:196
+#: src/widgets/bw-flipbox.php:328
+msgid "Type your description here"
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:142
+msgid "Name"
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:144
+msgid "Black Widget"
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:145 src/widgets/bw-box.php:229
+#: src/widgets/bw-box.php:269 src/widgets/bw-button.php:376
+#: src/widgets/bw-call-to-action.php:132 src/widgets/bw-call-to-action.php:198
+#: src/widgets/bw-flipbox.php:185 src/widgets/bw-flipbox.php:317
+#: src/widgets/bw-flipbox.php:366 src/widgets/bw-icon-box.php:245
+#: src/widgets/bw-icon-box.php:390 src/widgets/bw-magic-link.php:331
+#: src/widgets/bw-title-animate.php:237 src/widgets/bw-title-animate.php:298
+#: src/widgets/bw-title-animate.php:313 src/widgets/bw-title-animate.php:328
+#: src/widgets/bw-title-animate.php:436 src/widgets/bw-title-animate.php:457
+#: src/widgets/bw-title-animate.php:494 src/widgets/bw-title-animate.php:511
+#: src/widgets/bw-title-animate.php:555 src/widgets/bw-title-animate.php:573
+#: src/widgets/bw-title-animate.php:591 src/widgets/bw-title-animate.php:607
+#: src/widgets/bw-title-animate.php:623 src/widgets/bw-title.php:162
+#: src/widgets/bw-title.php:202 src/widgets/bw-typography.php:231
+msgid "Type your title here"
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:146 src/widgets/bw-box.php:230
+#: src/widgets/bw-box.php:271 src/widgets/bw-title.php:163
+#: src/widgets/bw-title.php:204
+msgid ""
+"You can use all other HTML tags into the title field e.g. code, mark, abbr, "
+"blockquote and  ..."
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:154
+msgid "Select Quote Icon"
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:158
+msgid "SVG 1"
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:159
+msgid "SVG 2"
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:160
+msgid "SVG 3"
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:161
+msgid "SVG 4"
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:163
+msgid "Image/SVG"
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:188 src/widgets/bw-box.php:197
+#: src/widgets/bw-fade.php:146 src/widgets/bw-gsap-trigger.php:278
+#: src/widgets/bw-icon-box.php:496 src/widgets/bw-image-carousel.php:98
+#: src/widgets/bw-image-pro.php:176 src/widgets/bw-sentence.php:181
+#: src/widgets/bw-typography.php:452 src/widgets/bw-typography.php:569
+msgid "Choose Image"
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:220 src/widgets/bw-box.php:308
+#: src/widgets/bw-flipbox.php:436 src/widgets/bw-icon-box.php:1197
+#: src/widgets/bw-icon-box.php:1373 src/widgets/bw-icon-box.php:1549
+#: src/widgets/bw-icon-box.php:1727 src/widgets/bw-icon.php:157
+#: src/widgets/bw-image-pro.php:188 src/widgets/bw-magic-link.php:452
+#: src/widgets/bw-nav.php:233 src/widgets/bw-text-animate.php:205
+#: src/widgets/bw-title-animate.php:721 src/widgets/bw-title.php:241
+#: src/widgets/bw-typography.php:386 src/widgets/bw-typography.php:503
+#: src/widgets/bw-typography.php:707
+msgid "Text Alignment"
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:224 src/widgets/bw-box.php:312
+#: src/widgets/bw-button.php:404 src/widgets/bw-call-to-action.php:252
+#: src/widgets/bw-flipbox.php:440 src/widgets/bw-gsap-interactive-links.php:541
+#: src/widgets/bw-gsap-interactive-links.php:971
+#: src/widgets/bw-gsap-tabs.php:1942 src/widgets/bw-gsap-tabs.php:2057
+#: src/widgets/bw-gsap-trigger.php:954 src/widgets/bw-gsap-trigger.php:1221
+#: src/widgets/bw-icon-box.php:764 src/widgets/bw-icon-box.php:797
+#: src/widgets/bw-icon-box.php:1201 src/widgets/bw-icon-box.php:1377
+#: src/widgets/bw-icon-box.php:1553 src/widgets/bw-icon-box.php:1731
+#: src/widgets/bw-icon-box.php:2006 src/widgets/bw-icon.php:161
+#: src/widgets/bw-image-carousel.php:455 src/widgets/bw-image-carousel.php:1317
+#: src/widgets/bw-image-pro.php:192 src/widgets/bw-image-pro.php:856
+#: src/widgets/bw-list.php:280 src/widgets/bw-magic-link.php:456
+#: src/widgets/bw-nav.php:237 src/widgets/bw-scroll-heat.php:281
+#: src/widgets/bw-scroll-text.php:772 src/widgets/bw-sentence.php:576
+#: src/widgets/bw-social-links.php:258 src/widgets/bw-text-animate.php:209
+#: src/widgets/bw-title-animate.php:725 src/widgets/bw-title.php:245
+#: src/widgets/bw-typography.php:390 src/widgets/bw-typography.php:711
+msgid "Left"
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:228 src/widgets/bw-box.php:320
+#: src/widgets/bw-button.php:412 src/widgets/bw-call-to-action.php:260
+#: src/widgets/bw-flipbox.php:448 src/widgets/bw-gsap-interactive-links.php:549
+#: src/widgets/bw-gsap-interactive-links.php:979
+#: src/widgets/bw-gsap-tabs.php:1950 src/widgets/bw-gsap-tabs.php:2065
+#: src/widgets/bw-gsap-trigger.php:962 src/widgets/bw-gsap-trigger.php:1229
+#: src/widgets/bw-icon-box.php:772 src/widgets/bw-icon-box.php:801
+#: src/widgets/bw-icon-box.php:1209 src/widgets/bw-icon-box.php:1385
+#: src/widgets/bw-icon-box.php:1561 src/widgets/bw-icon-box.php:1739
+#: src/widgets/bw-icon-box.php:2014 src/widgets/bw-icon.php:169
+#: src/widgets/bw-image-carousel.php:463 src/widgets/bw-image-carousel.php:1325
+#: src/widgets/bw-image-pro.php:200 src/widgets/bw-image-pro.php:864
+#: src/widgets/bw-list.php:288 src/widgets/bw-magic-link.php:464
+#: src/widgets/bw-nav.php:245 src/widgets/bw-scroll-heat.php:289
+#: src/widgets/bw-scroll-text.php:780 src/widgets/bw-sentence.php:580
+#: src/widgets/bw-social-links.php:266 src/widgets/bw-text-animate.php:217
+#: src/widgets/bw-title-animate.php:733 src/widgets/bw-title.php:253
+#: src/widgets/bw-typography.php:507 src/widgets/bw-typography.php:719
+msgid "Right"
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:337 src/widgets/bw-blockquote.php:517
+#: src/widgets/bw-blockquote.php:667 src/widgets/bw-box.php:433
+#: src/widgets/bw-box.php:1415 src/widgets/bw-button.php:658
+#: src/widgets/bw-button.php:959 src/widgets/bw-button.php:1128
+#: src/widgets/bw-call-to-action.php:343 src/widgets/bw-call-to-action.php:465
+#: src/widgets/bw-call-to-action.php:615 src/widgets/bw-call-to-action.php:775
+#: src/widgets/bw-dropcap.php:237 src/widgets/bw-gsap-interactive-links.php:402
+#: src/widgets/bw-gsap-interactive-links.php:651
+#: src/widgets/bw-gsap-interactive-links.php:790
+#: src/widgets/bw-gsap-interactive-links.php:905
+#: src/widgets/bw-gsap-interactive-links.php:1259
+#: src/widgets/bw-gsap-tabs.php:771 src/widgets/bw-gsap-tabs.php:922
+#: src/widgets/bw-gsap-tabs.php:1407 src/widgets/bw-gsap-tabs.php:1891
+#: src/widgets/bw-icon-box.php:643 src/widgets/bw-icon-box.php:661
+#: src/widgets/bw-icon-box.php:933 src/widgets/bw-icon-box.php:1137
+#: src/widgets/bw-icon-box.php:1313 src/widgets/bw-icon-box.php:1489
+#: src/widgets/bw-icon-box.php:1665 src/widgets/bw-icon-box.php:1888
+#: src/widgets/bw-icon-box.php:2167 src/widgets/bw-image-pro.php:671
+#: src/widgets/bw-list.php:568 src/widgets/bw-list.php:788
+#: src/widgets/bw-magic-link.php:548 src/widgets/bw-magic-link.php:1269
+#: src/widgets/bw-nav.php:458 src/widgets/bw-nav.php:690
+#: src/widgets/bw-scroll-text.php:502 src/widgets/bw-scroll-text.php:682
+#: src/widgets/bw-sentence.php:743 src/widgets/bw-social-links.php:349
+#: src/widgets/bw-social-links.php:662 src/widgets/bw-social-links.php:940
+#: src/widgets/bw-typography.php:1215
+msgid "Hover"
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:430
+msgid "Content Style"
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:486
+msgid "Quote Styles"
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:502 src/widgets/bw-blockquote.php:652
+#: src/widgets/bw-call-to-action.php:450 src/widgets/bw-call-to-action.php:600
+#: src/widgets/bw-call-to-action.php:750 src/widgets/bw-icon-box.php:1125
+#: src/widgets/bw-icon-box.php:1301 src/widgets/bw-icon-box.php:1477
+#: src/widgets/bw-icon-box.php:1653 src/widgets/bw-icon-box.php:1836
+msgid "Normal Color"
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:524 src/widgets/bw-blockquote.php:674
+#: src/widgets/bw-call-to-action.php:472 src/widgets/bw-call-to-action.php:622
+#: src/widgets/bw-call-to-action.php:782
+#: src/widgets/bw-gsap-interactive-links.php:912
+#: src/widgets/bw-icon-box.php:1144 src/widgets/bw-icon-box.php:1320
+#: src/widgets/bw-icon-box.php:1496 src/widgets/bw-icon-box.php:1673
+#: src/widgets/bw-icon-box.php:1896
+msgid "Hover Color"
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:636
+msgid "Name Styles"
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:786
+msgid " SVG/Image/Icon Styles"
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:837 src/widgets/bw-icon-box.php:1982
+msgid "SVG Size"
+msgstr ""
+
+#: src/widgets/bw-blockquote.php:864 src/widgets/bw-title-animate.php:1673
+msgid "SVG Color"
+msgstr ""
+
+#: src/widgets/bw-box.php:58
+msgid "Black Box"
+msgstr ""
+
+#: src/widgets/bw-box.php:139 src/widgets/bw-button.php:298
+#: src/widgets/bw-button.php:319 src/widgets/bw-button.php:338
+#: src/widgets/bw-button.php:359 src/widgets/bw-image-marquee.php:239
+#: src/widgets/bw-social-links.php:134 src/widgets/bw-text-marquee.php:219
+#: src/widgets/bw-title.php:134
+msgid "Type 1"
+msgstr ""
+
+#: src/widgets/bw-box.php:140 src/widgets/bw-button.php:299
+#: src/widgets/bw-button.php:320 src/widgets/bw-button.php:339
+#: src/widgets/bw-button.php:360 src/widgets/bw-image-marquee.php:240
+#: src/widgets/bw-social-links.php:135 src/widgets/bw-text-marquee.php:220
+#: src/widgets/bw-title.php:135
+msgid "Type 2"
+msgstr ""
+
+#: src/widgets/bw-box.php:142 src/widgets/bw-gsap-tabs.php:137
+#: src/widgets/bw-title.php:144
+msgid ""
+"We created some skin before, you can use these or no! make a new custom type."
+msgstr ""
+
+#: src/widgets/bw-box.php:157
+msgid "Box Link"
+msgstr ""
+
+#: src/widgets/bw-box.php:161 src/widgets/bw-fade.php:182
+#: src/widgets/bw-gsap-tabs.php:205 src/widgets/bw-gsap-trigger.php:267
+#: src/widgets/bw-gsap-trigger.php:1174 src/widgets/bw-gsap-trigger.php:1187
+#: src/widgets/bw-gsap-trigger.php:1200 src/widgets/bw-icon.php:271
+#: src/widgets/bw-image-carousel.php:217 src/widgets/bw-image-carousel.php:376
+#: src/widgets/bw-image-carousel.php:390 src/widgets/bw-image-marquee.php:288
+#: src/widgets/bw-image-pro.php:227 src/widgets/bw-magic-link.php:370
+#: src/widgets/bw-scroll-heat.php:340 src/widgets/bw-scroll-heat.php:363
+#: src/widgets/bw-scroll-heat.php:554 src/widgets/bw-scroll-heat.php:777
+#: src/widgets/bw-scroll-heat.php:930 src/widgets/bw-scroll-heat.php:1164
+#: src/widgets/bw-text-marquee.php:268 src/widgets/bw-typography.php:692
+#: src/widgets/bw-typography.php:1019
+msgid "No"
+msgstr ""
+
+#: src/widgets/bw-box.php:162 src/widgets/bw-button.php:444
+#: src/widgets/bw-fade.php:183 src/widgets/bw-gsap-tabs.php:204
+#: src/widgets/bw-gsap-trigger.php:266 src/widgets/bw-gsap-trigger.php:1173
+#: src/widgets/bw-gsap-trigger.php:1186 src/widgets/bw-gsap-trigger.php:1199
+#: src/widgets/bw-icon-box.php:231 src/widgets/bw-icon-box.php:289
+#: src/widgets/bw-icon-box.php:347 src/widgets/bw-icon-box.php:377
+#: src/widgets/bw-icon-box.php:426 src/widgets/bw-icon-box.php:536
+#: src/widgets/bw-icon-box.php:573 src/widgets/bw-icon.php:272
+#: src/widgets/bw-image-carousel.php:216 src/widgets/bw-image-carousel.php:375
+#: src/widgets/bw-image-carousel.php:389 src/widgets/bw-image-marquee.php:287
+#: src/widgets/bw-image-pro.php:228 src/widgets/bw-magic-link.php:369
+#: src/widgets/bw-scroll-heat.php:339 src/widgets/bw-scroll-heat.php:362
+#: src/widgets/bw-scroll-heat.php:553 src/widgets/bw-scroll-heat.php:776
+#: src/widgets/bw-scroll-heat.php:929 src/widgets/bw-scroll-heat.php:1163
+#: src/widgets/bw-sentence.php:200 src/widgets/bw-sentence.php:373
+#: src/widgets/bw-sentence.php:444 src/widgets/bw-text-marquee.php:267
+#: src/widgets/bw-typography.php:691 src/widgets/bw-typography.php:1018
+#: src/widgets/bw-typography.php:1462 src/widgets/bw-typography.php:1524
+#: src/widgets/bw-typography.php:1713 src/widgets/bw-typography.php:1795
+msgid "Yes"
+msgstr ""
+
+#: src/widgets/bw-box.php:170 src/widgets/bw-button.php:383
+#: src/widgets/bw-fade.php:196 src/widgets/bw-flipbox.php:373
+#: src/widgets/bw-icon-box.php:402 src/widgets/bw-image-carousel.php:124
+#: src/widgets/bw-image-pro.php:236 src/widgets/bw-list.php:152
+#: src/widgets/bw-magic-link.php:338 src/widgets/bw-scroll-text.php:198
+#: src/widgets/bw-sentence.php:198 src/widgets/bw-sentence.php:209
+#: src/widgets/bw-social-links.php:170
+msgid "Link"
+msgstr ""
+
+#: src/widgets/bw-box.php:172 src/widgets/bw-button.php:385
+#: src/widgets/bw-fade.php:198 src/widgets/bw-flipbox.php:375
+#: src/widgets/bw-gsap-tabs.php:334 src/widgets/bw-gsap-tabs.php:500
+#: src/widgets/bw-icon-box.php:404 src/widgets/bw-image-pro.php:238
+#: src/widgets/bw-list.php:154 src/widgets/bw-magic-link.php:340
+#: src/widgets/bw-scroll-text.php:200 src/widgets/bw-sentence.php:211
+#: src/widgets/bw-social-links.php:172
+msgid "https://your-link.com"
+msgstr ""
+
+#: src/widgets/bw-box.php:226 src/widgets/bw-call-to-action.php:129
+#: src/widgets/bw-flipbox.php:182 src/widgets/bw-flipbox.php:314
+#: src/widgets/bw-gsap-horizontal-scrolling.php:190
+#: src/widgets/bw-icon-box.php:242 src/widgets/bw-list.php:129
+#: src/widgets/bw-scroll-text.php:164 src/widgets/bw-sentence.php:166
+#: src/widgets/bw-social-links.php:210 src/widgets/bw-title.php:159
+#: src/widgets/bw-typography.php:228
+msgid "Title"
+msgstr ""
+
+#: src/widgets/bw-box.php:228
+msgid "Clean & Solid"
+msgstr ""
+
+#: src/widgets/bw-box.php:238 src/widgets/bw-box.php:279
+#: src/widgets/bw-call-to-action.php:140 src/widgets/bw-call-to-action.php:173
+#: src/widgets/bw-icon-box.php:259 src/widgets/bw-icon-box.php:317
+#: src/widgets/bw-scroll-heat.php:257 src/widgets/bw-scroll-text.php:177
+#: src/widgets/bw-sentence.php:129 src/widgets/bw-text-animate.php:183
+#: src/widgets/bw-title-animate.php:652 src/widgets/bw-title.php:171
+#: src/widgets/bw-title.php:212 src/widgets/bw-typography.php:254
+msgid "HTML Tag"
+msgstr ""
+
+#: src/widgets/bw-box.php:242 src/widgets/bw-box.php:283
+#: src/widgets/bw-call-to-action.php:144 src/widgets/bw-call-to-action.php:177
+#: src/widgets/bw-icon-box.php:263 src/widgets/bw-icon-box.php:321
+#: src/widgets/bw-scroll-text.php:181 src/widgets/bw-sentence.php:133
+#: src/widgets/bw-text-animate.php:187 src/widgets/bw-title-animate.php:656
+#: src/widgets/bw-title.php:175 src/widgets/bw-title.php:216
+#: src/widgets/bw-typography.php:258
+msgid "div"
+msgstr ""
+
+#: src/widgets/bw-box.php:243 src/widgets/bw-box.php:284
+#: src/widgets/bw-call-to-action.php:145 src/widgets/bw-call-to-action.php:178
+#: src/widgets/bw-icon-box.php:264 src/widgets/bw-icon-box.php:322
+#: src/widgets/bw-scroll-text.php:182 src/widgets/bw-sentence.php:134
+#: src/widgets/bw-text-animate.php:188 src/widgets/bw-title-animate.php:657
+#: src/widgets/bw-title.php:176 src/widgets/bw-title.php:217
+#: src/widgets/bw-typography.php:259
+msgid "H1"
+msgstr ""
+
+#: src/widgets/bw-box.php:244 src/widgets/bw-box.php:285
+#: src/widgets/bw-call-to-action.php:146 src/widgets/bw-call-to-action.php:179
+#: src/widgets/bw-icon-box.php:265 src/widgets/bw-icon-box.php:323
+#: src/widgets/bw-scroll-text.php:183 src/widgets/bw-sentence.php:135
+#: src/widgets/bw-text-animate.php:189 src/widgets/bw-title-animate.php:658
+#: src/widgets/bw-title.php:177 src/widgets/bw-title.php:218
+#: src/widgets/bw-typography.php:260
+msgid "H2"
+msgstr ""
+
+#: src/widgets/bw-box.php:245 src/widgets/bw-box.php:286
+#: src/widgets/bw-call-to-action.php:147 src/widgets/bw-call-to-action.php:180
+#: src/widgets/bw-icon-box.php:266 src/widgets/bw-icon-box.php:324
+#: src/widgets/bw-scroll-text.php:184 src/widgets/bw-sentence.php:136
+#: src/widgets/bw-text-animate.php:190 src/widgets/bw-title-animate.php:659
+#: src/widgets/bw-title.php:178 src/widgets/bw-title.php:219
+#: src/widgets/bw-typography.php:261
+msgid "H3"
+msgstr ""
+
+#: src/widgets/bw-box.php:246 src/widgets/bw-box.php:287
+#: src/widgets/bw-call-to-action.php:148 src/widgets/bw-call-to-action.php:181
+#: src/widgets/bw-icon-box.php:267 src/widgets/bw-icon-box.php:325
+#: src/widgets/bw-scroll-text.php:185 src/widgets/bw-sentence.php:137
+#: src/widgets/bw-text-animate.php:191 src/widgets/bw-title-animate.php:660
+#: src/widgets/bw-title.php:179 src/widgets/bw-title.php:220
+#: src/widgets/bw-typography.php:262
+msgid "H4"
+msgstr ""
+
+#: src/widgets/bw-box.php:247 src/widgets/bw-box.php:288
+#: src/widgets/bw-call-to-action.php:149 src/widgets/bw-call-to-action.php:182
+#: src/widgets/bw-icon-box.php:268 src/widgets/bw-icon-box.php:326
+#: src/widgets/bw-scroll-text.php:186 src/widgets/bw-sentence.php:138
+#: src/widgets/bw-text-animate.php:192 src/widgets/bw-title-animate.php:661
+#: src/widgets/bw-title.php:180 src/widgets/bw-title.php:221
+#: src/widgets/bw-typography.php:263
+msgid "H5"
+msgstr ""
+
+#: src/widgets/bw-box.php:248 src/widgets/bw-box.php:289
+#: src/widgets/bw-call-to-action.php:150 src/widgets/bw-call-to-action.php:183
+#: src/widgets/bw-icon-box.php:269 src/widgets/bw-icon-box.php:327
+#: src/widgets/bw-scroll-text.php:187 src/widgets/bw-sentence.php:139
+#: src/widgets/bw-text-animate.php:193 src/widgets/bw-title-animate.php:662
+#: src/widgets/bw-title.php:181 src/widgets/bw-title.php:222
+#: src/widgets/bw-typography.php:264
+msgid "H6"
+msgstr ""
+
+#: src/widgets/bw-box.php:249 src/widgets/bw-box.php:290
+#: src/widgets/bw-call-to-action.php:151 src/widgets/bw-call-to-action.php:184
+#: src/widgets/bw-icon-box.php:270 src/widgets/bw-icon-box.php:328
+#: src/widgets/bw-scroll-text.php:188 src/widgets/bw-sentence.php:140
+#: src/widgets/bw-text-animate.php:194 src/widgets/bw-title-animate.php:663
+#: src/widgets/bw-title.php:182 src/widgets/bw-title.php:223
+#: src/widgets/bw-typography.php:265
+msgid "p"
+msgstr ""
+
+#: src/widgets/bw-box.php:250 src/widgets/bw-box.php:291
+#: src/widgets/bw-call-to-action.php:152 src/widgets/bw-call-to-action.php:185
+#: src/widgets/bw-icon-box.php:271 src/widgets/bw-icon-box.php:329
+#: src/widgets/bw-scroll-text.php:189 src/widgets/bw-sentence.php:141
+#: src/widgets/bw-text-animate.php:195 src/widgets/bw-title-animate.php:664
+#: src/widgets/bw-title.php:183 src/widgets/bw-title.php:224
+#: src/widgets/bw-typography.php:266
+msgid "span"
+msgstr ""
+
+#: src/widgets/bw-box.php:252 src/widgets/bw-box.php:293
+#: src/widgets/bw-call-to-action.php:154 src/widgets/bw-call-to-action.php:187
+#: src/widgets/bw-icon-box.php:273 src/widgets/bw-icon-box.php:331
+#: src/widgets/bw-sentence.php:143 src/widgets/bw-title-animate.php:666
+#: src/widgets/bw-title.php:185 src/widgets/bw-title.php:226
+#: src/widgets/bw-typography.php:268
+msgid ""
+"Choose an HTML tag, it can help you to SEO and beautifully of the UI design "
+"with follow the structure of your website."
+msgstr ""
+
+#: src/widgets/bw-box.php:267 src/widgets/bw-call-to-action.php:162
+#: src/widgets/bw-icon-box.php:300 src/widgets/bw-title.php:200
+msgid "Subtitle"
+msgstr ""
+
+#: src/widgets/bw-box.php:270
+msgid "Development, Design, and E-Commerce"
+msgstr ""
+
+#: src/widgets/bw-box.php:316 src/widgets/bw-button.php:408
+#: src/widgets/bw-call-to-action.php:256 src/widgets/bw-flipbox.php:444
+#: src/widgets/bw-gsap-interactive-links.php:545
+#: src/widgets/bw-gsap-interactive-links.php:975
+#: src/widgets/bw-gsap-tabs.php:1946 src/widgets/bw-gsap-tabs.php:2061
+#: src/widgets/bw-gsap-trigger.php:958 src/widgets/bw-gsap-trigger.php:1225
+#: src/widgets/bw-icon-box.php:768 src/widgets/bw-icon-box.php:1205
+#: src/widgets/bw-icon-box.php:1381 src/widgets/bw-icon-box.php:1557
+#: src/widgets/bw-icon-box.php:1735 src/widgets/bw-icon-box.php:2010
+#: src/widgets/bw-icon.php:165 src/widgets/bw-image-carousel.php:459
+#: src/widgets/bw-image-carousel.php:1321 src/widgets/bw-image-pro.php:196
+#: src/widgets/bw-image-pro.php:860 src/widgets/bw-list.php:284
+#: src/widgets/bw-magic-link.php:460 src/widgets/bw-nav.php:241
+#: src/widgets/bw-scroll-heat.php:285 src/widgets/bw-scroll-text.php:776
+#: src/widgets/bw-social-links.php:262 src/widgets/bw-text-animate.php:213
+#: src/widgets/bw-title-animate.php:729 src/widgets/bw-title.php:249
+#: src/widgets/bw-typography.php:715
+msgid "Center"
+msgstr ""
+
+#: src/widgets/bw-box.php:531 src/widgets/bw-gsap-interactive-links.php:776
+#: src/widgets/bw-sentence.php:246 src/widgets/bw-sentence.php:772
+#: src/widgets/bw-sentence.php:919 src/widgets/bw-title.php:431
+#: src/widgets/bw-typography.php:1313 src/widgets/bw-typography.php:1564
+msgid "Title Color"
+msgstr ""
+
+#: src/widgets/bw-box.php:544 src/widgets/bw-title.php:423
+#: src/widgets/bw-typography.php:1305
+msgid "Title Typography"
+msgstr ""
+
+#: src/widgets/bw-box.php:555 src/widgets/bw-title.php:578
+msgid "Subtitle Color"
+msgstr ""
+
+#: src/widgets/bw-box.php:568 src/widgets/bw-title.php:570
+msgid "Subtitle Typography"
+msgstr ""
+
+#: src/widgets/bw-box.php:581 src/widgets/bw-fade.php:446
+#: src/widgets/bw-image-pro.php:903 src/widgets/bw-typography.php:1822
+msgid "2D & 3D Normal Transform Style"
+msgstr ""
+
+#: src/widgets/bw-box.php:590 src/widgets/bw-box.php:988
+#: src/widgets/bw-fade.php:460 src/widgets/bw-fade.php:868
+#: src/widgets/bw-gsap-trigger.php:578 src/widgets/bw-gsap-trigger.php:747
+#: src/widgets/bw-image-pro.php:912 src/widgets/bw-image-pro.php:1310
+#: src/widgets/bw-typography.php:1831
+msgid "Transform Style"
+msgstr ""
+
+#: src/widgets/bw-box.php:609 src/widgets/bw-box.php:1007
+#: src/widgets/bw-fade.php:479 src/widgets/bw-fade.php:887
+#: src/widgets/bw-image-pro.php:931 src/widgets/bw-image-pro.php:1329
+#: src/widgets/bw-typography.php:1850
+msgid "Move"
+msgstr ""
+
+#: src/widgets/bw-box.php:616 src/widgets/bw-box.php:1014
+#: src/widgets/bw-fade.php:486 src/widgets/bw-fade.php:894
+#: src/widgets/bw-image-pro.php:938 src/widgets/bw-image-pro.php:1336
+#: src/widgets/bw-typography.php:1857
+msgid "Move on → X"
+msgstr ""
+
+#: src/widgets/bw-box.php:630 src/widgets/bw-box.php:1028
+#: src/widgets/bw-fade.php:500 src/widgets/bw-fade.php:908
+#: src/widgets/bw-image-pro.php:952 src/widgets/bw-image-pro.php:1350
+#: src/widgets/bw-typography.php:1871
+msgid "movement on the diagram X - do not leave empty!"
+msgstr ""
+
+#: src/widgets/bw-box.php:637 src/widgets/bw-box.php:1035
+#: src/widgets/bw-fade.php:507 src/widgets/bw-fade.php:915
+#: src/widgets/bw-image-pro.php:959 src/widgets/bw-image-pro.php:1357
+#: src/widgets/bw-typography.php:1878
+msgid "Move on ↑ Y"
+msgstr ""
+
+#: src/widgets/bw-box.php:651 src/widgets/bw-box.php:1049
+#: src/widgets/bw-fade.php:521 src/widgets/bw-fade.php:929
+#: src/widgets/bw-image-pro.php:973 src/widgets/bw-image-pro.php:1371
+#: src/widgets/bw-typography.php:1892
+msgid "movement on the diagram Y - do not leave empty!"
+msgstr ""
+
+#: src/widgets/bw-box.php:658 src/widgets/bw-box.php:1056
+#: src/widgets/bw-fade.php:528 src/widgets/bw-fade.php:936
+#: src/widgets/bw-image-pro.php:980 src/widgets/bw-image-pro.php:1378
+#: src/widgets/bw-typography.php:1899
+msgid "Move on ↙ Z"
+msgstr ""
+
+#: src/widgets/bw-box.php:672 src/widgets/bw-box.php:1070
+#: src/widgets/bw-fade.php:542 src/widgets/bw-image-pro.php:994
+#: src/widgets/bw-image-pro.php:1392 src/widgets/bw-typography.php:1913
+msgid "movement on the diagram Z - do not leave empty!"
+msgstr ""
+
+#: src/widgets/bw-box.php:680 src/widgets/bw-box.php:1078
+#: src/widgets/bw-fade.php:550 src/widgets/bw-fade.php:958
+#: src/widgets/bw-icon-box.php:590 src/widgets/bw-icon-box.php:611
+#: src/widgets/bw-icon-box.php:648 src/widgets/bw-icon-box.php:666
+#: src/widgets/bw-image-pro.php:1002 src/widgets/bw-image-pro.php:1400
+#: src/widgets/bw-typography.php:1921
+msgid "Scale"
+msgstr ""
+
+#: src/widgets/bw-box.php:687 src/widgets/bw-box.php:1085
+#: src/widgets/bw-fade.php:557 src/widgets/bw-fade.php:965
+#: src/widgets/bw-image-pro.php:1009 src/widgets/bw-image-pro.php:1407
+#: src/widgets/bw-typography.php:1928
+msgid "Scale on → X"
+msgstr ""
+
+#: src/widgets/bw-box.php:701 src/widgets/bw-box.php:1099
+#: src/widgets/bw-fade.php:571 src/widgets/bw-fade.php:979
+#: src/widgets/bw-image-pro.php:1023 src/widgets/bw-image-pro.php:1421
+#: src/widgets/bw-typography.php:1942
+msgid "set 1.1 to scale on left and right - do not set 0"
+msgstr ""
+
+#: src/widgets/bw-box.php:708 src/widgets/bw-box.php:1106
+#: src/widgets/bw-fade.php:578 src/widgets/bw-fade.php:986
+#: src/widgets/bw-image-pro.php:1030 src/widgets/bw-image-pro.php:1428
+#: src/widgets/bw-typography.php:1949
+msgid "Scale on ↑ Y"
+msgstr ""
+
+#: src/widgets/bw-box.php:722 src/widgets/bw-box.php:1120
+#: src/widgets/bw-fade.php:592 src/widgets/bw-fade.php:1000
+#: src/widgets/bw-image-pro.php:1044 src/widgets/bw-image-pro.php:1442
+#: src/widgets/bw-typography.php:1963
+msgid "set 1.1 to scale on top and bottom - do not set 0"
+msgstr ""
+
+#: src/widgets/bw-box.php:729 src/widgets/bw-box.php:1127
+#: src/widgets/bw-fade.php:599 src/widgets/bw-fade.php:1007
+#: src/widgets/bw-image-pro.php:1051 src/widgets/bw-image-pro.php:1449
+#: src/widgets/bw-typography.php:1970
+msgid "Scale on ↙ Z"
+msgstr ""
+
+#: src/widgets/bw-box.php:743 src/widgets/bw-box.php:764
+#: src/widgets/bw-box.php:785 src/widgets/bw-box.php:1141
+#: src/widgets/bw-box.php:1162 src/widgets/bw-box.php:1183
+#: src/widgets/bw-fade.php:613 src/widgets/bw-fade.php:634
+#: src/widgets/bw-fade.php:655 src/widgets/bw-fade.php:1021
+#: src/widgets/bw-fade.php:1042 src/widgets/bw-fade.php:1063
+#: src/widgets/bw-image-pro.php:1065 src/widgets/bw-image-pro.php:1086
+#: src/widgets/bw-image-pro.php:1107 src/widgets/bw-image-pro.php:1463
+#: src/widgets/bw-image-pro.php:1484 src/widgets/bw-image-pro.php:1505
+#: src/widgets/bw-typography.php:1984 src/widgets/bw-typography.php:2005
+#: src/widgets/bw-typography.php:2026
+msgid "If you want to use scale Z or 3D Scale, you should set perspective size"
+msgstr ""
+
+#: src/widgets/bw-box.php:750 src/widgets/bw-box.php:1148
+#: src/widgets/bw-fade.php:620 src/widgets/bw-fade.php:1028
+#: src/widgets/bw-image-pro.php:1072 src/widgets/bw-image-pro.php:1470
+#: src/widgets/bw-typography.php:1991
+msgid "Self Perspective ◊"
+msgstr ""
+
+#: src/widgets/bw-box.php:771 src/widgets/bw-box.php:1169
+#: src/widgets/bw-fade.php:641 src/widgets/bw-fade.php:1049
+#: src/widgets/bw-image-pro.php:1093 src/widgets/bw-image-pro.php:1491
+#: src/widgets/bw-typography.php:2012
+msgid "Children Perspective ◊"
+msgstr ""
+
+#: src/widgets/bw-box.php:793 src/widgets/bw-box.php:1191
+#: src/widgets/bw-fade.php:663 src/widgets/bw-fade.php:1071
+#: src/widgets/bw-icon-box.php:591 src/widgets/bw-icon-box.php:612
+#: src/widgets/bw-icon-box.php:649 src/widgets/bw-icon-box.php:667
+#: src/widgets/bw-image-pro.php:1115 src/widgets/bw-image-pro.php:1513
+#: src/widgets/bw-magic-link.php:1288 src/widgets/bw-typography.php:2034
+msgid "Rotate"
+msgstr ""
+
+#: src/widgets/bw-box.php:800 src/widgets/bw-box.php:1198
+#: src/widgets/bw-fade.php:670 src/widgets/bw-fade.php:1078
+#: src/widgets/bw-image-pro.php:1122 src/widgets/bw-image-pro.php:1520
+#: src/widgets/bw-typography.php:2041
+msgid "Rotate on → X"
+msgstr ""
+
+#: src/widgets/bw-box.php:820 src/widgets/bw-box.php:1218
+#: src/widgets/bw-fade.php:690 src/widgets/bw-fade.php:1098
+#: src/widgets/bw-image-pro.php:1142 src/widgets/bw-image-pro.php:1540
+#: src/widgets/bw-typography.php:2061
+msgid "Rotate on ↑ Y"
+msgstr ""
+
+#: src/widgets/bw-box.php:840 src/widgets/bw-box.php:1238
+#: src/widgets/bw-fade.php:710 src/widgets/bw-fade.php:1118
+#: src/widgets/bw-image-pro.php:1162 src/widgets/bw-image-pro.php:1560
+#: src/widgets/bw-typography.php:2081
+msgid "Rotate on ↙ Z"
+msgstr ""
+
+#: src/widgets/bw-box.php:861 src/widgets/bw-box.php:1259
+#: src/widgets/bw-fade.php:731 src/widgets/bw-fade.php:1139
+#: src/widgets/bw-image-pro.php:1183 src/widgets/bw-image-pro.php:1581
+#: src/widgets/bw-typography.php:2102
+msgid "Skew"
+msgstr ""
+
+#: src/widgets/bw-box.php:868 src/widgets/bw-box.php:1266
+#: src/widgets/bw-fade.php:738 src/widgets/bw-fade.php:1146
+#: src/widgets/bw-image-pro.php:1190 src/widgets/bw-image-pro.php:1588
+#: src/widgets/bw-typography.php:2109
+msgid "Skew on → X ▱"
+msgstr ""
+
+#: src/widgets/bw-box.php:888 src/widgets/bw-box.php:1286
+#: src/widgets/bw-fade.php:758 src/widgets/bw-fade.php:1166
+#: src/widgets/bw-image-pro.php:1210 src/widgets/bw-image-pro.php:1608
+#: src/widgets/bw-typography.php:2129
+msgid "Skew on ↑ Y ▱"
+msgstr ""
+
+#: src/widgets/bw-box.php:913 src/widgets/bw-fade.php:783
+#: src/widgets/bw-image-pro.php:1235
+msgid "Cursor & Hover Animate"
+msgstr ""
+
+#: src/widgets/bw-box.php:922 src/widgets/bw-fade.php:797
+#: src/widgets/bw-image-pro.php:1244
+msgid "Select Cursor Style"
+msgstr ""
+
+#: src/widgets/bw-box.php:926 src/widgets/bw-fade.php:801
+#: src/widgets/bw-image-pro.php:1248
+msgid "auto"
+msgstr ""
+
+#: src/widgets/bw-box.php:927 src/widgets/bw-fade.php:802
+#: src/widgets/bw-gsap-interactive-links.php:194
+#: src/widgets/bw-image-pro.php:1249
+msgid "default"
+msgstr ""
+
+#: src/widgets/bw-box.php:928 src/widgets/bw-fade.php:803
+#: src/widgets/bw-image-pro.php:1250
+msgid "none"
+msgstr ""
+
+#: src/widgets/bw-box.php:929 src/widgets/bw-fade.php:804
+#: src/widgets/bw-image-pro.php:1251
+msgid "pointer"
+msgstr ""
+
+#: src/widgets/bw-box.php:930 src/widgets/bw-fade.php:805
+#: src/widgets/bw-image-pro.php:1252
+msgid "not-Allowed"
+msgstr ""
+
+#: src/widgets/bw-box.php:931 src/widgets/bw-fade.php:806
+#: src/widgets/bw-image-pro.php:1253
+msgid "wait"
+msgstr ""
+
+#: src/widgets/bw-box.php:932 src/widgets/bw-fade.php:807
+#: src/widgets/bw-image-pro.php:1254
+msgid "progress"
+msgstr ""
+
+#: src/widgets/bw-box.php:933 src/widgets/bw-fade.php:808
+#: src/widgets/bw-image-pro.php:1255
+msgid "help"
+msgstr ""
+
+#: src/widgets/bw-box.php:934 src/widgets/bw-fade.php:809
+#: src/widgets/bw-image-pro.php:1256
+msgid "context-menu"
+msgstr ""
+
+#: src/widgets/bw-box.php:935 src/widgets/bw-fade.php:810
+#: src/widgets/bw-image-pro.php:1257
+msgid "cell"
+msgstr ""
+
+#: src/widgets/bw-box.php:936 src/widgets/bw-fade.php:811
+#: src/widgets/bw-image-pro.php:1258
+msgid "crosshair"
+msgstr ""
+
+#: src/widgets/bw-box.php:937 src/widgets/bw-fade.php:812
+#: src/widgets/bw-image-pro.php:1259
+msgid "text"
+msgstr ""
+
+#: src/widgets/bw-box.php:938 src/widgets/bw-fade.php:813
+#: src/widgets/bw-image-pro.php:1260
+msgid "wetical-text"
+msgstr ""
+
+#: src/widgets/bw-box.php:939 src/widgets/bw-fade.php:814
+#: src/widgets/bw-image-pro.php:1261
+msgid "grab"
+msgstr ""
+
+#: src/widgets/bw-box.php:940 src/widgets/bw-fade.php:815
+#: src/widgets/bw-image-pro.php:1262
+msgid "grabbing"
+msgstr ""
+
+#: src/widgets/bw-box.php:941 src/widgets/bw-fade.php:816
+#: src/widgets/bw-image-pro.php:1263
+msgid "alias"
+msgstr ""
+
+#: src/widgets/bw-box.php:942 src/widgets/bw-fade.php:817
+#: src/widgets/bw-image-pro.php:1264
+msgid "copy"
+msgstr ""
+
+#: src/widgets/bw-box.php:943 src/widgets/bw-fade.php:818
+#: src/widgets/bw-image-pro.php:1265
+msgid "move"
+msgstr ""
+
+#: src/widgets/bw-box.php:944 src/widgets/bw-fade.php:819
+#: src/widgets/bw-image-pro.php:1266
+msgid "zoom-in"
+msgstr ""
+
+#: src/widgets/bw-box.php:945 src/widgets/bw-fade.php:820
+#: src/widgets/bw-image-pro.php:1267
+msgid "zoom-out"
+msgstr ""
+
+#: src/widgets/bw-box.php:946 src/widgets/bw-fade.php:821
+#: src/widgets/bw-image-pro.php:1268
+msgid "col-resize"
+msgstr ""
+
+#: src/widgets/bw-box.php:947 src/widgets/bw-fade.php:822
+#: src/widgets/bw-image-pro.php:1269
+msgid "row-resize"
+msgstr ""
+
+#: src/widgets/bw-box.php:948 src/widgets/bw-fade.php:823
+#: src/widgets/bw-image-pro.php:1270
+msgid "nesw-resize"
+msgstr ""
+
+#: src/widgets/bw-box.php:949 src/widgets/bw-fade.php:824
+#: src/widgets/bw-image-pro.php:1271
+msgid "newse-resize"
+msgstr ""
+
+#: src/widgets/bw-box.php:950 src/widgets/bw-fade.php:825
+#: src/widgets/bw-image-pro.php:1272
+msgid "ew-resize"
+msgstr ""
+
+#: src/widgets/bw-box.php:951 src/widgets/bw-fade.php:826
+#: src/widgets/bw-image-pro.php:1273
+msgid "ns-resize"
+msgstr ""
+
+#: src/widgets/bw-box.php:952 src/widgets/bw-fade.php:827
+#: src/widgets/bw-image-pro.php:1274
+msgid "n-resize"
+msgstr ""
+
+#: src/widgets/bw-box.php:953 src/widgets/bw-fade.php:828
+#: src/widgets/bw-image-pro.php:1275
+msgid "w-resize"
+msgstr ""
+
+#: src/widgets/bw-box.php:954 src/widgets/bw-fade.php:829
+#: src/widgets/bw-image-pro.php:1276
+msgid "s-resize"
+msgstr ""
+
+#: src/widgets/bw-box.php:955 src/widgets/bw-fade.php:830
+#: src/widgets/bw-image-pro.php:1277
+msgid "e-resize"
+msgstr ""
+
+#: src/widgets/bw-box.php:956 src/widgets/bw-fade.php:831
+#: src/widgets/bw-image-pro.php:1278
+msgid "nw-resize"
+msgstr ""
+
+#: src/widgets/bw-box.php:957 src/widgets/bw-fade.php:832
+#: src/widgets/bw-image-pro.php:1279
+msgid "ne-resize"
+msgstr ""
+
+#: src/widgets/bw-box.php:958 src/widgets/bw-fade.php:833
+#: src/widgets/bw-image-pro.php:1280
+msgid "sw-resize"
+msgstr ""
+
+#: src/widgets/bw-box.php:959 src/widgets/bw-fade.php:834
+#: src/widgets/bw-image-pro.php:1281
+msgid "se-resize"
+msgstr ""
+
+#: src/widgets/bw-box.php:961 src/widgets/bw-fade.php:139
+#: src/widgets/bw-fade.php:836 src/widgets/bw-image-pro.php:1283
+msgid ""
+"It just work with scroll down and does not work on first section. it works "
+"once"
+msgstr ""
+
+#: src/widgets/bw-box.php:968 src/widgets/bw-fade.php:843
+#: src/widgets/bw-image-pro.php:1290
+msgid "Type Custom Animate"
+msgstr ""
+
+#: src/widgets/bw-box.php:970 src/widgets/bw-fade.php:845
+#: src/widgets/bw-image-pro.php:1292
+msgid "all 0.23s ease"
+msgstr ""
+
+#: src/widgets/bw-box.php:979 src/widgets/bw-fade.php:854
+#: src/widgets/bw-image-pro.php:1301
+msgid "2D & 3D Hover Transform Style"
+msgstr ""
+
+#: src/widgets/bw-box.php:1311 src/widgets/bw-gsap-trigger.php:927
+#: src/widgets/bw-image-marquee.php:513
+msgid "Image Style"
+msgstr ""
+
+#: src/widgets/bw-box.php:1509 src/widgets/bw-image-pro.php:789
+msgid "Hover Animation"
+msgstr ""
+
+#: src/widgets/bw-box.php:1522
+msgid "Overlay Style"
+msgstr ""
+
+#: src/widgets/bw-box.php:1546 src/widgets/bw-flipbox.php:1392
+msgid "Background Hover"
+msgstr ""
+
+#: src/widgets/bw-button.php:59
+msgid "Black Button"
+msgstr ""
+
+#: src/widgets/bw-button.php:223 src/widgets/bw-magic-link.php:261
+msgid "Minimal"
+msgstr ""
+
+#: src/widgets/bw-button.php:224 src/widgets/bw-magic-link.php:263
+msgid "Modern"
+msgstr ""
+
+#: src/widgets/bw-button.php:225
+msgid "Noise"
+msgstr ""
+
+#: src/widgets/bw-button.php:226
+msgid "Fancy"
+msgstr ""
+
+#: src/widgets/bw-button.php:227
+msgid "Abstract"
+msgstr ""
+
+#: src/widgets/bw-button.php:228
+msgid "Gradient"
+msgstr ""
+
+#: src/widgets/bw-button.php:229 src/widgets/bw-magic-link.php:264
+#: src/widgets/bw-title-animate.php:154 src/widgets/bw-typography.php:201
+msgid "Simple"
+msgstr ""
+
+#: src/widgets/bw-button.php:230 src/widgets/bw-title.php:142
+msgid "Custom"
+msgstr ""
+
+#: src/widgets/bw-button.php:234
+msgid "Effect Marquee"
+msgstr ""
+
+#: src/widgets/bw-button.php:235
+msgid "Vertical Swap"
+msgstr ""
+
+#: src/widgets/bw-button.php:236
+msgid "Arrow Slide"
+msgstr ""
+
+#: src/widgets/bw-button.php:237
+msgid "Perspective Flip"
+msgstr ""
+
+#: src/widgets/bw-button.php:268 src/widgets/bw-magic-link.php:302
+msgid "Hover Text"
+msgstr ""
+
+#: src/widgets/bw-button.php:271
+msgid "Same as button text if empty"
+msgstr ""
+
+#: src/widgets/bw-button.php:283
+msgid ""
+"These effects need GSAP enabled in Black Widgets settings (GSAP CDN). "
+"Perspective Flip also needs the SplitText CDN."
+msgstr ""
+
+#: src/widgets/bw-button.php:294
+msgid "Modern Skin"
+msgstr ""
+
+#: src/widgets/bw-button.php:300 src/widgets/bw-button.php:321
+#: src/widgets/bw-button.php:340 src/widgets/bw-social-links.php:136
+#: src/widgets/bw-title.php:136
+msgid "Type 3"
+msgstr ""
+
+#: src/widgets/bw-button.php:301 src/widgets/bw-button.php:341
+#: src/widgets/bw-social-links.php:137 src/widgets/bw-title.php:137
+msgid "Type 4"
+msgstr ""
+
+#: src/widgets/bw-button.php:302 src/widgets/bw-button.php:342
+#: src/widgets/bw-social-links.php:138 src/widgets/bw-title.php:138
+msgid "Type 5"
+msgstr ""
+
+#: src/widgets/bw-button.php:315
+msgid "Noise Skin"
+msgstr ""
+
+#: src/widgets/bw-button.php:334
+msgid "Fancy Skin"
+msgstr ""
+
+#: src/widgets/bw-button.php:355
+msgid "Abstract Skin"
+msgstr ""
+
+#: src/widgets/bw-button.php:373 src/widgets/bw-call-to-action.php:195
+#: src/widgets/bw-flipbox.php:363 src/widgets/bw-gsap-tabs.php:323
+#: src/widgets/bw-gsap-tabs.php:489 src/widgets/bw-magic-link.php:328
+msgid "Button Text"
+msgstr ""
+
+#: src/widgets/bw-button.php:375
+msgid "Lets started"
+msgstr ""
+
+#: src/widgets/bw-button.php:399 src/widgets/bw-gsap-interactive-links.php:537
+#: src/widgets/bw-gsap-trigger.php:950 src/widgets/bw-gsap-trigger.php:1217
+#: src/widgets/bw-list.php:276 src/widgets/bw-scroll-heat.php:277
+#: src/widgets/bw-scroll-text.php:768 src/widgets/bw-social-links.php:254
+msgid "Alignment"
+msgstr ""
+
+#: src/widgets/bw-button.php:428 src/widgets/bw-title.php:271
+msgid "Custom Content"
+msgstr ""
+
+#: src/widgets/bw-button.php:442
+msgid "Do You Need Icon/shape?"
+msgstr ""
+
+#: src/widgets/bw-button.php:445
+msgid "No!"
+msgstr ""
+
+#: src/widgets/bw-button.php:472 src/widgets/bw-magic-link.php:407
+#: src/widgets/bw-title-animate.php:622
+msgid "After"
+msgstr ""
+
+#: src/widgets/bw-button.php:473 src/widgets/bw-magic-link.php:403
+#: src/widgets/bw-title-animate.php:297 src/widgets/bw-title-animate.php:435
+msgid "Before"
+msgstr ""
+
+#: src/widgets/bw-button.php:474
+msgid "Up"
+msgstr ""
+
+#: src/widgets/bw-button.php:475
+msgid "Down "
+msgstr ""
+
+#: src/widgets/bw-button.php:541 src/widgets/bw-button.php:700
+#: src/widgets/bw-button.php:859 src/widgets/bw-button.php:990
+msgid "Wrapper Background"
+msgstr ""
+
+#: src/widgets/bw-button.php:819 src/widgets/bw-flipbox.php:1286
+msgid "Button Typography"
+msgstr ""
+
+#: src/widgets/bw-button.php:835 src/widgets/bw-button.php:966
+msgid "Button Text Color"
+msgstr ""
+
+#: src/widgets/bw-button.php:871
+msgid "Color 1(Gradiant)"
+msgstr ""
+
+#: src/widgets/bw-button.php:888
+msgid "Color 2(Gradiant)"
+msgstr ""
+
+#: src/widgets/bw-button.php:903
+#: src/widgets/bw-gsap-horizontal-scrolling.php:239
+#: src/widgets/bw-gsap-trigger.php:1029 src/widgets/bw-image-carousel.php:289
+#: src/widgets/bw-image-carousel.php:1170 src/widgets/bw-image-marquee.php:417
+#: src/widgets/bw-image-marquee.php:561 src/widgets/bw-text-marquee.php:412
+msgid "Height"
+msgstr ""
+
+#: src/widgets/bw-button.php:925
+msgid "Size Icon"
+msgstr ""
+
+#: src/widgets/bw-button.php:1019 src/widgets/bw-icon.php:258
+msgid "Icon Style"
+msgstr ""
+
+#: src/widgets/bw-button.php:1099 src/widgets/bw-button.php:1194
+msgid "Padding For Wrapper"
+msgstr ""
+
+#: src/widgets/bw-button.php:1113 src/widgets/bw-button.php:1208
+msgid "Margin For Wrapper"
+msgstr ""
+
+#: src/widgets/bw-call-to-action.php:57
+msgid "Black Call To Action"
+msgstr ""
+
+#: src/widgets/bw-call-to-action.php:131
+msgid "Let's get started today, Ever thought about joining us?"
+msgstr ""
+
+#: src/widgets/bw-call-to-action.php:133 src/widgets/bw-call-to-action.php:166
+#: src/widgets/bw-list.php:133 src/widgets/bw-typography.php:232
+msgid ""
+"Inline HTML allowed: br, strong, b, em, i, u, span, mark, small, sub, sup."
+msgstr ""
+
+#: src/widgets/bw-call-to-action.php:164
+msgid "Create a High Quality UI/UX Design from San Francisco."
+msgstr ""
+
+#: src/widgets/bw-call-to-action.php:165 src/widgets/bw-icon-box.php:303
+msgid "Type your subtitle here"
+msgstr ""
+
+#: src/widgets/bw-call-to-action.php:197
+msgid "Find More"
+msgstr ""
+
+#: src/widgets/bw-call-to-action.php:205
+msgid "Button URL"
+msgstr ""
+
+#: src/widgets/bw-call-to-action.php:207
+msgid "#"
+msgstr ""
+
+#: src/widgets/bw-call-to-action.php:248
+msgid "Content Alignment"
+msgstr ""
+
+#: src/widgets/bw-call-to-action.php:434 src/widgets/bw-icon-box.php:1104
+msgid "Title Styles"
+msgstr ""
+
+#: src/widgets/bw-call-to-action.php:584 src/widgets/bw-icon-box.php:1280
+msgid "Subtitle Styles"
+msgstr ""
+
+#: src/widgets/bw-call-to-action.php:734 src/widgets/bw-icon-box.php:1632
+msgid "Link Styles"
+msgstr ""
+
+#: src/widgets/bw-dropcap.php:57
+msgid "Black Drop Cap"
+msgstr ""
+
+#: src/widgets/bw-dropcap.php:129 src/widgets/bw-flipbox.php:192
+msgid "Description (limit character 159)"
+msgstr ""
+
+#: src/widgets/bw-dropcap.php:132
+msgid ""
+"Contrary to popular belief, Lorem Ipsum is not simply random text. It has "
+"roots in a piece of classical Latin literature from 45 BC, making it over "
+"2000 years old, Contrary to popular belief, Lorem Ipsum is not simply random "
+"text. It has roots in a piece of classical Latin literature from 45 BC, "
+"making it over 2000 years old. contrary to popular belief, Lorem Ipsum is "
+"not simply random text. It has roots in a piece of classical Latin "
+"literature from 45 BC, making it over 2000 years old, Contrary to popular "
+"belief, Lorem Ipsum is not simply random text. It has roots in a piece of "
+"classical Latin literature from 45 BC, making it over 2000 years old."
+msgstr ""
+
+#: src/widgets/bw-dropcap.php:327
+msgid "Back Dropcap Typography"
+msgstr ""
+
+#: src/widgets/bw-dropcap.php:457 src/widgets/bw-flipbox.php:1156
+msgid "Back Paragraph Typography"
+msgstr ""
+
+#: src/widgets/bw-fade.php:54
+msgid "Black Fade"
+msgstr ""
+
+#: src/widgets/bw-fade.php:135 src/widgets/bw-gsap-tabs.php:283
+#: src/widgets/bw-gsap-tabs.php:449 src/widgets/bw-gsap-trigger.php:210
+#: src/widgets/bw-image-carousel.php:89 src/widgets/bw-sentence.php:157
+msgid "Image"
+msgstr ""
+
+#: src/widgets/bw-fade.php:136
+msgid "Line 1"
+msgstr ""
+
+#: src/widgets/bw-fade.php:137
+msgid "Line 2"
+msgstr ""
+
+#: src/widgets/bw-fade.php:178 src/widgets/bw-image-pro.php:223
+msgid "Add link for Image?"
+msgstr ""
+
+#: src/widgets/bw-fade.php:219
+msgid "Image Grow From"
+msgstr ""
+
+#: src/widgets/bw-fade.php:223 src/widgets/bw-text-marquee.php:233
+msgid "Right To Left"
+msgstr ""
+
+#: src/widgets/bw-fade.php:224 src/widgets/bw-text-marquee.php:232
+msgid "Left To Right"
+msgstr ""
+
+#: src/widgets/bw-fade.php:225
+msgid "Top To Bottom"
+msgstr ""
+
+#: src/widgets/bw-fade.php:226
+msgid "Bottom To Top"
+msgstr ""
+
+#: src/widgets/bw-fade.php:334
+msgid "Image & line  Style"
+msgstr ""
+
+#: src/widgets/bw-fade.php:342
+msgid "Start line width"
+msgstr ""
+
+#: src/widgets/bw-fade.php:385 src/widgets/bw-gsap-interactive-links.php:1087
+msgid "Image Width"
+msgstr ""
+
+#: src/widgets/bw-fade.php:415
+msgid "Image Cover X"
+msgstr ""
+
+#: src/widgets/bw-fade.php:423
+msgid "After change style, scroll down to see changes"
+msgstr ""
+
+#: src/widgets/bw-fade.php:430
+msgid "Image Hover Animation"
+msgstr ""
+
+#: src/widgets/bw-fade.php:950
+msgid "Movement on the diagram Z - do not leave empty!"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:57
+msgid "Black Flip Box"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:134
+msgid "Flip Bottom To Top"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:135
+msgid "Flip Top To Bottom"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:136
+msgid "Flip Left To Right"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:137
+msgid "Flip Right To Left"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:146
+msgid "3D Depth"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:166
+msgid "Face"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:184
+msgid "Flipbox"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:203
+msgid "Face Background Options"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:213
+msgid "Face Background"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:222 src/widgets/bw-flipbox.php:269
+#: src/widgets/bw-gsap-interactive-links.php:1146
+#: src/widgets/bw-gsap-trigger.php:435 src/widgets/bw-gsap-trigger.php:604
+#: src/widgets/bw-gsap-trigger.php:1094 src/widgets/bw-magic-link.php:1143
+#: src/widgets/bw-typography.php:1054
+msgid "Opacity"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:242 src/widgets/bw-flipbox.php:289
+#: src/widgets/bw-flipbox.php:355
+msgid "Overlay CSS Filters"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:250
+msgid "Face Overlay Options"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:298
+msgid "Back"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:316
+msgid "Know More"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:324
+msgid "Description (limit character 300)"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:335
+msgid "Back Background Options"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:345 src/widgets/bw-flipbox.php:520
+#: src/widgets/bw-flipbox.php:915
+msgid "Back Background"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:365
+msgid "Click Here"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:496
+msgid "Front Icon Settings"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:529 src/widgets/bw-flipbox.php:924
+#: src/widgets/bw-magic-link.php:1177
+msgid "Size"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:631
+msgid "Front Title Typography"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:761
+msgid "Front Paragraph Typography"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:891
+msgid "Back Icon Settings"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:1026
+msgid "Back Title Typography"
+msgstr ""
+
+#: src/widgets/bw-flipbox.php:1383
+msgid "Button Hover Background"
+msgstr ""
+
+#: src/widgets/bw-gsap-horizontal-scrolling.php:55
+msgid "Black Horizontal"
+msgstr ""
+
+#: src/widgets/bw-gsap-horizontal-scrolling.php:164
+#: src/widgets/bw-gsap-trigger.php:202
+msgid "Select Content"
+msgstr ""
+
+#: src/widgets/bw-gsap-horizontal-scrolling.php:168 src/widgets/bw-nav.php:203
+#: src/widgets/bw-typography.php:281
+msgid "Style 1"
+msgstr ""
+
+#: src/widgets/bw-gsap-horizontal-scrolling.php:170
+msgid "Do not forget every template and this section should be full-screen"
+msgstr ""
+
+#: src/widgets/bw-gsap-horizontal-scrolling.php:178
+msgid "Elementor template is not defined yet."
+msgstr ""
+
+#: src/widgets/bw-gsap-horizontal-scrolling.php:181
+msgid "Select elementor template"
+msgstr ""
+
+#: src/widgets/bw-gsap-horizontal-scrolling.php:192 src/widgets/bw-list.php:131
+msgid "List Title"
+msgstr ""
+
+#: src/widgets/bw-gsap-horizontal-scrolling.php:200
+msgid "Custom Template"
+msgstr ""
+
+#: src/widgets/bw-gsap-horizontal-scrolling.php:211 src/widgets/bw-list.php:162
+#: src/widgets/bw-social-links.php:185
+msgid "Repeater List"
+msgstr ""
+
+#: src/widgets/bw-gsap-horizontal-scrolling.php:216 src/widgets/bw-list.php:167
+msgid "Item content #1"
+msgstr ""
+
+#: src/widgets/bw-gsap-horizontal-scrolling.php:231
+msgid "Layout"
+msgstr ""
+
+#: src/widgets/bw-gsap-horizontal-scrolling.php:243
+#: src/widgets/bw-icon-box.php:1064
+msgid "Auto"
+msgstr ""
+
+#: src/widgets/bw-gsap-horizontal-scrolling.php:244
+msgid "Fit Viewport"
+msgstr ""
+
+#: src/widgets/bw-gsap-horizontal-scrolling.php:252
+msgid "Stack Below"
+msgstr ""
+
+#: src/widgets/bw-gsap-horizontal-scrolling.php:256
+msgid "Mobile"
+msgstr ""
+
+#: src/widgets/bw-gsap-horizontal-scrolling.php:257
+msgid "Tablet"
+msgstr ""
+
+#: src/widgets/bw-gsap-horizontal-scrolling.php:258
+msgid "Never"
+msgstr ""
+
+#: src/widgets/bw-gsap-horizontal-scrolling.php:260
+msgid "Below this breakpoint, panels stack vertically."
+msgstr ""
+
+#: src/widgets/bw-gsap-horizontal-scrolling.php:270
+msgid "General Typography Style"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:93
+msgid "Black Interactive Links"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:410
+#: src/widgets/bw-gsap-interactive-links.php:669
+#: src/widgets/bw-icon-box.php:1938 src/widgets/bw-icon-box.php:2175
+msgid "Hover Background"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:420
+msgid "Hover Border"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:465
+msgid "Hover Box Shadow"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:490 src/widgets/bw-list.php:268
+msgid "List Items"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:506 src/widgets/bw-list.php:308
+msgid "Items Gap"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:576
+#: src/widgets/bw-gsap-interactive-links.php:876
+#: src/widgets/bw-gsap-tabs.php:1371 src/widgets/bw-gsap-tabs.php:1414
+#: src/widgets/bw-gsap-tabs.php:1808 src/widgets/bw-gsap-tabs.php:1853
+#: src/widgets/bw-gsap-tabs.php:1898 src/widgets/bw-gsap-tabs.php:2215
+#: src/widgets/bw-image-carousel.php:1278 src/widgets/bw-image-pro.php:822
+msgid "Text Color"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:658
+msgid "Hover Text Color"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:751
+msgid "Links & Titles"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:797
+#: src/widgets/bw-gsap-tabs.php:778
+msgid "Title Hover Color"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:813
+#: src/widgets/bw-gsap-tabs.php:813 src/widgets/bw-title.php:519
+#: src/widgets/bw-typography.php:1384 src/widgets/bw-typography.php:1635
+msgid "Title Padding"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:825
+#: src/widgets/bw-gsap-tabs.php:825 src/widgets/bw-title.php:507
+#: src/widgets/bw-typography.php:1372 src/widgets/bw-typography.php:1623
+msgid "Title Margin"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:851
+#: src/widgets/bw-gsap-tabs.php:837
+msgid "Description"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:967
+#: src/widgets/bw-gsap-tabs.php:1938 src/widgets/bw-gsap-tabs.php:2053
+#: src/widgets/bw-image-carousel.php:1313 src/widgets/bw-image-pro.php:852
+msgid "Text Align"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:1007
+msgid "Hover Image Container"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:1078
+msgid "Hover Image"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:1108
+msgid ""
+"Width of the follow image. Tablet and mobile values are applied separately."
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:1118
+msgid "Image Height"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:1135
+msgid ""
+"Leave empty to auto-scale height and show the full image at its own aspect "
+"ratio."
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:1233
+msgid "GSAP Hover Effects"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:1248
+msgid "Brightness"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:1264
+msgid "Max Rotation X"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:1271
+msgid "Max Rotation Y"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:1278
+msgid "Rotation Z Strength"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:1285
+msgid "Max Translate X"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:1292
+msgid "Max Translate Y"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:1299
+msgid "Brightness on Hover"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:1306
+msgid "Image Fade-In Duration"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:1313
+msgid "Image Fade-Out Duration"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:1320
+msgid "Main Animation Duration"
+msgstr ""
+
+#: src/widgets/bw-gsap-interactive-links.php:1327
+msgid "Ease"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:48
+msgid "Black Tabs"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:126 src/widgets/bw-image-marquee.php:235
+#: src/widgets/bw-scroll-heat.php:187 src/widgets/bw-text-marquee.php:215
+msgid "Type"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:136
+msgid "Feel free to edit."
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:144
+msgid "Tab Type"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:147
+msgid "Vertical Tab"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:148
+msgid "Horizontal  Tab"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:171
+msgid "Enter your content here"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:183
+msgid "Tabs"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:202
+msgid "Enable Autoplay"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:214
+msgid "Autoplay Delay (ms)"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:241 src/widgets/bw-gsap-tabs.php:243
+#: src/widgets/bw-gsap-tabs.php:427 src/widgets/bw-gsap-tabs.php:429
+msgid "Tab Title"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:251
+msgid "Tab Title HTML Tag"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:271 src/widgets/bw-gsap-tabs.php:437
+msgid "Short Description"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:273
+msgid "Tab short description goes here."
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:280 src/widgets/bw-gsap-tabs.php:446
+msgid "Media Type"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:284 src/widgets/bw-gsap-tabs.php:450
+msgid "Video"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:293 src/widgets/bw-gsap-tabs.php:459
+msgid "Select Image"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:308 src/widgets/bw-gsap-tabs.php:474
+msgid "Select Video"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:325 src/widgets/bw-gsap-tabs.php:366
+#: src/widgets/bw-gsap-tabs.php:491 src/widgets/bw-gsap-tabs.php:531
+msgid "Read More"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:332 src/widgets/bw-gsap-tabs.php:498
+msgid "Button Link"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:342 src/widgets/bw-gsap-tabs.php:508
+msgid "Button Icon"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:354 src/widgets/bw-gsap-tabs.php:520
+msgid "Tab Items"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:359
+msgid "Sample Tab 1"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:361
+msgid "This is a short description for sample tab 1."
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:374
+msgid "Sample Tab 2"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:376
+msgid "This is a short description for sample tab 2."
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:381 src/widgets/bw-gsap-tabs.php:396
+#: src/widgets/bw-gsap-tabs.php:545 src/widgets/bw-gsap-tabs.php:559
+msgid "Learn More"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:389
+msgid "Sample Tab 3"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:391
+msgid "This is a short description for sample tab 3."
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:439
+msgid "Tab description goes here."
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:525
+msgid "Vertical Tab 1"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:526
+msgid "This is the description for vertical tab 1."
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:539
+msgid "Vertical Tab 2"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:540
+msgid "This is the description for vertical tab 2."
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:553
+msgid "Vertical Tab 3"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:554
+msgid "This is the description for vertical tab 3."
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:643
+msgid "Gap Between Columns"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:660
+msgid "Columns Layout"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:664
+msgid "Side by Side"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:668
+msgid "Stacked"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:689
+msgid "Left / Right Column Width (%)"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:719
+msgid "Tabs List"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:730
+msgid "Titles"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:758
+msgid "Title Normal Color"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:791 src/widgets/bw-gsap-tabs.php:1088
+#: src/widgets/bw-gsap-tabs.php:1846
+msgid "Active"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:798
+msgid "Title Active Color"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:854
+msgid "Description Text Color"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:865
+msgid "Description Padding"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:877
+msgid "Description Margin"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:889 src/widgets/bw-gsap-tabs.php:1772
+msgid "Tab Item"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:909
+msgid "Tab Item Normal Background"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:929
+msgid "Tab Item Hover Background"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:945
+msgid "Tab Item Border"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:953
+msgid "Tab Item Border Radius"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:965
+msgid "Tab Item Padding"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:977
+msgid "Tab Item Margin"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:990
+msgid "Tab Item Box Shadow"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1073
+msgid "Timeline Indicator"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1095
+msgid "Active Timeline Indicator Thickness"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1115
+msgid "Not Active"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1122
+msgid "Not Active Timeline Indicator Thickness"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1144
+msgid "Timeline Track Color"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1155
+msgid "Timeline Fill Color"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1166
+msgid "Timeline Border Radius"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1178
+msgid "Timeline Gap / Offset"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1211 src/widgets/bw-gsap-tabs.php:2093
+msgid "Media"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1222 src/widgets/bw-gsap-tabs.php:2104
+#: src/widgets/bw-gsap-trigger.php:1002 src/widgets/bw-scroll-heat.php:833
+#: src/widgets/bw-scroll-heat.php:979 src/widgets/bw-scroll-heat.php:1235
+msgid "Max Width"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1244 src/widgets/bw-gsap-tabs.php:2121
+msgid "Max Height"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1272
+msgid "Media Area Border"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1280
+msgid "Media Area Border Radius"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1293
+msgid "Media Area Box Shadow"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1301 src/widgets/bw-gsap-tabs.php:2151
+#: src/widgets/bw-gsap-trigger.php:1052
+msgid "Object Fit"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1304 src/widgets/bw-gsap-tabs.php:2154
+#: src/widgets/bw-gsap-trigger.php:1056 src/widgets/bw-image-carousel.php:317
+msgid "Contain"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1305 src/widgets/bw-gsap-tabs.php:2155
+#: src/widgets/bw-gsap-trigger.php:1057 src/widgets/bw-image-carousel.php:318
+msgid "Cover"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1306 src/widgets/bw-gsap-tabs.php:2156
+#: src/widgets/bw-gsap-trigger.php:1058
+msgid "Fill"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1307 src/widgets/bw-gsap-tabs.php:2157
+#: src/widgets/bw-gsap-trigger.php:1059 src/widgets/bw-gsap-trigger.php:1250
+#: src/widgets/bw-icon-box.php:647 src/widgets/bw-icon-box.php:665
+#: src/widgets/bw-icon-box.php:684 src/widgets/bw-scroll-text.php:95
+#: src/widgets/bw-text-animate.php:137
+msgid "None"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1308 src/widgets/bw-gsap-tabs.php:2158
+#: src/widgets/bw-gsap-trigger.php:1060
+msgid "Scale Down"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1320 src/widgets/bw-gsap-tabs.php:1382
+#: src/widgets/bw-gsap-tabs.php:1425 src/widgets/bw-gsap-tabs.php:1819
+#: src/widgets/bw-gsap-tabs.php:1864 src/widgets/bw-gsap-tabs.php:1909
+#: src/widgets/bw-gsap-tabs.php:2226 src/widgets/bw-image-carousel.php:1289
+msgid "Background Color"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1342 src/widgets/bw-gsap-tabs.php:2196
+msgid "Read More Button"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1494 src/widgets/bw-gsap-tabs.php:2316
+msgid "Icon Spacing"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1570
+msgid "Box Styles"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1657
+msgid "Tab Titles"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1668
+msgid "Tabs Container Width"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1702 src/widgets/bw-gsap-trigger.php:1162
+msgid "Wrapper"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1719
+msgid "Wrapper Padding"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1731
+msgid "Container"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:1830 src/widgets/bw-gsap-tabs.php:1875
+#: src/widgets/bw-gsap-tabs.php:1920 src/widgets/bw-scroll-text.php:518
+#: src/widgets/bw-scroll-text.php:723
+msgid "Border Color"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:2018
+msgid "Content Area"
+msgstr ""
+
+#: src/widgets/bw-gsap-tabs.php:2069 src/widgets/bw-gsap-trigger.php:1233
+#: src/widgets/bw-scroll-heat.php:293
+msgid "Justify"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:60
+msgid "Black Trigger"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:189
+msgid "This For Expert"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:193
+msgid "gsap.com"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:206
+msgid "HTML"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:222
+msgid "HTML Code"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:237
+msgid "Put your HTML tags here, please check the example structure"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:249 src/widgets/bw-gsap-trigger.php:1159
+msgid "Shared Class"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:251
+msgid "bw-eg"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:252
+msgid "use the shared class for each line, like the example"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:264
+msgid "Limit animation to this widget"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:270
+msgid ""
+"Off: use global class selectors (same as before). On: limit targets to this "
+"widget."
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:308
+msgid "Alt Text"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:313
+msgid "Describe the image"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:314
+msgid "Leave empty to use the attachment alt text."
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:329
+msgid "JS for Image"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:342
+msgid "Add A Unique Trigger Class"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:344 src/widgets/bw-gsap-trigger.php:345
+msgid "bw-image-1"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:346
+msgid ""
+"Class on the image wrapper. Keep it unique on the page unless \"Limit "
+"animation to this widget\" is on."
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:353
+msgid "Scroll position"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:362 src/widgets/bw-image-pro.php:286
+#: src/widgets/bw-image-pro.php:402 src/widgets/bw-typography.php:810
+#: src/widgets/bw-typography.php:912
+msgid "Start Point"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:364
+msgid "center bottom"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:365 src/widgets/bw-gsap-trigger.php:376
+msgid "top bottom"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:366
+msgid ""
+"When the animation starts. Two words: element position, then viewport "
+"position. Example: center bottom."
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:373 src/widgets/bw-image-pro.php:301
+#: src/widgets/bw-image-pro.php:417
+msgid "End Point"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:375
+msgid "center top"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:377
+msgid "When the animation finishes. Example: center top."
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:384
+msgid "Toggle Actions"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:386 src/widgets/bw-gsap-trigger.php:387
+msgid "none none none none"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:388
+msgid ""
+"Four words for on enter, leave, enter-back, leave-back. Common values: play, "
+"reverse, restart, reset, none."
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:395
+msgid "Scrub"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:397
+msgid "true"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:398
+msgid "false"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:399
+msgid ""
+"true ties the animation to the scrollbar. A number (e.g. 1) does the same "
+"with a short delay. false plays once."
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:427
+msgid "From (start look)"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:437 src/widgets/bw-gsap-trigger.php:438
+#: src/widgets/bw-gsap-trigger.php:479 src/widgets/bw-gsap-trigger.php:480
+#: src/widgets/bw-gsap-trigger.php:489 src/widgets/bw-gsap-trigger.php:490
+#: src/widgets/bw-gsap-trigger.php:559 src/widgets/bw-gsap-trigger.php:560
+#: src/widgets/bw-gsap-trigger.php:606 src/widgets/bw-gsap-trigger.php:607
+#: src/widgets/bw-gsap-trigger.php:648 src/widgets/bw-gsap-trigger.php:658
+#: src/widgets/bw-gsap-trigger.php:659 src/widgets/bw-gsap-trigger.php:728
+#: src/widgets/bw-gsap-trigger.php:729 src/widgets/bw-typography.php:595
+#: src/widgets/bw-typography.php:627
+msgid "1"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:439
+msgid "Starting visibility. 0 is hidden, 1 is fully visible."
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:446 src/widgets/bw-gsap-trigger.php:615
+#: src/widgets/bw-image-pro.php:317 src/widgets/bw-image-pro.php:433
+#: src/widgets/bw-scroll-text.php:312 src/widgets/bw-scroll-text.php:372
+#: src/widgets/bw-typography.php:827 src/widgets/bw-typography.php:929
+msgid "Duration"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:448
+msgid "0.9"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:449 src/widgets/bw-gsap-trigger.php:618
+msgid "0.4"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:450
+msgid "How long the start state lasts, in seconds."
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:457 src/widgets/bw-gsap-trigger.php:626
+msgid "RotationX"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:459 src/widgets/bw-gsap-trigger.php:469
+#: src/widgets/bw-gsap-trigger.php:499 src/widgets/bw-gsap-trigger.php:500
+#: src/widgets/bw-gsap-trigger.php:510 src/widgets/bw-gsap-trigger.php:520
+#: src/widgets/bw-gsap-trigger.php:529 src/widgets/bw-gsap-trigger.php:530
+#: src/widgets/bw-gsap-trigger.php:539 src/widgets/bw-gsap-trigger.php:540
+#: src/widgets/bw-gsap-trigger.php:549 src/widgets/bw-gsap-trigger.php:550
+#: src/widgets/bw-gsap-trigger.php:570 src/widgets/bw-gsap-trigger.php:628
+#: src/widgets/bw-gsap-trigger.php:629 src/widgets/bw-gsap-trigger.php:638
+#: src/widgets/bw-gsap-trigger.php:639 src/widgets/bw-gsap-trigger.php:649
+#: src/widgets/bw-gsap-trigger.php:668 src/widgets/bw-gsap-trigger.php:669
+#: src/widgets/bw-gsap-trigger.php:678 src/widgets/bw-gsap-trigger.php:679
+#: src/widgets/bw-gsap-trigger.php:688 src/widgets/bw-gsap-trigger.php:689
+#: src/widgets/bw-gsap-trigger.php:698 src/widgets/bw-gsap-trigger.php:699
+#: src/widgets/bw-gsap-trigger.php:708 src/widgets/bw-gsap-trigger.php:709
+#: src/widgets/bw-gsap-trigger.php:718 src/widgets/bw-gsap-trigger.php:719
+#: src/widgets/bw-gsap-trigger.php:738 src/widgets/bw-gsap-trigger.php:739
+#: src/widgets/bw-typography.php:778
+msgid "0"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:460 src/widgets/bw-gsap-trigger.php:470
+#: src/widgets/bw-typography.php:597 src/widgets/bw-typography.php:629
+msgid "3"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:467 src/widgets/bw-gsap-trigger.php:636
+msgid "RotationY"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:477 src/widgets/bw-gsap-trigger.php:646
+msgid "ScaleX"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:487 src/widgets/bw-gsap-trigger.php:656
+msgid "ScaleY"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:497 src/widgets/bw-gsap-trigger.php:666
+msgid "ScaleZ"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:507 src/widgets/bw-gsap-trigger.php:676
+msgid "SkewX"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:509
+msgid "26"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:517 src/widgets/bw-gsap-trigger.php:686
+msgid "SkewY"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:519
+msgid "-42"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:527 src/widgets/bw-gsap-trigger.php:696
+msgid "MoveX"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:537 src/widgets/bw-gsap-trigger.php:706
+msgid "MoveY"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:547 src/widgets/bw-gsap-trigger.php:716
+msgid "MoveZ"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:557 src/widgets/bw-gsap-trigger.php:726
+msgid "Auto Alpha"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:567 src/widgets/bw-gsap-trigger.php:736
+msgid "Preserve"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:569
+msgid "50"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:571 src/widgets/bw-gsap-trigger.php:740
+msgid ""
+"3D perspective distance (transformPerspective). Higher values look flatter."
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:580 src/widgets/bw-gsap-trigger.php:581
+#: src/widgets/bw-gsap-trigger.php:749 src/widgets/bw-gsap-trigger.php:750
+msgid "preserve-3d"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:596
+msgid "To (end look)"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:608
+msgid "Ending visibility. 0 is hidden, 1 is fully visible."
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:617
+msgid "0.5"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:619
+msgid "How long it takes to reach the end look, in seconds."
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:760
+msgid "JS for HTML Content"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:774
+msgid "JS: GSAP timeline > scrollTrigger"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:787 src/widgets/bw-gsap-trigger.php:814
+msgid "Put your transform properties tags here for \"from\""
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:794
+msgid "JS: GSAP tl.from"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:821
+msgid "JS: GSAP tl.to"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:840
+msgid "Put your transform properties tags here for \"to\""
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:975 src/widgets/bw-image-carousel.php:1193
+#: src/widgets/bw-image-marquee.php:394 src/widgets/bw-image-marquee.php:538
+#: src/widgets/bw-image-pro.php:528 src/widgets/bw-text-marquee.php:388
+msgid "Width"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1055 src/widgets/bw-gsap-trigger.php:1074
+#: src/widgets/bw-gsap-trigger.php:1123 src/widgets/bw-gsap-trigger.php:1249
+msgid "Default"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1071
+msgid "Object Position"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1075
+msgid "Center Center"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1076
+msgid "Center Left"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1077
+msgid "Center Right"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1078
+msgid "Top Center"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1079
+msgid "Top Left"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1080
+msgid "Top Right"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1081
+msgid "Bottom Center"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1082
+msgid "Bottom Left"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1083
+msgid "Bottom Right"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1120
+msgid "Overflow"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1124
+msgid "Hidden"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1125
+msgid "Visible"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1155
+msgid "Apply styles to"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1160
+msgid "Headings"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1161
+msgid "All text"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1164
+msgid ""
+"Choose which HTML inside this widget receives typography. The box itself is "
+"still styled for backward compatibility."
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1171
+msgid "Override inline styles"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1177
+msgid ""
+"Remove font and color inline styles from the selected tags so these "
+"typography controls can apply."
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1184
+msgid "Use built-in demo text styles"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1190
+msgid ""
+"Keeps the default .bw-eg color, line-height, and start transform. Turn off "
+"to let your typography fully control the text."
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1197
+msgid "Style images inside HTML"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1203
+msgid "Apply Image Style controls to <img> tags inside your HTML content."
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1246
+msgid "Text Decoration"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1251
+msgid "Underline"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1252
+msgid "Overline"
+msgstr ""
+
+#: src/widgets/bw-gsap-trigger.php:1253
+msgid "Line Through"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:60
+msgid "Black Icon Box Pro"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:177
+msgid "Positions"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:200
+msgid "Icon Box Position"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:204
+msgid "Position 1"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:205
+msgid "Position 2"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:206
+msgid "Position 3"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:207
+msgid "Position 4"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:208
+msgid "Position 5"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:209
+msgid "Position 6"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:211
+msgid "Select position of the Icon Box."
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:229
+msgid "Do You Need Title?"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:232 src/widgets/bw-icon-box.php:290
+#: src/widgets/bw-icon-box.php:348 src/widgets/bw-icon-box.php:378
+#: src/widgets/bw-icon-box.php:427 src/widgets/bw-icon-box.php:537
+#: src/widgets/bw-icon-box.php:574 src/widgets/bw-sentence.php:201
+#: src/widgets/bw-sentence.php:374 src/widgets/bw-sentence.php:445
+#: src/widgets/bw-typography.php:1463 src/widgets/bw-typography.php:1525
+#: src/widgets/bw-typography.php:1714 src/widgets/bw-typography.php:1796
+msgid "No !"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:244
+msgid "This is Title"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:246 src/widgets/bw-icon-box.php:304
+msgid "Plain text only. HTML is escaped."
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:287
+msgid "Do You Need Subtitle?"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:302
+msgid "This is Subtitle"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:345
+msgid "Do You Need Paragraph?"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:357 src/widgets/bw-scroll-heat.php:323
+msgid "Paragraph"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:360
+msgid "This is paragraph"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:361
+msgid "Type your paragraph here"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:375
+msgid "Do You Need Link?"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:387
+msgid "Link Text"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:389
+msgid "Read more"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:424
+msgid "Do You Need Icon or Image?"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:437 src/widgets/bw-typography.php:367
+#: src/widgets/bw-typography.php:484
+msgid "How exactly does it work?"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:441 src/widgets/bw-typography.php:371
+#: src/widgets/bw-typography.php:488
+msgid "With ICON"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:442 src/widgets/bw-typography.php:372
+#: src/widgets/bw-typography.php:489
+msgid "With IMAGE or SVG"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:443 src/widgets/bw-typography.php:373
+#: src/widgets/bw-typography.php:490
+msgid "With SVG Code"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:457 src/widgets/bw-typography.php:415
+#: src/widgets/bw-typography.php:532
+msgid "CODE"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:461
+msgid "Paste SVG markup here"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:476 src/widgets/bw-typography.php:432
+#: src/widgets/bw-typography.php:549
+msgid "Choose Icon"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:534
+msgid "SVG Animate!"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:558
+msgid "Animate"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:571
+msgid "Enable Animate"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:577
+msgid "Needs GSAP and ScrollTrigger in Black Widgets Settings."
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:584 src/widgets/bw-icon-box.php:604
+#: src/widgets/bw-scroll-heat.php:483 src/widgets/bw-typography.php:673
+msgid "Animation Type"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:588 src/widgets/bw-icon-box.php:609
+#: src/widgets/bw-typography.php:149
+msgid "Fade"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:589 src/widgets/bw-icon-box.php:610
+msgid "Fade Up"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:592 src/widgets/bw-icon-box.php:613
+msgid "Bounce"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:608
+msgid "Draw (SVG)"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:615
+msgid "Draw traces SVG paths. Raster images fall back to Fade Up."
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:626 src/widgets/bw-scroll-heat.php:518
+msgid "Trigger"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:630
+msgid "On Load"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:631
+msgid "On Scroll Once"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:632
+msgid "On Every Scroll"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:668
+msgid "Draw"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:680
+msgid "Loop (in view)"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:685
+msgid "Float"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:686
+msgid "Pulse"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:687
+msgid "Spin"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:698 src/widgets/bw-text-animate.php:163
+#: src/widgets/bw-title-animate.php:204 src/widgets/bw-title-animate.php:340
+msgid "Duration (ms)"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:713 src/widgets/bw-title-animate.php:219
+#: src/widgets/bw-title-animate.php:355
+msgid "Delay (ms)"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:728 src/widgets/bw-scroll-heat.php:679
+msgid "Easing"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:732 src/widgets/bw-scroll-heat.php:685
+msgid "Soft"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:733 src/widgets/bw-scroll-heat.php:686
+msgid "Smooth"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:734 src/widgets/bw-scroll-heat.php:687
+msgid "Snappy"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:735 src/widgets/bw-scroll-heat.php:691
+msgid "Overshoot"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:736 src/widgets/bw-scroll-heat.php:684
+msgid "Linear"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:760 src/widgets/bw-icon-box.php:793
+msgid "Box Alignment"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:1047
+msgid "Icon Shape"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:1060 src/widgets/bw-title.php:717
+msgid "Shape"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:1065 src/widgets/bw-nav.php:277
+msgid "Square"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:1066 src/widgets/bw-nav.php:276
+msgid "Circle"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:1067
+msgid "Rounded"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:1075
+msgid "Box Size"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:1456
+msgid "Paragraph Styles"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:1810 src/widgets/bw-typography.php:2254
+msgid "Icon Styles"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:1849
+msgid "SVG(fill) Normal Color"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:1863
+msgid "SVG(stroke) Normal Color"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:1909
+msgid "SVG(fill) Hover Color"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:1923
+msgid "SVG(stroke) Hover Color"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:2002 src/widgets/bw-magic-link.php:399
+msgid "Icon Position"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:2033
+msgid "Icon Vertical Align"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:2037 src/widgets/bw-sentence.php:661
+#: src/widgets/bw-typography.php:394
+msgid "Top"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:2041
+msgid "Middle"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:2045 src/widgets/bw-sentence.php:665
+#: src/widgets/bw-typography.php:511
+msgid "Bottom"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:2132
+msgid "Image Styles"
+msgstr ""
+
+#: src/widgets/bw-icon-box.php:2194
+msgid "Image Size"
+msgstr ""
+
+#: src/widgets/bw-icon.php:54
+msgid "Black Icon"
+msgstr ""
+
+#: src/widgets/bw-icon.php:267
+msgid "Is the icon in SVG format?"
+msgstr ""
+
+#: src/widgets/bw-icon.php:382
+msgid "SVG Color(fill)"
+msgstr ""
+
+#: src/widgets/bw-icon.php:398
+msgid "Path Color(stroke)"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:38
+msgid "Black Image Carousel"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:64
+msgid "Select Elementor template"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:85
+msgid "Item Type"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:90
+msgid "Elementor Template"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:109 src/widgets/bw-image-carousel.php:180
+#: src/widgets/bw-image-carousel.php:1262 src/widgets/bw-image-pro.php:803
+msgid "Caption"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:110
+msgid ""
+"Shown on the slide - position/style depends on the Carousel Type and the "
+"Caption style section."
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:113
+msgid "Enter caption"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:126
+msgid "https://example.com"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:133
+msgid "Optional. Opens this URL from the image and the caption."
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:143
+msgid "Alt Text (override)"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:146
+msgid "Leave empty to use the image's own alt text"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:157
+msgid "Select Template"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:170
+msgid "Items"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:197
+msgid "Carousel Type"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:201
+msgid "Classic Caption"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:202
+msgid "Clean Cover"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:203
+msgid "Editorial"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:204
+msgid "Peek Focus"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:214
+msgid "Center Slide Emphasis"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:220
+msgid ""
+"Scales up the centered slide. Only applies when there is a genuine single "
+"center slide (i.e. an odd number of visible slides); has no effect on "
+"breakpoints showing an even count."
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:230
+msgid "Center Slide Scale"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:249
+msgid "Slides Per View"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:258
+msgid "For Peek Focus try 1.2 to 1.5. For Editorial try about 1."
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:267
+msgid "Slides to Scroll"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:277
+msgid "Space Between (px)"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:282
+msgid "Leave empty to use the type default gap."
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:313
+msgid "Image Fit"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:332
+msgid "Autoplay"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:334 src/widgets/bw-image-marquee.php:309
+#: src/widgets/bw-list.php:334 src/widgets/bw-nav.php:259
+#: src/widgets/bw-sentence.php:232 src/widgets/bw-text-marquee.php:289
+#: src/widgets/bw-title-animate.php:389 src/widgets/bw-typography.php:657
+msgid "On"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:335 src/widgets/bw-image-marquee.php:310
+#: src/widgets/bw-list.php:335 src/widgets/bw-nav.php:260
+#: src/widgets/bw-sentence.php:233 src/widgets/bw-text-marquee.php:290
+#: src/widgets/bw-title-animate.php:390 src/widgets/bw-typography.php:658
+msgid "Off"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:345
+msgid "Autoplay Speed (ms)"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:359
+msgid "Transition Speed (ms)"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:365
+msgid ""
+"How long each slide change takes. Higher = smoother / softer (recommended "
+"700–1000 for centered layouts like Editorial & Peek Focus)."
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:373 src/widgets/bw-title-animate.php:405
+msgid "Infinite Loop"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:379
+msgid ""
+"Continues from the first slide after the last (seamless wrap). With few "
+"items this wrap can look like it “goes and comes back” — that is expected, "
+"not a bounce. Turn off to stop at both ends."
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:387 src/widgets/bw-image-marquee.php:285
+#: src/widgets/bw-text-marquee.php:265
+msgid "Pause on Hover"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:403
+msgid "Show Pagination"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:405 src/widgets/bw-image-carousel.php:483
+#: src/widgets/bw-image-pro.php:259
+msgid "Show"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:406 src/widgets/bw-image-carousel.php:484
+#: src/widgets/bw-image-pro.php:260
+msgid "Hide"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:415
+msgid "Pagination Style"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:419
+msgid "Type Default"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:420
+msgid "Dots"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:421
+msgid "Fraction (1 / 5)"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:422
+msgid "Progress Bar"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:424
+msgid ""
+"Type Default: Classic Caption / Clean Cover use Dots, Editorial uses "
+"Fraction, Peek Focus uses a Progress Bar."
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:434
+msgid "Pagination Position"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:438 src/widgets/bw-image-carousel.php:497
+msgid "Inside (Overlay on Slider)"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:439 src/widgets/bw-image-carousel.php:498
+msgid "Outside (Below Slider)"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:450
+msgid "Pagination Alignment"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:467
+msgid "Leave unset to keep each carousel type's own default alignment."
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:481
+msgid "Show Navigation Arrows"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:493
+msgid "Arrows Position"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:509
+msgid "Previous Arrow Icon (custom SVG)"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:512 src/widgets/bw-image-carousel.php:525
+msgid ""
+"Optional - overrides the built-in arrow icon. Still respects the Arrows Icon "
+"Color setting below."
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:522
+msgid "Next Arrow Icon (custom SVG)"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:535
+msgid "Custom Dot Icon (SVG)"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:538
+msgid ""
+"Optional - replaces the simple circle bullet with your icon. Still respects "
+"the Bullet Color settings below (only applies to the Dots pagination style)."
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:628
+msgid "Slide Style"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:637
+msgid "Applies to every image and template slide (the slide content card)."
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:700
+msgid "Bullet Points and Arrows Style"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:708
+msgid "Arrows Background Color"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:724
+msgid "Arrows Icon Color"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:737
+msgid "Arrows Hover Background Color"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:749
+msgid "Arrows Hover Icon Color"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:761
+msgid "Arrow Size"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:779
+msgid "Arrows Border Radius"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:805
+msgid "Arrows Edge Offset"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:814
+msgid ""
+"Distance from the slider edge. Only applies when Arrows Position is set to "
+"Inside."
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:834
+msgid "Bullets Size"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:852
+msgid "Bullets Gap"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:874
+msgid "Bullets Border Radius"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:891
+msgid "Set to 0 for square/pill-shaped dots instead of circles."
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:901
+msgid "Inactive Bullets Color"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:913
+msgid "Active Bullets Color"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:925
+msgid "Active Bullets Border Color"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:984
+msgid "Fraction Style"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:1005
+msgid "Base color (also used for the “/” separator)."
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:1017
+msgid "Current Number Color"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:1030
+msgid "Total Number Color"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:1069
+msgid "Gap Around Separator"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:1137
+msgid "Progress Bar Style"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:1146
+msgid "Track Color"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:1158
+msgid "Fill Color"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:1291
+msgid ""
+"Classic Caption has no backdrop by default; Clean Cover, Editorial and Peek "
+"Focus overlay the caption on the image with a flat translucent backdrop by "
+"default."
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:1447
+#: src/widgets/bw-image-carousel.php:1661
+msgid "Previous slide"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:1454
+#: src/widgets/bw-image-carousel.php:1662
+msgid "Next slide"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:1643
+msgid "carousel"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:1644
+msgid "Image carousel"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:1663
+msgid "Go to slide {{index}}"
+msgstr ""
+
+#: src/widgets/bw-image-carousel.php:1677
+msgid "slide"
+msgstr ""
+
+#. translators: 1: slide number 2: total slides
+#: src/widgets/bw-image-carousel.php:1678
+#, php-format
+msgid "%1$d of %2$d"
+msgstr ""
+
+#: src/widgets/bw-image-marquee.php:76
+msgid "Black Image Marquee"
+msgstr ""
+
+#: src/widgets/bw-image-marquee.php:214
+msgid "Images"
+msgstr ""
+
+#: src/widgets/bw-image-marquee.php:219
+msgid "Marquee Images"
+msgstr ""
+
+#: src/widgets/bw-image-marquee.php:248 src/widgets/bw-text-marquee.php:228
+msgid "Direction"
+msgstr ""
+
+#: src/widgets/bw-image-marquee.php:252
+msgid "Left To Right / Up"
+msgstr ""
+
+#: src/widgets/bw-image-marquee.php:253
+msgid "Right To Left / Down"
+msgstr ""
+
+#: src/widgets/bw-image-marquee.php:261 src/widgets/bw-scroll-heat.php:612
+#: src/widgets/bw-scroll-heat.php:734
+msgid "Duration (s)"
+msgstr ""
+
+#: src/widgets/bw-image-marquee.php:272
+msgid "GAP"
+msgstr ""
+
+#: src/widgets/bw-image-marquee.php:275
+msgid "Space between images."
+msgstr ""
+
+#: src/widgets/bw-image-marquee.php:307 src/widgets/bw-text-marquee.php:287
+msgid "Move on Scroll"
+msgstr ""
+
+#: src/widgets/bw-image-marquee.php:319 src/widgets/bw-text-marquee.php:302
+msgid "Speed Scroll"
+msgstr ""
+
+#: src/widgets/bw-image-marquee.php:636
+msgid "Css Filters"
+msgstr ""
+
+#: src/widgets/bw-image-marquee.php:645
+msgid "Css Filters Hover"
+msgstr ""
+
+#: src/widgets/bw-image-pro.php:60
+msgid "Black Image Pro"
+msgstr ""
+
+#: src/widgets/bw-image-pro.php:256
+msgid "Show Caption"
+msgstr ""
+
+#: src/widgets/bw-image-pro.php:257
+msgid ""
+"Uses the Caption field from the WordPress media library for the chosen image."
+msgstr ""
+
+#: src/widgets/bw-image-pro.php:273
+msgid "Image Movement Animate → From"
+msgstr ""
+
+#: src/widgets/bw-image-pro.php:333 src/widgets/bw-image-pro.php:449
+#: src/widgets/bw-scroll-text.php:323 src/widgets/bw-scroll-text.php:383
+#: src/widgets/bw-typography.php:843 src/widgets/bw-typography.php:945
+msgid "Vertical Movement"
+msgstr ""
+
+#: src/widgets/bw-image-pro.php:347 src/widgets/bw-image-pro.php:463
+#: src/widgets/bw-scroll-text.php:332 src/widgets/bw-scroll-text.php:392
+#: src/widgets/bw-typography.php:857 src/widgets/bw-typography.php:959
+msgid "Horizontal Movement"
+msgstr ""
+
+#: src/widgets/bw-image-pro.php:361 src/widgets/bw-image-pro.php:477
+#: src/widgets/bw-scroll-text.php:341 src/widgets/bw-scroll-text.php:401
+#: src/widgets/bw-typography.php:871 src/widgets/bw-typography.php:973
+msgid "Opacity at End"
+msgstr ""
+
+#: src/widgets/bw-image-pro.php:375 src/widgets/bw-image-pro.php:491
+#: src/widgets/bw-scroll-text.php:350 src/widgets/bw-scroll-text.php:410
+#: src/widgets/bw-typography.php:885 src/widgets/bw-typography.php:987
+msgid "Rotation at End"
+msgstr ""
+
+#: src/widgets/bw-image-pro.php:389
+msgid "Image Movement Animate → To"
+msgstr ""
+
+#: src/widgets/bw-image-pro.php:506
+msgid "Extra Image Parallax"
+msgstr ""
+
+#: src/widgets/bw-image-pro.php:520
+msgid "Image Box Style"
+msgstr ""
+
+#: src/widgets/bw-image-pro.php:689
+msgid "Background /color/ with low opacity is required."
+msgstr ""
+
+#: src/widgets/bw-list.php:56
+msgid "Black List"
+msgstr ""
+
+#: src/widgets/bw-list.php:173
+msgid "Item content #2"
+msgstr ""
+
+#: src/widgets/bw-list.php:179
+msgid "Item content #3"
+msgstr ""
+
+#: src/widgets/bw-list.php:332
+msgid "Divider"
+msgstr ""
+
+#: src/widgets/bw-list.php:344
+msgid "Divider Color"
+msgstr ""
+
+#: src/widgets/bw-list.php:359
+msgid "Divider Weight"
+msgstr ""
+
+#: src/widgets/bw-list.php:451
+msgid "Icon Settings"
+msgstr ""
+
+#: src/widgets/bw-list.php:680
+msgid "Text Settings"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:57
+msgid "Black Magic Link"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:196
+msgid "Split · Char Rise"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:197
+msgid "Split · Char Fade"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:198
+msgid "Split · Wave"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:199
+msgid "Split · Perspective Flip"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:200
+msgid "Split · Vertical Swap"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:201
+msgid "Split · Blur Reveal"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:202
+msgid "Split · Elastic Pop"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:262 src/widgets/bw-title-animate.php:156
+msgid "Liner"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:265
+msgid "Heart Beat"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:266
+msgid "Pull Left To Right"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:267
+msgid "Pull Right To Left"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:268
+msgid "Pull Top To Bottom"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:269
+msgid "Pull Bottom To Top"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:270
+msgid "Arrow"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:271
+msgid "Anchor"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:272
+msgid "Wheel"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:295
+msgid ""
+"CSS types work without CDN. Split types need GSAP and SplitText in Settings."
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:305
+msgid "Same as link text if empty"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:317
+msgid ""
+"Split types need GSAP CDN + SplitText CDN enabled in Black Widgets → "
+"Settings."
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:330
+msgid "Let's started"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:355 src/widgets/bw-magic-link.php:1165
+msgid "Split Icon"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:367
+msgid "Show Icon"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:638
+msgid "Text Typography"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:765
+msgid "Hover Text Typography"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:892
+msgid "Other Styles"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:901
+msgid "Normal Height"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:931
+msgid "Hover Height"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:961
+msgid "Normal Width"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:991
+msgid "Hover Width"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:1021
+msgid "Liner Height"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:1050 src/widgets/bw-title-animate.php:1520
+#: src/widgets/bw-title-animate.php:1596
+msgid "Line Color"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:1071
+msgid "Bg Color/Line Color"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:1093
+msgid "Underline Color"
+msgstr ""
+
+#: src/widgets/bw-magic-link.php:1206
+msgid "Gap"
+msgstr ""
+
+#: src/widgets/bw-nav.php:54
+msgid "Black Flat Nav"
+msgstr ""
+
+#: src/widgets/bw-nav.php:165
+msgid "Select Menu"
+msgstr ""
+
+#. translators: %s is the URL to the Menus screen
+#: src/widgets/bw-nav.php:172
+#, php-format
+msgid ""
+"Go to the <a href=\"%s\" target=\"_blank\">Menus screen</a> to manage your "
+"menus; The menu should be flat"
+msgstr ""
+
+#. translators: %s is the URL to the Menus screen for creating a new menu
+#: src/widgets/bw-nav.php:184
+#, php-format
+msgid ""
+"<strong>There are no menus in your site.</strong><br>Go to the <a href=\"%s"
+"\" target=\"_blank\">Menus screen</a> to create one."
+msgstr ""
+
+#: src/widgets/bw-nav.php:202
+msgid "Style 0"
+msgstr ""
+
+#: src/widgets/bw-nav.php:204 src/widgets/bw-typography.php:282
+msgid "Style 2"
+msgstr ""
+
+#: src/widgets/bw-nav.php:205 src/widgets/bw-typography.php:283
+msgid "Style 3"
+msgstr ""
+
+#: src/widgets/bw-nav.php:206
+msgid "Style 4 "
+msgstr ""
+
+#: src/widgets/bw-nav.php:207
+msgid "Style 5 "
+msgstr ""
+
+#: src/widgets/bw-nav.php:208
+msgid "Style 6 "
+msgstr ""
+
+#: src/widgets/bw-nav.php:209
+msgid "Style 7 "
+msgstr ""
+
+#: src/widgets/bw-nav.php:210
+msgid "Style 8 "
+msgstr ""
+
+#: src/widgets/bw-nav.php:211
+msgid "Style 9 "
+msgstr ""
+
+#: src/widgets/bw-nav.php:257
+msgid "Control List Style"
+msgstr ""
+
+#: src/widgets/bw-nav.php:263
+msgid "Off keeps theme list markers. On lets you style or hide them."
+msgstr ""
+
+#: src/widgets/bw-nav.php:270
+msgid "List Style"
+msgstr ""
+
+#: src/widgets/bw-nav.php:274
+msgid "None (no bullets)"
+msgstr ""
+
+#: src/widgets/bw-nav.php:275
+msgid "Disc"
+msgstr ""
+
+#: src/widgets/bw-nav.php:278
+msgid "Decimal"
+msgstr ""
+
+#: src/widgets/bw-nav.php:295
+msgid "List Indent"
+msgstr ""
+
+#: src/widgets/bw-nav.php:419
+msgid "Link Typography"
+msgstr ""
+
+#: src/widgets/bw-nav.php:435 src/widgets/bw-nav.php:465
+msgid "Link Text Color"
+msgstr ""
+
+#: src/widgets/bw-nav.php:493 src/widgets/bw-nav.php:549
+#: src/widgets/bw-nav.php:596 src/widgets/bw-nav.php:635
+msgid "Shape Styles"
+msgstr ""
+
+#: src/widgets/bw-nav.php:510
+msgid "Shape 1 Color"
+msgstr ""
+
+#: src/widgets/bw-nav.php:562
+msgid "Shape 3 Normal Color"
+msgstr ""
+
+#: src/widgets/bw-nav.php:578
+msgid "Shape 3 Hover Color"
+msgstr ""
+
+#: src/widgets/bw-nav.php:609
+msgid "Normal Underline Color"
+msgstr ""
+
+#: src/widgets/bw-nav.php:620
+msgid "Hover Underline Color"
+msgstr ""
+
+#: src/widgets/bw-nav.php:677 src/widgets/bw-nav.php:697
+msgid "Link SVG Color"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:47
+msgid "Black Scroll Heat"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:199
+msgid "Scroll Heat"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:200
+msgid "Animated Text"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:201 src/widgets/bw-scroll-heat.php:314
+#: src/widgets/bw-scroll-heat.php:1032
+msgid "Line Reveal"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:211
+msgid ""
+"Needs GSAP, ScrollTrigger, and SplitText URLs in Black Widgets → Settings."
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:240 src/widgets/bw-scroll-heat.php:790
+#: src/widgets/bw-scroll-heat.php:895 src/widgets/bw-sentence.php:156
+#: src/widgets/bw-text-animate.php:114 src/widgets/bw-title-animate.php:254
+msgid "Text"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:243
+msgid "Type your text here. Words change color as you scroll."
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:244 src/widgets/bw-scroll-heat.php:327
+msgid "Enter text…"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:245 src/widgets/bw-scroll-heat.php:328
+msgid "Allowed HTML: <br>, <strong>, <b>, <hr>. No attributes."
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:326
+msgid ""
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod "
+"tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, "
+"quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo "
+"consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse "
+"cillum dolore eu fugiat nulla pariatur."
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:337
+msgid "Show Index"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:349
+msgid "Index"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:360
+msgid "Show Eyebrow"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:372
+msgid "Eyebrow"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:374
+msgid "( Lorem ipsum )"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:387 src/widgets/bw-scroll-heat.php:474
+#: src/widgets/bw-scroll-heat.php:707 src/widgets/bw-text-animate.php:147
+msgid "Animation"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:396 src/widgets/bw-scroll-heat.php:567
+#: src/widgets/bw-scroll-heat.php:716
+msgid "Scroll Start"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:400 src/widgets/bw-scroll-heat.php:572
+#: src/widgets/bw-scroll-heat.php:721
+msgid "Early (Top 90%)"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:401
+msgid "Top 85%"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:402
+msgid "Default (Top 78%)"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:403
+msgid "Top 70%"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:404 src/widgets/bw-scroll-heat.php:575
+#: src/widgets/bw-scroll-heat.php:724
+msgid "Top 60%"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:405 src/widgets/bw-scroll-heat.php:576
+#: src/widgets/bw-scroll-heat.php:725
+msgid "Center (Top 50%)"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:413
+msgid "Scroll End"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:417
+msgid "Early (Bottom 20%)"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:418
+msgid "Default (Bottom 32%)"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:419
+msgid "Bottom 40%"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:420
+msgid "Center (Bottom 50%)"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:421
+msgid "Late (Bottom 60%)"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:422
+msgid "Until Fully Out"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:430 src/widgets/bw-scroll-heat.php:588
+msgid "Scrub Smoothness"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:443
+msgid "Higher values feel softer. 0 follows the scroll exactly."
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:450
+msgid "Word Stagger"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:463
+msgid "Delay between each word."
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:487 src/widgets/bw-text-animate.php:152
+msgid "From Bottom"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:488 src/widgets/bw-text-animate.php:151
+msgid "From Top"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:489 src/widgets/bw-text-animate.php:153
+msgid "From Left"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:490 src/widgets/bw-sentence.php:964
+#: src/widgets/bw-text-animate.php:154
+msgid "From Right"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:491 src/widgets/bw-text-animate.php:155
+#: src/widgets/bw-title-animate.php:163
+msgid "Fade In"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:492
+msgid "Blur Focus"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:493
+msgid "3D Flip"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:494
+msgid "Mask Reveal + Gradient"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:502
+msgid "Split Type"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:506
+msgid "Auto (Recommended)"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:507 src/widgets/bw-scroll-text.php:228
+msgid "Characters"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:508 src/widgets/bw-scroll-text.php:229
+msgid "Words"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:509
+msgid "Lines"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:511
+msgid "Auto picks the best split for the selected animation."
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:523
+msgid "On Scroll"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:524
+msgid "When In View (Footer / Page End)"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:525
+msgid "On Page Load"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:533
+msgid "Scroll Behavior"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:537
+msgid "Play Once (No Repeat)"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:538
+msgid "Replay Every Time In View"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:539
+msgid "Play & Reverse On Leave"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:540
+msgid "Scrub With Scroll"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:551
+msgid "Replay When Scrolling Back"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:571 src/widgets/bw-scroll-heat.php:720
+msgid "When Visible (Footer Safe)"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:573 src/widgets/bw-scroll-heat.php:722
+msgid "Top 80%"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:574 src/widgets/bw-scroll-heat.php:723
+msgid "Default (Top 75%)"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:577 src/widgets/bw-scroll-heat.php:726
+msgid "Late (Top 40%)"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:636 src/widgets/bw-scroll-heat.php:754
+msgid "Stagger"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:656
+msgid "Delay (s)"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:683
+msgid "Auto (Per Animation)"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:688
+msgid "Sharp"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:689
+msgid "Dramatic"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:690
+msgid "Gentle"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:692
+msgid "Circular"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:774
+msgid "Replay on Every Scroll"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:807
+msgid "Dim Color"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:813
+msgid "Word color before scroll highlights them."
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:820
+msgid "Lit Color"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:826
+msgid "Word color after scroll highlights them."
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:927
+msgid "Gradient Text"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:940
+msgid "Gradient From"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:953
+msgid "Gradient Accent"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:966
+msgid "Gradient To"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:1070
+msgid "Index Color"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:1091
+msgid "Eyebrow Color"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:1103
+msgid "Index Width"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:1104
+msgid ""
+"Reserved column for the index (e.g. DSGN or 01). Letters stay on the left; "
+"leftover space is the column."
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:1132
+msgid "Index Gap"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:1133
+msgid ""
+"Space between the index column and the eyebrow + paragraph. 0 pulls them "
+"together."
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:1160
+msgid "Fixed Eyebrow Column"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:1161
+msgid ""
+"Lock the eyebrow to Eyebrow Width so stacked Line Reveal widgets keep "
+"paragraphs on one column. Off = eyebrow hugs its text."
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:1175
+msgid "Eyebrow Width"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:1176
+msgid ""
+"Max eyebrow width, not an empty column. The eyebrow hugs its text unless "
+"Fixed Eyebrow Column is on."
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:1207
+msgid "Eyebrow Gap"
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:1208
+msgid ""
+"Space between the eyebrow and the start of the paragraph. Use a small value "
+"(16-24) for a tight first line."
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:1236
+msgid "Max width of the whole block (index + eyebrow + paragraph)."
+msgstr ""
+
+#: src/widgets/bw-scroll-heat.php:1263
+msgid "Inner spacing of the widget."
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:53 src/widgets/bw-scroll-text.php:167
+msgid "Black Scroll Text"
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:96 src/widgets/bw-typography.php:300
+msgid "Animate 1"
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:97 src/widgets/bw-typography.php:301
+msgid "Animate 2"
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:98 src/widgets/bw-typography.php:302
+msgid "Animate 3"
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:99 src/widgets/bw-typography.php:303
+msgid "Animate 4"
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:100 src/widgets/bw-typography.php:304
+msgid "Animate 5"
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:101 src/widgets/bw-typography.php:305
+msgid "Animate 6"
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:102 src/widgets/bw-typography.php:306
+msgid "Animate 7"
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:103 src/widgets/bw-typography.php:307
+msgid "Animate 8"
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:107 src/widgets/bw-typography.php:311
+msgid "Mask Rise (SplitText)"
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:108 src/widgets/bw-typography.php:312
+msgid "Word Cascade Blur"
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:109 src/widgets/bw-typography.php:313
+msgid "Char Wave 3D"
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:110 src/widgets/bw-typography.php:314
+msgid "Clip Wipe"
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:156
+msgid "Scroll Text"
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:157
+msgid ""
+"Dedicated On Scroll + Movement widget extracted from Typography. Existing "
+"Typography “On Scroll” instances keep working."
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:168
+msgid "Type your title here (HTML + line breaks allowed)"
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:169
+msgid ""
+"Allowed inline tags: strong, b, i, em, u, br, hr, span, mark, small, sub, "
+"sup."
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:191
+msgid "Wrapper tag for SEO and document structure."
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:214
+msgid "Animate On Scroll"
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:224
+msgid "Animate By"
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:231
+msgid "Split and stagger the same animation by character or by word."
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:241
+msgid "Animation Delay"
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:247
+msgid ""
+"Wait (ms) after the text enters the viewport before the whole animation "
+"starts — not per character/word. 100 is subtle; try 300 for a clearer pause. "
+"Ignored while Scrub is on."
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:258 src/widgets/bw-typography.php:337
+msgid "Scrub on scrolling up and down"
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:273
+msgid "Replay when entering view again"
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:279
+msgid ""
+"Play the animation again each time the text re-enters the viewport (for "
+"example after scrolling back to the top). Separate from Scrub."
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:292
+msgid "Text Movement"
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:300 src/widgets/bw-typography.php:797
+msgid "Text Movement Animate → From"
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:359 src/widgets/bw-typography.php:899
+msgid "Text Movement Animate → To"
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:538 src/widgets/bw-scroll-text.php:743
+msgid "Transition Duration (ms)"
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:565
+msgid "Text Style"
+msgstr ""
+
+#: src/widgets/bw-scroll-text.php:618 src/widgets/bw-scroll-text.php:714
+msgid "Text Background"
+msgstr ""
+
+#: src/widgets/bw-sentence.php:56
+msgid "Black Sentence"
+msgstr ""
+
+#: src/widgets/bw-sentence.php:168
+msgid "Make it look amazing ;)"
+msgstr ""
+
+#: src/widgets/bw-sentence.php:230
+msgid "Advanced styles per item"
+msgstr ""
+
+#: src/widgets/bw-sentence.php:238
+msgid ""
+"Turn on only when you need to edit per-item styles. Frontend styles still "
+"apply when this is off."
+msgstr ""
+
+#: src/widgets/bw-sentence.php:263
+msgid "Image width"
+msgstr ""
+
+#: src/widgets/bw-sentence.php:294
+msgid "z-index"
+msgstr ""
+
+#: src/widgets/bw-sentence.php:324 src/widgets/bw-sentence.php:459
+#: src/widgets/bw-sentence.php:751 src/widgets/bw-title.php:491
+#: src/widgets/bw-typography.php:1356 src/widgets/bw-typography.php:1535
+#: src/widgets/bw-typography.php:1607 src/widgets/bw-typography.php:1806
+msgid "Title Background"
+msgstr ""
+
+#: src/widgets/bw-sentence.php:371 src/widgets/bw-typography.php:1460
+#: src/widgets/bw-typography.php:1711
+msgid "Text Stroke"
+msgstr ""
+
+#: src/widgets/bw-sentence.php:388 src/widgets/bw-typography.php:1472
+#: src/widgets/bw-typography.php:1743
+msgid "Text Stroke Color"
+msgstr ""
+
+#: src/widgets/bw-sentence.php:405 src/widgets/bw-typography.php:1491
+#: src/widgets/bw-typography.php:1762
+msgid "Text Stroke Size"
+msgstr ""
+
+#: src/widgets/bw-sentence.php:442 src/widgets/bw-typography.php:1522
+msgid "Text Gradient/Image"
+msgstr ""
+
+#: src/widgets/bw-sentence.php:554
+msgid "Position"
+msgstr ""
+
+#: src/widgets/bw-sentence.php:559
+msgid "Absolut"
+msgstr ""
+
+#: src/widgets/bw-sentence.php:572
+msgid "Horizontal Orientation"
+msgstr ""
+
+#: src/widgets/bw-sentence.php:597 src/widgets/bw-sentence.php:627
+#: src/widgets/bw-sentence.php:682 src/widgets/bw-sentence.php:712
+msgid "Offset"
+msgstr ""
+
+#: src/widgets/bw-sentence.php:657
+msgid "Vertical Orientation"
+msgstr ""
+
+#: src/widgets/bw-sentence.php:876
+msgid ""
+"Tip: leave Advanced styles per item Off unless you need it. Use General "
+"Settings for shared typography and color."
+msgstr ""
+
+#: src/widgets/bw-sentence.php:884
+msgid "Sentence Repeater"
+msgstr ""
+
+#: src/widgets/bw-sentence.php:889
+msgid "Hello"
+msgstr ""
+
+#: src/widgets/bw-sentence.php:892
+msgid "everybody,"
+msgstr ""
+
+#: src/widgets/bw-sentence.php:895
+msgid "this is"
+msgstr ""
+
+#: src/widgets/bw-sentence.php:898
+msgid "the black sentence."
+msgstr ""
+
+#: src/widgets/bw-sentence.php:948
+msgid "Sentence Alignment"
+msgstr ""
+
+#: src/widgets/bw-sentence.php:952
+msgid "From Start"
+msgstr ""
+
+#: src/widgets/bw-sentence.php:956
+msgid "On Center"
+msgstr ""
+
+#: src/widgets/bw-sentence.php:960
+msgid "Strech"
+msgstr ""
+
+#: src/widgets/bw-social-links.php:57
+msgid "Black Social Links"
+msgstr ""
+
+#: src/widgets/bw-social-links.php:139
+msgid "Type 6 (social name)"
+msgstr ""
+
+#: src/widgets/bw-social-links.php:148
+msgid "Social Name"
+msgstr ""
+
+#: src/widgets/bw-social-links.php:150 src/widgets/bw-social-links.php:190
+msgid "Facebook"
+msgstr ""
+
+#: src/widgets/bw-social-links.php:196
+msgid "Twitter"
+msgstr ""
+
+#: src/widgets/bw-social-links.php:212
+msgid "Follow"
+msgstr ""
+
+#: src/widgets/bw-social-links.php:213
+msgid "Type your follow here"
+msgstr ""
+
+#: src/widgets/bw-social-links.php:214
+msgid "Type text like it: Follow"
+msgstr ""
+
+#: src/widgets/bw-social-links.php:441
+msgid "Typography Styling"
+msgstr ""
+
+#: src/widgets/bw-social-links.php:457 src/widgets/bw-social-links.php:669
+msgid "Social Name Color"
+msgstr ""
+
+#: src/widgets/bw-social-links.php:472 src/widgets/bw-social-links.php:684
+msgid "Social Name Typography"
+msgstr ""
+
+#: src/widgets/bw-social-links.php:484 src/widgets/bw-social-links.php:696
+msgid "Social Name Text Shadow"
+msgstr ""
+
+#: src/widgets/bw-social-links.php:499
+msgid "Follow Link Color"
+msgstr ""
+
+#: src/widgets/bw-social-links.php:519 src/widgets/bw-social-links.php:731
+msgid "Follow Typography"
+msgstr ""
+
+#: src/widgets/bw-social-links.php:536 src/widgets/bw-social-links.php:748
+msgid "Follow Text Shadow"
+msgstr ""
+
+#: src/widgets/bw-social-links.php:550 src/widgets/bw-social-links.php:762
+msgid "Social Name Margin"
+msgstr ""
+
+#: src/widgets/bw-social-links.php:562 src/widgets/bw-social-links.php:774
+msgid "Social Name Padding"
+msgstr ""
+
+#: src/widgets/bw-social-links.php:575 src/widgets/bw-social-links.php:787
+msgid "Social Name Border"
+msgstr ""
+
+#: src/widgets/bw-social-links.php:583 src/widgets/bw-social-links.php:795
+msgid "Social Name Border Radius"
+msgstr ""
+
+#: src/widgets/bw-social-links.php:595 src/widgets/bw-social-links.php:807
+msgid "Follow Text Margin"
+msgstr ""
+
+#: src/widgets/bw-social-links.php:613 src/widgets/bw-social-links.php:825
+msgid "Follow Text Padding"
+msgstr ""
+
+#: src/widgets/bw-social-links.php:631 src/widgets/bw-social-links.php:843
+msgid "Follow Text Border"
+msgstr ""
+
+#: src/widgets/bw-social-links.php:644 src/widgets/bw-social-links.php:856
+msgid "Follow Text Border Radius"
+msgstr ""
+
+#: src/widgets/bw-social-links.php:711
+msgid "Follow link Color"
+msgstr ""
+
+#: src/widgets/bw-social-links.php:878
+msgid "Icon Styling"
+msgstr ""
+
+#: src/widgets/bw-text-animate.php:49
+msgid "Black Text Animate"
+msgstr ""
+
+#: src/widgets/bw-text-animate.php:117
+msgid "Black Widget Text Animate"
+msgstr ""
+
+#: src/widgets/bw-text-animate.php:118 src/widgets/bw-text-marquee.php:201
+msgid "Type your text here"
+msgstr ""
+
+#: src/widgets/bw-text-animate.php:133
+msgid "Split by"
+msgstr ""
+
+#: src/widgets/bw-text-animate.php:138
+msgid "Letter"
+msgstr ""
+
+#: src/widgets/bw-text-animate.php:139
+msgid "Word"
+msgstr ""
+
+#: src/widgets/bw-text-animate.php:197
+msgid ""
+"Semantic tag for the whole text. Words/letters are wrapped in span for "
+"animation."
+msgstr ""
+
+#: src/widgets/bw-text-marquee.php:72
+msgid "Black Text Marquee"
+msgstr ""
+
+#: src/widgets/bw-text-marquee.php:200
+msgid "Black Widget Text Marquee"
+msgstr ""
+
+#: src/widgets/bw-text-marquee.php:241
+msgid "Speed"
+msgstr ""
+
+#: src/widgets/bw-text-marquee.php:252
+msgid "GAP (px)"
+msgstr ""
+
+#: src/widgets/bw-text-marquee.php:255
+msgid "Space between repeating text units."
+msgstr ""
+
+#: src/widgets/bw-text-marquee.php:422
+msgid "Leave empty for auto height. A fixed value can clip text."
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:58
+msgid "Black Title Animate"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:155
+msgid "Classic"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:157
+msgid "Effective"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:158
+msgid "Typing"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:159
+msgid "Fade From Top"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:160
+msgid "Fade From Left"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:161
+msgid "Fade From Right"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:162
+msgid "Fade From Bottom"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:164
+msgid "Fade Out"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:165
+msgid "Glitch 1"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:166
+msgid "Glitch 2"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:167
+msgid "Fade From Bottom2"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:168
+msgid "Rotator"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:169
+msgid "SVG"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:178
+msgid "Select Animation"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:182
+msgid "Clip"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:183
+msgid "Flip Rotate"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:184
+msgid "Latter FadeIn"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:185
+msgid "Latter Rotate"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:186
+msgid "Typing Latter"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:187
+msgid "Bar Loading"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:188
+msgid "Slide Top"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:189
+msgid "Zoom Out"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:190
+msgid "Scale In"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:191
+msgid "Push Left"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:192
+msgid "Color Effect"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:193
+msgid "Bouncing Effect"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:234
+msgid "Rotator Text"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:236 src/widgets/bw-title-animate.php:606
+msgid "Hello Goodbye"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:249
+msgid "Animation List"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:260
+msgid "World"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:272
+msgid "Select SVG"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:276
+msgid "Vector 1"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:277
+msgid "Vector 2"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:278
+msgid "Vector 3"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:279
+msgid "Vector 4"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:280
+msgid "Vector 5"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:281
+msgid "Vector 6"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:282
+msgid "Vector 7"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:283
+msgid "Vector 8"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:284
+msgid "Vector 9"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:295
+msgid "Before Text"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:310
+msgid "Animation Text"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:325
+msgid "After Text"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:361
+msgid "When looping, used as hold time before the stroke resets."
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:371
+msgid "Loop"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:373
+msgid "True"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:374
+msgid "False"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:387
+msgid "Custom Playback"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:393
+msgid ""
+"Off keeps the default playback. On lets you set play once, loop, and speed."
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:400
+msgid "Play Mode"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:404 src/widgets/bw-typography.php:689
+msgid "Play Once"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:416
+msgid "Animation Speed"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:422
+msgid "1 = normal. Higher is faster, lower is slower."
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:433
+msgid "Before Title"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:454 src/widgets/bw-title-animate.php:508
+msgid "Main Title"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:475
+msgid "Symbol (Just Single Character) "
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:477
+msgid "&"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:478
+msgid "Set symbol"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:491
+msgid "Glitch Text"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:493
+msgid "Glitch•"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:510
+msgid "Find Your Element"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:523
+msgid "Start Range From Bottom"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:552
+msgid "Text 1"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:554
+msgid "Set"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:570
+msgid "Text 2"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:572
+msgid "Ready"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:588
+msgid "Text 3"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:590
+msgid "Go"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:604
+msgid "Typing Text"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:620
+msgid "After Title"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:643
+msgid "HTML Tag Setting"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:780
+msgid "Before Text Typography"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:924
+msgid "Main Text Typography"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:1065
+msgid "Animate Text Typography"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:1092
+msgid "Color 1(Color Effect)"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:1105
+msgid "Color 2(Color Effect)"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:1227
+msgid "Symbol Text Typography"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:1364
+msgid "After Text Typography"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:1509
+msgid "Line Color (Type)"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:1534 src/widgets/bw-title-animate.php:1610
+#: src/widgets/bw-typography.php:2170
+msgid "Line Width"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:1558 src/widgets/bw-title-animate.php:1634
+#: src/widgets/bw-typography.php:2189
+msgid "Line Height"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:1584
+msgid "Line Color (Animation)"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:1660
+msgid "SVG Style"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:1687
+msgid "Stroke Width"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:1706
+msgid "Horizontal Offset"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:1723
+msgid "Vertical Offset"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:1731
+msgid ""
+"Positive values push the SVG lower than the text, negative values pull it "
+"up. 40px moves it 40px down."
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:1741
+msgid "View Box (advanced)"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:1750
+msgid "View Box Width"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:1759
+msgid "View Box Height"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:1768
+msgid "View Box Min-X"
+msgstr ""
+
+#: src/widgets/bw-title-animate.php:1777
+msgid "View Box Min-Y"
+msgstr ""
+
+#: src/widgets/bw-title.php:57
+msgid "Black Title"
+msgstr ""
+
+#: src/widgets/bw-title.php:139
+msgid "Type 6"
+msgstr ""
+
+#: src/widgets/bw-title.php:140
+msgid "Type 7"
+msgstr ""
+
+#: src/widgets/bw-title.php:141
+msgid "Type 8"
+msgstr ""
+
+#: src/widgets/bw-title.php:161 src/widgets/bw-typography.php:230
+msgid "Black Widget Title"
+msgstr ""
+
+#: src/widgets/bw-title.php:203
+msgid "Black Widget Subtitle"
+msgstr ""
+
+#: src/widgets/bw-title.php:285
+msgid "Choose Shape"
+msgstr ""
+
+#: src/widgets/bw-title.php:290
+msgid ""
+"We suggest you use the SVG files, but you can use PNG format event JPG file "
+"formats."
+msgstr ""
+
+#: src/widgets/bw-title.php:298
+msgid "Rotation"
+msgstr ""
+
+#: src/widgets/bw-title.php:458 src/widgets/bw-title.php:605
+msgid "First Letter Typography - type 8"
+msgstr ""
+
+#: src/widgets/bw-title.php:539 src/widgets/bw-typography.php:1404
+#: src/widgets/bw-typography.php:1655 src/widgets/bw-typography.php:2232
+msgid "Title Border"
+msgstr ""
+
+#: src/widgets/bw-title.php:560 src/widgets/bw-typography.php:1425
+#: src/widgets/bw-typography.php:1676
+msgid "Title Box Shadow"
+msgstr ""
+
+#: src/widgets/bw-title.php:638
+msgid "Subtitle Background"
+msgstr ""
+
+#: src/widgets/bw-title.php:654
+msgid "Subtitle Margin"
+msgstr ""
+
+#: src/widgets/bw-title.php:666
+msgid "Subtitle Padding"
+msgstr ""
+
+#: src/widgets/bw-title.php:686
+msgid "Subtitle Border"
+msgstr ""
+
+#: src/widgets/bw-title.php:707
+msgid "Subtitle Box Shadow"
+msgstr ""
+
+#: src/widgets/bw-title.php:725
+msgid "Shape Before Color"
+msgstr ""
+
+#: src/widgets/bw-title.php:736
+msgid "Shape After Color"
+msgstr ""
+
+#: src/widgets/bw-title.php:747
+msgid "Shape Before Width"
+msgstr ""
+
+#: src/widgets/bw-title.php:766
+msgid "Shape Before Height"
+msgstr ""
+
+#: src/widgets/bw-title.php:785
+msgid "Shape After Width"
+msgstr ""
+
+#: src/widgets/bw-title.php:804
+msgid "Shape After Height"
+msgstr ""
+
+#: src/widgets/bw-title.php:825
+msgid "Custom Shape Settings"
+msgstr ""
+
+#: src/widgets/bw-title.php:838
+msgid "Shape Poistion"
+msgstr ""
+
+#: src/widgets/bw-title.php:842
+msgid "Absolute"
+msgstr ""
+
+#: src/widgets/bw-title.php:843
+msgid "Relative"
+msgstr ""
+
+#: src/widgets/bw-title.php:854
+msgid "Top Position"
+msgstr ""
+
+#: src/widgets/bw-title.php:864 src/widgets/bw-title.php:881
+#: src/widgets/bw-title.php:898 src/widgets/bw-title.php:915
+msgid "Type position size with unit. e.g: 10px or auto or calc(50% - 24px)"
+msgstr ""
+
+#: src/widgets/bw-title.php:871
+msgid "Left Position"
+msgstr ""
+
+#: src/widgets/bw-title.php:888
+msgid "Bottom Position"
+msgstr ""
+
+#: src/widgets/bw-title.php:905
+msgid "Right Position"
+msgstr ""
+
+#: src/widgets/bw-typography.php:74
+msgid "Black Typography"
+msgstr ""
+
+#: src/widgets/bw-typography.php:150
+msgid "Fade Outward"
+msgstr ""
+
+#: src/widgets/bw-typography.php:151
+msgid "Fade Soft"
+msgstr ""
+
+#: src/widgets/bw-typography.php:152
+msgid "Fade Tight"
+msgstr ""
+
+#: src/widgets/bw-typography.php:153
+msgid "Fade Deep"
+msgstr ""
+
+#: src/widgets/bw-typography.php:202
+msgid "With Shapes"
+msgstr ""
+
+#: src/widgets/bw-typography.php:203
+msgid "Repetitive"
+msgstr ""
+
+#: src/widgets/bw-typography.php:204
+msgid "On Scroll (legacy)"
+msgstr ""
+
+#: src/widgets/bw-typography.php:215
+msgid "Prefer Black Scroll Text"
+msgstr ""
+
+#: src/widgets/bw-typography.php:216
+msgid ""
+"On Scroll + Movement now have a dedicated “Black Scroll Text” widget. "
+"Existing Typography On Scroll settings keep working; use Scroll Text for new "
+"designs."
+msgstr ""
+
+#: src/widgets/bw-typography.php:239
+msgid "SVG Shape"
+msgstr ""
+
+#: src/widgets/bw-typography.php:246
+msgid ""
+"Upload your custom SVG shape, then add <em> and </em> around of the text! "
+"you'll see the shape under the text with a simple animate."
+msgstr ""
+
+#: src/widgets/bw-typography.php:284
+msgid "Style 4"
+msgstr ""
+
+#: src/widgets/bw-typography.php:285
+msgid "Style 5"
+msgstr ""
+
+#: src/widgets/bw-typography.php:286
+msgid "Style 6"
+msgstr ""
+
+#: src/widgets/bw-typography.php:287
+msgid "Custom Style"
+msgstr ""
+
+#: src/widgets/bw-typography.php:320
+msgid "Select Animate On Scroll"
+msgstr ""
+
+#: src/widgets/bw-typography.php:355
+msgid "Left or Top"
+msgstr ""
+
+#: src/widgets/bw-typography.php:417 src/widgets/bw-typography.php:534
+msgid "SVG CODE HERE"
+msgstr ""
+
+#: src/widgets/bw-typography.php:472
+msgid "Right or Bottom"
+msgstr ""
+
+#: src/widgets/bw-typography.php:591
+msgid "How many repeat you need?"
+msgstr ""
+
+#: src/widgets/bw-typography.php:596 src/widgets/bw-typography.php:628
+msgid "2"
+msgstr ""
+
+#: src/widgets/bw-typography.php:598 src/widgets/bw-typography.php:630
+msgid "4"
+msgstr ""
+
+#: src/widgets/bw-typography.php:599 src/widgets/bw-typography.php:631
+msgid "5"
+msgstr ""
+
+#: src/widgets/bw-typography.php:600 src/widgets/bw-typography.php:632
+msgid "6"
+msgstr ""
+
+#: src/widgets/bw-typography.php:601 src/widgets/bw-typography.php:633
+msgid "7"
+msgstr ""
+
+#: src/widgets/bw-typography.php:602 src/widgets/bw-typography.php:634
+msgid "8"
+msgstr ""
+
+#: src/widgets/bw-typography.php:603 src/widgets/bw-typography.php:635
+msgid "9"
+msgstr ""
+
+#: src/widgets/bw-typography.php:604 src/widgets/bw-typography.php:636
+msgid "10"
+msgstr ""
+
+#: src/widgets/bw-typography.php:605 src/widgets/bw-typography.php:637
+msgid "11"
+msgstr ""
+
+#: src/widgets/bw-typography.php:606 src/widgets/bw-typography.php:638
+msgid "12"
+msgstr ""
+
+#: src/widgets/bw-typography.php:607 src/widgets/bw-typography.php:639
+msgid "13"
+msgstr ""
+
+#: src/widgets/bw-typography.php:608 src/widgets/bw-typography.php:640
+msgid "14"
+msgstr ""
+
+#: src/widgets/bw-typography.php:609 src/widgets/bw-typography.php:641
+msgid "15"
+msgstr ""
+
+#: src/widgets/bw-typography.php:610 src/widgets/bw-typography.php:642
+msgid "16"
+msgstr ""
+
+#: src/widgets/bw-typography.php:623
+msgid "Set Other Style for which repeat?"
+msgstr ""
+
+#: src/widgets/bw-typography.php:655
+msgid "Viewport Animation"
+msgstr ""
+
+#: src/widgets/bw-typography.php:661
+msgid "Off keeps the text static. On animates it when it enters the screen."
+msgstr ""
+
+#: src/widgets/bw-typography.php:741
+msgid "Vertical Title"
+msgstr ""
+
+#: src/widgets/bw-typography.php:753 src/widgets/bw-typography.php:771
+msgid "Reset Wrapper:"
+msgstr ""
+
+#: src/widgets/bw-typography.php:757
+msgid "Block"
+msgstr ""
+
+#: src/widgets/bw-typography.php:758
+msgid "unset"
+msgstr ""
+
+#: src/widgets/bw-typography.php:775
+msgid "-180deg"
+msgstr ""
+
+#: src/widgets/bw-typography.php:776
+msgid "-90deg"
+msgstr ""
+
+#: src/widgets/bw-typography.php:777
+msgid "-45deg"
+msgstr ""
+
+#: src/widgets/bw-typography.php:779
+msgid "45deg"
+msgstr ""
+
+#: src/widgets/bw-typography.php:780
+msgid "90deg"
+msgstr ""
+
+#: src/widgets/bw-typography.php:781
+msgid "180deg"
+msgstr ""
+
+#: src/widgets/bw-typography.php:814 src/widgets/bw-typography.php:916
+msgid ""
+"Start point from 0 to 1. Example: 0.85 starts near the bottom of the screen."
+msgstr ""
+
+#: src/widgets/bw-typography.php:1003
+msgid "Overlay"
+msgstr ""
+
+#: src/widgets/bw-typography.php:1016
+msgid "Do you need overlay?"
+msgstr ""
+
+#: src/widgets/bw-typography.php:1022
+msgid "Background behind the text (image, gradient, opacity, blur)."
+msgstr ""
+
+#: src/widgets/bw-typography.php:1074
+msgid "Backdrop Filter Blur"
+msgstr ""
+
+#: src/widgets/bw-typography.php:1440 src/widgets/bw-typography.php:1691
+msgid "Z-Index"
+msgstr ""
+
+#: src/widgets/bw-typography.php:1445 src/widgets/bw-typography.php:1696
+msgid "If you using the 2D / 3D style, so z-index will be disabled."
+msgstr ""
+
+#: src/widgets/bw-typography.php:1551
+msgid "Unique Title Typography"
+msgstr ""
+
+#: src/widgets/bw-typography.php:1793
+msgid "Text Gradient"
+msgstr ""
+
+#: src/widgets/bw-typography.php:2154
+msgid "Line Styles"
+msgstr ""
+
+#: src/widgets/bw-typography.php:2525 src/widgets/bw-typography.php:2530
+#: src/widgets/bw-typography.php:2543 src/widgets/bw-typography.php:2547
+msgid "Icon Image"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://modernaweb.net/black-widgets"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Build web pages with black widgets."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Modernaweb Studio"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://modernaweb.net/"
+msgstr ""

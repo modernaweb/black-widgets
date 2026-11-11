@@ -449,7 +449,9 @@ class CallToAction extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Normal Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'default' => '#fff',
+				'global' => [
+					'default' => Global_Colors::COLOR_PRIMARY,
+				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-cta .bw-cta-title' => 'color: {{VALUE}}',
 				],
@@ -469,6 +471,9 @@ class CallToAction extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Hover Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
+				'global' => [
+					'default' => Global_Colors::COLOR_PRIMARY,
+				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-cta:hover .bw-cta-title' => 'color: {{VALUE}}',
 				],
@@ -594,7 +599,9 @@ class CallToAction extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Normal Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'default' => '#fff',
+				'global' => [
+					'default' => Global_Colors::COLOR_PRIMARY,
+				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-cta .bw-cta-subtitle' => 'color: {{VALUE}}',
 				],
@@ -614,6 +621,9 @@ class CallToAction extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Hover Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
+				'global' => [
+					'default' => Global_Colors::COLOR_PRIMARY,
+				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-cta:hover .bw-cta-subtitle' => 'color: {{VALUE}}',
 				],
@@ -739,7 +749,9 @@ class CallToAction extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Normal Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
-				'default' => '#000',
+				'global' => [
+					'default' => Global_Colors::COLOR_PRIMARY,
+				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-cta .bw-cta-btn' => 'color: {{VALUE}}',
 				],
@@ -769,6 +781,9 @@ class CallToAction extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Hover Color', 'blackwidgets' ),
 				'type' => Controls_Manager::COLOR,
+				'global' => [
+					'default' => Global_Colors::COLOR_PRIMARY,
+				],
 				'selectors' => [
 					'{{WRAPPER}} .bw-cta .bw-cta-btn:hover' => 'color: {{VALUE}}',
 				],
@@ -886,7 +901,6 @@ class CallToAction extends \Elementor\Widget_Base {
 
 		$settings   	= $this->get_settings_for_display();
 		// Variables
-		// $type 	        		= isset($settings['widget_type']) 								? $settings['widget_type'] 						: ''; // Widget Type
 		$allowed_tags 			= ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'];
 		$allowed_inline_html = [
 			'br'     => [],
@@ -904,14 +918,14 @@ class CallToAction extends \Elementor\Widget_Base {
 		// Title
 		$title 					= isset($settings['widget_title'])					? $settings['widget_title']						: '';
 		$title_tag 				= isset($settings['widget_html_tag_title'])			? $settings['widget_html_tag_title']			: ''; // HTML Tag
-		if (!in_array($title_tag, $allowed_tags)) {
-			$title_tag = 'h3'; // esc_attr($title_tag)
+		if (!in_array($title_tag, $allowed_tags, true)) {
+			$title_tag = 'h3';
 		}
 		// Subtitle
 		$subtitle				= isset($settings['widget_subtitle'])				? $settings['widget_subtitle']					: '';
 		$subtitle_tag			= isset($settings['widget_html_tag_subtitle'])		? $settings['widget_html_tag_subtitle']			: ''; // HTML Tag
-		if (!in_array($subtitle_tag, $allowed_tags)) {
-			$subtitle_tag = 'p'; // esc_attr($subtitle_tag)
+		if (!in_array($subtitle_tag, $allowed_tags, true)) {
+			$subtitle_tag = 'p';
 		}
 		// Button
 		$link					= isset($settings['widget_link_url']['url'])		? $settings['widget_link_url']['url']			: ''; // Link URL

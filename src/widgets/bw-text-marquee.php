@@ -21,7 +21,7 @@ class TextMarquee extends \Elementor\Widget_Base {
      *
      * Registers styles and scripts required for the Text Marquee widget.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      *
      * @param array $data Optional. Widget data. Default empty array.
      * @param mixed $args Optional. Additional arguments. Default null.
@@ -51,7 +51,7 @@ class TextMarquee extends \Elementor\Widget_Base {
      *
      * Returns the unique name of the widget used internally by Elementor.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      *
      * @return string Widget name.
      */
@@ -64,7 +64,7 @@ class TextMarquee extends \Elementor\Widget_Base {
      *
      * Returns the display title for the widget shown in the Elementor editor.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      *
      * @return string Translatable widget title.
      */
@@ -77,7 +77,7 @@ class TextMarquee extends \Elementor\Widget_Base {
      *
      * Returns the Elementor icon class for displaying in the widget list.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      *
      * @return string Elementor icon class name.
      */
@@ -90,7 +90,7 @@ class TextMarquee extends \Elementor\Widget_Base {
      *
      * Specifies the custom categories the widget belongs to in Elementor.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      *
      * @return array List of category slugs.
      */
@@ -103,7 +103,7 @@ class TextMarquee extends \Elementor\Widget_Base {
      *
      * Registers styles to be enqueued when the widget is used on the frontend.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      *
      * @return array List of style handles.
      */
@@ -116,7 +116,7 @@ class TextMarquee extends \Elementor\Widget_Base {
      *
      * Registers scripts to be enqueued when the widget is used on the frontend.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      *
      * @return array List of script handles.
      */
@@ -146,7 +146,7 @@ class TextMarquee extends \Elementor\Widget_Base {
      *
      * Indicates whether this widget supports dynamic content or not.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      *
      * @return bool False since the widget only displays static content.
      */
@@ -157,7 +157,7 @@ class TextMarquee extends \Elementor\Widget_Base {
     /**
      * Check whether GSAP is enabled in the plugin options.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      *
      * @return bool True if GSAP is enabled, false otherwise.
      */
@@ -168,7 +168,7 @@ class TextMarquee extends \Elementor\Widget_Base {
     /**
      * Register widget controls by calling settings and style control registration methods.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      * @return void
      */
     protected function register_controls() {
@@ -179,7 +179,7 @@ class TextMarquee extends \Elementor\Widget_Base {
     /**
      * Register the content-related settings controls for the widget.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      * @return void
      */
     private function register_settings_controls() {
@@ -342,7 +342,7 @@ class TextMarquee extends \Elementor\Widget_Base {
     /**
      * Register all style controls including box and content styles.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      * @return void
      */
     private function register_style_controls() {
@@ -353,7 +353,7 @@ class TextMarquee extends \Elementor\Widget_Base {
     /**
      * Register style controls related to the box wrapper.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      * @return void
      */
     private function register_style_box_controls() {
@@ -482,7 +482,7 @@ class TextMarquee extends \Elementor\Widget_Base {
     /**
      * Register style controls related to the text content and typography.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      * @return void
      */
     private function register_style_content_controls() {
@@ -541,7 +541,7 @@ class TextMarquee extends \Elementor\Widget_Base {
      * Supports GSAP animation, pause on hover, and configurable direction,
      * speed, gap, and display modes.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      *
      * @return void Outputs the widget HTML.
      */

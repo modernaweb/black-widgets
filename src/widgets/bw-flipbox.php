@@ -1293,7 +1293,9 @@ class FlipIx extends \Elementor\Widget_Base {
             [
                 'label' => esc_html__( 'Color', 'blackwidgets' ),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#FFFFFF',
+                'global' => [
+                    'default' => Global_Colors::COLOR_PRIMARY,
+                ],
                 'selectors' => [
                     '{{WRAPPER}} .bw-flipbox .bw-flip-card .bw-back .description .bw-button' => 'color: {{VALUE}}',
                 ],

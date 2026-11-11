@@ -305,25 +305,15 @@ class Sentence extends \Elementor\Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}' => 'z-index: {{SIZE}};',
 				],
-				'condition' => [
-					'advanced_item_styles' => 'yes',
-				],
 			]
 		);
 
-		$repeater->start_controls_tabs('inner_tab', [
-			'condition' => [
-				'advanced_item_styles' => 'yes',
-			],
-		]);
+		$repeater->start_controls_tabs('inner_tab');
 
 		$repeater->start_controls_tab(
 			'normal_style',
 			[
 				'label' => esc_html__( 'Normal', 'blackwidgets' ),
-				'condition' => [
-					'advanced_item_styles' => 'yes',
-				],
 			]
 		);
 
@@ -339,9 +329,6 @@ class Sentence extends \Elementor\Widget_Base {
 						'render_type' => 'ui',
 					],
 				],
-				'condition' => [
-					'advanced_item_styles' => 'yes',
-				],
 			]
 		);
 
@@ -349,9 +336,6 @@ class Sentence extends \Elementor\Widget_Base {
 			'bg_hr',
 			[
 				'type' => \Elementor\Controls_Manager::DIVIDER,
-				'condition' => [
-					'advanced_item_styles' => 'yes',
-				],
 			]
 		);
 
@@ -362,7 +346,6 @@ class Sentence extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Typography', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a',
 				'condition'  => [
-					'advanced_item_styles' => 'yes',
 					'sentence_type' => [
 						'bw-t-1',
 					],
@@ -375,7 +358,6 @@ class Sentence extends \Elementor\Widget_Base {
 			[
 				'type' => \Elementor\Controls_Manager::DIVIDER,
 				'condition'  => [
-					'advanced_item_styles' => 'yes',
 					'sentence_type' => [
 						'bw-t-1',
 					],
@@ -393,7 +375,6 @@ class Sentence extends \Elementor\Widget_Base {
 				'return_value' 	=> 'stroke_enable',
 				'render_type' => 'ui',
 				'condition'  => [
-					'advanced_item_styles' => 'yes',
 					'sentence_type' => [
 						'bw-t-1',
 					],
@@ -411,7 +392,6 @@ class Sentence extends \Elementor\Widget_Base {
 					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a' => '-webkit-text-stroke-color: {{VALUE}}',
 				],
 				'condition'  => [
-					'advanced_item_styles' => 'yes',
 					'widget_stroke_title_enable' => [
 						'stroke_enable',
 					],
@@ -437,7 +417,6 @@ class Sentence extends \Elementor\Widget_Base {
 					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a' => '-webkit-text-stroke-width: {{SIZE}}{{UNIT}} !important;',
 				],
 				'condition'  => [
-					'advanced_item_styles' => 'yes',
 					'widget_stroke_title_enable' => [
 						'stroke_enable',
 					],
@@ -450,7 +429,6 @@ class Sentence extends \Elementor\Widget_Base {
 			[
 				'type' => \Elementor\Controls_Manager::DIVIDER,
 				'condition'  => [
-					'advanced_item_styles' => 'yes',
 					'sentence_type' => [
 						'bw-t-1',
 					],
@@ -467,7 +445,6 @@ class Sentence extends \Elementor\Widget_Base {
 				'label_off' 	=> esc_html__( 'No !', 'blackwidgets' ),
 				'return_value' 	=> 'gradient_enable',
 				'condition'  => [
-					'advanced_item_styles' => 'yes',
 					'sentence_type' => [
 						'bw-t-1',
 					],
@@ -488,7 +465,6 @@ class Sentence extends \Elementor\Widget_Base {
 					],
 				],
 				'condition'  => [
-					'advanced_item_styles' => 'yes',
 					'gradient_color_title_enable' => [
 						'gradient_enable',
 					],
@@ -500,9 +476,6 @@ class Sentence extends \Elementor\Widget_Base {
 			'hr1',
 			[
 				'type' => \Elementor\Controls_Manager::DIVIDER,
-				'condition'  => [
-					'advanced_item_styles' => 'yes',
-				],
 			]
 		);
 
@@ -515,9 +488,6 @@ class Sentence extends \Elementor\Widget_Base {
 				'render_type' => 'ui',
 				'selectors' => [
 					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-				'condition' => [
-					'advanced_item_styles' => 'yes',
 				],
 			]
 		);
@@ -532,9 +502,6 @@ class Sentence extends \Elementor\Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
-				'condition' => [
-					'advanced_item_styles' => 'yes',
-				],
 			]
 		);
 
@@ -544,9 +511,6 @@ class Sentence extends \Elementor\Widget_Base {
 				'name' => 'widget_box_border_normal',
 				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}',
-				'condition' => [
-					'advanced_item_styles' => 'yes',
-				],
 			]
 		);
 
@@ -560,9 +524,6 @@ class Sentence extends \Elementor\Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
-				'condition' => [
-					'advanced_item_styles' => 'yes',
-				],
 			]
 		);
 
@@ -572,9 +533,6 @@ class Sentence extends \Elementor\Widget_Base {
 				'name' => 'widget_box_box_shadow_normal',
 				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}',
-				'condition' => [
-					'advanced_item_styles' => 'yes',
-				],
 			]
 		);
 
@@ -583,7 +541,6 @@ class Sentence extends \Elementor\Widget_Base {
 			[
 				'type' => \Elementor\Controls_Manager::DIVIDER,
 				'condition'  => [
-					'advanced_item_styles' => 'yes',
 					'sentence_type' => [
 						'bw-t-2',
 					],
@@ -602,7 +559,6 @@ class Sentence extends \Elementor\Widget_Base {
 					'absolut' 	=> esc_html__( 'Absolut', 'blackwidgets' ),
 				],
 				'condition'  => [
-					'advanced_item_styles' => 'yes',
 					'sentence_type' => [
 						'bw-t-2',
 					],
@@ -628,7 +584,6 @@ class Sentence extends \Elementor\Widget_Base {
 				'toggle'    => true,
 				'render_type' => 'ui',
 				'condition'  => [
-					'advanced_item_styles' => 'yes',
 					'sentence_image_position_normal' => [
 						'absolut',
 					],
@@ -659,7 +614,6 @@ class Sentence extends \Elementor\Widget_Base {
 					'{{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}' => 'left: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
-					'advanced_item_styles' => 'yes',
 					'sentence_image_horizontal_position_normal' => [
 						'left',
 					],
@@ -690,7 +644,6 @@ class Sentence extends \Elementor\Widget_Base {
 					'{{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}' => 'right: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
-					'advanced_item_styles' => 'yes',
 					'sentence_image_horizontal_position_normal' => [
 						'right',
 					],
@@ -716,7 +669,6 @@ class Sentence extends \Elementor\Widget_Base {
 				'toggle'    => true,
 				'render_type' => 'ui',
 				'condition'  => [
-					'advanced_item_styles' => 'yes',
 					'sentence_image_position_normal' => [
 						'absolut',
 					],
@@ -747,7 +699,6 @@ class Sentence extends \Elementor\Widget_Base {
 					'{{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}' => 'top: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
-					'advanced_item_styles' => 'yes',
 					'sentence_image_vertical_position_normal' => [
 						'top',
 					],
@@ -778,7 +729,6 @@ class Sentence extends \Elementor\Widget_Base {
 					'{{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}' => 'bottom: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
-					'advanced_item_styles' => 'yes',
 					'sentence_image_vertical_position_normal' => [
 						'bottom',
 					],
@@ -791,9 +741,6 @@ class Sentence extends \Elementor\Widget_Base {
 			'hover_style',
 			[
 				'label' => esc_html__( 'Hover', 'blackwidgets' ),
-				'condition' => [
-					'advanced_item_styles' => 'yes',
-				],
 			]
 		);
 
@@ -809,9 +756,6 @@ class Sentence extends \Elementor\Widget_Base {
 						'render_type' => 'ui',
 					],
 				],
-				'condition' => [
-					'advanced_item_styles' => 'yes',
-				],
 			]
 		);
 
@@ -819,9 +763,6 @@ class Sentence extends \Elementor\Widget_Base {
 			'bg_hr_hover',
 			[
 				'type' => \Elementor\Controls_Manager::DIVIDER,
-				'condition' => [
-					'advanced_item_styles' => 'yes',
-				],
 			]
 		);
 
@@ -835,7 +776,6 @@ class Sentence extends \Elementor\Widget_Base {
 					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}:hover, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a:hover' => 'color: {{VALUE}}',
 				],
 				'condition'  => [
-					'advanced_item_styles' => 'yes',
 					'sentence_type' => [
 						'bw-t-1',
 					],
@@ -850,7 +790,6 @@ class Sentence extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Typography', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}:hover, {{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}} a:hover',
 				'condition'  => [
-					'advanced_item_styles' => 'yes',
 					'sentence_type' => [
 						'bw-t-1',
 					],
@@ -863,7 +802,6 @@ class Sentence extends \Elementor\Widget_Base {
 			[
 				'type' => \Elementor\Controls_Manager::DIVIDER,
 				'condition'  => [
-					'advanced_item_styles' => 'yes',
 					'sentence_type' => [
 						'bw-t-1',
 					],
@@ -881,9 +819,6 @@ class Sentence extends \Elementor\Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}:hover, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}:hover' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
-				'condition' => [
-					'advanced_item_styles' => 'yes',
-				],
 			]
 		);
 
@@ -897,9 +832,6 @@ class Sentence extends \Elementor\Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}:hover, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}:hover' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
-				'condition' => [
-					'advanced_item_styles' => 'yes',
-				],
 			]
 		);
 
@@ -909,9 +841,6 @@ class Sentence extends \Elementor\Widget_Base {
 				'name' => 'widget_box_border_hover',
 				'label' => esc_html__( 'Border', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}:hover, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}:hover',
-				'condition' => [
-					'advanced_item_styles' => 'yes',
-				],
 			]
 		);
 
@@ -925,9 +854,6 @@ class Sentence extends \Elementor\Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}:hover, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
-				'condition' => [
-					'advanced_item_styles' => 'yes',
-				],
 			]
 		);
 
@@ -937,9 +863,6 @@ class Sentence extends \Elementor\Widget_Base {
 				'name' => 'widget_box_box_shadow_hover',
 				'label' => esc_html__( 'Box Shadow', 'blackwidgets' ),
 				'selector' => '{{WRAPPER}} .bw-sentence .bw-t-1{{CURRENT_ITEM}}:hover, {{WRAPPER}} .bw-sentence .bw-t-2{{CURRENT_ITEM}}:hover',
-				'condition' => [
-					'advanced_item_styles' => 'yes',
-				],
 			]
 		);
 
@@ -1066,13 +989,15 @@ class Sentence extends \Elementor\Widget_Base {
 		$type 	                = isset($settings['sentence_type'])				? $settings['sentence_type']				: '';
 		$allowed_tags 			= ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'];
 		$title_tag 				= isset($settings['widget_html_tag_title']) 	? $settings['widget_html_tag_title']		: '';
-		if (!in_array($title_tag, $allowed_tags)) {
+		if (!in_array($title_tag, $allowed_tags, true)) {
 			$title_tag = 'h1';
 		}
         $title 			        = isset($settings['widget_title'])				? $settings['widget_title']		: '';
 		$justify 	            = isset($settings['justify_positioning'])		? $settings['justify_positioning']			: '';
 		$data_id				= 'bw_' . uniqid();
 		$script_id				= '#' . $data_id;
+		$target					= '';
+		$nofollow				= '';
 
         if ( $settings['sentence'] ) {
 			echo '<div class="bw-sentence bw-showcase">';

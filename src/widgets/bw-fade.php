@@ -1288,7 +1288,7 @@ class Fade extends \Elementor\Widget_Base {
 				if ( ! $image_url && $image_URL ) {
 					$image_url = $image_URL;
 				}
-				echo '<div class="bw-load-img bw-cursor-' . esc_attr( $cursor ) .'" id="'. $data_id .'">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo '<div class="bw-load-img bw-cursor-' . esc_attr( $cursor ) .'" id="'. esc_attr( $data_id ) .'">';
 					echo '<div class="bw-img ' . esc_attr( $hover_animation ) . '">';
 						echo '<div class="bw-image-grow-cover ' . esc_attr( $img_grow ) . '"></div>';
 						if ( $image_url ) {

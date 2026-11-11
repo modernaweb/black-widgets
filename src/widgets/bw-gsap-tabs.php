@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * A tab-based content widget powered by GSAP animations.
  * Includes automatic tab switching, image/video display, and responsive layout.
  *
- * @since 1.3.6
+ * @since 2.0.0
  */
 class GSAPTabs extends Widget_Base {
 
@@ -30,7 +30,7 @@ class GSAPTabs extends Widget_Base {
 	 * Get widget name.
 	 *
 	 * @return string Widget name.
-	 * @since 1.3.6
+	 * @since 2.0.0
 	 * @access public
 	 */
 	public function get_name(): string {
@@ -41,7 +41,7 @@ class GSAPTabs extends Widget_Base {
 	 * Get widget title.
 	 *
 	 * @return string Widget title.
-	 * @since 1.3.6
+	 * @since 2.0.0
 	 * @access public
 	 */
 	public function get_title(): string {
@@ -52,7 +52,7 @@ class GSAPTabs extends Widget_Base {
 	 * Get widget icon.
 	 *
 	 * @return string Widget icon class.
-	 * @since 1.3.6
+	 * @since 2.0.0
 	 * @access public
 	 */
 	public function get_icon(): string {
@@ -63,7 +63,7 @@ class GSAPTabs extends Widget_Base {
 	 * Get widget categories.
 	 *
 	 * @return array Categories array.
-	 * @since 1.3.6
+	 * @since 2.0.0
 	 * @access public
 	 */
 	public function get_categories(): array {
@@ -101,7 +101,7 @@ class GSAPTabs extends Widget_Base {
 	 * Register widget controls.
 	 *
 	 * @return void
-	 * @since 1.3.6
+	 * @since 2.0.0
 	 * @access protected
 	 */
 	protected function register_controls() {
@@ -116,7 +116,7 @@ class GSAPTabs extends Widget_Base {
 	 * Settings Controls
 	 *
 	 * @return void
-	 * @since 1.3.6
+	 * @since 2.0.0
 	 * @access private
 	 */
 	private function register_settings_controls() {
@@ -229,7 +229,7 @@ class GSAPTabs extends Widget_Base {
 	 * Default Repeater Controls
 	 *
 	 * @return void
-	 * @since 1.3.6
+	 * @since 2.0.0
 	 * @access private
 	 */
     private function register_default_repeater() {
@@ -414,7 +414,7 @@ class GSAPTabs extends Widget_Base {
 	 * Vertical Repeater Controls
 	 *
 	 * @return void
-	 * @since 1.3.6
+	 * @since 2.0.0
 	 * @access private
 	 */
     private function register_vertical_repeater() {
@@ -577,7 +577,7 @@ class GSAPTabs extends Widget_Base {
 	 * Default Style Controls
 	 *
 	 * @return void
-	 * @since 1.3.6
+	 * @since 2.0.0
 	 * @access private
 	 */
     private function register_default_style_controls() {
@@ -598,7 +598,7 @@ class GSAPTabs extends Widget_Base {
 	 * Default Box style controls
 	 *
 	 * @return void
-	 * @since 1.3.6
+	 * @since 2.0.0
 	 * @access private
 	 */
 	private function register_default_box_style_controls() {
@@ -709,7 +709,7 @@ class GSAPTabs extends Widget_Base {
 	 * Default Tabs Style Controls
 	 *
 	 * @return void
-	 * @since 1.3.6
+	 * @since 2.0.0
 	 * @access private
 	 */
 	private function register_default_tabs_style_controls() {
@@ -999,7 +999,7 @@ class GSAPTabs extends Widget_Base {
 	 * Content Style Controls
 	 *
 	 * @return void
-	 * @since 1.3.92
+	 * @since 2.0.0
 	 * @access private
 	 */
 	private function register_default_content_style_controls() {
@@ -1062,7 +1062,7 @@ class GSAPTabs extends Widget_Base {
 	 * Default Timeline Style Controls
 	 *
 	 * @return void
-	 * @since 1.3.6
+	 * @since 2.0.0
 	 * @access private
 	 */
 	private function register_default_timeline_style_controls() {
@@ -1201,7 +1201,7 @@ class GSAPTabs extends Widget_Base {
 	 * Default Media Style Controls
 	 *
 	 * @return void
-	 * @since 1.3.6
+	 * @since 2.0.0
 	 * @access private
 	 */
 	private function register_default_media_style_controls() {
@@ -1332,7 +1332,7 @@ class GSAPTabs extends Widget_Base {
 	 * Default Read More Button Style Controls
 	 *
 	 * @return void
-	 * @since 1.3.6
+	 * @since 2.0.0
 	 * @access private
 	 */
     private function register_default_read_more_button_style_controls() {
@@ -1541,7 +1541,7 @@ class GSAPTabs extends Widget_Base {
 	 * Vertical Style Controls
 	 *
 	 * @return void
-	 * @since 1.3.6
+	 * @since 2.0.0
 	 * @access private
 	 */
 	private function register_vertical_style_controls() {
@@ -1560,7 +1560,7 @@ class GSAPTabs extends Widget_Base {
 	 * Wrapper Style Controls
 	 *
 	 * @return void
-	 * @since 1.3.6
+	 * @since 2.0.0
 	 * @access private
 	 */
 	private function register_vertical_box_style_controls() {
@@ -1647,7 +1647,7 @@ class GSAPTabs extends Widget_Base {
 	 * Vertical Tab Titles Style Controls
 	 *
 	 * @return void
-	 * @since 1.3.6
+	 * @since 2.0.0
 	 * @access private
 	 */
 	private function register_vertical_tab_titles_style_controls() {
@@ -2008,7 +2008,7 @@ class GSAPTabs extends Widget_Base {
 	 * Vertical Tab Content Style Controls
 	 *
 	 * @return void
-	 * @since 1.3.6
+	 * @since 2.0.0
 	 * @access private
 	 */
 	private function register_vertical_content_area_style_controls() {
@@ -2083,7 +2083,7 @@ class GSAPTabs extends Widget_Base {
 	 * Vertical Media Style Controls
 	 *
 	 * @return void
-	 * @since 1.3.6
+	 * @since 2.0.0
 	 * @access private
 	 */
 	private function register_vertical_media_style_controls() {
@@ -2186,7 +2186,7 @@ class GSAPTabs extends Widget_Base {
 	 * Vertical Read More Style Controls
 	 *
 	 * @return void
-	 * @since 1.3.6
+	 * @since 2.0.0
 	 * @access private
 	 */
 	protected function register_vertical_read_more_button_style_controls() {
@@ -2340,7 +2340,7 @@ class GSAPTabs extends Widget_Base {
 	 * Render widget output on the frontend.
 	 *
 	 * @return void
-	 * @since 1.3.6
+	 * @since 2.0.0
 	 * @access protected
 	 */
 	protected function render() {
@@ -2428,8 +2428,8 @@ class GSAPTabs extends Widget_Base {
                             <?php if ( ! empty( $tab['read_more_text'] ) ): ?>
                                 <a href="<?php echo esc_url( $tab['read_more_link']['url'] ?? '#' ); ?>"
                                    class="black-tabs__read-more"
-                                   target="<?php echo esc_attr( $tab['read_more_link']['is_external'] ? '_blank' : '_self' ); ?>"
-                                   rel="<?php echo esc_attr( $tab['read_more_link']['nofollow'] ? 'nofollow noopener' : 'noopener' ); ?>">
+                                   target="<?php echo esc_attr( ! empty( $tab['read_more_link']['is_external'] ) ? '_blank' : '_self' ); ?>"
+                                   rel="<?php echo esc_attr( ! empty( $tab['read_more_link']['nofollow'] ) ? 'nofollow noopener' : 'noopener' ); ?>">
                                     <?php echo esc_html( $tab['read_more_text'] ); ?>
                                     <?php if ( ! empty( $tab['read_more_icon']['value'] ) ):
                                         Icons_Manager::render_icon( $tab['read_more_icon'], [ 'aria-hidden' => 'true' ] );
@@ -2507,8 +2507,8 @@ class GSAPTabs extends Widget_Base {
 								<?php if ( ! empty( $tab['read_more_link']['url'] ) ) : ?>
                                     <a href="<?php echo esc_url( $tab['read_more_link']['url'] ); ?>"
                                        class="black-tabs__read-more"
-                                       target="<?php echo esc_attr( $tab['read_more_link']['is_external'] ? '_blank' : '_self' ); ?>"
-                                       rel="<?php echo esc_attr( $tab['read_more_link']['nofollow'] ? 'nofollow' : '' ); ?>">
+                                       target="<?php echo esc_attr( ! empty( $tab['read_more_link']['is_external'] ) ? '_blank' : '_self' ); ?>"
+                                       rel="<?php echo esc_attr( ! empty( $tab['read_more_link']['nofollow'] ) ? 'nofollow' : '' ); ?>">
 										<?php
 										if ( ! empty( $tab['read_more_icon']['value'] ) ) {
 											echo '<span class="black-tabs__read-more-icon">';

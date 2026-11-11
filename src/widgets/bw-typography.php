@@ -1105,8 +1105,26 @@ class Typography extends \Elementor\Widget_Base {
 				'type' 			=> \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .bw-typograpgy' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; overflow: hidden;',
+					'{{WRAPPER}} .bw-typograpgy' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					'{{WRAPPER}} .bw-typograpgy .bw-overlay' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition' => $overlay_on,
+			]
+		);
+
+		// Hidden clips children to the radius; Visible lets overflowing content show.
+		$this->add_control(
+			'widget_overlay_overflow',
+			[
+				'label'     => esc_html__( 'Overflow', 'blackwidgets' ),
+				'type'      => \Elementor\Controls_Manager::SELECT,
+				'options'   => [
+					'hidden'  => esc_html__( 'Hidden', 'blackwidgets' ),
+					'visible' => esc_html__( 'Visible', 'blackwidgets' ),
+				],
+				'default'   => 'hidden',
+				'selectors' => [
+					'{{WRAPPER}} .bw-typograpgy' => 'overflow: {{VALUE}};',
 				],
 				'condition' => $overlay_on,
 			]
@@ -2335,7 +2353,7 @@ class Typography extends \Elementor\Widget_Base {
 		$allowed_tags 			= ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'];
 		$title_tag 				= isset($settings['widget_html_tag_title'])				 ? $settings['widget_html_tag_title']			: '';
 		// Validate the HTML tag
-		if (!in_array($title_tag, $allowed_tags)) {
+		if (!in_array($title_tag, $allowed_tags, true)) {
 			$title_tag = 'div';
 		}
         $title 			        = isset($settings['widget_title'])                       ? $settings['widget_title']					: '';
@@ -2396,7 +2414,6 @@ class Typography extends \Elementor\Widget_Base {
 			$alignment_1_tablet ? 'tablet-' . esc_attr( $alignment_1_tablet ) : '',
 			$alignment_1_mobile ? 'mobile-' . esc_attr( $alignment_1_mobile ) : '',
 		] ) );
-        // $alignment_1            = '';
         $style_2_type           = isset($settings['tab_style_2_type'])                  ? $settings['tab_style_2_type']                 : '';
         $image_2		        = isset($settings['tab_style_2_image']) 		        ?  $settings['tab_style_2_image']        : ''; // Image 2
 		$iconset_2				= isset($settings['tab_style_2_icon'])                  ? $settings['tab_style_2_icon']                 : ''; // Icon 2
@@ -2479,7 +2496,7 @@ class Typography extends \Elementor\Widget_Base {
 			if ( $overlay === 'overlay_enable' ) {
 				echo '<div class="bw-overlay" aria-hidden="true"></div>';
 			}
-			echo '<div class="bw-typograpgy-wrap" id="'. $data_id .'">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo '<div class="bw-typograpgy-wrap" id="'. esc_attr( $data_id ) .'">';
 			switch ($type) {
 				case 'bw-t-1': // Type 1
 					echo '<'. $title_tag .' class="bw-typograpgy-main-title bw-'. esc_attr( $vertical ) .' '. esc_attr( $vertical_rotation ) .' bw-typography-this-title">'.$safe_title.'</'. $title_tag .'>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -2576,7 +2593,7 @@ class Typography extends \Elementor\Widget_Base {
 						if ( !empty($vertical) ) echo '</div>';
 					break;
 				case 'bw-t-4': // Type 4
-					echo '<h2 class="bw-typograpgy-animate words chars splitting '. esc_attr( $vertical_rotation ) .'" '. esc_attr( $title_scrub ) .'  data-bw-splitting data-bw-'. esc_attr( $type4 ) .' id="scrub'.$data_id.'" data-scrub="true">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					echo '<h2 class="bw-typograpgy-animate words chars splitting '. esc_attr( $vertical_rotation ) .'" '. esc_attr( $title_scrub ) .'  data-bw-splitting data-bw-'. esc_attr( $type4 ) .' id="scrub'. esc_attr( $data_id ) .'" data-scrub="true">';
 						echo '<span class="word" data-word="'. esc_attr( $plain_title ) .'" style="--word-index:0;">';
 							echo esc_html( $plain_title );
 						echo '</span>';
@@ -2637,8 +2654,8 @@ class Typography extends \Elementor\Widget_Base {
 					$hook_raw = $settings['trigger_hook2'];
 				}
 				$hook = floatval( $hook_raw );
-				// Legacy default 0.1 was unused before; treat it as enter-viewport for smoother first paint.
-				if ( $hook_raw === '' || $hook_raw === '0.1' || $hook <= 0 || $hook > 1 ) {
+				// Empty or out-of-range values fall back to 0.85.
+				if ( $hook_raw === '' || $hook <= 0 || $hook > 1 ) {
 					$hook = 0.85;
 				}
 				$st_start = 'top ' . round( $hook * 100 ) . '%';

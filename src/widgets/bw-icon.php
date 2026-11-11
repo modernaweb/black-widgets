@@ -427,11 +427,11 @@ class Icon extends \Elementor\Widget_Base {
 
 		// Variables
 		$alignment		= isset($settings['widget_alignment']) 			? $settings['widget_alignment'] 					: '';
-        if ( ! in_array( $alignment, [ 'left', 'center', 'right' ] ) ) {
+        if ( ! in_array( $alignment, [ 'left', 'center', 'right' ], true ) ) {
             $alignment = 'center';
         }
 
-		echo '<div class="bw-icon-box" style="text-align: ' . $alignment . ';">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo '<div class="bw-icon-box" style="text-align: ' . esc_attr( $alignment ) . ';">';
 		
 		echo '<div class="bw-icon-into">';
 				\Elementor\Icons_Manager::render_icon( $settings['icon_widget'], [ 'aria-hidden' => 'true' ] );

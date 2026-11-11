@@ -3,15 +3,17 @@ namespace Modernaweb\BlackWidgets;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
-    exit;
+	exit;
 }
 
 class Admin {
+	const DB_UPGRADE_HOOK = 'black_widgets_run_db_upgrade';
 
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'addPluginAdminMenu' ), 9);
 		add_action( 'admin_init', array( $this, 'register_plugin_settings' ));
 		add_action( 'admin_init', array( $this, 'maybe_upgrade_plugin_db_version' ) );
+		add_action( self::DB_UPGRADE_HOOK, array( $this, 'maybe_upgrade_plugin_db_version' ) );
 		add_action( 'admin_init', array( $this, 'maybe_archive_rejected_cdn_urls' ) );
 		add_action( 'admin_init', array( $this, 'handle_dismiss_cdn_notice' ) );
 		add_action( 'admin_init', array( $this, 'handle_dismiss_cdn_allowlist_notice' ) );
@@ -119,87 +121,91 @@ class Admin {
 			array($this, 'black_widgets_settings')
 		);
 
-    }
+	}
 
 
-    public function validate_options( $input ) {
-        $prev  = Plugin_Options::all();
-        $input = is_array( $input ) ? $input : [];
-        $clean = [];
+	public function validate_options( $input ) {
+		$prev  = Plugin_Options::all();
+		$input = is_array( $input ) ? $input : [];
+		$clean = $prev;
 
-        $clean['gsap_options'] = ! empty( $input['gsap_options'] ) ? 1 : 0;
+		$clean['gsap_options'] = ! empty( $input['gsap_options'] ) ? 1 : 0;
 
-        // Feature flags: if GSAP is off, fields are disabled and may be omitted - keep prior.
-        foreach ( [ 'bw_enable_scroll_text', 'bw_gsap_trigger_scope' ] as $flag ) {
-            if ( array_key_exists( $flag, $input ) ) {
-                $clean[ $flag ] = ! empty( $input[ $flag ] ) ? 1 : 0;
-            } elseif ( $clean['gsap_options'] ) {
-                // Toggle on but key missing: treat as unchecked.
-                $clean[ $flag ] = 0;
-            } else {
-                $clean[ $flag ] = ! empty( $prev[ $flag ] ) ? 1 : 0;
-            }
-        }
+		// Feature flags: if GSAP is off, fields are disabled and may be omitted - keep prior.
+		foreach ( [ 'bw_enable_scroll_text', 'bw_gsap_trigger_scope' ] as $flag ) {
+			if ( array_key_exists( $flag, $input ) ) {
+				$clean[ $flag ] = ! empty( $input[ $flag ] ) ? 1 : 0;
+			} elseif ( $clean['gsap_options'] ) {
+				// Toggle on but key missing: treat as unchecked.
+				$clean[ $flag ] = 0;
+			} else {
+				$clean[ $flag ] = ! empty( $prev[ $flag ] ) ? 1 : 0;
+			}
+		}
 
-        // Default Scroll Text ON for fresh installs / first save with GSAP on and no prior key.
-        if ( $clean['gsap_options'] && ! array_key_exists( 'bw_enable_scroll_text', $prev ) && ! array_key_exists( 'bw_enable_scroll_text', $input ) ) {
-            $clean['bw_enable_scroll_text'] = 1;
-        }
+		// Default Scroll Text ON for fresh installs / first save with GSAP on and no prior key.
+		if ( $clean['gsap_options'] && ! array_key_exists( 'bw_enable_scroll_text', $prev ) && ! array_key_exists( 'bw_enable_scroll_text', $input ) ) {
+			$clean['bw_enable_scroll_text'] = 1;
+		}
 
-        foreach ( Plugin_Options::cdn_keys() as $field ) {
-            $legacy_key = Plugin_Options::legacy_cdn_key( $field );
-            $prev_url   = isset( $prev[ $field ] ) ? trim( (string) $prev[ $field ] ) : '';
-            $archive    = isset( $prev[ $legacy_key ] ) ? trim( (string) $prev[ $legacy_key ] ) : '';
+		foreach ( Plugin_Options::cdn_keys() as $field ) {
+			$legacy_key = Plugin_Options::legacy_cdn_key( $field );
+			$prev_url   = isset( $prev[ $field ] ) ? trim( (string) $prev[ $field ] ) : '';
+			$archive    = isset( $prev[ $legacy_key ] ) ? trim( (string) $prev[ $legacy_key ] ) : '';
 
-            if ( ! array_key_exists( $field, $input ) ) {
-                // Field omitted from POST: keep the stored value.
-                $clean[ $field ] = $prev_url;
-            } else {
-                $submitted     = trim( (string) $input[ $field ] );
-                $sanitized     = $this->sanitize_gsap_cdn_url( $submitted );
-                $prev_rejected = ( '' !== $prev_url && '' === $this->sanitize_gsap_cdn_url( $prev_url ) );
+			if ( ! array_key_exists( $field, $input ) ) {
+				// Field omitted from POST: keep the stored value.
+				$clean[ $field ] = $prev_url;
+			} else {
+				$submitted     = trim( (string) $input[ $field ] );
+				$sanitized     = $this->sanitize_gsap_cdn_url( $submitted );
+				$prev_rejected = ( '' !== $prev_url && '' === $this->sanitize_gsap_cdn_url( $prev_url ) );
 
-                if ( '' !== $sanitized ) {
-                    $clean[ $field ] = $sanitized;
-                    $archive         = '';
-                } elseif ( $prev_rejected && ( '' === $submitted || $submitted === $prev_url ) ) {
-                    $clean[ $field ] = $prev_url;
-                    $archive         = $prev_url;
-                } else {
-                    $clean[ $field ] = '';
-                    if ( '' !== $submitted ) {
-                        $archive = $submitted;
-                    }
-                }
-            }
+				if ( '' !== $sanitized ) {
+					$clean[ $field ] = $sanitized;
+					$archive         = '';
+				} elseif ( $prev_rejected && ( '' === $submitted || $submitted === $prev_url ) ) {
+					$clean[ $field ] = $prev_url;
+					$archive         = $prev_url;
+				} else {
+					$clean[ $field ] = '';
+					if ( '' !== $submitted ) {
+						$archive = $submitted;
+					}
+				}
+			}
 
-            if ( '' !== $archive ) {
-                $clean[ $legacy_key ] = $archive;
-            }
-        }
+			if ( '' !== $archive ) {
+				$clean[ $legacy_key ] = $archive;
+			} else {
+				unset( $clean[ $legacy_key ] );
+			}
+		}
 
-        // Keep the pre-1.4.0 TimelineMax archive: the allowlist rebuild above would drop it on the next save.
-        $timelinemax_key     = Plugin_Options::legacy_timelinemax_key();
-        $timelinemax_archive = isset( $prev[ $timelinemax_key ] ) ? trim( (string) $prev[ $timelinemax_key ] ) : '';
-        if ( '' !== $timelinemax_archive ) {
-            $clean[ $timelinemax_key ] = $timelinemax_archive;
-        }
+		// Keep the pre-2.0.0 TimelineMax archive: the allowlist rebuild above would drop it on the next save.
+		$timelinemax_key     = Plugin_Options::legacy_timelinemax_key();
+		$timelinemax_archive = isset( $prev[ $timelinemax_key ] ) ? trim( (string) $prev[ $timelinemax_key ] ) : '';
+		if ( '' !== $timelinemax_archive ) {
+			$clean[ $timelinemax_key ] = $timelinemax_archive;
+		} else {
+			unset( $clean[ $timelinemax_key ] );
+		}
 
-        return $clean;
-    }
+		return $clean;
+	}
 
-    /**
-     * Allow only HTTPS CDN URLs on known hosts (filterable for custom CDNs).
-     *
-     * @param string $url Raw URL.
-     * @return string
-     */
-    private function sanitize_gsap_cdn_url( $url ) {
-        return Plugin_Options::sanitize_cdn_url( $url );
-    }
+	/**
+	 * Allow only HTTPS CDN URLs on known hosts (filterable for custom CDNs).
+	 *
+	 * @param string $url Raw URL.
+	 * @return string
+	 */
+	private function sanitize_gsap_cdn_url( $url ) {
+		return Plugin_Options::sanitize_cdn_url( $url );
+	}
 
 
-	function register_plugin_settings(){
+	public function register_plugin_settings(){
 		register_setting(
 			'plugin_options',
 			'plugin_options',
@@ -220,170 +226,170 @@ class Admin {
 		);
 
 
-        add_settings_field(
-            'bw_gsap_options',
-            __( 'JS → CDN', 'blackwidgets' ),
-            array( $this, 'bw_setting_chb2_gsap_fn' ),
-            'black_widgets_settings_general_settings',
-            'black_widgets_settings_setting',
-            [
-                'label_for' => 'bw_gsap_options',
-                'class' => 'gsap-option'
-            ]
-        );
+		add_settings_field(
+			'bw_gsap_options',
+			__( 'JS → CDN', 'blackwidgets' ),
+			array( $this, 'bw_setting_chb2_gsap_fn' ),
+			'black_widgets_settings_general_settings',
+			'black_widgets_settings_setting',
+			[
+				'label_for' => 'bw_gsap_options',
+				'class' => 'gsap-option'
+			]
+		);
 
-        // Visible on first paint when master toggle is already on (no FOUC / no-JS fallback).
-        $gsap_child_class = Plugin_Options::is_gsap_toggle_on() ? ' bw-gsap-child-visible' : '';
+		// Visible on first paint when master toggle is already on (no FOUC / no-JS fallback).
+		$gsap_child_class = Plugin_Options::is_gsap_toggle_on() ? ' bw-gsap-child-visible' : '';
 
-        add_settings_field(
-            'bw_option_gsap_cdn1',
-            __( 'GSAP CDN', 'blackwidgets' ),
-            array( $this, 'bw_setting_gsap_cdn1_fn' ),
-            'black_widgets_settings_general_settings',
-            'black_widgets_settings_setting',
-            [
-                'label_for' => 'bw_option_gsap_cdn1',
-                'class'     => 'gsap-cdn' . $gsap_child_class,
-            ]
-        );
+		add_settings_field(
+			'bw_option_gsap_cdn1',
+			__( 'GSAP CDN', 'blackwidgets' ),
+			array( $this, 'bw_setting_gsap_cdn1_fn' ),
+			'black_widgets_settings_general_settings',
+			'black_widgets_settings_setting',
+			[
+				'label_for' => 'bw_option_gsap_cdn1',
+				'class'     => 'gsap-cdn' . $gsap_child_class,
+			]
+		);
 
-        add_settings_field(
-            'bw_option_gsap_cdn2',
-            __( 'ScrollTrigger CDN', 'blackwidgets' ),
-            array( $this, 'bw_setting_gsap_cdn2_fn' ),
-            'black_widgets_settings_general_settings',
-            'black_widgets_settings_setting',
-            [
-                'label_for' => 'bw_option_gsap_cdn2',
-                'class'     => 'gsap-cdn' . $gsap_child_class,
-            ]
-        );
+		add_settings_field(
+			'bw_option_gsap_cdn2',
+			__( 'ScrollTrigger CDN', 'blackwidgets' ),
+			array( $this, 'bw_setting_gsap_cdn2_fn' ),
+			'black_widgets_settings_general_settings',
+			'black_widgets_settings_setting',
+			[
+				'label_for' => 'bw_option_gsap_cdn2',
+				'class'     => 'gsap-cdn' . $gsap_child_class,
+			]
+		);
 
-        add_settings_field(
-            'bw_option_gsap_cdn3',
-            __( 'SplitText CDN', 'blackwidgets' ),
-            array( $this, 'bw_setting_gsap_cdn3_fn' ),
-            'black_widgets_settings_general_settings',
-            'black_widgets_settings_setting',
-            [
-                'label_for' => 'bw_option_gsap_cdn3',
-                'class'     => 'gsap-cdn' . $gsap_child_class,
-            ]
-        );
+		add_settings_field(
+			'bw_option_gsap_cdn3',
+			__( 'SplitText CDN', 'blackwidgets' ),
+			array( $this, 'bw_setting_gsap_cdn3_fn' ),
+			'black_widgets_settings_general_settings',
+			'black_widgets_settings_setting',
+			[
+				'label_for' => 'bw_option_gsap_cdn3',
+				'class'     => 'gsap-cdn' . $gsap_child_class,
+			]
+		);
 
-        add_settings_field(
-            'bw_option_gsap_cdn4',
-            __( 'TweenMax CDN (Deprecated)', 'blackwidgets' ),
-            array( $this, 'bw_setting_gsap_cdn4_fn' ),
-            'black_widgets_settings_general_settings',
-            'black_widgets_settings_setting',
-            [
-                'label_for' => 'bw_option_gsap_cdn4',
-                'class'     => 'gsap-cdn gsap-cdn-deprecated' . $gsap_child_class,
-            ]
-        );
+		add_settings_field(
+			'bw_option_gsap_cdn4',
+			__( 'TweenMax CDN (Deprecated)', 'blackwidgets' ),
+			array( $this, 'bw_setting_gsap_cdn4_fn' ),
+			'black_widgets_settings_general_settings',
+			'black_widgets_settings_setting',
+			[
+				'label_for' => 'bw_option_gsap_cdn4',
+				'class'     => 'gsap-cdn gsap-cdn-deprecated' . $gsap_child_class,
+			]
+		);
 
-        add_settings_field(
-            'bw_enable_scroll_text',
-            __( 'Enable Black Scroll Text', 'blackwidgets' ),
-            array( $this, 'bw_setting_enable_scroll_text_fn' ),
-            'black_widgets_settings_general_settings',
-            'black_widgets_settings_setting',
-            [
-                'label_for' => 'bw_enable_scroll_text',
-                'class'     => 'gsap-dependent' . $gsap_child_class,
-            ]
-        );
+		add_settings_field(
+			'bw_enable_scroll_text',
+			__( 'Enable Black Scroll Text', 'blackwidgets' ),
+			array( $this, 'bw_setting_enable_scroll_text_fn' ),
+			'black_widgets_settings_general_settings',
+			'black_widgets_settings_setting',
+			[
+				'label_for' => 'bw_enable_scroll_text',
+				'class'     => 'gsap-dependent' . $gsap_child_class,
+			]
+		);
 
-        add_settings_field(
-            'bw_gsap_trigger_scope',
-            __( 'Scope GSAP Trigger selectors', 'blackwidgets' ),
-            array( $this, 'bw_setting_gsap_trigger_scope_fn' ),
-            'black_widgets_settings_general_settings',
-            'black_widgets_settings_setting',
-            [
-                'label_for' => 'bw_gsap_trigger_scope',
-                'class'     => 'gsap-dependent' . $gsap_child_class,
-            ]
-        );
+		add_settings_field(
+			'bw_gsap_trigger_scope',
+			__( 'Scope GSAP Trigger selectors', 'blackwidgets' ),
+			array( $this, 'bw_setting_gsap_trigger_scope_fn' ),
+			'black_widgets_settings_general_settings',
+			'black_widgets_settings_setting',
+			[
+				'label_for' => 'bw_gsap_trigger_scope',
+				'class'     => 'gsap-dependent' . $gsap_child_class,
+			]
+		);
 
 	}
 
 
-	function  section_text_fn() {
+	public function section_text_fn() {
 		echo '<p>' . esc_html__( 'Turn on JS → CDN to unlock the fields below. Add GSAP and ScrollTrigger URLs for scroll animations. Add SplitText only if you need character or word effects. TweenMax is optional and unused.', 'blackwidgets' ) . '</p>';
 	}
 
 
-    /**
-     * Disabled attribute for GSAP child fields when master toggle is off.
-     */
-    protected function gsap_child_disabled_attr() {
-        return Plugin_Options::is_gsap_toggle_on() ? '' : ' disabled="disabled"';
-    }
+	/**
+	 * Disabled attribute for GSAP child fields when master toggle is off.
+	 */
+	protected function gsap_child_disabled_attr() {
+		return Plugin_Options::is_gsap_toggle_on() ? '' : ' disabled="disabled"';
+	}
 
-    function bw_setting_chb2_gsap_fn() {
-        $checked       = Plugin_Options::is_gsap_toggle_on() ? ' checked="checked" ' : '';
-        $checked_class = Plugin_Options::is_gsap_toggle_on() ? 'class="bw-checked"' : '';
-        echo '<input ' . $checked . ' id="bw_gsap_options" name="plugin_options[gsap_options]" type="checkbox" ' . $checked_class . ' />'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-        echo '<p>' . esc_html__( 'Shows GSAP widgets in Elementor and unlocks movement options. Add at least the GSAP CDN URL below. Some widgets also need ScrollTrigger or SplitText.', 'blackwidgets' ) . '</p>';
-    }
-
-
-    function bw_setting_gsap_cdn1_fn() {
-        $cdn1    = Plugin_Options::cdn( 1 );
-        $example = 'https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js';
-        $disabled = $this->gsap_child_disabled_attr();
-        echo "<input id='bw_option_gsap_cdn1' name='plugin_options[bw_gsap_cdn1]' type='text' class='regular-text' value='" . esc_url( $cdn1 ) . "' placeholder='" . esc_attr( $example ) . "'{$disabled} />";
-        echo '<p class="description">' . esc_html__( 'URL for the GSAP core file. Example:', 'blackwidgets' ) . '</p>';
-        echo '<p class="description"><code>' . esc_html( $example ) . '</code></p>';
-    }
+	public function bw_setting_chb2_gsap_fn() {
+		$checked       = Plugin_Options::is_gsap_toggle_on() ? ' checked="checked" ' : '';
+		$checked_class = Plugin_Options::is_gsap_toggle_on() ? 'class="bw-checked"' : '';
+		echo '<input ' . $checked . ' id="bw_gsap_options" name="plugin_options[gsap_options]" type="checkbox" ' . $checked_class . ' />'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo '<p>' . esc_html__( 'Shows GSAP widgets in Elementor and unlocks movement options. Add at least the GSAP CDN URL below. Some widgets also need ScrollTrigger or SplitText.', 'blackwidgets' ) . '</p>';
+	}
 
 
-    function bw_setting_gsap_cdn2_fn() {
-        $cdn2     = Plugin_Options::cdn( 2 );
-        $example  = 'https://cdn.jsdelivr.net/npm/gsap@3.15/dist/ScrollTrigger.min.js';
-        $disabled = $this->gsap_child_disabled_attr();
-        echo "<input id='bw_option_gsap_cdn2' name='plugin_options[bw_gsap_cdn2]' type='text' class='regular-text' value='" . esc_url( $cdn2 ) . "' placeholder='" . esc_attr( $example ) . "'{$disabled} />";
-        echo '<p class="description">' . esc_html__( 'URL for ScrollTrigger. Example:', 'blackwidgets' ) . '</p>';
-        echo '<p class="description"><code>' . esc_html( $example ) . '</code></p>';
-    }
+	public function bw_setting_gsap_cdn1_fn() {
+		$cdn1    = Plugin_Options::cdn( 1 );
+		$example = 'https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js';
+		$disabled = $this->gsap_child_disabled_attr();
+		echo "<input id='bw_option_gsap_cdn1' name='plugin_options[bw_gsap_cdn1]' type='text' class='regular-text' value='" . esc_url( $cdn1 ) . "' placeholder='" . esc_attr( $example ) . "'{$disabled} />"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed attribute strings.
+		echo '<p class="description">' . esc_html__( 'URL for the GSAP core file. Example:', 'blackwidgets' ) . '</p>';
+		echo '<p class="description"><code>' . esc_html( $example ) . '</code></p>';
+	}
 
 
-    function bw_setting_gsap_cdn3_fn() {
-        $cdn3     = Plugin_Options::cdn( 3 );
-        $example  = 'https://cdn.jsdelivr.net/npm/gsap@3.15/dist/SplitText.min.js';
-        $disabled = $this->gsap_child_disabled_attr();
-        echo "<input id='bw_option_gsap_cdn3' name='plugin_options[bw_gsap_cdn3]' type='text' class='regular-text' value='" . esc_url( $cdn3 ) . "' placeholder='" . esc_attr( $example ) . "'{$disabled} />";
-        echo '<p class="description">' . esc_html__( 'Optional. Needed for Perspective Flip on buttons and for text effects that split characters or words. Example:', 'blackwidgets' ) . '</p>';
-        echo '<p class="description"><code>' . esc_html( $example ) . '</code></p>';
-    }
+	public function bw_setting_gsap_cdn2_fn() {
+		$cdn2     = Plugin_Options::cdn( 2 );
+		$example  = 'https://cdn.jsdelivr.net/npm/gsap@3.15/dist/ScrollTrigger.min.js';
+		$disabled = $this->gsap_child_disabled_attr();
+		echo "<input id='bw_option_gsap_cdn2' name='plugin_options[bw_gsap_cdn2]' type='text' class='regular-text' value='" . esc_url( $cdn2 ) . "' placeholder='" . esc_attr( $example ) . "'{$disabled} />"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed attribute strings.
+		echo '<p class="description">' . esc_html__( 'URL for ScrollTrigger. Example:', 'blackwidgets' ) . '</p>';
+		echo '<p class="description"><code>' . esc_html( $example ) . '</code></p>';
+	}
 
 
-    function bw_setting_gsap_cdn4_fn() {
-        $cdn4     = Plugin_Options::cdn( 4 );
-        $disabled = $this->gsap_child_disabled_attr();
-        echo "<input id='bw_option_gsap_cdn4' name='plugin_options[bw_gsap_cdn4]' type='text' class='regular-text' value='" . esc_url( $cdn4 ) . "'{$disabled} />";
-        echo '<p class="description">' . esc_html__( 'Deprecated. Leave empty. Black Widgets does not load this file.', 'blackwidgets' ) . '</p>';
-    }
-
-    function bw_setting_enable_scroll_text_fn() {
-        $enabled  = Plugin_Options::is_scroll_text_enabled();
-        $checked  = $enabled ? ' checked="checked" ' : '';
-        $disabled = $this->gsap_child_disabled_attr();
-        echo "<input {$checked} id='bw_enable_scroll_text' name='plugin_options[bw_enable_scroll_text]' type='checkbox'{$disabled} />";
-        echo '<p class="description">' . esc_html__( 'Show the Black Scroll Text widget in Elementor. Typography On Scroll still works if this is off.', 'blackwidgets' ) . '</p>';
-    }
-
-    function bw_setting_gsap_trigger_scope_fn() {
-        $checked  = Plugin_Options::is_gsap_trigger_scoped() ? ' checked="checked" ' : '';
-        $disabled = $this->gsap_child_disabled_attr();
-        echo "<input {$checked} id='bw_gsap_trigger_scope' name='plugin_options[bw_gsap_trigger_scope]' type='checkbox'{$disabled} />";
-        echo '<p class="description">' . esc_html__( 'Limit Trigger selectors to the current widget. Off uses the same global selectors as before. You can also set this per widget.', 'blackwidgets' ) . '</p>';
-    }
+	public function bw_setting_gsap_cdn3_fn() {
+		$cdn3     = Plugin_Options::cdn( 3 );
+		$example  = 'https://cdn.jsdelivr.net/npm/gsap@3.15/dist/SplitText.min.js';
+		$disabled = $this->gsap_child_disabled_attr();
+		echo "<input id='bw_option_gsap_cdn3' name='plugin_options[bw_gsap_cdn3]' type='text' class='regular-text' value='" . esc_url( $cdn3 ) . "' placeholder='" . esc_attr( $example ) . "'{$disabled} />"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed attribute strings.
+		echo '<p class="description">' . esc_html__( 'Optional. Needed for Perspective Flip on buttons and for text effects that split characters or words. Example:', 'blackwidgets' ) . '</p>';
+		echo '<p class="description"><code>' . esc_html( $example ) . '</code></p>';
+	}
 
 
-	function black_widgets_settings() {
+	public function bw_setting_gsap_cdn4_fn() {
+		$cdn4     = Plugin_Options::cdn( 4 );
+		$disabled = $this->gsap_child_disabled_attr();
+		echo "<input id='bw_option_gsap_cdn4' name='plugin_options[bw_gsap_cdn4]' type='text' class='regular-text' value='" . esc_url( $cdn4 ) . "'{$disabled} />"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed attribute strings.
+		echo '<p class="description">' . esc_html__( 'Deprecated. Leave empty. Black Widgets does not load this file.', 'blackwidgets' ) . '</p>';
+	}
+
+	public function bw_setting_enable_scroll_text_fn() {
+		$enabled  = Plugin_Options::is_scroll_text_enabled();
+		$checked  = $enabled ? ' checked="checked" ' : '';
+		$disabled = $this->gsap_child_disabled_attr();
+		echo "<input {$checked} id='bw_enable_scroll_text' name='plugin_options[bw_enable_scroll_text]' type='checkbox'{$disabled} />"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed attribute strings.
+		echo '<p class="description">' . esc_html__( 'Show the Black Scroll Text widget in Elementor. Typography On Scroll still works if this is off.', 'blackwidgets' ) . '</p>';
+	}
+
+	public function bw_setting_gsap_trigger_scope_fn() {
+		$checked  = Plugin_Options::is_gsap_trigger_scoped() ? ' checked="checked" ' : '';
+		$disabled = $this->gsap_child_disabled_attr();
+		echo "<input {$checked} id='bw_gsap_trigger_scope' name='plugin_options[bw_gsap_trigger_scope]' type='checkbox'{$disabled} />"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed attribute strings.
+		echo '<p class="description">' . esc_html__( 'Limit Trigger selectors to the current widget. Off uses the same global selectors as before. You can also set this per widget.', 'blackwidgets' ) . '</p>';
+	}
+
+
+	public function black_widgets_settings() {
 		require_once( BLACK_WIDGETS_PLUGIN_PATH . 'includes/admin/black-widgets-settings.php');
 	}
 
@@ -392,7 +398,7 @@ class Admin {
 	 * Elementor CSS rebuild.
 	 *
 	 * Not gated on current_user_can(): WP-CLI and background updates must run it
-	 * too. The stored version guard makes it run at most once.
+	 * too. The DB version guard stops it once the CSS cache clear has succeeded.
 	 */
 	public function maybe_upgrade_plugin_db_version() {
 		$stored  = get_option( 'bw_plugin_db_version', '0' );
@@ -402,19 +408,30 @@ class Admin {
 			return;
 		}
 
-		// Drop the bw_dark_style flag on upgrade instead of waiting for a Settings save.
-		$this->maybe_strip_legacy_dark_mode_option();
+		// Data migrations run once, even when the CSS cache clear has to be retried.
+		$migrated = get_option( 'bw_plugin_data_migrated', '0' );
 
-		// Upgrading from before 1.4.0: queue the CDN migration notice once.
-		if ( version_compare( (string) $stored, '1.4.0', '<' ) ) {
-			// v1.3.9 activation-redirect flag was autoloaded.
-			delete_option( 'my_plugin_do_activation_redirect' );
+		if ( version_compare( (string) $migrated, (string) $current, '<' ) ) {
+			$is_fresh_install = ( '0' === (string) $stored ) && ( false === get_option( 'plugin_options', false ) );
 
-			if ( ! get_option( 'bw_cdn_notice_dismissed' ) ) {
-				update_option( 'bw_show_cdn_migration_notice', '1', false );
+			// Drop the bw_dark_style flag on upgrade instead of waiting for a Settings save.
+			$this->maybe_strip_legacy_dark_mode_option();
+
+			// Upgrading from before 2.0.0: queue the CDN migration notice once.
+			if ( ! $is_fresh_install && version_compare( (string) $stored, '2.0.0', '<' ) ) {
+				// v1.3.9 activation-redirect flag was autoloaded.
+				delete_option( 'my_plugin_do_activation_redirect' );
+
+				if ( ! get_option( 'bw_cdn_notice_dismissed' ) ) {
+					if ( Plugin_Options::is_gsap_toggle_on() ) {
+						update_option( 'bw_show_cdn_migration_notice', '1', false );
+					}
+				}
+
+				$this->migrate_legacy_timelinemax_cdn();
 			}
 
-			$this->migrate_legacy_timelinemax_cdn();
+			update_option( 'bw_plugin_data_migrated', $current, false );
 		}
 
 		// Hold the stored version back when Elementor is not available
@@ -424,6 +441,25 @@ class Admin {
 
 		// Autoloaded so the version_compare guard above costs no query per request.
 		update_option( 'bw_plugin_db_version', $current, true );
+	}
+
+	/**
+	 * Queue the one-time upgrade on init so no visitor request runs it inline.
+	 *
+	 * @return void
+	 */
+	public function schedule_plugin_db_upgrade() {
+		$stored = get_option( 'bw_plugin_db_version', '0' );
+
+		if ( version_compare( (string) $stored, BLACK_WIDGETS_VERSION, '>=' ) ) {
+			return;
+		}
+
+		if ( wp_next_scheduled( self::DB_UPGRADE_HOOK ) ) {
+			return;
+		}
+
+		wp_schedule_single_event( time(), self::DB_UPGRADE_HOOK );
 	}
 
 	/**
@@ -438,7 +474,7 @@ class Admin {
 	}
 
 	/**
-	 * CDN field 3 was "TimelineMax CDN" before 1.4.0 and is now registered as
+	 * CDN field 3 was "TimelineMax CDN" before 2.0.0 and is now registered as
 	 * GSAP-SplitText. Reusing the stored value would turn on SplitText-only options
 	 * while shipping a GSAP 2 file, so archive the URL and hand the field back empty.
 	 *
@@ -515,7 +551,7 @@ class Admin {
 				<strong><?php esc_html_e( 'Black Widgets: SplitText CDN (was TimelineMax)', 'blackwidgets' ); ?></strong>
 			</p>
 			<p>
-				<?php esc_html_e( 'In 1.4.0 the third CDN field is SplitText, not TimelineMax. Your old TimelineMax URL was saved for reference and removed from this field so the wrong file is not loaded.', 'blackwidgets' ); ?>
+				<?php esc_html_e( 'In 2.0.0 the third CDN field is SplitText, not TimelineMax. Your old TimelineMax URL was saved for reference and removed from this field so the wrong file is not loaded.', 'blackwidgets' ); ?>
 			</p>
 			<?php if ( '' !== $archived ) : ?>
 				<p>
@@ -600,7 +636,7 @@ class Admin {
 		?>
 		<div class="notice notice-info bw-cdn-migration-notice">
 			<p>
-				<strong><?php esc_html_e( 'Black Widgets 1.4.0', 'blackwidgets' ); ?></strong>
+				<strong><?php esc_html_e( 'Black Widgets 2.0.0', 'blackwidgets' ); ?></strong>
 			</p>
 			<p>
 				<?php esc_html_e( 'GSAP animations work with GSAP 3.15 (core, ScrollTrigger, and SplitText when needed). TweenMax is no longer used.', 'blackwidgets' ); ?>
@@ -626,7 +662,7 @@ class Admin {
 
 	/**
 	 * Copy CDN URLs the allowlist rejects into their *_legacy keys, so a URL saved
-	 * before 1.4.0 stays recoverable even if the empty Settings field is saved over it.
+	 * before 2.0.0 stays recoverable even if the empty Settings field is saved over it.
 	 *
 	 * @return void
 	 */
@@ -715,6 +751,10 @@ class Admin {
 	 */
 	public function render_cdn_allowlist_notice() {
 		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		if ( ! Plugin_Options::is_gsap_toggle_on() ) {
 			return;
 		}
 

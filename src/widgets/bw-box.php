@@ -1669,11 +1669,11 @@ class Box extends \Elementor\Widget_Base {
         $title 			= isset($settings['widget_title']) 									? $settings['widget_title']													: '';
         $subtitle 		= isset($settings['widget_subtitle']) 								? $settings['widget_subtitle']												: '';
         $title_tag 		= isset($settings['widget_html_tag_title']) 						? $settings['widget_html_tag_title']										: '';
-        if (!in_array($title_tag, $allowed_tags)) {
+        if (!in_array($title_tag, $allowed_tags, true)) {
             $title_tag = 'h4'; // esc_attr($title_tag)
         }
         $subtitle_tag   = isset($settings['widget_html_tag_subtitle']) 						? $settings['widget_html_tag_subtitle']										: '';
-        if (!in_array($subtitle_tag, $allowed_tags)) {
+        if (!in_array($subtitle_tag, $allowed_tags, true)) {
             $subtitle_tag = 'p'; // esc_attr($subtitle_tag)
         }
         $image_URL		= isset( $settings['image']['url']) 								? $settings['image']['url']													: '';

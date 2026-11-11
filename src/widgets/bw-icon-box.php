@@ -774,7 +774,6 @@ class IconBox extends \Elementor\Widget_Base {
 					],
 				],
 				'toggle'    => true,
-				'default'   => 'left',
 				'selectors' => [
 					'{{WRAPPER}} .bw-iconbox' => 'text-align: {{VALUE}};',
 				],
@@ -804,7 +803,6 @@ class IconBox extends \Elementor\Widget_Base {
 					],
 				],
 				'toggle'    => true,
-				'default'   => 'left',
 				// No selectors: Elementor must re-render so .bw-box-left|.bw-box-right
 				// classes update (Pos 3/4 padding/border mirror + Pos 5/6 flex reverse).
 				'condition'  => [
@@ -1995,6 +1993,15 @@ class IconBox extends \Elementor\Widget_Base {
 					'{{WRAPPER}} .bw-iconbox .bw-iconbox-icon svg' => 'width: {{SIZE}}{{UNIT}} !important; height: {{SIZE}}{{UNIT}} !important;',
 					'{{WRAPPER}} .bw-iconbox .bw-iconbox-img svg' => 'width: {{SIZE}}{{UNIT}} !important; height: auto !important; max-width: 100%;',
 				],
+				'condition' => [
+					'widget_icon_image_enable' => [
+						'icon_image_enable',
+					],
+					'widget_icon_image_type' => [
+						'enable_code',
+						'enable_image',
+					],
+				],
 			]
 		);
 
@@ -2342,7 +2349,8 @@ class IconBox extends \Elementor\Widget_Base {
 		if ( ! in_array( $shape, [ 'auto', 'square', 'circle', 'rounded' ], true ) ) {
 			$shape = 'auto';
 		}
-		$svg_animate = ( isset( $settings['widget_svg_animate'] ) && 'bw-iconbox-svg-animate' === $settings['widget_svg_animate'] ) ? 'bw-iconbox-svg-animate' : '';
+		// Only animate SVG/image media; the control is hidden for other types.
+		$svg_animate = ( $enable_icon && in_array( $this->media_kind( $settings ), [ 'svg', 'image' ], true ) && isset( $settings['widget_svg_animate'] ) && 'bw-iconbox-svg-animate' === $settings['widget_svg_animate'] ) ? 'bw-iconbox-svg-animate' : '';
 		$data_id     = 'bw_ibox_' . $this->get_id();
 
 		$root_classes = [
@@ -2546,10 +2554,10 @@ class IconBox extends \Elementor\Widget_Base {
 		$is_stack = in_array( $position, [ 'position-3', 'position-4', 'position-5', 'position-6' ], true );
 		$key      = $is_stack ? 'box_b_text_alignment' : 'box_text_alignment';
 		$desktop  = $this->choose_string( $settings, $key );
-		if ( $desktop === '' ) {
-			$desktop = 'left';
+		$classes  = [];
+		if ( '' !== $desktop ) {
+			$classes[] = 'bw-box-' . $desktop;
 		}
-		$classes = [ 'bw-box-' . $desktop ];
 		if ( $is_stack ) {
 			$tablet = $this->choose_string( $settings, $key . '_tablet' );
 			$mobile = $this->choose_string( $settings, $key . '_mobile' );

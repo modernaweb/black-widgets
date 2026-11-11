@@ -376,7 +376,7 @@ class ImageCarousel extends \Elementor\Widget_Base {
                 'label_off' => __( 'No', 'blackwidgets' ),
                 'return_value' => 'yes',
                 'default' => 'yes',
-                'description' => __( 'Continues from the first slide after the last (seamless wrap). With few items this wrap can look like it “goes and comes back” — that is expected, not a bounce. Turn off to stop at both ends.', 'blackwidgets' ),
+                'description' => __( 'Continues from the first slide after the last (seamless wrap). With few items this wrap can look like it "goes and comes back". That is expected, not a bounce. Turn off to stop at both ends.', 'blackwidgets' ),
             ]
         );
 

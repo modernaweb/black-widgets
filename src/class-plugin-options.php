@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Central accessor for plugin_options / GSAP CDN readiness.
  *
- * Replaces scattered get_option( 'plugin_options' ) reads across Main and widgets.
+ * Reads the plugin_options array and provides GSAP CDN and feature flag helpers.
  */
 final class Plugin_Options {
 
@@ -58,26 +58,31 @@ final class Plugin_Options {
 
 	/**
 	 * Allowed hosts for GSAP CDN script URLs (filterable).
+	 * A filter returning false disables host checks; an empty or non-array value falls back to the defaults.
 	 *
-	 * @return string[]
+	 * @return string[]|false Allowlist, or false when the filter disabled it.
 	 */
 	public static function allowed_cdn_hosts() {
-		$hosts = apply_filters(
-			'black_widgets_allowed_gsap_cdn_hosts',
-			[
-				'cdn.jsdelivr.net',
-				'cdnjs.cloudflare.com',
-				'unpkg.com',
-				'gsap.com',
-				'cdn.gsap.com',
-				's3-us-west-2.amazonaws.com',
-			]
-		);
-		return is_array( $hosts ) ? $hosts : [];
+		$site_host = wp_parse_url( home_url(), PHP_URL_HOST );
+		$defaults  = [
+			'cdn.jsdelivr.net',
+			'cdnjs.cloudflare.com',
+			'unpkg.com',
+			'gsap.com',
+			'cdn.gsap.com',
+		];
+		if ( is_string( $site_host ) && '' !== $site_host ) {
+			$defaults[] = $site_host;
+		}
+		$hosts = apply_filters( 'black_widgets_allowed_gsap_cdn_hosts', $defaults );
+		if ( false === $hosts ) {
+			return false;
+		}
+		return is_array( $hosts ) && ! empty( $hosts ) ? $hosts : $defaults;
 	}
 
 	/**
-	 * Whether a host matches an allowlist entry, exactly or as a subdomain.
+	 * Whether a host exactly equals an allowlist entry (case-insensitive).
 	 *
 	 * @param mixed    $host          Host from wp_parse_url() (null when unparseable).
 	 * @param string[] $allowed_hosts Allowlist entries.
@@ -90,11 +95,7 @@ final class Plugin_Options {
 		}
 
 		foreach ( $allowed_hosts as $allowed ) {
-			$allowed = strtolower( (string) $allowed );
-			if ( '' === $allowed ) {
-				continue;
-			}
-			if ( $host === $allowed || substr( $host, -( strlen( $allowed ) + 1 ) ) === '.' . $allowed ) {
+			if ( is_string( $allowed ) && '' !== $allowed && $host === strtolower( $allowed ) ) {
 				return true;
 			}
 		}
@@ -103,27 +104,131 @@ final class Plugin_Options {
 	}
 
 	/**
-	 * Sanitize a GSAP CDN URL: HTTPS + allowlisted host.
+	 * Whether a lowercase host is the site's own host (home_url).
+	 *
+	 * @param string $host Host to compare.
+	 * @return bool
+	 */
+	private static function is_site_host( $host ) {
+		$site_host = wp_parse_url( home_url(), PHP_URL_HOST );
+		return is_string( $site_host ) && '' !== $site_host && strtolower( $site_host ) === strtolower( (string) $host );
+	}
+
+	/**
+	 * Whether a host is an IPv4 or IPv6 literal.
+	 *
+	 * @param string $host Host from wp_parse_url().
+	 * @return bool
+	 */
+	private static function is_ip_host( $host ) {
+		$host = trim( (string) $host, '[]' );
+		return (bool) preg_match( '/^\d{1,3}(\.\d{1,3}){3}$/', $host ) || false !== strpos( $host, ':' );
+	}
+
+	/**
+	 * Whether an absolute URL points at an allowlisted host with no user-info.
+	 * The site's own host skips the port and IP rules (local dev sites).
+	 *
+	 * @param string   $url           Absolute URL.
+	 * @param string[] $allowed_hosts Allowlist entries.
+	 * @return bool
+	 */
+	private static function is_allowed_cdn_url( $url, array $allowed_hosts ) {
+		$parts = wp_parse_url( (string) $url );
+		if ( ! is_array( $parts ) || ! isset( $parts['host'] ) ) {
+			return false;
+		}
+
+		if ( isset( $parts['user'] ) || isset( $parts['pass'] ) ) {
+			return false;
+		}
+
+		$host = strtolower( (string) $parts['host'] );
+		if ( ! self::host_matches_allowlist( $host, $allowed_hosts ) ) {
+			return false;
+		}
+
+		if ( self::is_site_host( $host ) ) {
+			return true;
+		}
+
+		if ( isset( $parts['port'] ) && 443 !== (int) $parts['port'] ) {
+			return false;
+		}
+
+		return ! self::is_ip_host( $host );
+	}
+
+	/**
+	 * Sanitize a root-relative CDN path (starts with "/", ends in .js).
+	 *
+	 * The raw value is checked first because esc_url_raw() strips characters
+	 * and can turn "/\/evil.com" or "/<TAB>/evil.com" into a protocol-relative URL.
+	 *
+	 * @param string $raw Untrimmed input.
+	 * @param string $url Trimmed input starting with "/".
+	 * @return string
+	 */
+	private static function sanitize_relative_cdn_path( $raw, $url ) {
+		$raw = (string) $raw;
+		$url = (string) $url;
+
+		for ( $i = 0, $len = strlen( $raw ); $i < $len; $i++ ) {
+			$code = ord( $raw[ $i ] );
+			if ( $code < 32 || 127 === $code ) {
+				return '';
+			}
+		}
+
+		if ( false !== strpos( $raw, chr( 92 ) ) || preg_match( '/%(5c|09|0a|0d)/i', $raw ) || preg_match( '#^/%2f%2f#i', $raw ) ) {
+			return '';
+		}
+
+		$sanitized = esc_url_raw( $url );
+		if ( ! is_string( $sanitized ) || '' === $sanitized ) {
+			return '';
+		}
+
+		if ( 0 !== strpos( $sanitized, '/' ) || 0 === strpos( $sanitized, '//' ) || false !== strpos( $sanitized, chr( 92 ) ) ) {
+			return '';
+		}
+
+		$parts = wp_parse_url( $sanitized );
+		if ( ! is_array( $parts ) || isset( $parts['host'] ) ) {
+			return '';
+		}
+
+		$path = isset( $parts['path'] ) ? (string) $parts['path'] : '';
+		return '.js' === strtolower( substr( $path, -3 ) ) ? $sanitized : '';
+	}
+
+	/**
+	 * Sanitize a GSAP CDN URL: HTTPS + exact allowlisted host, or a root-relative .js path.
 	 *
 	 * @param string $url Raw URL.
 	 * @return string
 	 */
 	public static function sanitize_cdn_url( $url ) {
-		$url = trim( (string) $url );
+		$raw = (string) $url;
+		$url = trim( $raw );
 		if ( '' === $url ) {
 			return '';
 		}
 
 		$allowed_hosts = self::allowed_cdn_hosts();
 
-		/*
-		 * Versions up to 1.3.9 saved this field without sanitizing it, so http:// URLs
-		 * can exist. Upgrade them to https:// for allowlisted hosts instead of dropping
-		 * them, which would silently disable the animations. Other hosts fall through
-		 * to the https-only check below.
-		 */
-		if ( 0 === stripos( $url, 'http://' ) && self::host_matches_allowlist( wp_parse_url( $url, PHP_URL_HOST ), $allowed_hosts ) ) {
+		if ( 0 === strpos( $url, '//' ) ) {
+			$url = 'https:' . $url;
+		}
+
+		if ( 0 === stripos( $url, 'http://' ) && false !== $allowed_hosts && self::is_allowed_cdn_url( $url, $allowed_hosts ) ) {
 			$url = 'https://' . substr( $url, strlen( 'http://' ) );
+		}
+
+		$has_scheme = (bool) preg_match( '#^[a-z][a-z0-9+.\-]*://#i', $url );
+
+		if ( ! $has_scheme ) {
+			return 0 === strpos( $url, '/' ) ? self::sanitize_relative_cdn_path( $raw, $url ) : '';
 		}
 
 		$url = esc_url_raw( $url, [ 'https' ] );
@@ -136,12 +241,11 @@ final class Plugin_Options {
 			return '';
 		}
 
-		// Empty allowlist (via filter) = https-only mode.
-		if ( empty( $allowed_hosts ) ) {
+		if ( false === $allowed_hosts ) {
 			return $url;
 		}
 
-		return self::host_matches_allowlist( $host, $allowed_hosts ) ? $url : '';
+		return self::is_allowed_cdn_url( $url, $allowed_hosts ) ? $url : '';
 	}
 
 	/**
@@ -176,7 +280,7 @@ final class Plugin_Options {
 	}
 
 	/**
-	 * Archive key for the value CDN field 3 held before 1.4.0, when it was the
+	 * Archive key for the value CDN field 3 held before 2.0.0, when it was the
 	 * "TimelineMax CDN" field instead of SplitText.
 	 *
 	 * @return string
@@ -186,7 +290,7 @@ final class Plugin_Options {
 	}
 
 	/**
-	 * Archived pre-1.4.0 TimelineMax URL, kept for reference only (never enqueued).
+	 * Archived pre-2.0.0 TimelineMax URL, kept for reference only (never enqueued).
 	 *
 	 * @return string
 	 */
@@ -243,7 +347,7 @@ final class Plugin_Options {
 
 	/**
 	 * Standard GSAP readiness used by most widgets (core + ScrollTrigger).
-	 * Same semantics as historical is_gsap_enabled().
+	 * True when the GSAP toggle is on and both the core and ScrollTrigger CDN URLs are set.
 	 */
 	public static function is_gsap_ready() {
 		return self::is_gsap_toggle_on() && self::cdn( 1 ) && self::cdn( 2 );
@@ -341,7 +445,7 @@ final class Plugin_Options {
 		wp_add_inline_script( $handle, 'window.__bwHad' . $prop . '=window.' . $prop . ';', 'before' );
 		wp_add_inline_script(
 			$handle,
-			'if(window.__bwHad' . $prop . '){window.' . $prop . '=window.__bwHad' . $prop . ';}delete window.__bwHad' . $prop . ';',
+			'try{const bwPrev=window.__bwHad' . $prop . ',bwOurs=window.' . $prop . ';if(bwPrev&&bwOurs&&typeof bwPrev.version==="string"&&typeof bwOurs.version==="string"&&bwPrev.version!==bwOurs.version&&!window.__bwGsapWarned){window.__bwGsapWarned=true;console.warn("Black Widgets: another GSAP copy (v"+bwPrev.version+") is already loaded, so Black Widgets runs on it instead of v"+bwOurs.version+". Update or remove the duplicate to avoid errors.");}}catch(e){}' . 'if(window.__bwHad' . $prop . '){window.' . $prop . '=window.__bwHad' . $prop . ';}delete window.__bwHad' . $prop . ';',
 			'after'
 		);
 	}
@@ -362,28 +466,28 @@ final class Plugin_Options {
 
 		if ( $cdn1 ) {
 			if ( ! wp_script_is( 'GSAP', 'registered' ) ) {
-				wp_register_script( 'GSAP', $cdn1, [], BLACK_WIDGETS_VERSION, true );
+				wp_register_script( 'GSAP', $cdn1, [], null, true );
 			}
 			self::preserve_window_global( 'GSAP', 'gsap' );
 		}
 
 		if ( $cdn2 ) {
 			if ( ! wp_script_is( 'GSAP-ScrollTrigger', 'registered' ) ) {
-				wp_register_script( 'GSAP-ScrollTrigger', $cdn2, [ 'GSAP' ], BLACK_WIDGETS_VERSION, true );
+				wp_register_script( 'GSAP-ScrollTrigger', $cdn2, [ 'GSAP' ], null, true );
 			}
 			self::preserve_window_global( 'GSAP-ScrollTrigger', 'ScrollTrigger' );
 		}
 
 		if ( $cdn3 ) {
 			if ( ! wp_script_is( 'GSAP-SplitText', 'registered' ) ) {
-				wp_register_script( 'GSAP-SplitText', $cdn3, [ 'GSAP' ], BLACK_WIDGETS_VERSION, true );
+				wp_register_script( 'GSAP-SplitText', $cdn3, [ 'GSAP' ], null, true );
 			}
 			self::preserve_window_global( 'GSAP-SplitText', 'SplitText' );
 		}
 
 		// Deprecated soft-compat - not used as a widget dependency.
 		if ( $cdn4 && ! wp_script_is( 'TweenLite', 'registered' ) ) {
-			wp_register_script( 'TweenLite', $cdn4, [], BLACK_WIDGETS_VERSION, true );
+			wp_register_script( 'TweenLite', $cdn4, [], null, true );
 		}
 	}
 }

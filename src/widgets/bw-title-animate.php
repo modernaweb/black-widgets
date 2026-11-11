@@ -324,7 +324,8 @@ class TitleAnimate extends \Elementor\Widget_Base {
             [
                 'label' => esc_html__( 'After Text', 'blackwidgets' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => esc_html__( '', 'blackwidgets' ),
+                // 'default' => esc_html__( '', 'blackwidgets' ),
+                'default' => '',
                 'placeholder' => esc_html__( 'Type your title here', 'blackwidgets' ),
                 'condition'  => [
                     'widget_type' => [
@@ -1030,8 +1031,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
             [
                 'name' => 'style_main_text_border',
                 'label' => esc_html__( 'Border', 'blackwidgets' ),
-                'selector' => '{{WRAPPER}} .bw-title-animate .bw-svg-text',
-                'selector' => '{{WRAPPER}} .bw-title-animate .bw-rotator-text',
+                'selector' => '{{WRAPPER}} .bw-title-animate .bw-svg-text, {{WRAPPER}} .bw-title-animate .bw-rotator-text',
             ]
         );
 
@@ -1083,9 +1083,6 @@ class TitleAnimate extends \Elementor\Widget_Base {
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .bw-title-animate .bw-animate-text' => 'color: {{VALUE}}',
-                ],
-                'condition' => [
-                    'widget_type' => 'rotator',
                 ],
             ]
         );
@@ -1943,7 +1940,7 @@ class TitleAnimate extends \Elementor\Widget_Base {
         $data_id                = 'bw-' . uniqid();
 
         // wp_kses is slow here, so the HTML tag is validated manually.
-        if ( ! in_array( $HTML, ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'] ) ) {
+        if ( ! in_array( $HTML, ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'], true ) ) {
             $HTML = 'h1';
         }
         ?>

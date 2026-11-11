@@ -1413,6 +1413,10 @@ transformStyle: "preserve-3d",
         switch ($type) {
             case 'html':
                 echo '<div class="' . esc_attr( implode( ' ', $this->get_html_box_classes( $settings ) ) ) . '" id="' . esc_attr( $data_id ) . '">';
+                // Users with unfiltered_html intentionally skip the post-kses filter, like core/Elementor.
+                $post_id        = get_the_ID();
+                $post_author_id = $post_id ? (int) get_post_field( 'post_author', $post_id ) : 0;
+                $can_unfiltered = $post_author_id ? user_can( $post_author_id, 'unfiltered_html' ) : false;
                 if ( stripos( $html_code, '<svg' ) !== false ) {
                     $sanitizer = new Sanitizer();
                     $sanitizer->removeRemoteReferences( true );
@@ -1423,12 +1427,12 @@ transformStyle: "preserve-3d",
                     while ( $pos < $len ) {
                         $svg_start = stripos( $html_code, '<svg', $pos );
                         if ( $svg_start === false ) {
-                            $output .= wp_kses_post( substr( $html_code, $pos ) );
+                            $output .= $can_unfiltered ? substr( $html_code, $pos ) : wp_kses_post( substr( $html_code, $pos ) );
                             break;
                         }
 
                         if ( $svg_start > $pos ) {
-                            $output .= wp_kses_post( substr( $html_code, $pos, $svg_start - $pos ) );
+                            $output .= $can_unfiltered ? substr( $html_code, $pos, $svg_start - $pos ) : wp_kses_post( substr( $html_code, $pos, $svg_start - $pos ) );
                         }
 
                         // Find the matching </svg> by counting nested <svg> opens and closes.
@@ -1486,7 +1490,7 @@ transformStyle: "preserve-3d",
                         $pos = $svg_end;
                     }
                 } else {
-                    $output = wp_kses_post( $html_code );
+                    $output = $can_unfiltered ? $html_code : wp_kses_post( $html_code );
                 }
                 echo $this->prepare_html_content( $output, $settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- sanitized above, then class-annotated.
                 echo '</div>';
@@ -1499,8 +1503,10 @@ transformStyle: "preserve-3d",
                     }
                     // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
                     echo '<script>
-                             jQuery(window).ready(function($) {
-                                 if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+                             (function (run) {
+                             if (document.readyState === \'loading\') { document.addEventListener(\'DOMContentLoaded\', run); } else { run(); }
+                             })(function bwRun() {
+                                 if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") { if (!bwRun.bwRetried) { bwRun.bwRetried = true; window.addEventListener("load", bwRun); } return; }
                                  var targetSel = "' . esc_js( $html_target_sel ) . '";
                                  if (!targetSel || !document.querySelector(targetSel)) return;
                                  ' . $st_missing_guard . '
@@ -1534,8 +1540,10 @@ transformStyle: "preserve-3d",
                     // Build executable JS. Values are escaped individually, not the whole script.
                     // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
                     echo '<script>
-						jQuery(window).ready(function($) {
-							if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+						(function (run) {
+						if (document.readyState === \'loading\') { document.addEventListener(\'DOMContentLoaded\', run); } else { run(); }
+						})(function bwRun() {
+							if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") { if (!bwRun.bwRetried) { bwRun.bwRetried = true; window.addEventListener("load", bwRun); } return; }
 							var triggerSel = "' . esc_js( $img_trigger_sel ) . '";
 							if (!triggerSel || !document.querySelector(triggerSel)) return;
 							' . $img_target_guard . '
@@ -1550,38 +1558,38 @@ transformStyle: "preserve-3d",
 								markers: 		false,
 							}});
 							tl.from("' . esc_js( $img_target_sel ) . '", {
-								opacity:				' . esc_js( $element_opacity_from ) . ',
-								duration:				' . esc_js( $element_duration_from ) . ',
-								rotateX:				' . esc_js( $element_rotationx_from ) . ',
-								rotateY:				' . esc_js( $element_rotationy_from ) . ',
-								scaleX:					' . esc_js( $element_scalex_from ) . ',
-								scaleY:					' . esc_js( $element_scaley_from ) . ',
-								scaleZ:					' . esc_js( $element_scalez_from ) . ',
-								skewX:					' . esc_js( $element_skewx_from ) . ',
-								skewY:					' . esc_js( $element_skewy_from ) . ',
-								x:						' . esc_js( $element_movex_from ) . ',
-								y:						' . esc_js( $element_movey_from ) . ',
-								z:						' . esc_js( $element_movez_from ) . ',
-								autoAlpha:				' . esc_js( $element_autoalpha_from ) . ',
-								transformPerspective:	' . esc_js( $element_perspective_from ) . ',
-								transformStyle:			"' . esc_js( $element_transformstyle_from ) . '",
+								opacity:				' . $this->gsap_js_value( $element_opacity_from ) . ',
+								duration:				' . $this->gsap_js_value( $element_duration_from ) . ',
+								rotateX:				' . $this->gsap_js_value( $element_rotationx_from ) . ',
+								rotateY:				' . $this->gsap_js_value( $element_rotationy_from ) . ',
+								scaleX:					' . $this->gsap_js_value( $element_scalex_from ) . ',
+								scaleY:					' . $this->gsap_js_value( $element_scaley_from ) . ',
+								scaleZ:					' . $this->gsap_js_value( $element_scalez_from ) . ',
+								skewX:					' . $this->gsap_js_value( $element_skewx_from ) . ',
+								skewY:					' . $this->gsap_js_value( $element_skewy_from ) . ',
+								x:						' . $this->gsap_js_value( $element_movex_from ) . ',
+								y:						' . $this->gsap_js_value( $element_movey_from ) . ',
+								z:						' . $this->gsap_js_value( $element_movez_from ) . ',
+								autoAlpha:				' . $this->gsap_js_value( $element_autoalpha_from ) . ',
+								transformPerspective:	' . $this->gsap_js_value( $element_perspective_from ) . ',
+								transformStyle:			' . $this->gsap_js_enum( $element_transformstyle_from, [ 'flat', 'preserve-3d' ] ) . ',
 							});
 							tl.to("' . esc_js( $img_target_sel ) . '", {
-								opacity:				' . esc_js( $element_opacity_to ) . ',
-								duration:				' . esc_js( $element_duration_to ) . ',
-								rotateX:				' . esc_js( $element_rotationx_to ) . ',
-								rotateY:				' . esc_js( $element_rotationy_to ) . ',
-								scaleX:					' . esc_js( $element_scalex_to ) . ',
-								scaleY:					' . esc_js( $element_scaley_to ) . ',
-								scaleZ:					' . esc_js( $element_scalez_to ) . ',
-								skewX:					' . esc_js( $element_skewx_to ) . ',
-								skewY:					' . esc_js( $element_skewy_to ) . ',
-								x:						' . esc_js( $element_movex_to ) . ',
-								y:						' . esc_js( $element_movey_to ) . ',
-								z:						' . esc_js( $element_movez_to ) . ',
-								autoAlpha:				' . esc_js( $element_autoalpha_to ) . ',
-								transformPerspective:	' . esc_js( $element_perspective_to ) . ',
-								transformStyle:			"' . esc_js( $element_transformstyle_to ) . '",
+								opacity:				' . $this->gsap_js_value( $element_opacity_to ) . ',
+								duration:				' . $this->gsap_js_value( $element_duration_to ) . ',
+								rotateX:				' . $this->gsap_js_value( $element_rotationx_to ) . ',
+								rotateY:				' . $this->gsap_js_value( $element_rotationy_to ) . ',
+								scaleX:					' . $this->gsap_js_value( $element_scalex_to ) . ',
+								scaleY:					' . $this->gsap_js_value( $element_scaley_to ) . ',
+								scaleZ:					' . $this->gsap_js_value( $element_scalez_to ) . ',
+								skewX:					' . $this->gsap_js_value( $element_skewx_to ) . ',
+								skewY:					' . $this->gsap_js_value( $element_skewy_to ) . ',
+								x:						' . $this->gsap_js_value( $element_movex_to ) . ',
+								y:						' . $this->gsap_js_value( $element_movey_to ) . ',
+								z:						' . $this->gsap_js_value( $element_movez_to ) . ',
+								autoAlpha:				' . $this->gsap_js_value( $element_autoalpha_to ) . ',
+								transformPerspective:	' . $this->gsap_js_value( $element_perspective_to ) . ',
+								transformStyle:			' . $this->gsap_js_enum( $element_transformstyle_to, [ 'flat', 'preserve-3d' ] ) . ',
 							});
 						});
 					</script>';
@@ -1804,6 +1812,55 @@ transformStyle: "preserve-3d",
         return $code;
     }
 
+    /**
+     * Return a JS literal for a GSAP position value. Unknown input becomes undefined.
+     *
+     * @param mixed $value Raw setting value.
+     * @return string
+     */
+    private function gsap_js_value( $value ) {
+        if ( ! is_scalar( $value ) || is_bool( $value ) ) {
+            return 'undefined';
+        }
+
+        $value = trim( (string) $value );
+        if ( '' === $value ) {
+            return 'undefined';
+        }
+
+        // Plain numbers are printed as they are.
+        if ( preg_match( '/^-?\d+(\.\d+)?$/', $value ) || preg_match( '/^-?\.\d+$/', $value ) ) {
+            return $value;
+        }
+
+        // Relative values, CSS units and random() strings are printed as JSON strings.
+        if (
+            preg_match( '/^[+-]=\d+(\.\d+)?(%|px|deg|vh|vw|em|rem)?$/', $value )
+            || preg_match( '/^-?\d+(\.\d+)?(%|px|deg|vh|vw|em|rem)$/', $value )
+            || preg_match( '/^random\(\s*-?\d+(\.\d+)?\s*,\s*-?\d+(\.\d+)?\s*(,\s*-?\d+(\.\d+)?)?\s*\)$/', $value )
+        ) {
+            $json = wp_json_encode( $value );
+            return is_string( $json ) ? $json : 'undefined';
+        }
+
+        return 'undefined';
+    }
+
+    /**
+     * Return a JS string literal only when the value is one of the allowed options.
+     *
+     * @param mixed $value   Raw setting value.
+     * @param array $allowed Allowed values.
+     * @return string
+     */
+    private function gsap_js_enum( $value, array $allowed ) {
+        if ( ! in_array( $value, $allowed, true ) ) {
+            return 'undefined';
+        }
+
+        $json = wp_json_encode( $value );
+        return is_string( $json ) ? $json : 'undefined';
+    }
 }
 
 

@@ -19,7 +19,7 @@ use Elementor\Group_Control_Box_Shadow;
  *
  * Existing Typography Type-4 instances keep working (BC). New projects should use this widget.
  *
- * @since 1.4.0
+ * @since 2.0.0
  */
 class ScrollText extends \Elementor\Widget_Base {
 
@@ -244,7 +244,7 @@ class ScrollText extends \Elementor\Widget_Base {
                 'min'         => 0,
                 'max'         => 5000,
                 'step'        => 50,
-                'description' => esc_html__( 'Wait (ms) after the text enters the viewport before the whole animation starts — not per character/word. 100 is subtle; try 300 for a clearer pause. Ignored while Scrub is on.', 'blackwidgets' ),
+                'description' => esc_html__( 'Wait (ms) after the text enters the viewport before the whole animation starts, not per character/word. 100 is subtle; try 300 for a clearer pause. Ignored while Scrub is on.', 'blackwidgets' ),
                 'condition'   => [
                     'widget_type_4!' => 'none',
                     'title_scrub!'   => 'scrub_mode',

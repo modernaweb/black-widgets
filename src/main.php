@@ -42,20 +42,21 @@ final class Main {
     const MINIMUM_ELEMENTOR_VERSION = '3.5.0';
     const MINIMUM_PHP_VERSION = '7.4';
 
+    private $admin;
+
     public function __construct() {
         add_action( 'plugins_loaded', [ $this, 'init' ] );
         add_filter( 'upload_mimes', [ $this, 'add_file_types_to_uploads' ] );
         add_filter( 'wp_handle_upload_prefilter', [ $this, 'sanitize_uploaded_svg' ] );
+        add_filter( 'wp_handle_sideload_prefilter', [ $this, 'sanitize_uploaded_svg' ] );
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_public_scripts' ] );
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_public_styles' ] );
         add_action('elementor/frontend/after_register_scripts', [ $this, 'register_widget_scripts' ] );
         add_action('elementor/frontend/after_register_styles', [ $this, 'register_widget_styles']);
         add_action( 'upgrader_process_complete', 'black_widgets_clear_css_cache_after_update', 10, 2 );
 
-        if ( is_admin() ) {
-            require_once( __DIR__ . '/admin.php' );
-            new Admin();
-        }
+        require_once( __DIR__ . '/admin.php' );
+        $this->admin = new Admin();
     }
 
     public function init() {
@@ -73,6 +74,8 @@ final class Main {
             add_action( 'admin_notices', [ $this, 'admin_notice_minimum_php_version' ] );
             return;
         }
+
+        add_action( 'init', [ $this->admin, 'schedule_plugin_db_upgrade' ], 20 );
 
         add_action( 'elementor/widgets/register', [ $this, 'init_widgets' ] );
 
@@ -113,7 +116,7 @@ final class Main {
             }
             Plugin_Options::register_swiper_assets();
 
-            // Text / Image Carousel in afterwards would otherwise leave the page
+            // Enqueue widget assets now so widgets added later in the editor already have their scripts.
             $this->enqueue_preview_widget_assets();
 
             $deps = [ 'black-widgets-tilt', 'black-widgets-simple-parallax', 'black-widgets-anime' ];
@@ -230,27 +233,29 @@ final class Main {
     }
 
     public function sanitize_uploaded_svg( $file ) {
-        $extension = strtolower( pathinfo( $file['name'], PATHINFO_EXTENSION ) );
-        $is_svg    = in_array( $extension, array( 'svg', 'svgz' ), true ) || $file['type'] === 'image/svg+xml';
+        $extension    = strtolower( pathinfo( $file['name'], PATHINFO_EXTENSION ) );
+        $declared_svg = in_array( $extension, array( 'svg', 'svgz' ), true ) || ( isset( $file['type'] ) && $file['type'] === 'image/svg+xml' );
 
-        // Name and type come from the client, so also sniff the first 4 KB for an <svg tag.
-        if ( ! $is_svg ) {
-            $head   = file_get_contents( $file['tmp_name'], false, null, 0, 4096 );
-            $is_svg = is_string( $head ) && stripos( $head, '<svg' ) !== false;
+        // Only files that declare an SVG type or extension are sanitized.
+        if ( ! $declared_svg ) {
+            return $file;
         }
 
-        if ( ! $is_svg ) {
+        // Declared type is not enough on its own: the content must also contain an <svg tag.
+        $head = is_readable( $file['tmp_name'] ) ? file_get_contents( $file['tmp_name'], false, null, 0, 4096 ) : false;
+        if ( ! is_string( $head ) || stripos( $head, '<svg' ) === false ) {
+            $file['error'] = __( 'Invalid or potentially unsafe SVG file.', 'blackwidgets' );
             return $file;
         }
 
         if ( ! class_exists( 'enshrined\svgSanitize\Sanitizer' ) ) {
-            $file['error'] = 'SVG Sanitizer library is not loaded.';
+            $file['error'] = __( 'SVG Sanitizer library is not loaded.', 'blackwidgets' );
             return $file;
         }
 
         $dirty_svg = file_get_contents( $file['tmp_name'] );
         if ( $dirty_svg === false ) {
-            $file['error'] = 'Could not read uploaded SVG file.';
+            $file['error'] = __( 'Could not read uploaded SVG file.', 'blackwidgets' );
             return $file;
         }
 
@@ -259,11 +264,14 @@ final class Main {
         $clean_svg = $sanitizer->sanitize( $dirty_svg );
 
         if ( $clean_svg === false || empty( $clean_svg ) ) {
-            $file['error'] = 'Invalid or potentially unsafe SVG file.';
+            $file['error'] = __( 'Invalid or potentially unsafe SVG file.', 'blackwidgets' );
             return $file;
         }
 
-        file_put_contents( $file['tmp_name'], $clean_svg );
+        if ( false === file_put_contents( $file['tmp_name'], $clean_svg ) ) {
+            $file['error'] = __( 'Could not save the sanitized SVG file.', 'blackwidgets' );
+            return $file;
+        }
         return $file;
     }
 
@@ -383,7 +391,7 @@ final class Main {
     }
 
     /**
-     * @deprecated 1.4.0 Use Plugin_Options::is_scroll_text_enabled().
+     * @deprecated 2.0.0 Use Plugin_Options::is_scroll_text_enabled().
      * @param array|string|null $options Unused; kept for BC of any external callers.
      * @return bool
      */

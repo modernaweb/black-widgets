@@ -1666,7 +1666,6 @@ class ImagePro extends \Elementor\Widget_Base {
         $has_caption = ( '' !== $caption_text );
         // Parallax
         $parallax					= isset($settings['image_parllax'])						? $settings['image_parllax']						: '';
-        // $imagelink					= isset($settings['bw_image_link']['url'])				? $settings['bw_image_link']['url']						: '';
         // Transform Option
         $normal_transform			= isset($settings['transform_normal_option'])			? $settings['transform_normal_option']				: '';
         $hover_transform			= isset($settings['transform_hover_option'])			? $settings['transform_hover_option']				: '';
@@ -1744,14 +1743,14 @@ class ImagePro extends \Elementor\Widget_Base {
         $hover_transform_style 		= ($hover_transform == 'hover_transform')				? "#$data_id:hover { $perspective_hover transform: $perspective_child_hover $skew_hover $rotatex_hover $rotatey_hover $rotatez_hover $scale3d_hover $translate3d_hover; -webkit-transform: $perspective_child_hover $skew_hover $rotatex_hover $rotatey_hover $rotatez_hover $scale3d_hover $translate3d_hover; $scale3dx_hover }" : '';
         echo "<style>" . esc_html( $normal_transform_style ) . " " . esc_html( $hover_transform_style ) . "</style>";
 
-        if ( ! in_array( $alignment, [ 'left', 'center', 'right' ] ) ) {
+        if ( ! in_array( $alignment, [ 'left', 'center', 'right' ], true ) ) {
             $alignment = 'center';
         }
 
-        echo '<div class="bw-image" style="text-align: ' . $alignment . ';">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        echo '<div class="bw-image" style="text-align: ' . esc_attr( $alignment ) . ';">';
 
         $hover_animation = isset( $settings['hover_animation'] ) ? (string) $settings['hover_animation'] : '';
-        echo '<div class="bw-img-' . esc_attr( $type ) . ' ' . esc_attr( $hover_animation ) . ' bw-cursor-' . esc_attr( $cursor ) .'" id="'. $data_id .'">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        echo '<div class="bw-img-' . esc_attr( $type ) . ' ' . esc_attr( $hover_animation ) . ' bw-cursor-' . esc_attr( $cursor ) .'" id="'. esc_attr( $data_id ) .'">';
 
         if ( $has_caption ) {
             echo '<figure class="bw-image-figure">';
@@ -1806,12 +1805,14 @@ class ImagePro extends \Elementor\Widget_Base {
         // Init parallax on load in case element_ready timing misses
         if ( $parallax === 'bw-parallax' ) {
             echo '<script>
-			jQuery(function () {
+			(function (run) {
+			if (document.readyState === \'loading\') { document.addEventListener(\'DOMContentLoaded\', run); } else { run(); }
+			})(function bwRun() {
+				if (typeof window.bwInitImageParallax !== "function" && typeof simpleParallax === "undefined") { if (!bwRun.bwRetried) { bwRun.bwRetried = true; window.addEventListener("load", bwRun); } return; }
 				if (typeof window.bwInitImageParallax === "function") {
 					window.bwInitImageParallax(document);
 					return;
 				}
-				if (typeof simpleParallax === "undefined") return;
 				var nodes = document.querySelectorAll("img.bw-parallax");
 				for (var i = 0; i < nodes.length; i++) {
 					if (nodes[i] && !nodes[i].closest(".simpleParallax")) {
@@ -1864,8 +1865,10 @@ class ImagePro extends \Elementor\Widget_Base {
 
             // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
             echo '<script>
-                  	jQuery(window).ready(function($) {
-                        if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+                  	(function (run) {
+                  	if (document.readyState === \'loading\') { document.addEventListener(\'DOMContentLoaded\', run); } else { run(); }
+                  	})(function bwRun() {
+                        if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") { if (!bwRun.bwRetried) { bwRun.bwRetried = true; window.addEventListener("load", bwRun); } return; }
                         var triggerEl = document.getElementById("' . esc_js( $data_id ) . '");
                         if (!triggerEl) { return; }
                   		gsap.registerPlugin(ScrollTrigger);

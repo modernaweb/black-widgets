@@ -16,7 +16,7 @@ use Elementor\Repeater;
  *
  * Custom Elementor widget for displaying an animated image marquee.
  *
- * @since 1.4.0
+ * @since 2.0.0
  */
 class ImageMarquee extends \Elementor\Widget_Base {
 
@@ -25,7 +25,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
      *
      * Registers the widget styles and scripts, and includes GSAP dependencies if enabled.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      *
      * @param array $data Widget data.
      * @param array|null $args Optional arguments.
@@ -55,7 +55,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
      *
      * Returns the unique widget identifier.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      *
      * @return string Widget name.
      */
@@ -68,7 +68,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
      *
      * Returns the widget title to be displayed in Elementor editor.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      *
      * @return string Widget title.
      */
@@ -81,7 +81,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
      *
      * Returns the icon for the widget in the editor.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      *
      * @return string Icon class name.
      */
@@ -94,7 +94,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
      *
      * Returns the categories this widget belongs to.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      *
      * @return array Widget categories.
      */
@@ -107,7 +107,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
      *
      * Returns an array of style handles that need to be enqueued.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      *
      * @return array List of style handles.
      */
@@ -120,7 +120,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
      *
      * Returns an array of script handles that need to be enqueued.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      *
      * @return array List of script handles.
      */
@@ -150,7 +150,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
      *
      * This widget is static and doesn't rely on dynamic data.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      *
      * @return bool False always.
      */
@@ -161,7 +161,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
     /**
      * Check whether GSAP is enabled in the plugin options.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      *
      * @return bool True if GSAP is enabled, false otherwise.
      */
@@ -172,7 +172,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
     /**
      * Register widget controls by calling settings and style control registration methods.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      * @return void
      */
     protected function register_controls() {
@@ -183,7 +183,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
     /**
      * Register all style controls including box and content styles.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      * @return void
      */
     private function register_style_controls() {
@@ -196,7 +196,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
      *
      * Allows users to add images and set marquee behavior settings.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      *
      * @return void
      */
@@ -358,7 +358,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
      *
      * Controls for border, box shadow, and background of the marquee container.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      *
      * @return void
      */
@@ -502,7 +502,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
      *
      * Controls to style the images inside the marquee (e.g., size, margin).
      *
-     * @since 1.4.0
+     * @since 2.0.0
      *
      * @return void
      */
@@ -664,7 +664,7 @@ class ImageMarquee extends \Elementor\Widget_Base {
      *
      * Outputs the HTML for the image marquee, including GSAP data attributes if enabled.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      *
      * @return void
      */

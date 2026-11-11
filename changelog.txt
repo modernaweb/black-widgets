@@ -1,6 +1,39 @@
-= 1.4.0 — 2026-09 =
-- Fixed: SVG upload sanitizer bypass (case-insensitive extension check and content sniffing for uploads)
-- Improved: Remote references are stripped from uploaded SVG files
-- Fixed: XML declaration no longer output in inline SVG markup
-- Fixed: Nested SVG elements are kept intact in the Black Trigger (GSAP) widget
+### 2.0.0 — 2026-11-11
+- Refactored: Plugin Structure and internal architecture under a dedicated namespace
+- Improved: Settings page
+- Compatibility: WordPress v7.1
+- Compatibility: Elementor v4.4 (requires Elementor 3.5+)
+- Requires: PHP 7.4+
+- Added: New widget: Black Text Marquee
+- Added: New widget: Black Image Marquee
+- Added: New widget: Black Image Carousel
+- Added: New widget: Black Scroll Heat
+- Added: New widget: Black Text Animate
+- Added: New widget: Black Tabs
+- Added: New widget: Black Interactive Links
+- Added: New widget: Black Scroll Text
+- Improved: Widget-specific CSS and JavaScript asset organization and loading
+- Improved: Black Horizontal scroll distance now scales with section width and panel count instead of using a fixed distance
+- Improved: GSAP loads through widget dependencies using GSAP 3.15, ScrollTrigger and SplitText; TweenMax is deprecated and no longer enqueued
+- Improved: CDN URL validation with exact-host matching, credential protection and safe handling of relative paths
+- Improved: HTTP URLs on approved CDN hosts are automatically upgraded to HTTPS
+- Improved: Flip Box back-face styling now applies to every flip type, not just the default one
+- Improved: Smoother default timing for Typography's scroll-triggered text movement animation
+- Changed: CDN field 3 now loads SplitText instead of TimelineMax; the previous value is automatically archived and the field cleared on upgrade
+- Changed: Black Magic Link markup updated; custom CSS targeting the old classes may need adjustment
+- Changed: Black Flip Box button link now opens in the same tab by default
+- Changed: GSAP CDN URLs must now use HTTPS on an allowed host (jsDelivr, cdnjs, unpkg, gsap.com or your own site)
+- Fixed: Cross-site scripting (XSS) vulnerability in the Black List widget; thanks to the Patchstack team
+- Fixed: Hardened Elementor repeater `_id` output (List + Sentence) against attribute-breakout XSS
+- Fixed: Cross-site scripting (XSS) vulnerability when uploading SVG and image-as-code by adding an SVG sanitizer; thanks to the Patchstack team
+- Fixed: SVG upload sanitizer bypass involving case-insensitive extensions and content sniffing
+- Fixed: Remote references stripped from uploaded SVG files
+- Fixed: SVG-as-code output no longer emptied by WordPress post-save KSES
+- Fixed: XML declarations no longer output in inline SVG markup
+- Fixed: Nested SVG elements kept intact in the Black Trigger (GSAP) widget
+- Security: Updated bundled enshrined/svg-sanitize library to 1.0.0
+- Removed: Inactive legacy Loop widget
+- Removed: Legacy Marquee widget (already disabled and unusable since 1.3.9)
+- Removed: Elementor Dark Mode editor setting (legacy `bw_dark_style` option is cleaned on upgrade / Settings save)
 
+Read more here: https://modernaweb.net/black-widgets/support/whats-new/

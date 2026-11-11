@@ -121,8 +121,6 @@ class FlatNav extends \Elementor\Widget_Base {
 	 * @return string nav index.
 	 */
 	protected function get_nav_menu_index() {
-
-		// return $this->nav_menu_index++;
 		return true;
 	}
 
@@ -719,7 +717,6 @@ class FlatNav extends \Elementor\Widget_Base {
 		$settings           = $this->get_settings_for_display();
 
 		// Variables
-		// $type 	        = isset($settings['widget_type']) 				? $settings['widget_type'] : '';
 		$alignment          = isset($settings['widget_alignment'])      ? $settings['widget_alignment']         : '';
         $custom_nav_styles	= isset($settings['custom_nav_styles'])		? $settings['custom_nav_styles']		: '';
 		$list_style_enable  = isset($settings['nav_list_style_enable']) ? $settings['nav_list_style_enable']   : '';

@@ -4,8 +4,8 @@
  * Plugin URI: https://modernaweb.net/black-widgets
  * Description: Build web pages with black widgets.
  * Author: Modernaweb Studio
- * Version: 1.4.0
- * Requires at least: 7.1
+ * Version: 2.0.0
+ * Requires at least: 6.0
  * Requires PHP: 7.4
  * Author URI: https://modernaweb.net/
  * License: GPLv3 or later
@@ -26,7 +26,7 @@ if (!defined('ABSPATH')) {
 define( 'BLACK_WIDGETS_PLUGIN_BASENAME', plugin_basename(__FILE__));
 define( 'BLACK_WIDGETS_PLUGIN_PATH', trailingslashit(plugin_dir_path(__FILE__)));
 define( 'BLACK_WIDGETS_PLUGIN_URL', trailingslashit(plugins_url('/', __FILE__)));
-define( 'BLACK_WIDGETS_VERSION', '1.4.0' );
+define( 'BLACK_WIDGETS_VERSION', '2.0.0' );
 
 require_once BLACK_WIDGETS_PLUGIN_PATH . 'vendor/autoload.php';
 

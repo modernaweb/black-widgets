@@ -28,7 +28,7 @@ charset conversion) and a trailing `$('[data-tilt]').tilt()` auto-init call,
 which upstream leaves to the caller.
 
 Because of that auto-init, any element with a `data-tilt` attribute is
-initialised on pages where Tilt.js loads, which since 1.4.0 means pages using the
+initialised on pages where Tilt.js loads, which since 2.0.0 means pages using the
 Black Button widget (plus the Elementor editor preview).
 
 ## GSAP

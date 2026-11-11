@@ -526,7 +526,7 @@ function black_widgets_elementor_raw_settings( $stack ) {
 /**
  * Drop Elementor's pre-generated CSS files.
  *
- * Several stored controls changed their `selector` in 1.4.0 (List, Icon Box hover,
+ * Several stored controls changed their `selector` in 2.0.0 (List, Icon Box hover,
  * Flip Box), so existing pages keep rendering their old rules until each post CSS
  * file is rebuilt.
  *
@@ -589,3 +589,172 @@ function black_widgets_clear_css_cache_after_update( $upgrader = null, $hook_ext
 
 	black_widgets_clear_elementor_css_cache();
 }
+
+/**
+ * Restore Black Trigger JS fields on Elementor save for users without unfiltered_html.
+ * Values come from the stored document, so only users with unfiltered_html can change them.
+ * Registered at file load so it runs before any Elementor save.
+ *
+ * @param mixed $data     Elementor document save data.
+ * @param mixed $document Elementor document instance.
+ * @return mixed
+ */
+function black_widgets_strip_gsap_trigger_js_on_save( $data, $document = null ) {
+    if ( ! is_array( $data ) || current_user_can( 'unfiltered_html' ) ) {
+        return $data;
+    }
+
+    $js_fields = [
+        'widget_html_js_gsap_timeline_scroll_trigger',
+        'widget_html_js_tl_from',
+        'widget_html_js_tl_to',
+    ];
+
+    // Map element id => settings from the stored data, built once.
+    $lookup  = [];
+    $collect = function ( $elements ) use ( &$collect, &$lookup ) {
+        if ( ! is_array( $elements ) ) {
+            return;
+        }
+        foreach ( $elements as $element ) {
+            if ( ! is_array( $element ) ) {
+                continue;
+            }
+            if (
+                isset( $element['id'] )
+                && ( is_string( $element['id'] ) || is_int( $element['id'] ) )
+                && isset( $element['settings'] )
+                && is_array( $element['settings'] )
+                && ! isset( $lookup[ $element['id'] ] )
+            ) {
+                $lookup[ $element['id'] ] = $element['settings'];
+            }
+            if ( isset( $element['elements'] ) ) {
+                $collect( $element['elements'] );
+            }
+        }
+    };
+
+    $stored = [];
+    try {
+        if ( is_object( $document ) && method_exists( $document, 'get_json_meta' ) ) {
+            $meta = $document->get_json_meta( '_elementor_data' );
+            if ( is_array( $meta ) ) {
+                $stored = $meta;
+            }
+        }
+    } catch ( \Throwable $e ) {
+        $stored = [];
+    }
+    $collect( $stored );
+
+    $restore = function ( $elements ) use ( &$restore, $js_fields, $lookup ) {
+        if ( ! is_array( $elements ) ) {
+            return $elements;
+        }
+        foreach ( $elements as $key => $element ) {
+            if ( ! is_array( $element ) ) {
+                continue;
+            }
+            if (
+                isset( $element['elType'], $element['widgetType'] )
+                && 'widget' === $element['elType']
+                && 'b_gsap_trigger' === $element['widgetType']
+                && isset( $element['settings'] )
+                && is_array( $element['settings'] )
+            ) {
+                $stored_settings = [];
+                if (
+                    isset( $element['id'] )
+                    && ( is_string( $element['id'] ) || is_int( $element['id'] ) )
+                    && isset( $lookup[ $element['id'] ] )
+                ) {
+                    $stored_settings = $lookup[ $element['id'] ];
+                }
+                foreach ( $js_fields as $field ) {
+                    $in_saved  = array_key_exists( $field, $element['settings'] );
+                    $in_stored = array_key_exists( $field, $stored_settings );
+                    if ( ! $in_saved && ! $in_stored ) {
+                        continue;
+                    }
+                    $element['settings'][ $field ] = $in_stored ? $stored_settings[ $field ] : '';
+                }
+            }
+            if ( isset( $element['elements'] ) ) {
+                $element['elements'] = $restore( $element['elements'] );
+            }
+            $elements[ $key ] = $element;
+        }
+        return $elements;
+    };
+
+    if ( isset( $data['elements'] ) ) {
+        $data['elements'] = $restore( $data['elements'] );
+    }
+
+    return $data;
+}
+add_filter( 'elementor/document/save/data', 'black_widgets_strip_gsap_trigger_js_on_save', 20, 2 );
+
+/**
+ * Load a widget file when an old Black_Widgets class alias is requested.
+ *
+ * Old names can be referenced before the widget is registered. The alias is
+ * created at the bottom of each widget file, so that file is loaded here.
+ * Does nothing until Elementor is loaded.
+ *
+ * @param string $class Class name passed to the autoloader.
+ * @return void
+ */
+function black_widgets_autoload_legacy_alias( $class ) {
+    if ( 0 !== strpos( $class, 'Black_Widgets\\BLACK_WIDGETS_' ) ) {
+        return;
+    }
+    if ( ! function_exists( 'did_action' ) || ! did_action( 'elementor/loaded' ) ) {
+        return;
+    }
+    if ( ! class_exists( '\\Elementor\\Widget_Base', false ) ) {
+        return;
+    }
+
+    static $map = array(
+        'BLACK_WIDGETS_Alert'                         => 'bw-alert.php',
+        'BLACK_WIDGETS_Block_Quote'                   => 'bw-blockquote.php',
+        'BLACK_WIDGETS_Box'                           => 'bw-box.php',
+        'BLACK_WIDGETS_Button'                        => 'bw-button.php',
+        'BLACK_WIDGETS_Call_To_Action'                => 'bw-call-to-action.php',
+        'BLACK_WIDGETS_Dropcap'                       => 'bw-dropcap.php',
+        'BLACK_WIDGETS_Fade'                          => 'bw-fade.php',
+        'BLACK_WIDGETS_Flip_Ix'                       => 'bw-flipbox.php',
+        'BLACK_WIDGETS_Flip_Box'                      => 'bw-flipbox.php',
+        'BLACK_WIDGETS_GSAP_HORIZONTAL_SCROLLING'     => 'bw-gsap-horizontal-scrolling.php',
+        'BLACK_WIDGETS_GSAP_Trigger'                  => 'bw-gsap-trigger.php',
+        'BLACK_WIDGETS_Icon_Box'                      => 'bw-icon-box.php',
+        'BLACK_WIDGETS_Icon'                          => 'bw-icon.php',
+        'BLACK_WIDGETS_Image_Pro'                     => 'bw-image-pro.php',
+        'BLACK_WIDGETS_List'                          => 'bw-list.php',
+        'BLACK_WIDGETS_ListItems'                     => 'bw-list.php',
+        'BLACK_WIDGETS_Magic_Link'                    => 'bw-magic-link.php',
+        'BLACK_WIDGETS_Nav'                           => 'bw-nav.php',
+        'BLACK_WIDGETS_FlatNav'                       => 'bw-nav.php',
+        'BLACK_WIDGETS_Scroll_Text'                   => 'bw-scroll-text.php',
+        'BLACK_WIDGETS_Sentence'                      => 'bw-sentence.php',
+        'BLACK_WIDGETS_Social_Links'                  => 'bw-social-links.php',
+        'BLACK_WIDGETS_Title_Animate'                 => 'bw-title-animate.php',
+        'BLACK_WIDGETS_Title'                         => 'bw-title.php',
+        'BLACK_WIDGETS_Typography'                    => 'bw-typography.php',
+    );
+
+    $short = substr( $class, strlen( 'Black_Widgets\\' ) );
+    if ( ! isset( $map[ $short ] ) ) {
+        return;
+    }
+
+    $file = __DIR__ . '/widgets/' . $map[ $short ];
+    if ( ! file_exists( $file ) ) {
+        return;
+    }
+    require_once $file;
+}
+spl_autoload_register( 'black_widgets_autoload_legacy_alias' );
+

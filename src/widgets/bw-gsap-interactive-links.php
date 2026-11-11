@@ -21,7 +21,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      *
      * @param array $data Optional. Widget data. Default empty array.
      * @param mixed $args Optional. Additional arguments. Default null.
-     * @since 1.4.0
+     * @since 2.0.0
      */
     public function __construct( $data = [], $args = null ) {
         parent::__construct( $data, $args );
@@ -42,7 +42,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      * Listing the GSAP handle unconditionally would make WordPress drop this script
      * whenever the CDN URL is missing or refused, so the JS guard never runs.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      */
     private function register_interactive_links_script() {
         $deps = [ 'jquery' ]; // ScrollTrigger not used by this widget.
@@ -70,7 +70,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      *
      * Retrieve the interactive links widget name.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      * @access public
      *
      * @return string Widget name.
@@ -84,7 +84,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      *
      * Retrieve the interactive links widget title.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      * @access public
      *
      * @return string Widget title.
@@ -98,7 +98,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      *
      * Retrieve the interactive links widget icon.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      * @access public
      *
      * @return string Widget icon.
@@ -115,7 +115,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      * @access public
      *
      * @return array Widget categories.
-     * @since 1.4.0
+     * @since 2.0.0
      */
     public function get_categories() {
         return [ 'black_widgets' ];
@@ -125,7 +125,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      * Returns an array of style handles to be enqueued with this widget.
      *
      * @return array List of style handles.
-     * @since 1.4.0
+     * @since 2.0.0
      */
     public function get_style_depends() {
         return [ 'black-widgets-gsap-interactive-links' ];
@@ -135,7 +135,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      * Returns an array of script handles to be enqueued with this widget.
      *
      * @return array List of script handles.
-     * @since 1.4.0
+     * @since 2.0.0
      */
     public function get_script_depends() {
         $this->register_interactive_links_script();
@@ -147,7 +147,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      * Determines whether this widget includes dynamic content.
      *
      * @return bool False, because the widget has no dynamic content.
-     * @since 1.4.0
+     * @since 2.0.0
      */
     protected function is_dynamic_content(): bool {
         return false;
@@ -158,7 +158,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      *
      * Registers all widget controls by delegating to the settings and style helpers.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      * @access protected
      * @return void
      */
@@ -172,7 +172,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      *
      * Registers the content controls (type, items, title, description, link, image) in the Content tab.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      * @access private
      * @return void
      */
@@ -289,7 +289,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      *
      * Groups the style controls into sections: box, list, items, titles, descriptions, and image hover.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      * @access private
      * @return void
      */
@@ -308,7 +308,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      *
      * Registers the box style controls (background, border, padding, margin, shadow) for normal and hover states.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      * @access private
      * @return void
      */
@@ -479,7 +479,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      *
      * Registers the style controls for the list items (li): typography, colors, and hover states.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      * @access private
      * @return void
      */
@@ -740,7 +740,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      *
      * Registers the style controls for links and titles: typography, color, hover color, and padding.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      * @access private
      * @return void
      */
@@ -839,7 +839,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      *
      * Registers the style controls for the description text in normal and hover states.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      * @access private
      * @return void
      */
@@ -995,7 +995,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      *
      * Registers the background, border, box shadow, padding and margin controls of the image container.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      * @access private
      * @return void
      */
@@ -1066,7 +1066,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      *
      * Registers the style controls for the hover image: opacity, border, shadow, radius, margin, and padding.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      * @access private
      * @return void
      */
@@ -1221,7 +1221,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      *
      * Registers the GSAP hover effect controls (rotation, translation, brightness, fade and duration) for the image and main element.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      * @access private
      * @return void
      */
@@ -1364,7 +1364,7 @@ class GSAPInteractiveLinks extends \Elementor\Widget_Base {
      *
      * Outputs the widget HTML.
      *
-     * @since 1.4.0
+     * @since 2.0.0
      * @access protected
      */
     protected function render() {
