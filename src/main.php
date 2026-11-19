@@ -45,6 +45,7 @@ final class Main {
     private $admin;
 
     public function __construct() {
+        add_action( 'init', [ $this, 'load_textdomain' ] );
         add_action( 'plugins_loaded', [ $this, 'init' ] );
         add_filter( 'upload_mimes', [ $this, 'add_file_types_to_uploads' ] );
         add_filter( 'wp_handle_upload_prefilter', [ $this, 'sanitize_uploaded_svg' ] );
@@ -57,6 +58,20 @@ final class Main {
 
         require_once( __DIR__ . '/admin.php' );
         $this->admin = new Admin();
+    }
+
+    /**
+     * Load the plugin's translation files.
+     *
+     * @since 2.0.0
+     * @return void
+     */
+    public function load_textdomain() {
+        load_plugin_textdomain(
+            'blackwidgets',
+            false,
+            dirname( BLACK_WIDGETS_PLUGIN_BASENAME ) . '/languages'
+        );
     }
 
     public function init() {

@@ -10,7 +10,8 @@
 **License:** GPLv3 or later \
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.html
 
-Free add-on for Elementor! With this add-on, you can add more visual effects and improve your website's user experience. ✌
+Free Elementor add-on with 29 animated widgets, typography, GSAP effects, carousels and more. ✌
+
 
 
 ## Description
@@ -102,7 +103,7 @@ If you found an issue or have a new suggestion, contact us: [ **modernawebdesign
 
 ## Upgrade Notice
 
-Major update. Settings are kept. GSAP now loads only through widget dependencies, so set GSAP 3.15, ScrollTrigger and SplitText URLs in Settings if animations stop. TweenMax is no longer loaded. Test on staging first.
+Major update. Settings are kept. GSAP now loads only through widget dependencies, set GSAP 3.15, ScrollTrigger and SplitText URLs in Settings if animations stop; TweenMax is no longer loaded. Black Magic Link's markup changed, if you added custom CSS targeting its old classes, check it after updating. Black Flip Box button links now open in the same tab by default (previously a new tab). The Elementor Dark Mode editor setting was removed. Test on staging first.
 
 ## Installation
 
