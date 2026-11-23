@@ -137,7 +137,7 @@ GSAP is **not** bundled. It is loaded from a CDN URL that you supply in Settings
 
 ## Changelog
 
-= 2.0.0 — 2026-11-11 =
+= 2.0.0 — 2026-11-23 =
 - Refactored: Plugin Structure and internal architecture under a dedicated namespace
 - Improved: Settings page
 - Compatibility: WordPress v7.1

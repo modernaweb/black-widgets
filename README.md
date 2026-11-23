@@ -142,7 +142,7 @@ Major update. Settings are kept. GSAP now loads only through widget dependencies
 
 ## Changelog
 
-### 2.0.0 — 2026-11-11
+### 2.0.0 — 2026-11-23
 
 - Refactored: Plugin Structure and internal architecture under a dedicated namespace
 - Improved: Settings page
